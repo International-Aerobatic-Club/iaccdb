@@ -1,0 +1,27 @@
+<h1>Listing members</h1>
+
+<table>
+  <tr>
+    <th>Iac</th>
+    <th>Given name</th>
+    <th>Family name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @members.each do |member| %>
+  <tr>
+    <td><%= member.iac_id %></td>
+    <td><%= member.given_name %></td>
+    <td><%= member.family_name %></td>
+    <td><%= link_to 'Show', member %></td>
+    <td><%= link_to 'Edit', edit_member_path(member) %></td>
+    <td><%= link_to 'Destroy', member, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Member', new_member_path %>

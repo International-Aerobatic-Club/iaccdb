@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  iac_id: 1
+  given_name: MyString
+  family_name: MyString
+
+two:
+  iac_id: 1
+  given_name: MyString
+  family_name: MyString
