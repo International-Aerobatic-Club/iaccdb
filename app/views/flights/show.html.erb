@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Contest:</b>
+  <%= @flight.contest_id %>
+</p>
+
+<p>
+  <b>Category:</b>
+  <%= @flight.category %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @flight.name %>
+</p>
+
+<p>
+  <b>Sequence:</b>
+  <%= @flight.sequence %>
+</p>
+
+<p>
+  <b>Chief:</b>
+  <%= @flight.chief_id %>
+</p>
+
+<p>
+  <b>Assist:</b>
+  <%= @flight.assist_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_flight_path(@flight) %> |
+<%= link_to 'Back', flights_path %>

@@ -1,11 +1,11 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  iac_id: 1
-  given_name: MyString
-  family_name: MyString
+  iac_id: 19517
+  given_name: Michael
+  family_name: Stephenson
 
 two:
-  iac_id: 1
-  given_name: MyString
-  family_name: MyString
+  iac_id: 432908 
+  given_name: Matthew
+  family_name: Beaubein

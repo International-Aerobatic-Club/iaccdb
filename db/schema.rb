@@ -10,7 +10,32 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101214215014) do
+ActiveRecord::Schema.define(:version => 20101217232028) do
+
+  create_table "contests", :force => true do |t|
+    t.string   "name",       :limit => 48
+    t.string   "city",       :limit => 24
+    t.string   "state",      :limit => 2
+    t.date     "start"
+    t.integer  "chapter"
+    t.string   "director",   :limit => 48
+    t.string   "region",     :limit => 16
+    t.integer  "manny_id",                 :null => false
+    t.string   "aircat",     :limit => 1
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "flights", :force => true do |t|
+    t.integer  "contest_id",               :null => false
+    t.string   "category",   :limit => 16, :null => false
+    t.string   "name",       :limit => 16, :null => false
+    t.integer  "sequence",                 :null => false
+    t.integer  "chief_id",                 :null => false
+    t.integer  "assist_id",                :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "members", :force => true do |t|
     t.integer  "iac_id"

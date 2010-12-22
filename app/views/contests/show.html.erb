@@ -1,0 +1,50 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @contest.name %>
+</p>
+
+<p>
+  <b>City:</b>
+  <%= @contest.city %>
+</p>
+
+<p>
+  <b>State:</b>
+  <%= @contest.state %>
+</p>
+
+<p>
+  <b>Start:</b>
+  <%= @contest.start %>
+</p>
+
+<p>
+  <b>Chapter:</b>
+  <%= @contest.chapter %>
+</p>
+
+<p>
+  <b>Director:</b>
+  <%= @contest.director %>
+</p>
+
+<p>
+  <b>Region:</b>
+  <%= @contest.region %>
+</p>
+
+<p>
+  <b>Manny:</b>
+  <%= @contest.manny_id %>
+</p>
+
+<p>
+  <b>Type:</b>
+  <%= @contest.aircat %>
+</p>
+
+
+<%= link_to 'Edit', edit_contest_path(@contest) %> |
+<%= link_to 'Back', contests_path %>

@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  contest_id: 1
+  category: Advanced
+  name: Known
+  sequence: 1
+  chief_id: 1
+  assist_id: 1
+
+two:
+  contest_id: 1
+  category: Advanced
+  name: Free
+  sequence: 2
+  chief_id: 1
+  assist_id: 1

@@ -1,0 +1,53 @@
+<%= form_for(@contest) do |f| %>
+  <% if @contest.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@contest.errors.count, "error") %> prohibited this contest from being saved:</h2>
+
+      <ul>
+      <% @contest.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :city %><br />
+    <%= f.text_field :city %>
+  </div>
+  <div class="field">
+    <%= f.label :state %><br />
+    <%= f.text_field :state %>
+  </div>
+  <div class="field">
+    <%= f.label :start %><br />
+    <%= f.date_select :start %>
+  </div>
+  <div class="field">
+    <%= f.label :chapter %><br />
+    <%= f.text_field :chapter %>
+  </div>
+  <div class="field">
+    <%= f.label :director %><br />
+    <%= f.text_field :director %>
+  </div>
+  <div class="field">
+    <%= f.label :region %><br />
+    <%= f.text_field :region %>
+  </div>
+  <div class="field">
+    <%= f.label :manny_id %><br />
+    <%= f.text_field :manny_id %>
+  </div>
+  <div class="field">
+    <%= f.label :type %><br />
+    <%= f.text_field :aircat %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

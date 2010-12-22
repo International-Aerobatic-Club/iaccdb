@@ -1,0 +1,39 @@
+<h1>Listing contests</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>City</th>
+    <th>State</th>
+    <th>Start</th>
+    <th>Chapter</th>
+    <th>Director</th>
+    <th>Region</th>
+    <th>Manny</th>
+    <th>Type</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @contests.each do |contest| %>
+  <tr>
+    <td><%= contest.name %></td>
+    <td><%= contest.city %></td>
+    <td><%= contest.state %></td>
+    <td><%= contest.start %></td>
+    <td><%= contest.chapter %></td>
+    <td><%= contest.director %></td>
+    <td><%= contest.region %></td>
+    <td><%= contest.manny_id %></td>
+    <td><%= contest.aircat %></td>
+    <td><%= link_to 'Show', contest %></td>
+    <td><%= link_to 'Edit', edit_contest_path(contest) %></td>
+    <td><%= link_to 'Destroy', contest, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Contest', new_contest_path %>

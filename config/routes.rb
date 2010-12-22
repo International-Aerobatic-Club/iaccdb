@@ -1,4 +1,8 @@
 Iac::Application.routes.draw do
+  resources :flights
+
+  resources :contests
+
   resources :members
 
   # The priority is based upon order of creation:

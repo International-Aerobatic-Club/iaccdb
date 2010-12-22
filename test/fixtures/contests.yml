@@ -1,0 +1,23 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: Tequila Cup
+  city: Marana
+  state: AZ
+  start: 2080-11-08
+  chapter: 62
+  director: Jim Ward
+  region: SouthWest
+  manny_id: 204
+  aircat: G
+
+two:
+  name: Chuck Alley Cajun Aerobatic Contest
+  city: Estherwood
+  state: LA
+  start: 2005-04-29
+  chapter: 72
+  director: Buuba Vidrine
+  region: SouthCentral
+  manny_id: 32
+  aircat: P
