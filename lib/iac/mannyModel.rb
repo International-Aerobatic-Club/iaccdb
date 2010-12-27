@@ -111,6 +111,14 @@ class Contest
   def pilot(cat, pid)
     category(cat).pilot(pid)
   end
+
+  def manny_date=(value)
+    @manny_date = Time.parse(value)
+  end
+
+  def record_date=(value)
+    @record_date = Time.parse(value)
+  end
 end
 
 end

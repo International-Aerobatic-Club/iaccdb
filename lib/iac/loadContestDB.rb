@@ -1,9 +1,11 @@
 # use rails runner lib/iac/loadContestDB.rb <file>
 $: << File.dirname(__FILE__)
-require "manny"
+require "mannyParse"
+require "mannyModel"
+require "mannyToDB"
 
 ARGV.each do |f|
-  manny = IAC::Manny.new
+  manny = Manny::MannyParse.new
   IO.foreach(f) { |line| manny.processLine(line) }
 end
 

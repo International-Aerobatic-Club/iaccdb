@@ -8,7 +8,6 @@ one:
   chapter: 62
   director: Jim Ward
   region: SouthWest
-  manny_id: 204
   aircat: G
 
 two:
@@ -19,5 +18,4 @@ two:
   chapter: 72
   director: Buuba Vidrine
   region: SouthCentral
-  manny_id: 32
   aircat: P

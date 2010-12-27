@@ -21,8 +21,14 @@ class MannyTest < ActiveSupport::TestCase
     assert_equal('George Norris', contest.director)
     assert_equal('69', contest.chapter)
     assert_equal('SouthWest', contest.region)
-    assert /^5\/4\/2006/ =~ contest.manny_date
-    assert_equal('3/30/2006', contest.record_date)
+    assert_equal(Time, contest.manny_date.class)
+    assert_equal(Time, contest.record_date.class)
+    assert_equal(5, contest.manny_date.month)
+    assert_equal(4, contest.manny_date.mday)
+    assert_equal(2006, contest.manny_date.year)
+    assert_equal(3, contest.record_date.month)
+    assert_equal(30, contest.record_date.mday)
+    assert_equal(2006, contest.record_date.year)
   end
 
   test "contest 30 personnel" do
