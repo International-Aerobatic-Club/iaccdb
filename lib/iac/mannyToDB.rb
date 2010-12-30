@@ -1,11 +1,13 @@
-# assume loaded with rails environment for iac contest data application
+# assume loaded with rails ActiveRecord
+# environment for IAC contest data application
 
 require "iac/mannyModel"
 
 # this class contains methods to map the parsed manny model
 # into records of the contest database
-# for sanity, variables that reference the manny model have prefix 'm'
-# variables that reference the database model have prefix 'd'
+# for sanity:
+#   'm' prefixes variables that reference the manny model
+#   'd' prefixes variables that reference the database model
 module IAC
 class MannyToDB
 attr_reader :dContest
@@ -14,7 +16,7 @@ attr_reader :dContest
 # appropriately update or create records in the contest database
 def process_contest(manny, alwaysUpdate = false)
   r = MannySynch.contest_action(manny.contest)
-  dMannySynch = r[0]
+  dMannySynch = r[0] # Manny Synch record from the database
   case r[1]
     when 'create'
       @dContest = createContest(manny.contest, dMannySynch)
@@ -29,6 +31,9 @@ def process_contest(manny, alwaysUpdate = false)
       end
   end
   Contest.logger.debug("MannyToDB has dContest #{@dContest.display}")
+  if @dContest
+    process_participants(manny.contest)
+  end
 end
 
 ###
@@ -72,34 +77,33 @@ def updateContest(mContest, dMannySynch)
   dContest
 end
 
-
-def process_person(line)
-  ma = line.split("\t")
-  pid = ma[0].to_i
-  gName = ma[2]
-  famName = ma[1]
-  iac_id = ma[3]
-  m = Member.where(:iac_id => iac_id).first
-  if m 
-    Member.logger.info "Found member #{m.display}"
-    if m.given_name.downcase != gName.downcase
-      Member.logger.warn "Member given name mismatch overwriting with #{gName}"
-      m.given_name = gName;
-      m.save
+def process_participants(mContest)
+  @parts = [] # maps manny participant number to contest db Member
+  mContest.participants.each_with_index do |mp,i| 
+    if mp
+      dm = Member.where(:iac_id => mp.iacID).first
+      if dm 
+        Member.logger.info "Found member #{dm.display}"
+        if dm.given_name.downcase != mp.givenName.downcase
+          Member.logger.warn "Member given name mismatch overwriting with #{mp.givenName}"
+          dm.given_name = mp.givenName;
+          dm.save
+        end
+        if dm.family_name.downcase != mp.familyName.downcase
+          Member.logger.warn "Member family name mismatch overwriting with #{mp.familyName}"
+          dm.family_name = mp.familyName;
+          dm.save
+        end
+      else
+        dm = Member.create(
+          :iac_id => mp.iacID,
+          :given_name => mp.givenName,
+          :family_name => mp.familyName)
+        Member.logger.info "New member #{dm.display}"
+      end
+      @parts[i] = dm
     end
-    if m.family_name.downcase != famName.downcase
-      Member.logger.warn "Member family name mismatch overwriting with #{famName}"
-      m.family_name = famName;
-      m.save
-    end
-  else
-    m = Member.create(
-      :iac_id => iac_id,
-      :given_name => gName,
-      :family_name => famName)
-    Member.logger.info "New member #{m.display}"
   end
-  @parts[pid] = m
 end
 
 end #class

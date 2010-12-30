@@ -51,31 +51,17 @@ class MannyToDBTest < ActiveSupport::TestCase
     assert_equal(2005, contest.start.year)
   end
 
-#  test "contest 30 personnel" do
-#    contest = MP30.contest
-#    ap = contest.participants
-#    assert !ap.empty?
-#    apid = ap.collect { |p| p ? p.iacID : 0 }
-#    assert apid.include? 19517
-#    assert apid.include? 432911
-#    p = ap.detect { |p| p && p.iacID == 19517 }
-#    assert_equal('Michael', p.givenName)
-#    assert_equal('Steveson', p.familyName)
-#    assert_equal(p, ap[1])
-#    p = ap.detect { |p| p && p.iacID == 432911 }
-#    assert_equal('Lenny', p.givenName)
-#    assert_equal('Spigiel', p.familyName)
-#    assert_equal(p, ap[18])
-#
-##    m = Member.where(:iac_id => 19517).first
-##    assert m
-##    assert_equal('Michael', m.given_name)
-##    assert_equal('Steveson', m.family_name)
-##    m = Member.where(:iac_id => 432911).first
-##    assert m
-##    assert_equal('Lenny', m.given_name)
-##    assert_equal('Spigiel', m.family_name)
-#  end
+  test "contest 30 personnel" do
+    m2d = IAC::MannyToDB.new
+    m2d.process_contest(MP30, true)
+
+    p = Member.where(:iac_id => 19517).first
+    assert_equal('Michael', p.given_name)
+    assert_equal('Steveson', p.family_name)
+    p = Member.where(:iac_id => 432911).first
+    assert_equal('Lenny', p.given_name)
+    assert_equal('Spigiel', p.family_name)
+  end
 #
 #  test "contest 30 flights" do
 #    contest = MP30.contest
