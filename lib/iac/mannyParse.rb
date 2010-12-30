@@ -1,5 +1,4 @@
-$: << File.dirname(__FILE__)
-require 'mannyModel'
+require 'iac/mannyModel'
 
 module Manny
 class MannyParse

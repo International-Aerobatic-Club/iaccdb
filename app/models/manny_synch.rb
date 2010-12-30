@@ -5,10 +5,11 @@ class MannySynch < ActiveRecord::Base
   # returns an array containing MannySynch and string action:
   #   skip, update, or create
   def self.contest_action(contest)
+    logger.debug("manny record date #{contest.manny_date}")
     ms = MannySynch.where(:manny_number => contest.mannyID).first
     if ms
+      logger.debug("date in database #{ms.synch_date}");
       if ms.synch_date >= contest.manny_date
-        # date in database (ms.synch_date) same or after manny record
         [ms, 'skip']
       else
         [ms, 'update']

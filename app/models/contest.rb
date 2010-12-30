@@ -2,6 +2,6 @@ class Contest < ActiveRecord::Base
   has_many :flights, :dependent => :destroy
 
   def display
-    "#{name} category #{aircat} on #{start.to_s}"
+    "#{name} on #{start.strftime('%b %d, %Y')}"
   end
 end

@@ -1,58 +1,78 @@
+# assume loaded with rails environment for iac contest data application
+
+require "iac/mannyModel"
+
+# this class contains methods to map the parsed manny model
+# into records of the contest database
+# for sanity, variables that reference the manny model have prefix 'm'
+# variables that reference the database model have prefix 'd'
 module IAC
-class Manny
+class MannyToDB
+attr_reader :dContest
 
-# Contest columns:
-# 0 manny id
-# 1 aircraft category 'P' or 'G'
-# 2 name
-# 3 city
-# 4 state
-# 5 dates string
-# 6 contest director
-# 7 chapter
-# 8 region
-# 9 update
-# 10 jasper version
-# 11 process code
-# 12 process code
-# 13 contest date of record
-def process_contest(line)
-  ca = line.split("\t")
-  manny_id = ca[0]
-  c = Contest.where(:manny_id => manny_id).first
-  if c
-    Contest.logger.info "Found contest #{c.display}"
-  else
-    c = Contest.create(
-      :manny_id => manny_id,
-      :name => ca[2],
-      :city => ca[3],
-      :state => ca[4],
-      :start => ca[13],
-      :chapter => ca[7],
-      :director => ca[6],
-      :region => ca[8],
-      :aircat => ca[1])
-    Contest.logger.info "New contest #{c.display}"
+# accept a parsed manny model of contest results
+# appropriately update or create records in the contest database
+def process_contest(manny, alwaysUpdate = false)
+  r = MannySynch.contest_action(manny.contest)
+  dMannySynch = r[0]
+  case r[1]
+    when 'create'
+      @dContest = createContest(manny.contest, dMannySynch)
+    when 'update'
+      @dContest = updateContest(manny.contest, dMannySynch)
+    when 'skip'
+      if alwaysUpdate
+        @dContest = updateContest(manny.contest, dMannySynch)
+      else
+        Contest.logger.info("MannyToDB skipping contest #{manny.contest}")
+        @dContest = nil
+      end
   end
-  @contest = c
+  Contest.logger.debug("MannyToDB has dContest #{@dContest.display}")
 end
 
-PROCESS_CONTEST = lambda do |m, line|
-  case line
-  when /<\/Contest>/ 
-    SEEK_SECTION
-  else
-    m.process_contest(line)
-    PROCESS_CONTEST
-  end
+###
+private
+###
+
+# the contest does not yet exist. set it up.
+# mContest : the manny contest model
+# dMannySynch : the synch record for the model
+# returns a properly initialized contest record
+def createContest(mContest, dMannySynch)
+  dContest = Contest.new(
+    :name => mContest.name,
+    :city => mContest.city,
+    :state => mContest.state,
+    :start => mContest.record_date,
+    :chapter => mContest.chapter,
+    :director => mContest.director,
+    :region => mContest.region)
+  Contest.logger.info "New contest #{dContest.display}"
+  dContest.save
+  dMannySynch.contest = dContest
+  dMannySynch.save
+  dContest
 end
 
-# ContestPersonnel columns:
-# 0 = PersID
-# 1 = Family name
-# 2 = Given name
-# 3 = IAC Number
+# the contest exists.  delete existing records
+# mContest : the manny contest model
+# dMannySynch : the synch record for the model
+# returns a properly initialized contest record with
+# all flights deleted that correspond to those in the manny model
+# note power and glider flights for one contest share that contest
+# in the contest record.  manny separates them into separate contests
+def updateContest(mContest, dMannySynch)
+  dContest = dMannySynch.contest
+  if !dContest
+    #exception contest should exist
+  else
+    Contest.logger.info "Found contest #{dContest.display}"
+  end
+  dContest
+end
+
+
 def process_person(line)
   ma = line.split("\t")
   pid = ma[0].to_i
@@ -80,57 +100,6 @@ def process_person(line)
     Member.logger.info "New member #{m.display}"
   end
   @parts[pid] = m
-end
-
-PROCESS_PERSON = lambda do |m, line|
-  case line
-  when /<\/ContestPersonnel>/
-    SEEK_SECTION
-  else
-    m.process_person(line)
-    PROCESS_PERSON
-  end
-end
-
-# ContestJudgesLine columns:
-# 0 = CategoryID (1=Pri; 2=Sporty; 3=Int; 4=Adv; 5=Unl; 6=4 min)
-# 1 = FlightID (1=Knwn; 2=Free; 3=Unkn1; 4=Unkn2)
-# 2 = PersID
-# 3 = Judge Type (1=Chief; 2=Scoring; 3=Scoring Assistant; 4=Chief Assist)
-# 4 = AssistingID (another PersID for the person that was being assisted)
-def process_judge
-end
-
-PROCESS_JUDGE = lambda do |m, line| 
-  case line
-  when /<ContestJudgesLine>/
-    SEEK_SECTION
-  else
-    m.process_judge(line)
-    PROCESS_JUDGE
-  end
-end
-
-SEEK_SECTION = lambda do |m, line| 
-  case line
-  when /<Contest>/
-    PROCESS_CONTEST
-  when /<ContestPersonnel>/
-    PROCESS_PERSON
-  when /<ContestJudgesLine>/
-    PROCESS_JUDGE
-  else
-    SEEK_SECTION
-  end
-end
-
-def initialize
-  @state = SEEK_SECTION
-  @parts = []
-end
-
-def processLine(line)
-  @state = @state.call(self, line)
 end
 
 end #class

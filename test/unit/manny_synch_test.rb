@@ -1,38 +1,26 @@
 require 'test_helper'
-
-require 'iac/mannyParse'
+require 'test/unit/helpers/manny_helper'
 
 class MannySynchTest < ActiveSupport::TestCase
-  @@Parsed30 = Manny::MannyParse.new
-  IO.foreach("test/fixtures/Contest_30.txt") { |line| @@Parsed30.processLine(line) }
-  @@Parsed31 = Manny::MannyParse.new
-  IO.foreach("test/fixtures/Contest_31.txt") { |line| @@Parsed31.processLine(line) }
-  @@Parsed32 = Manny::MannyParse.new
-  IO.foreach("test/fixtures/Contest_32.txt") { |line| @@Parsed32.processLine(line) }
-
-  def setup
-    @mp30 = @@Parsed30
-    @mp31 = @@Parsed31
-    @mp32 = @@Parsed32
-  end
+  include MannyParsedTestData
 
   test "manny synch skip" do
-    r = MannySynch.contest_action(@mp30.contest)
-    assert_equal('skip', r[1])
+    r = MannySynch.contest_action(MP30.contest)
     assert_not_nil(r[0])
-    assert(@mp30.contest.manny_date <= r[0].synch_date)
+    assert(MP30.contest.manny_date <= r[0].synch_date)
+    assert_equal('skip', r[1])
   end
 
   test "manny synch update" do
-    r = MannySynch.contest_action(@mp31.contest)
-    assert_equal('update', r[1])
+    r = MannySynch.contest_action(MP32.contest)
     assert_not_nil(r[0])
-    assert(r[0].synch_date < @mp31.contest.manny_date)
+    assert(r[0].synch_date < MP32.contest.manny_date)
+    assert_equal('update', r[1])
   end
 
   test "manny synch create" do
-    r = MannySynch.contest_action(@mp32.contest)
-    assert_equal('create', r[1])
+    r = MannySynch.contest_action(MP31.contest)
     assert_not_nil(r[0])
+    assert_equal('create', r[1])
   end
 end

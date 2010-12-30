@@ -1,21 +1,19 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  name: Tequila Cup
-  city: Marana
+thirty:
+  name: Copperstate Championships
+  city: Coolidge
   state: AZ
-  start: 2080-11-08
-  chapter: 62
-  director: Jim Ward
+  start: 2006-03-30
+  chapter: 69
+  director: George Norris
   region: SouthWest
-  aircat: G
 
-two:
+thirty_two:
   name: Chuck Alley Cajun Aerobatic Contest
   city: Estherwood
   state: LA
   start: 2005-04-29
   chapter: 72
-  director: Buuba Vidrine
+  director: Bubba Vidrine
   region: SouthCentral
-  aircat: P
