@@ -43,8 +43,8 @@ class Flight
 
 end
 
-FLIGHT_NAMES = %w{nil Known Free Unknown 1 Unknown 2}
 CATEGORY_NAMES = %w{nil Primary Sportsman Intermediate Advanced Unlimited Four\ Minute}
+FLIGHT_NAMES = %w{nil Known Free Unknown 1 Unknown 2}
 
 class Category
   attr_accessor :flights, :pilots, :name
@@ -113,11 +113,11 @@ class Contest
   end
 
   def manny_date=(value)
-    @manny_date = Time.parse(value)
+    @manny_date = Time.parse(value + ' UTC')
   end
 
   def record_date=(value)
-    @record_date = Time.parse(value)
+    @record_date = Time.parse(value + ' UTC')
   end
 end
 
