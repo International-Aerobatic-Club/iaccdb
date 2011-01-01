@@ -1,17 +1,17 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  contest_id: 1
+  contest: thirty
   category: Advanced
   name: Known
+  aircat: G
   sequence: 1
-  chief_id: 1
-  assist_id: 1
+  chief: one
 
 two:
-  contest_id: 1
+  contest_id: thirty
   category: Advanced
   name: Free
+  aircat: G
   sequence: 2
-  chief_id: 1
-  assist_id: 1
+  chief: one

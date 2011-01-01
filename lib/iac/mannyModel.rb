@@ -44,7 +44,7 @@ class Flight
 end
 
 CATEGORY_NAMES = %w{nil Primary Sportsman Intermediate Advanced Unlimited Four\ Minute}
-FLIGHT_NAMES = %w{nil Known Free Unknown 1 Unknown 2}
+FLIGHT_NAMES = %w{nil Known Free Unknown\ 1 Unknown\ 2}
 
 class Category
   attr_accessor :flights, :pilots, :name

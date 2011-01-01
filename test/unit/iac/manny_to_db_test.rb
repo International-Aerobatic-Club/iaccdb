@@ -14,7 +14,15 @@ class MannyToDBTest < ActiveSupport::TestCase
   test "contest 30 contest update" do
     m2d = IAC::MannyToDB.new
     m2d.process_contest(MP30, true)
-    assert_not_nil m2d.dContest
+    assert_not_nil(m2d.dContest, "Failed update contest")
+    af = m2d.dContest.flights
+    assert_not_nil(af, "Failed traverse flights from contest")
+    assert(!af.empty?, "Empty flights from contest")
+    f = af.detect { |f| f.category == 'Sportsman' and
+      f.name == 'Known' and
+      f.aircat == 'G'}
+    assert_not_nil(f, "Failed query flight")
+    assert_equal('Steveson', f.chief.family_name)
   end
 
   test "contest 32 contest update" do
@@ -57,7 +65,12 @@ class MannyToDBTest < ActiveSupport::TestCase
 
     p = Member.where(:iac_id => 19517).first
     assert_equal('Michael', p.given_name)
-    assert_equal('Steveson', p.family_name)
+    assert_equal('Stephenson', p.family_name)
+
+    p = Member.where(:family_name => 'Steveson').first
+    assert_equal('Michael', p.given_name)
+    assert_equal(19517, p.iac_id)
+
     p = Member.where(:iac_id => 432911).first
     assert_equal('Lenny', p.given_name)
     assert_equal('Spigiel', p.family_name)
@@ -132,5 +145,24 @@ class MannyToDBTest < ActiveSupport::TestCase
 #    f2 = contest.flight(2,2)
 #    assert_equal(100, f2.penalty(14))
 #  end
+
+  test "contest 31 unique members iac number zero" do
+    m2d = IAC::MannyToDB.new
+    m2d.process_contest(MP31, true)
+
+    ahill = Member.where(:family_name => 'Hill', :given_name => 'Melinda')
+    assert_equal(1, ahill.length)
+    hill = ahill.first
+    assert_equal(909090, hill.iac_id)
+
+    ahay = Member.where(:family_name => 'Haycraft', :given_name => 'Joe')
+    assert_equal(1, ahay.length)
+
+    m2d.process_contest(MP32, true)
+
+    awood = Member.where(:family_name => 'Wood')
+    assert_equal(2, awood.length)
+    jw = awood.detect { |m| m.given_name == 'Julia' }
+  end
 end
 

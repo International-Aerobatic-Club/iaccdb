@@ -33,6 +33,7 @@ def process_contest(manny, alwaysUpdate = false)
   Contest.logger.debug("MannyToDB has dContest #{@dContest.display}")
   if @dContest
     process_participants(manny.contest)
+    process_categories(manny.contest)
   end
 end
 
@@ -70,39 +71,102 @@ end
 def updateContest(mContest, dMannySynch)
   dContest = dMannySynch.contest
   if !dContest
-    #exception contest should exist
+    dContest = createContest(mContest, dMannySynch)
+    msg = "Expected contest #{dContest.display} was missing, created." 
+    Contest.logger.warn msg
   else
-    Contest.logger.info "Found contest #{dContest.display}"
+    Contest.logger.info "Updating contest #{dContest.display}"
+    Flight.delete_all(:contest_id => dContest, :aircat => mContest.aircat)
   end
   dContest
 end
 
+# find or create member with bad or mismatched IAC ID
+# member family and given names must match exatly, otherwise
+# this creates a new member record
+def member_name_fallback(mPart)
+  dm = Member.where(:family_name => mPart.familyName, 
+    :given_name =>mPart.givenName).first
+  if dm
+    Member.logger.info "Found by name member #{dm.display}"
+  else
+    dm = Member.create(
+      :iac_id => mPart.iacID,
+      :given_name => mPart.givenName,
+      :family_name => mPart.familyName)
+    Member.logger.info "New member #{dm.display}"
+  end
+  dm
+end
+
+# find or create member with good IAC ID
+# IAC ID and family name must match exactly, otherwise this falls
+# back to exact match of family name and given name
+def member_by_iacID(mPart)
+  dm = Member.where(:iac_id => mPart.iacID).first
+  if dm 
+    Member.logger.info "Found member #{dm.display}"
+    if dm.family_name.downcase != mPart.familyName.downcase
+      # different, fallback to name match
+      Member.logger.warn "Member family name mismatch" +
+        " manny has #{mPart.familyName}"
+      dm = member_name_fallback(mPart)
+    end
+  else
+    dm = member_name_fallback(mPart)
+  end
+  dm
+end
+
+# initialize an array @parts of member database records to match the
+# participant indices used in the manny model
+# update and add member entries as required
+# note that IAC ID and family name OR given name and family name
+#   must exactly match, otherwise this creates a new member record
+# IAC ID zero never matches.  A later name match will update the IAC ID.
+# mContest : manny contest model
 def process_participants(mContest)
   @parts = [] # maps manny participant number to contest db Member
   mContest.participants.each_with_index do |mp,i| 
     if mp
-      dm = Member.where(:iac_id => mp.iacID).first
-      if dm 
-        Member.logger.info "Found member #{dm.display}"
-        if dm.given_name.downcase != mp.givenName.downcase
-          Member.logger.warn "Member given name mismatch overwriting with #{mp.givenName}"
-          dm.given_name = mp.givenName;
-          dm.save
-        end
-        if dm.family_name.downcase != mp.familyName.downcase
-          Member.logger.warn "Member family name mismatch overwriting with #{mp.familyName}"
-          dm.family_name = mp.familyName;
-          dm.save
-        end
+      if mp.iacID && mp.iacID != 0
+        dm = member_by_iacID(mp)
       else
-        dm = Member.create(
-          :iac_id => mp.iacID,
-          :given_name => mp.givenName,
-          :family_name => mp.familyName)
-        Member.logger.info "New member #{dm.display}"
+        Member.logger.warn("#{mp.givenName} #{mp.familyName} missing IAC ID")
+        dm = member_name_fallback(mp)
       end
       @parts[i] = dm
     end
+  end
+end
+
+def process_categories(mContest)
+  mContest.categories.each_value do |mCat|
+    process_category(mContest, mCat)
+  end
+end
+
+def process_category(mContest, mCat)
+  mCat.flights.each_with_index do |mFlight, i|
+    if mFlight
+      process_flight(mContest, mCat, mFlight, i)
+    end
+  end
+end
+
+def process_flight(mContest, mCat, mFlight, seq)
+  # the k values give us flights that were not flown, so...
+  # have to check for scores before creating a flight
+  if !mFlight.scores.empty? && !mFlight.judges.empty?
+    dFlight = Flight.create(
+      :contest => @dContest,
+      :category => mCat.name,
+      :name => mFlight.name,
+      :sequence => seq,
+      :aircat => mContest.aircat)
+    dFlight.chief = @parts[mFlight.chief]
+    dFlight.save
+    # TODO now do the judging line and pilot scores
   end
 end
 
