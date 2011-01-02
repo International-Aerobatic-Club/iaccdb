@@ -9,7 +9,7 @@ one:
   chief: one
 
 two:
-  contest_id: thirty
+  contest: thirty
   category: Advanced
   name: Free
   aircat: G

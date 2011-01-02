@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101230234923) do
+ActiveRecord::Schema.define(:version => 20110101025506) do
 
   create_table "contests", :force => true do |t|
     t.string   "name",       :limit => 48
@@ -48,6 +48,16 @@ ActiveRecord::Schema.define(:version => 20101230234923) do
     t.integer  "iac_id"
     t.string   "given_name",  :limit => 40
     t.string   "family_name", :limit => 40
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "pilot_flights", :force => true do |t|
+    t.integer  "pilot_id"
+    t.integer  "flight_id"
+    t.integer  "sequence_id"
+    t.integer  "aircraft_id"
+    t.string   "chapter",     :limit => 8
     t.datetime "created_at"
     t.datetime "updated_at"
   end
