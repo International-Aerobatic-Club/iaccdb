@@ -4,4 +4,8 @@ class Flight < ActiveRecord::Base
   belongs_to :assist, :foreign_key => "assist_id", :class_name => 'Member'
   has_many :pilot_flights
   has_many :pilots, :through => :pilot_flights, :class_name => 'Member'
+
+  def display
+    "#{contest.name} category #{category}, flight #{name}"
+  end
 end

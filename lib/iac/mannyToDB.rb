@@ -166,8 +166,40 @@ def process_flight(mContest, mCat, mFlight, seq)
       :aircat => mContest.aircat)
     dFlight.chief = @parts[mFlight.chief]
     dFlight.save
-    # TODO now do the judging line 
+    process_flight_judges(dFlight, mFlight)
     process_flight_scores(dFlight, mCat, mFlight)
+  end
+end
+
+# Initialize hash @judges of judge pdx to Judge db record
+def process_flight_judges(dFlight, mFlight)
+  @judges = {}
+  mFlight.judges.each do |j|
+    dJ = @parts[j]
+    if !dJ
+      msg = "Missing judge #{j} for #{dFlight.display}"
+      Judge.logger.error(msg)
+    end
+    dA = nil
+    mpida = mFlight.assists[j]
+    if mpida
+      dA = @parts[mpida]
+    end
+    if !dA
+      msg = "Missing assistant for #{dFlight.display}, judge #{dJ.display}"
+      Judge.logger.warn(msg)
+    end
+    puts "Judge #{dJ} is #{dJ.display}"
+    dJudge = Judge.where(:judge_id => dJ, :assist_id => dA).first ||
+      Judge.create(:judge => dJ, :assist => dA)
+    if !dJudge
+      msg = "Failed create judge #{dJ} for #{dFlight.display}"
+      puts msg
+      Judge.logger.error(msg)
+    else
+      puts "#{dJudge.display}"
+    end
+    @judges[j] = dJudge
   end
 end
 

@@ -73,7 +73,7 @@ end
 # 1 = FlightID (1=Knwn; 2=Free; 3=Unkn1; 4=Unkn2)
 # 2 = PersID
 # 3 = Judge Type (1=Chief; 2=Scoring; 3=Scoring Assistant; 4=Chief Assist)
-# 4 = AssistingID (another PersID for the person that was being assisted)
+# 4 = AssistingID (another PersID for the judge assisted)
 def process_judge(line)
   ja = line.split("\t")
   cid = ja[0].to_i # category

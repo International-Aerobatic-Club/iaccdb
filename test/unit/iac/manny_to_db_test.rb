@@ -116,21 +116,29 @@ class MannyToDBTest < ActiveSupport::TestCase
     pf = apf.detect { |pf| pf.pilot == p }
     assert_not_nil(pf)
   end
-#
-#  test "contest 30 judges" do
-#    contest = MP30.contest
-#    f1 = contest.flight(2,1)
-#    assert_equal(1, f1.chief)
-#    assert_equal(2, f1.chiefAssists.length)
-#    assert f1.chiefAssists.include? 2
-#    assert f1.chiefAssists.include? 3
-#    assert_equal(5, f1.judges.length)
-#    aj = [4, 6, 8, 10, 12]
-#    aa = [5, 7, 9, 11, 13]
-#    aj.each { |j| assert f1.judges.include? j }
-#    aj.each_with_index { |j,i| assert_equal(aa[i], f1.assists[j]) }
-#  end
-#
+
+  test "contest 30 judges" do
+    m2d = IAC::MannyToDB.new
+    m2d.process_contest(MP30, true)
+
+    pj = Member.find_by_iac_id(26409)
+    assert_equal('Dornberger', pj.family_name)
+    pa = Member.find_by_iac_id(431814)
+    assert_equal('Benzing', pa.family_name)
+    Judge.find_each do |j|
+      puts "Judge #{j.id} #{j.judge.display}"
+      if j.assist
+        puts "Assisted by #{j.assist.display}"
+      else
+        puts "Without an assistant"
+      end
+    end
+    j = Judge.find_by_judge_id_and_assist_id(pj, pa)
+    assert_not_nil(j)
+    assert_equal(pj, j.judge)
+    assert_equal(pa, j.assist)
+  end
+
 #  test "contest 30 sequences" do
 #    contest = MP30.contest
 #    seq = contest.seq_for(2,1,14)
