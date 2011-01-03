@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110101025506) do
+ActiveRecord::Schema.define(:version => 20110103164012) do
 
   create_table "contests", :force => true do |t|
     t.string   "name",       :limit => 48
@@ -34,6 +34,13 @@ ActiveRecord::Schema.define(:version => 20110101025506) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "aircat",     :limit => 1
+  end
+
+  create_table "judges", :force => true do |t|
+    t.integer  "judge_id"
+    t.integer  "assist_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "manny_synches", :force => true do |t|

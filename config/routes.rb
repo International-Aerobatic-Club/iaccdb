@@ -1,4 +1,6 @@
 Iac::Application.routes.draw do
+  resources :judges
+
   resources :pilot_flights
 
   resources :flights
