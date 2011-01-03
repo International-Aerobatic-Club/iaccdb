@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Pilot:</b>
+  <%= @pilot_flight.pilot_id %>
+</p>
+
+<p>
+  <b>Flight:</b>
+  <%= @pilot_flight.flight_id %>
+</p>
+
+<p>
+  <b>Sequence:</b>
+  <%= @pilot_flight.sequence_id %>
+</p>
+
+<p>
+  <b>Aircraft:</b>
+  <%= @pilot_flight.aircraft_id %>
+</p>
+
+<p>
+  <b>Chapter:</b>
+  <%= @pilot_flight.chapter %>
+</p>
+
+
+<%= link_to 'Edit', edit_pilot_flight_path(@pilot_flight) %> |
+<%= link_to 'Back', pilot_flights_path %>
