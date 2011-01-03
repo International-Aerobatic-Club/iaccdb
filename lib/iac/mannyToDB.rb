@@ -155,7 +155,7 @@ def process_category(mContest, mCat)
 end
 
 def process_flight(mContest, mCat, mFlight, seq)
-  # the k values give us flights that were not flown, so...
+  # the k values produce flights in the manny model that were not flown, so...
   # have to check for scores before creating a flight
   if !mFlight.scores.empty? && !mFlight.judges.empty?
     dFlight = Flight.create(
@@ -166,8 +166,27 @@ def process_flight(mContest, mCat, mFlight, seq)
       :aircat => mContest.aircat)
     dFlight.chief = @parts[mFlight.chief]
     dFlight.save
-    # TODO now do the judging line and pilot scores
+    # TODO now do the judging line 
+    process_flight_scores(dFlight, mCat, mFlight)
   end
+end
+
+def process_flight_scores(dFlight, mCat, mFlight)
+  mFlight.scores.each do |mScore|
+    mParti = mScore.pilot
+    mPilot = mCat.pilots[mParti]
+    dPilot = @parts[mParti]
+    dPilotFlight = get_pilot_flight(dPilot, dFlight, mPilot.chapter)
+  end
+end
+
+def get_pilot_flight(dPilot, dFlight, chapter)
+  PilotFlight.where(:pilot_id => dPilot, 
+      :flight_id => dFlight).first ||
+    PilotFlight.create(
+      :pilot => dPilot,
+      :flight => dFlight,
+      :chapter => chapter)
 end
 
 end #class

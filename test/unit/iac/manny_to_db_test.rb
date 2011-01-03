@@ -75,16 +75,47 @@ class MannyToDBTest < ActiveSupport::TestCase
     assert_equal('Lenny', p.given_name)
     assert_equal('Spigiel', p.family_name)
   end
-#
-#  test "contest 30 flights" do
-#    contest = MP30.contest
-#    f1 = contest.flight(2,1)
-#    assert f1
-#    assert_equal("Known", f1.name)
-#    f2 = contest.flight(2,2)
-#    assert f2
-#    assert_equal("Free", f2.name)
-#  end
+
+  test "contest 31 unique members iac number zero" do
+    m2d = IAC::MannyToDB.new
+    m2d.process_contest(MP31, true)
+
+    ahill = Member.where(:family_name => 'Hill', :given_name => 'Melinda')
+    assert_equal(1, ahill.length)
+    hill = ahill.first
+    assert_equal(909090, hill.iac_id)
+
+    ahay = Member.where(:family_name => 'Haycraft', :given_name => 'Joe')
+    assert_equal(1, ahay.length)
+
+    m2d.process_contest(MP32, true)
+
+    awood = Member.where(:family_name => 'Wood')
+    assert_equal(2, awood.length)
+    jw = awood.detect { |m| m.given_name == 'Julia' }
+  end
+
+  test "contest 30 pilot-flight" do
+    m2d = IAC::MannyToDB.new
+    m2d.process_contest(MP30, true)
+
+    ms = MannySynch.where(:manny_number => 30).first
+    assert_not_nil(ms)
+    c = ms.contest
+    af = c.flights
+    assert_not_nil(af)
+    assert_equal(2, af.length)
+    f = af.detect { |f| f.name == 'Known' }
+    assert_not_nil(f)
+    apf = f.pilot_flights
+    assert_not_nil(apf)
+    assert_equal(5, apf.length)
+    p = Member.where(:iac_id => 432592).first
+    assert_not_nil(p)
+    assert_equal('Travis', p.given_name)
+    pf = apf.detect { |pf| pf.pilot == p }
+    assert_not_nil(pf)
+  end
 #
 #  test "contest 30 judges" do
 #    contest = MP30.contest
@@ -145,24 +176,5 @@ class MannyToDBTest < ActiveSupport::TestCase
 #    f2 = contest.flight(2,2)
 #    assert_equal(100, f2.penalty(14))
 #  end
-
-  test "contest 31 unique members iac number zero" do
-    m2d = IAC::MannyToDB.new
-    m2d.process_contest(MP31, true)
-
-    ahill = Member.where(:family_name => 'Hill', :given_name => 'Melinda')
-    assert_equal(1, ahill.length)
-    hill = ahill.first
-    assert_equal(909090, hill.iac_id)
-
-    ahay = Member.where(:family_name => 'Haycraft', :given_name => 'Joe')
-    assert_equal(1, ahay.length)
-
-    m2d.process_contest(MP32, true)
-
-    awood = Member.where(:family_name => 'Wood')
-    assert_equal(2, awood.length)
-    jw = awood.detect { |m| m.given_name == 'Julia' }
-  end
 end
 
