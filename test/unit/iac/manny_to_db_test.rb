@@ -59,23 +59,6 @@ class MannyToDBTest < ActiveSupport::TestCase
     assert_equal(2005, contest.start.year)
   end
 
-  test "contest 30 personnel" do
-    m2d = IAC::MannyToDB.new
-    m2d.process_contest(MP30, true)
-
-    p = Member.where(:iac_id => 19517).first
-    assert_equal('Michael', p.given_name)
-    assert_equal('Stephenson', p.family_name)
-
-    p = Member.where(:family_name => 'Steveson').first
-    assert_equal('Michael', p.given_name)
-    assert_equal(19517, p.iac_id)
-
-    p = Member.where(:iac_id => 432911).first
-    assert_equal('Lenny', p.given_name)
-    assert_equal('Spigiel', p.family_name)
-  end
-
   test "contest 31 unique members iac number zero" do
     m2d = IAC::MannyToDB.new
     m2d.process_contest(MP31, true)
@@ -95,48 +78,66 @@ class MannyToDBTest < ActiveSupport::TestCase
     jw = awood.detect { |m| m.given_name == 'Julia' }
   end
 
-  test "contest 30 pilot-flight" do
+  test "contest 30" do
     m2d = IAC::MannyToDB.new
     m2d.process_contest(MP30, true)
 
-    ms = MannySynch.where(:manny_number => 30).first
-    assert_not_nil(ms)
-    c = ms.contest
-    af = c.flights
-    assert_not_nil(af)
-    assert_equal(2, af.length)
-    f = af.detect { |f| f.name == 'Known' }
-    assert_not_nil(f)
-    apf = f.pilot_flights
-    assert_not_nil(apf)
-    assert_equal(5, apf.length)
-    p = Member.where(:iac_id => 432592).first
-    assert_not_nil(p)
-    assert_equal('Travis', p.given_name)
-    pf = apf.detect { |pf| pf.pilot == p }
-    assert_not_nil(pf)
-  end
+    p = Member.where(:iac_id => 19517).first
+    assert_equal('Michael', p.given_name)
+    assert_equal('Stephenson', p.family_name)
 
-  test "contest 30 judges" do
-    m2d = IAC::MannyToDB.new
-    m2d.process_contest(MP30, true)
+    p = Member.where(:family_name => 'Steveson').first
+    assert_equal('Michael', p.given_name)
+    assert_equal(19517, p.iac_id)
+
+    p = Member.where(:iac_id => 432911).first
+    assert_equal('Lenny', p.given_name)
+    assert_equal('Spigiel', p.family_name)
+
+    pilot = Member.find_by_iac_id(432592)
+    assert_not_nil(pilot)
+    assert_equal('Travis', pilot.given_name)
 
     pj = Member.find_by_iac_id(26409)
     assert_equal('Dornberger', pj.family_name)
     pa = Member.find_by_iac_id(431814)
     assert_equal('Benzing', pa.family_name)
-    Judge.find_each do |j|
-      puts "Judge #{j.id} #{j.judge.display}"
-      if j.assist
-        puts "Assisted by #{j.assist.display}"
-      else
-        puts "Without an assistant"
-      end
+
+    judge = Judge.find_by_judge_id_and_assist_id(pj, pa)
+    assert_not_nil(judge)
+    assert_equal(pj, judge.judge)
+    assert_equal(pa, judge.assist)
+
+    ms = MannySynch.where(:manny_number => 30).first
+    assert_not_nil(ms)
+
+    contest = ms.contest
+    af = contest.flights
+    assert_not_nil(af)
+    assert_equal(2, af.length)
+
+    flight = af.detect { |f| f.name == 'Known' }
+    assert_not_nil flight
+    assert_equal('Sportsman', flight.category)
+
+    apf = flight.pilot_flights
+    assert_not_nil(apf)
+    assert_equal(5, apf.length)
+
+    pf = apf.detect { |pf| pf.pilot == pilot }
+    assert_not_nil(pf)
+
+    asc = pf.scores
+    assert_equal(5, asc.length)
+
+    scores = asc.detect { |sc| sc.judge == judge }
+    assert_not_nil scores
+    values = scores.values
+    assert_not_nil values
+    assert_equal(11, values.length)
+    [85, 90, 90, 90, 65, 85, 95, 80, 85, 80, 90].each_with_index do |v,i|
+      assert_equal(v, values[i], "flight score figure #{i+1}")
     end
-    j = Judge.find_by_judge_id_and_assist_id(pj, pa)
-    assert_not_nil(j)
-    assert_equal(pj, j.judge)
-    assert_equal(pa, j.assist)
   end
 
 #  test "contest 30 sequences" do
@@ -157,23 +158,6 @@ class MannyToDBTest < ActiveSupport::TestCase
 #    assert_equal("", pilot.chapter)
 #    assert_equal("G-Blanik", pilot.make)
 #    assert_equal("N1BA", pilot.reg)
-#  end
-#
-#  test "contest 30 scores" do
-#    contest = MP30.contest
-#    f1 = contest.flight(2,1)
-#    assert f1
-#    assert_equal(25, f1.scores.length)
-#    f2 = contest.flight(2,2)
-#    assert f2
-#    assert_equal(25, f2.scores.length)
-#    score = f2.scores[24]
-#    assert_equal(12, score.judge)
-#    assert_equal(18, score.pilot)
-#    assert_equal(65, score.seq.pres)
-#    [70, 80, 70, 75, 60, 50,60, 50, 70, 70].each_with_index do |v,i|
-#      assert_equal(v, score.seq.figs[i+1])
-#    end
 #  end
 #
 #  test "contest 30 penalties" do

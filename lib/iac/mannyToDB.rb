@@ -189,15 +189,11 @@ def process_flight_judges(dFlight, mFlight)
       msg = "Missing assistant for #{dFlight.display}, judge #{dJ.display}"
       Judge.logger.warn(msg)
     end
-    puts "Judge #{dJ} is #{dJ.display}"
     dJudge = Judge.where(:judge_id => dJ, :assist_id => dA).first ||
       Judge.create(:judge => dJ, :assist => dA)
     if !dJudge
       msg = "Failed create judge #{dJ} for #{dFlight.display}"
-      puts msg
       Judge.logger.error(msg)
-    else
-      puts "#{dJudge.display}"
     end
     @judges[j] = dJudge
   end
@@ -209,6 +205,17 @@ def process_flight_scores(dFlight, mCat, mFlight)
     mPilot = mCat.pilots[mParti]
     dPilot = @parts[mParti]
     dPilotFlight = get_pilot_flight(dPilot, dFlight, mPilot.chapter)
+    mJi = mScore.judge
+    dJudge = @judges[mJi] # get the judge team
+    dScore = Score.create(
+      :pilot_flight => dPilotFlight,
+      :judge => dJudge,
+      :values => [])
+    mSeq = mScore.seq
+    ctF = mSeq.ctFigs
+    (1..ctF).each { |i| dScore.values << mSeq.figs[i] } # write scores
+    dScore.values << mSeq.pres # write presentation
+    dScore.save
   end
 end
 

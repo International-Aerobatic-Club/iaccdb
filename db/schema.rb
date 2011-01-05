@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110103164012) do
+ActiveRecord::Schema.define(:version => 20110104150435) do
 
   create_table "contests", :force => true do |t|
     t.string   "name",       :limit => 48
@@ -65,6 +65,14 @@ ActiveRecord::Schema.define(:version => 20110103164012) do
     t.integer  "sequence_id"
     t.integer  "aircraft_id"
     t.string   "chapter",     :limit => 8
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "scores", :force => true do |t|
+    t.integer  "pilot_flight_id"
+    t.integer  "judge_id"
+    t.string   "values"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

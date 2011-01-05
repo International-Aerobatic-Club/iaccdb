@@ -1,16 +1,11 @@
 require 'test_helper'
-require 'iac/mannyParse'
+require 'test/unit/helpers/manny_helper'
 
 class MannyTest < ActiveSupport::TestCase
-  @@Parsed30 = Manny::MannyParse.new
-  IO.foreach("test/fixtures/Contest_30.txt") { |line| @@Parsed30.processLine(line) }
-
-  def setup
-    @mparse = @@Parsed30
-  end
+  include MannyParsedTestData
 
   test "contest 30 contest" do
-    contest = @mparse.contest
+    contest = MP30.contest
     assert contest
     assert_equal(30, contest.mannyID)
     assert_equal('G', contest.aircat)
@@ -32,7 +27,7 @@ class MannyTest < ActiveSupport::TestCase
   end
 
   test "contest 30 personnel" do
-    contest = @mparse.contest
+    contest = MP30.contest
     ap = contest.participants
     assert !ap.empty?
     apid = ap.collect { |p| p ? p.iacID : 0 }
@@ -46,19 +41,10 @@ class MannyTest < ActiveSupport::TestCase
     assert_equal('Lenny', p.givenName)
     assert_equal('Spigiel', p.familyName)
     assert_equal(p, ap[18])
-
-#    m = Member.where(:iac_id => 19517).first
-#    assert m
-#    assert_equal('Michael', m.given_name)
-#    assert_equal('Steveson', m.family_name)
-#    m = Member.where(:iac_id => 432911).first
-#    assert m
-#    assert_equal('Lenny', m.given_name)
-#    assert_equal('Spigiel', m.family_name)
   end
 
   test "contest 30 flights" do
-    contest = @mparse.contest
+    contest = MP30.contest
     f1 = contest.flight(2,1)
     assert f1
     assert_equal("Known", f1.name)
@@ -68,7 +54,7 @@ class MannyTest < ActiveSupport::TestCase
   end
 
   test "contest 30 judges" do
-    contest = @mparse.contest
+    contest = MP30.contest
     f1 = contest.flight(2,1)
     assert_equal(1, f1.chief)
     assert_equal(2, f1.chiefAssists.length)
@@ -82,7 +68,7 @@ class MannyTest < ActiveSupport::TestCase
   end
 
   test "contest 30 sequences" do
-    contest = @mparse.contest
+    contest = MP30.contest
     seq = contest.seq_for(2,1,14)
     [17, 10, 15, 18, 10, 14, 10, 17, 11, 5, 6].each_with_index do |k,i|
       assert_equal(k, seq.figs[i+1])
@@ -91,10 +77,13 @@ class MannyTest < ActiveSupport::TestCase
     assert_equal(10, seq.ctFigs)
     assert_equal(seq, contest.seq_for(2,1,15))
     assert_equal(seq, contest.seq_for(2,2,14))
+    seq = contest.seq_for(2, 2, 18)
+    assert_equal(6, seq.pres)
+    assert_equal(10, seq.ctFigs)
   end
 
   test "contest 30 pilots" do
-    contest = @mparse.contest
+    contest = MP30.contest
     pilot = contest.pilot(2,14)
     assert_equal("", pilot.chapter)
     assert_equal("G-Blanik", pilot.make)
@@ -102,7 +91,7 @@ class MannyTest < ActiveSupport::TestCase
   end
 
   test "contest 30 scores" do
-    contest = @mparse.contest
+    contest = MP30.contest
     f1 = contest.flight(2,1)
     assert f1
     assert_equal(25, f1.scores.length)
@@ -112,14 +101,17 @@ class MannyTest < ActiveSupport::TestCase
     score = f2.scores[24]
     assert_equal(12, score.judge)
     assert_equal(18, score.pilot)
-    assert_equal(65, score.seq.pres)
-    [70, 80, 70, 75, 60, 50,60, 50, 70, 70].each_with_index do |v,i|
-      assert_equal(v, score.seq.figs[i+1])
+    seq = score.seq
+    assert_not_nil seq
+    assert_equal(65, seq.pres)
+    assert_equal(10, seq.ctFigs)
+    [70, 80, 70, 75, 60, 50, 60, 50, 70, 70].each_with_index do |v,i|
+      assert_equal(v, seq.figs[i+1], "Figure #{i+1} score")
     end
   end
 
   test "contest 30 penalties" do
-    contest = @mparse.contest
+    contest = MP30.contest
     f1 = contest.flight(2,1)
     assert_equal(250, f1.penalty(16))
     assert_equal(0, f1.penalty(14))

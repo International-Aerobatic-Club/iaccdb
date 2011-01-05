@@ -33,6 +33,7 @@ class Flight
     ks[pid] ||= Seq.new
   end
 
+  # pid is a one-based index for the pilot from the manny file
   def seq_for(pid)
     ks[pid] || ks[0]
   end
@@ -62,12 +63,23 @@ class Category
   def pilot pid
     pilots[pid] ||= Pilot.new(pid)
   end
+
+  # this is needed for primary and sportsman where the sequence
+  # for subsequent flights may be the same as the for the first
+  # the manny data supplies only the known. it does not repeat.
+  def forwardfill_sequences
+    seq = flights[1].ks[0] if flights[1]
+    flights.each do |f|
+      f.ks[0] ||= seq if f
+    end if seq
+  end
 end
 
 class Score
-  attr_accessor :pilot, :judge, :seq
+  attr_accessor :ks, :pilot, :judge, :seq
 
-  def initialize(pilot, judge)
+  def initialize(ks, pilot, judge)
+    @ks = ks # Seq k values for sequence
     @pilot = pilot # participant index
     @judge = judge # participant index
   end

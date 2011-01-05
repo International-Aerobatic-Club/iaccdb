@@ -1,0 +1,29 @@
+<%= form_for(@score) do |f| %>
+  <% if @score.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@score.errors.count, "error") %> prohibited this score from being saved:</h2>
+
+      <ul>
+      <% @score.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :pilot_flight_id %><br />
+    <%= f.text_field :pilot_flight_id %>
+  </div>
+  <div class="field">
+    <%= f.label :judge_id %><br />
+    <%= f.text_field :judge_id %>
+  </div>
+  <div class="field">
+    <%= f.label :values %><br />
+    <%= f.text_field :values %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
