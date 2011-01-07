@@ -4,8 +4,12 @@ class Member < ActiveRecord::Base
   has_many :pilot_flights, :foreign_key => "pilot_id"
   has_many :flights, :through => :pilot_flights
 
+  def name
+    "#{given_name} #{family_name}"
+  end
+
   def display
-    "#{given_name} #{family_name}, iac #{iac_id}"
+    "#{name}, iac #{iac_id}"
   end
 
 end

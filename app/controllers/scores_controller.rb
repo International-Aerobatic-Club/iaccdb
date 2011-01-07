@@ -1,23 +1,20 @@
 class ScoresController < ApplicationController
-  # GET /scores
-  # GET /scores.xml
-  def index
-    @scores = Score.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @scores }
-    end
-  end
-
-  # GET /scores/1
-  # GET /scores/1.xml
+  # GET pilot/:pilot_id/scores/:contest_id
   def show
-    @score = Score.find(params[:id])
-
+    @contest = Contest.find(params[:id])
+    @pilot = Member.find(params[:pilot_id])
+    flights = Flight.where("contest_id = #{params[:id]}")
+    @pilot_flights = PilotFlight.where("flight_id in (" +
+      flights.collect { |f| f.id }.join(',') + ") and pilot_id = " +
+      @pilot.id.to_s);
+    @flight_scores = {}
+    @pilot_flights.each do |p|
+      @flight_scores[p] = p.scores.collect { |s| s.values }
+    end
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @score }
+      format.xml  { render :xml => @pilot_flights }
     end
   end
 

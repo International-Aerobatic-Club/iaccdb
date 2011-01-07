@@ -8,7 +8,24 @@
 </head>
 <body>
 
-<%= yield %>
+<div class="navigation">
+<ul class="no_bullets">
+<li><%= link_to 'Contests', contests_path %></li>
+<li><%= link_to 'Pilots', pilots_path %></li>
+</ul>
+</div>
 
+<div class="content">
+<%= yield %>
+</div>
+
+<div class="acknowledgement">
+<p>These pages appear to you thanks to: </p>
+<ul>
+<li>"Manny," the contest results tracking system built by Randy Owens; </li>
+<li>"JaSPer," the contest scoring and data management system
+built by 'Bwana' Bob Buckley; and </li>
+<li>Web Wizard Douglas Lovell</li>
+</ul>
 </body>
 </html>

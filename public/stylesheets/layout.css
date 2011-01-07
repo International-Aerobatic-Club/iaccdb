@@ -1,0 +1,39 @@
+div.navigation {
+  display: inline-block;
+  vertical-align: top;
+  position: relative;
+  top: 60px;
+  left: -10px;
+}
+
+div.navigation ul {
+  margin-top: 0px;
+  list-style-type: none;
+}
+
+div.content {
+  display: inline-block;
+  vertical-align: top;
+  position: relative;
+  top: 10px;
+  left: 10px;
+  padding-left: 10px;
+  border-left: 2pt solid black;
+}
+
+div.acknowledgement {
+  padding-left: 10px;
+  padding-top: 20px;
+  font-style: italic;
+  font-size: very-small;
+  color: #77a;
+}
+
+div.acknowledgement p {
+  margin-bottom: 0px;
+}
+
+div.acknowledgement ul {
+  margin-top: 0px;
+  list-style-type: none;
+}

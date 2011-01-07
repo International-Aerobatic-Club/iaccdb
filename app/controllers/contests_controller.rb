@@ -2,7 +2,7 @@ class ContestsController < ApplicationController
   # GET /contests
   # GET /contests.xml
   def index
-    @contests = Contest.all
+    @contests = Contest.order("start DESC")
 
     respond_to do |format|
       format.html # index.html.erb

@@ -1,20 +1,33 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Pilot flight:</b>
-  <%= @score.pilot_flight_id %>
-</p>
+<h1><%= link_to @pilot.name, pilot_path(@pilot) %></h1>
+<h2><%= link_to (@contest) do "#{@contest.name} #{@contest.start}" end %></h2>
 
-<p>
-  <b>Judge:</b>
-  <%= @score.judge_id %>
-</p>
-
-<p>
-  <b>Values:</b>
-  <%= @score.values %>
-</p>
-
-
-<%= link_to 'Edit', edit_score_path(@score) %> |
-<%= link_to 'Back', scores_path %>
+<% @flight_scores.each do |f,s| %>
+  <h3><%= f.flight.displayName %></h3>
+  <table class="scores">
+  <thead><tr>
+  <th>F</th>
+  <% (1 .. s.count).each do |j| %>
+    <th>J<%= j.to_s %></th>
+  <% end %>
+  </tr></thead>
+  <tbody>
+  <% pi = s[0].count - 1 %>
+  <% (1 ... pi).each do |f| #figures %>
+    <tr>
+    <td><%= f.to_s %></td>
+    <% s.each do |js| #judges %>
+      <td><%= js[f].to_s %></td>
+    <% end #judges %>
+    </tr>
+  <% end #figures %>
+  <tr>
+  <td>P</td>
+  <% s.each do |js| #judges %>
+    <td><%= js[pi].to_s %></td>
+  <% end #judges %>
+  </tr>
+  </tbody>
+  </table>
+<% end #flights %>

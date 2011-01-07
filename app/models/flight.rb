@@ -6,6 +6,10 @@ class Flight < ActiveRecord::Base
   has_many :pilots, :through => :pilot_flights, :class_name => 'Member'
 
   def display
-    "#{contest.name} category #{category}, flight #{name}"
+    "#{contest.name} category #{category}, flight #{name}, aircat #{aircat}"
+  end
+
+  def displayName
+    "#{category} #{'Glider' if aircat == 'G'} #{name}"
   end
 end

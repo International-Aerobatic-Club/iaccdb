@@ -1,0 +1,11 @@
+<h1>Pilots</h1>
+
+<ul>
+<% @pilots.each do |pilot| %>
+  <li>
+  <%= link_to (pilot_path(pilot)) do %>
+    <%= pilot.given_name %> <%= pilot.family_name %>
+  <% end %>
+  (<%= pilot.category %>)</li>
+<% end %>
+</ul>
