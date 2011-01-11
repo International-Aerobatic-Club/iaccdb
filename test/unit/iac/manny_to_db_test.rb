@@ -94,12 +94,15 @@ class MannyToDBTest < ActiveSupport::TestCase
     assert_equal('Lenny', p.given_name)
     assert_equal('Spigiel', p.family_name)
 
+    # Pilot 14 in the Manny data
     pilot = Member.find_by_iac_id(432592)
     assert_not_nil(pilot)
     assert_equal('Travis', pilot.given_name)
 
+    # Judge 8 in the Manny data
     pj = Member.find_by_iac_id(26409)
     assert_equal('Dornberger', pj.family_name)
+    # Manny number 9
     pa = Member.find_by_iac_id(431814)
     assert_equal('Benzing', pa.family_name)
 
@@ -116,6 +119,7 @@ class MannyToDBTest < ActiveSupport::TestCase
     assert_not_nil(af)
     assert_equal(2, af.length)
 
+    # Manny category 2, flight 1
     flight = af.detect { |f| f.name == 'Known' }
     assert_not_nil flight
     assert_equal('Sportsman', flight.category)
@@ -130,12 +134,13 @@ class MannyToDBTest < ActiveSupport::TestCase
     asc = pf.scores
     assert_equal(5, asc.length)
 
+    # Manny scores 2 1 14 8
     scores = asc.detect { |sc| sc.judge == judge }
     assert_not_nil scores
     values = scores.values
     assert_not_nil values
-    assert_equal(11, values.length)
-    [85, 90, 90, 90, 65, 85, 95, 80, 85, 80, 90].each_with_index do |v,i|
+    assert_equal(12, values.length)
+    [85, 90, 90, 90, 65, 85, 95, 80, 85, 80, 80, 90].each_with_index do |v,i|
       assert_equal(v, values[i], "flight score figure #{i+1}")
     end
   end

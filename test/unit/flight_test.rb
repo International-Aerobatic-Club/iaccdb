@@ -1,8 +1,7 @@
 require 'test_helper'
 
 class FlightTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
+  test "count judges" do
+    assert_equal(2, flights(:one).count_judges) 
   end
 end

@@ -69,16 +69,16 @@ class MannyTest < ActiveSupport::TestCase
 
   test "contest 30 sequences" do
     contest = MP30.contest
-    seq = contest.seq_for(2,1,14)
-    [17, 10, 15, 18, 10, 14, 10, 17, 11, 5, 6].each_with_index do |k,i|
-      assert_equal(k, seq.figs[i+1])
+    seq = contest.seq_for(2,2,14)
+    [6, 8, 20, 16, 3, 19, 16, 16, 10, 14].each_with_index do |k,i|
+      assert_equal(k, seq.figs[i+1], "Figure #{i+1} K")
     end
-    assert_equal(6, seq.pres)
+    assert_equal(15, seq.pres)
     assert_equal(10, seq.ctFigs)
-    assert_equal(seq, contest.seq_for(2,1,15))
-    assert_equal(seq, contest.seq_for(2,2,14))
+    assert_not_equal(seq, contest.seq_for(2,1,14))
+    assert_equal(seq, contest.seq_for(2,2,15))
     seq = contest.seq_for(2, 2, 18)
-    assert_equal(6, seq.pres)
+    assert_equal(15, seq.pres)
     assert_equal(10, seq.ctFigs)
   end
 

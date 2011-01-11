@@ -34,20 +34,26 @@ def self.findStars (contest)
   CONTEST_CATEGORIES.each_with_index do |cat, iCat|
     catch (:category) do
       catFlights = contest.flights.find_all_by_category(cat)
+      # TODO problem if both power and glider in category; must distinguish
       ctFMin = (iCat < 2) ? 1 : 2
-      if (ctFMin <= catFlights.length) do
+      if (ctFMin <= catFlights.length) then
         catPilots = catFlights[0].pilots
         # pilots of first flight sufficient because a pilot must fly every flight
         catPilots.each do |pilot|
           catch (:pilot) do
             catFlights.each do |flight|
               # if not three judges, break category (minimum three judges)
-              ctJ = count_flight_judges(flight)
+              ctJ = flight.count_judges
               throw :category if ctJ < 3
               maxBlw5 = (ctJ == 3) ? 0 : 1
-              pilotFlight = flight.pilot_flights.find_by_pilot(pilot)
+              pilotFlight = flight.pilot_flights.find_by_pilot_id(pilot)
               test_pilot_flight stars, pilotFlight, maxBlw5
             end # each flight
+            stars << { :name => pilot.name,
+                       :iacID => pilot.iac_id,
+                       :category => cat,
+                       :scoresURL => make_scores_url(pilot, contest)
+                     }
           end # catch pilot
         end # each pilot
       end # if sufficient flights
@@ -63,7 +69,7 @@ private
 # check score from each judge for each figure 
 # throws :pilot if number of scores below five on a figure exceeds maxBlw5
 # adds a Hash to Array stars if all figures pass
-def test_pilot_flight(stars, pilotFlight, maxBlw5)
+def self.test_pilot_flight(stars, pilotFlight, maxBlw5)
   pfScores = pilotFlight.gatherScores
   pfScores.each do |f|
     ctBlw5 = 0
@@ -72,19 +78,13 @@ def test_pilot_flight(stars, pilotFlight, maxBlw5)
       throw :pilot if maxBlw5 < ctBlw5
     end
   end
-  stars << { :name => pilotFlight.pilot.name,
-             :iacID => pilotFlight.pilot.iac_id,
-             :category => pilotFlight.flight.category,
-             :scoresURL => make_scores_url pilotFlight.pilot,
-               pilotFlight.flight.contest
-           }
 end
 
 # create a URL for the scores
 # we don't have ActiveRouting path helpers, so we punt on this
 # and build it with extrinsic knowledge of the resource path
-def make_scores_url(pilot, contest)
-  "http://www.iacusn.org/cdb/pilots/" + pilot.id + "/scores/" + contest.id
+def self.make_scores_url(pilot, contest)
+  "http://www.iacusn.org/cdb/pilots/#{pilot.id}/scores/#{contest.id}"
 end
 
 end #class

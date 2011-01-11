@@ -10,7 +10,7 @@ class ScoresController < ApplicationController
       @pilot.id.to_s);
     @flight_scores = {}
     @pilot_flights.each do |p|
-      @flight_scores[p] = p.scores.collect { |s| s.values }
+      @flight_scores[p] = p.gatherScores
     end
     respond_to do |format|
       format.html # show.html.erb

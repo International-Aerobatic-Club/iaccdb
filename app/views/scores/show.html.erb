@@ -4,30 +4,32 @@
 <h2><%= link_to (@contest) do "#{@contest.name} #{@contest.start}" end %></h2>
 
 <% @flight_scores.each do |f,s| %>
+  <div class="flightScores">
   <h3><%= f.flight.displayName %></h3>
   <table class="scores">
   <thead><tr>
   <th>F</th>
-  <% (1 .. s.count).each do |j| %>
+  <% (1 .. s[0].count).each do |j| %>
     <th>J<%= j.to_s %></th>
   <% end %>
   </tr></thead>
   <tbody>
-  <% pi = s[0].count - 1 %>
-  <% (1 ... pi).each do |f| #figures %>
+  <% pi = s.count - 1 %>
+  <% (0 ... pi).each do |f| #figures %>
     <tr>
     <td><%= f.to_s %></td>
-    <% s.each do |js| #judges %>
-      <td><%= js[f].to_s %></td>
+    <% s[f].each do |js| #judges %>
+      <td><%= js.to_s %></td>
     <% end #judges %>
     </tr>
   <% end #figures %>
   <tr>
   <td>P</td>
-  <% s.each do |js| #judges %>
-    <td><%= js[pi].to_s %></td>
+  <% s[pi].each do |js| #judges %>
+    <td><%= js.to_s %></td>
   <% end #judges %>
   </tr>
   </tbody>
   </table>
+  </div>
 <% end #flights %>

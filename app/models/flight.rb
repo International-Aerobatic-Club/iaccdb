@@ -10,6 +10,16 @@ class Flight < ActiveRecord::Base
   end
 
   def displayName
-    "#{category} #{'Glider' if aircat == 'G'} #{name}"
+    "#{displayCategory} #{name}"
+  end
+
+  def displayCategory
+    "#{category} #{'Glider' if aircat == 'G'}"
+  end
+
+  def count_judges
+    Judge.find_by_sql("select distinct s.judge_id 
+      from scores s, pilot_flights p 
+      where p.flight_id = #{id} and s.pilot_flight_id = p.id").count
   end
 end
