@@ -1,4 +1,7 @@
+require 'lib/iac/constants.rb'
+
 module Manny
+
 class Seq
   attr_accessor :pres, :figs, :ctFigs
 
@@ -44,8 +47,8 @@ class Flight
 
 end
 
-CATEGORY_NAMES = %w{nil Primary Sportsman Intermediate Advanced Unlimited Four\ Minute}
-FLIGHT_NAMES = %w{nil Known Free Unknown\ 1 Unknown\ 2}
+CATEGORY_NAMES = [ nil ] + IAC::CATEGORY_NAMES
+FLIGHT_NAMES = [ nil ] + IAC::FLIGHT_NAMES
 
 class Category
   attr_accessor :flights, :pilots, :name
