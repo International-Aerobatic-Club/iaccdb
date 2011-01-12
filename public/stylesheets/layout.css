@@ -1,27 +1,27 @@
+span.pilot {
+  padding-right: 3pt;
+}
+
 div.flightScores {
   display: inline-block;
   margin-right: 20px;
 }
 
-div.navigation {
-  display: inline-block;
-  vertical-align: top;
-  position: relative;
-  top: 60px;
-  left: -10px;
+.hide {
+  visibility:hidden;
 }
 
-div.navigation ul {
+.navigation ul {
   margin-top: 0px;
   list-style-type: none;
 }
 
-div.content {
-  display: inline-block;
-  vertical-align: top;
-  position: relative;
-  top: 10px;
-  left: 10px;
+td.navigation {
+  vertical-align:top;
+  padding-right: 10px;
+}
+
+td.content {
   padding-left: 10px;
   border-left: 2pt solid black;
 }

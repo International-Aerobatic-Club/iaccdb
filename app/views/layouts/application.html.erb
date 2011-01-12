@@ -8,16 +8,20 @@
 </head>
 <body>
 
-<div class="navigation">
+<table class="material">
+<tbody><tr>
+<td class="navigation">
+<h1 class="hide">Nav</h1>
 <ul class="no_bullets">
 <li><%= link_to 'Contests', contests_path %></li>
 <li><%= link_to 'Pilots', pilots_path %></li>
 </ul>
-</div>
+</td>
 
-<div class="content">
+<td class="content">
 <%= yield %>
-</div>
+</td>
+</tr></tbody></table>
 
 <div class="acknowledgement">
 <p>These pages appear to you thanks to: </p>
