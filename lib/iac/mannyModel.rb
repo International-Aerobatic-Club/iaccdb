@@ -47,8 +47,8 @@ class Flight
 
 end
 
-CATEGORY_NAMES = [ nil ] + IAC::CATEGORY_NAMES
-FLIGHT_NAMES = [ nil ] + IAC::FLIGHT_NAMES
+CATEGORY_NAMES = [ nil ] + IAC::Constants::CATEGORY_NAMES
+FLIGHT_NAMES = [ nil ] + IAC::Constants::FLIGHT_NAMES
 
 class Category
   attr_accessor :flights, :pilots, :name

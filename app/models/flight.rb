@@ -22,4 +22,5 @@ class Flight < ActiveRecord::Base
       from scores s, pilot_flights p 
       where p.flight_id = #{id} and s.pilot_flight_id = p.id").count
   end
+  
 end

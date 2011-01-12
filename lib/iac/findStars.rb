@@ -5,15 +5,17 @@ require 'lib/iac/constants'
 # this class contains methods to find pilots who qualify for stars awards
 module IAC
 class FindStars
-
+include IAC::Constants
 # Examines the pilots at a contest to find any that qualify for
 # stars awards.  
 # Accepts the database Contest instance for examination
 # Returns an Array of Hash, one per stars qualified pilot.
 # Each Hash contains:
-#  :name => first and last name as a string
+#  :given_name => first name as a string
+#  :family_name => last name as a string
 #  :iacID => IAC member number
-#  :category => name of category qualified as a string
+#  :category => name of category for which qualified as a string
+#  :aircat => 'P' or 'G' for power or glider
 #  :scoresURL => URL to examine the pilot scores
 # Returns an empty array if there are no qualifying pilots
 #
@@ -32,32 +34,38 @@ class FindStars
 def self.findStars (contest)
   stars = []
   CONTEST_CATEGORIES.each_with_index do |cat, iCat|
-    catch (:category) do
-      catFlights = contest.flights.find_all_by_category(cat)
-      # TODO problem if both power and glider in category; must distinguish
-      ctFMin = (iCat < 2) ? 1 : 2
-      if (ctFMin <= catFlights.length) then
-        catPilots = catFlights[0].pilots
-        # pilots of first flight sufficient because a pilot must fly every flight
-        catPilots.each do |pilot|
-          catch (:pilot) do
-            catFlights.each do |flight|
-              # if not three judges, break category (minimum three judges)
-              ctJ = flight.count_judges
-              throw :category if ctJ < 3
-              maxBlw5 = (ctJ == 3) ? 0 : 1
-              pilotFlight = flight.pilot_flights.find_by_pilot_id(pilot)
-              test_pilot_flight stars, pilotFlight, maxBlw5
-            end # each flight
-            stars << { :name => pilot.name,
-                       :iacID => pilot.iac_id,
-                       :category => cat,
-                       :scoresURL => make_scores_url(pilot, contest)
-                     }
-          end # catch pilot
-        end # each pilot
-      end # if sufficient flights
-    end # catch category
+    AIRPLANE_CATEGORIES.each do |aircat|
+      catch (:category) do
+        catFlights = Flight.find_by_sql("select * from flights 
+          where contest_id = #{contest.id} and category = '#{cat}' and 
+            aircat = '#{aircat}'")
+        ctFMin = (iCat < 2) ? 1 : 2
+        if (ctFMin <= catFlights.length) then
+          flight = catFlights.first
+          catPilots = flight.pilots
+          # pilots of first flight sufficient; a pilot must fly every flight
+          catPilots.each do |pilot|
+            catch (:pilot) do
+              catFlights.each do |flight|
+                # if not three judges, break category (minimum three judges)
+                ctJ = flight.count_judges
+                throw :category if ctJ < 3
+                maxBlw5 = (ctJ == 3) ? 0 : 1
+                pilotFlight = flight.pilot_flights.find_by_pilot_id(pilot)
+                test_pilot_flight stars, pilotFlight, maxBlw5
+              end # each flight
+              stars << { :given_name => pilot.given_name,
+                         :family_name => pilot.family_name,
+                         :iacID => pilot.iac_id,
+                         :category => cat,
+                         :aircat => aircat,
+                         :scoresURL => make_scores_url(pilot, contest)
+                       }
+            end # catch pilot
+          end # each pilot
+        end # if sufficient flights
+      end # catch category
+    end # each aircat 
   end # each category
   stars
 end
