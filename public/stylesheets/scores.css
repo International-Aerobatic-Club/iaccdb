@@ -1,0 +1,9 @@
+table.scores td {
+  text-align:right;
+  padding-left: 3pt;
+}
+
+table.scores th {
+  width:2em;
+  text-align:right;
+}

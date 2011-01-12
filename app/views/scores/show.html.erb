@@ -17,16 +17,16 @@
   <% pi = s.count - 1 %>
   <% (0 ... pi).each do |f| #figures %>
     <tr>
-    <td><%= f.to_s %></td>
+    <td><%= (f+1).to_s %></td>
     <% s[f].each do |js| #judges %>
-      <td><%= js.to_s %></td>
+      <td><%= Score.display_score(js) %></td>
     <% end #judges %>
     </tr>
   <% end #figures %>
   <tr>
   <td>P</td>
   <% s[pi].each do |js| #judges %>
-    <td><%= js.to_s %></td>
+    <td><%= Score.display_score(js) %></td>
   <% end #judges %>
   </tr>
   </tbody>
