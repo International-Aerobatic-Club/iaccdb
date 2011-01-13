@@ -16,6 +16,11 @@ div.flightScores {
   list-style-type: none;
 }
 
+ul.bare {
+  margin-top: 0px;
+  list-style-type: none;
+}
+
 td.navigation {
   vertical-align:top;
   padding-right: 10px;

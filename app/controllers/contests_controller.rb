@@ -1,4 +1,8 @@
+require 'lib/iac/constants'
+
 class ContestsController < ApplicationController
+  include IAC::Constants
+
   # GET /contests
   # GET /contests.xml
   def index
@@ -14,6 +18,17 @@ class ContestsController < ApplicationController
   # GET /contests/1.xml
   def show
     @contest = Contest.find(params[:id])
+    pa = Member.find_by_sql("select distinct m.*, f.category, f.aircat
+      from members m, flights f, pilot_flights p
+        where f.contest_id = #{@contest.id} and p.flight_id = f.id and
+          m.id = p.pilot_id")
+    @pilots = category_split(pa)
+    @categories = category_list_sort(@pilots)
+    ja = Judge.find_by_sql("select distinct j.*, f.category, f.aircat
+      from judges j, flights f, pilot_flights p, scores s
+      where f.contest_id = #{@contest.id} and p.flight_id = f.id and
+        s.pilot_flight_id = p.id and j.id = s.judge_id")
+    @judges = category_split(ja)
 
     respond_to do |format|
       format.html # show.html.erb

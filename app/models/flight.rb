@@ -5,12 +5,12 @@ class Flight < ActiveRecord::Base
   has_many :pilot_flights
   has_many :pilots, :through => :pilot_flights, :class_name => 'Member'
 
-  def display
+  def to_s
     "#{contest.name} category #{category}, flight #{name}, aircat #{aircat}"
   end
 
   def displayName
-    "#{displayCategory} #{name}"
+    "#{displayCategory} #{name if category != 'Four Minute Free'}"
   end
 
   def displayCategory
@@ -22,5 +22,4 @@ class Flight < ActiveRecord::Base
       from scores s, pilot_flights p 
       where p.flight_id = #{id} and s.pilot_flight_id = p.id").count
   end
-  
 end

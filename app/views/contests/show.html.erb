@@ -5,3 +5,26 @@
 <p class="contest_director">Directed by <%= @contest.director %>, 
    Chapter <%= @contest.chapter %></p>
 
+<h2>Pilots</h2>
+
+<% @categories.each do |cat| %>
+  <h3><%= cat %></h3>
+  <% @pilots[cat].each do |pilot| %>
+    <span class="pilot">
+      <%= link_to ("#{pilot.name}", pilot_score_path(pilot, @contest)) %>
+    </span>
+  <% end %>
+<% end %>
+
+<h2>Judges</h2>
+<% @categories.each do |cat| %>
+  <h3><%= cat %></h3>
+  <ul class="bare">
+  <% @judges[cat].each do |judge| %>
+    <li class="judge">
+      <%= judge.judge_name %> with <%= judge.assistant_name %>
+    </li>
+  <% end %>
+  </ul>
+<% end %>
+</ul>
