@@ -4,13 +4,13 @@ class ScoresController < ApplicationController
   def show
     @contest = Contest.find(params[:id])
     @pilot = Member.find(params[:pilot_id])
-    flights = Flight.where("contest_id = #{params[:id]}")
-    @pilot_flights = PilotFlight.where("flight_id in (" +
-      flights.collect { |f| f.id }.join(',') + ") and pilot_id = " +
-      @pilot.id.to_s);
-    @flight_scores = {}
-    @pilot_flights.each do |p|
-      @flight_scores[p] = p.gatherScores
+    @pilot_flights = PilotFlight.find_by_sql(["select p.* 
+      from pilot_flights p, flights f 
+      where f.contest_id = :cid and p.flight_id = f.id and p.pilot_id = :pid
+      order by f.sequence", {:cid => params[:id], :pid => params[:pilot_id]}])
+    @flight_scores = []
+    @pilot_flights.each do |pf|
+      @flight_scores << pf.gatherScores
     end
     respond_to do |format|
       format.html # show.html.erb

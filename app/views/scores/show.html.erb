@@ -3,9 +3,10 @@
 <h1><%= link_to @pilot.name, pilot_path(@pilot) %></h1>
 <h2><%= link_to (@contest) do "#{@contest.name} #{@contest.start}" end %></h2>
 
-<% @flight_scores.each do |f,s| %>
+<% @pilot_flights.each_with_index do |pf,i| %>
+  <% s = @flight_scores[i] %>
   <div class="flightScores">
-  <h3><%= f.flight.displayName %></h3>
+  <h3><%= pf.flight.displayName %></h3>
   <table class="scores">
   <thead><tr>
   <th>F</th>
