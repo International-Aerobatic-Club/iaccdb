@@ -1,25 +1,7 @@
-<h1>Listing judges</h1>
-
-<table>
-  <tr>
-    <th>Judge</th>
-    <th>Assist</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<h1>IAC Judges</h1>
 
 <% @judges.each do |judge| %>
-  <tr>
-    <td><%= judge.judge %></td>
-    <td><%= judge.assist %></td>
-    <td><%= link_to 'Show', judge %></td>
-    <td><%= link_to 'Edit', edit_judge_path(judge) %></td>
-    <td><%= link_to 'Destroy', judge, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+  <span class="para-index">
+  <%= link_to ("#{judge.name}", judge_path(judge)) %>
+  </span>
 <% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Judge', new_judge_path %>

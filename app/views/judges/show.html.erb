@@ -1,15 +1,12 @@
-<p id="notice"><%= notice %></p>
+<h1><%= @judge.name %></h1>
 
-<p>
-  <b>Judge:</b>
-  <%= @judge.judge %>
-</p>
-
-<p>
-  <b>Assist:</b>
-  <%= @judge.assist %>
-</p>
-
-
-<%= link_to 'Edit', edit_judge_path(@judge) %> |
-<%= link_to 'Back', judges_path %>
+<ul class='no-bullets'>
+<% @contests.each do |contest| %>
+  <li>
+    <%= contest.start %>
+    <%= link_to contest.name, contest %>
+    (<%= contest.region %>,
+    <%= contest.category %>)
+  </li>
+<% end %>
+</ul>

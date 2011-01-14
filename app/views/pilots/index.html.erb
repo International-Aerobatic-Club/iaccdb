@@ -1,7 +1,7 @@
 <h1>IAC Pilots</h1>
 
 <% @pilots.each do |pilot| %>
-  <span class="pilot">
+  <span class="para-index">
   <%= link_to ("#{pilot.name}", pilot_path(pilot)) %>
   </span>
 <% end %>
