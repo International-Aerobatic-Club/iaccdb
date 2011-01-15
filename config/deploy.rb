@@ -12,6 +12,7 @@ role :db, domain, :primary => true
 default_environment['PATH']='~/bin:/usr/bin:/bin'
 
 set :scm, 'git'
+set :scm-command, 'git --exec-path=~/bin'
 set :repository,  "file://~/.git/#{application}.git"
 set :deploy_via, :copy
 set :branch, 'master'
