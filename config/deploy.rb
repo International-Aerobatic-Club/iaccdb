@@ -3,7 +3,6 @@ set :user, 'wbreezec'
 set :domain, 'wbreeze.com'
 
 # file paths
-set :repository,  "#{user}@#{domain}:~/.git/#{application}.git"
 set :deploy_to, "~/rails/#{application}"
 
 role :app, domain
@@ -12,10 +11,9 @@ role :db, domain, :primary => true
 
 default_environment['PATH']='~/bin:/usr/bin:/bin'
 
-set :deploy_via, :copy
 set :scm, 'git'
-set :scm_command, '~/bin/git'
-set :local_scm_command, '~/bin/git'
+set :repository,  "file://~/.git/#{application}.git"
+set :deploy_via, :copy
 set :branch, 'master'
 set :scm_verbose, true
 set :use_sudo, false
