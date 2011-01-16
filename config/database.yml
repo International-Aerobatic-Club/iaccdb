@@ -17,9 +17,9 @@ test:
 
 production:
   adapter: mysql2
-  database: wbreezec_cdb
+  database: iaccdbor_cdb
   encoding: utf8
   pool: 5
-  username: wbreezec_cdb
-  password: hb6cdm8RJCMt
+  username: iaccdbor_cdb
+  password: 7Tsrm0MNhiPvFEUu
   host: localhost
