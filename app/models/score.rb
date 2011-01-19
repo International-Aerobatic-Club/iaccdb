@@ -6,6 +6,6 @@ class Score < ActiveRecord::Base
 
   # convert the value * 10 into a pretty decimal
   def self.display_score(score)
-    sprintf('%0.1f', score.fdiv(10))
+    score < 0 ? 'A' : sprintf('%0.1f', score.fdiv(10))
   end
 end

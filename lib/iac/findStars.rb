@@ -82,7 +82,7 @@ def self.test_pilot_flight(stars, pilotFlight, maxBlw5)
   pfScores.each do |f|
     ctBlw5 = 0
     f.each do |s|
-      ctBlw5 += 1 if s < 50
+      ctBlw5 += 1 if 0 <= s && s < 50
       throw :pilot if maxBlw5 < ctBlw5
     end
   end
