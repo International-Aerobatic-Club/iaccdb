@@ -30,7 +30,7 @@ def process_contest(manny, alwaysUpdate = false)
         @dContest = nil
       end
   end
-  Contest.logger.debug("MannyToDB has dContest #{@dContest.display}")
+  Contest.logger.debug("MannyToDB has dContest #{@dContest.to_s}")
   if @dContest
     process_participants(manny.contest)
     process_categories(manny.contest)
@@ -54,9 +54,10 @@ def createContest(mContest, dMannySynch)
     :chapter => mContest.chapter,
     :director => mContest.director,
     :region => mContest.region)
-  Contest.logger.info "New contest #{dContest.display}"
+  Contest.logger.info "New contest #{dContest.to_s}"
   dContest.save
   dMannySynch.contest = dContest
+  dMannySynch.synch_date = Time.now
   dMannySynch.save
   dContest
 end
@@ -72,12 +73,14 @@ def updateContest(mContest, dMannySynch)
   dContest = dMannySynch.contest
   if !dContest
     dContest = createContest(mContest, dMannySynch)
-    msg = "Expected contest #{dContest.display} was missing, created." 
+    msg = "Expected contest #{dContest.to_s} was missing, created." 
     Contest.logger.warn msg
   else
-    Contest.logger.info "Updating contest #{dContest.display}"
+    Contest.logger.info "Updating contest #{dContest.to_s}"
     Flight.delete_all(:contest_id => dContest, :aircat => mContest.aircat)
   end
+  dMannySynch.synch_date = Time.now
+  dMannySynch.save
   dContest
 end
 
@@ -88,13 +91,13 @@ def member_name_fallback(mPart)
   dm = Member.where(:family_name => mPart.familyName, 
     :given_name =>mPart.givenName).first
   if dm
-    Member.logger.info "Found by name member #{dm.display}"
+    Member.logger.info "Found by name member #{dm.to_s}"
   else
     dm = Member.create(
       :iac_id => mPart.iacID,
       :given_name => mPart.givenName,
       :family_name => mPart.familyName)
-    Member.logger.info "New member #{dm.display}"
+    Member.logger.info "New member #{dm.to_s}"
   end
   dm
 end
@@ -105,7 +108,7 @@ end
 def member_by_iacID(mPart)
   dm = Member.where(:iac_id => mPart.iacID).first
   if dm 
-    Member.logger.info "Found member #{dm.display}"
+    Member.logger.info "Found member #{dm.to_s}"
     if dm.family_name.downcase != mPart.familyName.downcase
       # different, fallback to name match
       Member.logger.warn "Member family name mismatch" +
@@ -177,7 +180,7 @@ def process_flight_judges(dFlight, mFlight)
   mFlight.judges.each do |j|
     dJ = @parts[j]
     if !dJ
-      msg = "Missing judge #{j} for #{dFlight.display}"
+      msg = "Missing judge #{j} for #{dFlight.to_s}"
       Judge.logger.error(msg)
     end
     dA = nil
@@ -186,13 +189,13 @@ def process_flight_judges(dFlight, mFlight)
       dA = @parts[mpida]
     end
     if !dA
-      msg = "Missing assistant for #{dFlight.display}, judge #{dJ.display}"
+      msg = "Missing assistant for #{dFlight.to_s}, judge #{dJ.to_s}"
       Judge.logger.warn(msg)
     end
     dJudge = Judge.where(:judge_id => dJ, :assist_id => dA).first ||
       Judge.create(:judge => dJ, :assist => dA)
     if !dJudge
-      msg = "Failed create judge #{dJ} for #{dFlight.display}"
+      msg = "Failed create judge #{dJ} for #{dFlight.to_s}"
       Judge.logger.error(msg)
     end
     @judges[j] = dJudge

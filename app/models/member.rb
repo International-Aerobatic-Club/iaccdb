@@ -8,7 +8,7 @@ class Member < ActiveRecord::Base
     "#{given_name} #{family_name}"
   end
 
-  def display
+  def to_s
     "#{name}, iac #{iac_id}"
   end
 

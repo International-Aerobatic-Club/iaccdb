@@ -1,7 +1,7 @@
 class Contest < ActiveRecord::Base
   has_many :flights, :dependent => :destroy
 
-  def display
+  def to_s
     "#{name} on #{start.strftime('%b %d, %Y')}"
   end
 
