@@ -92,7 +92,7 @@ end
 # we don't have ActiveRouting path helpers, so we punt on this
 # and build it with extrinsic knowledge of the resource path
 def self.make_scores_url(pilot, contest)
-  "http://www.iacusn.org/cdb/pilots/#{pilot.id}/scores/#{contest.id}"
+  "http://www.iaccdb.org/pilots/#{pilot.id}/scores/#{contest.id}"
 end
 
 end #class

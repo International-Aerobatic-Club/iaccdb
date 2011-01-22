@@ -5,29 +5,26 @@ require "lib/iac/constants"
 
 include IAC::Constants
 
+#stars = IAC::FindStars.findStars(Contest.first())
 stars = []
 Contest.all().each do |contest|
   puts "Checking #{contest.to_s}..."
   stars += IAC::FindStars.findStars(contest)
 end
 puts "Sorting results..."
-stars = stars.sort_by { |s| [ CONTEST_CATEGORIES.index(s[:category]).to_s +
-  '_' + s[:aircat] + '_' + s[:family_name] + '_' + s[:given_name], s ] }
-cat = ''
-aircat = ''
-stars.each do |s|
-  if (cat != s[:category] || aircat != s[:aircat])
-    cat = s[:category]
-    aircat = s[:aircat]
-    puts cat + ' ' + airplane_category_name(aircat)
-    fname = ''
-    lname = ''
+stars = stars.group_by { |s| s[:family_name] + '_' + s[:given_name] }
+names = stars.keys.sort
+names.each do |ks|
+  asp = stars[ks]
+  fname = asp[0][:given_name]
+  lname = asp[0][:family_name]
+  puts "#{fname} #{lname} #{asp[0][:iacID]}"
+  cats = category_split(asp)
+  cats.each do |kc, asc|
+    cat = asc[0][:category]
+    aircat = asc[0][:aircat]
+    puts "\t#{cat} #{airplane_category_name(aircat)}"
+    asc.each { |s| puts "\t\t#{s[:scoresURL]}" }
   end
-  if (fname != s[:given_name] || lname != s[:family_name])
-    fname = s[:given_name]
-    lname = s[:family_name]
-    puts "\t#{fname} #{lname} #{s[:iacID]}"
-  end
-  puts "\t\t#{s[:scoresURL]}"
 end
 
