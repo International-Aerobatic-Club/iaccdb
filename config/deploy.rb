@@ -1,6 +1,6 @@
 set :application, 'cdb'
 set :user, 'iaccdbor'
-set :domain, '174.120.16.66'
+set :domain, 'iaccdb.org'
 
 role :app, domain
 role :web, domain
