@@ -14,6 +14,6 @@ class JudgesController < ApplicationController
       from pilot_flights p, judges j, scores s, flights f, contests c
       where j.judge_id = :id and s.judge_id = j.id and 
         s.pilot_flight_id = p.id and p.flight_id = f.id and f.contest_id = c.id
-      order by c.start, f.sequence", {:id => id}])
+      order by c.start desc, f.sequence", {:id => id}])
   end
 end

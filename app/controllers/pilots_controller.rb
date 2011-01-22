@@ -13,6 +13,6 @@ class PilotsController < ApplicationController
       c.id, c.name, c.start, c.region, f.category
       from pilot_flights p, members m, flights f, contests c
       where p.pilot_id = :id and p.flight_id = f.id and f.contest_id = c.id
-      order by c.start", {:id => id}])
+      order by c.start desc", {:id => id}])
   end
 end
