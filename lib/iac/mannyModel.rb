@@ -132,7 +132,11 @@ class Contest
   end
 
   def record_date=(value)
-    @record_date = Time.parse(value + ' UTC')
+    begin
+      @record_date = Time.parse(value + ' UTC')
+    rescue ArgumentError
+      @record_date = Time.now
+    end
   end
 end
 

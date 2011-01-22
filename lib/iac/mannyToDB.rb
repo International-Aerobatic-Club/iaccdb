@@ -167,7 +167,7 @@ def process_flight(mContest, mCat, mFlight, seq)
       :name => mFlight.name,
       :sequence => seq,
       :aircat => mContest.aircat)
-    dFlight.chief = @parts[mFlight.chief]
+    dFlight.chief = @parts[mFlight.chief] if mFlight.chief
     dFlight.save
     process_flight_judges(dFlight, mFlight)
     process_flight_scores(dFlight, mCat, mFlight)

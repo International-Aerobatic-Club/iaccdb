@@ -7,8 +7,10 @@ include IAC::Constants
 
 stars = []
 Contest.all().each do |contest|
+  puts "Checking #{contest.to_s}..."
   stars += IAC::FindStars.findStars(contest)
 end
+puts "Sorting results..."
 stars = stars.sort_by { |s| [ CONTEST_CATEGORIES.index(s[:category]).to_s +
   '_' + s[:aircat] + '_' + s[:family_name] + '_' + s[:given_name], s ] }
 cat = ''
