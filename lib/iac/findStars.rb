@@ -17,6 +17,8 @@ include IAC::Constants
 #  :category => name of category for which qualified as a string
 #  :aircat => 'P' or 'G' for power or glider
 #  :scoresURL => URL to examine the pilot scores
+#  :contest => Contest name
+#  :date => Contest start date
 # Returns an empty array if there are no qualifying pilots
 #
 # The algorithm is based on the rules for stars qualification from
@@ -59,7 +61,9 @@ def self.findStars (contest)
                          :iacID => pilot.iac_id,
                          :category => cat,
                          :aircat => aircat,
-                         :scoresURL => make_scores_url(pilot, contest)
+                         :scoresURL => make_scores_url(pilot, contest),
+                         :contest => contest.name,
+                         :date => contest.start
                        }
             end # catch pilot
           end # each pilot
