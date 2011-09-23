@@ -8,4 +8,12 @@ class Contest < ActiveRecord::Base
   def place
     "#{city}, #{state} (#{region})"
   end
+
+  def sobriquet
+    if !name.empty?
+      name
+    else
+      id
+    end
+  end
 end

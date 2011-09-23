@@ -3,7 +3,7 @@
 <ul class="no-bullets">
 <% @contests.each do |contest| %>
     <li><%= contest.start %>
-    <%= link_to contest.name, contest %>
+    <%= link_to contest.sobriquet, contest %>
     <%= contest.place %>.
     Directed by <%= contest.director %>,
     Chapter <%= contest.chapter %></li>
