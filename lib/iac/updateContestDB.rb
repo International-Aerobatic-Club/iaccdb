@@ -63,7 +63,7 @@ end
 
 #retrieve a contest from Manny, parse it, and add it to the database
 # id is Manny identifier for the contest.
-def processContest(m2d, id)
+def doProcessContest(m2d, id)
   query = "<ContestDetail><ContestID>#{id}</ContestID></ContestDetail>"
   manny = Manny::MannyParse.new
   tail = ''
@@ -81,12 +81,24 @@ def processContest(m2d, id)
   m2d.process_contest(manny, true)
 end
 
-m2d = IAC::MannyToDB.new
-findMissingContests.each_key do |k| 
+def processContest(m2d, k)
   puts "Retrieving contest id #{k}"
   begin
+    doProcessContest(m2d, k)
+  rescue Exception => e
+    puts "Problem with contest id #{k} is #{e}"
+    puts e.backtrace
+  end
+end
+
+m2d = IAC::MannyToDB.new
+if ARGV.size == 0
+  findMissingContests.each_key do |k| 
     processContest(m2d, k)
-  rescue
-    puts "Problem with contest id #{k}"
+  end
+else
+  ARGV.each do |arg|
+    k = arg.to_i
+    if (k != 0) then processContest(m2d, k) end
   end
 end

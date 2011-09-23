@@ -22,16 +22,16 @@ attr_reader :contest
 def process_contest(line)
   ca = line.split("\t")
   @contest.mannyID = ca[0].to_i
-  @contest.aircat = ca[1].strip
-  @contest.name = ca[2].strip
-  @contest.city = ca[3].strip
-  @contest.state = ca[4].strip
-  @contest.dateAdv = ca[5].strip
-  @contest.director = ca[6].strip
-  @contest.chapter = ca[7].strip
-  @contest.region = ca[8].strip
-  @contest.manny_date = ca[9].strip
-  @contest.record_date = ca[13].strip
+  @contest.aircat = columnValue(ca,1)
+  @contest.name = columnValue(ca,2)
+  @contest.city = columnValue(ca,3)
+  @contest.state = columnValue(ca,4)
+  @contest.dateAdv = columnValue(ca,5)
+  @contest.director = columnValue(ca,6)
+  @contest.chapter = columnValue(ca,7)
+  @contest.region = columnValue(ca,8)
+  @contest.manny_date = columnValue(ca,9)
+  @contest.record_date = columnValue(ca,13)
 end
 
 PROCESS_CONTEST = lambda do |m, line|
@@ -52,8 +52,8 @@ end
 def process_person(line)
   ma = line.split("\t")
   pid = ma[0].to_i
-  gName = ma[2].strip
-  famName = ma[1].strip
+  gName = columnValue(ma,2)
+  famName = columnValue(ma,1)
   iac_id = ma[3].to_i
   @contest.participants[pid] = Participant.new(gName, famName, iac_id)
 end
@@ -147,14 +147,19 @@ end
 # 8 = aircraft model
 # 9 = aircraft registration
 def process_pilot(line)
-  pa = line.split("\t")
-  cid = pa[0].to_i # category
-  pid = pa[1].to_i # person
-  pilot = @contest.pilot(cid, pid)
-  pilot.chapter = pa[2].strip
-  pilot.make = pa[7].strip
-  pilot.model = pa[8].strip
-  pilot.reg = pa[9].strip
+  begin
+    pa = line.split("\t")
+    cid = pa[0].to_i # category
+    pid = pa[1].to_i # person
+    pilot = @contest.pilot(cid, pid)
+    pilot.chapter = columnValue(pa,2)
+    pilot.make = columnValue(pa,7)
+    pilot.model = columnValue(pa,8)
+    pilot.reg = columnValue(pa,9)
+  rescue
+    puts "Process pilot: trouble with line '#{CGI.escape(line)}' is #{$!}"
+    throw
+  end
 end
 
 PROCESS_PILOT = lambda do |m, line| 
@@ -255,6 +260,20 @@ end
 
 def processLine(line)
   @state = @state.call(self, line)
+end
+
+private
+
+# safely return non-null, stripped string array item at offset
+# strip if not nil
+# return empty string if nil
+def columnValue(line, offset)
+  e = line[offset]
+  if e
+    e.strip
+  else
+    ''
+  end
 end
 
 end #class
