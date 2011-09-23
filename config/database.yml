@@ -26,4 +26,3 @@ production:
   pool: 5
   username: iaccdbor_cdb
   password: 7Tsrm0MNhiPvFEUu
-  socket: /tmp/mysql.sock
