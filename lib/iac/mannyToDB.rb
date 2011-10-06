@@ -88,37 +88,14 @@ end
 # member family and given names must match exatly, otherwise
 # this creates a new member record
 def member_name_fallback(mPart)
-  dm = Member.where(:family_name => mPart.familyName, 
-    :given_name =>mPart.givenName).first
-  if dm
-    Member.logger.info "Found by name member #{dm.to_s}"
-  else
-    dm = Member.create(
-      :iac_id => mPart.iacID,
-      :given_name => mPart.givenName,
-      :family_name => mPart.familyName)
-    Member.logger.info "New member #{dm.to_s}"
-  end
-  dm
+  dm = Member.find_or_create_by_name(mPort.iacID, mPart.givenName, mPart.familyName)
 end
 
 # find or create member with good IAC ID
 # IAC ID and family name must match exactly, otherwise this falls
 # back to exact match of family name and given name
 def member_by_iacID(mPart)
-  dm = Member.where(:iac_id => mPart.iacID).first
-  if dm 
-    Member.logger.info "Found member #{dm.to_s}"
-    if dm.family_name.downcase != mPart.familyName.downcase
-      # different, fallback to name match
-      Member.logger.warn "Member family name mismatch" +
-        " manny has #{mPart.familyName}"
-      dm = member_name_fallback(mPart)
-    end
-  else
-    dm = member_name_fallback(mPart)
-  end
-  dm
+  Member.find_or_create_by_iac_number(mPart.iacID, mPart.givenName, mPart.familyName)
 end
 
 # initialize an array @parts of member database records to match the

@@ -1,4 +1,4 @@
-require 'lib/iac/constants.rb'
+require 'iac/constants.rb'
 
 module Manny
 
