@@ -2,8 +2,9 @@
 require "acro/contestScraper"
 require "acro/pilotScraper"
 
-reload = !ARGV.empty? && ARGV[0] == 'reload'
-args = reload ? ARGV.drop(1) : ARGV
+#reload = !ARGV.empty? && ARGV[0] == 'reload'
+#args = reload ? ARGV.drop(1) : ARGV
+args = ARGV
 ctlFile = args[0]
 if (ctlFile)
   scrapeContest(ctlFile)
@@ -19,7 +20,7 @@ def scrapeContest(ctlFile)
   cScrape.files.each do |f|
     begin
       pScrape = ACRO::PilotScraper.new(f)
-      cScrape.process_pilotFlight(pScrape, reload)
+      cScrape.process_pilotFlight(pScrape)
     rescue Exception => e
       puts "\nSomething went wrong with #{f}:"
       puts e.message

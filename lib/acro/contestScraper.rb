@@ -23,19 +23,30 @@ def initialize(ctlFile)
     @dContest.save
   end
   @pDir = Dir.new(File.dirname(ctlFile))
+  @flights = {}
 end
 
 def files
-  @pDir.find_all { |name| name =~ /^pilot_p\d{3}s\d\d\.htm$/ }
+  pfs = @pDir.find_all { |name| name =~ /^pilot_p\d{3}s\d\d\.htm$/ }
+  pfs.collect { |fn| File.join(@pDir.path, fn) }
 end
 
-def process_pilotFlight(pScrape, reload)
+def process_pilotFlight(pScrape)
   # get member records for pilot, judges
   judge_members = pScrape.judges.collect { |j| find_member(j) }
   pilot_member = find_member(pScrape.pilotName)
   # maintain mapping from flight id to flight record
-  # create flight record first time id seen, infer category and flight
-  # type from the flight name
+  flight = @flights[pScrape.flightID]
+  if !flight
+    category = detect_flight_category(pScrape.flightName)
+    name = detect_flight_name(pScrape.flightName)
+    aircat = detect_flight_aircat(pScrape.flightName)
+    # create flight record first time id seen, infer category and flight
+    flight = dContest.build_flight(:name => name, :category => category,
+       :aircat => aircat)
+    @flights[pScrape.flightID] = flight
+  end
+  # add the scores and figure k's
 end
 
 ###
@@ -45,7 +56,7 @@ private
 def find_member(name)
   parts = name.split(' ')
   given = parts[0]
-  parts.pop
+  parts.shift
   family = parts.join(' ')
   Member.find_or_create_by_name(0, given, family)
 end
