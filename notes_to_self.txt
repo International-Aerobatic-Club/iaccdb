@@ -1,5 +1,7 @@
 rspec spec/acro/contest_scraper.rb is the current test.
-sometime figure out how to run all the specs.  maybe a wild card.
-
-contest_scraper.rb: make_judge_team
 rake db:migrate; rake db:test:prepare
+
+ensure penalties available
+ensure figure k's available
+
+sequences are not unique - not finding existing sequence

@@ -1,15 +1,22 @@
 class Sequence < ActiveRecord::Base
   has_many :pilot_flight
 
+  serialize :k_values
+
   # k_values is array of int figure k
   def self.find_or_create(k_values)
+    seq = nil
     attrs = create_attrs(k_values)
     sa = Sequence.where(attrs)
-    if sa.empty?
-      Sequence.new(attrs)
-    else
-      sa.first
+    sa.each do |cur|
+      seq = cur if cur.k_values == k_values
     end
+    if !seq
+      attrs.merge!(:k_values => k_values)
+      seq = Sequence.new(attrs)
+      seq.save
+    end
+    seq
   end
 
   # k_values is array of int figure k
@@ -25,7 +32,6 @@ class Sequence < ActiveRecord::Base
     end
     attrs[:total_k] = total_k
     attrs[:mod_3_total] = mod_3_total
-    attrs[:k_values] = k_values
     attrs
   end
 end
