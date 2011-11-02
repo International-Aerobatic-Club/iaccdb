@@ -1,0 +1,5 @@
+rspec spec/acro/contest_scraper.rb is the current test.
+sometime figure out how to run all the specs.  maybe a wild card.
+
+contest_scraper.rb: make_judge_team
+rake db:migrate; rake db:test:prepare

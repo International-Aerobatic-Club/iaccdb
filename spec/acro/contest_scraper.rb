@@ -37,6 +37,16 @@ module ACRO
       mr.should == md
     end
     it 'finds existing judge members' do
+      cs = ContestScraper.new('spec/acro/newContest.yml')
+      cs.files.each do |pf|
+        ps = PilotScraper.new(pf)
+        cs.process_pilotFlight(ps)
+      end
+      Judge.all.size.should == 14
+      stols = Member.where(:family_name => 'Stoltenberg')
+      stols.size.should == 1
+      aj = Judge.where(:judge_id => stols.first)
+      aj.size.should == 1
     end
     it 'creates pilot member records' do
       md = Member.where(:given_name => 'Kelly')
@@ -49,6 +59,15 @@ module ACRO
       mr.should == md
     end
     it 'finds existing pilot members' do
+      cs = ContestScraper.new('spec/acro/newContest.yml')
+      cs.files.each do |pf|
+        ps = PilotScraper.new(pf)
+        cs.process_pilotFlight(ps)
+      end
+      ballews = Member.where(:family_name => 'Ballew').all
+      ballews.size.should == 1
+      apf = PilotFlight.where(:pilot_id => ballews.first)
+      apf.size.should == 2
     end
     it 'creates flight records' do
       ct = Contest.where(:start => '2011-09-25')
@@ -61,21 +80,33 @@ module ACRO
       fla.size.should == 1
       fl = fla.first
       fl.category.should == 'Advanced'
-      fl.name.should == 'Known'
+      fl.aircat.should == 'P'
+      fl.name.should == 'Free'
       pts = fl.pilot_flights
       pts.size.should == 1
       pt = pts.first
       pi = pt.pilot
-      pi.given_name.should == 'Bryan'
-      pi.family_name.should == 'Taylor'
+      pi.given_name.should == 'Bruce'
+      pi.family_name.should == 'Ballew'
       fjs = pt.gatherScores
-      fjs[1][1].should == 80
-      fjs[7][10].should == 90
-      fjs[3][5].should == 0
-      fjs[5][7].should == 85
+      fjs[1][1].should == 85
+      fjs[10][7].should == 90
+      fjs[5][3].should == 80
+      fjs[7][5].should == 85
+      fjs[10][3].should == 60
+      fjs[12][4].should == 85
+      fjs[13][2].should == 70
     end
     it 'adds to existing flight records' do
-      # make the advanced known flight exist
+      cs = ContestScraper.new('spec/acro/newContest.yml')
+      cs.files.each do |pf|
+        ps = PilotScraper.new(pf)
+        cs.process_pilotFlight(ps)
+      end
+      ct = Contest.where(:start => '2011-09-25').first
+      fla = ct.flights
+      fla.size.should == 3
+      fla.first.pilot_flights.size.should == 2
     end
   end
 end

@@ -2,6 +2,7 @@ class PilotFlight < ActiveRecord::Base
   belongs_to :flight
   belongs_to :pilot, :class_name => 'Member'
   has_many :scores, :dependent => :destroy
+  belongs_to :sequence
 
   def display
     "Flight #{flight.display} for pilot #{pilot.display}"
@@ -17,14 +18,18 @@ class PilotFlight < ActiveRecord::Base
   #  ...
   #  [(nf,1),(nf,2),(nf,3),...(nf,nj)]
   # ]
+  # The zero indices are all nil, reference the returned matrix
+  # using indices (1 .. size-1) 
+  # Count of figures is fjs.size - 1
+  # Count of judges is fjs[1].size - 1
   def gatherScores
     jfs = scores.collect { |s| s.values }
     # jfs[j][f] has score from judge j for figure f
     fjs = []
     jfs.each_with_index do |afs,j|
       afs.each_with_index do |s,f|
-        fjs[f] ||= []
-        fjs[f][j] = s
+        fjs[f+1] ||= []
+        fjs[f+1][j+1] = s
       end
     end
     # fjs[f][j] has score for figure f from judge j

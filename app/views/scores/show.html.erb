@@ -10,24 +10,25 @@
   <table class="scores">
   <thead><tr>
   <th>F</th>
-  <% (1 .. s[0].count).each do |j| %>
+  <% ctJudge = s[1].size - 1 %>
+  <% (1 .. ctJudge).each do |j| %>
     <th>J<%= j.to_s %></th>
   <% end %>
   </tr></thead>
   <tbody>
-  <% pi = s.count - 1 %>
-  <% (0 ... pi).each do |f| #figures %>
+  <% pi = s.size - 1 %>
+  <% (1 .. pi-1).each do |f| #figures %>
     <tr>
-    <td><%= (f+1).to_s %></td>
-    <% s[f].each do |js| #judges %>
-      <td><%= Score.display_score(js) %></td>
+    <td><%= (f).to_s %></td>
+    <% (1 .. ctJudge).each do |j| #judges %>
+      <td><%= Score.display_score(s[f][j]) %></td>
     <% end #judges %>
     </tr>
   <% end #figures %>
   <tr>
   <td>P</td>
-  <% s[pi].each do |js| #judges %>
-    <td><%= Score.display_score(js) %></td>
+  <% (1 .. ctJudge).each do |j| #judges %>
+    <td><%= Score.display_score(s[pi][j]) %></td>
   <% end #judges %>
   </tr>
   </tbody>
