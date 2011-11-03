@@ -76,6 +76,7 @@ def process_pilotFlight(pScrape)
     pilot_flight.scores.build(:judge => judge_team, :values => values)
   end
   pilot_flight.sequence = Sequence.find_or_create(kays)
+  pilot_flight.penalty_total = pScrape.penalty
   pilot_flight.save
 end
 

@@ -1,7 +1,2 @@
 rspec spec/acro/contest_scraper.rb is the current test.
 rake db:migrate; rake db:test:prepare
-
-ensure penalties available
-ensure figure k's available
-
-sequences are not unique - not finding existing sequence

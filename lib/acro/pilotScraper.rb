@@ -56,8 +56,12 @@ end
 def penalty
   ar = theRows
   pr = ar[ar.size-4]
-  nStr = /Minus\s+(\d+)\s+penalties/.match(pr.text)[1]
-  nStr.to_i
+  mp = /Minus\s+(\d+)\s+penalties/.match(pr.text)
+  if mp
+    mp[1].to_i
+  else
+    0
+  end
 end
 
 ###

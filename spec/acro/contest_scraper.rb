@@ -30,7 +30,7 @@ module ACRO
       md = Member.where(:given_name => 'Debby')
       md.empty?.should == true
       cs = ContestScraper.new('spec/acro/newContest.yml')
-      ps = PilotScraper.new(cs.files.first)
+      ps = PilotScraper.new('spec/acro/pilot_p002s17.htm')
       cs.process_pilotFlight(ps)
       mr = Member.where(:family_name => 'Rihn-Harvey').first
       md = Member.where(:given_name => 'Debby').first
@@ -52,7 +52,7 @@ module ACRO
       md = Member.where(:given_name => 'Kelly')
       md.empty?.should == true
       cs = ContestScraper.new('spec/acro/newContest.yml')
-      ps = PilotScraper.new(cs.files.first)
+      ps = PilotScraper.new('spec/acro/pilot_p002s17.htm')
       cs.process_pilotFlight(ps)
       mr = Member.where(:given_name => 'Kelly').first
       md = Member.where(:family_name => 'Adams').first
@@ -73,7 +73,7 @@ module ACRO
       ct = Contest.where(:start => '2011-09-25')
       ct.empty?.should == true
       cs = ContestScraper.new('spec/acro/newContest.yml')
-      ps = PilotScraper.new(cs.files.first)
+      ps = PilotScraper.new('spec/acro/pilot_p002s17.htm')
       cs.process_pilotFlight(ps)
       ct = Contest.where(:start => '2011-09-25').first
       fla = ct.flights
@@ -107,6 +107,34 @@ module ACRO
       fla = ct.flights
       fla.size.should == 3
       fla.first.pilot_flights.size.should == 2
+    end
+    it 'stores the penalty' do
+      cs = ContestScraper.new('spec/acro/newContest.yml')
+      ps = PilotScraper.new('spec/acro/pilot_p002s17.htm')
+      cs.process_pilotFlight(ps)
+      ct = Contest.where(:start => '2011-09-25').first
+      fl = ct.flights.first
+      pf = fl.pilot_flights.first
+      pf.penalty_total.should == 0
+      ps = PilotScraper.new('spec/acro/pilot_p002s16.htm')
+      cs.process_pilotFlight(ps)
+      fl = ct.flights[1]
+      pf = fl.pilot_flights.first
+      pf.penalty_total.should == 110
+    end
+    it 'stores figure k values' do
+      cs = ContestScraper.new('spec/acro/newContest.yml')
+      ps = PilotScraper.new('spec/acro/pilot_p002s17.htm')
+      cs.process_pilotFlight(ps)
+      ct = Contest.where(:start => '2011-09-25').first
+      fl = ct.flights.first
+      pf = fl.pilot_flights.first
+      seq = pf.sequence
+      seq.total_k.should == 312
+      seq.figure_count.should == 13
+      seq.k_values[0].should == 40
+      seq.k_values[9].should == 22
+      seq.k_values[12].should == 12
     end
   end
 end

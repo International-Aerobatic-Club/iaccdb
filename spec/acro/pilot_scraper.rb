@@ -36,5 +36,9 @@ module ACRO
     it 'finds penalty amount for flight' do
       @ps.penalty.should == 20
     end
+    it 'finds the no penalty amount for the flight' do
+      @ps = PilotScraper.new('spec/acro/pilot_p002s17.htm')
+      @ps.penalty.should == 0
+    end
   end
 end
