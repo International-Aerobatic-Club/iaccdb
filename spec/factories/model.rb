@@ -115,4 +115,9 @@ FactoryGirl.define do
       1400, 900, 1440, 1105, 510, 360, 760]
     r.flight_value 18365
   end
+  factory :existing_pf_result, :class => PfResult do |r|
+    r.association :pilot_flight, :factory => :adams_known
+    r.flight_value 1786.83
+    r.adj_flight_value 1756.83
+  end
 end
