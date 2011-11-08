@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111102204401) do
+ActiveRecord::Schema.define(:version => 20111104180447) do
 
   create_table "contests", :force => true do |t|
     t.string   "name",       :limit => 48
@@ -55,6 +55,36 @@ ActiveRecord::Schema.define(:version => 20111102204401) do
     t.integer  "iac_id"
     t.string   "given_name",  :limit => 40
     t.string   "family_name", :limit => 40
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "pc_results", :force => true do |t|
+    t.integer  "pilot_id",                                                   :null => false
+    t.integer  "contest_id",                                                 :null => false
+    t.string   "category",       :limit => 16,                               :null => false
+    t.decimal  "category_value",               :precision => 8, :scale => 2
+    t.integer  "category_rank"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "pf_results", :force => true do |t|
+    t.integer  "pilot_flight_id",                                :null => false
+    t.decimal  "flight_value",     :precision => 7, :scale => 2
+    t.decimal  "adj_flight_value", :precision => 7, :scale => 2
+    t.integer  "flight_rank"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "pfj_results", :force => true do |t|
+    t.integer  "pilot_flight_id", :null => false
+    t.integer  "judge_id",        :null => false
+    t.string   "computed_values"
+    t.string   "computed_ranks"
+    t.integer  "flight_value"
+    t.integer  "flight_rank"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
