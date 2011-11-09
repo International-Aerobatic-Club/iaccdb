@@ -1,5 +1,6 @@
 # assume loaded with rails ActiveRecord
 # environment for IAC contest data application
+# for PfResult and PfjResult classes
 
 # this class contains methods to compute results and rankings
 # it follows the IAC straight average method
@@ -16,9 +17,10 @@ end
 # Does no computation if pf_result entry is more recent than scores
 # Returns the PfResult ActiveRecord instance
 def computePilotFlight
-  @pf = PfResult.find_or_create_by_pilot_flight(:pilot_flight => @pilot_flight)
+  @pf = @pilot_flight.pf_results.first
+  if !@pf then @pf = @pilot_flight.pf_results.build end
   @seq = @pilot_flight.sequence
-  @kays = seq ? seq.k_values : nil
+  @kays = @seq ? @seq.k_values : nil
   if @pf.new_record?
     compute = true
   else
@@ -29,8 +31,8 @@ def computePilotFlight
     end
   end
   if compute
-    @pf.write_attribute(:flight_value, 0)
-    @pf.write_attribute(:adj_flight_value, 0)
+    @pf.flight_value = 0
+    @pf.adj_flight_value = 0
     if @kays
       @pfScores ||= @pilot_flight.scores
       computeNonZeroValues
@@ -86,12 +88,14 @@ end
 def storeExtendedScores
   @judges.each_with_index do |judge, j|
     jsa = []
-    (0 ... @kays.length) do |f|
+    (0 ... @kays.length).each do |f|
       jsa << @fjsx[f][j]
     end
-    pfj = PfjResult.find_or_create_by_pilot_flight_and_judge(
-      :pilot_flight => @pilot_flight, :judge => judge)
-    pfj.write_attribute(:computed_values, jsa)
+    pfj = @pilot_flight.pfj_results.where(:judge_id => judge).first
+    if !pfj 
+      pfj = @pilot_flight.pfj_results.build(:judge => judge)
+    end
+    pfj.computed_values = jsa
     pfj.save
   end
 end
@@ -134,16 +138,18 @@ end
 def storeResults
   flight_total = 0.0
   @judges.each_with_index do |judge, j|
-    pfj = PfjResult.find_by_pilot_flight_and_judge(
-      :pilot_flight => @pilot_flight, :judge => judge)
-    pfj.write_attribute(:flight_value, @totals[j])
+    pfj = @pilot_flight.pfj_results.where(:judge_id => judge).first
+    if !pfj 
+      pfj = @pilot_flight.pfj_results.build(:judge => judge)
+    end
+    pfj.flight_value = @totals[j]
     pfj.save
     flight_total += @totals[j]
   end
   flight_avg = flight_total / (@judges.length * 10.0) # scores are stored * 10
-  @pf.write_attribute(:flight_value, flight_avg)
+  @pf.flight_value = flight_avg
   flight_avg -= @pilot_flight.penalty_total
-  @pf.write_attribute(:adj_flight_value, flight_avg)
+  @pf.adj_flight_value = flight_avg
   @pf.save
 end
 

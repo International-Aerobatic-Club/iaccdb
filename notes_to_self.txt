@@ -6,3 +6,5 @@ http://mathworld.wolfram.com/SpearmanRankCorrelationCoefficient.html
 CIVA RI
 
 rspec spec/model/pf_result.rb
+
+test averages and zeros
