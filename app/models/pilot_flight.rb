@@ -1,3 +1,5 @@
+require 'iac/saComputer'
+
 class PilotFlight < ActiveRecord::Base
   belongs_to :flight
   belongs_to :pilot, :class_name => 'Member'
@@ -34,5 +36,12 @@ class PilotFlight < ActiveRecord::Base
     end
     # fjs[f][j] has score for figure f from judge j
     fjs
+  end
+
+  # compute or retrieve cached results
+  # returns PfResult ActiveRecord instance for this pilot for this flight
+  def results
+    sac = SAComputer.new(self)
+    sac.computePilotFlight
   end
 end
