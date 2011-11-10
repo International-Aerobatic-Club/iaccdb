@@ -8,3 +8,4 @@ CIVA RI
 rspec spec/model/pf_result.rb
 
 test averages and zeros
+will need separate column for the average-replaced-only computed values

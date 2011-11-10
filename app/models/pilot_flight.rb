@@ -43,7 +43,7 @@ class PilotFlight < ActiveRecord::Base
   # compute or retrieve cached results
   # returns PfResult ActiveRecord instance for this pilot for this flight
   def results
-    pf = pf_results.build
+    scores.reset  # make sure any changed scores get reloaded
     sac = IAC::SAComputer.new(self)
     sac.computePilotFlight
   end
