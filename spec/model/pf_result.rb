@@ -63,5 +63,66 @@ module Model
       pfj.flight_value.should == 18235
       pf.flight_value.round(2).should == 1784.67
     end
+    it 'behaves on empty sequence' do
+        @pf = Factory.create(:pilot_flight)
+        Factory.create(:score,
+          :pilot_flight => @pf,
+          :values => [60, 0, 0, 0, 0])
+        Factory.create(:score,
+          :pilot_flight => @pf,
+          :values => [-1, 0, 0, 0, 0])
+        @pf.results
+    end
+    context 'mixed grades, averages, and zeros' do
+      before(:each) do
+        seq = Factory.create(:sequence,
+          :k_values => [1,1,1,1,1])
+        @pf = Factory.create(:pilot_flight,
+          :sequence => seq)
+        @judges = []
+        5.times { @judges << Factory.create(:judge) }
+        Factory.create(:score,
+          :pilot_flight => @pf,
+          :judge => @judges[0],
+          :values => [60, 0, 60, 0, 80])
+        Factory.create(:score,
+          :pilot_flight => @pf,
+          :judge => @judges[1],
+          :values => [-1, 0, 90, -1, -1])
+        Factory.create(:score,
+          :pilot_flight => @pf,
+          :judge => @judges[2],
+          :values => [80, 60, 0, 70, -1])
+        Factory.create(:score,
+          :pilot_flight => @pf,
+          :judge => @judges[3],
+          :values => [80, 70, 0, 80, 0])
+        Factory.create(:score,
+          :pilot_flight => @pf,
+          :judge => @judges[4],
+          :values => [60, 80, 0, 60, 0])
+        @res = @pf.results
+      end
+      it 'converts average grade to the average' do
+        @pf.pfj_result(@judge[0]).computed_values[0].should == 70
+      end
+      it 'converts minority zero to the average' do
+        @pf.pfj_result(@judge[0]).computed_values[1].should == 70
+        @pf.pfj_result(@judge[1]).computed_values[1].should == 70
+      end
+      it 'converts minority grade to zero' do
+        @pf.pfj_result(@judge[0]).computed_values[2].should == 0
+        @pf.pfj_result(@judge[1]).computed_values[2].should == 0
+      end
+      it 'converts minority zero and averages to the average' do
+        @pf.pfj_result(@judge[0]).computed_values[3].should == 70
+        @pf.pfj_result(@judge[1]).computed_values[3].should == 70
+      end
+      it 'converts minority grade and averages to zero' do
+        @pf.pfj_result(@judge[0]).computed_values[4].should == 0
+        @pf.pfj_result(@judge[1]).computed_values[4].should == 0
+        @pf.pfj_result(@judge[2]).computed_values[4].should == 0
+      end
+    end
   end
 end

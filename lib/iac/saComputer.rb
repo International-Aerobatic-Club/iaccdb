@@ -21,6 +21,7 @@ def computePilotFlight
   if !@pf then @pf = @pilot_flight.pf_results.build end
   @seq = @pilot_flight.sequence
   @kays = @seq ? @seq.k_values : nil
+  @kays = nil if @kays && @kays.length == 0
   if @pf.new_record?
     compute = true
   else
@@ -51,34 +52,44 @@ private
 ###
 
 def computeNonZeroValues
-  @judges = []
+  # scaled score for a figure is judge grade * k value
+  # Matrix of scaled scores indexed [figure][judge]
   @fjsx = []
   @kays.length.times { @fjsx << [] }
+  # Judges for each index [j]
+  @judges = []
+  # count of zero scores for figure [f]
   @zero_ct = Array.new(@kays.length, 0)
+  # count of non-zero scores for figure [f]
   @score_ct = Array.new(@kays.length, 0)
+  # total of scaled scores for figure [f]
   @score_total = Array.new(@kays.length, 0)
   @pfScores.each do |score|
     @judges << score.judge
-    score.values.each_with_index do |v, i|
-      @zero_ct[i] += 1 if v == 0
-      if 0 < v
-        x = v * @kays[i]
-        @score_ct[i] += 1
-        @score_total[i] += x
-        @fjsx[i] << x
+    score.values.each_with_index do |v, f|
+      if f < @kays.length
+        @zero_ct[f] += 1 if v == 0
+        if 0 < v
+          x = v * @kays[f]
+          @score_ct[f] += 1
+          @score_total[f] += x
+          @fjsx[f] << x
+        else
+          @fjsx[f] << v
+        end
       else
-        @fjsx[i] << v
+        throw ArgumentError, 
+          "More scores than K values in #{self}, judge #{score.judge}"
       end
     end
   end
 end
 
 def resolveAverages
-  (0 ... @kays.length).each do |f|
+  @kays.length.times do |f|
     if @score_ct[f] + @zero_ct[f] < @judges.length
       avg = average_score(f)
-      # rounds to the nearest 10th (rememeber scores are * 10)
-      @fjsx[f].each_with_index do |j|
+      @fjsx[f].length.times do |j|
         @fjsx[f][j] = avg if @fjsx[f][j] < 0
       end
     end
@@ -88,7 +99,7 @@ end
 def storeExtendedScores
   @judges.each_with_index do |judge, j|
     jsa = []
-    (0 ... @kays.length).each do |f|
+    @kays.length.times do |f|
       jsa << @fjsx[f][j]
     end
     pfj = @pilot_flight.pfj_results.where(:judge_id => judge).first
@@ -101,17 +112,17 @@ def storeExtendedScores
 end
 
 def resolveZeros
-  (0 ... @kays.length).each do |f|
+  @kays.length.times do |f|
     if 0 < @zero_ct[f]
       if (0 < (@score_ct[f] - 2 * @zero_ct[f]))
         # minority zero
         avg = average_score(f)
-        @fjsx[f].each_with_index do |j|
+        @fjsx[f].length.times do |j|
           @fjsx[f][j] = avg if @fjsx[f][j] == 0
         end
       else
         # majority zero
-        @fjsx[f].each_with_index do |j|
+        @fjsx[f].length.times do |j|
           @fjsx[f][j] = 0
         end
       end
@@ -126,9 +137,9 @@ end
 
 def computeTotals
   @totals = []
-  (0 ... @judges.length).each do |j|
+  @judges.length.times do |j|
     total = 0
-    (0 ... @kays.length).each do |f|
+    @kays.length.times do |f|
       total += @fjsx[f][j]
     end
     @totals << total
