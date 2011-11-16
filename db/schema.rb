@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111115173311) do
+ActiveRecord::Schema.define(:version => 20111116163545) do
 
   create_table "contests", :force => true do |t|
     t.string   "name",       :limit => 48
@@ -113,10 +113,12 @@ ActiveRecord::Schema.define(:version => 20111115173311) do
   end
 
   create_table "sequences", :force => true do |t|
-    t.integer "figure_count"
-    t.integer "total_k"
-    t.integer "mod_3_total"
-    t.string  "k_values"
+    t.integer  "figure_count"
+    t.integer  "total_k"
+    t.integer  "mod_3_total"
+    t.string   "k_values"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "sequences", ["figure_count", "total_k", "mod_3_total"], :name => "by_attrs"

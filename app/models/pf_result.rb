@@ -2,11 +2,11 @@
 #  includes results computed from all judges for each figure of the flight
 #
 # flight_value is the total of flight_value from all judges, divided
-#   by the number of judges.  It should closely match the sum of
-#   figure_values
+#   by the number of judges * 10.  It should closely match the sum of
+#   figure_results.  Value is stored as a decimal accurate to 1/100 point.
 #
 # adj_flight_value is flight_value minus any penalties earned by the pilot
-#   on the flight.
+#   on the flight.  Value is stored as a decimal accurate to 1/100 point.
 #
 # flight_rank is the pilot rank relative to all other pilots on the
 #   flight, based on flight_value.  It is the number of pilots with a higher
@@ -18,6 +18,7 @@
 #
 # figure_results is the total of pfj_result.computed values from all
 #   judges for each figure, divided by the number of judges
+#   Values are stored as integer number of tenths (scaled * 10)
 #
 class PfResult < ActiveRecord::Base
   belongs_to :pilot_flight
