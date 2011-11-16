@@ -5,7 +5,13 @@ Spearman's rank correlation coefficient
 http://mathworld.wolfram.com/SpearmanRankCorrelationCoefficient.html
 CIVA RI
 
-rspec spec/model/pf_result.rb
+'rspec spec' runs all of the tests.  
+End test file names in spec directory with _spec.rb
 
-test averages and zeros
-will need separate column for the average-replaced-only computed values
+Contest result and rank computations
+
+spec/rank_computer_spec
+ - get real scores and set-up spreadsheet to validate
+
+lib/iac/rank_computer.rb
+app/models/contest.rb

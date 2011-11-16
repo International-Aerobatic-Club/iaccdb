@@ -1,3 +1,5 @@
+require 'iac/rank_computer.rb'
+
 class Contest < ActiveRecord::Base
   has_many :flights, :dependent => :destroy
 
@@ -16,4 +18,12 @@ class Contest < ActiveRecord::Base
       id
     end
   end
+
+  def results
+    flights.each do |flight|
+      IAC::RankComputer.computeFlight(flight)
+    end
+    self
+  end
 end
+
