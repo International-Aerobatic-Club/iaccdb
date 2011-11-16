@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111104180447) do
+ActiveRecord::Schema.define(:version => 20111115173311) do
 
   create_table "contests", :force => true do |t|
     t.string   "name",       :limit => 48
@@ -76,6 +76,8 @@ ActiveRecord::Schema.define(:version => 20111104180447) do
     t.integer  "flight_rank"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "figure_results"
+    t.integer  "adj_flight_rank"
   end
 
   create_table "pfj_results", :force => true do |t|
@@ -87,6 +89,8 @@ ActiveRecord::Schema.define(:version => 20111104180447) do
     t.integer  "flight_rank"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "graded_values"
+    t.string   "graded_ranks"
   end
 
   create_table "pilot_flights", :force => true do |t|

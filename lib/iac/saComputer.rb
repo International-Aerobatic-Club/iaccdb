@@ -98,17 +98,21 @@ end
 
 def storeExtendedScores
   @judges.each_with_index do |judge, j|
-    jsa = []
-    @kays.length.times do |f|
-      jsa << @fjsx[f][j]
-    end
     pfj = @pilot_flight.pfj_results.where(:judge_id => judge).first
     if !pfj 
       pfj = @pilot_flight.pfj_results.build(:judge => judge)
     end
-    pfj.computed_values = jsa
+    pfj.graded_values = make_judge_values(j)
     pfj.save
   end
+end
+
+def make_judge_values(j)
+  jsa = []
+  @kays.length.times do |f|
+    jsa << @fjsx[f][j]
+  end
+  jsa
 end
 
 def resolveZeros
@@ -136,13 +140,13 @@ def average_score(figure)
 end
 
 def computeTotals
-  @totals = []
+  @j_totals = Array.new(@judges.length, 0)
+  @f_totals = Array.new(@kays.length, 0)
   @judges.length.times do |j|
-    total = 0
     @kays.length.times do |f|
-      total += @fjsx[f][j]
+      @j_totals[j] += @fjsx[f][j]
+      @f_totals[f] += @fjsx[f][j]
     end
-    @totals << total
   end
 end
 
@@ -153,10 +157,15 @@ def storeResults
     if !pfj 
       pfj = @pilot_flight.pfj_results.build(:judge => judge)
     end
-    pfj.flight_value = @totals[j]
+    pfj.computed_values = make_judge_values(j)
+    pfj.flight_value = @j_totals[j]
     pfj.save
-    flight_total += @totals[j]
+    flight_total += @j_totals[j]
   end
+  @kays.length.times do |f|
+    @f_totals[f] /= @judges.length.to_f
+  end
+  @pf.figure_results = @f_totals
   flight_avg = flight_total / (@judges.length * 10.0) # scores are stored * 10
   @pf.flight_value = flight_avg
   flight_avg -= @pilot_flight.penalty_total

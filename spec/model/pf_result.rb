@@ -76,7 +76,7 @@ module Model
     context 'mixed grades, averages, and zeros' do
       before(:each) do
         seq = Factory.create(:sequence,
-          :k_values => [1,1,1,1,1])
+          :k_values => [2,2,2,2,2])
         @pf = Factory.create(:pilot_flight,
           :sequence => seq)
         @judges = []
@@ -101,27 +101,52 @@ module Model
           :pilot_flight => @pf,
           :judge => @judges[4],
           :values => [60, 80, 0, 60, 0])
+        #     f0, f1, f2, f3, f4
+        # j0: 60, 70,  0, 70,  0 = 200
+        # j1: 70, 70,  0, 70,  0 = 210
+        # j2: 80, 60,  0, 70,  0 = 210
+        # j3: 80, 70,  0, 80,  0 = 240
+        # j4: 60, 80,  0, 60,  0 = 200
+        #     70, 70,  0, 70,  0   210       
         @res = @pf.results
       end
       it 'converts average grade to the average' do
-        @pf.pfj_result(@judge[0]).computed_values[0].should == 70
+        @res.for_judge(@judges[1]).computed_values[0].should == 140
+        @res.figure_results[0].should == 140
       end
       it 'converts minority zero to the average' do
-        @pf.pfj_result(@judge[0]).computed_values[1].should == 70
-        @pf.pfj_result(@judge[1]).computed_values[1].should == 70
+        @res.figure_results[1].should == 140
       end
       it 'converts minority grade to zero' do
-        @pf.pfj_result(@judge[0]).computed_values[2].should == 0
-        @pf.pfj_result(@judge[1]).computed_values[2].should == 0
+        @res.for_judge(@judges[0]).graded_values[2].should == 120
+        @res.for_judge(@judges[1]).graded_values[2].should == 180
+        @res.for_judge(@judges[0]).computed_values[2].should == 0
+        @res.for_judge(@judges[1]).computed_values[2].should == 0
+        @res.figure_results[2].should == 0
       end
       it 'converts minority zero and averages to the average' do
-        @pf.pfj_result(@judge[0]).computed_values[3].should == 70
-        @pf.pfj_result(@judge[1]).computed_values[3].should == 70
+        @res.for_judge(@judges[0]).graded_values[3].should == 120
+        @res.for_judge(@judges[1]).graded_values[3].should == 180
+        @res.for_judge(@judges[0]).computed_values[3].should == 0
+        @res.for_judge(@judges[1]).computed_values[3].should == 0
+        @res.figure_results[3].should == 140
       end
       it 'converts minority grade and averages to zero' do
-        @pf.pfj_result(@judge[0]).computed_values[4].should == 0
-        @pf.pfj_result(@judge[1]).computed_values[4].should == 0
-        @pf.pfj_result(@judge[2]).computed_values[4].should == 0
+        @res.for_judge(@judges[0]).graded_values[4].should == 160
+        @res.for_judge(@judges[1]).graded_values[4].should == 160
+        @res.for_judge(@judges[2]).graded_values[4].should == 160
+        @res.for_judge(@judges[0]).computed_values[4].should == 0
+        @res.for_judge(@judges[1]).computed_values[4].should == 0
+        @res.for_judge(@judges[2]).computed_values[4].should == 0
+        @res.figure_results[4].should == 0
+      end
+      it 'computes flight values with resolved zeros and averages' do
+        @res.for_judge(@judges[0]).flight_value.should == 400
+        @res.for_judge(@judges[1]).flight_value.should == 420
+        @res.for_judge(@judges[2]).flight_value.should == 420
+        @res.for_judge(@judges[3]).flight_value.should == 480
+        @res.for_judge(@judges[4]).flight_value.should == 400
+        @res.flight_value.should == 420
       end
     end
   end
