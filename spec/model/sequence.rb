@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-module DB
+module Model
   describe Sequence do
     before(:all) do
       @k_values = [19, 14, 21, 33, 21, 23, 22, 20, 8]

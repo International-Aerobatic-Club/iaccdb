@@ -1,2 +1,11 @@
-rspec spec/acro/contest_scraper.rb is the current test.
 rake db:migrate; rake db:test:prepare
+
+decide algorithms for judge metrics
+Spearman's rank correlation coefficient
+http://mathworld.wolfram.com/SpearmanRankCorrelationCoefficient.html
+CIVA RI
+
+rspec spec/model/pf_result.rb
+
+test averages and zeros
+will need separate column for the average-replaced-only computed values
