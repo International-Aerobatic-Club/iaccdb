@@ -1,6 +1,9 @@
 
 require 'spec_helper'
 
+# Test computation of rank values
+# All of the numbers come from the spreadsheet, FlightComputation.ods
+# found in this directory
 module IAC
   describe RankComputer do
     before(:each) do
@@ -18,11 +21,6 @@ module IAC
       @judges = []
       4.times { @judges << Factory.create(:judge) }
       # pilot_flights[0]
-      #1   9.0   9.5   8.0   9.0
-      #2   8.0   8.0   7.5   7.5
-      #3   8.5   8.5   8.0   8.5
-      #4   7.5   9.0   7.5   8.5
-      #5   8.0   7.5   5.5   7.0
       Factory.create(:score,
         :pilot_flight => @pilot_flights[0],
         :judge => @judges[0],
@@ -40,11 +38,6 @@ module IAC
         :judge => @judges[3],
         :values => [90, 75, 85, 85, 70])
       # pilot_flights[1]
-      #1   7.0   8.0   6.5   6.5
-      #2   8.0   8.5   8.0   6.0
-      #3   8.5   9.0   6.0   8.0
-      #4   8.0   8.0   7.5   8.0
-      #5   7.0   7.0   5.0   7.5
       Factory.create(:score,
         :pilot_flight => @pilot_flights[1],
         :judge => @judges[0],
@@ -62,11 +55,6 @@ module IAC
         :judge => @judges[3],
         :values => [65, 60, 80, 80, 75])
       # pilot_flights[2]
-      #1   8.0   8.0   7.5   7.5
-      #2   3.0   6.0   5.0   3.0
-      #3   8.0   7.0   7.0   8.0
-      #4   8.5   8.0   8.0   8.5
-      #5   6.0   6.0   7.0   7.0
       Factory.create(:score,
         :pilot_flight => @pilot_flights[2],
         :judge => @judges[0],
@@ -84,11 +72,6 @@ module IAC
         :judge => @judges[3],
         :values => [75, 30, 80, 85, 70])
       # pilot_flights[3]
-      #1   9.5   7.0   7.5   8.5
-      #2   8.5   8.5   7.5   8.5
-      #3   9.0   9.0   8.0   9.0
-      #4   9.0   8.5   7.5   8.5
-      #5   8.5   8.0   7.0   8.0
       Factory.create(:score,
         :pilot_flight => @pilot_flights[3],
         :judge => @judges[0],
@@ -106,11 +89,6 @@ module IAC
         :judge => @judges[3],
         :values => [85, 85, 90, 85, 80])
       # pilot_flights[4]
-      #1   9.0   8.0   7.5   7.0
-      #2   8.5   8.5   8.0   8.0
-      #3   8.5   8.5   9.0   9.0
-      #4   9.0   9.0   8.5   9.0
-      #5   8.5   7.0   8.0   7.5
       Factory.create(:score,
         :pilot_flight => @pilot_flights[4],
         :judge => @judges[0],
@@ -127,30 +105,71 @@ module IAC
         :pilot_flight => @pilot_flights[4],
         :judge => @judges[3],
         :values => [70, 80, 90, 90, 75])
+    end
+    context 'full results' do
+      before :each do
+        @contest.results
+      end
+      it 'ranks pilots for a flight' do
+        [3, 4, 5, 2, 1].each_with_index do |r,i|
+          @pilot_flights[i].pf_results.first.flight_rank.should == r
+        end
+        [2, 5, 4, 1, 3].each_with_index do |r,i|
+          @pilot_flights[i].pf_results.first.adj_flight_rank.should == r
+        end
+      end
+      it 'ranks figures for a flight' do
+        res = @pilot_flights[0].pf_results.first
+        res.for_judge(@judges[0]).computed_ranks.should == [2,3,2,5,3]
+        res.for_judge(@judges[1]).computed_ranks.should == [1,4,3,1,2]
+        res.for_judge(@judges[2]).computed_ranks.should == [1,3,2,3,4]
+        res.for_judge(@judges[3]).computed_ranks.should == [1,3,3,2,4]
+        res = @pilot_flights[1].pf_results.first
+        res.for_judge(@judges[0]).computed_ranks.should == [5,3,2,4,4]
+        res = @pilot_flights[2].pf_results.first
+        res.for_judge(@judges[0]).computed_ranks.should == [4,5,5,3,5]
+        res = @pilot_flights[3].pf_results.first
+        res.for_judge(@judges[0]).computed_ranks.should == [1,1,1,1,1]
+        res = @pilot_flights[4].pf_results.first
+        res.for_judge(@judges[0]).computed_ranks.should == [2,1,2,1,1]
+      end
+      it 'computes how each judge ranked the pilots' do
+        res = @pilot_flights[0].pf_results.first
+        [3, 1, 3, 2].each_with_index do |r,i|
+           res.for_judge(@judges[i]).flight_rank.should == r
+        end
+        res = @pilot_flights[1].pf_results.first
+        [4, 4, 5, 4].each_with_index do |r,i|
+           res.for_judge(@judges[i]).flight_rank.should == r
+        end
+        res = @pilot_flights[2].pf_results.first
+        [5, 5, 4, 5].each_with_index do |r,i|
+           res.for_judge(@judges[i]).flight_rank.should == r
+        end
+        res = @pilot_flights[3].pf_results.first
+        [1, 2, 2, 1].each_with_index do |r,i|
+           res.for_judge(@judges[i]).flight_rank.should == r
+        end
+        res = @pilot_flights[4].pf_results.first
+        [2, 2, 1, 2].each_with_index do |r,i|
+           res.for_judge(@judges[i]).flight_rank.should == r
+        end
+      end
+    end
+    it 'behaves when there is no sequence for result computations' do
+      @pilot_flights.each do |pilot_flight|
+        pilot_flight.sequence = nil
+        pilot_flight.save
+      end
       @contest.results
-    end
-    it 'ranks pilots for a flight' do
-      [3, 4, 5, 2, 1].each_with_index do |r,i|
-        @pilot_flights[i].pf_results.first.flight_rank.should == r
+      @pilot_flights.each do |pilot_flight|
+        pf_result = pilot_flight.pf_results.first
+        pf_result.flight_rank.should == 1
+        @judges.each do |judge|
+          pfj_result = pf_result.for_judge(judge)
+          pfj_result.should == nil
+        end
       end
-      [2, 5, 4, 1, 3].each_with_index do |r,i|
-        @pilot_flights[i].pf_results.first.adj_flight_rank.should == r
-      end
-    end
-    it 'ranks figures for a flight' do
-      res = @pilot_flights[0].pf_results.first
-      res.for_judge(@judges[0]).computed_ranks.should == [2,3,2,5,3]
-      res.for_judge(@judges[1]).computed_ranks.should == [1,4,3,1,2]
-      res.for_judge(@judges[2]).computed_ranks.should == [1,3,2,3,4]
-      res.for_judge(@judges[3]).computed_ranks.should == [1,3,3,2,4]
-      res = @pilot_flights[1].pf_results.first
-      res.for_judge(@judges[0]).computed_ranks.should == [5,3,2,4,4]
-      res = @pilot_flights[2].pf_results.first
-      res.for_judge(@judges[0]).computed_ranks.should == [4,5,5,3,5]
-      res = @pilot_flights[3].pf_results.first
-      res.for_judge(@judges[0]).computed_ranks.should == [1,1,1,1,1]
-      res = @pilot_flights[4].pf_results.first
-      res.for_judge(@judges[0]).computed_ranks.should == [2,1,2,1,1]
     end
   end
 end

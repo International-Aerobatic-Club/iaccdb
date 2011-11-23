@@ -9,7 +9,6 @@ CIVA RI
 End test file names in spec directory with _spec.rb
 
 Contest result and rank computations
-- check computed pfj_results.flight_rank
 
 spec/models/rank_computer_spec
 lib/iac/rank_computer.rb

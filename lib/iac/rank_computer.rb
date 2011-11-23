@@ -21,6 +21,7 @@ module IAC
       pf_results = []
       judge_pilot_figure_computed_values = {} #computed_values lookup by judge
       judge_pilot_figure_graded_values = {} #graded_values lookup by judge
+      judge_pilot_flight_values = {} #flight_values lookup by judge
       flight.pilot_flights.each do |pilot_flight|
         pf_result = pilot_flight.results
         pf_result.judge_teams.each do |judge|
@@ -35,6 +36,10 @@ module IAC
           pilot_figure_graded_values << pfj_result.graded_values
           judge_pilot_figure_graded_values[judge] =
             pilot_figure_graded_values
+          pilot_flight_values = 
+            judge_pilot_flight_values[judge] || Array.new
+          pilot_flight_values << pfj_result.flight_value
+          judge_pilot_flight_values[judge] = pilot_flight_values
         end
         pf_results << pf_result
       end
@@ -48,11 +53,14 @@ module IAC
       adjusted_flight_ranks = Ranking::Computer.ranks_for(adjusted_flight_values)
       judge_pilot_figure_computed_ranks = {}
       judge_pilot_figure_graded_ranks = {}
+      judge_pilot_flight_ranks = {}
       judge_pilot_figure_computed_values.each_key do |judge|
         judge_pilot_figure_computed_ranks[judge] =
           Ranking::Computer.rank_matrix(judge_pilot_figure_computed_values[judge])
         judge_pilot_figure_graded_ranks[judge] =
           Ranking::Computer.rank_matrix(judge_pilot_figure_graded_values[judge])
+        judge_pilot_flight_ranks[judge] =
+          Ranking::Computer.ranks_for(judge_pilot_flight_values[judge])
       end
       pf_results.each_with_index do |pf_result, i|
         pf_result.flight_rank = flight_ranks[i]
@@ -62,6 +70,7 @@ module IAC
           pfj_result = pf_result.for_judge(judge)
           pfj_result.computed_ranks = judge_pilot_figure_computed_ranks[judge][i]
           pfj_result.graded_ranks = judge_pilot_figure_graded_ranks[judge][i]
+          pfj_result.flight_rank = judge_pilot_flight_ranks[judge][i]
           pfj_result.save
         end
       end
