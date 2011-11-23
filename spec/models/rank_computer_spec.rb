@@ -8,8 +8,13 @@ module IAC
       @flight = Factory.create(:flight, :contest => @contest)
       seq = Factory.create(:sequence, :k_values => [2,2,2,2,2])
       @pilot_flights = []
-      5.times { @pilot_flights << Factory.create(:pilot_flight, 
-        :flight => @flight, :sequence => seq) }
+      [2, 6, 0, 0, 8].each do |penalty|
+        @pilot_flights << Factory.create(
+          :pilot_flight, 
+          :flight => @flight, 
+          :sequence => seq, 
+          :penalty_total => penalty) 
+      end
       @judges = []
       4.times { @judges << Factory.create(:judge) }
       # pilot_flights[0]
@@ -128,6 +133,24 @@ module IAC
       [3, 4, 5, 2, 1].each_with_index do |r,i|
         @pilot_flights[i].pf_results.first.flight_rank.should == r
       end
+      [2, 5, 4, 1, 3].each_with_index do |r,i|
+        @pilot_flights[i].pf_results.first.adj_flight_rank.should == r
+      end
+    end
+    it 'ranks figures for a flight' do
+      res = @pilot_flights[0].pf_results.first
+      res.for_judge(@judges[0]).computed_ranks.should == [2,3,2,5,3]
+      res.for_judge(@judges[1]).computed_ranks.should == [1,4,3,1,2]
+      res.for_judge(@judges[2]).computed_ranks.should == [1,3,2,3,4]
+      res.for_judge(@judges[3]).computed_ranks.should == [1,3,3,2,4]
+      res = @pilot_flights[1].pf_results.first
+      res.for_judge(@judges[0]).computed_ranks.should == [5,3,2,4,4]
+      res = @pilot_flights[2].pf_results.first
+      res.for_judge(@judges[0]).computed_ranks.should == [4,5,5,3,5]
+      res = @pilot_flights[3].pf_results.first
+      res.for_judge(@judges[0]).computed_ranks.should == [1,1,1,1,1]
+      res = @pilot_flights[4].pf_results.first
+      res.for_judge(@judges[0]).computed_ranks.should == [2,1,2,1,1]
     end
   end
 end

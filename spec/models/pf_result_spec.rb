@@ -26,6 +26,11 @@ module Model
           :judge => judge_team)
         @pf = @pilot_flight.results
       end
+      it 'finds judges' do
+        judge_teams = @pf.judge_teams
+        judge_teams.length.should == 3
+        judge_teams.include?(@judge_jim).should == true
+      end
       it 'computes and caches figure and flight values' do
         pfj = @pf.for_judge(@judge_jim)
         pfj.computed_values.should == 
@@ -34,7 +39,7 @@ module Model
         pfj.flight_value.should == 18365
         @pf.flight_value.should == 1789
         pfn = @pilot_flight.results
-        pfn.updated_at.should == @pf.updated_at
+        (@pf.updated_at <= pfn.updated_at).should be_true
       end
       it 'updates cached values when scores change' do
         sleep 2 # a two second delay to ensure time difference
@@ -156,7 +161,7 @@ module Model
         @res.for_judge(@judges[2]).flight_value.should == 420
         @res.for_judge(@judges[3]).flight_value.should == 460
         @res.for_judge(@judges[4]).flight_value.should == 400
-        @res.flight_value.round(2).should == 42
+        @res.flight_value.round(2).should == 42.0
       end
     end
   end

@@ -30,4 +30,10 @@ class PfResult < ActiveRecord::Base
   def for_judge(judge)
     pilot_flight.pfj_results.where(:judge_id => judge).first
   end
+
+  # Return the judge_teams for a flight
+  # (each an instance from table :judges)
+  def judge_teams
+    pilot_flight.pfj_results.collect { |pfj_result| pfj_result.judge }
+  end
 end

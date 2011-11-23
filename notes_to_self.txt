@@ -9,9 +9,8 @@ CIVA RI
 End test file names in spec directory with _spec.rb
 
 Contest result and rank computations
+- check computed pfj_results.flight_rank
 
-spec/rank_computer_spec
- - get real scores and set-up spreadsheet to validate
-
+spec/models/rank_computer_spec
 lib/iac/rank_computer.rb
 app/models/contest.rb
