@@ -44,13 +44,17 @@ def processContestList
   ch
 end
 
-#find list of database contest id's that are
-# missing or out of date with respect to Manny
-def findMissingContests
-  curList = processContestList
+def getHaveList
   haveList = {}
   MannySynch.all().each { |rcd| haveList[rcd.manny_number] = rcd.synch_date }
-  curList.delete_if do |id, date|
+  haveList
+end
+
+#find list of database contest id's that are
+# missing or out of date with respect to Manny
+def findMissingContests(curList)
+  haveList = getHaveList
+  curList.reject do |id, date|
     false # do not remove == will retrieve
     if haveList.has_key?(id) 
       # date format from Manny looks like: 8/5/2009 9:55:27 PM
@@ -59,6 +63,12 @@ def findMissingContests
       curStamp < haveList[id] 
     end
   end
+end
+
+#find list of past Manny database contest id's that no longer have
+# any counterpart with respect to the current Manny list
+def findSpuriousContests(curList)
+  getHaveList.reject { |id, date| curList.include?(id) }
 end
 
 #retrieve a contest from Manny, parse it, and add it to the database
@@ -91,10 +101,18 @@ def processContest(m2d, k)
   end
 end
 
+def removeContest(m2d, k)
+  puts "Should remove contest id #{k}"
+end
+
 m2d = IAC::MannyToDB.new
 if ARGV.size == 0
-  findMissingContests.each_key do |k| 
+  curList = processContestList
+  findMissingContests(curList).each_key do |k| 
     processContest(m2d, k)
+  end
+  findSpuriousContests(curList).each_key do |k|
+    removeContest(m2d, k)
   end
 else
   ARGV.each do |arg|

@@ -34,6 +34,7 @@ def process_contest(manny, alwaysUpdate = false)
   if @dContest
     process_participants(manny.contest)
     process_categories(manny.contest)
+    @dContest.results
   end
 end
 
@@ -192,6 +193,11 @@ def process_flight_scores(dFlight, mCat, mFlight)
       :judge => dJudge,
       :values => [])
     mSeq = mScore.seq
+    if !dPilotFlight.sequence 
+      dSequence = Sequence.find_or_create(mSeq)
+      dPilotFlight.sequence = dSequence
+      dPilotFlight.save
+    end
     ctF = mSeq.ctFigs
     (1..ctF).each { |i| dScore.values << mSeq.figs[i] } # write scores
     dScore.values << mSeq.pres # write presentation
