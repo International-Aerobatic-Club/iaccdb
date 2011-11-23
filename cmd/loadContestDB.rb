@@ -1,3 +1,4 @@
+# load the contest database from Manny files on the file system
 # use rails runner lib/iac/loadContestDB.rb <file>
 require "iac/mannyParse"
 require "iac/mannyToDB"

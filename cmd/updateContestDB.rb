@@ -105,17 +105,20 @@ def removeContest(m2d, k)
   puts "Should remove contest id #{k}"
 end
 
+reload = !ARGV.empty? && ARGV[0] == 'reload'
+files = reload ? ARGV.drop(1) : ARGV
 m2d = IAC::MannyToDB.new
-if ARGV.size == 0
+if files.size == 0
   curList = processContestList
-  findMissingContests(curList).each_key do |k| 
+  doList = reload ? curList : findMissingContests(curList)
+  doList.each_key do |k| 
     processContest(m2d, k)
   end
   findSpuriousContests(curList).each_key do |k|
     removeContest(m2d, k)
   end
 else
-  ARGV.each do |arg|
+  files.each do |arg|
     k = arg.to_i
     if (k != 0) then processContest(m2d, k) end
   end
