@@ -20,9 +20,10 @@ end
 
 class Flight
   attr_accessor :penalties, :ks, :judges, :assists, :chiefAssists, :scores
-  attr_accessor :name, :chief
+  attr_accessor :pid, :name, :chief
 
-  def initialize(name)
+  def initialize(pid, name)
+    @pid = pid
     @name = name
     @penalties = {} # int indexed by pilot pdx
     @ks = {} # Seq indexed by pilot pdx
@@ -51,16 +52,17 @@ CATEGORY_NAMES = [ nil ] + IAC::Constants::CATEGORY_NAMES
 FLIGHT_NAMES = [ nil ] + IAC::Constants::FLIGHT_NAMES
 
 class Category
-  attr_accessor :flights, :pilots, :name
+  attr_accessor :flights, :pilots, :name, :pid
 
-  def initialize name
+  def initialize(pid, name)
+    @pid = pid
     @name = name
     @flights = [] # Flight indexed by flightID
     @pilots = [] # Pilot indexed by part
   end
   
   def flight flt
-    flights[flt] ||= Flight.new(FLIGHT_NAMES[flt])
+    flights[flt] ||= Flight.new(flt, FLIGHT_NAMES[flt])
   end
 
   def pilot pid
@@ -79,10 +81,10 @@ class Category
 end
 
 class Score
-  attr_accessor :ks, :pilot, :judge, :seq
+  attr_accessor :pilot, :judge, :seq
 
-  def initialize(ks, pilot, judge)
-    @ks = ks # Seq k values for sequence
+  def initialize(seq, pilot, judge)
+    @seq = seq
     @pilot = pilot # participant index
     @judge = judge # participant index
   end
@@ -110,7 +112,7 @@ class Contest
   end
 
   def category cat
-    categories[cat] ||= Category.new(CATEGORY_NAMES[cat])
+    categories[cat] ||= Category.new(cat, CATEGORY_NAMES[cat])
   end
 
   def flight(cat, flt)

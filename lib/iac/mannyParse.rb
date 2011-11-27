@@ -190,11 +190,8 @@ def process_scores(line)
   for fi in 1 .. 20
     seq.figs[fi] = asc[fi+4].to_i
   end
-  ks = @contest.seq_for(cid, fid, pid)
-  seq.ctFigs = ks.ctFigs
   flight = @contest.flight(cid, fid)
-  score = Score.new(ks, pid, jid)
-  score.seq = seq
+  score = Score.new(seq, pid, jid)
   flight.scores << score
 end
 

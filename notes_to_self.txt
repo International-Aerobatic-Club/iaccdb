@@ -8,4 +8,15 @@ CIVA RI
 'rspec spec' runs all of the tests.  
 End test file names in spec directory with _spec.rb
 
+
+Trying to get k values from Manny into database
+bundle exec rails runner cmd/loadContestDB.rb reload IACContestData/Contest_300.txt
+is the Phil Schacht
+
+rspec spec/manny/manny_parse_spec.rb
+
+lib/iac/mannyToDB line 201 put k factors on sequence
+lib/iac/mannyParse - getting k factors?
+lib/iac/mannyModel - k factors for sequence and pilot
+
 Display results and rankings

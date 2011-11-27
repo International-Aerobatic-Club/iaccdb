@@ -89,7 +89,7 @@ end
 # member family and given names must match exatly, otherwise
 # this creates a new member record
 def member_name_fallback(mPart)
-  dm = Member.find_or_create_by_name(mPort.iacID, mPart.givenName, mPart.familyName)
+  dm = Member.find_or_create_by_name(mPart.iacID, mPart.givenName, mPart.familyName)
 end
 
 # find or create member with good IAC ID
@@ -128,6 +128,7 @@ def process_categories(mContest)
 end
 
 def process_category(mContest, mCat)
+  mCat.forwardfill_sequences
   mCat.flights.each_with_index do |mFlight, i|
     if mFlight
       process_flight(mContest, mCat, mFlight, i)
@@ -149,6 +150,17 @@ def process_flight(mContest, mCat, mFlight, seq)
     dFlight.save
     process_flight_judges(dFlight, mFlight)
     process_flight_scores(dFlight, mCat, mFlight)
+  end
+end
+
+# Set k values on pilot flights
+def process_flight_kays(dFlight, mContest, mCat, mFlight)
+  dFlight.pilot_flights.each do |pilot_flight|
+    mPart = @parts.index(pilot_flight.pilot)
+    mKays = mContest.seq_for(mCat.name, mFlight.name, mPart)
+    dSequence = Sequence.find_or_create(mKays)
+    pilot_flight.sequence = dSequence
+    pilot_flight.save
   end
 end
 
@@ -184,23 +196,24 @@ def process_flight_scores(dFlight, mCat, mFlight)
   mFlight.scores.each do |mScore|
     mParti = mScore.pilot
     mPilot = mCat.pilots[mParti]
+    mSeq = mFlight.seq_for(mParti)
     dPilot = @parts[mParti]
     dPilotFlight = get_pilot_flight(dPilot, dFlight, mPilot.chapter)
+    if !dPilotFlight.sequence
+      kays = []
+      (0..mSeq.ctFigs).each { |f| kays << mSeq.figs[f+1] }
+      dSequence = Sequence.find_or_create(kays)
+      dPilotFlight.sequence = dSequence
+      dPilotFlight.save
+    end
     mJi = mScore.judge
     dJudge = @judges[mJi] # get the judge team
     dScore = Score.create(
       :pilot_flight => dPilotFlight,
       :judge => dJudge,
       :values => [])
-    mSeq = mScore.seq
-    if !dPilotFlight.sequence 
-      dSequence = Sequence.find_or_create(mSeq)
-      dPilotFlight.sequence = dSequence
-      dPilotFlight.save
-    end
     ctF = mSeq.ctFigs
-    (1..ctF).each { |i| dScore.values << mSeq.figs[i] } # write scores
-    dScore.values << mSeq.pres # write presentation
+    dScore.values = mScore.seq.figs.slice(1...ctF)
     dScore.save
   end
 end
