@@ -34,4 +34,8 @@ class Sequence < ActiveRecord::Base
     attrs[:mod_3_total] = mod_3_total
     attrs
   end
+
+  def to_s
+    k_values.join(', ')
+  end
 end

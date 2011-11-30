@@ -88,7 +88,8 @@ def doProcessContest(m2d, id)
       end
     end
   end
-  m2d.process_contest(manny, true)
+  contest = m2d.process_contest(manny, true)
+  contest.results if contest
 end
 
 def processContest(m2d, k)

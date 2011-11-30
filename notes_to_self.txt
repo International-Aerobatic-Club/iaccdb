@@ -13,10 +13,11 @@ Trying to get k values from Manny into database
 bundle exec rails runner cmd/loadContestDB.rb reload IACContestData/Contest_300.txt
 is the Phil Schacht
 
-rspec spec/manny/manny_parse_spec.rb
+Computing figure ranks for free program makes no sense.  Trying to do it
+and the figure counts don't match pilot to pilot.  Have to code a guard
+for that, figure out what to put in the database.  Can check pilots flying
+the same sequence.  If not, no figure ranks.
 
-lib/iac/mannyToDB line 201 put k factors on sequence
-lib/iac/mannyParse - getting k factors?
-lib/iac/mannyModel - k factors for sequence and pilot
+Can merge this branch back into master and start a new one.
 
 Display results and rankings

@@ -42,12 +42,27 @@ module Manny
       spnKnown = @contest.flight(2,1)
       spnKnown.scores.each do |s|
         seqK = spnKnown.seq_for(s.pilot)
-        s.seq.figs[seqK.ctFigs+1].should == s.seq.pres
         if s.pilot == 12 && s.judge == 7
-          s.seq.figs.should == [nil, 95, 85, 80, 85, 85, 80, 90, 85, 90, 95, 90] 
+          s.seq.figs.should == [nil, 95, 85, 80, 85, 85, 80, 90, 85, 90,
+          95, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] 
         end
       end
     end
-    it 'captures participants'
+    it 'captures participants' do
+      part = @contest.participants[1]
+      part.givenName.should == 'Frederick'
+      part.familyName.should == 'Weaver'
+      part.iacID.should == 1017
+      part = @contest.participants[37]
+      part.givenName.should == 'Charlie'
+      part.familyName.should == 'Wilkinson'
+      part.iacID.should == 433543
+      category = @contest.category(2)
+      pilot = category.pilot(12)
+      pilot.chapter.should == '288'
+      pilot.make.should == 'Pitts'
+      pilot.model.should == 'S2B'
+      pilot.reg.should == 'N260AB'
+    end
   end
 end

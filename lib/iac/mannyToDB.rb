@@ -34,8 +34,8 @@ def process_contest(manny, alwaysUpdate = false)
   if @dContest
     process_participants(manny.contest)
     process_categories(manny.contest)
-    @dContest.results
   end
+  @dContest
 end
 
 ###
@@ -213,7 +213,8 @@ def process_flight_scores(dFlight, mCat, mFlight)
       :judge => dJudge,
       :values => [])
     ctF = mSeq.ctFigs
-    dScore.values = mScore.seq.figs.slice(1...ctF)
+    dScore.values = mScore.seq.figs.slice(1..ctF)
+    dScore.values << mScore.seq.pres
     dScore.save
   end
 end
