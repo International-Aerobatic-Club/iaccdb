@@ -8,16 +8,7 @@ CIVA RI
 'rspec spec' runs all of the tests.  
 End test file names in spec directory with _spec.rb
 
-
-Trying to get k values from Manny into database
-bundle exec rails runner cmd/loadContestDB.rb reload IACContestData/Contest_300.txt
-is the Phil Schacht
-
-Computing figure ranks for free program makes no sense.  Trying to do it
-and the figure counts don't match pilot to pilot.  Have to code a guard
-for that, figure out what to put in the database.  Can check pilots flying
-the same sequence.  If not, no figure ranks.
-
-Can merge this branch back into master and start a new one.
+Check assertion for spec/models/rank_computer_spec.rb
+flight rank computation
 
 Display results and rankings
