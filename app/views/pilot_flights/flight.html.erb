@@ -1,0 +1,41 @@
+  <h3><%= pilot_flight.flight.displayName %></h3>
+  
+  <% scores = pilot_flight.scores %>
+  <% ctJudge = scores.size %>
+  <% if 0 < ctJudge %>
+    <table class="scores">
+    <thead>
+    <tr>
+      <th>F</th>
+      <% (1 .. ctJudge).each do |j| %>
+        <th>J<%= j %></th>
+      <% end %>
+      <th>Avg</th>
+      <th>K</th>
+      <th>PtsLoT</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% ctFigs = scores[0].values.size %>
+    <% if 0 < ctFigs %>
+      <% (1 .. ctFigs-1).each do |f| #figures %>
+        <tr>
+        <td><%= (f).to_s %></td>
+        <% (1 .. ctJudge).each do |j| #judges %>
+          <td><%= Score.display_score(scores[j-1].values[f-1]) %></td>
+        <% end #judges %>
+        </tr>
+      <% end #figures %>
+    <% end #if ctFigs %>
+    <tr>
+    <td>P</td>
+    <% (1 .. ctJudge).each do |j| #judges %>
+      <td><%= Score.display_score(scores[j-1].values[ctFigs-1]) %></td>
+    <% end #judges %>
+    </tr>
+    </tbody>
+    </table>
+    <% (1 .. ctJudge).each do |j| #judges %>
+      <p>J<%= j %>: <%= scores[j-1].judge.to_s %></p>
+    <% end #judges %>
+  <% end #if ctJudge %>

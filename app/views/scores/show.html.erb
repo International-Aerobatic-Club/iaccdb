@@ -4,34 +4,8 @@
 <h2><%= link_to (@contest) do "#{@contest.name} #{@contest.start}" end %></h2>
 
 <% @pilot_flights.each_with_index do |pf,i| %>
-  <% s = @flight_scores[i] %>
   <div class="flightScores">
-  <h3><%= pf.flight.displayName %></h3>
-  <table class="scores">
-  <thead><tr>
-  <th>F</th>
-  <% ctJudge = s[1].size - 1 %>
-  <% (1 .. ctJudge).each do |j| %>
-    <th>J<%= j.to_s %></th>
-  <% end %>
-  </tr></thead>
-  <tbody>
-  <% pi = s.size - 1 %>
-  <% (1 .. pi-1).each do |f| #figures %>
-    <tr>
-    <td><%= (f).to_s %></td>
-    <% (1 .. ctJudge).each do |j| #judges %>
-      <td><%= Score.display_score(s[f][j]) %></td>
-    <% end #judges %>
-    </tr>
-  <% end #figures %>
-  <tr>
-  <td>P</td>
-  <% (1 .. ctJudge).each do |j| #judges %>
-    <td><%= Score.display_score(s[pi][j]) %></td>
-  <% end #judges %>
-  </tr>
-  </tbody>
-  </table>
+  <%= render :template => 'pilot_flights/flight', 
+    :locals => { :pilot_flight => pf } %>
   </div>
 <% end #flights %>

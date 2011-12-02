@@ -8,10 +8,10 @@ class ScoresController < ApplicationController
       from pilot_flights p, flights f 
       where f.contest_id = :cid and p.flight_id = f.id and p.pilot_id = :pid
       order by f.sequence", {:cid => params[:id], :pid => params[:pilot_id]}])
-    @flight_scores = []
-    @pilot_flights.each do |pf|
-      @flight_scores << pf.gatherScores
-    end
+    #@flight_scores = []
+    #@pilot_flights.each do |pf|
+    #  @flight_scores << pf.gatherScores
+    #end
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @pilot_flights }
