@@ -163,8 +163,8 @@ module IAC
       end
       @contest.results
       @pilot_flights.each do |pilot_flight|
-        pf_result = pilot_flight.pf_results.first
-        pf_result.flight_rank.should == 1
+        pf_result = pilot_flight.results
+        pf_result.flight_rank.should == nil
         @judges.each do |judge|
           pfj_result = pf_result.for_judge(judge)
           pfj_result.should == nil

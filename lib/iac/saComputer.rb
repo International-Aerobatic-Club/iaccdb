@@ -21,6 +21,7 @@ def computePilotFlight
   @seq = @pilot_flight.sequence
   @kays = @seq ? @seq.k_values : nil
   @kays = nil if @kays && @kays.length == 0
+  # compute or cache?
   if @pf.new_record?
     compute = true
   else
