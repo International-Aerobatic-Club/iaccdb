@@ -12,7 +12,6 @@ files.each do |f|
     manny = Manny::MannyParse.new
     IO.foreach(f) { |line| manny.processLine(line) }
     contest = m2d.process_contest(manny, reload)
-    contest.results if contest
   rescue Exception => e
     puts "\nSomething went wrong with #{f}:"
     puts e.message
