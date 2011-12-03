@@ -6,4 +6,31 @@ module PilotFlightsHelper
   def avg(pts, k)
     Score.display_score(pts.fdiv(k))
   end
+
+  def rank(rank)
+    if rank
+      "(#{sprintf('%2d', rank)})"
+    else
+      ''
+    end
+  end
+
+  def figure_rank(ranks, f)
+    if ranks
+      rank(ranks[f])
+    else
+      ''
+    end
+  end
+
+  def points(points)
+    sprintf('%.2f', points)
+  end
+
+  def show_judge_team(judge_team)
+    team_name = judge_team.judge.name
+    if judge_team.assist
+      team_name += " with " + judge_team.assist.name
+    end
+  end
 end

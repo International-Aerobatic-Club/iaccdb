@@ -12,10 +12,10 @@
       <th>F</th>
       <% (1 .. ctJudge).each do |j| %>
         <% pfj_results << results.for_judge(scores[j-1].judge) %>
-        <th>J<%= j %></th>
+        <th>J<%= j %></th><th/>
       <% end %>
       <% if sequence %>
-        <th>Avg</th>
+        <th>Avg</th><th/>
         <th>K</th>
         <th>PtsLoT</th>
       <% end # if sequence %>
@@ -29,9 +29,11 @@
         <td><%= (f).to_s %></td>
         <% (1 .. ctJudge).each do |j| #judges %>
           <td><%= Score.display_score(scores[j-1].values[f-1]) %></td>
+          <td><%= figure_rank(pfj_results[j-1].graded_ranks, f-1) %></td>
         <% end #judges %>
         <% if sequence %>
           <td><%= avg(results.figure_results[f-1], sequence.k_values[f-1]) %></td>
+          <td/>
           <td><%= sequence.k_values[f-1] %></td>
           <td><%= ptsLoT(results.figure_results[f-1],
             sequence.k_values[f-1]) %></td>
@@ -43,10 +45,12 @@
     <td>P</td>
     <% (1 .. ctJudge).each do |j| #judges %>
       <td><%= Score.display_score(scores[j-1].values[ctFigs-1]) %></td>
+      <td><%= figure_rank(pfj_results[j-1].graded_ranks, ctFigs-1) %></td>
     <% end #judges %>
     <% if sequence %>
       <td><%= avg(results.figure_results[ctFigs-1],
         sequence.k_values[ctFigs-1]) %></td>
+      <td/>
       <td><%= sequence.k_values[ctFigs-1] %></td>
       <td><%= ptsLoT(results.figure_results[ctFigs-1],
         sequence.k_values[ctFigs-1]) %></td>
@@ -57,22 +61,25 @@
       <td>Points</td>
       <% (1 .. ctJudge).each do |j| %>
         <td><%= Score.display_score(pfj_results[j-1].flight_value) %></td>
+        <td><%= rank(pfj_results[j-1].flight_rank) %></td>
       <% end %>
-      <td><%= results.flight_value %></td>
+      <td><%= points(results.flight_value) %></td>
+      <td><%= rank(results.flight_rank) %></td>
       </tr>
       <tr>
-      <td colspan="<%= ctJudge + 1 %>">Penalty</td>
+      <td colspan="<%= ctJudge * 2 + 1 %>">Penalty</td>
       <td><%= pilot_flight.penalty_total %></td>
       </tr>
-      <td colspan="<%= ctJudge + 1 %>">Points Earned</td>
-      <td><%= results.adj_flight_value %></td>
+      <td colspan="<%= ctJudge * 2 + 1 %>">Points Earned</td>
+      <td><%= points(results.adj_flight_value) %></td>
+      <td><%= rank(results.adj_flight_rank) %></td>
       </tr>
       </tr>
-      <td colspan="<%= ctJudge + 1 %>">Max Possible</td>
+      <td colspan="<%= ctJudge * 2 + 1 %>">Max Possible</td>
       <td><%= sprintf('%.02d', (sequence.total_k * 10)) %></td>
       </tr>
       </tr>
-      <td colspan="<%= ctJudge + 1 %>">Percent of Possible</td>
+      <td colspan="<%= ctJudge * 2 + 1 %>">Percent of Possible</td>
       <td><%= sprintf('%.2f', results.adj_flight_value * 10.0 /
         sequence.total_k) %></td>
       </tr>
@@ -80,6 +87,6 @@
     </tbody>
     </table>
     <% (1 .. ctJudge).each do |j| #judges %>
-      <p>J<%= j %>: <%= scores[j-1].judge.to_s %></p>
+      <p class='judge_team'>J<%= j %>: <%= show_judge_team(scores[j-1].judge) %></p>
     <% end #judges %>
   <% end #if ctJudge %>
