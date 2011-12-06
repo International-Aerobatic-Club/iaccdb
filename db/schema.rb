@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111116163545) do
+ActiveRecord::Schema.define(:version => 20111206020437) do
 
   create_table "contests", :force => true do |t|
     t.string   "name",       :limit => 48
@@ -60,17 +60,18 @@ ActiveRecord::Schema.define(:version => 20111116163545) do
   end
 
   create_table "pc_results", :force => true do |t|
-    t.integer  "pilot_id",                                                   :null => false
-    t.integer  "contest_id",                                                 :null => false
-    t.string   "category",       :limit => 16,                               :null => false
+    t.integer  "pilot_id",                                                                     :null => false
+    t.integer  "contest_id",                                                                   :null => false
+    t.string   "category",       :limit => 16,                                                 :null => false
     t.decimal  "category_value",               :precision => 8, :scale => 2
     t.integer  "category_rank"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "need_compute",                                               :default => true
   end
 
   create_table "pf_results", :force => true do |t|
-    t.integer  "pilot_flight_id",                                :null => false
+    t.integer  "pilot_flight_id",                                                  :null => false
     t.decimal  "flight_value",     :precision => 7, :scale => 2
     t.decimal  "adj_flight_value", :precision => 7, :scale => 2
     t.integer  "flight_rank"
@@ -78,11 +79,12 @@ ActiveRecord::Schema.define(:version => 20111116163545) do
     t.datetime "updated_at"
     t.string   "figure_results"
     t.integer  "adj_flight_rank"
+    t.boolean  "need_compute",                                   :default => true
   end
 
   create_table "pfj_results", :force => true do |t|
-    t.integer  "pilot_flight_id", :null => false
-    t.integer  "judge_id",        :null => false
+    t.integer  "pilot_flight_id",                   :null => false
+    t.integer  "judge_id",                          :null => false
     t.string   "computed_values"
     t.string   "computed_ranks"
     t.integer  "flight_value"
@@ -91,6 +93,7 @@ ActiveRecord::Schema.define(:version => 20111116163545) do
     t.datetime "updated_at"
     t.string   "graded_values"
     t.string   "graded_ranks"
+    t.boolean  "need_compute",    :default => true
   end
 
   create_table "pilot_flights", :force => true do |t|
