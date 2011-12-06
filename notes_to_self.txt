@@ -10,4 +10,9 @@ End test file names in spec directory with _spec.rb
 
 Display results and rankings
 
-app/views/pilot_flights/flight.html.erb
+app/views/contests/show.html.erb
+app/controllers/contests_controller.rb
+
+Two puzzles:
+ - get pf_results ordered for pc_results
+ - ensure fresh result computations without recomputing every time

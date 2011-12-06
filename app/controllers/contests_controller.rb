@@ -18,6 +18,8 @@ class ContestsController < ApplicationController
   # GET /contests/1.xml
   def show
     @contest = Contest.find(params[:id])
+    #@contest.results #todo cache
+    #pa = PCResults.find(:contest => @contest).order_by(:category, :category_rank)
     pa = Member.find_by_sql("select distinct m.*, f.category, f.aircat
       from members m, flights f, pilot_flights p
         where f.contest_id = #{@contest.id} and p.flight_id = f.id and
