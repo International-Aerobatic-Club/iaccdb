@@ -12,10 +12,18 @@ class PilotFlight < ActiveRecord::Base
     "Flight #{flight.display} for pilot #{pilot.display}"
   end
 
+  def mark_for_calcs
+    pf_results.each do |pf_result|
+      pf_result.mark_for_calcs
+    end
+    pfj_results.each do |pfj_result|
+      pfj_result.mark_for_calcs
+    end
+  end
+
   # compute or retrieve cached results
   # returns PfResult ActiveRecord instance for this pilot for this flight
   def results
-    scores.reset  # make sure any changed scores get reloaded
     sac = IAC::SAComputer.new(self)
     sac.computePilotFlight
   end

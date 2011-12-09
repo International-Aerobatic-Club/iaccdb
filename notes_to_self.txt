@@ -16,3 +16,4 @@ app/controllers/contests_controller.rb
 Two puzzles:
  - get pf_results ordered for pc_results
  - ensure fresh result computations without recomputing every time
+rspec spec/models/pf_result_spec.rb 

@@ -25,6 +25,13 @@ class PfResult < ActiveRecord::Base
 
   serialize :figure_results
 
+  def mark_for_calcs
+    if !need_compute
+      update_attribute(:need_compute, true)
+      # gonna mark up the chain from here eventually
+    end
+  end
+
   # Return the pfj_result for a judge team that contributed to
   # this flight result
   def for_judge(judge)

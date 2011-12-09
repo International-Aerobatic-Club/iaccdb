@@ -42,13 +42,11 @@ module Model
         (@pf.updated_at <= pfn.updated_at).should be_true
       end
       it 'updates cached values when scores change' do
-        sleep 2 # a two second delay to ensure time difference
         scores = @pilot_flight.scores.where(:judge_id => @judge_jim).first
         va = scores.values
         va[3] = 80
         va[12] = 100
         scores.save.should == true
-        scores.touch
         pf = @pilot_flight.results
         pfj = pf.for_judge(@judge_jim)
         pfj.computed_values.should == 
@@ -58,18 +56,14 @@ module Model
         pf.flight_value.round(2).should == 1784.67
       end
       it 'updates cached values when sequence changes' do
-        sleep 2 # a two second delay to ensure time difference
         @pilot_flight.sequence.k_values[13] = 12
         @pilot_flight.sequence.save.should == true
-        @pilot_flight.sequence.touch
         pf = @pilot_flight.results
         pf.flight_value.round(2).should == 1827
       end
       it 'throws exception if k values for some but not for all' do
-        sleep 2 # a two second delay to ensure time difference
         @pilot_flight.sequence.k_values.pop
         @pilot_flight.sequence.save.should == true
-        @pilot_flight.sequence.touch
         @pilot_flight.sequence.k_values.length.should == 13
         lambda { @pilot_flight.results }.should raise_error(ArgumentError)
       end

@@ -161,5 +161,6 @@ FactoryGirl.define do
     r.association :pilot_flight, :factory => :adams_known
     r.flight_value 1786.83
     r.adj_flight_value 1756.83
+    r.need_compute false
   end
 end

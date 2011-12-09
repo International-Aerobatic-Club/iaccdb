@@ -30,4 +30,10 @@ class PfjResult < ActiveRecord::Base
   serialize :graded_values
   serialize :graded_ranks
 
+  def mark_for_calcs
+    if !need_compute
+      need_compute = true
+    end
+  end
+
 end
