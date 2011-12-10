@@ -47,6 +47,18 @@ module Model
         va[3] = 80
         va[12] = 100
         scores.save.should == true
+      contest = Contest.first(:conditions => {:start => '2011-09-25'})
+      contest.should_not be nil
+      flight = contest.flights.first(:conditions => {
+        :category => 'Intermediate', 
+        :name => 'Known'})
+      flight.should_not be nil
+      pilot = Member.find_by_iac_id(1999)
+      pilot.should_not be nil
+      @pilot_flight = PilotFlight.first(:conditions => {
+        :pilot_id => pilot, 
+        :flight_id => flight})
+      @pilot_flight.should_not be nil
         pf = @pilot_flight.results
         pfj = pf.for_judge(@judge_jim)
         pfj.computed_values.should == 
@@ -58,6 +70,18 @@ module Model
       it 'updates cached values when sequence changes' do
         @pilot_flight.sequence.k_values[13] = 12
         @pilot_flight.sequence.save.should == true
+        contest = Contest.first(:conditions => {:start => '2011-09-25'})
+        contest.should_not be nil
+        flight = contest.flights.first(:conditions => {
+          :category => 'Intermediate', 
+          :name => 'Known'})
+        flight.should_not be nil
+        pilot = Member.find_by_iac_id(1999)
+        pilot.should_not be nil
+        @pilot_flight = PilotFlight.first(:conditions => {
+          :pilot_id => pilot, 
+          :flight_id => flight})
+        @pilot_flight.should_not be nil
         pf = @pilot_flight.results
         pf.flight_value.round(2).should == 1827
       end
@@ -65,6 +89,18 @@ module Model
         @pilot_flight.sequence.k_values.pop
         @pilot_flight.sequence.save.should == true
         @pilot_flight.sequence.k_values.length.should == 13
+        contest = Contest.first(:conditions => {:start => '2011-09-25'})
+        contest.should_not be nil
+        flight = contest.flights.first(:conditions => {
+          :category => 'Intermediate', 
+          :name => 'Known'})
+        flight.should_not be nil
+        pilot = Member.find_by_iac_id(1999)
+        pilot.should_not be nil
+        @pilot_flight = PilotFlight.first(:conditions => {
+          :pilot_id => pilot, 
+          :flight_id => flight})
+        @pilot_flight.should_not be nil
         lambda { @pilot_flight.results }.should raise_error(ArgumentError)
       end
     end

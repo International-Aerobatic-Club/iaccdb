@@ -3,9 +3,9 @@ class Sequence < ActiveRecord::Base
 
   serialize :k_values
 
-  after_save do |sequence|
-    #puts "Have saved sequence #{sequence.to_yaml}"
-    #sequence.pilot_flights.each { |pilot_flight| pilot_flight.mark_for_calcs }
+  after_update do |sequence|
+    flights = PilotFlight.all(:conditions => { :sequence_id => sequence })
+    flights.each { |pilot_flight| pilot_flight.mark_for_calcs }
   end
 
   # k_values is array of int figure k
