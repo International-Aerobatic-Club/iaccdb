@@ -10,7 +10,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111206020437) do
+ActiveRecord::Schema.define(:version => 20111211144223) do
+
+  create_table "c_results", :force => true do |t|
+    t.integer  "contest_id"
+    t.string   "category"
+    t.boolean  "need_compute", :default => true
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "c_results", ["contest_id", "category"], :name => "c_contest_category"
 
   create_table "contests", :force => true do |t|
     t.string   "name",       :limit => 48
@@ -20,6 +30,13 @@ ActiveRecord::Schema.define(:version => 20111206020437) do
     t.integer  "chapter"
     t.string   "director",   :limit => 48
     t.string   "region",     :limit => 16
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "f_results", :force => true do |t|
+    t.integer  "flight_id"
+    t.boolean  "need_compute", :default => true
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -69,6 +86,8 @@ ActiveRecord::Schema.define(:version => 20111206020437) do
     t.datetime "updated_at"
     t.boolean  "need_compute",                                               :default => true
   end
+
+  add_index "pc_results", ["contest_id", "category"], :name => "pc_contest_category"
 
   create_table "pf_results", :force => true do |t|
     t.integer  "pilot_flight_id",                                                  :null => false

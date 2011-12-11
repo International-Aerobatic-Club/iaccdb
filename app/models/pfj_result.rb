@@ -32,7 +32,7 @@ class PfjResult < ActiveRecord::Base
 
   def mark_for_calcs
     if !need_compute
-      need_compute = true
+      update_attribute(:need_compute, true)
     end
   end
 

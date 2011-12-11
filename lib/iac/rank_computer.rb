@@ -122,32 +122,5 @@ module IAC
       end
       flight
     end
-
-    # Compute result values for one flight of the contest
-    # Accepts a flight
-    # Creates or updates pfj_result, pf_result
-    # Does no computation if there are no sequence figure k values 
-    # Returns the flight
-    def self.old_computeFlight(flight)
-      pf_results = []
-      flight.pilot_flights.each do |pilot_flight|
-        pf_result = pilot_flight.results
-        pf_result.judge_teams.each do |judge|
-          pfj_result = pf_result.for_judge(judge)
-        end
-        pf_results << pf_result
-      end
-      pf_results.each do |pf_result|
-      end
-      pf_results.each_with_index do |pf_result, i|
-        pf_result.save
-        pf_result.judge_teams.each do |judge|
-          pfj_result = pf_result.for_judge(judge)
-          pfj_result.save
-        end
-      end
-      flight
-    end
-
   end # class
 end # module
