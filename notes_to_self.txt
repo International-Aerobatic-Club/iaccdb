@@ -16,4 +16,12 @@ app/controllers/contests_controller.rb
 Two puzzles:
  - get pf_results ordered for pc_results
  - ensure fresh result computations without recomputing every time
-rspec spec/models/pf_result_spec.rb 
+
+Use f_results and c_results cascade to mark cached results
+Use results method in models
+
+rspec spec/models/pc_result_spec.rb 
+
+app/models/c_result.rb line 51
+
+

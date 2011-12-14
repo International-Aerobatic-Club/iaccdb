@@ -17,16 +17,18 @@ module IAC
     # Creates or updates pfj_result, pf_result
     # Does no computation if there are no sequence figure k values 
     # Does figure computations only if all fly the same sequence
-    # Returns the flight
+    # Returns the array af pf_results
     def self.computeFlight(flight)
+      pf_results = []
       seq = nil
       same = false
       flight.pilot_flights.each do |pilot_flight|
         seq ||= pilot_flight.sequence
         same = seq != nil && seq == pilot_flight.sequence
       end
-      computeFlightOverallRankings(flight) if seq
+      pf_results = computeFlightOverallRankings(flight) if seq
       computeFlightFigureRankings(flight) if same
+      pf_results
     end
 
   ###
@@ -73,7 +75,7 @@ module IAC
           pfj_result.save
         end
       end
-      flight
+      pf_results
     end
 
     # Compute by-figure result values for one flight of the contest

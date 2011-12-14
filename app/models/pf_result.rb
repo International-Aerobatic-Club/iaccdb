@@ -22,13 +22,15 @@
 #
 class PfResult < ActiveRecord::Base
   belongs_to :pilot_flight
+  belongs_to :pc_result
+  belongs_to :f_result
 
   serialize :figure_results
 
   def mark_for_calcs
     if !need_compute
+      pc_result.mark_for_calcs if pc_result
       update_attribute(:need_compute, true)
-      # gonna mark up the chain from here eventually
     end
   end
 

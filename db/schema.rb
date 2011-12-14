@@ -10,17 +10,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111211144223) do
+ActiveRecord::Schema.define(:version => 20111214022723) do
 
   create_table "c_results", :force => true do |t|
     t.integer  "contest_id"
     t.string   "category"
-    t.boolean  "need_compute", :default => true
+    t.boolean  "need_compute",              :default => true
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "aircat",       :limit => 1, :default => "P"
   end
 
-  add_index "c_results", ["contest_id", "category"], :name => "c_contest_category"
+  add_index "c_results", ["category", "aircat"], :name => "c_contest_category"
 
   create_table "contests", :force => true do |t|
     t.string   "name",       :limit => 48
@@ -39,6 +40,7 @@ ActiveRecord::Schema.define(:version => 20111211144223) do
     t.boolean  "need_compute", :default => true
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "c_result_id"
   end
 
   create_table "flights", :force => true do |t|
@@ -77,17 +79,14 @@ ActiveRecord::Schema.define(:version => 20111211144223) do
   end
 
   create_table "pc_results", :force => true do |t|
-    t.integer  "pilot_id",                                                                     :null => false
-    t.integer  "contest_id",                                                                   :null => false
-    t.string   "category",       :limit => 16,                                                 :null => false
-    t.decimal  "category_value",               :precision => 8, :scale => 2
+    t.integer  "pilot_id",                                                       :null => false
+    t.decimal  "category_value", :precision => 8, :scale => 2
     t.integer  "category_rank"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "need_compute",                                               :default => true
+    t.boolean  "need_compute",                                 :default => true
+    t.integer  "c_result_id"
   end
-
-  add_index "pc_results", ["contest_id", "category"], :name => "pc_contest_category"
 
   create_table "pf_results", :force => true do |t|
     t.integer  "pilot_flight_id",                                                  :null => false
@@ -99,6 +98,8 @@ ActiveRecord::Schema.define(:version => 20111211144223) do
     t.string   "figure_results"
     t.integer  "adj_flight_rank"
     t.boolean  "need_compute",                                   :default => true
+    t.integer  "pc_result_id"
+    t.integer  "f_result_id"
   end
 
   create_table "pfj_results", :force => true do |t|
