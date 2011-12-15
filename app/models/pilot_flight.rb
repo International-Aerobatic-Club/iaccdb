@@ -8,8 +8,8 @@ class PilotFlight < ActiveRecord::Base
   has_many :pf_results, :dependent => :destroy
   has_many :pfj_results, :dependent => :destroy
 
-  def display
-    "Flight #{flight.display} for pilot #{pilot.display}"
+  def to_s
+    "Pilot_flight #{id} #{flight} for pilot #{pilot}"
   end
 
   def mark_for_calcs

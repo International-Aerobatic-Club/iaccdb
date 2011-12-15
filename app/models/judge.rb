@@ -5,8 +5,8 @@ class Judge < ActiveRecord::Base
   has_many :pfj_results, :dependent => :destroy
 
   def to_s
-    "Judge #{judge.to_s} " +
-    (assist ? "assisted by #{assist.to_s}" : 'without an assistant.')
+    "Judge #{id} #{judge.to_s} " +
+    (assist ? "assisted by #{assist.to_s}" : '')
   end
 
   def judge_name

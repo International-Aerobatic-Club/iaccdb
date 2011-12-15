@@ -82,20 +82,20 @@ module ACRO
       fl.category.should == 'Advanced'
       fl.aircat.should == 'P'
       fl.name.should == 'Free'
-      pts = fl.pilot_flights
-      pts.size.should == 1
-      pt = pts.first
-      pi = pt.pilot
-      pi.given_name.should == 'Bruce'
-      pi.family_name.should == 'Ballew'
-      fjs = pt.gatherScores
-      fjs[1][1].should == 85
-      fjs[10][7].should == 90
-      fjs[5][3].should == 80
-      fjs[7][5].should == 85
-      fjs[10][3].should == 60
-      fjs[12][4].should == 85
-      fjs[13][2].should == 70
+      pilot_flights = fl.pilot_flights
+      pilot_flights.size.should == 1
+      pilot_flight = pilot_flights.first
+      pilot = pilot_flight.pilot
+      pilot.given_name.should == 'Bruce'
+      pilot.family_name.should == 'Ballew'
+      scores = pilot_flight.scores
+      scores[0].values[0].should == 85
+      scores[6].values[9].should == 90
+      scores[2].values[4].should == 80
+      scores[4].values[6].should == 85
+      scores[2].values[9].should == 60
+      scores[3].values[11].should == 85
+      scores[1].values[12].should == 70
     end
     it 'adds to existing flight records' do
       cs = ContestScraper.new('spec/acro/newContest.yml')

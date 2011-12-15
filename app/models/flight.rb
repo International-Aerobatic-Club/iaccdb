@@ -7,7 +7,7 @@ class Flight < ActiveRecord::Base
   has_many :f_results, :dependent => :destroy
 
   def to_s
-    "#{contest.name} category #{category}, flight #{name}, aircat #{aircat}"
+    "Flight #{id} #{contest.name} #{displayName}"
   end
 
   def displayName

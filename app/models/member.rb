@@ -9,7 +9,7 @@ class Member < ActiveRecord::Base
   end
 
   def to_s
-    "#{name}, iac #{iac_id}"
+    "Member #{id} #{name}, IAC #{iac_id}"
   end
 
   # find or create member with bad or mismatched IAC ID
