@@ -28,8 +28,9 @@ class PfResult < ActiveRecord::Base
   serialize :figure_results
 
   def mark_for_calcs
-    if !need_compute
+    if !self.need_compute
       pc_result.mark_for_calcs if pc_result
+      f_result.mark_for_calcs if f_result
       update_attribute(:need_compute, true)
     end
   end

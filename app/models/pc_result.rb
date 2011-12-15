@@ -4,7 +4,7 @@ class PcResult < ActiveRecord::Base
   has_many :pf_results
 
   def mark_for_calcs
-    if !need_compute
+    if !self.need_compute
       c_result.mark_for_calcs if c_result
       update_attribute(:need_compute, true)
     end

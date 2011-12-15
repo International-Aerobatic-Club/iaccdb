@@ -12,6 +12,20 @@ require 'ranking/computer.rb'
 module IAC
   class RankComputer
 
+    # Compute rank for each pilot in a contest category
+    def self.computeCategory(c_result)
+      category_values = []
+      c_result.pc_results.each do |pc_result|
+        category_values << pc_result.category_value
+      end
+      category_ranks = Ranking::Computer.ranks_for(category_values)
+      c_result.pc_results.each_with_index do |pc_result, i|
+        pc_result.category_rank = category_ranks[i]
+        pc_result.save
+      end
+      c_result
+    end
+
     # Compute result values for one flight of the contest
     # Accepts a flight
     # Creates or updates pfj_result, pf_result

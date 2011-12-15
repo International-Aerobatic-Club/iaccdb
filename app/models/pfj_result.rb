@@ -31,7 +31,7 @@ class PfjResult < ActiveRecord::Base
   serialize :graded_ranks
 
   def mark_for_calcs
-    if !need_compute
+    if !self.need_compute
       update_attribute(:need_compute, true)
     end
   end

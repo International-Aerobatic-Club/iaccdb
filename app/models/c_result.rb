@@ -1,3 +1,5 @@
+require 'iac/rank_computer.rb'
+
 # Record need to recompute category results
 class CResult < ActiveRecord::Base
   belongs_to :contest
@@ -10,7 +12,7 @@ class CResult < ActiveRecord::Base
   end
 
   def mark_for_calcs
-    if !need_compute
+    if !self.need_compute
       update_attribute(:need_compute, true)
     end
   end
@@ -39,7 +41,7 @@ class CResult < ActiveRecord::Base
           pc_results.delete(pc_result) 
         end
       end
-# do ranking
+      IAC::RankComputer.computeCategory(self)
       self.need_compute = false
       save
     end
