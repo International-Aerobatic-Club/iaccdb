@@ -22,6 +22,6 @@ Use results method in models
 
 rspec spec/models/pc_result_spec.rb 
 
-app/models/c_result.rb line 51
+app/models/c_result.rb do the ranking
 
 

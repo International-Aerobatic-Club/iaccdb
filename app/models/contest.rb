@@ -27,18 +27,18 @@ class Contest < ActiveRecord::Base
   # ensure all computations for this contest are complete
   # return array of category results
   def results
-    cur_results = []
+    cur_results = Set.new
     flights.each do |flight|
-      pf_results = flight.results
-      cur_results << c_result_for_flight(flight)
+      cur_results.add c_result_for_flight(flight)
     end
     c_results.each do |c_result|
       if (cur_results.include?(c_result))
         c_result.compute_category_totals_and_rankings
       else
-        c_result.delete
+        c_results.delete(c_result)
       end
     end
+    save
     c_results
   end
 
@@ -50,8 +50,13 @@ private
   def c_result_for_flight(flight)
     c_result = c_results.first(:conditions => {
       :category => flight.category, :aircat => flight.aircat})
-    c_result = CResult.create(:contest => self, 
-      :category => flight.category, :aircat => flight.aircat) if !c_result
+    if !c_result
+      c_result = c_results.build(:category => flight.category, 
+        :aircat => flight.aircat)
+      save
+    end
+    c_result
   end
+
 end
 

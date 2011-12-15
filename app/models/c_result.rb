@@ -4,6 +4,11 @@ class CResult < ActiveRecord::Base
   has_many :pc_results, :dependent => :destroy
   has_many :f_results
 
+  def to_s 
+    "c_result #{id} for contest #{contest}, category #{category}, aircat #{aircat}" + 
+       " needs compute #{need_compute}"
+  end
+
   def mark_for_calcs
     if !need_compute
       update_attribute(:need_compute, true)
@@ -11,7 +16,7 @@ class CResult < ActiveRecord::Base
   end
 
   def compute_category_totals_and_rankings
-    if need_compute
+    if self.need_compute
       cat_flights = contest.flights.all(:conditions => {
         :category => category, :aircat => aircat })
       cur_pc_results = Set.new
@@ -19,7 +24,6 @@ class CResult < ActiveRecord::Base
       cat_flights.each do |flight|
         f_result = flight.results.first
         cur_pc_results |= pc_results_for_flight(f_result)
-        puts "Have cur_pc_results for #{flight} is #{cur_pc_results.to_a}"
         cur_f_results << f_result
       end
       f_results.each do |f_result|
@@ -29,14 +33,14 @@ class CResult < ActiveRecord::Base
         f_results << f_result if !f_results.include?(f_result)
       end
       pc_results.each do |pc_result|
-        pc_results.delete(pc_result) if !cur_pc_results.include?(pc_result)
-      end
-      cur_pc_results.each do |pc_result|
-        pc_results << pc_result if !pc_results.include?(pc_result)
-        pc_result.compute_category_totals(f_results)
+        if cur_pc_results.include?(pc_result)
+          pc_result.compute_category_totals(f_results)
+        else
+          pc_results.delete(pc_result) 
+        end
       end
 # do ranking
-      need_compute = false
+      self.need_compute = false
       save
     end
   end
@@ -51,10 +55,12 @@ class CResult < ActiveRecord::Base
     # this is double-booking the pc_results
       pilot = pf_result.pilot_flight.pilot
       pc_result = pc_results.first(:conditions => { 
-        :pilot_id => pilot }) || 
-        pc_results.build(:pilot => pilot)
+        :pilot_id => pilot })
+      if !pc_result
+        pc_result = pc_results.build(:pilot => pilot)
+        save # so next round finds the new result
+      end
       rpc_results << pc_result
-      puts "Have pc_result #{pc_result} pc_results contains #{pc_results}"
     end
     rpc_results.to_set
   end

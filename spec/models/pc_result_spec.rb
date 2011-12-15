@@ -65,12 +65,14 @@ module Model
           :judge => judge_lynne)
         @c_results = @contest.results
       end
+
       it 'finds two pilots in category results' do
         c_result = @c_results.first(:conditions => {
           :category => 'Intermediate' })
         c_result.should_not be nil
         c_result.pc_results.size.should == 2
       end
+
       it 'computes category total for pilot' do
         c_result = @c_results.first(:conditions => {
           :category => 'Intermediate' })
@@ -78,12 +80,13 @@ module Model
         pc_result = c_result.pc_results.first(:conditions => {
           :pilot_id => @adams })
         pc_result.should_not be nil
-        pc_result.category_value.should == 0
+        pc_result.category_value.round(2).should == 3474.83
         pc_result = c_result.pc_results.first(:conditions => {
           :pilot_id => @denton })
         pc_result.should_not be nil
-        pc_result.category_value.should == 0
+        pc_result.category_value.round(2).should == 3459.33
       end
+
       it 'computes category rank for pilot' do
         c_result = @c_results.first(:conditions => {
           :category => 'Intermediate' })
@@ -97,8 +100,11 @@ module Model
         pc_result.should_not be nil
         pc_result.category_rank.should == 2
       end
+
       it 'recomputes values when score changes'
+
       it 'recomputes values when sequence changes'
+
 #      it 'updates cached values when scores change' do
 #        scores = @pilot_flight.scores.where(:judge_id => judge_jim).first
 #        va = scores.values
@@ -144,6 +150,7 @@ module Model
 #        pf.flight_value.round(2).should == 1827
 #      end
     end
+   
     it 'behaves on empty sequence' 
 #    do
 #      @pf = Factory.create(:pilot_flight)

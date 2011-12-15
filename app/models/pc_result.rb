@@ -11,8 +11,8 @@ class PcResult < ActiveRecord::Base
   end
 
   def compute_category_totals(f_results)
-    if need_compute
-      category_value = 0
+    if self.need_compute
+      self.category_value = 0
       cur_pf_results = []
       f_results.each do |f_result|
         f_result.pf_results.each do |pf_result|
@@ -20,15 +20,20 @@ class PcResult < ActiveRecord::Base
         end
       end
       cur_pf_results.each do |pf_result|
-        category_value += pf_result.adj_flight_value
+        self.category_value += pf_result.adj_flight_value
         pf_results << pf_result if !pf_results.include?(pf_result)
       end
       pf_results.each do |pf_result|
         pf_results.delete(pf_result) if !cur_pf_results.include?(pf_result)
       end
-      need_compute = false
+      self.need_compute = false
       save
     end
+  end
+
+  def to_s 
+    "pc_result for pilot #{pilot} value #{category_value}, " +
+      "need_compute is #{need_compute}"
   end
 
 end
