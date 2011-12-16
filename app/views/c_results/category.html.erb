@@ -1,0 +1,34 @@
+<h3><%= c_result.display_category %></h3>
+
+<table><thead><tr><th>Pilot</th>
+<% c_result.f_results.order(:id).each do |f_result| %>
+  <th colspan='3'><%= f_result.flight.name %></th>
+<% end %>
+<th colspan='3'>Total</th>
+</tr></thead><tbody>
+<% c_result.pc_results.order(:category_rank).each do |pc_result| %>
+<tr>
+  <% pilot = pc_result.pilot %>
+  <td class="pilot">
+    <%= link_to ("#{pilot.name}", pilot_score_path(pilot, @contest)) %>
+  </td>
+  <% total_possible = 0 %>
+  <% pc_result.pf_results.order(:f_result_id).each do |pf_result| %>
+    <td><%= pf_result.adj_flight_value %></td>
+    <% possible = pf_result.pilot_flight.sequence.total_k %>
+    <td><%= sprintf('%.2f', pf_result.adj_flight_value * 10.0 / possible) %>%</td>
+    <% total_possible += possible %>
+    <td>(<%=pf_result.adj_flight_rank%>)</td>
+  <% end %>
+  <td><%= pc_result.category_value %></td>
+  <td><%= sprintf('%.2f', pc_result.category_value * 10.0 / total_possible) %>%</td>
+  <td>(<%= pc_result.category_rank %>)</td>
+</tr>
+<% end %>
+</tbody></table>
+<h4>Judges</h4>
+<ul class="bare">
+<% @judges[c_result].each do |judge| %>
+  <li class="judge"><%= judge.team_name %></li>
+<% end %>
+</ul>

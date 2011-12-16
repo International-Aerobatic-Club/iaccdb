@@ -11,6 +11,10 @@ class CResult < ActiveRecord::Base
        " need_compute is #{need_compute}"
   end
 
+  def display_category
+    "#{category} #{'Glider' if aircat == 'G'}"
+  end
+
   def mark_for_calcs
     if !self.need_compute
       update_attribute(:need_compute, true)

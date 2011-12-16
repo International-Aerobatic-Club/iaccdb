@@ -9,6 +9,11 @@ class Judge < ActiveRecord::Base
     (assist ? "assisted by #{assist.to_s}" : '')
   end
 
+  def team_name
+    "#{judge_name} " +
+    (assist ? "assisted by #{assist.name}" : '')
+  end
+
   def judge_name
     judge ? judge.name : 'missing judge'
   end
