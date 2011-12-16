@@ -27,6 +27,11 @@ class PfResult < ActiveRecord::Base
 
   serialize :figure_results
 
+  def to_s
+    "pf_result #{id} for pilot_flight:#{pilot_flight.id}, " + 
+      "pc_result:#{pc_result.id}, f_result:#{f_result.id}"
+  end
+
   def mark_for_calcs
     if !self.need_compute
       pc_result.mark_for_calcs if pc_result

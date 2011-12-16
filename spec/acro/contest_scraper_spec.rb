@@ -3,6 +3,9 @@ require 'acro/contestScraper'
 
 module ACRO
   describe ContestScraper do
+    before(:each) do
+      reset_db
+    end
     it 'creates a new contest' do
       ct = Contest.where(:start => '2011-09-25')
       ct.empty?.should == true

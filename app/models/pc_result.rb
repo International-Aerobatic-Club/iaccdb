@@ -3,6 +3,12 @@ class PcResult < ActiveRecord::Base
   belongs_to :c_result
   has_many :pf_results
 
+  def to_s 
+    a = "pc_result for pilot #{pilot} value #{category_value}, "
+    a += "pilot_flight results [\n\t#{pf_results.join("\n\t")}\n]" if pf_results
+    a += "need_compute is #{need_compute}"
+  end
+
   def mark_for_calcs
     if !self.need_compute
       c_result.mark_for_calcs if c_result
@@ -29,11 +35,6 @@ class PcResult < ActiveRecord::Base
       self.need_compute = false
       save
     end
-  end
-
-  def to_s 
-    "pc_result for pilot #{pilot} value #{category_value}, " +
-      "need_compute is #{need_compute}"
   end
 
 end

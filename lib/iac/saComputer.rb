@@ -18,17 +18,6 @@ end
 # Returns the PfResult ActiveRecord instance
 def computePilotFlight
   @pf = @pilot_flight.pf_results.first || @pilot_flight.pf_results.build
-#  if @pf.new_record?
-#    compute = true
-#  else
-#    compute = @seq ? @pf.updated_at < @seq.updated_at : false
-#    @pfScores = @pilot_flight.scores
-#    @pfScores.each do |score|
-#      compute ||= @pf.updated_at < score.updated_at
-#    end
-#  end
-#  if compute
-  # compute or cache?
   if @pf.need_compute
     @seq = @pilot_flight.sequence
     @kays = @seq ? @seq.k_values : nil

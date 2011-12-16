@@ -30,6 +30,11 @@ class PfjResult < ActiveRecord::Base
   serialize :graded_values
   serialize :graded_ranks
 
+  def to_s
+    "pfj_result for pilot_flight #{pilot_flight.id}, judge #{judge.id} " +
+      "need compute #{need_compute}"
+  end
+
   def mark_for_calcs
     if !self.need_compute
       update_attribute(:need_compute, true)

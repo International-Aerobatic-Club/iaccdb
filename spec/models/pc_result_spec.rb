@@ -9,6 +9,7 @@ module Model
     end
     context 'real_scores' do
       before(:all) do
+        reset_db
         @contest = Factory.create(:nationals)
         @adams = Factory.create(:tom_adams)
         @denton = Factory.create(:bill_denton)
@@ -132,7 +133,7 @@ module Model
         pc_result = c_result.pc_results.first(:conditions => {
           :pilot_id => @adams })
         pc_result.should_not be nil
-        pc_result.category_value.round(2).should == 3483.17
+        pc_result.category_value.round(2).should == 3478.5
         pc_result.category_rank.should == 1
       end
 

@@ -7,8 +7,8 @@ class CResult < ActiveRecord::Base
   has_many :f_results
 
   def to_s 
-    "c_result #{id} for contest #{contest}, category #{category}, aircat #{aircat}" + 
-       " needs compute #{need_compute}"
+    "c_result #{id} for #{contest}, #{category}, #{aircat}" + 
+       " need_compute is #{need_compute}"
   end
 
   def mark_for_calcs

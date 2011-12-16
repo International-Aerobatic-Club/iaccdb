@@ -113,7 +113,7 @@ FactoryGirl.define do
     r.k_values [10, 13, 9, 9, 18, 10, 19, 19, 18, 14, 18, 13, 10, 6, 4, 8]
   end
 ### PilotFlight
-  factory :pilot_flight do |r|
+  factory :pilot_flight, :class => PilotFlight do |r|
     r.association :pilot, :factory => :member
     r.association :flight
     r.association :sequence

@@ -3,6 +3,7 @@ require 'spec_helper'
 module Model
   describe Sequence do
     before(:all) do
+      reset_db
       @k_values = [19, 14, 21, 33, 21, 23, 22, 20, 8]
       @attrs = Sequence.create_attrs(@k_values)
     end

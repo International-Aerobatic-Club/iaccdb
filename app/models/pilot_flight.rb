@@ -9,7 +9,9 @@ class PilotFlight < ActiveRecord::Base
   has_many :pfj_results, :dependent => :destroy
 
   def to_s
-    "Pilot_flight #{id} #{flight} for pilot #{pilot}"
+    a = "Pilot_flight #{id} #{flight} for pilot #{pilot}"
+    a += "\npf_results [#{pf_results.join("\n\t")}]" if pf_results
+    a += "\npfj_results [#{pfj_results.join("\n\t")}]" if pfj_results
   end
 
   def mark_for_calcs
