@@ -1,35 +1,42 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Contest:</b>
-  <%= @flight.contest_id %>
-</p>
+<h2><%= link_to(@flight.contest.name, contest_path(@flight.contest)) %></h2>
+<h1><%= @flight.displayName %></h1>
+<p>Chief judge <%= @flight.display_chief %></p>
 
-<p>
-  <b>Category:</b>
-  <%= @flight.category %>
-</p>
-
-<p>
-  <b>Name:</b>
-  <%= @flight.name %>
-</p>
-
-<p>
-  <b>Sequence:</b>
-  <%= @flight.sequence %>
-</p>
-
-<p>
-  <b>Chief:</b>
-  <%= @flight.chief_id %>
-</p>
-
-<p>
-  <b>Assist:</b>
-  <%= @flight.assist_id %>
-</p>
-
-
-<%= link_to 'Edit', edit_flight_path(@flight) %> |
-<%= link_to 'Back', flights_path %>
+<table><thead>
+<tr>
+<th>Pilot</th>
+<% @judge_results.values[0].each_with_index do |pfj_result, j| %>
+  <th colspan='2'><%= "J#{j+1}" %></th>
+<% end %>
+<th colspan='3'>Score</th>
+<th>Pnlt</th>
+<th colspan='2'>Result</th>
+</tr>
+</thead><tbody>
+<% @pf_results.each do |pf_result| %>
+  <% pilot_flight = pf_result.pilot_flight %>
+  <tr>
+  <td class='pilot'>
+    <% pilot = pilot_flight.pilot %>
+    <%= link_to ("#{pilot.name}", pilot_score_path(pilot, @flight.contest)) %>
+  </td>
+  <% @judge_results[pf_result].each do |pfj_result| %>
+    <td><%= pfj_result.flight_value.fdiv(10).round(2) %></td>
+    <td>(<%= pfj_result.flight_rank %>)</td>
+  <% end %>
+  <td><%= pf_result.flight_value %></td>
+  <td><%= (pf_result.flight_value * 10).fdiv(pilot_flight.sequence.total_k).round(2) %>%</td>
+  <td>(<%= pf_result.flight_rank %>)</td>
+  <td><%= pilot_flight.penalty_total %></td>
+  <td><%= pf_result.adj_flight_value %></td>
+  <td>(<%= pf_result.adj_flight_rank %>)</td>
+  </tr>
+<% end %>
+</tbody></table>
+<ul>
+<% @judge_results.values[0].each_with_index do |pfj_result, j| %>
+  <li><%= "J#{j+1} #{pfj_result.judge.team_name}" %></li>
+<% end %>
+</ul>

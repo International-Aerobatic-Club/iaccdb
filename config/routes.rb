@@ -8,6 +8,8 @@ Iac::Application.routes.draw do
 
   resources :judges, :only => [:index, :show]
 
+  resources :flights, :only => [:show]
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

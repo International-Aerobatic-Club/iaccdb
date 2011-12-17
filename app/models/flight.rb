@@ -18,6 +18,11 @@ class Flight < ActiveRecord::Base
     "#{category} #{'Glider' if aircat == 'G'}"
   end
 
+  def display_chief
+    chief.name +
+    (assist ? " assisted by #{assist.name}" : '')
+  end
+
   def count_judges
     Judge.find_by_sql("select distinct s.judge_id 
       from scores s, pilot_flights p 
@@ -25,9 +30,12 @@ class Flight < ActiveRecord::Base
   end
 
   # ensure rollups for this flight have been calculated
+  # there's really only one f_result for now
   def results
-    f_result = f_results.first || f_results.build
-    f_result.results
+    f_results.build if f_results.empty?
+    f_results.each do |f_result| 
+      f_result.results
+    end
     f_results
   end
 end

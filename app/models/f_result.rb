@@ -28,6 +28,7 @@ class FResult < ActiveRecord::Base
       self.need_compute = false
       save
     end
+    pf_results
   end
 
 end

@@ -2,7 +2,9 @@
 
 <table><thead><tr><th>Pilot</th>
 <% c_result.f_results.order(:id).each do |f_result| %>
-  <th colspan='3'><%= f_result.flight.name %></th>
+  <th colspan='3'>
+  <%= link_to (f_result.flight.name, flight_path(f_result.flight)) %>
+  </th>
 <% end %>
 <th colspan='3'>Total</th>
 </tr></thead><tbody>
