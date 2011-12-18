@@ -82,6 +82,18 @@ module IAC
       scores.values.should == 
         [85, 90, 65, 100, 80, 85, 90, 100, 0, 90, 85]
     end
+    it 'captures penalties' do
+      flight = @contest.flights.where(
+        :name => 'Free', 
+        :category => 'Sportsman').first # manny 2, 2
+      flight.should_not be nil
+      pilot = Member.where(:family_name => 'Cohen').first # manny_id 6
+      pilot.should_not be nil
+      pilot_flight = flight.pilot_flights.first(
+        :conditions => { :pilot_id => pilot, })
+      pilot_flight.should_not be nil
+      pilot_flight.penalty_total.should == 100
+    end
     it 'captures participants' do
       part = Member.where(:given_name => 'Frederick').first
       part.family_name.should == 'Weaver'

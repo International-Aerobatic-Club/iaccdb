@@ -199,13 +199,14 @@ def process_flight_scores(dFlight, mCat, mFlight)
     mSeq = mFlight.seq_for(mParti)
     dPilot = @parts[mParti]
     dPilotFlight = get_pilot_flight(dPilot, dFlight, mPilot.chapter)
+    dPilotFlight.penalty_total = mFlight.penalty(mParti)
     if !dPilotFlight.sequence
       kays = []
       (0..mSeq.ctFigs).each { |f| kays << mSeq.figs[f+1] }
       dSequence = Sequence.find_or_create(kays)
       dPilotFlight.sequence = dSequence
-      dPilotFlight.save
     end
+    dPilotFlight.save
     mJi = mScore.judge
     dJudge = @judges[mJi] # get the judge team
     dScore = Score.create(
