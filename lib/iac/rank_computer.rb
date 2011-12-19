@@ -12,6 +12,57 @@ require 'ranking/computer.rb'
 module IAC
   class RankComputer
 
+    def self.computeJudgeMetrics(flight, f_result)
+      jf_results_by_judge = {}
+      p_ranks = []
+      j_rank_for_jf = {}
+      flight.pilot_flights.each do |pilot_flight|
+        pf_result = pilot_flight.pf_results.first
+        p = pf_result.flight_rank
+        p_ranks << p
+        pilot_flight.pfj_results.each do |pfj_result|
+          judge = pfj_result.judge.judge
+          jf_result = jf_results_by_judge[judge]
+          if !jf_result
+            jf_result = 
+              f_result.jf_results.first(:conditions => {
+                :judge_id => judge}) ||
+              f_result.jf_results.build(:judge => judge)
+            jf_result.zero_reset
+            j_rank_for_jf[jf_result] = []
+            jf_results_by_judge[judge] = jf_result
+          end
+          jf_result.pilot_count += 1
+          j = pfj_result.flight_rank
+          j_rank_for_jf[jf_result] << j
+          d = p - j
+          jf_result.sigma_d2 += d * d
+          jf_result.sigma_pj += p * j
+          jf_result.sigma_p2 += p * p
+          jf_result.sigma_j2 += j * j
+          jf_result.sigma_ri_delta += (j - p).abs *
+            (pfj_result.flight_value.fdiv(10) - pf_result.flight_value).abs / 
+            pf_result.flight_value
+        end
+      end
+      jf_results_by_judge.each do |judge, jf_result|
+        aj = j_rank_for_jf[jf_result]
+        (0 ... p_ranks.length).each do |ip|
+          (ip+1 ... p_ranks.length).each do |jp|
+            if (aj[ip] < aj[jp] && p_ranks[ip] < p_ranks[jp]) ||
+               (aj[ip] > aj[jp] && p_ranks[ip] > p_ranks[jp])
+              jf_result.con += 1
+            elsif (aj[ip] < aj[jp] && p_ranks[ip] > p_ranks[jp]) ||
+               (aj[ip] > aj[jp] && p_ranks[ip] < p_ranks[jp])
+              jf_result.dis += 1
+            end
+          end
+        end
+        jf_result.save
+      end
+      jf_results_by_judge.values
+    end
+
     # Compute rank for each pilot in a contest category
     def self.computeCategory(c_result)
       category_values = []

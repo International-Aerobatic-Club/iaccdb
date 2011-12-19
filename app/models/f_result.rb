@@ -3,6 +3,7 @@ class FResult < ActiveRecord::Base
   belongs_to :flight
   belongs_to :c_result
   has_many :pf_results
+  has_many :jf_results
 
   def to_s
     a = "f_result #{id} for #{flight}, #{c_result} "
@@ -18,17 +19,36 @@ class FResult < ActiveRecord::Base
 
   def results
     if self.need_compute
-      cur_pf_results = IAC::RankComputer.computeFlight(flight)
-      self.pf_results.each do |pf_result|
-        self.pf_results.delete(pf_result) if !cur_pf_results.include?(pf_result)
-      end
-      cur_pf_results.each do |pf_result|
-        self.pf_results << pf_result if !self.pf_results.include?(pf_result)
-      end
+      compute_pf_results
+      save
+      compute_jf_results
       self.need_compute = false
       save
     end
     pf_results
   end
 
+  ###
+  private
+  ###
+
+  def compute_pf_results
+    cur_pf_results = IAC::RankComputer.computeFlight(flight)
+    self.pf_results.each do |pf_result|
+      self.pf_results.delete(pf_result) if !cur_pf_results.include?(pf_result)
+    end
+    cur_pf_results.each do |pf_result|
+      self.pf_results << pf_result if !self.pf_results.include?(pf_result)
+    end
+  end
+
+  def compute_jf_results
+    cur_jf_results = IAC::RankComputer.computeJudgeMetrics(flight, self)
+    self.jf_results.each do |jf_result|
+      self.jf_results.delete(jf_result) if !cur_jf_results.include?(jf_result)
+    end
+    cur_jf_results.each do |jf_result|
+      self.jf_results << jf_result if !self.jf_results.include?(jf_result)
+    end
+  end
 end

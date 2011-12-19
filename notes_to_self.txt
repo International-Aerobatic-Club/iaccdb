@@ -13,15 +13,12 @@ Display results and rankings
 app/views/contests/show.html.erb
 app/controllers/contests_controller.rb
 
-Two puzzles:
- - get pf_results ordered for pc_results
- - ensure fresh result computations without recomputing every time
+implement and test:
+    cur_jf_results = IAC::RankComputer.computeJudgeMetrics(flight)
+    app/models/f_result.rb
+    app/models/jf_result.rb
 
-Use f_results and c_results cascade to mark cached results
-Use results method in models
+Then display the metrics
 
-rspec spec/models/pc_result_spec.rb 
-
-app/models/c_result.rb do the ranking
-
-
+Then jc_results rollup for category
+  and display those

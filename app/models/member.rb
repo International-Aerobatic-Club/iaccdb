@@ -1,8 +1,11 @@
 class Member < ActiveRecord::Base
-  has_many :chief, :foreign_key => "chief_id", :class_name => "flight"
-  has_many :assistChief, :foreign_key => "assist_id", :class_name => "flight"
-  has_many :pilot_flights, :foreign_key => "pilot_id"
+  has_many :chief, :foreign_key => 'chief_id', :class_name => 'Flight'
+  has_many :assistChief, :foreign_key => 'assist_id', :class_name => 'Flight'
+  has_many :pilot_flights, :foreign_key => 'pilot_id'
   has_many :flights, :through => :pilot_flights
+  has_many :jf_results, :foreign_key => 'judge_id'
+  has_many :judge, :foreign_key => 'judge_id', :class_name => 'Judge'
+  has_many :assist, :foreign_key => 'assist_id', :class_name => 'Judge'
 
   def name
     "#{given_name} #{family_name}"
