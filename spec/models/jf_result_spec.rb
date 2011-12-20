@@ -12,12 +12,14 @@ describe JfResult do
     @flight2 = contest.flights.first(:conditions => { 
       :category => 'Primary', :name => 'Free' })
     f_result = @flight2.results.first
-    j1 = Member.first(:conditions => {
+    lr = Member.first(:conditions => {
       :family_name => 'Ramirez',
       :given_name => 'Laurie' })
-    j2 = Member.first(:conditions => {
+    mf = Member.first(:conditions => {
       :family_name => 'Flournoy',
       :given_name => 'Martin' })
+    j1 = Judge.first(:conditions => { :judge_id => lr })
+    j2 = Judge.first(:conditions => { :judge_id => mf })
     @jf_result1 = f_result.jf_results.first(:conditions => {
       :judge_id => j1 })
     @jf_result2 = f_result.jf_results.first(:conditions => {
@@ -48,7 +50,7 @@ describe JfResult do
     scores = pilot_flight.scores.first
     scores.values[0] = 0
     scores.save
-    judge = scores.judge.judge
+    judge = scores.judge
     contest = Contest.first
     flight = contest.flights.first(:conditions => { 
       :category => 'Primary', :name => 'Free' })
@@ -65,7 +67,7 @@ describe JfResult do
         scores.values[1] = 0 
         scores.save
       else
-        judge = scores.judge.judge
+        judge = scores.judge
       end
     end
     judge.should_not be nil

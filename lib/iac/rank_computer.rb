@@ -21,7 +21,7 @@ module IAC
         p = pf_result.flight_rank
         p_ranks << p
         pilot_flight.pfj_results.each do |pfj_result|
-          judge = pfj_result.judge.judge
+          judge = pfj_result.judge
           jf_result = jf_results_by_judge[judge]
           if !jf_result
             jf_result = 

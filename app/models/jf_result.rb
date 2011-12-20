@@ -1,5 +1,5 @@
 class JfResult < ActiveRecord::Base
-  belongs_to :judge, :class_name => 'Member'
+  belongs_to :judge
   belongs_to :f_result
 
   def zero_reset

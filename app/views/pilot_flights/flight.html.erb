@@ -1,9 +1,10 @@
   <h3><%= pilot_flight.flight.displayName %></h3>
   
-  <% scores = pilot_flight.scores %>
+  <% scores = pilot_flight.scores.order(:judge_id) %>
   <% results = pilot_flight.results %>
   <% sequence = pilot_flight.sequence %>
   <% ctJudge = scores.size %>
+  <% jf_results = results.f_result.jf_results.order(:judge_id) %>
   <% pfj_results = [] %>
   <% if 0 < ctJudge %>
     <table class="scores">
@@ -86,7 +87,29 @@
     <% end # if sequence %>
     </tbody>
     </table>
-    <% (1 .. ctJudge).each do |j| #judges %>
-      <p class='judge_team'>J<%= j %>: <%= show_judge_team(scores[j-1].judge) %></p>
-    <% end #judges %>
+    <table><thead>
+    <tr>
+    <th>Judge</th>
+    <th>rho</th>
+    <th>cc</th>
+    <th>ri</th>
+    <th>tau</th>
+    <th>gamma</th>
+    <th>Mz</th>
+    <th>Mg</th>
+    </tr>
+    <tbody>
+    <% jf_results.each_with_index do |jf_result, j| %>
+      <tr>
+      <td><%= "J#{j+1} #{jf_result.judge.team_name}" %></td>
+      <td><%= jf_result.rho %></td>
+      <td><%= jf_result.cc %></td>
+      <td><%= jf_result.ri %></td>
+      <td><%= jf_result.tau %></td>
+      <td><%= jf_result.gamma %></td>
+      <td><%= jf_result.minority_zero_ct %></td>
+      <td><%= jf_result.minority_grade_ct %></td>
+      </tr>
+    <% end %>
+    </tbody></table>
   <% end #if ctJudge %>

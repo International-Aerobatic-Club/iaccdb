@@ -3,6 +3,7 @@ class Judge < ActiveRecord::Base
   belongs_to :assist, :class_name => 'Member'
   has_many :scores, :dependent => :destroy
   has_many :pfj_results, :dependent => :destroy
+  has_many :jf_results, :dependent => :destroy
 
   def to_s
     "Judge #{id} #{judge.to_s} " +
