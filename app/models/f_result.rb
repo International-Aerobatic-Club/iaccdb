@@ -20,7 +20,6 @@ class FResult < ActiveRecord::Base
   def results
     if self.need_compute
       compute_pf_results
-      save
       compute_jf_results
       self.need_compute = false
       save

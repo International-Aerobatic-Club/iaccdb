@@ -5,6 +5,7 @@ class JfResult < ActiveRecord::Base
   def zero_reset
     self.sigma_d2 = self.sigma_pj = self.sigma_p2 = self.sigma_j2 = self.sigma_ri_delta = 0
     self.pilot_count = self.con = self.dis = 0
+    self.minority_zero_ct = self.minority_grade_ct = 0
   end
 
   def rho

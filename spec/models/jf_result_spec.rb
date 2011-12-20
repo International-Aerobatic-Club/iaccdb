@@ -9,9 +9,9 @@ describe JfResult do
     m2d = IAC::MannyToDB.new
     m2d.process_contest(manny, true)
     contest = Contest.first
-    flight2 = contest.flights.first(:conditions => { 
+    @flight2 = contest.flights.first(:conditions => { 
       :category => 'Primary', :name => 'Free' })
-    f_result = flight2.results.first
+    f_result = @flight2.results.first
     j1 = Member.first(:conditions => {
       :family_name => 'Ramirez',
       :given_name => 'Laurie' })
@@ -43,8 +43,44 @@ describe JfResult do
     @jf_result1.cc.should == 91
     @jf_result2.cc.should == 96
   end
-  it 'computes the number of minority zeros from each judge for a flight'
-  it 'computes the number of minority grades from each judge for a flight'
-  it 'counts the number of grades given by every judge for a flight'
-  it 'counts the number of pilots graded by every judge for a flight'
+  it 'computes the number of minority zeros from each judge for a flight' do
+    pilot_flight = @flight2.pilot_flights.first
+    scores = pilot_flight.scores.first
+    scores.values[0] = 0
+    scores.save
+    judge = scores.judge.judge
+    contest = Contest.first
+    flight = contest.flights.first(:conditions => { 
+      :category => 'Primary', :name => 'Free' })
+    f_result = flight.results.first
+    jf_result = f_result.jf_results.first(:conditions => {
+      :judge_id => judge })
+    jf_result.minority_zero_ct.should == 1
+  end
+  it 'computes the number of minority grades from each judge for a flight' do
+    pilot_flight = @flight2.pilot_flights.first
+    judge = nil
+    pilot_flight.scores.each_with_index do |scores, i|
+      if i%2 == 0
+        scores.values[1] = 0 
+        scores.save
+      else
+        judge = scores.judge.judge
+      end
+    end
+    judge.should_not be nil
+    contest = Contest.first
+    flight = contest.flights.first(:conditions => { 
+      :category => 'Primary', :name => 'Free' })
+    f_result = flight.results.first
+    jf_result = f_result.jf_results.first(:conditions => {
+      :judge_id => judge })
+    jf_result.minority_grade_ct.should == 1
+  end
+  it 'counts the number of grades given by every judge for a flight' do
+    @flight2.count_figures_graded.should == 42
+  end
+  it 'counts the number of pilots graded by every judge for a flight' do
+    @flight2.count_pilots.should == 6
+  end
 end

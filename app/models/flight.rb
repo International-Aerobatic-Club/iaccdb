@@ -19,14 +19,29 @@ class Flight < ActiveRecord::Base
   end
 
   def display_chief
-    chief.name +
-    (assist ? " assisted by #{assist.name}" : '')
+    s = chief ? chief.name : ''
+    s += (assist ? " assisted by #{assist.name}" : '')
   end
 
   def count_judges
     Judge.find_by_sql("select distinct s.judge_id 
       from scores s, pilot_flights p 
       where p.flight_id = #{id} and s.pilot_flight_id = p.id").count
+  end
+
+  def count_pilots
+    pilot_flights.length
+  end
+
+  def count_figures_graded
+    total_count = 0
+    #pilot_flights.inject do |total_count, pilot_flight|
+    #  total_count + pilot_flight.sequence.figure_count
+    #  total_count
+    pilot_flights.each do |pilot_flight|
+      total_count += pilot_flight.sequence.figure_count
+    end
+    total_count
   end
 
   # ensure rollups for this flight have been calculated
