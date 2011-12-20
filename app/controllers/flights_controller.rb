@@ -10,6 +10,7 @@ class FlightsController < ApplicationController
     @pf_results.each do |pf_result|
       @judge_results[pf_result] = pf_result.pilot_flight.pfj_results.order(:judge_id)
     end
+    @jf_results = @f_result.jf_results.order(:judge_id)
 
     respond_to do |format|
       format.html # show.html.erb
