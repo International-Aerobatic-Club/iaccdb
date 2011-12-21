@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111220010225) do
+ActiveRecord::Schema.define(:version => 20111221193516) do
 
   create_table "c_results", :force => true do |t|
     t.integer  "contest_id"
@@ -55,6 +55,24 @@ ActiveRecord::Schema.define(:version => 20111220010225) do
     t.string   "aircat",     :limit => 1
   end
 
+  create_table "jc_results", :force => true do |t|
+    t.integer  "c_result_id",                                      :null => false
+    t.integer  "judge_id",                                         :null => false
+    t.integer  "pilot_count"
+    t.integer  "sigma_d2"
+    t.integer  "sigma_pj"
+    t.integer  "sigma_p2"
+    t.integer  "sigma_j2"
+    t.decimal  "sigma_ri_delta",    :precision => 11, :scale => 5
+    t.integer  "con"
+    t.integer  "dis"
+    t.integer  "minority_zero_ct"
+    t.integer  "minority_grade_ct"
+    t.boolean  "need_compute"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "jf_results", :force => true do |t|
     t.integer  "f_result_id"
     t.integer  "judge_id"
@@ -70,6 +88,7 @@ ActiveRecord::Schema.define(:version => 20111220010225) do
     t.datetime "updated_at"
     t.integer  "minority_zero_ct",                                 :default => 0
     t.integer  "minority_grade_ct",                                :default => 0
+    t.integer  "jc_result_id"
   end
 
   create_table "judges", :force => true do |t|

@@ -13,12 +13,7 @@ Display results and rankings
 app/views/contests/show.html.erb
 app/controllers/contests_controller.rb
 
-implement and test:
-    cur_jf_results = IAC::RankComputer.computeJudgeMetrics(flight)
-    app/models/f_result.rb
-    app/models/jf_result.rb
-
-Then display the metrics
-
-Then jc_results rollup for category
+Compute jc_results rollup for category
   and display those
+
+Getting NaN on jf_result computation

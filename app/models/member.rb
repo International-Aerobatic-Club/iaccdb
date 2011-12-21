@@ -5,6 +5,7 @@ class Member < ActiveRecord::Base
   has_many :flights, :through => :pilot_flights
   has_many :judge, :foreign_key => 'judge_id', :class_name => 'Judge'
   has_many :assist, :foreign_key => 'assist_id', :class_name => 'Judge'
+  has_many :jc_results, :foreign_key => 'judge_id'
 
   def name
     "#{given_name} #{family_name}"

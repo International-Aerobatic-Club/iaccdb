@@ -41,6 +41,7 @@ module IAC
             jf_result.sigma_pj += p * j
             jf_result.sigma_p2 += p * p
             jf_result.sigma_j2 += j * j
+            puts "sigma_ri_delta #{jf_result.sigma_ri_delta}"
             jf_result.sigma_ri_delta += (j - p).abs *
               (pfj_result.flight_value.fdiv(10) - pf_result.flight_value).abs / 
               pf_result.flight_value

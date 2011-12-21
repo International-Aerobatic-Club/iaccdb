@@ -225,6 +225,11 @@ FactoryGirl.define do
     r.need_compute false
   end
 ### CResult
+  factory :c_result do |r|
+    r.association :contest
+    r.category 'Advanced'
+    r.aircat 'P'
+  end
   factory :existing_c_result, :class => CResult do |r|
     r.association :contest, :factory => :nationals
     r.category 'Intermediate'
@@ -232,11 +237,34 @@ FactoryGirl.define do
     r.need_compute false
   end
 ### PcResult
+  factory :pc_result do |r|
+    r.association :c_result
+    r.association :pilot
+    r.need_compute true
+  end
   factory :existing_pc_result, :class => PcResult do |r|
     r.association :c_result, :factory => :existing_c_result
     r.association :pilot, :factory => :tom_adams
     r.category_value 4992.14
     r.category_rank 1
     r.need_compute false
+  end
+### JfResult
+  factory :jf_result do |r|
+    r.association :judge, :factory => :judge
+    r.association :f_result, :factory => :f_result
+    r.association :jc_result, :factory => :jc_result
+  end
+### JcResult
+  factory :jc_result do |r|
+    r.association :judge, :factory => :member
+    r.association :c_result, :factory => :c_result
+    r.need_compute true
+  end
+### FResult
+  factory :f_result do |r|
+    r.association :flight
+    r.association :c_result
+    r.need_compute true
   end
 end
