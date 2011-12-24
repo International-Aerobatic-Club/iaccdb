@@ -35,28 +35,5 @@
   </tr>
 <% end %>
 </tbody></table>
-<table><thead>
-<tr>
-<th>Judge</th>
-<th>rho</th>
-<th>cc</th>
-<th>ri</th>
-<th>tau</th>
-<th>gamma</th>
-<th>Mz</th>
-<th>Mg</th>
-</tr>
-<tbody>
-<% @jf_results.each_with_index do |jf_result, j| %>
-  <tr>
-  <td><%= "J#{j+1} #{jf_result.judge.team_name}" %></td>
-  <td><%= jf_result.rho %></td>
-  <td><%= jf_result.cc %></td>
-  <td><%= jf_result.ri %></td>
-  <td><%= jf_result.tau %></td>
-  <td><%= jf_result.gamma %></td>
-  <td><%= jf_result.minority_zero_ct %></td>
-  <td><%= jf_result.minority_grade_ct %></td>
-  </tr>
-<% end %>
-</tbody></table>
+<%= render :template => 'judges/results',
+  :locals => { :j_results => @jf_results } %>

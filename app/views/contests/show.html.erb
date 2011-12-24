@@ -7,6 +7,5 @@
 
 <% @c_results.each do |c_result| %>
   <%= render :template => 'c_results/category',
-    :locals => { :c_result => c_result, 
-      :judges => @judges[c_result] } %>
+    :locals => { :c_result => c_result } %>
 <% end %>

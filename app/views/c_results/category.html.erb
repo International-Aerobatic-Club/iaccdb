@@ -28,9 +28,5 @@
 </tr>
 <% end %>
 </tbody></table>
-<h4>Judges</h4>
-<ul class="bare">
-<% @judges[c_result].each do |judge| %>
-  <li class="judge"><%= judge.team_name %></li>
-<% end %>
-</ul>
+<%= render :template => 'judges/results',
+  :locals => { :j_results => c_result.jc_results } %>

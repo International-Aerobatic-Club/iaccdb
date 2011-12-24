@@ -16,4 +16,5 @@ app/controllers/contests_controller.rb
 Compute jc_results rollup for category
   and display those
 
-Getting NaN on jf_result computation
+Missing flight for f_result on display contest. computation?
+New test in jc_result_spec

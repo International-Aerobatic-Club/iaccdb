@@ -2,7 +2,7 @@ class Flight < ActiveRecord::Base
   belongs_to :contest
   belongs_to :chief, :foreign_key => "chief_id", :class_name => 'Member'
   belongs_to :assist, :foreign_key => "assist_id", :class_name => 'Member'
-  has_many :pilot_flights
+  has_many :pilot_flights, :dependent => :destroy
   has_many :pilots, :through => :pilot_flights, :class_name => 'Member'
   has_many :f_results, :dependent => :destroy
 
@@ -47,7 +47,10 @@ class Flight < ActiveRecord::Base
   # ensure rollups for this flight have been calculated
   # there's really only one f_result for now
   def results
-    f_results.build if f_results.empty?
+    if f_results.empty?
+      f_results.build
+      save
+    end
     f_results.each do |f_result| 
       f_result.results
     end

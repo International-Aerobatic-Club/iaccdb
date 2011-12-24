@@ -8,30 +8,50 @@ module JudgeMetrics
   end
 
   def rho
-    np2 = pilot_count * pilot_count
-    rho = 1.0 - 6.0 * sigma_d2.fdiv(pilot_count * (np2 - 1))
-    (rho * 100).round
+    if pilot_count && pilot_count != 0
+      np2 = pilot_count * pilot_count
+      rho = 1.0 - 6.0 * sigma_d2.fdiv(pilot_count * (np2 - 1))
+      (rho * 100).round
+    else
+      0
+    end
   end
 
   def cc
-    cc = sigma_pj.fdiv(Math.sqrt(sigma_p2 * sigma_j2))
-    (cc * 100).round
+    if sigma_p2 && sigma_j2 && sigma_p2 != 0 && sigma_j2 != 0
+      cc = sigma_pj.fdiv(Math.sqrt(sigma_p2 * sigma_j2))
+      (cc * 100).round
+    else
+      0
+    end
   end
 
   def ri
-    ri = (20.0 * sigma_ri_delta) / 
-    (0.0057 * pilot_count * pilot_count + 0.1041 * pilot_count)
-    ri.round(2)
+    if pilot_count && pilot_count != 0
+      ri = (20.0 * sigma_ri_delta) / 
+      (0.0057 * pilot_count * pilot_count + 0.1041 * pilot_count)
+      ri.round(2)
+    else
+      0
+    end
   end
 
   def tau
-    tau = (con - dis).fdiv(pilot_count)
-    tau.round(2)
+    if pilot_count && pilot_count != 0
+      tau = (con - dis).fdiv(pilot_count)
+      tau.round(2)
+    else
+      0
+    end
   end
 
   def gamma
-    g = (con - dis).fdiv(con + dis)
-    (g * 100).round
+    if con && dis && 0 < (con + dis)
+      g = (con - dis).fdiv(con + dis)
+      (g * 100).round
+    else
+      0
+    end
   end
 
 end

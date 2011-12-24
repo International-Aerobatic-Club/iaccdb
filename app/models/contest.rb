@@ -31,10 +31,12 @@ class Contest < ActiveRecord::Base
     flights.each do |flight|
       cur_results.add c_result_for_flight(flight)
     end
+    # all cur_results are now either present or added to c_results
     c_results.each do |c_result|
       if (cur_results.include?(c_result))
         c_result.compute_category_totals_and_rankings
       else
+        # flights for this category no longer present
         c_results.delete(c_result)
       end
     end

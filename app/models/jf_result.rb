@@ -5,4 +5,7 @@ class JfResult < ActiveRecord::Base
 
   include JudgeMetrics
 
+  def judge_name
+    judge.team_name
+  end
 end

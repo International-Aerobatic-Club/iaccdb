@@ -5,6 +5,10 @@ class JcResult < ActiveRecord::Base
 
   include JudgeMetrics
 
+  def judge_name
+    judge.name
+  end
+
   def to_s 
     a = "jc_result for judge #{judge}, need_compute is #{need_compute}"
   end
@@ -15,12 +19,14 @@ class JcResult < ActiveRecord::Base
     end
   end
 
-  def compute_category_totals(f_result)
+  def compute_category_totals(f_results)
     if self.need_compute
       zero_reset
       cur_jf_results = []
-      f_result.jf_results.each do |jf_result|
-        cur_jf_results << jf_result if jf_result.judge.judge == self.judge
+      f_results.each do |f_result|
+        f_result.jf_results.each do |jf_result|
+          cur_jf_results << jf_result if jf_result.judge.judge == self.judge
+        end
       end
       cur_jf_results.each do |jf_result|
         self.pilot_count += jf_result.pilot_count
