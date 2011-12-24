@@ -10,8 +10,12 @@ m2d = IAC::MannyToDB.new
 files.each do |f|
   begin
     manny = Manny::MannyParse.new
+    puts "Reading manny data from #{f}"
     IO.foreach(f) { |line| manny.processLine(line) }
+    puts "Loading contest data from #{manny.contest.name}"
     contest = m2d.process_contest(manny, reload)
+    puts "Computing results, ranks, and metrics for #{contest.name}"
+    contest.results
   rescue Exception => e
     puts "\nSomething went wrong with #{f}:"
     puts e.message
