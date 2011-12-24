@@ -21,6 +21,10 @@ td.rank {
   padding-right:15px;
 }
 
+td.points {
+  text-align:right;
+}
+
 td.rho,
 td.cc,
 td.ri,

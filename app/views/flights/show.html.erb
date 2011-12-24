@@ -4,7 +4,7 @@
 <h1><%= @flight.displayName %></h1>
 <p>Chief judge <%= @flight.display_chief %></p>
 
-<table><thead>
+<table class='flight_results'><thead>
 <tr>
 <th>Pilot</th>
 <% @judge_results.values[0].each_with_index do |pfj_result, j| %>
@@ -23,15 +23,23 @@
     <%= link_to ("#{pilot.name}", pilot_score_path(pilot, @flight.contest)) %>
   </td>
   <% @judge_results[pf_result].each do |pfj_result| %>
-    <td><%= pfj_result.flight_value.fdiv(10).round(2) %></td>
-    <td>(<%= pfj_result.flight_rank %>)</td>
+    <td class='total_average'>
+      <%= sprintf('%.02f', pfj_result.flight_value.fdiv(10)) %>
+    </td>
+    <td class='rank'>(<%= pfj_result.flight_rank %>)</td>
   <% end %>
-  <td><%= pf_result.flight_value %></td>
-  <td><%= (pf_result.flight_value * 10).fdiv(pilot_flight.sequence.total_k).round(2) %>%</td>
-  <td>(<%= pf_result.flight_rank %>)</td>
-  <td><%= pilot_flight.penalty_total %></td>
-  <td><%= pf_result.adj_flight_value %></td>
-  <td>(<%= pf_result.adj_flight_rank %>)</td>
+  <td class='total_average'>
+    <%= sprintf('%.02f', pf_result.flight_value) %>
+  </td>
+  <td class='percentage'>
+    <%= sprintf('%.02f', (pf_result.flight_value * 10).fdiv(pilot_flight.sequence.total_k)) %>%
+  </td>
+  <td class='rank'>(<%= pf_result.flight_rank %>)</td>
+  <td class='points'><%= pilot_flight.penalty_total %></td>
+  <td class='total_average'>
+    <%= sprintf('%.02f', pf_result.adj_flight_value) %>
+  </td>
+  <td class='rank'>(<%= pf_result.adj_flight_rank %>)</td>
   </tr>
 <% end %>
 </tbody></table>
