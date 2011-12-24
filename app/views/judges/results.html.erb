@@ -1,25 +1,25 @@
-<table><thead>
+<table class='judge_results'><thead>
 <tr>
 <th>Judge</th>
-<th>rho</th>
+<th>ρ</th>
 <th>cc</th>
 <th>ri</th>
-<th>tau</th>
-<th>gamma</th>
+<th>τ</th>
+<th>γ</th>
 <th>Mz</th>
 <th>Mg</th>
 </tr>
 <tbody>
 <% j_results.each_with_index do |j_result, j| %>
   <tr>
-  <td><%= "J#{j+1} #{j_result.judge_name}" %></td>
-  <td><%= j_result.rho %></td>
-  <td><%= j_result.cc %></td>
-  <td><%= j_result.ri %></td>
-  <td><%= j_result.tau %></td>
-  <td><%= j_result.gamma %></td>
-  <td><%= j_result.minority_zero_ct %></td>
-  <td><%= j_result.minority_grade_ct %></td>
+  <td class='judge_name'><%= "J#{j+1} #{j_result.judge_name}" %></td>
+  <td class='rho'><%= j_result.rho %></td>
+  <td class='cc'><%= j_result.cc %></td>
+  <td class='ri'><%= sprintf('%.02f', j_result.ri) %></td>
+  <td class='tau'><%= sprintf('%.02f', j_result.tau) %></td>
+  <td class='gamma'><%= j_result.gamma %></td>
+  <td class='mz_count'><%= j_result.minority_zero_ct %></td>
+  <td class='mg_count'><%= j_result.minority_grade_ct %></td>
   </tr>
 <% end %>
 </tbody></table>

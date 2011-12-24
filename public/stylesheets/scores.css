@@ -7,3 +7,27 @@ table.scores th {
   width:2em;
   text-align:right;
 }
+
+td.total_average {
+  text-align:right;
+}
+
+td.percentage {
+  text-align:right;
+}
+
+td.rank {
+  text-align:right;
+  padding-right:15px;
+}
+
+td.rho,
+td.cc,
+td.ri,
+td.tau,
+td.gamma,
+td.mz_count,
+td.mg_count {
+  text-align:right;
+  padding-left:3pt;
+}

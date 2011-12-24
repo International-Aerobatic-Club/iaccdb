@@ -1,6 +1,6 @@
 <h3><%= c_result.display_category %></h3>
 
-<table><thead><tr><th>Pilot</th>
+<table class='pilot_results'><thead><tr><th>Pilot</th>
 <% c_result.f_results.order(:id).each do |f_result| %>
   <th colspan='3'>
   <%= link_to (f_result.flight.name, flight_path(f_result.flight)) %>
@@ -16,15 +16,23 @@
   </td>
   <% total_possible = 0 %>
   <% pc_result.pf_results.order(:f_result_id).each do |pf_result| %>
-    <td><%= pf_result.adj_flight_value %></td>
+    <td class='total_average'>
+      <%= sprintf('%.02f', pf_result.adj_flight_value) %>
+    </td>
     <% possible = pf_result.pilot_flight.sequence.total_k %>
-    <td><%= sprintf('%.2f', pf_result.adj_flight_value * 10.0 / possible) %>%</td>
+    <td class='percentage'>
+      <%= sprintf('%.02f', pf_result.adj_flight_value * 10.0 / possible) %>%
+    </td>
     <% total_possible += possible %>
-    <td>(<%=pf_result.adj_flight_rank%>)</td>
+    <td class='rank'>(<%= pf_result.adj_flight_rank %>)</td>
   <% end %>
-  <td><%= pc_result.category_value %></td>
-  <td><%= sprintf('%.2f', pc_result.category_value * 10.0 / total_possible) %>%</td>
-  <td>(<%= pc_result.category_rank %>)</td>
+  <td class='total_average'>
+    <%= sprintf('%.02f', pc_result.category_value) %>
+  </td>
+  <td class='percentage'>
+    <%= sprintf('%.02f', pc_result.category_value * 10.0 / total_possible) %>%
+  </td>
+  <td class='rank'>(<%= pc_result.category_rank %>)</td>
 </tr>
 <% end %>
 </tbody></table>
