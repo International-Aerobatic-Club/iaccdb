@@ -1,24 +1,28 @@
-table.scores td {
-  text-align:right;
-  padding-left: 3pt;
-}
-
-table.scores th {
-  width:2em;
-  text-align:right;
-}
-
-td.total_average {
-  text-align:right;
-}
-
+td.score,
+td.figure_number,
+th.figure_number,
+td.total_average,
 td.percentage {
   text-align:right;
+}
+
+td.k_value {
+  text-align:right;
+  padding-left: 4pt;
+}
+
+td.summary_label {
+  text-align:right;
+  padding-right:4pt;
 }
 
 td.rank {
   text-align:right;
   padding-right:15px;
+}
+
+table.scores td.rank {
+  padding-right:2pt;
 }
 
 td.points {

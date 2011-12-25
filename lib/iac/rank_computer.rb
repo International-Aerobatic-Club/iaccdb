@@ -91,15 +91,18 @@ module IAC
     # Does the figure computations only if all fly the same sequence
     # Returns the array of pf_results
     def self.computeFlight(flight)
-      pf_results = []
       seq = nil
       same = false
       flight.pilot_flights.each do |pilot_flight|
         seq ||= pilot_flight.sequence
         same = seq != nil && seq == pilot_flight.sequence
       end
-      pf_results = computeFlightOverallRankings(flight) if seq
-      computeFlightFigureRankings(flight) if same
+      if seq
+        pf_results = computeFlightOverallRankings(flight)
+        computeFlightFigureRankings(pf_results) if same
+      else
+        pf_results = []
+      end
       pf_results
     end
 
@@ -117,7 +120,6 @@ module IAC
       flight_values = []
       adjusted_flight_values = []
       judge_pilot_flight_values = {} #flight_values lookup by judge
-      pilot_figure_results = [] # figure results from each pilot
       flight.pilot_flights.each do |pilot_flight|
         pf_result = pilot_flight.results
         pf_result.judge_teams.each do |judge|
@@ -129,7 +131,6 @@ module IAC
         end
         flight_values << pf_result.flight_value
         adjusted_flight_values << pf_result.adj_flight_value
-        pilot_figure_results << pf_result.figure_results
         pf_results << pf_result
       end
       flight_ranks = Ranking::Computer.ranks_for(flight_values)
@@ -139,12 +140,9 @@ module IAC
         judge_pilot_flight_ranks[judge] =
           Ranking::Computer.ranks_for(judge_pilot_flight_values[judge])
       end
-      pilot_figure_ranks =
-        Ranking::Computer.rank_matrix(pilot_figure_results)
       pf_results.each_with_index do |pf_result, i|
         pf_result.flight_rank = flight_ranks[i]
         pf_result.adj_flight_rank = adjusted_flight_ranks[i]
-        pf_result.figure_ranks = pilot_figure_ranks[i]
         pf_result.save
         pf_result.judge_teams.each do |judge|
           pfj_result = pf_result.for_judge(judge)
@@ -155,17 +153,15 @@ module IAC
       pf_results
     end
 
-    # Compute by-figure result values for one flight of the contest
-    # Accepts a flight
+    # Compute by-figure result values for pf_results of one flight of the contest
+    # Accepts flight pf_results
     # Creates or updates pfj_result, pf_result
     # Do not call unless all pilot_flight have same sequence
-    # Returns the flight
-    def self.computeFlightFigureRankings(flight)
-      pf_results = []
+    def self.computeFlightFigureRankings(pf_results)
       judge_pilot_figure_computed_values = {} #computed_values lookup by judge
       judge_pilot_figure_graded_values = {} #graded_values lookup by judge
-      flight.pilot_flights.each do |pilot_flight|
-        pf_result = pilot_flight.results
+      pilot_figure_results = [] # figure results from each pilot
+      pf_results.each do |pf_result|
         pf_result.judge_teams.each do |judge|
           pfj_result = pf_result.for_judge(judge)
           # computed value matrix
@@ -181,7 +177,7 @@ module IAC
           judge_pilot_figure_graded_values[judge] =
             pilot_figure_graded_values
         end
-        pf_results << pf_result
+        pilot_figure_results << pf_result.figure_results
       end
       judge_pilot_figure_computed_ranks = {}
       judge_pilot_figure_graded_ranks = {}
@@ -191,6 +187,8 @@ module IAC
         judge_pilot_figure_graded_ranks[judge] =
           Ranking::Computer.rank_matrix(judge_pilot_figure_graded_values[judge])
       end
+      pilot_figure_ranks =
+        Ranking::Computer.rank_matrix(pilot_figure_results)
       pf_results.each_with_index do |pf_result, i|
         pf_result.judge_teams.each do |judge|
           pfj_result = pf_result.for_judge(judge)
@@ -198,8 +196,9 @@ module IAC
           pfj_result.graded_ranks = judge_pilot_figure_graded_ranks[judge][i]
           pfj_result.save
         end
+        pf_result.figure_ranks = pilot_figure_ranks[i]
+        pf_result.save
       end
-      flight
     end
   end # class
 end # module

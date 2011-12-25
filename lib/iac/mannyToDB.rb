@@ -78,7 +78,8 @@ def updateContest(mContest, dMannySynch)
     Contest.logger.warn msg
   else
     Contest.logger.info "Updating contest #{dContest.to_s}"
-    Flight.delete_all(:contest_id => dContest, :aircat => mContest.aircat)
+    dContest.flights.destroy_all
+    dContest.c_results.destroy_all
   end
   dMannySynch.synch_date = Time.now
   dMannySynch.save
