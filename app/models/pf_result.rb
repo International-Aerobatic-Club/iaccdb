@@ -26,6 +26,7 @@ class PfResult < ActiveRecord::Base
   belongs_to :f_result
 
   serialize :figure_results
+  serialize :figure_ranks
 
   def to_s
     s = "pf_result #{id} for pilot_flight:#{pilot_flight.id}"

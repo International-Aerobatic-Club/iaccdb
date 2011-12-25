@@ -136,6 +136,10 @@ module IAC
         res = @pilot_flights[4].pf_results.first
         res.for_judge(@judges[0]).computed_ranks.should == [2,1,2,1,1]
       end
+      it 'ranks per figure results for a flight' do
+        res = @pilot_flights[0].pf_results.first
+        res.figure_ranks.should == [1, 3, 3, 4, 3]
+      end
       it 'computes how each judge ranked the pilots' do
         res = @pilot_flights[0].pf_results.first
         [3, 1, 3, 2].each_with_index do |r,i|

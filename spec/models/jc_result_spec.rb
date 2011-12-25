@@ -16,7 +16,9 @@ module Model
         @jc_result = Factory.create(:jc_result, 
           :c_result => @c_result, 
           :judge => @judge_team.judge)
-        @f_result = Factory.create(:f_result, :c_result => @c_result)
+        @f_result = Factory.create(:f_result, 
+          :flight => @flight, 
+          :c_result => @c_result)
         @jf_result_1 = Factory.create(:jf_result,
           :f_result => @f_result,
           :jc_result => @jc_result,
@@ -45,7 +47,7 @@ module Model
           :dis => 3,
           :minority_zero_ct => 1,
           :minority_grade_ct => 2)
-        @jc_result.compute_category_totals(@f_result)
+        @jc_result.compute_category_totals(@flight.f_results)
       end
       it 'computes the Spearman rank coefficient' do
         @jc_result.rho.should == 92

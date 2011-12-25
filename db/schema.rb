@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111223040951) do
+ActiveRecord::Schema.define(:version => 20111224232436) do
 
   create_table "c_results", :force => true do |t|
     t.integer  "contest_id"
@@ -136,6 +136,7 @@ ActiveRecord::Schema.define(:version => 20111223040951) do
     t.boolean  "need_compute",                                   :default => true
     t.integer  "pc_result_id"
     t.integer  "f_result_id"
+    t.string   "figure_ranks"
   end
 
   create_table "pfj_results", :force => true do |t|

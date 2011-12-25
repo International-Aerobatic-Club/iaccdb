@@ -33,7 +33,7 @@
         <% end #judges %>
         <% if sequence %>
           <td><%= avg(pf_result.figure_results[f-1], sequence.k_values[f-1]) %></td>
-          <td/>
+          <td>(<%= pf_result.figure_ranks[f-1] %>)</td>
           <td><%= sequence.k_values[f-1] %></td>
           <td><%= ptsLoT(pf_result.figure_results[f-1],
             sequence.k_values[f-1]) %></td>
@@ -50,7 +50,7 @@
     <% if sequence %>
       <td><%= avg(pf_result.figure_results[ctFigs-1],
         sequence.k_values[ctFigs-1]) %></td>
-      <td/>
+      <td>(<%= pf_result.figure_ranks[ctFigs -1] %>)</td>
       <td><%= sequence.k_values[ctFigs-1] %></td>
       <td><%= ptsLoT(pf_result.figure_results[ctFigs-1],
         sequence.k_values[ctFigs-1]) %></td>

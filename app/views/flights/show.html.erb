@@ -34,12 +34,12 @@
   <td class='percentage'>
     <%= sprintf('%.02f', (pf_result.flight_value * 10).fdiv(pilot_flight.sequence.total_k)) %>%
   </td>
-  <td class='rank'>(<%= pf_result.flight_rank %>)</td>
+  <td class='overall_rank'>(<%= pf_result.flight_rank %>)</td>
   <td class='points'><%= pilot_flight.penalty_total %></td>
   <td class='total_average'>
     <%= sprintf('%.02f', pf_result.adj_flight_value) %>
   </td>
-  <td class='rank'>(<%= pf_result.adj_flight_rank %>)</td>
+  <td class='overall_rank'>(<%= pf_result.adj_flight_rank %>)</td>
   </tr>
 <% end %>
 </tbody></table>

@@ -4,7 +4,11 @@ module PilotFlightsHelper
   end
 
   def avg(pts, k)
-    Score.display_score(pts.fdiv(k))
+    if (0 < k)
+      Score.display_score(pts.fdiv(k))
+    else
+      0.0
+    end
   end
 
   def rank(rank)

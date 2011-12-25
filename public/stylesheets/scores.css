@@ -23,6 +23,7 @@ td.rank {
 
 td.points {
   text-align:right;
+  padding-right:4pt;
 }
 
 td.rho,
