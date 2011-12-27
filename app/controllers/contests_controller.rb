@@ -18,10 +18,20 @@ class ContestsController < ApplicationController
   # GET /contests/1.xml
   def show
     @contest = Contest.find(params[:id])
-    @c_results = @contest.results
+    begin
+      @c_results = @contest.results
+    rescue
+      @c_results = nil
+    end
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html do
+        if @c_results
+          render :show
+        else
+          render :raw, :notice => "Results unavailable"
+        end
+      end
       format.xml  { render :xml => @contest }
     end
   end

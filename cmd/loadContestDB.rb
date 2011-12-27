@@ -14,8 +14,12 @@ files.each do |f|
     IO.foreach(f) { |line| manny.processLine(line) }
     puts "Loading contest data from #{manny.contest.name}"
     contest = m2d.process_contest(manny, reload)
-    puts "Computing results, ranks, and metrics for #{contest.name}"
-    contest.results
+    if contest
+      puts "Computing results, ranks, and metrics for #{contest.name}"
+      contest.results
+    else
+      puts "Skipped contest #{manny.contest.name}"
+    end
   rescue Exception => e
     puts "\nSomething went wrong with #{f}:"
     puts e.message

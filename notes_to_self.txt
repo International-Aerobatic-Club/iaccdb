@@ -8,13 +8,5 @@ CIVA RI
 'rspec spec' runs all of the tests.  
 End test file names in spec directory with _spec.rb
 
-Display results and rankings
+Nationals (ACRO) web results scraping overwrites unlimited free with four minute free
 
-app/views/contests/show.html.erb
-app/controllers/contests_controller.rb
-
-Compute jc_results rollup for category
-  and display those
-
-Missing flight for f_result on display contest. computation?
-New test in jc_result_spec

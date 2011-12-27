@@ -1,9 +1,11 @@
 <h3><%= c_result.display_category %></h3>
 
 <table class='pilot_results'><thead><tr><th>Pilot</th>
+<% flight_order = [] %>
 <% c_result.f_results.order(:id).each do |f_result| %>
   <th colspan='3'>
-  <%= link_to (f_result.flight.name, flight_path(f_result.flight)) %>
+  <%= link_to(f_result.flight.name, flight_path(f_result.flight)) %>
+  <% flight_order << f_result.id %>
   </th>
 <% end %>
 <th colspan='3'>Total</th>
@@ -12,10 +14,18 @@
 <tr>
   <% pilot = pc_result.pilot %>
   <td class="pilot">
-    <%= link_to ("#{pilot.name}", pilot_score_path(pilot, @contest)) %>
+    <%= link_to("#{pilot.name}", pilot_score_path(pilot, @contest)) %>
   </td>
   <% total_possible = 0 %>
+  <% flight_index = 0 %>
   <% pc_result.pf_results.order(:f_result_id).each do |pf_result| %>
+    <!-- insert and blank columns -->
+    <% while flight_index < flight_order.size && 
+             pf_result.f_result_id != flight_order[flight_index] do %>
+      <td colspan='3'/>
+      <% flight_index += 1 %>
+    <% end %>
+    <% flight_index += 1 %>
     <td class='total_average'>
       <%= sprintf('%.02f', pf_result.adj_flight_value) %>
     </td>
@@ -25,6 +35,10 @@
     </td>
     <% total_possible += possible %>
     <td class='rank'>(<%= pf_result.adj_flight_rank %>)</td>
+  <% end %>
+  <% while flight_index < flight_order.size do %>
+    <td colspan='3'/>
+    <% flight_index += 1 %>
   <% end %>
   <td class='total_average'>
     <%= sprintf('%.02f', pc_result.category_value) %>

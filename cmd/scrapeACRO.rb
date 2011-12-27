@@ -9,7 +9,13 @@ ctlFile = args[0]
 if (ctlFile)
   cScrape = ACRO::ContestScraper.new(ctlFile)
   pcs = cScrape.scrapeContest
-  unless pcs.empty?
+  if pcs.empty?
+    begin
+      cScrape.dContest.results
+    rescue
+      puts "Trouble computing results for #{ctlFile}"
+    end
+  else
     puts "There were problems with these:"
     pcs.each { |f| puts f }
   end
