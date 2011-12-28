@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Iac</title>
+  <title>IAC</title>
   <%= stylesheet_link_tag :all %>
   <%= javascript_include_tag :defaults %>
   <%= csrf_meta_tag %>
@@ -16,6 +16,7 @@
 <li><%= link_to 'Contests', contests_path %></li>
 <li><%= link_to 'Pilots', pilots_path %></li>
 <li><%= link_to 'Judges', judges_path %></li>
+<li><%= link_to 'Notes', pages_notes_path %></li>
 </ul>
 </td>
 
@@ -27,7 +28,10 @@
 <div class="acknowledgement">
 <p>Results shown on these pages are computed by this system for study only.
 Official results are computed by the IAC Scoring program on-site at each
-contest and published at <a href="http://www.iac.org/">IAC.org</a>.</p>
+contest and published at <a href="http://www.iac.org/">IAC.org</a>.
+See the 
+<%= link_to 'Notes page', pages_notes_path %>
+for explanations of the numbers.</p>
 <p>These pages appear to you thanks to: </p>
 <ul>
 <li>"Manny," the contest results tracking system built by Randy Owens; </li>

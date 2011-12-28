@@ -38,8 +38,9 @@ module JudgeMetrics
 
   def tau
     if pilot_count && pilot_count != 0
-      tau = (con - dis).fdiv(pilot_count)
-      tau.round(2)
+      pair_ct = (pilot_count * pilot_count - pilot_count).fdiv(2)
+      tau = (con - dis).fdiv(pair_ct)
+      (tau * 100).round
     else
       0
     end

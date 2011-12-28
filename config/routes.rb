@@ -1,4 +1,6 @@
 Iac::Application.routes.draw do
+  get "pages/notes"
+
   resources :contests, :only => [:index, :show]
   root :to => "contests#index"
 

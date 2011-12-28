@@ -1,0 +1,223 @@
+<h1>Notes and Explanations</h1>
+
+<h2>Contents</h2>
+<ul>
+<li><a href='#category'>Category Results</li>
+<li><a href='#flight'>Flight Results</li>
+<li><a href='#grades'>Grades</li>
+<li><a href='#metrics'>Judge Metrics</li>
+</ul>
+
+<div class='report_notes'>
+<a name="category"></a><h2>Category Results on the Contest pages</h2>
+<p>The contest pages display results for each category
+flown in the contest.  The results show each pilot in rank
+order of overall standing and each judge who graded one or
+more flights of the category.</p>
+<p>The pilot results columns show scores and rankings 
+for each flight flown in the category, and the overall
+score and rank.  Each row lists 
+flight and overall results for a single pilot.  
+</p>
+<p>The judge results metrics show
+rollups for all flights judged in the category.
+<p>
+<img class='notes_image' src="/images/Category.png"/>
+<p>
+<ol>
+<li>Each link at the top of the flight column
+leads to a report detailing scores from each judge for each pilot on the
+flight.</li>
+<li>Each link in the pilot column leads to the scoring detail for all
+flights flown by the pilot at the contest.</li>
+<li>Percentage numbers show the percent of possible points earned by
+the pilot for the flight after penalties.</li>
+<li>Rank numbers show the pilot rank for the flight after penalties.  The
+rank is the count of pilots who did better, plus one.  (A rank value of one
+is the best rank, meaning no-one else did better.)</li>
+<li>The Total column shows the total points, percent of total possible
+points, and rank for each pilot in the category.</li>
+<li>See the <a href='#metrics'>judge metrics</a> explanations for
+further notes about the numbers in the columns next to the judge names.</li>
+</ol>
+</p>
+</div>
+
+<div class='report_notes'>
+<a name="flight"></a><h2>Flight results</h2>
+<p>The flight results show how pilots of one flight
+at one contest measured-up in front of one judging line.
+It shows rankings given the pilots by each judge, penalties,
+and points before and after penalties.</p>
+<img class='notes_image' src="/images/Flight.png"/>
+<p><ol>
+<li>Each link in the pilot column leads to the scoring detail for all
+flights flown by the pilot at the contest.</li>
+<li>The judge columns show how each judge scored and ranked each
+pilot.</li>
+<li>The rank numbers in parentheses show how the judge ranked each pilot
+relative to the other pilots.</li>
+<li>The Score column shows the average of points awarded by the judges.
+The percentages are of maximum possible points available on the flight.
+The ranks represent the rankings of the judges before application of
+penalties.  These are the ranks used to measure how closely each judge
+ranked each pilot relative to the overall ranking.</li>
+<li>The Pnlt column shows the number of penalty points earned by the pilot
+on the flight.</li>
+<li>The Result column shows the pilot rank and number of points earned 
+after subtracting penalties from the average score given by the
+judges.</li>
+<li>See the <a href='#metrics'>judge metrics</a> explanations for
+further notes about the numbers in the columns next to the judge names.</li>
+</ol></p>
+</div>
+
+<div class='report_notes'>
+<a name="grades"></a><h2>Grades</h2>
+<p>The details for a pilot show every grade from every judge for
+every flight flown by one pilot at one contest.</p>
+<img class='notes_image' src="/images/PilotFlight.png"/>
+<p><ol>
+<li>The F column shows the figure number, 'P' for Presentation.</li>
+<li>The individual judge columns show the grade given by each judge
+for each figure.</li>
+<li>When every pilot has flown the same figure, the numbers in parentheses
+show how each judge ranked the pilot on each figure.</li>
+<li>The Avg column shows the average of the judges' grades for each
+figure.</li>
+<li>When every pilot has flown the same figure, the numbers in paretheses
+show how the pilot ranked relative to the other pilots on each individual
+figure.  Use this to find figures flown less well than other pilots.</li>
+<li>The number of points left on the table, based on the K value and
+average score.  The pilot would have earned this many more points if
+all judges had awarded a ten grade.  Use this to find figures
+where improvement would give the most point benefit.</li>
+<li>The total number of points awarded by the judge to the pilot.</li>
+<li>The rank number in parentheses is the number of pilots who received a
+higher score from the judge, plus one-- 
+'(1)' means first place from that judge.</li>
+<li>The average of points awarded by the judges.
+The rank number in paretheses represents the ranking before penalties.</li>
+<li>The pilot rank and number of points earned 
+after subtracting penalties from the average score given by the
+judges.</li>
+<li>Shows the maximum number of points possible for the flight, and the
+percentage of maximum possible points earned by the pilot.</li>
+<li>These are the same numbers shown for the flight overall based
+on the results for all pilots on the same flight.
+The numbers shown match the numbers shown in the flight report.
+See the <a href='#metrics'>judge metrics</a> explanations for
+further notes about these numbers.</li>
+</ol></p>
+</div>
+
+<div class='report_notes'>
+<a name="metrics"></a><h2>Judge metrics</h2>
+<p>These are numbers that measure how closely each judge ranked pilots
+in a flight or category relative to the overall ranking of pilots.
+Following are explanations of each number.</p>
+<p>Remember that these computations are made with the pilot
+scores and rankings before penalties.  Judges do not apply
+penalties.  Penalties can significantly alter the final
+rankings of the pilots.</p>
+<dl>
+<dt>rho approximation (ρρ)</dt>
+<dd>is the approximation of the 
+Spearman Rank Correlation Coefficient multiplied by 100.
+The formula is:
+<p>
+<img class="inline-formula"
+src="//upload.wikimedia.org/wikipedia/en/math/7/e/c/7ec891503e38d00f0867d560d973f95e.png"
+alt=" \rho = 1- {\frac {6 \sum d_i^2}{n(n^2 - 1)}}."/>
+<span class='inline-formula'>di = xi − yi.</span>
+</p><p>
+rho ranges from -100 to 100.  
+100 is a perfect corellation.
+Zero means the judge's rankings are more or less random.
+Negative values mean the judge ranked the pilots more or
+less opposite the overall ranking.  More if the value is more negative.
+</p>
+</dd>
+<dt>rho (ρ)</dt>
+<dd>is the exact computation of the Spearman Rank Corellation Coefficent
+multiplied by 100.
+The exact computation, given by the following, is more robust in the
+presence of ties.
+<p>
+<img
+src="//upload.wikimedia.org/wikipedia/en/math/b/b/6/bb6b3858904c0393de24a24f40abe8b6.png"
+alt=" \rho = \frac{\sum_i(x_i-\bar{x})(y_i-\bar{y})}{\sqrt{\sum_i
+(x_i-\bar{x})^2 \sum_i(y_i-\bar{y})^2}}."/>
+</p><p>
+The range and interpretation are the same as for the approximation (ρρ).
+</p>
+</dd>
+<dt>ri</dt>
+<dd>is the CIVA formula that scales differences in the judge score and
+overall score by the difference in rank.  The formula is:
+<p>
+<img src='/images/RI.png'/>
+</p>
+<p>A zero RI represents perfect agreement in the rankings.  Larger numbers
+are worse.  Find more information about RI in the FAI Sporting Code, Section 6:
+Aerobatics, referenced below.  The RI discussion begins at paragraph 8.8.1.</p>
+</dd>
+<dt>tau (τ)</dt>
+<dd>
+is the Kendal Tau correlation coefficient (pronounced like "dow")
+multiplied by 100.  
+The formula is:
+<p>
+<img class="inline-formula"
+src="//upload.wikimedia.org/wikipedia/en/math/4/4/4/444a10977baf56039a0e3fe8a62e355a.png"
+alt="\tau = \frac{(\text{number of concordant pairs}) - (\text{number of
+discordant pairs})}{\frac{1}{2} n (n-1) } ."/>
+</dd>
+<p>The formula uses counts of differences in paired rankings.  If the
+overall ranking and the individual judge ranking both place pilot A before pilot B, 
+that is a "concordant pair."  A "discordant pair" arises when the overall
+ranking places pilot B before while the judge places pilot A before, or
+vice-versa.</p>
+<p>
+tau ranges from -100 to 100.  
+100 is a perfect corellation.
+Zero means the judge's rankings are more or less random.
+Negative values mean the judge ranked the pilots more or
+less opposite the overall ranking.  More if the value is more negative.
+</p>
+<dt>gamma (γ)</dt>
+<dd>
+is the Goodman and Kruskal gamma correlation coefficient
+multiplied by 100.  
+The formula is:
+<p>
+<img class="inline-formula"
+src="//upload.wikimedia.org/wikipedia/en/math/d/a/a/daad397304cc174d9bb394f3a1c04274.png"
+alt="G=\frac{N_s-N_d}{N_s+N_d}\ ."/>
+</p>
+<p>Ns and Nd are the number of concordant and discordant pairs defined the
+same way as for tau.  If there are no ties, then gamma and tau will be the
+same number.  Interpret gamma the same way as tau.  100 is perfect.  Zero
+is bad.  Negative numbers are horrible.
+</p>
+</dd>
+</dl>
+<p>The following sources provide further information about rank metrics:
+<ul>
+<li><a href='http://en.wikipedia.org/wiki/Correlation_and_dependence'>
+Correlation and dependence at Wikipedia.org</a></li>
+<li><a
+href='http://en.wikipedia.org/wiki/Spearman%27s_rank_correlation_coefficient'>
+Spearman's rank correlation coefficient at Wikipedia.org</a></li>
+<li><a
+href='http://en.wikipedia.org/wiki/Kendall_tau_rank_correlation_coefficient'>
+Kendall tau rank correlation coefficient at Wikipedia.org</a></li>
+<li><a href='http://en.wikipedia.org/wiki/Gamma_test_%28statistics%29'>
+Goodman and Kruskal's gamma at Wikipedia.org</a></li>
+<li><a
+href='http://www.fai.org/fai-documents'>
+FAI Sporting Code</a>. See Section 6: Aerobatics</li>
+</ul>
+</p>
+</div>
+

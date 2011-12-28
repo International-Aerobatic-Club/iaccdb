@@ -1,0 +1,23 @@
+div.report_notes {
+  clear:both;
+}
+
+div.report_notes dt {
+  font-weight: bold;
+}
+
+img.notes_image {
+  padding:10pt;
+  border:2pt solid black;
+  margin-left:20px;
+  float:right;
+}
+
+img.inline-formula {
+  vertical-align: middle;
+}
+
+span.inline-formula {
+  font-style: italic;
+}
+
