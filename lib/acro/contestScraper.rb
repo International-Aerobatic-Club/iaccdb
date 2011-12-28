@@ -94,7 +94,7 @@ def create_or_replace_pilot_flight(pScrape)
       :contest_id => @dContest, 
       :name => name, 
       :category => category, 
-      :aircat => aircat).delete_all
+      :aircat => aircat).destroy_all
     flight = @dContest.flights.build(
      :name => name,
      :category => category,
@@ -134,8 +134,12 @@ end
 
 def detect_flight_category(description)
   cat = nil
-  IAC::Constants::CONTEST_CATEGORIES.each do |catName|
-    cat = catName if Regexp.new(catName, 'i') =~ description
+  if /Four/i =~ description || /Minute/i =~ description
+    cat = 'Four Minute' 
+  else
+    IAC::Constants::CONTEST_CATEGORIES.each do |catName|
+      cat = catName if Regexp.new(catName, 'i') =~ description
+    end
   end
   if !cat
     if /Pri/i =~ description

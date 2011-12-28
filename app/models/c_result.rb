@@ -5,7 +5,7 @@ class CResult < ActiveRecord::Base
   belongs_to :contest
   has_many :pc_results, :dependent => :destroy
   has_many :jc_results, :dependent => :destroy
-  has_many :f_results
+  has_many :f_results, :dependent => :nullify
 
   def to_s 
     "c_result #{id} for #{contest}, #{category}, #{aircat}" + 
