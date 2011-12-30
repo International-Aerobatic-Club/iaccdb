@@ -1,7 +1,18 @@
 <h1>IAC Pilots</h1>
 
+<% letter = '' %>
 <% @pilots.each do |pilot| %>
+  <% lead_letter = pilot.family_name[0].chr.upcase %>
+  <% if lead_letter != letter %>
+    <% if letter != '' %>
+      </p> 
+    <% end %>
+    <p class='letter-index'>
+    <span class='letter-index'><%= lead_letter %></span>
+    <% letter = lead_letter %>
+  <% end %>
   <span class="para-index">
   <%= link_to ("#{pilot.name}", pilot_path(pilot)) %>
   </span>
 <% end %>
+</p>

@@ -1,7 +1,18 @@
 <h1>IAC Judges</h1>
 
+<% letter = '' %>
 <% @judges.each do |judge| %>
+  <% lead_letter = judge.family_name[0].chr.upcase %>
+  <% if lead_letter != letter %>
+    <% if letter != '' %>
+      </p> 
+    <% end %>
+    <p class='letter-index'>
+    <span class='letter-index'><%= lead_letter %></span>
+    <% letter = lead_letter %>
+  <% end %>
   <span class="para-index">
   <%= link_to ("#{judge.name}", judge_path(judge)) %>
   </span>
 <% end %>
+</p>

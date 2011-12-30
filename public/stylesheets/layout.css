@@ -2,6 +2,11 @@ span.para-index {
   padding-right: 3pt;
 }
 
+span.letter-index {
+  font-weight: bold;
+  padding-right: 4pt;
+}
+
 div.flightScores {
   display: inline-block;
   margin-right: 20px;
