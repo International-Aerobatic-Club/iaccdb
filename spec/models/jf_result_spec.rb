@@ -34,8 +34,8 @@ describe JfResult do
     @jf_result2.ri.should == 3.74
   end
   it 'computes the Kendal tau for each judge of a flight' do
-    @jf_result1.tau.should == 1.17
-    @jf_result2.tau.should == 1.5
+    @jf_result1.tau.should == 47
+    @jf_result2.tau.should == 60
   end
   it 'computes the Gamma for each judge of a flight' do
     @jf_result1.gamma.should == 47

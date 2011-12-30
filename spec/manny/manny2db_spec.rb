@@ -92,7 +92,7 @@ module IAC
       pilot_flight = flight.pilot_flights.first(
         :conditions => { :pilot_id => pilot, })
       pilot_flight.should_not be nil
-      pilot_flight.penalty_total.should == 100
+      pilot_flight.penalty_total.should == 10
     end
     it 'captures participants' do
       part = Member.where(:given_name => 'Frederick').first

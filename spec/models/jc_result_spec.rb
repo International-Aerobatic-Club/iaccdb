@@ -56,7 +56,7 @@ module Model
         @jc_result.ri.should == 3.26
       end
       it 'computes the Kendal tau' do
-        @jc_result.tau.should == 1.33
+        @jc_result.tau.should == 24
       end
       it 'computes the Gamma' do
         @jc_result.gamma.should == 53
