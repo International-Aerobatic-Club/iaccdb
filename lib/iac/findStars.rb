@@ -54,6 +54,7 @@ def self.findStars (contest)
                 throw :category if ctJ < 3
                 maxBlw5 = (ctJ == 3) ? 0 : 1
                 pilotFlight = flight.pilot_flights.find_by_pilot_id(pilot)
+                throw :pilot if !pilotFlight
                 test_pilot_flight stars, pilotFlight, maxBlw5
               end # each flight
               stars << { :given_name => pilot.given_name,
@@ -81,13 +82,15 @@ private
 # check score from each judge for each figure 
 # throws :pilot if number of scores below five on a figure exceeds maxBlw5
 # adds a Hash to Array stars if all figures pass
-def self.test_pilot_flight(stars, pilotFlight, maxBlw5)
+def self.test_pilot_flight(stars, pilotFlight, max_below_five)
   pfScores = pilotFlight.gatherScores
-  pfScores.each do |f|
-    ctBlw5 = 0
-    f.each do |s|
-      ctBlw5 += 1 if 0 <= s && s < 50
-      throw :pilot if maxBlw5 < ctBlw5
+  (1 ... pfScores.length).each do |f|
+    figure = pfScores[f]
+    count_below_five = 0
+    (1 ... figure.length).each do |j|
+      grade = figure[j]
+      count_below_five += 1 if 0 <= grade && grade < 50
+      throw :pilot if max_below_five < count_below_five
     end
   end
 end
