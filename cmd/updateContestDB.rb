@@ -1,6 +1,6 @@
 # find contests from Manny not yet loaded into the database
 # retrieve those contests and load them
-# use rails runner lib/iac/updateContestDB.rb
+# use rails runner cmd/updateContestDB.rb
 require "iac/mannyParse"
 require "iac/mannyToDB"
 require "net/http"
@@ -106,21 +106,23 @@ def removeContest(m2d, k)
   puts "Should remove contest id #{k}"
 end
 
-reload = !ARGV.empty? && ARGV[0] == 'reload'
-files = reload ? ARGV.drop(1) : ARGV
+#reload = !ARGV.empty? && ARGV[0] == 'reload'
+#files = reload ? ARGV.drop(1) : ARGV
+reload=false
 m2d = IAC::MannyToDB.new
-if files.size == 0
+#if files.size == 0
   curList = processContestList
   doList = reload ? curList : findMissingContests(curList)
   doList.each_key do |k| 
+    puts "Processing Contest #{k}"
     processContest(m2d, k)
   end
   findSpuriousContests(curList).each_key do |k|
     removeContest(m2d, k)
   end
-else
-  files.each do |arg|
-    k = arg.to_i
-    if (k != 0) then processContest(m2d, k) end
-  end
-end
+#else
+#  files.each do |arg|
+#    k = arg.to_i
+#    if (k != 0) then processContest(m2d, k) end
+#  end
+#end
