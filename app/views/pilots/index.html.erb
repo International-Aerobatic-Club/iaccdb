@@ -2,7 +2,8 @@
 
 <% letter = '' %>
 <% @pilots.each do |pilot| %>
-  <% lead_letter = pilot.family_name[0].chr.upcase %>
+  <% fam_name = pilot.family_name || 'X' %>
+  <% lead_letter = fam_name[0].chr.upcase %>
   <% if lead_letter != letter %>
     <% if letter != '' %>
       </p> 
