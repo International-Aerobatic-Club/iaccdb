@@ -3,6 +3,7 @@ require 'iac/rank_computer.rb'
 class Contest < ActiveRecord::Base
   has_many :flights, :dependent => :destroy
   has_many :c_results, :dependent => :destroy
+  has_one :manny_synch, :dependent => :nullify
 
   def to_s
     "#{name} on #{start.strftime('%b %d, %Y')}"
