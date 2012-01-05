@@ -6,3 +6,4 @@ log/*.log
 tmp/**/*
 IACContestData
 vendor/cache
+nationals

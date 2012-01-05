@@ -1,0 +1,38 @@
+<%= link_to 'Admin Manny Synch Records', admin_manny_synchs_path %>
+
+<h1>Admin Contests</h1>
+
+<table>
+<thead>
+  <tr>
+    <th>c_id</th>
+    <th>start</th>
+    <th>name</th>
+    <th>place</th>
+    <th>m_no</th>
+    <th>synch_dt</th>
+  </tr>
+</thead>
+<tbody>
+<% @contests.each do |contest| %>
+  <tr>
+    <td><%= contest.id %></td>
+    <td><%= contest.start %></td>
+    <td><%= link_to contest.sobriquet, contest %></td>
+    <td><%= contest.place %></td>
+    <% manny = contest.manny_synch %>
+    <% if manny %>
+      <td><%= manny.manny_number %></td>
+      <td><%= manny.synch_date %></td>
+    <% else %>
+      <td colspan='2'>no manny</td>
+    <% end %>
+    <td>
+      <%= link_to :delete, admin_contest_path(contest), 
+        :confirm => 'Will leave the Manny synch record, okay?', 
+        :method => :delete %>
+    </td>
+  </tr>
+<% end %>
+</tbody>
+</table>

@@ -1,4 +1,10 @@
 Iac::Application.routes.draw do
+
+  namespace :admin do
+    resources :contests, :except => [:new, :create]
+    resources :manny_synchs, :only => [:index, :destroy]
+  end
+
   get "pages/notes"
 
   resources :contests, :only => [:index, :show]
