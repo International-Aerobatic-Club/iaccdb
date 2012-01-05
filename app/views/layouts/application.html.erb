@@ -8,37 +8,34 @@
 </head>
 <body>
 
-<table class="material">
-<tbody><tr>
-<td class="navigation">
-<h1 class="hide">Nav</h1>
-<ul class="no_bullets">
-<li><%= link_to 'Contests', contests_path %></li>
-<li><%= link_to 'Pilots', pilots_path %></li>
-<li><%= link_to 'Judges', judges_path %></li>
-<li><%= link_to 'Notes', pages_notes_path %></li>
-</ul>
-</td>
+<div id='navigation'>
+  <h3>Navigate</h3>
+  <ul class="no_bullets">
+  <li><%= link_to 'Contests', contests_path %></li>
+  <li><%= link_to 'Pilots', pilots_path %></li>
+  <li><%= link_to 'Judges', judges_path %></li>
+  <li><%= link_to 'Notes', pages_notes_path %></li>
+  </ul>
+</div>
 
-<td class="content">
-<%= yield %>
-</td>
-</tr></tbody></table>
-
-<div class="acknowledgement">
-<p>Results shown on these pages are computed by this system for study only.
-Official results are computed by the IAC Scoring program on-site at each
-contest and published at <a href="http://www.iac.org/">IAC.org</a>.
-See the 
-<%= link_to 'Notes page', pages_notes_path %>
-for explanations of the numbers.</p>
-<p>These pages appear to you thanks to: </p>
-<ul>
-<li>"Manny," the contest results tracking system built by Randy Owens; </li>
-<li>"JaSPer," the contest scoring and data management system
-built by 'Bwana' Bob Buckley;</li>
-<li>Our contest scorekeepers who key-in the data; and</li>
-<li>Web wizardry by Douglas Lovell</li>
-</ul>
+<div id="content">
+  <%= yield %>
+  <div id="footer">
+    <p>Results shown on these pages are computed by this system for study only.
+    Official results are computed by the IAC Scoring program on-site at each
+    contest and published at <a href="http://www.iac.org/">IAC.org</a>.
+    See the 
+    <%= link_to 'Notes page', pages_notes_path %>
+    for explanations of the numbers.</p>
+    <p>These pages appear to you thanks to: </p>
+    <ul>
+    <li>"Manny," the contest results tracking system built by Randy Owens; </li>
+    <li>"JaSPer," the contest scoring and data management system
+    built by 'Bwana' Bob Buckley;</li>
+    <li>Our contest scorekeepers who key-in the data; and</li>
+    <li>Web wizardry by Douglas Lovell</li>
+    </ul>
+  </div>
+</div>
 </body>
 </html>

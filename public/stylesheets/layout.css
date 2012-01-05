@@ -16,7 +16,7 @@ div.flightScores {
   visibility:hidden;
 }
 
-.navigation ul {
+div#navigation ul {
   margin-top: 0px;
   list-style-type: none;
 }
@@ -26,29 +26,29 @@ ul.bare {
   list-style-type: none;
 }
 
-td.navigation {
+div#navigation {
+  position:fixed;
   vertical-align:top;
-  padding-right: 10px;
+  top: 10px;
 }
 
-td.content {
+div#content {
+  margin-left: 110px;
   padding-left: 10px;
   border-left: 2pt solid black;
 }
 
-div.acknowledgement {
-  padding-left: 10px;
-  padding-top: 20px;
+div#footer {
   font-style: italic;
   font-size: very-small;
   color: #77a;
 }
 
-div.acknowledgement p {
+div#footer p {
   margin-bottom: 0px;
 }
 
-div.acknowledgement ul {
+div#footer ul {
   margin-top: 0px;
   list-style-type: none;
 }
