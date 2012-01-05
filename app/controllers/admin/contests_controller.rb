@@ -1,4 +1,5 @@
 class Admin::ContestsController < ApplicationController
+  before_filter :authenticate
 
   # GET /contests
   # GET /contests.xml

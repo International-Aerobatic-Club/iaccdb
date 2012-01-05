@@ -1,4 +1,5 @@
 class Admin::MannySynchsController < ApplicationController
+  before_filter :authenticate
 
   def index
     @manny_synchs = MannySynch.includes(:contest).order("synch_date DESC")
