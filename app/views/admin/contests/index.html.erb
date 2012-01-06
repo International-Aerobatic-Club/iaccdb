@@ -11,6 +11,7 @@
     <th>place</th>
     <th>m_no</th>
     <th>synch_dt</th>
+    <th>calcs</th>
   </tr>
 </thead>
 <tbody>
@@ -26,6 +27,12 @@
       <td><%= manny.synch_date %></td>
     <% else %>
       <td colspan='2'>no manny</td>
+    <% end %>
+    <% results = contest.c_results %>
+    <% if results %>
+      <td><%= link_to 'results', admin_contest_c_results_path(contest) %></td>
+    <% else %>
+      <td/>
     <% end %>
     <td>
       <%= link_to :delete, admin_contest_path(contest), 

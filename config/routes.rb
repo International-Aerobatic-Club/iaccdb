@@ -1,14 +1,18 @@
 Iac::Application.routes.draw do
 
   namespace :admin do
-    resources :contests, :except => [:new, :create]
+    root :to => 'contests#index'
+    resources :contests, :except => [:new, :create] do
+      resources :c_results, :only => [:index, :show]
+    end
     resources :manny_synchs, :only => [:index, :destroy]
   end
+
+  root :to => "contests#index"
 
   get "pages/notes"
 
   resources :contests, :only => [:index, :show]
-  root :to => "contests#index"
 
   resources :pilots, :only => [:index, :show] do
     resources :scores, :only => [:show]
