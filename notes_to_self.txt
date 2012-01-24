@@ -5,5 +5,7 @@ End test file names in spec directory with _spec.rb
 
 Parsed penalties from manny get stored times 10.  No need to do that.
 
-record and show the stars eligible performances
+extract yaml files using the scraper on my machine
+read yaml files into the database on the server
+the server doesn't run nokogiri, probably because of libxml problems
 

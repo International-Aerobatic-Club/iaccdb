@@ -1,7 +1,6 @@
 # use rails runner lib/iac/runFindStars.rb 
 # will check all of the contests
-require "lib/iac/findStars"
-require "lib/iac/constants"
+require "iac/findStars"
 
 include IAC::Constants
 

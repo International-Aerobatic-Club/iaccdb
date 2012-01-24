@@ -8,7 +8,7 @@ attr_reader :flightID
 
 def initialize(file)
   File.open(file,'r') do |f|
-    @doc = Nokogiri::HTML.parse(f)
+    @doc = Nokogiri::HTML(f)
   end
   flds = /p(\d+)s(\d+)/.match(file)
   @pilotID = flds[1].to_i
