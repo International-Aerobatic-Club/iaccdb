@@ -3,6 +3,7 @@
 # use rails runner cmd/updateContestDB.rb
 require "iac/mannyParse"
 require "iac/mannyToDB"
+require "iac/findStars"
 require "net/http"
 require "date"
 
@@ -90,6 +91,7 @@ def doProcessContest(m2d, id)
   end
   contest = m2d.process_contest(manny, true)
   contest.results if contest
+  IAC::FindStars.findStars(contest) if contest
 end
 
 def processContest(m2d, k)

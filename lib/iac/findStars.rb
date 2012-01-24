@@ -38,9 +38,9 @@ def self.findStars (contest)
   CONTEST_CATEGORIES.each_with_index do |cat, iCat|
     AIRPLANE_CATEGORIES.each do |aircat|
       catch (:category) do
-        catFlights = Flight.find_by_sql("select * from flights 
-          where contest_id = #{contest.id} and category = '#{cat}' and 
-            aircat = '#{aircat}'")
+        catFlights = contest.flights.where({
+          :category => cat,
+          :aircat => aircat})
         ctFMin = (iCat < 2) ? 1 : 2
         if (ctFMin <= catFlights.length) then
           flight = catFlights.first
@@ -66,6 +66,15 @@ def self.findStars (contest)
                          :contest => contest.name,
                          :date => contest.start
                        }
+              CResult.where({
+                :contest_id => contest,
+                :category => cat,
+                :aircat => aircat}).each do |c_result|
+                c_result.pc_results.where(:pilot_id => pilot).each do |pc_result|
+                  pc_result.star_qualifying = true
+                  pc_result.save
+                end
+              end
             end # catch pilot
           end # each pilot
         end # if sufficient flights

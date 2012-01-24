@@ -1,12 +1,9 @@
 rake db:migrate; rake db:test:prepare
 
-decide algorithms for judge metrics
-Spearman's rank correlation coefficient
-http://mathworld.wolfram.com/SpearmanRankCorrelationCoefficient.html
-CIVA RI
-
 'rspec spec' runs all of the tests.  
 End test file names in spec directory with _spec.rb
 
 Parsed penalties from manny get stored times 10.  No need to do that.
+
+record and show the stars eligible performances
 

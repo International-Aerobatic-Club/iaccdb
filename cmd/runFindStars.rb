@@ -5,9 +5,11 @@ require "lib/iac/constants"
 
 include IAC::Constants
 
+year = ARGV.empty? ? 0 : ARGV[0].to_i
+year = Date.today.year if year < 1990
 #stars = IAC::FindStars.findStars(Contest.first())
 stars = []
-Contest.where('year(start) = ?', Date.today.year).each do |contest|
+Contest.where('year(start) = ?', year).each do |contest|
   puts "Checking #{contest.to_s}..."
   stars += IAC::FindStars.findStars(contest)
 end

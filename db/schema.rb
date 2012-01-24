@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111224232436) do
+ActiveRecord::Schema.define(:version => 20120124011204) do
 
   create_table "c_results", :force => true do |t|
     t.integer  "contest_id"
@@ -115,13 +115,14 @@ ActiveRecord::Schema.define(:version => 20111224232436) do
   end
 
   create_table "pc_results", :force => true do |t|
-    t.integer  "pilot_id",                                                       :null => false
-    t.decimal  "category_value", :precision => 8, :scale => 2
+    t.integer  "pilot_id",                                                         :null => false
+    t.decimal  "category_value",  :precision => 8, :scale => 2
     t.integer  "category_rank"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "need_compute",                                 :default => true
+    t.boolean  "need_compute",                                  :default => true
     t.integer  "c_result_id"
+    t.boolean  "star_qualifying",                               :default => false
   end
 
   create_table "pf_results", :force => true do |t|
