@@ -15,7 +15,7 @@
 <tr>
   <% pilot = pc_result.pilot %>
   <td class='star'>
-    <%= pc_result.star_qualifying ? '*' : ' ' %>
+    <%= pc_result.star_qualifying ? '★' : ' ' %>
   </td>
   <td class="pilot">
     <%= link_to("#{pilot.name}", pilot_score_path(pilot, @contest)) %>
