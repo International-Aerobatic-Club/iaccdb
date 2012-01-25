@@ -14,5 +14,9 @@ attr_accessor :k_factors
 attr_accessor :scores
 attr_accessor :penalty
 
+def score(f,j)
+  scores[j-1][f-1]
+end
+
 end #class
 end #module
