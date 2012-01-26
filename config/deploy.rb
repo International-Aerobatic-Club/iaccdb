@@ -32,6 +32,14 @@ task :enable_passenger, :roles => :app do
   run "rm -f ~/public_html && ln -s #{File.join(current_path, 'public')} ~/public_html"
 end
 
+# link admin credentials
+after "deploy:symlink", :config_admin
+desc "configure admin priveleges"
+task :config_admin, :roles => :app do
+  run "ln ~/admin.yml #{File.join(current_path, 'config/admin.yml')}"
+end
+
+# install bundle
 after "deploy:update_code", :bundle_install
 desc "install prerequisite gems from Gemfile.lock"
 task :bundle_install, :roles => :app do
