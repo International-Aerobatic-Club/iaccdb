@@ -3,7 +3,8 @@ class ApplicationController < ActionController::Base
 
   def authenticate
     authenticate_or_request_with_http_basic do |user_name, password|
-      user_name == 'dclo' && password == 'metrics4iac'
+      creds = YAML.load_file('config/admin.yml')
+      user_name == creds['user'] && password == creds['password']
     end
   end
 
