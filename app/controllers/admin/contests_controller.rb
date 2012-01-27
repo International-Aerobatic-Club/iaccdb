@@ -8,6 +8,22 @@ class Admin::ContestsController < ApplicationController
     # admin/index.html.erb
   end
 
+  # GET /contests/1/edit
+  def edit
+    @contest = Contest.find(params[:id])
+  end
+
+  # PUT /contests/1
+  def update
+    @contest = Contest.find(params[:id])
+
+    if @contest.update_attributes(params[:contest])
+      redirect_to :action => "index"
+    else
+      render :action => "edit"
+    end
+  end
+
   def destroy
     @contest = Contest.find(params[:id])
     @contest.destroy
