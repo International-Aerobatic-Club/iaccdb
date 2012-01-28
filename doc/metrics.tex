@@ -1,0 +1,41 @@
+\documentclass[12pt]{report}
+\begin{document}
+
+\[
+\rho\rho = 1- {\frac {6 \sum {d_p}^2}{n(n^2 - 1)}}
+\]
+
+$d_p = x_p - y_p$ where $x_p$ is the individual judge ranking of pilot $p$ and $y_p$
+is the result ranking of the pilot.
+
+$n$ is the number of pilots ranked.
+
+\[
+ \rho = \frac{\sum_p(x_p-\bar{x})(y_p-\bar{y})}{\sqrt{\sum_p (x_p-\bar{x})^2 \sum_p(y_p-\bar{y})^2}}
+\]
+
+$x_p$ and $y_p$ are judge and result ranks for pilot p adjusted for ties.  
+When $1 < m$ pilots have the same rank $r$, 
+the values for $x_p$ (or $y_p$) are the average $r + (m - 1)/2$ 
+of the positions they cover.  For example, with three tied for
+third, $x_p$ is $(3+4+5)/3 = 3 + (3-1)/2 = 4$.
+
+$\bar{x} = \bar{y} = (n+1)/2$ is the average of the ranks.
+
+\[
+\tau = \frac{N_c-N_d}{\frac{1}{2} n (n-1) }
+\]
+
+$N_c$ is the number of concordant pairs.  $N_d$ is the number of
+discordant pairs.  $n$ is the number of pilots ranked.
+${1/2}n(n-1)$ is the number of pairs.
+
+\[
+\gamma=\frac{N_c-N_d}{N_c+N_d}
+\]
+
+$N_c$ is the number of concordant pairs.  $N_d$ is the number of
+discordant pairs.
+
+\end{document}
+

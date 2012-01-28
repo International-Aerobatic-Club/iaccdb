@@ -127,29 +127,36 @@ Spearman Rank Correlation Coefficient multiplied by 100.
 The formula is:
 <p>
 <img class="inline-formula"
-src="//upload.wikimedia.org/wikipedia/en/math/7/e/c/7ec891503e38d00f0867d560d973f95e.png"
-alt=" \rho = 1- {\frac {6 \sum d_i^2}{n(n^2 - 1)}}."/>
-<span class='inline-formula'>di = xi − yi.</span>
+src="/images/rhorhoform.png"
+alt="\rho\rho = 1- {\frac {6 \sum {d_p}^2}{n(n^2 - 1)}}"/>
+<img class='inline-formula'
+src="/images/rhorhodef.png"
+alt="$d_p = x_p - y_p$ where $x_p$ is the individual judge ranking of pilot $p$ and $y_p$ is the result ranking of the pilot.  $n$ is the number of pilots ranked."/>
 </p><p>
 rho ranges from -100 to 100.  
 100 is a perfect corellation.
 Zero means the judge's rankings are more or less random.
 Negative values mean the judge ranked the pilots more or
 less opposite the overall ranking.  More if the value is more negative.
+</p><p>
+Contest values are a simple average of the flight values.
 </p>
 </dd>
 <dt>rho (ρ)</dt>
 <dd>is the exact computation of the Spearman Rank Corellation Coefficent
 multiplied by 100.
 The exact computation, given by the following, is more robust in the
-presence of ties.
+presence of ties than is the rho approximation.
 <p>
 <img
-src="//upload.wikimedia.org/wikipedia/en/math/b/b/6/bb6b3858904c0393de24a24f40abe8b6.png"
-alt=" \rho = \frac{\sum_i(x_i-\bar{x})(y_i-\bar{y})}{\sqrt{\sum_i
-(x_i-\bar{x})^2 \sum_i(y_i-\bar{y})^2}}."/>
+src="/images/rhoform.png"
+alt="\rho = \frac{\sum_p(x_p-\bar{x})(y_p-\bar{y})}{\sqrt{\sum_p (x_p-\bar{x})^2 \sum_p(y_p-\bar{y})^2}}"/>
+<img
+src="/images/rhodef.png"
+alt="$x_p$ and $y_p$ are judge and result ranks for pilot p adjusted for ties.  When $1 < m$ pilots have the same rank $r$, the values for $x_p$ (or $y_p$) are the average $r + (m - 1)/2$ of the positions they cover.  For example, with three tied for third, $x_p$ is $(3+4+5)/3 = 3 + (3-1)/2 = 4$."/>
 </p><p>
 The range and interpretation are the same as for the approximation (ρρ).
+Contest values are a simple average of the flight values.
 </p>
 </dd>
 <dt>ri</dt>
@@ -161,6 +168,8 @@ overall score by the difference in rank.  The formula is:
 <p>A zero RI represents perfect agreement in the rankings.  Larger numbers
 are worse.  Find more information about RI in the FAI Sporting Code, Section 6:
 Aerobatics, referenced below.  The RI discussion begins at paragraph 8.8.1.</p>
+<p>Contest values are computed with the RI formula applied to the
+combination of all flights judged in category.</p>
 </dd>
 <dt>tau (τ)</dt>
 <dd>
@@ -169,9 +178,11 @@ multiplied by 100.
 The formula is:
 <p>
 <img class="inline-formula"
-src="//upload.wikimedia.org/wikipedia/en/math/4/4/4/444a10977baf56039a0e3fe8a62e355a.png"
-alt="\tau = \frac{(\text{number of concordant pairs}) - (\text{number of
-discordant pairs})}{\frac{1}{2} n (n-1) } ."/>
+src="/images/tauform.png"
+alt="\tau = \frac{N_c-N_d}{\frac{1}{2} n (n-1) }"/>
+<img class="inline-formula"
+src="/images/taudef.png"
+alt="$N_c$ is the number of concordant pairs.  $N_d$ is the number of discordant pairs.  $n$ is the number of pilots ranked.  ${1/2}n(n-1)$ is the number of pairs."/>
 </dd>
 <p>The formula uses counts of differences in paired rankings.  If the
 overall ranking and the individual judge ranking both place pilot A before pilot B, 
@@ -184,7 +195,9 @@ tau ranges from -100 to 100.
 Zero means the judge's rankings are more or less random.
 Negative values mean the judge ranked the pilots more or
 less opposite the overall ranking.  More if the value is more negative.
-</p>
+</p><p>
+Contest values are computed with the total of concordant, discordant, and
+possible pairs from all flights judged in category.</p>
 <dt>gamma (γ)</dt>
 <dd>
 is the Goodman and Kruskal gamma correlation coefficient
@@ -192,17 +205,23 @@ multiplied by 100.
 The formula is:
 <p>
 <img class="inline-formula"
-src="//upload.wikimedia.org/wikipedia/en/math/d/a/a/daad397304cc174d9bb394f3a1c04274.png"
-alt="G=\frac{N_s-N_d}{N_s+N_d}\ ."/>
+src="/images/gammaform.png"
+alt="\gamma=\frac{N_c-N_d}{N_c+N_d}"/>
+<img class="inline-formula"
+src="/images/gammadef.png"
+alt="$N_c$ is the number of concordant pairs.  $N_d$ is the number of discordant pairs."/>
 </p>
-<p>Ns and Nd are the number of concordant and discordant pairs defined the
+<p>Concordant and discordant pairs are defined the
 same way as for tau.  If there are no ties, then gamma and tau will be the
 same number.  Interpret gamma the same way as tau.  100 is perfect.  Zero
 is bad.  Negative numbers are horrible.
 </p>
+<p>Contest values are computed with the total of concordant and discordant
+pairs from all flights judged in category.</p>
 </dd>
 </dl>
-<p>The following sources provide further information about rank metrics:
+<p>The following references provide further information about rank metrics.
+The references themselves contain references to primary sources.
 <ul>
 <li><a href='http://en.wikipedia.org/wiki/Correlation_and_dependence'>
 Correlation and dependence at Wikipedia.org</a></li>
