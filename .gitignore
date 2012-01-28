@@ -1,4 +1,5 @@
 .*.swp
+.~lock*
 .git
 .bundle
 db/*.sqlite3

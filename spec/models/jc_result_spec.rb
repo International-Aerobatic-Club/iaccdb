@@ -24,20 +24,6 @@ module Model
           :jc_result => @jc_result,
           :judge => @judge_team,
           :pilot_count => 6,
-          :sigma_d2 => 16,
-          :sigma_p2 => 91,
-          :sigma_j2 => 91,
-          :sigma_pj => 83,
-          :sigma_ri_delta => 0.1819549168,
-          :con => 11,
-          :dis => 4,
-          :minority_zero_ct => 1,
-          :minority_grade_ct => 2)
-        @jf_result_2 = Factory.create(:jf_result,
-          :f_result => @f_result,
-          :jc_result => @jc_result,
-          :judge => @judge_team,
-          :pilot_count => 6,
           :sigma_d2 => 8,
           :sigma_p2 => 91,
           :sigma_j2 => 91,
@@ -47,28 +33,42 @@ module Model
           :dis => 3,
           :minority_zero_ct => 1,
           :minority_grade_ct => 2)
+        @jf_result_2 = Factory.create(:jf_result,
+          :f_result => @f_result,
+          :jc_result => @jc_result,
+          :judge => @judge_team,
+          :pilot_count => 4,
+          :sigma_d2 => 2,
+          :sigma_p2 => 30,
+          :sigma_j2 => 30,
+          :sigma_pj => 29,
+          :sigma_ri_delta => 0.0743063718,
+          :con => 5,
+          :dis => 1,
+          :minority_zero_ct => 3,
+          :minority_grade_ct => 1)
         @jc_result.compute_category_totals(@flight.f_results)
       end
       it 'computes the Spearman rank coefficient' do
-        @jc_result.rho.should == 92
+        @jc_result.rho.should == 94
       end
       it 'computes the CIVA RI formula' do
-        @jc_result.ri.should == 3.26
+        @jc_result.ri.should == 2.85
       end
       it 'computes the Kendal tau' do
-        @jc_result.tau.should == 24
+        @jc_result.tau.should == 62
       end
       it 'computes the Gamma' do
-        @jc_result.gamma.should == 53
+        @jc_result.gamma.should == 62
       end
       it 'computes the standard correlation coefficient' do
-        @jc_result.cc.should == 93
+        @jc_result.cc.should == 96
       end
       it 'computes the number of minority zeros' do
-        @jc_result.minority_zero_ct.should == 2
+        @jc_result.minority_zero_ct.should == 4
       end
       it 'computes the number of minority grades' do
-        @jc_result.minority_grade_ct.should == 4
+        @jc_result.minority_grade_ct.should == 3
       end
     end #context factory data
     context 'parsed data' do

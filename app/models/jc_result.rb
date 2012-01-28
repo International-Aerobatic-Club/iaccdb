@@ -22,6 +22,7 @@ class JcResult < ActiveRecord::Base
   def compute_category_totals(f_results)
     if self.need_compute
       zero_reset
+      self.pair_count = 0
       cur_jf_results = []
       f_results.each do |f_result|
         f_result.jf_results.each do |jf_result|
@@ -30,6 +31,7 @@ class JcResult < ActiveRecord::Base
       end
       cur_jf_results.each do |jf_result|
         self.pilot_count += jf_result.pilot_count
+        self.pair_count += jf_result.pair_count
         self.sigma_d2 += jf_result.sigma_d2
         self.sigma_pj += jf_result.sigma_pj
         self.sigma_p2 += jf_result.sigma_p2

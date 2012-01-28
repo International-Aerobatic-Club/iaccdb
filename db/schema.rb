@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120124011204) do
+ActiveRecord::Schema.define(:version => 20120128163216) do
 
   create_table "c_results", :force => true do |t|
     t.integer  "contest_id"
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(:version => 20120124011204) do
     t.boolean  "need_compute",                                     :default => true
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "pair_count"
   end
 
   create_table "jf_results", :force => true do |t|

@@ -8,4 +8,12 @@ class JfResult < ActiveRecord::Base
   def judge_name
     judge.team_name
   end
+
+  def pair_count
+    if pilot_count
+      (pilot_count * pilot_count - pilot_count) / 2
+    else
+      0
+    end
+  end
 end
