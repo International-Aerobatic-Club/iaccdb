@@ -34,14 +34,6 @@ class PfResult < ActiveRecord::Base
     s += ", f_result:#{f_result.id}" if f_result
   end
 
-  def mark_for_calcs
-    if !self.need_compute
-      pc_result.mark_for_calcs if pc_result
-      f_result.mark_for_calcs if f_result
-      update_attribute(:need_compute, true)
-    end
-  end
-
   # Return the pfj_result for a judge team that contributed to
   # this flight result
   def for_judge(judge)

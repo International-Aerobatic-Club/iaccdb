@@ -18,21 +18,19 @@ end
 # Returns the PfResult ActiveRecord instance
 def computePilotFlight
   @pf = @pilot_flight.pf_results.first || @pilot_flight.pf_results.build
-  if @pf.need_compute
-    @seq = @pilot_flight.sequence
-    @kays = @seq ? @seq.k_values : nil
-    @kays = nil if @kays && @kays.length == 0
-    @pf.flight_value = 0
-    @pf.adj_flight_value = 0
-    if @kays
-      @pfScores ||= @pilot_flight.scores
-      computeNonZeroValues
-      resolveAverages
-      storeGradedValues
-      resolveZeros
-      computeTotals
-      storeResults
-    end
+  @seq = @pilot_flight.sequence
+  @kays = @seq ? @seq.k_values : nil
+  @kays = nil if @kays && @kays.length == 0
+  @pf.flight_value = 0
+  @pf.adj_flight_value = 0
+  if @kays
+    @pfScores ||= @pilot_flight.scores
+    computeNonZeroValues
+    resolveAverages
+    storeGradedValues
+    resolveZeros
+    computeTotals
+    storeResults
   end
   @pf
 end
@@ -168,7 +166,6 @@ def storeResults
   @pf.flight_value = flight_avg
   flight_avg -= @pilot_flight.penalty_total
   @pf.adj_flight_value = flight_avg
-  @pf.need_compute = false
   @pf.save
 end
 

@@ -18,11 +18,7 @@ class ContestsController < ApplicationController
   # GET /contests/1.xml
   def show
     @contest = Contest.find(params[:id])
-    begin
-      @c_results = @contest.results
-    rescue
-      @c_results = nil
-    end
+    @c_results = @contest.c_results
 
     respond_to do |format|
       format.html do

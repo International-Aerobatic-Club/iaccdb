@@ -4,10 +4,6 @@ class Score < ActiveRecord::Base
 
   serialize :values
 
-  after_save do |score|
-    score.pilot_flight.mark_for_calcs
-  end
-
   def to_s
     s = "Scores #{id} #{pilot_flight}, #{judge} (" +
       values.join(', ') + ")"

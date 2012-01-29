@@ -1,7 +1,7 @@
   <h3><%= pilot_flight.flight.displayName %></h3>
   
   <% scores = pilot_flight.scores.order(:judge_id) %>
-  <% pf_result = pilot_flight.results %>
+  <% pf_result = pilot_flight.pf_results.first %>
   <% sequence = pilot_flight.sequence %>
   <% ctJudge = scores.size %>
   <% pfj_results = [] %>

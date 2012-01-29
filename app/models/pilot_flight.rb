@@ -14,15 +14,6 @@ class PilotFlight < ActiveRecord::Base
     a += "\npfj_results [#{pfj_results.join("\n\t")}]" if pfj_results
   end
 
-  def mark_for_calcs
-    pf_results.each do |pf_result|
-      pf_result.mark_for_calcs
-    end
-    pfj_results.each do |pfj_result|
-      pfj_result.mark_for_calcs
-    end
-  end
-
  # arrange an array of scores for this flight
  # the array contains one entry for each figure
  # each entry is an array of scores in order of judge

@@ -1,8 +1,8 @@
 <table class='judge_results'><thead>
 <tr>
 <th>Judge</th>
-<th>ρρ</th>
 <th>ρ</th>
+<th>ρρ</th>
 <th>ri</th>
 <th>τ</th>
 <th>γ</th>
@@ -13,8 +13,8 @@
 <% j_results.each_with_index do |j_result, j| %>
   <tr>
   <td class='judge_name'><%= "J#{j+1} #{j_result.judge_name}" %></td>
-  <td class='rho'><%= j_result.rho %></td>
   <td class='cc'><%= j_result.cc %></td>
+  <td class='rho'><%= j_result.rho %></td>
   <td class='ri'><%= sprintf('%.02f', j_result.ri) %></td>
   <td class='tau'><%= j_result.tau %></td>
   <td class='gamma'><%= j_result.gamma %></td>

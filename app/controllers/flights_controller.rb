@@ -4,8 +4,8 @@ class FlightsController < ApplicationController
   # GET /flights/1.xml
   def show
     @flight = Flight.find(params[:id])
-    @f_result = @flight.results.first
-    @pf_results = @f_result.results.order(:adj_flight_rank)
+    @f_result = @flight.f_results.first
+    @pf_results = @f_result.pf_results.order(:adj_flight_rank)
     @judge_results = {}
     @pf_results.each do |pf_result|
       @judge_results[pf_result] = pf_result.pilot_flight.pfj_results.order(:judge_id)

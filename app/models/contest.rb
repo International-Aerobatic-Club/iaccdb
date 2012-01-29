@@ -21,10 +21,6 @@ class Contest < ActiveRecord::Base
     end
   end
 
-  def mark_for_calcs(flight)
-    c_result_for_flight(flight).mark_for_calcs
-  end
-
   # ensure all computations for this contest are complete
   # return array of category results
   def results

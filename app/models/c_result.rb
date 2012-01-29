@@ -8,57 +8,47 @@ class CResult < ActiveRecord::Base
   has_many :f_results, :dependent => :nullify
 
   def to_s 
-    "c_result #{id} for #{contest}, #{category}, #{aircat}" + 
-       " need_compute is #{need_compute}"
+    "c_result #{id} for #{contest}, #{category}, #{aircat}"
   end
 
   def display_category
     "#{category} #{'Glider' if aircat == 'G'}"
   end
 
-  def mark_for_calcs
-    if !self.need_compute
-      update_attribute(:need_compute, true)
+  def compute_category_totals_and_rankings(force = false)
+    cat_flights = contest.flights.all(:conditions => {
+      :category => category, :aircat => aircat })
+    cur_pc_results = Set.new
+    cur_jc_results = Set.new
+    cur_f_results = []
+    cat_flights.each do |flight|
+      f_result = flight.results.first
+      cur_pc_results |= pc_results_for_flight(f_result)
+      cur_jc_results |= jc_results_for_flight(f_result)
+      cur_f_results << f_result
     end
-  end
-
-  def compute_category_totals_and_rankings
-    if self.need_compute
-      cat_flights = contest.flights.all(:conditions => {
-        :category => category, :aircat => aircat })
-      cur_pc_results = Set.new
-      cur_jc_results = Set.new
-      cur_f_results = []
-      cat_flights.each do |flight|
-        f_result = flight.results.first
-        cur_pc_results |= pc_results_for_flight(f_result)
-        cur_jc_results |= jc_results_for_flight(f_result)
-        cur_f_results << f_result
-      end
-      f_results.each do |f_result|
-        f_results.delete(f_result) if !cur_f_results.include?(f_result)
-      end
-      cur_f_results.each do |f_result|
-        f_results << f_result if !f_results.include?(f_result)
-      end
-      pc_results.each do |pc_result|
-        if cur_pc_results.include?(pc_result)
-          pc_result.compute_category_totals(f_results)
-        else
-          pc_results.delete(pc_result) 
-        end
-      end
-      IAC::RankComputer.computeCategory(self)
-      jc_results.each do |jc_result|
-        if cur_jc_results.include?(jc_result)
-          jc_result.compute_category_totals(f_results)
-        else
-          jc_results.delete(jc_result)
-        end
-      end
-      self.need_compute = false
-      save
+    f_results.each do |f_result|
+      f_results.delete(f_result) if !cur_f_results.include?(f_result)
     end
+    cur_f_results.each do |f_result|
+      f_results << f_result if !f_results.include?(f_result)
+    end
+    pc_results.each do |pc_result|
+      if cur_pc_results.include?(pc_result)
+        pc_result.compute_category_totals(f_results)
+      else
+        pc_results.delete(pc_result) 
+      end
+    end
+    IAC::RankComputer.computeCategory(self)
+    jc_results.each do |jc_result|
+      if cur_jc_results.include?(jc_result)
+        jc_result.compute_category_totals(f_results)
+      else
+        jc_results.delete(jc_result)
+      end
+    end
+    save
   end
 
   ###

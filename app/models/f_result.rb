@@ -8,22 +8,12 @@ class FResult < ActiveRecord::Base
   def to_s
     a = "f_result #{id} for #{flight}, #{c_result} "
     a += "pilot_flight results [\n\t#{pf_results.join("\n\t")}\n]" if pf_results
-    a += " need_compute is #{need_compute}"
-  end
-
-  def mark_for_calcs
-    if !self.need_compute
-      update_attribute(:need_compute, true)
-    end
   end
 
   def results
-    if self.need_compute
-      compute_pf_results
-      compute_jf_results
-      self.need_compute = false
-      save
-    end
+    compute_pf_results
+    compute_jf_results
+    save
     pf_results
   end
 
