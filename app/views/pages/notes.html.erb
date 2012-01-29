@@ -121,32 +121,9 @@ scores and rankings before penalties.  Judges do not apply
 penalties.  Penalties can significantly alter the final
 rankings of the pilots.</p>
 <dl>
-<dt>rho approximation (ρρ)</dt>
-<dd>is the approximation of the 
-Spearman Rank Correlation Coefficient multiplied by 100.
-The formula is:
-<p>
-<img class="inline-formula"
-src="/images/rhorhoform.png"
-alt="\rho\rho = 1- {\frac {6 \sum {d_p}^2}{n(n^2 - 1)}}"/>
-<img class='inline-formula'
-src="/images/rhorhodef.png"
-alt="$d_p = x_p - y_p$ where $x_p$ is the individual judge ranking of pilot $p$ and $y_p$ is the result ranking of the pilot.  $n$ is the number of pilots ranked."/>
-</p><p>
-rho ranges from -100 to 100.  
-100 is a perfect corellation.
-Zero means the judge's rankings are more or less random.
-Negative values mean the judge ranked the pilots more or
-less opposite the overall ranking.  More if the value is more negative.
-</p><p>
-Contest values are a simple average of the flight values.
-</p>
-</dd>
 <dt>rho (ρ)</dt>
-<dd>is the exact computation of the Spearman Rank Corellation Coefficent
-multiplied by 100.
-The exact computation, given by the following, is more robust in the
-presence of ties than is the rho approximation.
+<dd>is the full computation of the Spearman Rank Corellation Coefficent
+formulated as follows, multiplied by 100.
 <p>
 <img
 src="/images/rhoform.png"
@@ -155,12 +132,44 @@ alt="\rho = \frac{\sum_p(x_p-\bar{x})(y_p-\bar{y})}{\sqrt{\sum_p (x_p-\bar{x})^2
 src="/images/rhodef.png"
 alt="$x_p$ and $y_p$ are judge and result ranks for pilot p adjusted for ties.  When $1 < m$ pilots have the same rank $r$, the values for $x_p$ (or $y_p$) are the average $r + (m - 1)/2$ of the positions they cover.  For example, with three tied for third, $x_p$ is $(3+4+5)/3 = 3 + (3-1)/2 = 4$."/>
 </p><p>
+rho ranges from -100 to 100.  
+100 means the judge ranked the pilots exactly the same as the result
+ranking.
+Zero means the judge's rankings are more or less random relative to the
+result ranking.
+Negative values mean the judge ranked the pilots more or
+less opposite the overall ranking-- more if the value is more negative.
+Negative 100 means the judge ranked the pilots exactly opposite the result
+ranking.  This sometimes happens when there are only two pilots.
+</p><p>
+Contest values are a simple average of the flight values.
+</p>
+</dd>
+<dt>simplified rho (ρρ)</dt>
+<dd>is the Spearman Rank Correlation Coefficient
+using the simplified computation as follows,
+multiplied by 100.
+<p>
+<img class="inline-formula"
+src="/images/rhorhoform.png"
+alt="\rho\rho = 1- {\frac {6 \sum {d_p}^2}{n(n^2 - 1)}}"/>
+<img class='inline-formula'
+src="/images/rhorhodef.png"
+alt="$d_p = x_p - y_p$ where $x_p$ is the individual judge ranking of pilot $p$ and $y_p$ is the result ranking of the pilot.  $n$ is the number of pilots ranked."/>
+</p>
+<p>
+The simplified computation will give the same result as the full computation
+except when there are ties.  Judges sometimes give competitors the
+same score, resulting in a tie from that judge.
+</p>
+<p>
 The range and interpretation are the same as for the approximation (ρρ).
+</p><p>
 Contest values are a simple average of the flight values.
 </p>
 </dd>
 <dt>ri</dt>
-<dd>is the CIVA formula that scales differences in the judge score and
+<dd>is the CIVA computation that scales differences in the judge score and
 overall score by the difference in rank.  The formula is:
 <p>
 <img src='/images/RI.png'/>
@@ -198,6 +207,7 @@ less opposite the overall ranking.  More if the value is more negative.
 </p><p>
 Contest values are computed with the total of concordant, discordant, and
 possible pairs from all flights judged in category.</p>
+</dd>
 <dt>gamma (γ)</dt>
 <dd>
 is the Goodman and Kruskal gamma correlation coefficient
