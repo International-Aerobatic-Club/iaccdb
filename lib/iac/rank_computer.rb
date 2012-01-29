@@ -16,6 +16,7 @@ module IAC
       jf_results_by_judge = {}
       p_ranks = []
       j_rank_for_jf = {}
+      # compute ranks and calculations based on individual rank
       flight.pilot_flights.each do |pilot_flight|
         pf_result = pilot_flight.pf_results.first
         if pf_result
@@ -38,9 +39,6 @@ module IAC
             j_rank_for_jf[jf_result] << j
             d = p - j
             jf_result.sigma_d2 += d * d
-            jf_result.sigma_pj += p * j
-            jf_result.sigma_p2 += p * p
-            jf_result.sigma_j2 += j * j
             jf_result.sigma_ri_delta += (j - p).abs *
               (pfj_result.flight_value.fdiv(10) - pf_result.flight_value).abs / 
               pf_result.flight_value if 0 < pf_result.flight_value
@@ -52,9 +50,23 @@ module IAC
           end
         end
       end
+      # now do the calculations we couldn't do before we had all of the
+      # ranks
+      avg_p_ranks = average_ranks(p_ranks)
+      top_rank = p_ranks.length
+      avg_rank = top_rank % 2 == 1 ? (top_rank + 1) : top_rank
+      avg_rank /= 2
       jf_results_by_judge.each do |judge, jf_result|
         aj = j_rank_for_jf[jf_result]
+        avg_j_ranks = average_ranks(aj)
         (0 ... p_ranks.length).each do |ip|
+          # values for rho
+          p = avg_p_ranks[ip] - avg_rank
+          j = avg_j_ranks[ip] - avg_rank
+          jf_result.sigma_pj += p * j
+          jf_result.sigma_p2 += p * p
+          jf_result.sigma_j2 += j * j
+          # concordant and discordant counts
           (ip+1 ... p_ranks.length).each do |jp|
             if (aj[ip] < aj[jp] && p_ranks[ip] < p_ranks[jp]) ||
                (aj[ip] > aj[jp] && p_ranks[ip] > p_ranks[jp])
@@ -109,6 +121,33 @@ module IAC
   ###
   private
   ###
+
+    # Convert raw ranks (number of better pilots + 1) into
+    # average ranks, in which tied pilots have rank equal to
+    # the average of the positions they would hold.
+    # Average ranks are decimal values, not integers
+    # This is for the Spearman corellation coefficient (rho) computation
+    def self.average_ranks(ranks)
+      sorted_ranks = ranks.sort
+      rank_conv = []
+      w = 0
+      v = sorted_ranks[0]
+      (1 .. ranks.length).each do |r|
+        if r == ranks.length || sorted_ranks[r] != v
+          v += (r - w - 1) / 2.0
+          while w < r do
+            rank_conv << v
+            w += 1
+          end
+          v = sorted_ranks[r]
+        end
+      end
+      avg_ranks = []
+      (0 ... ranks.length).each do |r|
+        avg_ranks << rank_conv[ranks[r]-1]
+      end
+      avg_ranks
+    end
 
     # Compute result values for one flight of the contest
     # Accepts a flight
