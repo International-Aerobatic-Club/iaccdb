@@ -42,8 +42,8 @@ describe JfResult do
     @jf_result2.gamma.should == 60
   end
   it 'computes the standard correlation coefficient for each judge of a flight' do
-    @jf_result1.cc.should == 58
-    @jf_result2.cc.should == 79
+    @jf_result1.cc.should == 54
+    @jf_result2.cc.should == 77
   end
   it 'computes the number of minority zeros from each judge for a flight' do
     pilot_flight = @flight2.pilot_flights.first

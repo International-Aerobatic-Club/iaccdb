@@ -37,8 +37,6 @@ module IAC
             jf_result.pilot_count += 1
             j = pfj_result.flight_rank
             j_rank_for_jf[jf_result] << j
-            d = p - j
-            jf_result.sigma_d2 += d * d
             jf_result.sigma_ri_delta += (j - p).abs *
               (pfj_result.flight_value.fdiv(10) - pf_result.flight_value).abs / 
               pf_result.flight_value if 0 < pf_result.flight_value
@@ -53,30 +51,41 @@ module IAC
       # now do the calculations we couldn't do before we had all of the
       # ranks
       avg_p_ranks = average_ranks(p_ranks)
-      top_rank = p_ranks.length
-      avg_rank = top_rank % 2 == 1 ? (top_rank + 1) : top_rank
-      avg_rank /= 2
+      avg_rank = (p_ranks.length + 1) / 2.0
       jf_results_by_judge.each do |judge, jf_result|
-        aj = j_rank_for_jf[jf_result]
-        avg_j_ranks = average_ranks(aj)
+        sigma_d2 = sigma_pj = sigma_p2 = sigma_j2 = 0
+        j_ranks = j_rank_for_jf[jf_result]
+        avg_j_ranks = average_ranks(j_ranks)
         (0 ... p_ranks.length).each do |ip|
           # values for rho
           p = avg_p_ranks[ip] - avg_rank
           j = avg_j_ranks[ip] - avg_rank
-          jf_result.sigma_pj += p * j
-          jf_result.sigma_p2 += p * p
-          jf_result.sigma_j2 += j * j
+          sigma_pj += p * j
+          sigma_p2 += p * p
+          sigma_j2 += j * j
+          d = p_ranks[ip] - j_ranks[ip]
+          sigma_d2 += d * d
           # concordant and discordant counts
           (ip+1 ... p_ranks.length).each do |jp|
-            if (aj[ip] < aj[jp] && p_ranks[ip] < p_ranks[jp]) ||
-               (aj[ip] > aj[jp] && p_ranks[ip] > p_ranks[jp])
+            if (j_ranks[ip] < j_ranks[jp] && p_ranks[ip] < p_ranks[jp]) ||
+               (j_ranks[ip] > j_ranks[jp] && p_ranks[ip] > p_ranks[jp])
               jf_result.con += 1
-            elsif (aj[ip] < aj[jp] && p_ranks[ip] > p_ranks[jp]) ||
-               (aj[ip] > aj[jp] && p_ranks[ip] < p_ranks[jp])
+            elsif (j_ranks[ip] < j_ranks[jp] && p_ranks[ip] > p_ranks[jp]) ||
+                  (j_ranks[ip] > j_ranks[jp] && p_ranks[ip] < p_ranks[jp])
               jf_result.dis += 1
             end
           end
         end
+        pilot_count = p_ranks.length
+        if 0 < pilot_count
+          np2 = pilot_count * pilot_count
+          rho = 1.0 - 6.0 * sigma_d2.fdiv(pilot_count * (np2 - 1))
+          cc = sigma_pj.fdiv(Math.sqrt(sigma_p2 * sigma_j2))
+        else
+          rho = cc = 0
+        end
+        jf_result.rho = (rho * 100).round
+        jf_result.cc = (cc * 100).round
         jf_result.save
       end
       jf_results_by_judge.values
