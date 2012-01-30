@@ -1,0 +1,44 @@
+<% if !@competitor_flights.empty? %>
+<h2>Competitor Flights</h2>
+<% end %>
+<% @competitor_flights.each do |flight| %>
+  <p class='item'>
+    <%= "#{flight.contest.year_name}, #{flight.displayName}" %>
+  </p>
+<% end %>
+
+<% if !@chief_flights.empty? %>
+<h2>Chief Judge Flights</h2>
+<% end %>
+<% @chief_flights.each do |flight| %>
+  <p class='item'>
+    <%= "#{flight.contest.year_name}, #{flight.displayName}" %>
+  </p>
+<% end %>
+
+<% if !@assist_chief_flights.empty? %>
+<h2>Assist Chief Judge Flights</h2>
+<% end %>
+<% @assist_chief_flights.each do |flight| %>
+  <p class='item'>
+    <%= "#{flight.contest.year_name}, #{flight.displayName}" %>
+  </p>
+<% end %>
+
+<% if !@judge_flights.empty? %>
+<h2>Judge Flights</h2>
+<% end %>
+<% @judge_flights.each do |flight| %>
+  <p class='item'>
+    <%= "#{flight.contest.year_name}, #{flight.displayName}" %>
+  </p>
+<% end %>
+
+<% if !@assist_flights.empty? %>
+<h2>Assist Judge Flights</h2>
+<% end %>
+<% @assist_flights.each do |flight| %>
+  <p class='item'>
+    <%= "#{flight.contest.year_name}, #{flight.displayName}" %>
+  </p>
+<% end %>

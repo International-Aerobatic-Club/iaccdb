@@ -52,4 +52,24 @@ class Member < ActiveRecord::Base
     dm
   end
 
+  def judge_flights
+    judge_flights = Set.new
+    judge.each do |judge|
+      judge.pilot_flights.each do |pilot_flight|
+        judge_flights << pilot_flight.flight
+      end
+    end
+    (judge_flights - [nil]).to_a
+  end
+
+  def assist_flights
+    assist_flights = Set.new
+    assist.each do |assist|
+      assist.pilot_flights.each do |pilot_flight|
+        assist_flights << pilot_flight.flight
+      end
+    end
+    (assist_flights - [nil]).to_a
+  end
+
 end

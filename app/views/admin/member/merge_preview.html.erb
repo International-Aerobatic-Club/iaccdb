@@ -1,2 +1,15 @@
-<h1>Admin::Member#merge_preview</h1>
-<p>Find me in app/views/admin/member/merge_preview.html.erb</p>
+<h1>Admin Member Merge</h1>
+<%= form_tag admin_member_merge_path do %>
+  <% @members.each do |member| %>
+    <p>
+      <%= radio_button_tag :target, member.id, member.id == @target %>
+      <%= "#{member.name}, #{member.iac_id}" %>
+      <%= hidden_field_tag "selected[#{member.id}]" %>
+    </p>
+  <% end %>
+  <%= submit_tag :merge, :confirm => 'Be careful. This cannot be undone.' %>
+  <%= link_to :cancel, admin_member_index_path(:anchor => @target) %>
+  <p>"Merge" will place all of the following with
+  the selected member and delete the other member(s).</p>
+  <%= render 'members/participation' %>
+<% end %>

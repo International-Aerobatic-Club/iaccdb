@@ -1,50 +1,10 @@
 <h1><%= @member.name %></h1>
 
-<% if !@member.chief.empty? %>
-<h2>Chief Judge Flights</h2>
-<% end %>
-<% @member.chief.each do |flight| %>
-  <p class='item'>
-    <%= "#{flight.contest.year_name}, #{flight.displayName}" %>
-  </p>
-<% end %>
-
-<% if !@member.assistChief.empty? %>
-<h2>Assist Chief Judge Flights</h2>
-<% end %>
-<% @member.assistChief.each do |flight| %>
-  <p class='item'>
-    <%= "#{flight.contest.year_name}, #{flight.displayName}" %>
-  </p>
-<% end %>
-
-<% if !@judge_flights.empty? %>
-<h2>Judge Flights</h2>
-<% end %>
-<% @judge_flights.each do |flight| %>
-  <p class='item'>
-    <%= "#{flight.contest.year_name}, #{flight.displayName}" %>
-  </p>
-<% end %>
-
-<% if !@assist_flights.empty? %>
-<h2>Assist Judge Flights</h2>
-<% end %>
-<% @assist_flights.each do |flight| %>
-  <p class='item'>
-    <%= "#{flight.contest.year_name}, #{flight.displayName}" %>
-  </p>
-<% end %>
-
-<% if !@member.flights.empty? %>
-<h2>Competitor Flights</h2>
-<% end %>
-<% @member.flights.each do |flight| %>
-  <p class='item'>
-    <%= "#{flight.contest.year_name}, #{flight.displayName}" %>
-  </p>
-<% end %>
+<%= render 'members/participation' %>
 
 <div class='actions'>
-  <p class='action'><%= link_to :index, admin_member_index_path %></p>
+  <p class='action'>
+    <%= link_to :index, admin_member_index_path(:anchor => @member.id) %>
+  </p>
 </div>
+
