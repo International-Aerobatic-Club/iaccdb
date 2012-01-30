@@ -4,12 +4,16 @@ Iac::Application.routes.draw do
     root :to => "contests#index"
     resources :contests, :except => [:new, :create]
     resources :manny_synchs, :only => [:index, :destroy]
+    resources :member, :only => [:index, :edit, :update, :show]
+    post "member/merge_preview"
+    post "member/merge"
   end
+
+  root :to => "contests#index"
 
   get "pages/notes"
 
   resources :contests, :only => [:index, :show]
-  root :to => "contests#index"
 
   resources :pilots, :only => [:index, :show] do
     resources :scores, :only => [:show]

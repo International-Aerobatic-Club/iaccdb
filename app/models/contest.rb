@@ -13,6 +13,10 @@ class Contest < ActiveRecord::Base
     "#{city}, #{state} (#{region})"
   end
 
+  def year_name
+    "#{start.year} #{sobriquet}"
+  end
+
   def sobriquet
     if !name.empty?
       name

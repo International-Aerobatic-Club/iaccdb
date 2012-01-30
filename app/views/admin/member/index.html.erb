@@ -1,0 +1,27 @@
+<%= link_to 'Admin Contests', admin_contests_path %>
+
+<h1>Admin Members</h1>
+
+<table>
+<thead>
+  <tr>
+    <th>select</th>
+    <th>family name</th>
+    <th>given name</th>
+    <th>iac id</th>
+    <th colspan='2'>action</th>
+  </tr>
+</thead>
+<tbody>
+<% @members.each do |member| %>
+  <tr>
+    <td><%= member.id %></td>
+    <td><%= member.family_name %></td>
+    <td><%= member.given_name %></td>
+    <td><%= member.iac_id %></td>
+    <td><%= link_to :edit, edit_admin_member_path(member) %></td>
+    <td><%= link_to :show, admin_member_path(member) %></td>
+  </tr>
+<% end %>
+</tbody>
+</table>

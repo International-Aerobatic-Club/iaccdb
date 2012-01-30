@@ -2,6 +2,7 @@ class Judge < ActiveRecord::Base
   belongs_to :judge, :class_name => 'Member'
   belongs_to :assist, :class_name => 'Member'
   has_many :scores, :dependent => :destroy
+  has_many :pilot_flights, :through => :scores
   has_many :pfj_results, :dependent => :destroy
   has_many :jf_results, :dependent => :destroy
 

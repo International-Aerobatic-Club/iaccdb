@@ -3,3 +3,5 @@ rake db:migrate; rake db:test:prepare
 'rspec spec' runs all of the tests.  
 End test file names in spec directory with _spec.rb
 
+Include assistants, chiefs, assist_chiefs in judges list
+Show all in judge view

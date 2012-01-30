@@ -6,6 +6,16 @@ body, p, ol, ul, td {
   line-height: 18px;
 }
 
+p.action,
+p.item {
+  margin-top: 0px;
+  margin-bottom: 0pt;
+}
+
+div.actions {
+  margin-top: 1ex;
+}
+
 pre {
   background-color: #eee;
   padding: 10px;
