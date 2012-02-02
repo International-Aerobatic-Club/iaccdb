@@ -84,12 +84,12 @@
       </tr>
       </tr>
       <td class='summary_label' colspan="<%= ctJudge * 2 + 1 %>">Max Possible</td>
-      <td class='total_average'><%= sprintf('%.02d', (sequence.total_k * 10)) %></td>
+      <td class='total_average'><%= k_score_two(sequence.total_k) %></td>
       </tr>
       </tr>
       <td class='summary_label' colspan="<%= ctJudge * 2 + 1 %>">Percent of Possible</td>
       <td class='percentage'>
-        <%= sprintf('%.2f%', pf_result.adj_flight_value * 10.0 / sequence.total_k) %>
+        <%= score_pct_two(pf_result.adj_flight_value, sequence.total_k) %>
       </td>
       </tr>
     <% end # if sequence %>

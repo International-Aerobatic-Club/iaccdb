@@ -24,20 +24,20 @@
   </td>
   <% @judge_results[pf_result].each do |pfj_result| %>
     <td class='total_average'>
-      <%= sprintf('%.02f', pfj_result.flight_value.fdiv(10)) %>
+      <%= score_two(pfj_result.flight_value) %>
     </td>
     <td class='rank'>(<%= pfj_result.flight_rank %>)</td>
   <% end %>
   <td class='total_average'>
-    <%= sprintf('%.02f', pf_result.flight_value) %>
+    <%= decimal_two(pf_result.flight_value) %>
   </td>
   <td class='percentage'>
-    <%= sprintf('%.02f', (pf_result.flight_value * 10).fdiv(pilot_flight.sequence.total_k)) %>%
+    <%= score_pct_two(pf_result.flight_value, pilot_flight.sequence.total_k) %>%
   </td>
   <td class='overall_rank'>(<%= pf_result.flight_rank %>)</td>
   <td class='points'><%= pilot_flight.penalty_total %></td>
   <td class='total_average'>
-    <%= sprintf('%.02f', pf_result.adj_flight_value) %>
+    <%= decimal_two(pf_result.adj_flight_value) %>
   </td>
   <td class='overall_rank'>(<%= pf_result.adj_flight_rank %>)</td>
   </tr>
