@@ -73,6 +73,8 @@ class Admin::MemberController < ApplicationController
       ['assist_id in (?)', ids.join(',')])
     PcResult.update_all(['pilot_id = ?', @target.id], 
       ['pilot_id in (?)', ids.join(',')])
+    JcResult.update_all(['judge_id = ?', @target.id], 
+      ['judge_id in (?)', ids.join(',')])
     @members.each { |member| member.destroy }
     redirect_to admin_member_index_path(:anchor => @target.id),
       :notice => "Members merged into #{@target.name}"
