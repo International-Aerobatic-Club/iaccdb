@@ -6,7 +6,7 @@ class JcResult < ActiveRecord::Base
   include JudgeMetrics
 
   def judge_name
-    judge.name
+    judge ? judge.name : 'missing judge'
   end
 
   def to_s 
