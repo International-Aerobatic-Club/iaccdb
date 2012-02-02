@@ -11,7 +11,7 @@
     <tr>
       <th class='figure_number'>F</th>
       <% (1 .. ctJudge).each do |j| %>
-        <% pfj_results << pf_result.for_judge(scores[j-1].judge) %>
+        <% pfj_results << pf_result.for_judge(scores[j-1].judge) if pf_result %>
         <th colspan='2'>J<%= j %></th>
       <% end %>
       <% if sequence %>
@@ -29,14 +29,20 @@
         <td class='figure_number'><%= (f).to_s %></td>
         <% (1 .. ctJudge).each do |j| #judges %>
           <td class='score'><%= Score.display_score(scores[j-1].values[f-1]) %></td>
-          <td class='rank'><%= figure_rank(pfj_results[j-1].graded_ranks, f-1) %></td>
+          <td class='rank'><%= figure_rank(pfj_results[j-1].graded_ranks,
+          f-1) if pf_result %></td>
         <% end #judges %>
         <% if sequence %>
-          <td class='total_average'><%= avg(pf_result.figure_results[f-1], sequence.k_values[f-1]) %></td>
-          <td class='rank'><%= figure_rank(pf_result.figure_ranks, f-1) %></td>
+          <td class='total_average'>
+            <%= avg(pf_result.figure_results[f-1], sequence.k_values[f-1]) if pf_result %>
+          </td>
+          <td class='rank'>
+            <%= figure_rank(pf_result.figure_ranks, f-1) if pf_result %>
+          </td>
           <td class='k_value'><%= sequence.k_values[f-1] %></td>
-          <td class='points'><%= ptsLoT(pf_result.figure_results[f-1],
-            sequence.k_values[f-1]) %></td>
+          <td class='points'>
+            <%= ptsLoT(pf_result.figure_results[f-1], sequence.k_values[f-1]) if pf_result %>
+          </td>
         <% end %>
         </tr>
       <% end #figures %>
@@ -48,16 +54,21 @@
         <%= Score.display_score(scores[j-1].values[ctFigs-1]) %>
       </td>
       <td class='rank'>
-        <%= figure_rank(pfj_results[j-1].graded_ranks, ctFigs-1) %>
+        <%= figure_rank(pfj_results[j-1].graded_ranks, ctFigs-1) if
+        pf_result %>
       </td>
     <% end #judges %>
     <% if sequence %>
-      <td class='total_average'><%= avg(pf_result.figure_results[ctFigs-1],
-        sequence.k_values[ctFigs-1]) %></td>
-      <td class='rank'><%= figure_rank(pf_result.figure_ranks, ctFigs - 1) %></td>
+      <td class='total_average'>
+        <%= avg(pf_result.figure_results[ctFigs-1], sequence.k_values[ctFigs-1]) if pf_result %>
+      </td>
+      <td class='rank'>
+        <%= figure_rank(pf_result.figure_ranks, ctFigs - 1) if pf_result %>
+      </td>
       <td class='k_value'><%= sequence.k_values[ctFigs-1] %></td>
-      <td class='points'><%= ptsLoT(pf_result.figure_results[ctFigs-1],
-        sequence.k_values[ctFigs-1]) %></td>
+      <td class='points'>
+        <%= ptsLoT(pf_result.figure_results[ctFigs-1], sequence.k_values[ctFigs-1]) if pf_result %>
+      </td>
     <% end %>
     </tr>
     <% if sequence %>
@@ -65,22 +76,24 @@
       <td>Points</td>
       <% (1 .. ctJudge).each do |j| %>
         <td class='total_average'>
-          <%= Score.display_score(pfj_results[j-1].flight_value) %>
+          <%= Score.display_score(pfj_results[j-1].flight_value) if pf_result %>
         </td>
         <td class='rank'>
-          <%= rank(pfj_results[j-1].flight_rank) %>
+          <%= rank(pfj_results[j-1].flight_rank) if pf_result %>
         </td>
       <% end %>
-      <td class='total_average'><%= points(pf_result.flight_value) %></td>
-      <td class='rank'><%= rank(pf_result.flight_rank) %></td>
+      <td class='total_average'>
+        <%= points(pf_result.flight_value) if pf_result %>
+      </td>
+      <td class='rank'><%= rank(pf_result.flight_rank) if pf_result %></td>
       </tr>
       <tr>
       <td class='summary_label' colspan="<%= ctJudge * 2 + 1 %>">Penalty</td>
       <td class='total_average'><%= pilot_flight.penalty_total %></td>
       </tr>
       <td class='summary_label' colspan="<%= ctJudge * 2 + 1 %>">Points Earned</td>
-      <td class='total_average'><%= points(pf_result.adj_flight_value) %></td>
-      <td class='rank'><%= rank(pf_result.adj_flight_rank) %></td>
+      <td class='total_average'><%= points(pf_result.adj_flight_value) if pf_result %></td>
+      <td class='rank'><%= rank(pf_result.adj_flight_rank) if pf_result %></td>
       </tr>
       </tr>
       <td class='summary_label' colspan="<%= ctJudge * 2 + 1 %>">Max Possible</td>
@@ -89,13 +102,13 @@
       </tr>
       <td class='summary_label' colspan="<%= ctJudge * 2 + 1 %>">Percent of Possible</td>
       <td class='percentage'>
-        <%= score_pct_two(pf_result.adj_flight_value, sequence.total_k) %>
+        <%= score_pct_two(pf_result.adj_flight_value, sequence.total_k) if pf_result %>
       </td>
       </tr>
     <% end # if sequence %>
     </tbody>
     </table>
-    <% f_result = pf_result.f_result %>
+    <% f_result = pf_result ? pf_result.f_result : nil %>
     <% if f_result %>
       <% jf_results = f_result.jf_results.order(:judge_id) %>
       <%= render :template => 'judges/results',
