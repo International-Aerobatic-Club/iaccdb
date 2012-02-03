@@ -34,6 +34,10 @@
     <% end %>
     <td><%= link_to :edit, edit_admin_contest_path(contest) %></td>
     <td>
+      <%= link_to :recompute, recompute_admin_contest_path(contest),
+        :confirm => 'This can take a while. Be very patient.  Okay?' %>
+    </td>
+    <td>
       <%= link_to :delete, admin_contest_path(contest), 
         :confirm => 'Will leave the Manny synch record, okay?', 
         :method => :delete %>

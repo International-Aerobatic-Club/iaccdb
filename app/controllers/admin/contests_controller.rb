@@ -37,4 +37,19 @@ class Admin::ContestsController < ApplicationController
     # admin/show.html.erb
   end
 
+  # GET /contests/1
+  # GET /contests/1.xml
+  def show
+    @contest = Contest.find(params[:id])
+    # admin/show.html.erb
+  end
+
+  # GET /contests/1/recompute
+  # GET /contests/
+  def recompute
+    @contest = Contest.find(params[:id])
+    @contest.results
+    render :action => 'index'
+  end
+
 end

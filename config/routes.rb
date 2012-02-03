@@ -3,6 +3,11 @@ Iac::Application.routes.draw do
   namespace :admin do
     root :to => "contests#index"
     resources :contests, :except => [:new, :create]
+    resources :contests do
+      member do 
+        get 'recompute'
+      end
+    end
     resources :manny_synchs, :only => [:index, :destroy]
     resources :member, :only => [:index, :edit, :update, :show]
     post "member/merge_preview"
