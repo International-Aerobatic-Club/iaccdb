@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120129003924) do
+ActiveRecord::Schema.define(:version => 20120224192812) do
 
   create_table "c_results", :force => true do |t|
     t.integer  "contest_id"
@@ -19,9 +19,19 @@ ActiveRecord::Schema.define(:version => 20120129003924) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "aircat",       :limit => 1, :default => "P"
+    t.integer  "category_id"
   end
 
   add_index "c_results", ["category", "aircat"], :name => "c_contest_category"
+
+  create_table "categories", :force => true do |t|
+    t.integer  "sequence",                 :null => false
+    t.string   "category",   :limit => 16, :null => false
+    t.string   "aircat",     :limit => 1,  :null => false
+    t.string   "name",       :limit => 32, :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "contests", :force => true do |t|
     t.string   "name",       :limit => 48
@@ -44,15 +54,16 @@ ActiveRecord::Schema.define(:version => 20120129003924) do
   end
 
   create_table "flights", :force => true do |t|
-    t.integer  "contest_id",               :null => false
-    t.string   "category",   :limit => 16, :null => false
-    t.string   "name",       :limit => 16, :null => false
-    t.integer  "sequence",                 :null => false
+    t.integer  "contest_id",                :null => false
+    t.string   "category",    :limit => 16, :null => false
+    t.string   "name",        :limit => 16, :null => false
+    t.integer  "sequence",                  :null => false
     t.integer  "chief_id"
     t.integer  "assist_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "aircat",     :limit => 1
+    t.string   "aircat",      :limit => 1
+    t.integer  "category_id"
   end
 
   create_table "jc_results", :force => true do |t|
