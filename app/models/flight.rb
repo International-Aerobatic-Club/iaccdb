@@ -44,9 +44,18 @@ class Flight < ActiveRecord::Base
     total_count
   end
 
+  # get or create f_results, does not compute
+  def results
+    if f_results.empty?
+      f_results.build
+      save
+    end
+    f_results
+  end
+
   # ensure rollups for this flight have been calculated
   # there's really only one f_result for now
-  def results
+  def compute_flight_results
     if f_results.empty?
       f_results.build
       save

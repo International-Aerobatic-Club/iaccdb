@@ -1,27 +1,35 @@
 module JudgeMetrics
 
   def zero_reset
+    self.pilot_count = 0
+    self.pair_count = 0
     self.ftsdxdy = 0
     self.ftsdx2 = 0
     self.ftsdy2 = 0
     self.sigma_d2 = 0
     self.sigma_ri_delta = 0.0
-    self.pair_count = self.pilot_count = self.con = self.dis = 0
+    self.con = self.dis = 0
     self.minority_zero_ct = self.minority_grade_ct = 0
+    self.total_k = 0
+    self.figure_count = 0
+    self.flight_count = 0
   end
 
   def accumulate(metrics)
-    self.pilot_count += metrics.pilot_count
-    self.pair_count += metrics.pair_count
-    self.ftsdxdy += metrics.ftsdxdy
-    self.ftsdx2 += metrics.ftsdx2
-    self.ftsdy2 += metrics.ftsdy2
-    self.sigma_d2 += metrics.sigma_d2
+    self.pilot_count += (metrics.pilot_count || 0)
+    self.pair_count += (metrics.pair_count || 0)
+    self.ftsdxdy += (metrics.ftsdxdy || 0)
+    self.ftsdx2 += (metrics.ftsdx2 || 0)
+    self.ftsdy2 += (metrics.ftsdy2 || 0)
+    self.sigma_d2 += (metrics.sigma_d2 || 0)
     self.sigma_ri_delta += metrics.sigma_ri_delta
     self.con += metrics.con
     self.dis += metrics.dis
     self.minority_zero_ct += metrics.minority_zero_ct
     self.minority_grade_ct += metrics.minority_grade_ct
+    self.total_k += (metrics.total_k || 0)
+    self.figure_count += (metrics.figure_count || 0)
+    self.flight_count += (metrics.flight_count || 0)
   end
 
   def ri
@@ -69,6 +77,22 @@ module JudgeMetrics
       (cc * 100).round
     else
       100
+    end
+  end
+
+  def avgK
+    if (0 < figure_count)
+      total_k.fdiv(figure_count)
+    else
+      0
+    end
+  end
+
+  def avgFlightSize
+    if (0 < flight_count)
+      pilot_count.fdiv(flight_count)
+    else
+      0
     end
   end
 

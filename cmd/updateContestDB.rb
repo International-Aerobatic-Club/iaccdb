@@ -90,8 +90,12 @@ def doProcessContest(m2d, id)
     end
   end
   contest = m2d.process_contest(manny, true)
-  contest.results if contest
-  IAC::FindStars.findStars(contest) if contest
+  if (contest)
+    contest.compute_flights
+    contest.compute_contest_rollups
+    IAC::FindStars.findStars(contest) 
+    IAC::JudgeRollups.compute_jy_results(contest.start.year)
+  end
 end
 
 def processContest(m2d, k)

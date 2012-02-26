@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120225223006) do
+ActiveRecord::Schema.define(:version => 20120226190326) do
 
   create_table "c_results", :force => true do |t|
     t.integer  "contest_id"
@@ -67,15 +67,14 @@ ActiveRecord::Schema.define(:version => 20120225223006) do
   end
 
   create_table "jc_results", :force => true do |t|
-    t.integer  "c_result_id",                                                        :null => false
-    t.integer  "judge_id",                                                           :null => false
+    t.integer  "c_result_id",                                      :null => false
+    t.integer  "judge_id",                                         :null => false
     t.integer  "pilot_count"
     t.decimal  "sigma_ri_delta",    :precision => 11, :scale => 5
     t.integer  "con"
     t.integer  "dis"
     t.integer  "minority_zero_ct"
     t.integer  "minority_grade_ct"
-    t.boolean  "need_compute",                                     :default => true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "pair_count"
@@ -83,6 +82,9 @@ ActiveRecord::Schema.define(:version => 20120225223006) do
     t.integer  "ftsdxdy"
     t.integer  "ftsdy2"
     t.integer  "sigma_d2"
+    t.integer  "total_k"
+    t.integer  "figure_count"
+    t.integer  "flight_count"
   end
 
   create_table "jf_results", :force => true do |t|
@@ -102,6 +104,9 @@ ActiveRecord::Schema.define(:version => 20120225223006) do
     t.integer  "ftsdy2"
     t.integer  "sigma_d2"
     t.integer  "pair_count"
+    t.integer  "total_k"
+    t.integer  "figure_count"
+    t.integer  "flight_count"
   end
 
   create_table "judges", :force => true do |t|
@@ -122,15 +127,15 @@ ActiveRecord::Schema.define(:version => 20120225223006) do
     t.integer  "con"
     t.integer  "dis"
     t.integer  "pair_count"
-    t.decimal  "avgFlightSize",        :precision => 5,  :scale => 2
     t.integer  "flight_count"
-    t.integer  "grade_count"
-    t.decimal  "avgK",                 :precision => 5,  :scale => 2
-    t.integer  "minority_zero_count"
-    t.integer  "minority_grade_count"
-    t.decimal  "sigma_ri_delta",       :precision => 12, :scale => 5
+    t.decimal  "sigma_ri_delta",    :precision => 12, :scale => 5
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "sigma_d2"
+    t.integer  "minority_grade_ct"
+    t.integer  "minority_zero_ct"
+    t.integer  "total_k"
+    t.integer  "figure_count"
   end
 
   create_table "manny_synches", :force => true do |t|

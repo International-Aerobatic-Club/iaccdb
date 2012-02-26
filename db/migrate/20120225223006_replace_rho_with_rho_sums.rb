@@ -17,6 +17,13 @@ class ReplaceRhoWithRhoSums < ActiveRecord::Migration
       t.remove :rho
       t.remove :cc
     end
+    change_table :jy_results do |t|
+      t.integer "sigma_d2"
+      t.remove "minority_grade_count"
+      t.remove "minority_zero_count"
+      t.integer "minority_grade_ct"
+      t.integer "minority_zero_ct"
+    end
   end
 
   def self.down
@@ -36,6 +43,13 @@ class ReplaceRhoWithRhoSums < ActiveRecord::Migration
       t.remove  "pair_count"
       t.integer :rho
       t.integer :cc
+    end
+    change_table :jy_results do |t|
+      t.remove "sigma_d2"
+      t.integer "minority_grade_count"
+      t.integer "minority_zero_count"
+      t.remove "minority_grade_ct"
+      t.remove "minority_zero_ct"
     end
   end
 end

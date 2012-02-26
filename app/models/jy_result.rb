@@ -4,4 +4,7 @@ class JyResult < ActiveRecord::Base
 
   include JudgeMetrics
   
+  after_initialize do |jy_result|
+    jy_result.zero_reset
+  end
 end

@@ -35,6 +35,8 @@ module IAC
               jf_results_by_judge[judge] = jf_result
             end
             jf_result.pilot_count += 1
+            jf_result.total_k += pilot_flight.sequence.total_k
+            jf_result.figure_count += pilot_flight.sequence.figure_count
             j = pfj_result.flight_rank
             j_rank_for_jf[jf_result] << j
             jf_result.sigma_ri_delta += (j - p).abs *
@@ -76,6 +78,7 @@ module IAC
             end
           end
         end
+        jf_result.flight_count += 1
         jf_result.pair_count = pilot_count * (pilot_count - 1) / 2
         jf_result.save
       end

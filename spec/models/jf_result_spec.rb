@@ -11,7 +11,7 @@ describe JfResult do
     contest = Contest.first
     @flight2 = contest.flights.first(:conditions => { 
       :category => 'Primary', :name => 'Free' })
-    f_result = @flight2.results.first
+    f_result = @flight2.compute_flight_results.first
     lr = Member.first(:conditions => {
       :family_name => 'Ramirez',
       :given_name => 'Laurie' })
@@ -54,7 +54,7 @@ describe JfResult do
     contest = Contest.first
     flight = contest.flights.first(:conditions => { 
       :category => 'Primary', :name => 'Free' })
-    f_result = flight.results.first
+    f_result = flight.compute_flight_results.first
     jf_result = f_result.jf_results.first(:conditions => {
       :judge_id => judge })
     jf_result.minority_zero_ct.should == 1
@@ -74,7 +74,7 @@ describe JfResult do
     contest = Contest.first
     flight = contest.flights.first(:conditions => { 
       :category => 'Primary', :name => 'Free' })
-    f_result = flight.results.first
+    f_result = flight.compute_flight_results.first
     jf_result = f_result.jf_results.first(:conditions => {
       :judge_id => judge })
     jf_result.minority_grade_ct.should == 1

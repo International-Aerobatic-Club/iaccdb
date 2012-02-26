@@ -25,9 +25,22 @@ class Contest < ActiveRecord::Base
     end
   end
 
-  # ensure all computations for this contest are complete
-  # return array of category results
+  # compute all of the flights and the contest rollups
   def results
+    compute_flights
+    compute_contest_rollups
+  end
+
+  # compute results for all flights of the contest
+  def compute_flights
+    flights.each do |flight|
+      flight.compute_flight_results
+    end
+  end
+
+  # ensure contest rollup computations for this contest are complete
+  # return array of category results
+  def compute_contest_rollups
     cur_results = Set.new
     flights.each do |flight|
       cur_results.add c_result_for_flight(flight)

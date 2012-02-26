@@ -1,12 +1,12 @@
-# recompute all of the contest metrics
-# use rails runner lib/iac/recomputeMetrics.rb <file>
+# recompute all of the contest flight results
+# use rails runner lib/iac/recomputeMetrics.rb
 
 pcs = []
-CResult.all.each do |c_result|
-  cur = "contest #{c_result.contest.name}, category #{c_result.display_category}"
+Contest.all.each do |contest|
+  cur = "contest #{contest.year_name}"
   begin
     puts "Working with #{cur}"
-    c_result.compute_category_totals_and_rankings(true)
+    contest.compute_flights
   rescue Exception => e
     puts "\nSomething went wrong with #{cur}:"
     puts e.message
