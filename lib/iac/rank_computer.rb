@@ -51,22 +51,22 @@ module IAC
       # now do the calculations we couldn't do before we had all of the
       # ranks
       avg_p_ranks = average_ranks(p_ranks)
-      avg_rank = (p_ranks.length + 1) / 2.0
+      pilot_count = p_ranks.length
+      avg_rank = (pilot_count + 1) / 2.0
       jf_results_by_judge.each do |judge, jf_result|
-        sigma_d2 = sigma_pj = sigma_p2 = sigma_j2 = 0.0
         j_ranks = j_rank_for_jf[jf_result]
         avg_j_ranks = average_ranks(j_ranks)
-        (0 ... p_ranks.length).each do |ip|
+        (0 ... pilot_count).each do |ip|
           # values for rho
           p = avg_p_ranks[ip] - avg_rank
           j = avg_j_ranks[ip] - avg_rank
-          sigma_pj += p * j
-          sigma_p2 += p * p
-          sigma_j2 += j * j
+          jf_result.ftsdxdy += 4 * j * p
+          jf_result.ftsdx2 += 4 * j * j
+          jf_result.ftsdy2 += 4 * p * p
           d = p_ranks[ip] - j_ranks[ip]
-          sigma_d2 += d * d
+          jf_result.sigma_d2 += d * d
           # concordant and discordant counts
-          (ip+1 ... p_ranks.length).each do |jp|
+          (ip+1 ... pilot_count).each do |jp|
             if (j_ranks[ip] < j_ranks[jp] && p_ranks[ip] < p_ranks[jp]) ||
                (j_ranks[ip] > j_ranks[jp] && p_ranks[ip] > p_ranks[jp])
               jf_result.con += 1
@@ -76,18 +76,7 @@ module IAC
             end
           end
         end
-        pilot_count = p_ranks.length
-        rho = 1.0
-        if 1 < pilot_count
-          np2 = pilot_count * pilot_count
-          rho = 1.0 - 6.0 * sigma_d2.fdiv(pilot_count * (np2 - 1))
-        end
-        jf_result.rho = (rho * 100).round
-        cc = 1.0
-        if 0 < sigma_p2 && 0 < sigma_j2
-          cc = sigma_pj.fdiv(Math.sqrt(sigma_p2 * sigma_j2))
-        end
-        jf_result.cc = (cc * 100).round
+        jf_result.pair_count = pilot_count * (pilot_count - 1) / 2
         jf_result.save
       end
       jf_results_by_judge.values

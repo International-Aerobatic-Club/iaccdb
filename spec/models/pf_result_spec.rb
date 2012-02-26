@@ -2,13 +2,6 @@ require 'spec_helper'
 
 module Model
   describe PfResult do
-    it 'finds cached data' do
-      pf = Factory.create(:existing_pf_result)
-      rpf = pf.pilot_flight.results
-      rpf.flight_value.should == 1786.83
-      rpf.adj_flight_value.should == 1756.83
-      rpf.id.should == pf.id
-    end
     context 'real_scores' do
       before(:each) do
         reset_db

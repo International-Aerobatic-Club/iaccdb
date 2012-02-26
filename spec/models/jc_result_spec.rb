@@ -24,8 +24,11 @@ module Model
           :jc_result => @jc_result,
           :judge => @judge_team,
           :pilot_count => 6,
-          :rho => 77,
-          :cc => 96,
+          :pair_count => 15,
+          :ftsdxdy => 54,
+          :ftsdx2 => 70,
+          :ftsdy2 => 70,
+          :sigma_d2 => 8,
           :sigma_ri_delta => 0.1552617297,
           :con => 12,
           :dis => 3,
@@ -36,8 +39,11 @@ module Model
           :jc_result => @jc_result,
           :judge => @judge_team,
           :pilot_count => 4,
-          :rho => 80,
-          :cc => 97,
+          :pair_count => 6,
+          :ftsdxdy => 16,
+          :ftsdx2 => 20,
+          :ftsdy2 => 20,
+          :sigma_d2 => 2,
           :sigma_ri_delta => 0.0743063718,
           :con => 5,
           :dis => 1,
@@ -46,7 +52,7 @@ module Model
         @jc_result.compute_category_totals(@flight.f_results)
       end
       it 'computes the Spearman rank coefficient' do
-        @jc_result.rho.should == 79
+        @jc_result.rho.should == 94
       end
       it 'computes the CIVA RI formula' do
         @jc_result.ri.should == 2.85
@@ -58,7 +64,7 @@ module Model
         @jc_result.gamma.should == 62
       end
       it 'computes the standard correlation coefficient' do
-        @jc_result.cc.should == 97
+        @jc_result.cc.should == 78
       end
       it 'computes the number of minority zeros' do
         @jc_result.minority_zero_ct.should == 4

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120224192812) do
+ActiveRecord::Schema.define(:version => 20120225223006) do
 
   create_table "c_results", :force => true do |t|
     t.integer  "contest_id"
@@ -79,8 +79,10 @@ ActiveRecord::Schema.define(:version => 20120224192812) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "pair_count"
-    t.integer  "rho"
-    t.integer  "cc"
+    t.integer  "ftsdx2"
+    t.integer  "ftsdxdy"
+    t.integer  "ftsdy2"
+    t.integer  "sigma_d2"
   end
 
   create_table "jf_results", :force => true do |t|
@@ -95,13 +97,38 @@ ActiveRecord::Schema.define(:version => 20120224192812) do
     t.integer  "minority_zero_ct",                                 :default => 0
     t.integer  "minority_grade_ct",                                :default => 0
     t.integer  "jc_result_id"
-    t.integer  "rho"
-    t.integer  "cc"
+    t.integer  "ftsdx2"
+    t.integer  "ftsdxdy"
+    t.integer  "ftsdy2"
+    t.integer  "sigma_d2"
+    t.integer  "pair_count"
   end
 
   create_table "judges", :force => true do |t|
     t.integer  "judge_id"
     t.integer  "assist_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "jy_results", :force => true do |t|
+    t.integer  "judge_id"
+    t.integer  "category_id"
+    t.integer  "year"
+    t.integer  "pilot_count"
+    t.integer  "ftsdxdy"
+    t.integer  "ftsdx2"
+    t.integer  "ftsdy2"
+    t.integer  "con"
+    t.integer  "dis"
+    t.integer  "pair_count"
+    t.decimal  "avgFlightSize",        :precision => 5,  :scale => 2
+    t.integer  "flight_count"
+    t.integer  "grade_count"
+    t.decimal  "avgK",                 :precision => 5,  :scale => 2
+    t.integer  "minority_zero_count"
+    t.integer  "minority_grade_count"
+    t.decimal  "sigma_ri_delta",       :precision => 12, :scale => 5
     t.datetime "created_at"
     t.datetime "updated_at"
   end

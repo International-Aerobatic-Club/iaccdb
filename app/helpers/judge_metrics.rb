@@ -1,9 +1,27 @@
 module JudgeMetrics
 
   def zero_reset
+    self.ftsdxdy = 0
+    self.ftsdx2 = 0
+    self.ftsdy2 = 0
+    self.sigma_d2 = 0
     self.sigma_ri_delta = 0.0
-    self.pilot_count = self.con = self.dis = 0
+    self.pair_count = self.pilot_count = self.con = self.dis = 0
     self.minority_zero_ct = self.minority_grade_ct = 0
+  end
+
+  def accumulate(metrics)
+    self.pilot_count += metrics.pilot_count
+    self.pair_count += metrics.pair_count
+    self.ftsdxdy += metrics.ftsdxdy
+    self.ftsdx2 += metrics.ftsdx2
+    self.ftsdy2 += metrics.ftsdy2
+    self.sigma_d2 += metrics.sigma_d2
+    self.sigma_ri_delta += metrics.sigma_ri_delta
+    self.con += metrics.con
+    self.dis += metrics.dis
+    self.minority_zero_ct += metrics.minority_zero_ct
+    self.minority_grade_ct += metrics.minority_grade_ct
   end
 
   def ri
@@ -32,6 +50,25 @@ module JudgeMetrics
       (g * 100).round
     else
       0
+    end
+  end
+
+  def rho
+    if 1 < pilot_count
+      np2 = pilot_count * pilot_count
+      rho = 1.0 - 6.0 * sigma_d2.fdiv(pilot_count * (np2 - 1))
+      (rho * 100).round
+    else
+      100
+    end
+  end
+
+  def cc
+    if 0 < ftsdx2 && 0 < ftsdy2
+      cc = ftsdxdy.fdiv(Math.sqrt(ftsdx2 * ftsdy2))
+      (cc * 100).round
+    else
+      100
     end
   end
 
