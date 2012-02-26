@@ -165,7 +165,7 @@ def storeResults
   flight_avg = flight_total / (@judges.length * 10.0) # scores are stored * 10
   @pf.flight_value = flight_avg
   flight_avg -= @pilot_flight.penalty_total
-  @pf.adj_flight_value = flight_avg
+  @pf.adj_flight_value = flight_avg < 0 ? 0 : flight_avg
   @pf.save
 end
 
