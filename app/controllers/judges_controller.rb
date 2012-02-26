@@ -9,6 +9,9 @@ class JudgesController < ApplicationController
   def show
     id = params[:id]
     @judge = Member.find(id)
+    @jy_results = JyResult.includes(:category).order(
+       "year DESC").find_all_by_judge_id(id)
+    @jc_results = JcResult.includes(:c_result).find_all_by_judge_id(id)
     @contests = Contest.find_by_sql(["select distinct
       c.id, c.name, c.start, c.region, f.category
       from pilot_flights p, judges j, scores s, flights f, contests c

@@ -3,5 +3,32 @@ rake db:migrate; rake db:test:prepare
 'rspec spec' runs all of the tests.  
 End test file names in spec directory with _spec.rb
 
+cmd/recompute_flights does all of the flight calculations
+cmd/recompute_metrics does the judge metric calculations by flight and contest
+cmd/recompute_judge_rollups does the judge metric rollups for a given year
+
 Include assistants, chiefs, assist_chiefs in judges list
 Show all in judge view
+
+working on judge view
+working on jy rollups
+
+Something went wrong with contest 2005 2005 Gulf Coast Regional:
+Mysql2::Error: Column 'judge_id' cannot be null: INSERT INTO `pfj_results`
+(`created_at`, `flight_rank`, `updated_at`, `judge_id`, `graded_values`,
+`flight_value`, `computed_values`, `graded_ranks`, `computed_ranks`,
+`need_compute`, `pilot_flight_id`) VALUES ('2012-02-26 21:14:01', NULL,
+'2012-02-26 21:14:01', NULL, '--- \n- 2940\n- 1755\n- 1600\n- 2600\n-
+2520\n- 3000\n- 845\n- 1820\n- 3440\n- 1800\n', NULL, NULL, NULL, NULL, 1,
+7312)
+/home/dcl/.rvm/gems/ruby-1.8.7-p173@rails303/gems/activerecord-3.0.3/lib/active_record/connection_adapters/abstract_adapter.rb:202:in
+`log'
+/home/dcl/.rvm/gems/ruby-1.8.7-p173@rails303/gems/mysql2-0.2.6/lib/active_record/connection_adapters/mysql2_adapter.rb:314:in
+`execute'
+/home/dcl/.rvm/gems/ruby-1.8.7-p173@rails303/gems/activerecord-3.0.3/lib/active_record/connection_adapters/abstract/database_statements.rb:263:in
+`insert_sql'
+/home/dcl/.rvm/gems/ruby-1.8.7-p173@rails303/gems/mysql2-0.2.6/lib/active_record/connection_adapters/mysql2_adapter.rb:325:in
+`insert_sql'
+/home/dcl/.rvm/gems/ruby-1.8.7-p173@rails303/gems/activerecord-3.0.3/lib/active_record/connection_adapters/abstract/database_statements.rb:44:in
+`insert'
+

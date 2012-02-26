@@ -62,7 +62,7 @@ module JudgeMetrics
   end
 
   def rho
-    if 1 < pilot_count
+    if pilot_count && 1 < pilot_count
       np2 = pilot_count * pilot_count
       rho = 1.0 - 6.0 * sigma_d2.fdiv(pilot_count * (np2 - 1))
       (rho * 100).round
@@ -72,7 +72,7 @@ module JudgeMetrics
   end
 
   def cc
-    if 0 < ftsdx2 && 0 < ftsdy2
+    if ftsdx2 && ftsdy2 && ftsdxdy && 0 < ftsdx2 && 0 < ftsdy2
       cc = ftsdxdy.fdiv(Math.sqrt(ftsdx2 * ftsdy2))
       (cc * 100).round
     else
@@ -81,7 +81,7 @@ module JudgeMetrics
   end
 
   def avgK
-    if (0 < figure_count)
+    if (figure_count && 0 < figure_count)
       total_k.fdiv(figure_count)
     else
       0
@@ -89,7 +89,7 @@ module JudgeMetrics
   end
 
   def avgFlightSize
-    if (0 < flight_count)
+    if (flight_count && 0 < flight_count)
       pilot_count.fdiv(flight_count)
     else
       0
