@@ -12,26 +12,28 @@ class JudgeRollups
 def self.compute_jy_results (year)
   # start_list = list all jy_result where year
   start_list = JyResult.find_all_by_year(year)
-  puts "start with #{start_list}"
   # all contests where year(start) == year
   Contest.where(["year(start) = ?", year]).each do |contest|
     # all c_results
     puts "add #{contest.year_name} to judge rollups"
     contest.c_results.each do |c_result|
       # get category
-      puts "add #{c_result.display_category} to judge rollups"
-      category = Category.find_by_category_and_aircat(c_result.category,
-        c_result.aircat)
+      category = Category.find_for_cat_aircat(c_result.category, c_result.aircat)
       if category
         # all jc_result
         c_result.jc_results.each do |jc_result|
           # find or create jy_result for year, category, judge
-          puts "Category #{category.name}, Judge #{jc_result.judge.name}"
-          jy_result  =
-          JyResult.find_or_initialize_by_judge_id_and_category_id_and_year(
+          jy_result = JyResult.find_by_judge_id_and_category_id_and_year(
             jc_result.judge.id, category.id, year)
-          # if in start_list, reset & remove from start_list
-          if (start_list.include?(jy_result))
+          if !jy_result
+            # can't use the or_initialize find because we need zero_reset
+            jy_result = JyResult.new({
+              :judge_id => jc_result.judge.id,
+              :category_id => category.id,
+              :year => year});
+            jy_result.zero_reset
+          elsif (start_list.include?(jy_result))
+            # if in start_list, reset & remove from start_list
             jy_result.zero_reset
             start_list.delete(jy_result)
           end

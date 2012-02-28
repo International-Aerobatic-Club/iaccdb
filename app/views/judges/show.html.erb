@@ -1,50 +1,30 @@
 <h1><%= @judge.name %></h1>
 
-<ul class='no-bullets'>
-<% @contests.each do |contest| %>
-  <li>
-    <%= contest.start %>
-    <%= link_to contest.name, contest %>
-    (<%= contest.region %>,
-    <%= contest.category %>)
-  </li>
-<% end %>
 <table>
 <tbody>
-<% @jy_results.each do |jy_result| %>
-  <tr>
-    <td><%= jy_result.year %></td>
-    <td><%= jy_result.category.name %></td>
-    <td><%= jy_result.cc %></td>
-    <td><%= jy_result.ri %></td>
-    <td><%= jy_result.gamma %></td>
-    <td><%= jy_result.pilot_count %></td>
-    <td><%= jy_result.pair_count %></td>
-    <td><%= jy_result.flight_count %></td>
-    <td><%= jy_result.avgFlightSize %></td>
-    <td><%= jy_result.figure_count %></td>
-    <td><%= jy_result.avgK %></td>
-    <td><%= jy_result.minority_zero_ct %></td>
-    <td><%= jy_result.minority_grade_ct %></td>
-  </tr>
-<% end %>
-<% @jc_results.each do |jc_result| %>
-  <tr>
-    <td><%= jc_result.c_result.contest.year_name %></td>
-    <td><%= jc_result.c_result.display_category %></td>
-    <td><%= jc_result.cc %></td>
-    <td><%= jc_result.ri %></td>
-    <td><%= jc_result.gamma %></td>
-    <td><%= jc_result.pilot_count %></td>
-    <td><%= jc_result.pair_count %></td>
-    <td><%= jc_result.flight_count %></td>
-    <td><%= jc_result.avgFlightSize %></td>
-    <td><%= jc_result.figure_count %></td>
-    <td><%= jc_result.avgK %></td>
-    <td><%= jc_result.minority_zero_ct %></td>
-    <td><%= jc_result.minority_grade_ct %></td>
-  </tr>
+<% @sj_results.each do |sj_result| %>
+  <tr><td colspan='7'><%= sj_result[0] %></td></tr>
+  <% sj_result[1].each do |sj_cat_result| %>
+    <tr><td/><td colspan = '7'><%= sj_cat_result[0] %></td></tr>
+    <% sj_cat_result[1].each do |sj_line_result| %>
+      <% j_result = sj_line_result[1] %>
+      <tr>
+        <td colspan='2'/>
+        <td><%= sj_line_result[0] %></td>
+        <td><%= j_result.cc %></td>
+        <td><%= j_result.ri %></td>
+        <td><%= j_result.gamma %></td>
+        <td><%= j_result.pilot_count %></td>
+        <td><%= j_result.pair_count %></td>
+        <td><%= j_result.flight_count %></td>
+        <td><%= j_result.avgFlightSize %></td>
+        <td><%= j_result.figure_count %></td>
+        <td><%= j_result.avgK %></td>
+        <td><%= j_result.minority_zero_ct %></td>
+        <td><%= j_result.minority_grade_ct %></td>
+      </tr>
+    <% end %>
+  <% end %>
 <% end %>
 </tbody>
 </table>
-</ul>
