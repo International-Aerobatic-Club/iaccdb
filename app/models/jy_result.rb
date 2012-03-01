@@ -5,6 +5,6 @@ class JyResult < ActiveRecord::Base
   include JudgeMetrics
   
   def to_s
-    "jy_result #{year} #{category.name} #{judge.name} Np:#{pilot_count} Rho: #{cc} Gamma: #{gamma} avgK: #{avgK}"
+    "jy_result #{year} #{category.name if category} #{judge.name} Np:#{pilot_count} Rho: #{cc} Gamma: #{gamma} avgK: #{avgK}"
   end
 end

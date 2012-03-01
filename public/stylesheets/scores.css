@@ -30,13 +30,30 @@ td.points {
   padding-right:4pt;
 }
 
+td.label,
 td.rho,
 td.cc,
 td.ri,
 td.tau,
 td.gamma,
 td.mz_count,
-td.mg_count {
+td.mg_count,
+td.count,
+td.avg {
   text-align:right;
-  padding-left:3pt;
+  padding-left:6pt;
+}
+
+
+table.judge_cv th.year,
+table.judge_cv th.category {
+  text-align:left;
+}
+
+table.judge_cv th {
+  text-align:right;
+}
+
+table.judge_cv th.year {
+  padding-top:8pt;
 }

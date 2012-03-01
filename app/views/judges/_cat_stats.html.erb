@@ -1,0 +1,23 @@
+<% j_result = cat_stats[:values] %>
+<tr>
+  <td colspan='2'/>
+  <td class='label'>
+  <% if j_result.kind_of? JcResult %>
+    <%= link_to cat_stats[:label],
+      contest_path(j_result.c_result.contest) %>
+  <% else %>
+    <%= cat_stats[:label] %>
+  <% end %>
+  </td>
+  <td class='rho'><%= j_result.cc %></td>
+  <td class='ri'><%= decimal_two(j_result.ri) %></td>
+  <td class='gamma'><%= j_result.gamma %></td>
+  <td class='count'><%= j_result.pilot_count %></td>
+  <td class='count'><%= j_result.pair_count %></td>
+  <td class='count'><%= j_result.flight_count %></td>
+  <td class='avg'><%= decimal_two(j_result.avgFlightSize) %></td>
+  <td class='count'><%= j_result.figure_count %></td>
+  <td class='avg'><%= decimal_two(j_result.avgK) %></td>
+  <td class='count'><%= j_result.minority_zero_ct %></td>
+  <td class='count'><%= j_result.minority_grade_ct %></td>
+</tr>
