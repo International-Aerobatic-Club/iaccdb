@@ -40,7 +40,7 @@ class JudgesController < ApplicationController
         j_cat_results << {
           :label => 'Category rollup', 
           :values => jy_result
-        }
+        } if 1 < jc_cat.length
         j_results[year] << {
           :label => jy_result.category.name, 
           :values => j_cat_results
@@ -56,11 +56,11 @@ class JudgesController < ApplicationController
         career_category_results[jy_result.category].accumulate(jy_result)
       end
       year_rollup_entry = {
-        :label => 'All categories',
+        :label => "#{year} rollup",
         :values => year_rollup
       }
       j_results[year] << {
-        :label => "#{year} rollup",
+        :label => 'All categories',
         :values => [year_rollup_entry]
       }
       career_rollup.accumulate(year_rollup)
