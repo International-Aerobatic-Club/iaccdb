@@ -26,7 +26,7 @@ def self.compute_jy_results (year)
           jy_result = JyResult.find_by_judge_id_and_category_id_and_year(
             jc_result.judge.id, category.id, year)
           if !jy_result
-            # can't use the or_initialize find because we need zero_reset
+            # can't use the "or_initialize" find because we need zero_reset
             jy_result = JyResult.new({
               :judge_id => jc_result.judge.id,
               :category_id => category.id,

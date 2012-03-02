@@ -10,8 +10,20 @@ cmd/recompute_judge_rollups does the judge metric rollups for a given year
 Include assistants, chiefs, assist_chiefs in judges list
 Show all in judge view
 
-working on judge view
-working on jy rollups
+Create a judge leaderboard by year
+
+Something went wrong with contest 2006 Tequila Cup:
+undefined method `-' for nil:NilClass
+/home/iaccdbor/rails/cdb/releases/20120301212828/lib/iac/rank_computer.rb:42:in
+`computeJudgeMetrics'
+/home/iaccdbor/rails/cdb/releases/20120301212828/vendor/bundle/ruby/1.8/gems/activerecord-3.0.3/lib/active_record/associations/association_collection.rb:430:in
+`method_missing'
+/home/iaccdbor/rails/cdb/releases/20120301212828/vendor/bundle/ruby/1.8/gems/activerecord-3.0.3/lib/active_record/associations/association_proxy.rb:216:in
+`method_missing'
+/home/iaccdbor/rails/cdb/releases/20120301212828/vendor/bundle/ruby/1.8/gems/activerecord-3.0.3/lib/active_record/associations/association_proxy.rb:216:in
+`each'
+/home/iaccdbor/rails/cdb/releases/20120301212828/vendor/bundle/ruby/1.8/gems/activerecord-3.0.3/lib/active_record/associations/association_proxy.rb:216:in
+`send'
 
 Something went wrong with contest 2005 2005 Gulf Coast Regional:
 Mysql2::Error: Column 'judge_id' cannot be null: INSERT INTO `pfj_results`

@@ -22,11 +22,11 @@ module JudgeMetrics
     self.ftsdx2 += (metrics.ftsdx2 || 0)
     self.ftsdy2 += (metrics.ftsdy2 || 0)
     self.sigma_d2 += (metrics.sigma_d2 || 0)
-    self.sigma_ri_delta += metrics.sigma_ri_delta
-    self.con += metrics.con
-    self.dis += metrics.dis
-    self.minority_zero_ct += metrics.minority_zero_ct
-    self.minority_grade_ct += metrics.minority_grade_ct
+    self.sigma_ri_delta += (metrics.sigma_ri_delta || 0)
+    self.con += (metrics.con || 0)
+    self.dis += (metrics.dis || 0)
+    self.minority_zero_ct += (metrics.minority_zero_ct || 0)
+    self.minority_grade_ct += (metrics.minority_grade_ct || 0)
     self.total_k += (metrics.total_k || 0)
     self.figure_count += (metrics.figure_count || 0)
     self.flight_count += (metrics.flight_count || 0)
