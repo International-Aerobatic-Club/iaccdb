@@ -9,15 +9,5 @@
     <%= cat_stats[:label] %>
   <% end %>
   </td>
-  <td class='rho'><%= j_result.cc %></td>
-  <td class='ri'><%= decimal_two(j_result.ri) %></td>
-  <td class='gamma'><%= j_result.gamma %></td>
-  <td class='count'><%= j_result.pilot_count %></td>
-  <td class='count'><%= j_result.pair_count %></td>
-  <td class='count'><%= j_result.flight_count %></td>
-  <td class='avg'><%= decimal_two(j_result.avgFlightSize) %></td>
-  <td class='count'><%= j_result.figure_count %></td>
-  <td class='avg'><%= decimal_two(j_result.avgK) %></td>
-  <td class='count'><%= j_result.minority_zero_ct %></td>
-  <td class='count'><%= j_result.minority_grade_ct %></td>
+  <%= render :partial => 'judges/stats_column_values', :object => j_result %>
 </tr>

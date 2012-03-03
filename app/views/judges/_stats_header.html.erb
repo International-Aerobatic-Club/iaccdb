@@ -1,15 +1,5 @@
 <tr class='category'>
   <th/>
   <th class='category' colspan = '2'><%= stats_header %></th>
-  <th>ρ</th>
-  <th>ri</th>
-  <th>γ</th>
-  <th>Np</th>
-  <th>Npp</th>
-  <th>Nf</th>
-  <th>Fza</th>
-  <th>Ng</th>
-  <th>Ka</th>
-  <th>Mz</th>
-  <th>Mg</th>
+  <%= render :partial => 'judges/stats_column_headers', :object => 'Judge' %>
 </tr>

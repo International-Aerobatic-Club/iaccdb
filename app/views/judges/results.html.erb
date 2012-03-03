@@ -1,25 +1,13 @@
 <table class='judge_results'><thead>
 <tr>
 <th>Judge</th>
-<th>ρ</th>
-<th>ρρ</th>
-<th>ri</th>
-<th>τ</th>
-<th>γ</th>
-<th>Mz</th>
-<th>Mg</th>
+<%= render :partial => 'judges/stats_column_headers' %>
 </tr>
 <tbody>
 <% j_results.each_with_index do |j_result, j| %>
   <tr>
   <td class='judge_name'><%= "J#{j+1} #{j_result.judge_name}" %></td>
-  <td class='cc'><%= j_result.cc %></td>
-  <td class='rho'><%= j_result.rho %></td>
-  <td class='ri'><%= decimal_two(j_result.ri) %></td>
-  <td class='tau'><%= j_result.tau %></td>
-  <td class='gamma'><%= j_result.gamma %></td>
-  <td class='mz_count'><%= j_result.minority_zero_ct %></td>
-  <td class='mg_count'><%= j_result.minority_grade_ct %></td>
+  <%= render :partial => 'judges/stats_column_values', :object => j_result %>
   </tr>
 <% end %>
 </tbody></table>
