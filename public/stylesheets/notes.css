@@ -10,7 +10,11 @@ img.notes_image {
   padding:10pt;
   border:2pt solid black;
   margin-left:20px;
-  float:right;
+  float:left;
+}
+
+p.notes_text {
+  clear:left;
 }
 
 img.inline-formula {
