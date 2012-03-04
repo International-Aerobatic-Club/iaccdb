@@ -82,16 +82,6 @@ class JudgesController < ApplicationController
       puts career_line[:values]
     end
     @sj_results = j_results.sort { |a,b| b <=> a }
-    @sj_results.each do |year, year_stats| 
-      puts year
-      year_stats.each do |cat_stats|
-        puts cat_stats[:label]
-        cat_stats[:values].each do |cat_line|
-          puts cat_line[:label]
-          puts cat_line[:values]
-        end
-      end
-    end
   end
 
 end

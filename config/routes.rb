@@ -14,6 +14,12 @@ Iac::Application.routes.draw do
     post "member/merge"
   end
 
+  namespace :leaders do
+    root :to => "contests#index"
+    get 'judges/:year', :action => :judges
+    get 'judges', :action => :judges
+  end
+
   root :to => "contests#index"
 
   get "pages/notes"

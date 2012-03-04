@@ -1,0 +1,22 @@
+<h1>Judge Leader Board <%= @year %></h1>
+
+<p>
+<% @years.each do |year| %>
+  <%= link_to year, leaders_path(year) %>
+<% end %>
+</p>
+<table class='judge_leaders'>
+<tbody>
+<% @results.each do |cat, jy_results| %>
+  <%= render :partial => 'judges/stats_header', :object => cat.name %>
+  <% jy_results.each do |jy_result| %>
+    <tr>
+      <td/>
+      <td/>
+      <td><%= jy_result.judge.name %></td>
+      <%= render :partial => 'judges/stats_column_values', :object => jy_result %>
+    </tr>
+  <% end %>
+<% end %>
+</tbody>
+</table>
