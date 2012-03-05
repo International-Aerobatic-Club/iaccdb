@@ -13,6 +13,7 @@ module JudgeMetrics
     self.total_k = 0
     self.figure_count = 0
     self.flight_count = 0
+    self.ri_total = 0
   end
 
   def accumulate(metrics)
@@ -30,12 +31,12 @@ module JudgeMetrics
     self.total_k += (metrics.total_k || 0)
     self.figure_count += (metrics.figure_count || 0)
     self.flight_count += (metrics.flight_count || 0)
+    self.ri_total += (metrics.ri_total || 0)
   end
 
   def ri
-    if pilot_count && pilot_count != 0
-      ri = (20.0 * sigma_ri_delta) / 
-      (0.0057 * pilot_count * pilot_count + 0.1041 * pilot_count)
+    if flight_count && 0 < flight_count
+      ri = ri_total/flight_count
       ri.round(2)
     else
       0

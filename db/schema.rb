@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120226190326) do
+ActiveRecord::Schema.define(:version => 20120305194645) do
 
   create_table "c_results", :force => true do |t|
     t.integer  "contest_id"
@@ -85,6 +85,7 @@ ActiveRecord::Schema.define(:version => 20120226190326) do
     t.integer  "total_k"
     t.integer  "figure_count"
     t.integer  "flight_count"
+    t.decimal  "ri_total",          :precision => 11, :scale => 5
   end
 
   create_table "jf_results", :force => true do |t|
@@ -107,6 +108,7 @@ ActiveRecord::Schema.define(:version => 20120226190326) do
     t.integer  "total_k"
     t.integer  "figure_count"
     t.integer  "flight_count"
+    t.decimal  "ri_total",          :precision => 10, :scale => 5
   end
 
   create_table "judges", :force => true do |t|
@@ -136,6 +138,7 @@ ActiveRecord::Schema.define(:version => 20120226190326) do
     t.integer  "minority_zero_ct"
     t.integer  "total_k"
     t.integer  "figure_count"
+    t.decimal  "ri_total",          :precision => 12, :scale => 5
   end
 
   create_table "manny_synches", :force => true do |t|

@@ -30,6 +30,8 @@ module Model
           :ftsdy2 => 70,
           :sigma_d2 => 8,
           :sigma_ri_delta => 0.1552617297,
+          :ri_total => 3.7421482217,
+          :flight_count => 1,
           :con => 12,
           :dis => 3,
           :minority_zero_ct => 1,
@@ -45,6 +47,8 @@ module Model
           :ftsdy2 => 20,
           :sigma_d2 => 2,
           :sigma_ri_delta => 0.0743063718,
+          :ri_total => 2.9277530262,
+          :flight_count => 1,
           :con => 5,
           :dis => 1,
           :minority_zero_ct => 3,
@@ -55,7 +59,7 @@ module Model
         @jc_result.rho.should == 94
       end
       it 'computes the CIVA RI formula' do
-        @jc_result.ri.should == 2.85
+        @jc_result.ri.should == 3.33
       end
       it 'computes the Kendal tau' do
         @jc_result.tau.should == 62

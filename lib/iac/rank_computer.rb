@@ -80,6 +80,7 @@ module IAC
         end
         jf_result.flight_count += 1
         jf_result.pair_count = pilot_count * (pilot_count - 1) / 2
+        jf_result.ri_total = calc_ri(jf_result.sigma_ri_delta, pilot_count)
         jf_result.save
       end
       jf_results_by_judge.values
@@ -124,6 +125,16 @@ module IAC
   ###
   private
   ###
+
+    # scale sigma_ri_delta using pilot count to get CIVA ri value
+    def self.calc_ri(sigma_ri_delta, pilot_count)
+      if pilot_count && pilot_count != 0
+        (20.0 * sigma_ri_delta) / 
+          (0.0057 * pilot_count * pilot_count + 0.1041 * pilot_count)
+      else
+        0
+      end
+    end
 
     # Convert raw ranks (number of better pilots + 1) into
     # average ranks, in which tied pilots have rank equal to
