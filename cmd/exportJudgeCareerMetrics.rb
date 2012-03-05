@@ -2,7 +2,7 @@
 
 cols = [:pilot_count, :sigma_ri_delta, :con, :dis, :minority_zero_ct,
        :minority_grade_ct, :pair_count, :ftsdx2, :ftsdy2, :ftsdxdy, :sigma_d2,
-       :total_k, :figure_count, :flight_count]
+       :total_k, :figure_count, :flight_count, :ri_total]
 head = %w{judge_id pilot_count rho ri gamma flight_count}
 puts head.join(',')
 jy_results = JyResult.select(
