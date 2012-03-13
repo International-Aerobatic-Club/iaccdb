@@ -1,5 +1,4 @@
 require 'acro/pilotScraper'
-require 'iac/constants'
 
 # scrape pilot scores from ACRO produced web site files
 module ACRO

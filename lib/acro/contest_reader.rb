@@ -1,5 +1,4 @@
 require 'acro/pilot_flight_data'
-require 'iac/constants'
 
 # read into the database pilot scores from 
 #   extracted PilotFlightData YAML files

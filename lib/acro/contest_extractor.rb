@@ -1,6 +1,5 @@
 require 'acro/pilotScraper'
 require 'acro/pilot_flight_data'
-require 'iac/constants'
 
 # scrape pilot scores from ACRO produced web site files
 # output yml files that contain the scores

@@ -1,6 +1,5 @@
 # assume loaded with rails ActiveRecord
 # environment for IAC contest data application
-require 'lib/iac/constants'
 
 # this class contains methods to find pilots who qualify for stars awards
 module IAC
