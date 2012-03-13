@@ -24,8 +24,7 @@ def computePilotFlight
   @pf.flight_value = 0
   @pf.adj_flight_value = 0
   if @kays
-    @pfScores ||= @pilot_flight.scores
-    computeNonZeroValues
+    computeNonZeroValues(@pilot_flight.scores)
     resolveAverages
     storeGradedValues
     resolveZeros
@@ -39,7 +38,7 @@ end
 private
 ###
 
-def computeNonZeroValues
+def computeNonZeroValues(pfScores)
   # scaled score for a figure is judge grade * k value
   # Matrix of scaled scores indexed [figure][judge]
   @fjsx = []
@@ -52,7 +51,7 @@ def computeNonZeroValues
   @score_ct = Array.new(@kays.length, 0)
   # total of scaled scores for figure [f]
   @score_total = Array.new(@kays.length, 0)
-  @pfScores.each do |score|
+  pfScores.each do |score|
     @judges << score.judge
     score.values.each_with_index do |v, f|
       if f < @kays.length

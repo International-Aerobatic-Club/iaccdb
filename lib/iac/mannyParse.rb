@@ -83,6 +83,7 @@ def process_judge(line)
   case ja[3].to_i
     when 1
       flight.chief = pid
+      flight.judges << pid
     when 2
       flight.judges << pid
     when 3

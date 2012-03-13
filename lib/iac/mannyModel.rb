@@ -1,5 +1,3 @@
-require 'iac/constants.rb'
-
 module Manny
 
 class Seq
@@ -8,6 +6,10 @@ class Seq
   def initialize()
     @figs = []
   end
+  
+  def to_s
+    "Manny sequence presentation: #{pres}, figure_k's: #{figs}, figure_count: #{ctFigs}"
+  end
 end
 
 class Pilot
@@ -15,6 +17,10 @@ class Pilot
 
   def initialize(part)
     @part = part # participant index
+  end
+
+  def to_s
+    "Manny pilot part id: #{part} flying #{make} #{model} #{reg}"
   end
 end
 
@@ -87,6 +93,10 @@ class Score
     @seq = seq
     @pilot = pilot # participant index
     @judge = judge # participant index
+  end
+
+  def to_s
+    "Manny score pilot #{pilot}, judge #{judge}, sequence #{seq}"
   end
 end
 

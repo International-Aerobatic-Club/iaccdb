@@ -86,20 +86,6 @@ def updateContest(mContest, dMannySynch)
   dContest
 end
 
-# find or create member with bad or mismatched IAC ID
-# member family and given names must match exatly, otherwise
-# this creates a new member record
-def member_name_fallback(mPart)
-  dm = Member.find_or_create_by_name(mPart.iacID, mPart.givenName, mPart.familyName)
-end
-
-# find or create member with good IAC ID
-# IAC ID and family name must match exactly, otherwise this falls
-# back to exact match of family name and given name
-def member_by_iacID(mPart)
-  Member.find_or_create_by_iac_number(mPart.iacID, mPart.givenName, mPart.familyName)
-end
-
 # initialize an array @parts of member database records to match the
 # participant indices used in the manny model
 # update and add member entries as required
@@ -112,10 +98,10 @@ def process_participants(mContest)
   mContest.participants.each_with_index do |mp,i| 
     if mp
       if mp.iacID && mp.iacID != 0
-        dm = member_by_iacID(mp)
+        dm = Member.find_or_create_by_iac_number(mp.iacID, mp.givenName, mp.familyName)
       else
         Member.logger.warn("#{mp.givenName} #{mp.familyName} missing IAC ID")
-        dm = member_name_fallback(mp)
+        dm = Member.find_or_create_by_name(mp.iacID, mp.givenName, mp.familyName)
       end
       @parts[i] = dm
     end
@@ -189,6 +175,8 @@ def process_flight_judges(dFlight, mFlight)
       msg = "Failed create judge #{dJ} for #{dFlight.to_s}"
       Judge.logger.error(msg)
     end
+    #puts "judge team #{dJudge} for judge #{j} judge_id #{dJ}, assist_id #{dA}"
+    #puts "set judge #{j} to #{dJudge}"
     @judges[j] = dJudge
   end
 end
@@ -210,6 +198,7 @@ def process_flight_scores(dFlight, mCat, mFlight)
     dPilotFlight.save
     mJi = mScore.judge
     dJudge = @judges[mJi] # get the judge team
+    #puts "index #{mJi} mScore #{mScore}" if dJudge == nil
     dScore = Score.create(
       :pilot_flight => dPilotFlight,
       :judge => dJudge,
