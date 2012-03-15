@@ -12,35 +12,3 @@ Show all in judge view
 
 Create a judge leaderboard by year
 
-Something went wrong with contest 2006 Tequila Cup:
-undefined method `-' for nil:NilClass
-/home/iaccdbor/rails/cdb/releases/20120301212828/lib/iac/rank_computer.rb:42:in
-`computeJudgeMetrics'
-/home/iaccdbor/rails/cdb/releases/20120301212828/vendor/bundle/ruby/1.8/gems/activerecord-3.0.3/lib/active_record/associations/association_collection.rb:430:in
-`method_missing'
-/home/iaccdbor/rails/cdb/releases/20120301212828/vendor/bundle/ruby/1.8/gems/activerecord-3.0.3/lib/active_record/associations/association_proxy.rb:216:in
-`method_missing'
-/home/iaccdbor/rails/cdb/releases/20120301212828/vendor/bundle/ruby/1.8/gems/activerecord-3.0.3/lib/active_record/associations/association_proxy.rb:216:in
-`each'
-/home/iaccdbor/rails/cdb/releases/20120301212828/vendor/bundle/ruby/1.8/gems/activerecord-3.0.3/lib/active_record/associations/association_proxy.rb:216:in
-`send'
-
-Something went wrong with contest 2005 2005 Gulf Coast Regional:
-Mysql2::Error: Column 'judge_id' cannot be null: INSERT INTO `pfj_results`
-(`created_at`, `flight_rank`, `updated_at`, `judge_id`, `graded_values`,
-`flight_value`, `computed_values`, `graded_ranks`, `computed_ranks`,
-`need_compute`, `pilot_flight_id`) VALUES ('2012-02-26 21:14:01', NULL,
-'2012-02-26 21:14:01', NULL, '--- \n- 2940\n- 1755\n- 1600\n- 2600\n-
-2520\n- 3000\n- 845\n- 1820\n- 3440\n- 1800\n', NULL, NULL, NULL, NULL, 1,
-7312)
-/home/dcl/.rvm/gems/ruby-1.8.7-p173@rails303/gems/activerecord-3.0.3/lib/active_record/connection_adapters/abstract_adapter.rb:202:in
-`log'
-/home/dcl/.rvm/gems/ruby-1.8.7-p173@rails303/gems/mysql2-0.2.6/lib/active_record/connection_adapters/mysql2_adapter.rb:314:in
-`execute'
-/home/dcl/.rvm/gems/ruby-1.8.7-p173@rails303/gems/activerecord-3.0.3/lib/active_record/connection_adapters/abstract/database_statements.rb:263:in
-`insert_sql'
-/home/dcl/.rvm/gems/ruby-1.8.7-p173@rails303/gems/mysql2-0.2.6/lib/active_record/connection_adapters/mysql2_adapter.rb:325:in
-`insert_sql'
-/home/dcl/.rvm/gems/ruby-1.8.7-p173@rails303/gems/activerecord-3.0.3/lib/active_record/connection_adapters/abstract/database_statements.rb:44:in
-`insert'
-
