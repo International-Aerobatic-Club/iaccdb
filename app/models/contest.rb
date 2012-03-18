@@ -4,6 +4,7 @@ class Contest < ActiveRecord::Base
   has_many :flights, :dependent => :destroy
   has_many :c_results, :dependent => :destroy
   has_one :manny_synch, :dependent => :nullify
+  has_many :failures, :dependent => :destroy
 
   def to_s
     "#{name} on #{start.strftime('%b %d, %Y')}"

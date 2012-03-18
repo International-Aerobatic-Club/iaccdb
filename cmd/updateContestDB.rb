@@ -3,25 +3,12 @@
 # use rails runner cmd/updateContestDB.rb
 require "iac/mannyParse"
 require "iac/mannyToDB"
+require "iac/manny_connect"
 require "iac/findStars"
 require "net/http"
 require "date"
 
-MANNY_HOST = 'donkeykong.highroaddata.com'
-MANNY_PORT = 1001
-
-# process one record of the contest list
-#tabs (09) delimit fields
-# ch is a hash of contest id => last update time
-def processListRecord(ch, rcd)
-  if !(rcd =~ /ContestList\>/)
-    ctst = rcd.split("\t")
-    if 10 < ctst.length 
-      #puts ctst[0] << ' ' << ctst[2] << ' ' << ctst[9]
-      ch[ctst[0].to_i] = ctst[9]
-    end
-  end
-end
+include MannyConnect
 
 #retrieve and process content of Manny contest list
 #tabs (09) delimit fields
@@ -29,19 +16,15 @@ end
 #returns a hash of contest id => last update time
 def processContestList
   ch = {}
-  tail = ''
-  Net::HTTP.start(MANNY_HOST, MANNY_PORT) do |http|
-    http.post('/', '<ContestList/>', {'Content-Type' => 'text/xml'}) do |data| 
-      data = tail << data
-      aRcd = data.split("\r")
-      if !aRcd.empty?
-        tail = aRcd.last
-        aRcd.pop
-        aRcd.each { |rcd| processListRecord ch, rcd }
+  pull_contest_list(lambda do |rcd| 
+    if !(rcd =~ /ContestList\>/)
+      ctst = rcd.split("\t")
+      if 10 < ctst.length 
+        #puts ctst[0] << ' ' << ctst[2] << ' ' << ctst[9]
+        ch[ctst[0].to_i] = ctst[9]
       end
     end
-  end
-  # tail should be empty because data ends with a record delimiter
+  end)
   ch
 end
 
@@ -75,20 +58,8 @@ end
 #retrieve a contest from Manny, parse it, and add it to the database
 # id is Manny identifier for the contest.
 def doProcessContest(m2d, id)
-  query = "<ContestDetail><ContestID>#{id}</ContestID></ContestDetail>"
   manny = Manny::MannyParse.new
-  tail = ''
-  Net::HTTP.start(MANNY_HOST, MANNY_PORT) do |http|
-    http.post('/', query, {'Content-Type' => 'text/xml'}) do |data| 
-      data = tail << data
-      aRcd = data.split("\r")
-      if !aRcd.empty?
-        tail = aRcd.last
-        aRcd.pop
-        aRcd.each { |rcd| manny.processLine(rcd) }
-      end
-    end
-  end
+  pull_contest(lambda { |rcd| manny.processLine(rcd) })
   contest = m2d.process_contest(manny, true)
   if (contest)
     contest.compute_flights
@@ -112,23 +83,26 @@ def removeContest(m2d, k)
   puts "Should remove contest id #{k}"
 end
 
-#reload = !ARGV.empty? && ARGV[0] == 'reload'
-#files = reload ? ARGV.drop(1) : ARGV
-reload=false
+reload = !ARGV.empty? && ARGV[0] == 'reload'
+files = reload ? ARGV.drop(1) : ARGV
 m2d = IAC::MannyToDB.new
-#if files.size == 0
+if files.size == 0
   curList = processContestList
   doList = reload ? curList : findMissingContests(curList)
   doList.each_key do |k| 
-    puts "Processing Contest #{k}"
-    processContest(m2d, k)
+    puts "Queuing Contest #{k}"
+    Delayed::Job.enqueue RetrieveManny.new(k)
+    #processContest(m2d, k)
   end
   findSpuriousContests(curList).each_key do |k|
     removeContest(m2d, k)
   end
-#else
-#  files.each do |arg|
-#    k = arg.to_i
-#    if (k != 0) then processContest(m2d, k) end
-#  end
-#end
+else
+  files.each do |arg|
+    k = arg.to_i
+    if (k != 0) 
+      puts "Queuing Contest #{k}"
+      Delayed::Job.enqueue RetrieveMannyJob.new(k)
+    end
+  end
+end

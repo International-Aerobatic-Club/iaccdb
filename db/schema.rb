@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120305194645) do
+ActiveRecord::Schema.define(:version => 20120317144948) do
 
   create_table "c_results", :force => true do |t|
     t.integer  "contest_id"
@@ -45,12 +45,37 @@ ActiveRecord::Schema.define(:version => 20120305194645) do
     t.datetime "updated_at"
   end
 
+  create_table "delayed_jobs", :force => true do |t|
+    t.integer  "priority",   :default => 0
+    t.integer  "attempts",   :default => 0
+    t.text     "handler"
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
+
   create_table "f_results", :force => true do |t|
     t.integer  "flight_id"
     t.boolean  "need_compute", :default => true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "c_result_id"
+  end
+
+  create_table "failures", :force => true do |t|
+    t.string   "step",        :limit => 16
+    t.integer  "contest_id"
+    t.integer  "manny_id"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "flights", :force => true do |t|

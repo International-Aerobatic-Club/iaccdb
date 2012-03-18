@@ -1,3 +1,5 @@
+require 'lib/iac/constants'
+
 module Manny
 
 class Seq

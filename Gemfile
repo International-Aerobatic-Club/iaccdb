@@ -2,6 +2,8 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.0.3'
 
+gem 'delayed_job_active_record'
+
 group :development, :test do
   gem 'sqlite3-ruby', "= 1.2.5", :require => 'sqlite3'
 end
