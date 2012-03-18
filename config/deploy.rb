@@ -1,3 +1,5 @@
+require 'delayed/recipes'
+
 set :user, 'iaccdbor'
 set :domain, 'iaccdb.org'
 set :application, 'cdb'
@@ -45,4 +47,10 @@ desc "install prerequisite gems from Gemfile.lock"
 task :bundle_install, :roles => :app do
   run "cd #{release_path} && bundle install --deployment"
 end
+
+# delayed_job
+set :rails_env, "production"
+after "deploy:stop",    "delayed_job:stop"
+after "deploy:start",   "delayed_job:start"
+after "deploy:restart", "delayed_job:restart"
 
