@@ -5,7 +5,7 @@ module MannyConnect
 MANNY_HOST = 'donkeykong.highroaddata.com'
 MANNY_PORT = 1001
 
-def pull_contest(manny_number, &line_proc)
+def pull_contest(manny_number, line_proc)
   query = "<ContestDetail><ContestID>#{manny_number}</ContestID></ContestDetail>"
   tail = ''
   Net::HTTP.start(MANNY_HOST, MANNY_PORT) do |http|
@@ -15,7 +15,7 @@ def pull_contest(manny_number, &line_proc)
       if !aRcd.empty?
         tail = aRcd.last
         aRcd.pop
-        aRcd.each { |rcd| line_proc(rcd) }
+        aRcd.each { |rcd| line_proc.call(rcd) }
       end
     end
   end

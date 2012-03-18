@@ -1,3 +1,6 @@
+require 'iac/mannyParse'
+require 'iac/mannyToDB'
+
 # This captures a job for delayed job
 # The job retrieves one manny record and
 # parses the record into the contest database
@@ -9,8 +12,10 @@ class RetrieveMannyJob < Struct.new(:manny_id)
     say "Performing retrieve manny #{manny_id}"
     @manny_id = manny_id
     manny = Manny::MannyParse.new
-    pull_contest(lambda { |rcd| manny.processLine(rcd) })
+    pull_contest(@manny_id, lambda { |rcd| manny.processLine(rcd) })
     m2d = IAC::MannyToDB.new
+    mContest = manny.contest
+    say "Parsed contest, #{mContest.name} #{mContest.record_date}"
     @contest = m2d.process_contest(manny, true)
   end
 
@@ -29,7 +34,7 @@ class RetrieveMannyJob < Struct.new(:manny_id)
   end
 
   def say(text)
-    Delayed::Worker.logger.add(Logger::INFO, text)
+    puts text
   end
 
 end
