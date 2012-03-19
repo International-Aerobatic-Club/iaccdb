@@ -1,8 +1,11 @@
 Iac::Application.routes.draw do
 
+  ### Admin Namespace
   namespace :admin do
     root :to => "contests#index"
-    resources :contests, :except => [:new, :create]
+    resources :contests, :except => [:new, :create] do
+      resources :c_results, :only => [:index, :show]
+    end
     resources :contests do
       member do 
         get 'recompute'
@@ -15,12 +18,14 @@ Iac::Application.routes.draw do
     post "members/merge"
   end
 
+  ### Leaders namespace
   namespace :leaders do
     root :to => "contests#index"
     get 'judges/:year', :action => :judges
     get 'judges', :action => :judges
   end
 
+  ### Default namespace
   root :to => "contests#index"
 
   get "pages/notes"

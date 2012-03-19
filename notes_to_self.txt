@@ -9,6 +9,5 @@ cmd/recompute_judge_rollups does the judge metric rollups for a given year
 
 Include assistants, chiefs, assist_chiefs in judges list
 Show all in judge view
-
-Create a judge leaderboard by year
+c_result admin view show flights for contest; jf_result, f_result for c_result
 

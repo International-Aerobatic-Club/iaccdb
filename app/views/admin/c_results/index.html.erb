@@ -1,0 +1,24 @@
+
+<h1>Admin Results for Contest</h1>
+
+<%= link_to 'Admin Contests', admin_contests_path %>
+<%= link_to "#{@contest.sobriquet} (#{@contest.id})", admin_contest_path(@contest) %>
+
+<% @c_results.each do |c_result| %>
+  <h3><%= "#{c_result.category} #{c_result.aircat} (#{c_result.id})" %></h3>
+  <h4>pc_results</h4>
+  <table><thead><tr><th>id</th><th>pilot</th><th>result</th><th>need_compute</th></tr></thead>
+  <tbody>
+  <% c_result.pc_results.each do |pc_result| %>
+    <tr>
+      <td><%= pc_result.id %>
+      <td><%= pc_result.pilot_id %></td>
+      <td><%= "#{pc_result.category_value} (#{pc_result.category_rank})" %></td>
+      <td><%= pc_result.need_compute %></td>
+    </tr>
+  <% end %>
+  </tbody>
+  </table>
+<% end %>
+</tbody>
+</table>

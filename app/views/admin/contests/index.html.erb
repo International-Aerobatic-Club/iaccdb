@@ -14,26 +14,27 @@
 <thead>
   <tr>
     <th>c_id</th>
+    <th>m_no</th>
     <th>start</th>
     <th>name</th>
     <th>place</th>
-    <th>m_no</th>
-    <th>synch_dt</th>
+    <th>calcs</th>
   </tr>
 </thead>
 <tbody>
 <% @contests.each do |contest| %>
   <tr>
     <td><%= contest.id %></td>
+    <% manny = contest.manny_synch %>
+    <td><%= manny.manny_number if manny%></td>
     <td><%= contest.start %></td>
     <td><%= link_to contest.sobriquet, contest %></td>
     <td><%= contest.place %></td>
-    <% manny = contest.manny_synch %>
-    <% if manny %>
-      <td><%= manny.manny_number %></td>
-      <td><%= manny.synch_date %></td>
+    <% results = contest.c_results %>
+    <% if results %>
+      <td><%= link_to 'results', admin_contest_c_results_path(contest) %></td>
     <% else %>
-      <td colspan='2'>no manny</td>
+      <td/>
     <% end %>
     <td><%= link_to :edit, edit_admin_contest_path(contest) %></td>
     <td>
