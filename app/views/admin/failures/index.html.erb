@@ -1,0 +1,11 @@
+<p><%= link_to "Admin", admin_root_url %></p>
+<h1>Admin Failures</h1>
+<table>
+<thead>
+<tr><th>Step</th><th>Contest</th><th>c_id</th><th>m_no</th>
+<th colspan='2'>Actions</th></tr>
+</thead>
+<tbody>
+<%= render :partial=>:failure, :collection => @failures %>
+</tbody>
+</table>

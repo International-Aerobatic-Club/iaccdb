@@ -9,9 +9,10 @@ Iac::Application.routes.draw do
       end
     end
     resources :manny_synchs, :only => [:index, :destroy]
-    resources :member, :only => [:index, :edit, :update, :show]
-    post "member/merge_preview"
-    post "member/merge"
+    resources :members, :only => [:index, :edit, :update, :show]
+    resources :failures, :only => [:index, :show, :destroy]
+    post "members/merge_preview"
+    post "members/merge"
   end
 
   namespace :leaders do
