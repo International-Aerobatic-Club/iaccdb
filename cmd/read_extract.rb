@@ -1,21 +1,17 @@
 # use rails runner cmd/read_extract.rb <file>
 require "acro/contest_reader"
 
-#reload = !ARGV.empty? && ARGV[0] == 'reload'
-#args = reload ? ARGV.drop(1) : ARGV
 args = ARGV
 ctlFile = args[0]
 if (ctlFile)
   contest_reader = ACRO::ContestReader.new(ctlFile)
   pcs = contest_reader.read_contest
   if pcs.empty?
-    begin
-      contest_reader.dContest.results
-    rescue Exception => e
-      puts "Trouble computing results for #{ctlFile} is #{e}"
-    end
+    puts "Success reading #{contest_reader.dContest.year_name}."
+    Delayed::Job.enqueue ComputeFlightsJob.new(contest_reader.dContest)
+    puts "Results computation queued for processing."
   else
-    puts "There were problems with these:"
+    puts "There were problems with these contest files:"
     pcs.each { |f| puts f }
   end
 else

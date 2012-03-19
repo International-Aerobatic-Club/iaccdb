@@ -31,15 +31,17 @@ def initialize(ctlFile)
 end
 
 def read_contest
+  puts "Contest reader processing contest, #{@dContest.year_name}"
   pcs = []
   files.each do |f|
     begin
+      puts "Contest reader processing file, #{f}"
       pilot_flight_data = YAML.load_file(f)
       process_pilotFlight(pilot_flight_data)
     rescue Exception => e
       puts "\nSomething went wrong with #{f}:"
       puts e.message
-      e.backtrace.each { |l| puts l }
+      puts e.backtrace.each.join("\n")
       pcs << f
     end
   end
