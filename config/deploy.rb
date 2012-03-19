@@ -41,6 +41,15 @@ task :config_admin, :roles => :app do
   run "ln ~/admin.yml #{File.join(current_path, 'config/admin.yml')}"
 end
 
+# link database.yml for proper production database access
+namespace :db do
+  task :db_config, :except => { :no_release => true }, :role => :app do
+    run "rm #{File.join(current_path, 'config/database.yml')}"
+    run "ln ~/database.yml #{File.join(current_path, 'config/database.yml')}"
+  end
+end
+after "deploy:finalize_update", "db:db_config"
+
 # install bundle
 after "deploy:update_code", :bundle_install
 desc "install prerequisite gems from Gemfile.lock"
