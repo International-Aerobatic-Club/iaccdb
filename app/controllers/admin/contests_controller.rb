@@ -48,8 +48,9 @@ class Admin::ContestsController < ApplicationController
   # GET /contests/
   def recompute
     @contest = Contest.find(params[:id])
-    @contest.results
-    render :action => 'index'
+    Delayed::Job.enqueue ComputeFlightsJob.new(@contest)
+    flash[:notice] = "#{@contest.year_name} queued for computation"
+    redirect_to :action => 'index' 
   end
 
 end

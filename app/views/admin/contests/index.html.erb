@@ -8,6 +8,10 @@
 <%= link_to 'Admin Failures', admin_failures_path %>
 </p>
 
+<% if flash[:notice] %>
+  <p id="notice" ><%= flash[:notice] %></p>
+<% end %>
+
 <h1>Admin Contests</h1>
 
 <table>
@@ -39,11 +43,11 @@
     <td><%= link_to :edit, edit_admin_contest_path(contest) %></td>
     <td>
       <%= link_to :recompute, recompute_admin_contest_path(contest),
-        :confirm => 'This can take a while. Be very patient.  Okay?' %>
+        :confirm => 'Queues a job to recompute all contest results.  Okay?' %>
     </td>
     <td>
       <%= link_to :delete, admin_contest_path(contest), 
-        :confirm => 'Will leave the Manny synch record, okay?', 
+        :confirm => 'Will leave the Manny synch record.  Okay?', 
         :method => :delete %>
     </td>
   </tr>
