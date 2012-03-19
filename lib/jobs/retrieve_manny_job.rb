@@ -7,6 +7,7 @@ require 'iac/mannyToDB'
 class RetrieveMannyJob < Struct.new(:manny_id)
   
   include MannyConnect
+  include JobsSay
 
   def perform
     say "Performing retrieve manny #{manny_id}"
@@ -31,10 +32,6 @@ class RetrieveMannyJob < Struct.new(:manny_id)
   def success(job)
     say "Retrieve manny success #{manny_id}"
     Delayed::Job.enqueue ComputeFlightsJob.new(@contest)
-  end
-
-  def say(text)
-    puts text
   end
 
 end

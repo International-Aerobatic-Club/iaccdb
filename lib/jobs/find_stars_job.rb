@@ -4,14 +4,16 @@ require "iac/findStars"
 # The job computes flight results for a contest
 class FindStarsJob < Struct.new(:contest)
   
+  include JobsSay
+
   def perform
     @contest = contest
-    puts "Finding stars qualifying pilots for #{@contest.year_name}"
+    say "Finding stars qualifying pilots for #{@contest.year_name}"
     IAC::FindStars.findStars(contest) 
   end
 
   def error(job, exception)
-    puts "Error finding stars for #{@contest.year_name}"
+    say "Error finding stars for #{@contest.year_name}"
     Failure.create(
       :step => 'find stars', 
       :contest_id => @contest.id,
@@ -21,7 +23,7 @@ class FindStarsJob < Struct.new(:contest)
   end
 
   def success(job)
-    puts "Success finding stars for #{@contest.year_name}"
+    say "Success finding stars for #{@contest.year_name}"
   end
 
 end

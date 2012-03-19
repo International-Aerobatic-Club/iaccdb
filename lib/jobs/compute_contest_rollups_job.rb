@@ -2,14 +2,16 @@
 # The job computes flight results for a contest
 class ComputeContestRollupsJob < Struct.new(:contest)
   
+  include JobsSay
+
   def perform
     @contest = contest
-    puts "Computing rollups for #{@contest.year_name}"
+    say "Computing rollups for #{@contest.year_name}"
     @contest.compute_contest_rollups
   end
 
   def error(job, exception)
-    puts "Error computing rollups for #{@contest.year_name}"
+    say "Error computing rollups for #{@contest.year_name}"
     Failure.create(
       :step => 'compute rollups', 
       :contest_id => @contest.id,
@@ -19,7 +21,7 @@ class ComputeContestRollupsJob < Struct.new(:contest)
   end
 
   def success(job)
-    puts "Success computing contest rollups for #{@contest.year_name}"
+    say "Success computing contest rollups for #{@contest.year_name}"
     Delayed::Job.enqueue ComputeYearRollupsJob.new(@contest.start.year)
   end
 

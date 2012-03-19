@@ -4,14 +4,16 @@ require 'iac/judge_rollups'
 # The job computes metric rollups for all contests in a year
 class ComputeYearRollupsJob < Struct.new(:year)
   
+  include JobsSay
+
   def perform
     @year = year
-    puts "Computing year rollups for #{@year}"
+    say "Computing year rollups for #{@year}"
     IAC::JudgeRollups.compute_jy_results(@year)
   end
 
   def error(job, exception)
-    puts "Error computing rollups for #{@year}"
+    say "Error computing rollups for #{@year}"
     Failure.create(
       :step => 'year rollups #{@year}', 
       :description => 
@@ -19,7 +21,7 @@ class ComputeYearRollupsJob < Struct.new(:year)
   end
 
   def success(job)
-    puts "Success computing rollups for #{@year}"
+    say "Success computing rollups for #{@year}"
   end
 
 end
