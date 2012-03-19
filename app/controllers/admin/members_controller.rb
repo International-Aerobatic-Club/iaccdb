@@ -21,7 +21,7 @@ class Admin::MembersController < ApplicationController
   def update
     @member = Member.find(params[:id])
     if @member.update_attributes(params[:member])
-      redirect_to admin_member_index_path(:anchor => @member.id),
+      redirect_to admin_members_path(:anchor => @member.id),
         :notice => "Member updated"
     else
       render :action => "edit"
@@ -31,7 +31,7 @@ class Admin::MembersController < ApplicationController
   def merge_preview
     @members = Member.find(params[:selected].keys)
     if @members.length == 1
-      redirect_to admin_member_index_url, 
+      redirect_to admin_members_url, 
         :alert => 'select multiple members to merge'
     else
       @target = @members.first.id
@@ -51,7 +51,7 @@ class Admin::MembersController < ApplicationController
         check_dups_join(flights, member.flights) 
       end
       if (flash[:alert])
-        redirect_to admin_member_index_url 
+        redirect_to admin_members_url 
       end
     end
   end
@@ -76,8 +76,8 @@ class Admin::MembersController < ApplicationController
     JcResult.update_all(['judge_id = ?', @target.id], 
       ['judge_id in (?)', ids.join(',')])
     @members.each { |member| member.destroy }
-    redirect_to admin_member_index_path(:anchor => @target.id),
-      :notice => "Members merged into #{@target.name}"
+    flash[:notice] = "Members merged into #{@target.name}"
+    redirect_to admin_members_path(:anchor => @target.id)
   end
 
   ###
