@@ -30,7 +30,7 @@ end
 after "deploy:symlink", :enable_passenger
 desc "setup .htaccess for passenger"
 task :enable_passenger, :roles => :app do
-  run "echo -e \"PassengerEnabled On\\nPassengerAppRoot #{current_path}\" > #{File.join(current_path, 'public', '.htaccess')}"
+  run "echo -e \"PassengerEnabled On\\nPassengerAppRoot #{current_path}\" >> #{File.join(current_path, 'public', '.htaccess')}"
   run "rm -f ~/public_html && ln -s #{File.join(current_path, 'public')} ~/public_html"
 end
 
