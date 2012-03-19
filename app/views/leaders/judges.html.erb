@@ -13,7 +13,7 @@
     <tr>
       <td/>
       <td/>
-      <td><%= jy_result.judge.name %></td>
+      <td><%= link_to jy_result.judge.name, judge_path(jy_result.judge) %></td>
       <%= render :partial => 'judges/stats_column_values', :object => jy_result %>
     </tr>
   <% end %>
