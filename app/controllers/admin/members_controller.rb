@@ -31,8 +31,8 @@ class Admin::MembersController < ApplicationController
   def merge_preview
     @members = Member.find(params[:selected].keys)
     if @members.length == 1
-      redirect_to admin_members_url, 
-        :alert => 'select multiple members to merge'
+      flash[:alert] = 'select multiple members to merge'
+      redirect_to admin_members_url 
     else
       @target = @members.first.id
       @chief_flights = @members.inject([]) do |flights, member|
@@ -49,9 +49,6 @@ class Admin::MembersController < ApplicationController
       end
       @competitor_flights = @members.inject([]) do |flights, member|
         check_dups_join(flights, member.flights) 
-      end
-      if (flash[:alert])
-        redirect_to admin_members_url 
       end
     end
   end
