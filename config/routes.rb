@@ -16,6 +16,7 @@ Iac::Application.routes.draw do
     resources :failures, :only => [:index, :show, :destroy]
     post "members/merge_preview"
     post "members/merge"
+    get "manny_list", :controller => :contests, :action => "manny_list"
   end
 
   ### Leaders namespace

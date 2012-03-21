@@ -1,6 +1,8 @@
 class Admin::ContestsController < ApplicationController
   before_filter :authenticate
 
+  include MannyConnect
+
   # GET /contests
   # GET /contests.xml
   def index
@@ -53,4 +55,13 @@ class Admin::ContestsController < ApplicationController
     redirect_to :action => 'index' 
   end
 
+  # GET /manny_list
+  def manny_list
+    @records = []
+    pull_contest_list(lambda do |rcd| 
+      if !(rcd =~ /ContestList\>/)
+        @records << rcd.split("\t")
+      end
+    end)
+  end
 end

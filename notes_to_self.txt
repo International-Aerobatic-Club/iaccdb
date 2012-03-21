@@ -11,3 +11,5 @@ Include assistants, chiefs, assist_chiefs in judges list
 Show all in judge view
 c_result admin view show flights for contest; jf_result, f_result for c_result
 
+Do not process manny contest with code column value nine
+
