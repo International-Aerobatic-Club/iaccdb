@@ -14,12 +14,7 @@ class FindStarsJob < Struct.new(:contest)
 
   def error(job, exception)
     say "Error finding stars for #{@contest.year_name}"
-    Failure.create(
-      :step => 'find stars', 
-      :contest_id => @contest.id,
-      :manny_id => @contest.manny_synch, 
-      :description => 
-        ':: ' + exception.message + ' ::\n' + exception.backtrace.join('\n'))
+    record_contest_failure('find_stars', @contest, exception)
   end
 
   def success(job)

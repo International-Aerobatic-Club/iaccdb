@@ -12,12 +12,7 @@ class ComputeContestRollupsJob < Struct.new(:contest)
 
   def error(job, exception)
     say "Error computing rollups for #{@contest.year_name}"
-    Failure.create(
-      :step => 'compute rollups', 
-      :contest_id => @contest.id,
-      :manny_id => @contest.manny_synch, 
-      :description => 
-        ':: ' + exception.message + ' ::\n' + exception.backtrace.join('\n'))
+    record_contest_failure('compute rollups', @contest, exception)
   end
 
   def success(job)

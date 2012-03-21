@@ -17,7 +17,7 @@ class ComputeYearRollupsJob < Struct.new(:year)
     Failure.create(
       :step => 'year rollups #{@year}', 
       :description => 
-        ':: ' + exception.message + ' ::\n' + exception.backtrace.join('\n'))
+        ':: ' + exception.message + " ::\n" + exception.backtrace.join("\n"))
   end
 
   def success(job)

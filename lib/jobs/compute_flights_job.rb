@@ -12,12 +12,7 @@ class ComputeFlightsJob < Struct.new(:contest)
 
   def error(job, exception)
     say "Error computing flights for #{@contest.year_name}"
-    Failure.create(
-      :step => 'compute flights', 
-      :contest_id => @contest.id,
-      :manny_id => @contest.manny_synch, 
-      :description => 
-        ':: ' + exception.message + ' ::\n' + exception.backtrace.join('\n'))
+    record_contest_failure('compute_flights', @contest, exception)
   end
 
   def success(job)

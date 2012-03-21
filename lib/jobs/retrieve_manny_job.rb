@@ -21,12 +21,8 @@ class RetrieveMannyJob < Struct.new(:manny_id)
   end
 
   def error(job, exception)
-    say "Retrieve manny error #{manny_id}"
-    Failure.create(
-      :step => 'manny import', 
-      :manny_id => @manny_id, 
-      :description => 
-        ':: ' + exception.message + ' ::\n' + exception.backtrace.join('\n'))
+    say "Retrieve manny error #{@manny_id}"
+    record_manny_failure('retrieve manny', @manny_id, exception)
   end
 
   def success(job)
