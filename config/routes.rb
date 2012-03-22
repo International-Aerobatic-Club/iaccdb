@@ -17,6 +17,10 @@ Iac::Application.routes.draw do
     post "members/merge_preview"
     post "members/merge"
     get "manny_list", :controller => :contests, :action => "manny_list"
+    get "manny_synchs/:manny_number/retrieve", 
+      :controller => :manny_synchs, 
+      :action => "retrieve", 
+      :as => 'manny_retrieve'
   end
 
   ### Leaders namespace

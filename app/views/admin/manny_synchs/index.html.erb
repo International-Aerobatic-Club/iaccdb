@@ -1,6 +1,10 @@
 <p><%= link_to 'Admin', admin_contests_path %></p>
 <p><%= link_to 'Manny List', admin_manny_list_path %></p>
 
+<% if flash[:notice] %>
+  <p class='notice'><%= flash[:notice] %></p>
+<% end %>
+
 <h1>Admin Manny Synch Records</h1>
 
 <table>
@@ -15,25 +19,6 @@
   </tr>
 </thead>
 <tbody>
-<% @manny_synchs.each do |manny| %>
-  <tr>
-    <td><%= manny.manny_number %></td>
-    <td><%= manny.contest_id %></td>
-    <td><%= manny.synch_date %></td>
-    <% contest = manny.contest %>
-    <% if contest %>
-    <td><%= link_to contest.sobriquet, contest %></td>
-    <td><%= contest.start %></td>
-    <td><%= contest.place %></td>
-    <% else %>
-      <td colspan='3'>no contest</td>
-    <% end %>
-    <td>
-      <%= link_to :delete, admin_manny_synch_path(manny), 
-        :confirm => 'Will delete the contest, too, okay?', 
-        :method => :delete %>
-    </td>
-  </tr>
-<% end %>
+  <%= render :partial => 'synch_record', :collection => @manny_synchs %>
 </tbody>
 </table>
