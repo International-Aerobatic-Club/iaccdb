@@ -2,8 +2,8 @@
 class FResult < ActiveRecord::Base
   belongs_to :flight
   belongs_to :c_result
-  has_many :pf_results, :dependent => :nullify
-  has_many :jf_results, :dependent => :nullify
+  has_many :pf_results, :dependent => :destroy
+  has_many :jf_results, :dependent => :destroy
 
   def to_s
     a = "f_result #{id} for #{flight}, #{c_result} "

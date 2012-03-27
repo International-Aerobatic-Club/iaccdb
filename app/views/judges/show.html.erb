@@ -1,14 +1,3 @@
-<h1>Judge <%= @judge.name %></h1>
+<h1>Judge <%= @judge.judge_name %></h1>
 
-<table class='judge_cv'>
-<tbody>
-<%= render :partial => 'stats_header', :object => 'Career' %>
-<%= render :partial => 'cat_stats', :collection => @career_results %>
-<% @sj_results.each do |year, year_stats| %>
-  <tr class='year'>
-    <th class='year' colspan='14'><%= year %></th>
-  </tr>
-  <%= render :partial => 'year_stats', :collection => year_stats %>
-<% end %>
-</tbody>
-</table>
+<%= render :partial => 'flight_record', :collection => @jf_results %>

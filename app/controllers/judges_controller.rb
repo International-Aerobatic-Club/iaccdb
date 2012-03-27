@@ -8,6 +8,13 @@ class JudgesController < ApplicationController
 
   def show
     id = params[:id]
+    @judge = Judge.find(id)
+    @jf_results =
+      JfResult.includes(:f_result).find_all_by_judge_id(id)
+  end
+
+  def cv
+    id = params[:id]
     @judge = Member.find(id)
     jy_results_query = JyResult.includes(:category).order(
        "year DESC").find_all_by_judge_id(id)
