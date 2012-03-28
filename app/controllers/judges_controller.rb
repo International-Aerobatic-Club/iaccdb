@@ -8,9 +8,10 @@ class JudgesController < ApplicationController
 
   def show
     id = params[:id]
-    @judge = Judge.find(id)
+    @judge = Member.find(id)
+    judges = Judge.find_all_by_judge_id(id)
     @jf_results =
-      JfResult.includes(:f_result).find_all_by_judge_id(id)
+      JfResult.includes(:f_result).find_all_by_judge_id(judges)
   end
 
   def cv
