@@ -1,3 +1,5 @@
 <h1>Judge <%= @judge.name %></h1>
 
-<%= render :partial => 'flight_record', :collection => @jf_results %>
+<ul class="no-bullets">
+  <%= render :partial => 'flight_record', :collection => @jf_results %>
+</ul>

@@ -1,0 +1,7 @@
+<li>
+  <% flight = flight_record.f_result.flight %>
+  <% if flight %>
+  <%= link_to "#{flight.contest.year_name} #{flight.displayName}",
+      flight_path(flight) %>
+  <% end %>
+</li>

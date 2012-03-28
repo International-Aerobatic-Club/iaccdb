@@ -8,6 +8,7 @@ set :deploy_to, "/home/#{user}/rails/#{application}"
 default_run_options[:pty] = true
 
 set :scm, :git
+set :rake, 'bundle exec rake'
 
 role :app, domain
 role :web, domain
