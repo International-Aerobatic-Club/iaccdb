@@ -43,6 +43,11 @@ Iac::Application.routes.draw do
 
   resources :judges, :only => [:index, :show]
 
+  get 'judge/:id/cv', 
+    :controller => :judges, 
+    :action => :cv, 
+    :as => 'judge_cv'
+
   resources :flights, :only => [:show]
 
   # The priority is based upon order of creation:

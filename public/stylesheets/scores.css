@@ -45,8 +45,13 @@ td.avg {
 }
 
 
-table.judge_cv th.year,
-table.judge_cv th.category {
+table.judge_leaders th {
+  vertical-align:bottom;
+}
+
+table.judge_leaders th.year,
+table.judge_leaders th.category {
+  padding-top:15px;
   text-align:left;
 }
 

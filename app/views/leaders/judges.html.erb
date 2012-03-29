@@ -1,4 +1,7 @@
-<h1>Judge Leader Board <%= @year %></h1>
+<h1>Top Judges <%= @year %></h1>
+
+<p>Judges in each category who have judged the most flights, 
+with the most pilots, most in accordance with the results.</p>
 
 <p>
 <% @years.each do |year| %>
@@ -13,7 +16,7 @@
     <tr>
       <td/>
       <td/>
-      <td><%= link_to jy_result.judge.name, judge_path(jy_result.judge) %></td>
+      <td><%= link_to jy_result.judge.name, judge_cv_path(jy_result.judge) %></td>
       <%= render :partial => 'judges/stats_column_values', :object => jy_result %>
     </tr>
   <% end %>
