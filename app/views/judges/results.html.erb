@@ -1,12 +1,13 @@
 <table class='judge_results'><thead>
 <tr>
-<th>Judge</th>
+<th colspan='2'>Judge</th>
 <%= render :partial => 'judges/stats_column_headers' %>
 </tr>
 <tbody>
 <% j_results.each_with_index do |j_result, j| %>
   <tr>
-  <td class='judge_name'><%= "J#{j+1} #{j_result.judge_name}" %></td>
+  <td class='judge_name'><%= "J#{j+1}" %></td>
+  <td class='judge_name'><%= j_result.judge_name %></td>
   <%= render :partial => 'judges/stats_column_values', :object => j_result %>
   </tr>
 <% end %>
