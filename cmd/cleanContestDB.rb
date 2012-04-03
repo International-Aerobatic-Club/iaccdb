@@ -1,11 +1,7 @@
 # find contests from Manny that have code other than one
 # retrieve those contests to purge them
 # use rails runner cmd/cleanContestDB.rb
-require "iac/mannyParse"
-require "iac/mannyToDB"
 require "iac/manny_connect"
-require "net/http"
-require "date"
 
 include MannyConnect
 
@@ -28,5 +24,4 @@ contests = processContestList
 contests.each do |manny_number| 
   puts "Queuing Contest #{manny_number}"
   Delayed::Job.enqueue RetrieveMannyJob.new(manny_number)
-end
 end
