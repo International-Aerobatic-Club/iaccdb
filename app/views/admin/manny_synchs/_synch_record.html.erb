@@ -16,6 +16,7 @@
       :method => :delete %>
   </td>
   <td>
-    <%= link_to 'retrieve', admin_manny_retrieve_path(synch_record) %>
+    <%= link_to 'retrieve',
+      admin_manny_retrieve_path(synch_record.manny_number) %>
   </td>
 </tr>

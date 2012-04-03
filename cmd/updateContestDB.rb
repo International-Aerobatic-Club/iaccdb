@@ -55,30 +55,6 @@ def findSpuriousContests(curList)
   getHaveList.reject { |id, date| curList.include?(id) }
 end
 
-#retrieve a contest from Manny, parse it, and add it to the database
-# id is Manny identifier for the contest.
-def doProcessContest(m2d, id)
-  manny = Manny::MannyParse.new
-  pull_contest(lambda { |rcd| manny.processLine(rcd) })
-  contest = m2d.process_contest(manny, true)
-  if (contest)
-    contest.compute_flights
-    contest.compute_contest_rollups
-    IAC::FindStars.findStars(contest) 
-    IAC::JudgeRollups.compute_jy_results(contest.start.year)
-  end
-end
-
-def processContest(m2d, k)
-  puts "Retrieving contest id #{k}"
-  begin
-    doProcessContest(m2d, k)
-  rescue Exception => e
-    puts "Problem with contest id #{k} is #{e}"
-    puts e.backtrace
-  end
-end
-
 def removeContest(m2d, k)
   puts "Should remove contest id #{k}"
 end
@@ -92,7 +68,6 @@ if files.size == 0
   doList.each_key do |k| 
     puts "Queuing Contest #{k}"
     Delayed::Job.enqueue RetrieveMannyJob.new(k)
-    #processContest(m2d, k)
   end
   findSpuriousContests(curList).each_key do |k|
     removeContest(m2d, k)

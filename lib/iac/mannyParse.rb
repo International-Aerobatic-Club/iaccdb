@@ -17,7 +17,7 @@ attr_reader :contest
 # 9 update
 # 10 jasper version
 # 11 process code
-# 12 process code
+# 12 comments
 # 13 contest date of record
 def process_contest(line)
   ca = line.split("\t")
@@ -31,6 +31,7 @@ def process_contest(line)
   @contest.chapter = columnValue(ca,7)
   @contest.region = columnValue(ca,8)
   @contest.manny_date = columnValue(ca,9)
+  @contest.code = columnValue(ca,11)
   @contest.record_date = columnValue(ca,13)
 end
 

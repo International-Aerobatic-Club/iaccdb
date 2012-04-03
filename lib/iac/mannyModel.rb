@@ -113,7 +113,7 @@ class Participant
 end
 
 class Contest
-  attr_accessor :participants, :categories
+  attr_accessor :participants, :categories, :code
   attr_accessor :name, :region, :dateAdv, :director, :city, :state
   attr_accessor :chapter, :aircat, :mannyID, :manny_date, :record_date
 

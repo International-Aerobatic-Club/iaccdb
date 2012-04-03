@@ -15,25 +15,28 @@ attr_reader :dContest
 # accept a parsed manny model of contest results
 # appropriately update or create records in the contest database
 def process_contest(manny, alwaysUpdate = false)
-  r = MannySynch.contest_action(manny.contest)
+  mContest = manny.contest
+  r = MannySynch.contest_action(mContest)
   dMannySynch = r[0] # Manny Synch record from the database
+  puts "M2D contest #{mContest.name} #{mContest.record_date}, " + 
+    "code #{mContest.code}, action #{r[1]}, always update #{alwaysUpdate}"
   case r[1]
     when 'create'
-      @dContest = createContest(manny.contest, dMannySynch)
+      @dContest = createContest(mContest, dMannySynch)
     when 'update'
-      @dContest = updateContest(manny.contest, dMannySynch)
+      @dContest = updateContest(mContest, dMannySynch)
     when 'skip'
       if alwaysUpdate
-        @dContest = updateContest(manny.contest, dMannySynch)
+        @dContest = updateContest(mContest, dMannySynch)
       else
-        Contest.logger.info("MannyToDB skipping contest #{manny.contest}")
+        Contest.logger.info("MannyToDB skipping contest #{mContest}")
         @dContest = nil
       end
   end
-  Contest.logger.debug("MannyToDB has dContest #{@dContest.to_s}")
   if @dContest
-    process_participants(manny.contest)
-    process_categories(manny.contest)
+    Contest.logger.debug("MannyToDB has dContest #{@dContest.to_s}")
+    process_participants(mContest)
+    process_categories(mContest)
   end
   @dContest
 end
@@ -47,17 +50,21 @@ private
 # dMannySynch : the synch record for the model
 # returns a properly initialized contest record
 def createContest(mContest, dMannySynch)
-  dContest = Contest.new(
-    :name => mContest.name,
-    :city => mContest.city,
-    :state => mContest.state,
-    :start => mContest.record_date,
-    :chapter => mContest.chapter,
-    :director => mContest.director,
-    :region => mContest.region)
-  Contest.logger.info "New contest #{dContest.to_s}"
-  dContest.save
-  dMannySynch.contest = dContest
+  if (mContest.code.to_i == 1)
+    dContest = Contest.new(
+      :name => mContest.name,
+      :city => mContest.city,
+      :state => mContest.state,
+      :start => mContest.record_date,
+      :chapter => mContest.chapter,
+      :director => mContest.director,
+      :region => mContest.region)
+    puts "New contest #{dContest.to_s}"
+    dContest.save
+    dMannySynch.contest = dContest
+  else
+    dContest = nil
+  end
   dMannySynch.synch_date = Time.now
   dMannySynch.save
   dContest
@@ -72,14 +79,24 @@ end
 # in the contest record.  manny separates them into separate contests
 def updateContest(mContest, dMannySynch)
   dContest = dMannySynch.contest
-  if !dContest
-    dContest = createContest(mContest, dMannySynch)
-    msg = "Expected contest #{dContest.to_s} was missing, created." 
-    Contest.logger.warn msg
-  else
-    Contest.logger.info "Updating contest #{dContest.to_s}"
-    dContest.flights.destroy_all
-    dContest.c_results.destroy_all
+  if (mContest.code.to_i == 1)
+    if !dContest
+      dContest = createContest(mContest, dMannySynch)
+      if (dContest)
+        puts "Expected contest #{dContest.to_s} was missing, created." 
+      else
+        puts "Unable to create contest for #{mContest.name}, " +
+          "manny number #{mContest.mannyID}"
+      end
+    else
+      puts "Updating contest #{dContest.to_s}"
+      dContest.flights.destroy_all
+      dContest.c_results.destroy_all
+    end
+  elsif dContest
+    puts "Removing contest #{dContest.to_s}"
+    dContest.destroy
+    dContest = nil
   end
   dMannySynch.synch_date = Time.now
   dMannySynch.save
