@@ -12,6 +12,9 @@ class JudgesController < ApplicationController
     judges = Judge.find_all_by_judge_id(id)
     @jf_results =
       JfResult.includes(:f_result).find_all_by_judge_id(judges)
+    @jf_results.sort! do |a,b|
+      b.f_result.flight.contest.start <=> a.f_result.flight.contest.start
+    end
   end
 
   def cv
