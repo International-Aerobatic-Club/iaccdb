@@ -60,8 +60,12 @@ class Admin::ContestsController < ApplicationController
     @records = []
     pull_contest_list(lambda do |rcd| 
       if !(rcd =~ /ContestList\>/)
-        @records << rcd.split("\t")
+        record = rcd.split("\t")
+        synch = MannySynch.find_by_manny_number(record[0].to_i)
+        record << (synch && synch.contest_id ? synch.contest_id : "no contest")
+        @records << record
       end
     end)
+    @records.sort! {|a,b| b[0].to_i <=> a[0].to_i }
   end
 end
