@@ -39,10 +39,8 @@ module Ranking
       (0 ... colCt).each do |c|
         (0 ... rowCt).each do |i|
           (i + 1 ... rowCt).each do |j|
-            if matrix[i][c] && matrix[j][c]
-              r[i][c] += 1 if (matrix[i][c] < matrix[j][c])
-              r[j][c] += 1 if (matrix[j][c] < matrix[i][c])
-            end
+            r[i][c] += 1 if (matrix[i][c] < matrix[j][c])
+            r[j][c] += 1 if (matrix[j][c] < matrix[i][c])
           end
         end
       end
