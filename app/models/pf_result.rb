@@ -29,9 +29,7 @@ class PfResult < ActiveRecord::Base
   serialize :figure_ranks
 
   def to_s
-    s = "pf_result #{id} for pilot_flight:#{pilot_flight.id}"
-    s += ", pc_result:#{pc_result.id}" if pc_result
-    s += ", f_result:#{f_result.id}" if f_result
+    "pf_result #{id} for pilot_flight #{pilot_flight.id}"
   end
 
   # Return the pfj_result for a judge team that contributed to

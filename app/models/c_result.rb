@@ -15,6 +15,10 @@ class CResult < ActiveRecord::Base
     "#{category} #{'Glider' if aircat == 'G'}"
   end
 
+  def rank_computer
+    IAC::RankComputer.instance
+  end
+
   def compute_category_totals_and_rankings(force = false)
     cat_flights = contest.flights.all(:conditions => {
       :category => category, :aircat => aircat })
@@ -40,7 +44,7 @@ class CResult < ActiveRecord::Base
         pc_results.delete(pc_result) 
       end
     end
-    IAC::RankComputer.computeCategory(self)
+    rank_computer.computeCategory(self)
     jc_results.each do |jc_result|
       if cur_jc_results.include?(jc_result)
         jc_result.compute_category_totals(f_results)

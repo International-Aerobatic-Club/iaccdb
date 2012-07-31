@@ -2,7 +2,8 @@
 # environment for IAC contest data application
 # for PfResult and PfjResult classes
 
-require 'ranking/computer.rb'
+require 'ranking/computer'
+require 'log/config_logger'
 
 # this class contains methods to compute rankings from results.
 # It derives rankings from the scores, ranking pilots from highest
@@ -11,18 +12,22 @@ require 'ranking/computer.rb'
 # grades.
 module IAC
   class RankComputer
-
-    def self.computeJudgeMetrics(flight, f_result)
+    include Singleton
+    include Log::ConfigLogger
+    
+    def computeJudgeMetrics(flight, f_result)
       jf_results_by_judge = {}
       p_ranks = []
       j_rank_for_jf = {}
       # compute ranks and calculations based on individual rank
       flight.pilot_flights.each do |pilot_flight|
+        logger.info "Working on #{pilot_flight}"
         pf_result = pilot_flight.pf_results.first
         if pf_result
           p = pf_result.flight_rank
           p_ranks << p
           pilot_flight.pfj_results.each do |pfj_result|
+            logger.info "Computing #{pfj_result}"
             judge = pfj_result.judge
             jf_result = jf_results_by_judge[judge]
             if !jf_result
@@ -56,6 +61,7 @@ module IAC
       pilot_count = p_ranks.length
       avg_rank = (pilot_count + 1) / 2.0
       jf_results_by_judge.each do |judge, jf_result|
+        logger.info "Computing ranks for #{jf_result}"
         j_ranks = j_rank_for_jf[jf_result]
         avg_j_ranks = average_ranks(j_ranks)
         (0 ... pilot_count).each do |ip|
@@ -87,7 +93,8 @@ module IAC
     end
 
     # Compute rank for each pilot in a contest category
-    def self.computeCategory(c_result)
+    def computeCategory(c_result)
+      logger.info "Computing ranks for #{c_result}"
       category_values = []
       c_result.pc_results.each do |pc_result|
         category_values << pc_result.category_value
@@ -106,7 +113,7 @@ module IAC
     # Does no computation if there are no sequence figure k values 
     # Does the figure computations only if all fly the same sequence
     # Returns the array of pf_results
-    def self.computeFlight(flight)
+    def computeFlight(flight)
       seq = nil
       same = false
       flight.pilot_flights.each do |pilot_flight|
@@ -127,7 +134,7 @@ module IAC
   ###
 
     # scale sigma_ri_delta using pilot count to get CIVA ri value
-    def self.calc_ri(sigma_ri_delta, pilot_count)
+    def calc_ri(sigma_ri_delta, pilot_count)
       if pilot_count && pilot_count != 0
         (20.0 * sigma_ri_delta) / 
           (0.0057 * pilot_count * pilot_count + 0.1041 * pilot_count)
@@ -141,7 +148,7 @@ module IAC
     # the average of the positions they would hold.
     # Average ranks are decimal values, not integers
     # This is for the Spearman corellation coefficient (rho) computation
-    def self.average_ranks(ranks)
+    def average_ranks(ranks)
       sorted_ranks = ranks.sort
       rank_conv = []
       w = 0
@@ -168,7 +175,8 @@ module IAC
     # Creates or updates pfj_result, pf_result
     # Does no computation if there are no sequence figure k values 
     # Returns the flight
-    def self.computeFlightOverallRankings(flight)
+    def computeFlightOverallRankings(flight)
+      logger.info "Computing rankings for #{flight}"
       pf_results = []
       flight_values = []
       adjusted_flight_values = []
@@ -176,11 +184,11 @@ module IAC
       flight.pilot_flights.each do |pilot_flight|
         pf_result = pilot_flight.results
         pf_result.judge_teams.each do |judge|
+          if (!judge_pilot_flight_values[judge])
+            judge_pilot_flight_values[judge] = Array.new
+          end
           pfj_result = pf_result.for_judge(judge)
-          pilot_flight_values = 
-            judge_pilot_flight_values[judge] || Array.new
-          pilot_flight_values << pfj_result.flight_value
-          judge_pilot_flight_values[judge] = pilot_flight_values
+          judge_pilot_flight_values[judge] << pfj_result.flight_value
         end
         flight_values << pf_result.flight_value
         adjusted_flight_values << pf_result.adj_flight_value
@@ -210,11 +218,13 @@ module IAC
     # Accepts flight pf_results
     # Creates or updates pfj_result, pf_result
     # Do not call unless all pilot_flight have same sequence
-    def self.computeFlightFigureRankings(pf_results)
+    def computeFlightFigureRankings(pf_results)
+      logger.info "Computing figure rankings for flight results"
       judge_pilot_figure_computed_values = {} #computed_values lookup by judge
       judge_pilot_figure_graded_values = {} #graded_values lookup by judge
       pilot_figure_results = [] # figure results from each pilot
       pf_results.each do |pf_result|
+        logger.info "Computing figure rankings for #{pf_result.to_s}" 
         pf_result.judge_teams.each do |judge|
           pfj_result = pf_result.for_judge(judge)
           # computed value matrix

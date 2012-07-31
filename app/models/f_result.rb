@@ -21,8 +21,12 @@ class FResult < ActiveRecord::Base
   private
   ###
 
+  def rank_computer
+    IAC::RankComputer.instance
+  end
+
   def compute_pf_results
-    cur_pf_results = IAC::RankComputer.computeFlight(flight)
+    cur_pf_results = rank_computer.computeFlight(flight)
     self.pf_results.each do |pf_result|
       self.pf_results.delete(pf_result) if !cur_pf_results.include?(pf_result)
     end
@@ -32,7 +36,7 @@ class FResult < ActiveRecord::Base
   end
 
   def compute_jf_results
-    cur_jf_results = IAC::RankComputer.computeJudgeMetrics(flight, self)
+    cur_jf_results = rank_computer.computeJudgeMetrics(flight, self)
     self.jf_results.each do |jf_result|
       self.jf_results.delete(jf_result) if !cur_jf_results.include?(jf_result)
     end
