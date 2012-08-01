@@ -21,7 +21,7 @@ module IAC
       j_rank_for_jf = {}
       # compute ranks and calculations based on individual rank
       flight.pilot_flights.each do |pilot_flight|
-        logger.info "Working on #{pilot_flight}"
+        logger.info "Computing ranks and judge metrics for #{pilot_flight}"
         pf_result = pilot_flight.pf_results.first
         if pf_result
           p = pf_result.flight_rank
@@ -99,10 +99,23 @@ module IAC
       c_result.pc_results.each do |pc_result|
         category_values << pc_result.category_value
       end
-      category_ranks = Ranking::Computer.ranks_for(category_values)
-      c_result.pc_results.each_with_index do |pc_result, i|
-        pc_result.category_rank = category_ranks[i]
-        pc_result.save
+      begin
+        category_ranks = Ranking::Computer.ranks_for(category_values)
+        c_result.pc_results.each_with_index do |pc_result, i|
+          pc_result.category_rank = category_ranks[i]
+          pc_result.save
+        end
+      rescue Exception => exception
+        logger.error exception.message
+        contest = c_result.contest
+        Failure.create(
+          :step => "category",
+          :contest_id => contest.id,
+          :manny_id => contest.manny_synch ? contest.manny_synch.manny_number : nil,
+          :description => 
+            ":: category #{c_result} contest id #{c_result.contest.id}" +
+            "\n:: category_values " + category_values.to_yaml +
+            "\n:: #{exception.message} ::\n" + exception.backtrace.join("\n"))
       end
       c_result
     end
@@ -115,14 +128,14 @@ module IAC
     # Returns the array of pf_results
     def computeFlight(flight)
       seq = nil
-      same = false
+      same = true
       flight.pilot_flights.each do |pilot_flight|
         seq ||= pilot_flight.sequence
-        same = seq != nil && seq == pilot_flight.sequence
+        same &&= seq != nil && seq == pilot_flight.sequence
       end
       if seq
         pf_results = computeFlightOverallRankings(flight)
-        computeFlightFigureRankings(pf_results) if same
+        computeFlightFigureRankings(flight, pf_results) if same
       else
         pf_results = []
       end
@@ -194,22 +207,37 @@ module IAC
         adjusted_flight_values << pf_result.adj_flight_value
         pf_results << pf_result
       end
-      flight_ranks = Ranking::Computer.ranks_for(flight_values)
-      adjusted_flight_ranks = Ranking::Computer.ranks_for(adjusted_flight_values)
-      judge_pilot_flight_ranks = {}
-      judge_pilot_flight_values.each_key do |judge|
-        judge_pilot_flight_ranks[judge] =
-          Ranking::Computer.ranks_for(judge_pilot_flight_values[judge])
-      end
-      pf_results.each_with_index do |pf_result, i|
-        pf_result.flight_rank = flight_ranks[i]
-        pf_result.adj_flight_rank = adjusted_flight_ranks[i]
-        pf_result.save
-        pf_result.judge_teams.each do |judge|
-          pfj_result = pf_result.for_judge(judge)
-          pfj_result.flight_rank = judge_pilot_flight_ranks[judge][i]
-          pfj_result.save
+      begin
+        flight_ranks = Ranking::Computer.ranks_for(flight_values)
+        adjusted_flight_ranks = Ranking::Computer.ranks_for(adjusted_flight_values)
+        judge_pilot_flight_ranks = {}
+        judge_pilot_flight_values.each_key do |judge|
+          judge_pilot_flight_ranks[judge] =
+            Ranking::Computer.ranks_for(judge_pilot_flight_values[judge])
         end
+        pf_results.each_with_index do |pf_result, i|
+          pf_result.flight_rank = flight_ranks[i]
+          pf_result.adj_flight_rank = adjusted_flight_ranks[i]
+          pf_result.save
+          pf_result.judge_teams.each do |judge|
+            pfj_result = pf_result.for_judge(judge)
+            pfj_result.flight_rank = judge_pilot_flight_ranks[judge][i]
+            pfj_result.save
+          end
+        end
+      rescue Exception => exception
+        logger.error "Error computing rankings for flight #{flight} is #{exception.message}"
+        contest = flight.contest
+        Failure.create(
+          :step => 'flight_ranks',
+          :contest_id => contest.id,
+          :manny_id => contest.manny_synch ? contest.manny_synch.manny_number : nil,
+          :description => 
+            ":: Flight #{flight} " +
+            "\n:: flight_values " + flight_values.to_yaml +
+            "\n:: judge_pilot_flight_values " +
+            judge_pilot_flight_values.to_yaml +
+            "\n:: #{exception.message} ::\n" + exception.backtrace.join("\n"))
       end
       pf_results
     end
@@ -218,8 +246,8 @@ module IAC
     # Accepts flight pf_results
     # Creates or updates pfj_result, pf_result
     # Do not call unless all pilot_flight have same sequence
-    def computeFlightFigureRankings(pf_results)
-      logger.info "Computing figure rankings for flight results"
+    def computeFlightFigureRankings(flight, pf_results)
+      logger.info "Computing figure rankings for #{flight}"
       judge_pilot_figure_computed_values = {} #computed_values lookup by judge
       judge_pilot_figure_graded_values = {} #graded_values lookup by judge
       pilot_figure_results = [] # figure results from each pilot
@@ -244,23 +272,39 @@ module IAC
       end
       judge_pilot_figure_computed_ranks = {}
       judge_pilot_figure_graded_ranks = {}
-      judge_pilot_figure_computed_values.each_key do |judge|
-        judge_pilot_figure_computed_ranks[judge] =
-          Ranking::Computer.rank_matrix(judge_pilot_figure_computed_values[judge])
-        judge_pilot_figure_graded_ranks[judge] =
-          Ranking::Computer.rank_matrix(judge_pilot_figure_graded_values[judge])
-      end
-      pilot_figure_ranks =
-        Ranking::Computer.rank_matrix(pilot_figure_results)
-      pf_results.each_with_index do |pf_result, i|
-        pf_result.judge_teams.each do |judge|
-          pfj_result = pf_result.for_judge(judge)
-          pfj_result.computed_ranks = judge_pilot_figure_computed_ranks[judge][i]
-          pfj_result.graded_ranks = judge_pilot_figure_graded_ranks[judge][i]
-          pfj_result.save
+      begin
+        judge_pilot_figure_computed_values.each_key do |judge|
+          judge_pilot_figure_computed_ranks[judge] =
+            Ranking::Computer.rank_matrix(judge_pilot_figure_computed_values[judge])
+          judge_pilot_figure_graded_ranks[judge] =
+            Ranking::Computer.rank_matrix(judge_pilot_figure_graded_values[judge])
         end
-        pf_result.figure_ranks = pilot_figure_ranks[i]
-        pf_result.save
+        pilot_figure_ranks =
+          Ranking::Computer.rank_matrix(pilot_figure_results)
+        pf_results.each_with_index do |pf_result, i|
+          pf_result.judge_teams.each do |judge|
+            pfj_result = pf_result.for_judge(judge)
+            pfj_result.computed_ranks = judge_pilot_figure_computed_ranks[judge][i]
+            pfj_result.graded_ranks = judge_pilot_figure_graded_ranks[judge][i]
+            pfj_result.save
+          end
+          pf_result.figure_ranks = pilot_figure_ranks[i]
+          pf_result.save
+        end
+      rescue Exception => exception
+        logger.error exception.message
+        contest = flight.contest
+        Failure.create(
+          :step => "figures",
+          :contest_id => contest.id,
+          :manny_id => contest.manny_synch ? contest.manny_synch.manny_number : nil,
+          :description => 
+            ":: flight #{flight} \n:: judge_pilot_figure_computed_values " +
+            judge_pilot_figure_computed_values.to_yaml + 
+            "\n:: judge_pilot_figure_graded_values " +
+            judge_pilot_figure_graded_values.to_yaml + 
+            "\n:: #{exception.message} ::\n" + 
+            exception.backtrace.join("\n"))
       end
     end
   end # class
