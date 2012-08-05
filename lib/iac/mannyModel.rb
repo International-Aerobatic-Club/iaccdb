@@ -10,7 +10,7 @@ class Seq
   end
   
   def to_s
-    "Manny sequence presentation: #{pres}, figure_k's: #{figs}, figure_count: #{ctFigs}"
+    "Manny sequence presentation: #{pres}, figure_k's: #{figs.join(',')}, figure_count: #{ctFigs}"
   end
 end
 
@@ -54,6 +54,9 @@ class Flight
     penalties[pid] || 0
   end
 
+  def to_s
+    "Flight #{name} id #{pid}"
+  end
 end
 
 CATEGORY_NAMES = [ nil ] + IAC::Constants::CATEGORY_NAMES
@@ -86,6 +89,10 @@ class Category
       f.ks[0] ||= seq if f
     end if seq
   end
+
+  def to_s
+    "Category #{name} id #{pid}"
+  end
 end
 
 class Score
@@ -98,7 +105,7 @@ class Score
   end
 
   def to_s
-    "Manny score pilot #{pilot}, judge #{judge}, sequence #{seq}"
+    "Manny score pilot #{pilot}, judge #{judge}, values #{seq}"
   end
 end
 
@@ -109,6 +116,10 @@ class Participant
     @givenName = givenName
     @familyName = familyName
     @iacID = iacID # integer
+  end
+
+  def to_s
+    "Participant #{givenName} #{familyName} #{iacID}"
   end
 end
 
@@ -151,6 +162,10 @@ class Contest
     rescue ArgumentError
       @record_date = Time.now
     end
+  end
+  
+  def to_s
+    "Contest #{name} manny id #{mannyID} date #{manny_date}"
   end
 end
 

@@ -1,7 +1,10 @@
 require 'iac/mannyModel'
+require 'log/config_logger'
 
 module Manny
 class MannyParse
+include Log::ConfigLogger
+cattr_accessor :logger
 attr_reader :contest
 
 # Contest columns:
@@ -33,6 +36,7 @@ def process_contest(line)
   @contest.manny_date = columnValue(ca,9)
   @contest.code = columnValue(ca,11)
   @contest.record_date = columnValue(ca,13)
+  logger.debug "parsed manny line '#{line}' to contest model #{@contest}"
 end
 
 PROCESS_CONTEST = lambda do |m, line|
@@ -57,6 +61,7 @@ def process_person(line)
   famName = columnValue(ma,1)
   iac_id = ma[3].to_i
   @contest.participants[pid] = Participant.new(gName, famName, iac_id)
+  logger.debug "parsed manny line '#{line}' to participant #{pid} model #{@contest.participants[pid]}"
 end
 
 PROCESS_PERSON = lambda do |m, line|
@@ -96,6 +101,7 @@ def process_judge(line)
     when 4
       flight.chiefAssists << pid
   end
+  logger.debug "parsed manny line '#{line}' to judge #{pid} for flight model #{flight}"
 end
 
 PROCESS_JUDGE = lambda do |m, line| 
@@ -128,6 +134,7 @@ def process_k(line)
   end
   seq.ctFigs = fi - 1
   seq.figs[fi] = seq.pres = ka[3].to_i
+  logger.debug "parsed manny line '#{line}' to sequence #{seq} for flight model #{flight}"
 end
 
 PROCESS_K = lambda do |m, line| 
@@ -159,9 +166,10 @@ def process_pilot(line)
     pilot.model = columnValue(pa,8)
     pilot.reg = columnValue(pa,9)
   rescue
-    puts "Process pilot: trouble with line '#{CGI.escape(line)}' is #{$!}"
+    logger.error "Manny parse pilot: trouble with line '#{line}' is #{$!}"
     throw
   end
+  logger.debug "parsed manny line '#{line}' to pilot model #{pilot}"
 end
 
 PROCESS_PILOT = lambda do |m, line| 
@@ -195,6 +203,7 @@ def process_scores(line)
   flight = @contest.flight(cid, fid)
   score = Score.new(seq, pid, jid)
   flight.scores << score
+  logger.debug "parsed manny line '#{line}' to scores model #{score} for flight #{flight}, pilot #{pid}, judge #{jid}"
 end
 
 PROCESS_SCORES = lambda do |m, line| 
@@ -219,6 +228,7 @@ def process_penalty(line)
   pid = ma[2].to_i
   flight = @contest.flight(cid, fid)
   flight.penalties[pid] = ma[3].to_i
+  logger.debug "parsed manny line '#{line}' to flight model #{flight} penalty for pilot #{pid}"
 end
 
 PROCESS_PENALTY = lambda do |m, line|
@@ -234,18 +244,25 @@ end
 SEEK_SECTION = lambda do |m, line| 
   case line
   when /<Contest>/
+    logger.debug 'Manny parse contest'
     PROCESS_CONTEST
   when /<ContestPersonnel>/
+    logger.debug 'Manny parse contest personnel'
     PROCESS_PERSON
   when /<ContestJudgesLine>/
+    logger.debug 'Manny parse judges'
     PROCESS_JUDGE
   when /<ContestKs>/
+    logger.debug 'Manny parse sequences'
     PROCESS_K
   when /<ContestPilots>/
+    logger.debug 'Manny parse pilots'
     PROCESS_PILOT
   when /<ContestScores>/
+    logger.debug 'Manny parse scores'
     PROCESS_SCORES
   when /<ContestPenalties>/
+    logger.debug 'Manny parse penalties'
     PROCESS_PENALTY
   else
     SEEK_SECTION
