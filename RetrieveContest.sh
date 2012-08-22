@@ -1,1 +1,2 @@
-curl -d '<ContestDetail><ContestID>381</ContestID></ContestDetail>' http://donkeykong.highroaddata.com:1001/ >Contest_381.txt
+#!/bin/bash
+curl -d "<ContestDetail><ContestID>$1</ContestID></ContestDetail>" http://donkeykong.highroaddata.com:1001/ >Contest_$1.txt

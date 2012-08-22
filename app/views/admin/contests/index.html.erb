@@ -1,12 +1,4 @@
-<p class="action">
-<%= link_to 'Admin Manny Synch Records', admin_manny_synchs_path %>
-</p>
-<p class="action">
-<%= link_to 'Admin Member Records', admin_members_path %>
-</p>
-<p class="action">
-<%= link_to 'Admin Failures', admin_failures_path %>
-</p>
+<%= render 'admin/admin_menu' %>
 
 <% if flash[:notice] %>
   <p id="notice" ><%= flash[:notice] %></p>

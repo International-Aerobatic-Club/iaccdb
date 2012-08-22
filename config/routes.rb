@@ -21,6 +21,10 @@ Iac::Application.routes.draw do
       :controller => :manny_synchs, 
       :action => "retrieve", 
       :as => 'manny_retrieve'
+    get "manny_synchs/:manny_number/show", 
+      :controller => :manny_synchs, 
+      :action => "show", 
+      :as => 'manny_show'
   end
 
   ### Leaders namespace

@@ -1,4 +1,6 @@
 class Admin::MannySynchsController < ApplicationController
+  include MannyConnect
+
   before_filter :authenticate
 
   def index
@@ -16,6 +18,12 @@ class Admin::MannySynchsController < ApplicationController
     Delayed::Job.enqueue RetrieveMannyJob.new(params[:manny_number])
     flash[:notice] = "Queued manny number #{params[:manny_number]} for retrieval."
     redirect_to admin_manny_synchs_url
+  end
+
+  def show
+    @manny_number = params[:manny_number]
+    @text = []
+    pull_contest(@manny_number, lambda { |rcd| @text << rcd })
   end
 
 end

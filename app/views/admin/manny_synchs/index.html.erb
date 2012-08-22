@@ -1,5 +1,4 @@
-<p><%= link_to 'Admin', admin_contests_path %></p>
-<p><%= link_to 'Manny List', admin_manny_list_path %></p>
+<%= render 'admin/admin_menu' %>
 
 <% if flash[:notice] %>
   <p class='notice'><%= flash[:notice] %></p>
