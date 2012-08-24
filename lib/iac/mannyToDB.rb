@@ -18,7 +18,7 @@ def process_contest(manny, alwaysUpdate = false)
   mContest = manny.contest
   r = MannySynch.contest_action(mContest)
   dMannySynch = r[0] # Manny Synch record from the database
-  puts "M2D contest #{mContest.name} #{mContest.record_date}, " + 
+  Contest.logger.info "M2D contest #{mContest.name} #{mContest.record_date}, " + 
     "code #{mContest.code}, action #{r[1]}, always update #{alwaysUpdate}"
   case r[1]
     when 'create'
@@ -59,7 +59,7 @@ def createContest(mContest, dMannySynch)
       :chapter => mContest.chapter,
       :director => mContest.director,
       :region => mContest.region)
-    puts "New contest #{dContest.to_s}"
+    Contest.logger.info "New contest #{dContest.to_s}"
     dContest.save
     dMannySynch.contest = dContest
   else
@@ -83,18 +83,18 @@ def updateContest(mContest, dMannySynch)
     if !dContest
       dContest = createContest(mContest, dMannySynch)
       if (dContest)
-        puts "Expected contest #{dContest.to_s} was missing, created." 
+        Contest.logger.info "Expected contest #{dContest.to_s} was missing, created." 
       else
-        puts "Unable to create contest for #{mContest.name}, " +
+        Contest.logger.info "Unable to create contest for #{mContest.name}, " +
           "manny number #{mContest.mannyID}"
       end
     else
-      puts "Updating contest #{dContest.to_s}"
+      Contest.logger.info "Updating contest #{dContest.to_s}"
       dContest.flights.destroy_all
       dContest.c_results.destroy_all
     end
   elsif dContest
-    puts "Removing contest #{dContest.to_s}"
+    Contest.logger.info "Removing contest #{dContest.to_s}"
     dContest.destroy
     dContest = nil
   end
@@ -192,8 +192,8 @@ def process_flight_judges(dFlight, mFlight)
       msg = "Failed create judge #{dJ} for #{dFlight.to_s}"
       Judge.logger.error(msg)
     end
-    #puts "judge team #{dJudge} for judge #{j} judge_id #{dJ}, assist_id #{dA}"
-    #puts "set judge #{j} to #{dJudge}"
+    Contest.logger.debug "judge team #{dJudge} for judge #{j} judge_id #{dJ}, assist_id #{dA}"
+    Contest.logger.debug "set judge #{j} to #{dJudge}"
     @judges[j] = dJudge
   end
 end
@@ -215,7 +215,7 @@ def process_flight_scores(dFlight, mCat, mFlight)
     dPilotFlight.save
     mJi = mScore.judge
     dJudge = @judges[mJi] # get the judge team
-    #puts "index #{mJi} mScore #{mScore}" if dJudge == nil
+    Contest.logger.debug "index #{mJi} mScore #{mScore}" if dJudge == nil
     dScore = Score.create(
       :pilot_flight => dPilotFlight,
       :judge => dJudge,
