@@ -23,7 +23,7 @@ module IAC
       @contest.state.should == 'FL'
       @contest.chapter.should == 288
     end
-    it 'captures known sequence' do
+    it 'captures the primary known sequence' do
       flight = @contest.flights.first
       flight.should_not be nil
       pilot_flight = flight.pilot_flights.first
@@ -35,7 +35,7 @@ module IAC
       #puts "pilot is #{pilot_flight.pilot}"
       #puts "sequence is #{sequence}"
     end
-    it 'captures free sequence' do
+    it 'captures a sportsman submitted free for a second flight' do
       flight = @contest.flights.where(
         :name => 'Free', 
         :category => 'Sportsman').first
@@ -49,9 +49,23 @@ module IAC
       sequence.k_values.should == 
         [11, 17, 10, 13, 18, 3, 18, 11, 6, 9, 4, 10, 7, 6]
     end
-    it 'captures default free sequence' do
+    it 'captures a sportsman submitted free for a third flight' do
       flight = @contest.flights.where(
-        :name => 'Free', 
+        :name => 'Unknown', 
+        :category => 'Sportsman').first
+      flight.should_not be nil
+      pilot = Member.where(:family_name => 'Hartvigsen').first
+      pilot.should_not be nil
+      pilot_flight = flight.pilot_flights.where(:pilot_id => pilot).first
+      pilot_flight.should_not be nil
+      sequence = pilot_flight.sequence
+      sequence.should_not be nil
+      sequence.k_values.should == 
+        [11, 17, 10, 13, 18, 3, 18, 11, 6, 9, 4, 10, 7, 6]
+    end
+    it 'captures the sportsman known for a second flight' do
+      flight = @contest.flights.where(
+        :name => 'Unknown', 
         :category => 'Sportsman').first
       flight.should_not be nil
       pilot = Member.where(:family_name => 'Cohen').first
@@ -62,6 +76,20 @@ module IAC
       sequence.should_not be nil
       sequence.k_values.should == 
         [7, 13, 16, 13, 19, 18, 13, 10, 18, 10, 6]
+    end
+    it 'gets the intermediate unknown' do
+      flight = @contest.flights.where(
+        :name => 'Unknown', 
+        :category => 'Intermediate').first
+      flight.should_not be nil
+      pilot = Member.where(:family_name => 'Wells').first
+      pilot.should_not be nil
+      pilot_flight = flight.pilot_flights.where(:pilot_id => pilot).first
+      pilot_flight.should_not be nil
+      sequence = pilot_flight.sequence
+      sequence.should_not be nil
+      sequence.k_values.should == 
+        [25, 14, 12, 15, 19, 25, 31, 11, 23, 8]
     end
     it 'captures scores' do
       flight = @contest.flights.where(

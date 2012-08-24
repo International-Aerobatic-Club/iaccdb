@@ -13,3 +13,10 @@ c_result admin view show flights for contest; jf_result, f_result for c_result
 
 Do not process manny contest with code column value nine
 
+Write a test for sportsman category third flight as free.  Flight K values
+selection is broken in this case.
+
+Show first flight, second flight, third flight as names for Primary and
+Sportsman flights. Modify mannyModel Contest.category that calls
+Category.new
+

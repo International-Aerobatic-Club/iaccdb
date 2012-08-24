@@ -132,7 +132,6 @@ def process_categories(mContest)
 end
 
 def process_category(mContest, mCat)
-  mCat.forwardfill_sequences
   mCat.flights.each_with_index do |mFlight, i|
     if mFlight
       process_flight(mContest, mCat, mFlight, i)
@@ -153,18 +152,7 @@ def process_flight(mContest, mCat, mFlight, seq)
     dFlight.chief = @parts[mFlight.chief] if mFlight.chief
     dFlight.save
     process_flight_judges(dFlight, mFlight)
-    process_flight_scores(dFlight, mCat, mFlight)
-  end
-end
-
-# Set k values on pilot flights
-def process_flight_kays(dFlight, mContest, mCat, mFlight)
-  dFlight.pilot_flights.each do |pilot_flight|
-    mPart = @parts.index(pilot_flight.pilot)
-    mKays = mContest.seq_for(mCat.name, mFlight.name, mPart)
-    dSequence = Sequence.find_or_create(mKays)
-    pilot_flight.sequence = dSequence
-    pilot_flight.save
+    process_flight_scores(dFlight, mContest, mCat, mFlight)
   end
 end
 
@@ -198,11 +186,11 @@ def process_flight_judges(dFlight, mFlight)
   end
 end
 
-def process_flight_scores(dFlight, mCat, mFlight)
+def process_flight_scores(dFlight, mContest, mCat, mFlight)
   mFlight.scores.each do |mScore|
     mParti = mScore.pilot
     mPilot = mCat.pilots[mParti]
-    mSeq = mFlight.seq_for(mParti)
+    mSeq = mContest.seq_for(mCat.cid, mFlight.fid, mParti)
     dPilot = @parts[mParti]
     dPilotFlight = get_pilot_flight(dPilot, dFlight, mPilot.chapter)
     dPilotFlight.penalty_total = mFlight.penalty(mParti) / 10
