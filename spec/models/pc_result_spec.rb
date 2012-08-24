@@ -8,7 +8,7 @@ module Model
       pc_result.category_rank.should == 1
     end
     context 'real_scores' do
-      before(:all) do
+      before(:each) do
         reset_db
         @contest = Factory.create(:nationals)
         @adams = Factory.create(:tom_adams)
@@ -101,42 +101,6 @@ module Model
         pc_result.should_not be nil
         pc_result.category_rank.should == 2
       end
-
-      it 'recomputes values when score changes' do
-        scores = @adams_flight.scores.where(:judge_id => @judge_jim).first
-        va = scores.values
-        va[3] = 80
-        va[12] = 100
-        scores.save.should == true
-        @contest = Contest.first(:conditions => {
-          :city => 'Denison' })
-        @c_results = @contest.results
-        c_result = @c_results.first(:conditions => {
-          :category => 'Intermediate' })
-        c_result.should_not be nil
-        pc_result = c_result.pc_results.first(:conditions => {
-          :pilot_id => @adams })
-        pc_result.should_not be nil
-        pc_result.category_value.round(2).should == 3470.17
-        pc_result.category_rank.should == 1
-      end
-
-      it 'recomputes values when sequence changes' do
-        @adams_flight.sequence.k_values[10] = 12
-        @adams_flight.sequence.save.should == true
-        @contest = Contest.first(:conditions => {
-          :city => 'Denison' })
-        @c_results = @contest.results
-        c_result = @c_results.first(:conditions => {
-          :category => 'Intermediate' })
-        c_result.should_not be nil
-        pc_result = c_result.pc_results.first(:conditions => {
-          :pilot_id => @adams })
-        pc_result.should_not be nil
-        pc_result.category_value.round(2).should == 3478.5
-        pc_result.category_rank.should == 1
-      end
-
     end
    
     it 'behaves on empty sequence' do

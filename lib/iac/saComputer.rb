@@ -66,7 +66,8 @@ def computeNonZeroValues(pfScores)
         end
       else
         raise ArgumentError,
-          "More scores than K values in #{self}, judge #{score.judge}"
+          "More scores than K values in #{self}, judge #{score.judge}, flight #{score.pilot_flight},
+          scores #{score}, kays #{@kays}"
       end
     end
   end

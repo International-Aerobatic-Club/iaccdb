@@ -107,7 +107,7 @@ FactoryGirl.define do
     r.k_values [18, 18, 15, 15, 11, 17, 15, 11, 10, 13, 11, 19, 17, 8]
   end
   factory :denton_imdt_free_seq, :class => Sequence do |r|
-    r.figure_count 14
+    r.figure_count 16
     r.total_k 198
     r.mod_3_total 12
     r.k_values [10, 13, 9, 9, 18, 10, 19, 19, 18, 14, 18, 13, 10, 6, 4, 8]

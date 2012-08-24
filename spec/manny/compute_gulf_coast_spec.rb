@@ -5,12 +5,11 @@ require 'iac/judge_rollups'
 
 module IAC
   describe MannyToDB do
-    before(:each) do 
+    before(:all) do 
       manny = Manny::MannyParse.new
       IO.foreach('spec/manny/Contest_36.txt') { |line| manny.processLine(line) }
       m2d = IAC::MannyToDB.new
-      m2d.process_contest(manny, true)
-      @contest = Contest.first
+      @contest = m2d.process_contest(manny, true)
     end
     it 'Parses' do
       @contest.should_not be nil
