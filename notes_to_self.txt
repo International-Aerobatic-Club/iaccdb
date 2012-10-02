@@ -20,3 +20,5 @@ Show first flight, second flight, third flight as names for Primary and
 Sportsman flights. Modify mannyModel Contest.category that calls
 Category.new
 
+
+pc_result_spec
