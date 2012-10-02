@@ -7,26 +7,33 @@ attr_reader :pilotID
 attr_reader :flightID
 
 def initialize(file)
+  filtered = ""
   File.open(file,'r') do |f|
-    @doc = Nokogiri::HTML(f)
+    # the ACRO outputs have missing font end tags
+    # the non-breaking spaces don't encode as white space to strip
+    f.each_line { |l| filtered << l.gsub(/<font[^>]+>|<\/font>|&nbsp;/,' ') }
   end
+  @doc = Nokogiri::HTML(filtered)
   flds = /p(\d+)s(\d+)/.match(file)
   @pilotID = flds[1].to_i
   @flightID = flds[2].to_i
+  @hasFPSLines = /FairPlay/.match(@doc.xpath('id("table7")/tr[1]').text) != nil
 end
 
 def pilotName
-  nStr = theRows[2].text.strip.split(/\s\s+/)[0]
-  nStr[2,nStr.length]
+  pilotLine = @doc.xpath('id("table7")/tr[2]')
+  aStr = pilotLine.text.strip.split(' ')
+  aStr[0] + ' ' + aStr[1]
 end
 
 def flightName
-  nStr = theRows[3].text.strip
-  nStr[2,nStr.length]
+  flightLine = @doc.xpath('id("table7")/tr[3]')
+  flightLine.text.strip
 end
 
 def judges
-  nStr = theRows[6].text.strip
+  judgeLine = @doc.xpath('id("table7")/tr[6]')
+  nStr = judgeLine.text.strip
   nStr.split(',').collect do |s|
     s[s.index('-')+2,s.length]
   end
@@ -34,8 +41,10 @@ end
 
 def k_factors
   ks = []
-  ar = theRows
-  (8 .. ar.size-8).each do |itr|
+  ar = rawRows
+  startOffset = @hasFPSLines ? 5 : 6
+  endOffset = @hasFPSLines ? 3 : 2
+  (startOffset .. ar.size-endOffset).each do |itr|
     nStr = ar[itr].css('td')[1].text.strip
     ks << nStr.to_i
   end
@@ -43,9 +52,10 @@ def k_factors
 end
 
 def score(iFig, iJudge)
+  startOffset = @hasFPSLines ? 4 : 5
   s = 0
-  ar = theRows
-  nStr = ar[iFig + 7].css('td')[iJudge + 1].text.strip
+  ar = rawRows
+  nStr = ar[iFig + startOffset].css('td')[iJudge + 1].text.strip
   unless nStr =~ /Z/
     s = nStr.to_f * 10
     s = s.to_i
@@ -54,8 +64,7 @@ def score(iFig, iJudge)
 end
 
 def penalty
-  ar = theRows
-  pr = ar[ar.size-4]
+  pr = penaltyRow
   mp = /Minus\s+(\d+)\s+penalties/.match(pr.text)
   if mp
     mp[1].to_i
@@ -70,6 +79,14 @@ private
 
 def theRows
   @doc.css('table#table7 tr')
+end
+
+def rawRows
+  @doc.xpath('id("table7")/tr[td[@bgcolor]]')
+end
+
+def penaltyRow
+  @doc.xpath('id("table7")/tr[td[contains(.,"penalties")]]');
 end
 
 end #class
