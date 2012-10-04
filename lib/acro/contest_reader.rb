@@ -155,6 +155,8 @@ def detect_flight_category(description)
       cat = 'Intermediate'
     elsif /Unl/i =~ description
       cat = 'Unlimited'
+    elsif /Minute|Four/i =~ description
+      cat = 'Four Minute Free'
     end
   end
   cat
@@ -170,7 +172,7 @@ end
 
 def detect_flight_aircat(description)
   aircat = nil
-  if /Power/i =~ description
+  if /Power|Four|Minute|Primary/i =~ description
     aircat = IAC::Constants::POWER_CATEGORY
   elsif /Glider/i =~ description
     aircat = IAC::Constants::GLIDER_CATEGORY

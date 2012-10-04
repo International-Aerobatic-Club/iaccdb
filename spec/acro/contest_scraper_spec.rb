@@ -25,7 +25,7 @@ module ACRO
     end
     it 'finds pilot data files' do
       cs = ContestScraper.new('spec/acro/newContest.yml')
-      cs.files.size.should == 6
+      cs.files.size.should == 7
       File.exist?(cs.files.first).should == true
       File.file?(cs.files.first).should == true
     end
@@ -45,7 +45,7 @@ module ACRO
         ps = PilotScraper.new(pf)
         cs.process_pilotFlight(ps)
       end
-      Judge.all.size.should == 14
+      Judge.all.size.should == 18
       stols = Member.where(:family_name => 'Stoltenberg')
       stols.size.should == 1
       aj = Judge.where(:judge_id => stols.first)
@@ -108,7 +108,7 @@ module ACRO
       end
       ct = Contest.where(:start => '2011-09-25').first
       fla = ct.flights
-      fla.size.should == 3
+      fla.size.should == 4
       fla.first.pilot_flights.size.should == 2
     end
     it 'stores the penalty' do
