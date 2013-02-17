@@ -1,0 +1,1609 @@
+<ContestResults>
+  <Version>
+     <XMLFormat>1.0</XMLFormat>
+     <JaSPer>3.1.29</JaSPer>
+     <Generated>Mon Aug 13 09:22:44 MDT 2012</Generated>
+  </Version>
+  <ContestInfo>
+    <Id>380</Id>
+    <Contest>US Candian Challenge</Contest>
+    <City>Olean</City>
+    <State>NY</State>
+    <Date>6/23/12</Date>
+    <Director>Pat Barrett</Director>
+    <HostChapter>126</HostChapter>
+    <Region>NorthEast</Region>
+    <Type>Powered</Type>
+    <Comment>Good Wx and accident free flying,for which we Thank God. 
+One aircraft with impulse coupler failed had a delayed start. 
+Fed Ex delivered on time, maintence assisted installation.
+KOLE ASG Airport support Group provided breakfast, lunch and
+dinners (for a minimul charge). Sponsors were:
+Aircraft Spruce,Hope Propeller,SkyTec Starters, Blackstone 
+Oil analysis,David Clark Headsets, Gene Beggs Spins in the 
+Pitts and chicken wings by Mamosas' restaurant. 
+Video by amazing aerial video.com, with a contribution
+of a large panoramic view of all contest aircraft and pilots.
+Total of 13 contestants. Buffalo Channel briefly 2 reported the event 
+in three newscasts with Amazing aerial video supplying videos.
+  </Comment>
+  </ContestInfo>
+  <Judges>
+    <Category CategoryID="2">
+      <Flight FlightID="1">
+        <Judge JudgeID="0">
+          <Name>
+            <First>Carole</First>
+            <Last>Holyk</Last>
+          </Name>
+          <IACNumber>2383</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Bill</First>
+              <Last>Gordon</Last>
+            </Name>
+            <IACNumber>28094</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+          <Assistant>
+            <Name>
+              <First>Patrick</First>
+              <Last>Rebbetoy</Last>
+            </Name>
+            <IACNumber>16174</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+        <Judge JudgeID="1">
+          <Name>
+            <First>Sanford</First>
+            <Last>Langworthy</Last>
+          </Name>
+          <IACNumber>431885</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Hella</First>
+              <Last>Comat</Last>
+            </Name>
+            <IACNumber>433272</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+        <Judge JudgeID="2">
+          <Name>
+            <First>Chris</First>
+            <Last>Pulley</Last>
+          </Name>
+          <IACNumber>8476</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Steven</First>
+              <Last>Grohsmeyer</Last>
+            </Name>
+            <IACNumber>13721</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+        <Judge JudgeID="3">
+          <Name>
+            <First>Sheri</First>
+            <Last>Davis</Last>
+          </Name>
+          <IACNumber>24185</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Weston</First>
+              <Last>Liu</Last>
+            </Name>
+            <IACNumber>10467</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+      </Flight>
+      <Flight FlightID="2">
+        <Judge JudgeID="0">
+          <Name>
+            <First>Carole</First>
+            <Last>Holyk</Last>
+          </Name>
+          <IACNumber>2383</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Bill</First>
+              <Last>Gordon</Last>
+            </Name>
+            <IACNumber>28094</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+          <Assistant>
+            <Name>
+              <First>Patrick</First>
+              <Last>Rebbetoy</Last>
+            </Name>
+            <IACNumber>16174</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+        <Judge JudgeID="1">
+          <Name>
+            <First>Sanford</First>
+            <Last>Langworthy</Last>
+          </Name>
+          <IACNumber>431885</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Hella</First>
+              <Last>Comat</Last>
+            </Name>
+            <IACNumber>433272</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+        <Judge JudgeID="2">
+          <Name>
+            <First>Chris</First>
+            <Last>Pulley</Last>
+          </Name>
+          <IACNumber>8476</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Steven</First>
+              <Last>Grohsmeyer</Last>
+            </Name>
+            <IACNumber>13721</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+        <Judge JudgeID="3">
+          <Name>
+            <First>Sheri</First>
+            <Last>Davis</Last>
+          </Name>
+          <IACNumber>24185</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Weston</First>
+              <Last>Liu</Last>
+            </Name>
+            <IACNumber>10467</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+      </Flight>
+      <Flight FlightID="3">
+        <Judge JudgeID="0">
+          <Name>
+            <First>Carole</First>
+            <Last>Holyk</Last>
+          </Name>
+          <IACNumber>2383</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Bill</First>
+              <Last>Gordon</Last>
+            </Name>
+            <IACNumber>28094</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+          <Assistant>
+            <Name>
+              <First>Patrick</First>
+              <Last>Rebbetoy</Last>
+            </Name>
+            <IACNumber>16174</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+        <Judge JudgeID="1">
+          <Name>
+            <First>Sanford</First>
+            <Last>Langworthy</Last>
+          </Name>
+          <IACNumber>431885</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Hella</First>
+              <Last>Comat</Last>
+            </Name>
+            <IACNumber>433272</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+        <Judge JudgeID="2">
+          <Name>
+            <First>Chris</First>
+            <Last>Pulley</Last>
+          </Name>
+          <IACNumber>8476</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Steven</First>
+              <Last>Grohsmeyer</Last>
+            </Name>
+            <IACNumber>13721</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+        <Judge JudgeID="3">
+          <Name>
+            <First>Sheri</First>
+            <Last>Davis</Last>
+          </Name>
+          <IACNumber>24185</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Weston</First>
+              <Last>Liu</Last>
+            </Name>
+            <IACNumber>10467</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+      </Flight>
+    </Category>
+    <Category CategoryID="3">
+      <Flight FlightID="1">
+        <Judge JudgeID="0">
+          <Name>
+            <First>Carole</First>
+            <Last>Holyk</Last>
+          </Name>
+          <IACNumber>2383</IACNumber>
+          <Assistant>
+            <Name>
+              <First>William</First>
+              <Last>Gordon</Last>
+            </Name>
+            <IACNumber>28094</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+          <Assistant>
+            <Name>
+              <First>David</First>
+              <Last>Heinsohn</Last>
+            </Name>
+            <IACNumber>18515</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+        <Judge JudgeID="1">
+          <Name>
+            <First>Sanford</First>
+            <Last>Langworthy</Last>
+          </Name>
+          <IACNumber>431885</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Hans</First>
+              <Last>Bok</Last>
+            </Name>
+            <IACNumber>9728</IACNumber>
+            <Modifier>-5</Modifier>
+          </Assistant>
+        </Judge>
+        <Judge JudgeID="2">
+          <Name>
+            <First>Chris</First>
+            <Last>Pulley</Last>
+          </Name>
+          <IACNumber>8476</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Sheri</First>
+              <Last>Davis</Last>
+            </Name>
+            <IACNumber>24185</IACNumber>
+            <Modifier>-5</Modifier>
+          </Assistant>
+        </Judge>
+        <Judge JudgeID="3">
+          <Name>
+            <First>Francesco</First>
+            <Last>Pallozzi</Last>
+          </Name>
+          <IACNumber>434884</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Larry</First>
+              <Last>Ernewein</Last>
+            </Name>
+            <IACNumber>12058</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+      </Flight>
+      <Flight FlightID="2">
+        <Judge JudgeID="0">
+          <Name>
+            <First>Carole</First>
+            <Last>Holyk</Last>
+          </Name>
+          <IACNumber>2383</IACNumber>
+          <Assistant>
+            <Name>
+              <First>William</First>
+              <Last>Gordon</Last>
+            </Name>
+            <IACNumber>28094</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+          <Assistant>
+            <Name>
+              <First>David</First>
+              <Last>Heinsohn</Last>
+            </Name>
+            <IACNumber>18515</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+        <Judge JudgeID="1">
+          <Name>
+            <First>Sanford</First>
+            <Last>Langworthy</Last>
+          </Name>
+          <IACNumber>431885</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Hans</First>
+              <Last>Bok</Last>
+            </Name>
+            <IACNumber>9728</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+        <Judge JudgeID="2">
+          <Name>
+            <First>Chris</First>
+            <Last>Pulley</Last>
+          </Name>
+          <IACNumber>8476</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Sheri</First>
+              <Last>Davis</Last>
+            </Name>
+            <IACNumber>24185</IACNumber>
+            <Modifier>-5</Modifier>
+          </Assistant>
+        </Judge>
+        <Judge JudgeID="3">
+          <Name>
+            <First>Francesco</First>
+            <Last>Pallozzi</Last>
+          </Name>
+          <IACNumber>434884</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Larry</First>
+              <Last>Ernewein</Last>
+            </Name>
+            <IACNumber>12058</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+      </Flight>
+      <Flight FlightID="3">
+        <Judge JudgeID="0">
+          <Name>
+            <First>Carole</First>
+            <Last>Holyk</Last>
+          </Name>
+          <IACNumber>2383</IACNumber>
+          <Assistant>
+            <Name>
+              <First>William</First>
+              <Last>Gordon</Last>
+            </Name>
+            <IACNumber>28094</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+          <Assistant>
+            <Name>
+              <First>David</First>
+              <Last>Heinsohn</Last>
+            </Name>
+            <IACNumber>18515</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+        <Judge JudgeID="1">
+          <Name>
+            <First>Sanford</First>
+            <Last>Langworthy</Last>
+          </Name>
+          <IACNumber>431885</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Hans</First>
+              <Last>Bok</Last>
+            </Name>
+            <IACNumber>9728</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+        <Judge JudgeID="2">
+          <Name>
+            <First>Chris</First>
+            <Last>Pulley</Last>
+          </Name>
+          <IACNumber>8476</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Sheri</First>
+              <Last>Davis</Last>
+            </Name>
+            <IACNumber>24185</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+        <Judge JudgeID="3">
+          <Name>
+            <First>Francesco</First>
+            <Last>Pallozzi</Last>
+          </Name>
+          <IACNumber>434884</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Larry</First>
+              <Last>Ernewein</Last>
+            </Name>
+            <IACNumber>12058</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+      </Flight>
+    </Category>
+    <Category CategoryID="4">
+      <Flight FlightID="1">
+        <Judge JudgeID="0">
+          <Name>
+            <First>Carole</First>
+            <Last>Holyk</Last>
+          </Name>
+          <IACNumber>2383</IACNumber>
+          <Assistant>
+            <Name>
+              <First>William</First>
+              <Last>Gordon</Last>
+            </Name>
+            <IACNumber>28094</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+          <Assistant>
+            <Name>
+              <First>David</First>
+              <Last>Heinsohn</Last>
+            </Name>
+            <IACNumber>18515</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+        <Judge JudgeID="1">
+          <Name>
+            <First>Sanford</First>
+            <Last>Langworthy</Last>
+          </Name>
+          <IACNumber>431885</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Hella</First>
+              <Last>Comat</Last>
+            </Name>
+            <IACNumber>433272</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+        <Judge JudgeID="2">
+          <Name>
+            <First>Chris</First>
+            <Last>Pulley</Last>
+          </Name>
+          <IACNumber>8476</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Sheri</First>
+              <Last>Davis</Last>
+            </Name>
+            <IACNumber>24185</IACNumber>
+            <Modifier>-4</Modifier>
+          </Assistant>
+        </Judge>
+        <Judge JudgeID="3">
+          <Name>
+            <First>Sheri</First>
+            <Last>Davis</Last>
+          </Name>
+          <IACNumber>24185</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Larry</First>
+              <Last>Ernewein</Last>
+            </Name>
+            <IACNumber>12058</IACNumber>
+            <Modifier>-4</Modifier>
+          </Assistant>
+        </Judge>
+      </Flight>
+      <Flight FlightID="2">
+        <Judge JudgeID="0">
+          <Name>
+            <First>Carole</First>
+            <Last>Holyk</Last>
+          </Name>
+          <IACNumber>2383</IACNumber>
+          <Assistant>
+            <Name>
+              <First>William</First>
+              <Last>Gordon</Last>
+            </Name>
+            <IACNumber>28094</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+          <Assistant>
+            <Name>
+              <First>David</First>
+              <Last>Heinsohn</Last>
+            </Name>
+            <IACNumber>18515</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+        <Judge JudgeID="1">
+          <Name>
+            <First>Sanford</First>
+            <Last>Langworthy</Last>
+          </Name>
+          <IACNumber>431885</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Hella</First>
+              <Last>Comat</Last>
+            </Name>
+            <IACNumber>433272</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+        <Judge JudgeID="2">
+          <Name>
+            <First>Chris</First>
+            <Last>Pulley</Last>
+          </Name>
+          <IACNumber>8476</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Sheri</First>
+              <Last>Davis</Last>
+            </Name>
+            <IACNumber>24185</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+        <Judge JudgeID="3">
+          <Name>
+            <First>Sheri</First>
+            <Last>Davis</Last>
+          </Name>
+          <IACNumber>24185</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Larry</First>
+              <Last>Ernewein</Last>
+            </Name>
+            <IACNumber>12058</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+      </Flight>
+      <Flight FlightID="3">
+        <Judge JudgeID="0">
+          <Name>
+            <First>Carole</First>
+            <Last>Holyk</Last>
+          </Name>
+          <IACNumber>2383</IACNumber>
+          <Assistant>
+            <Name>
+              <First>William</First>
+              <Last>Gordon</Last>
+            </Name>
+            <IACNumber>28094</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+          <Assistant>
+            <Name>
+              <First>David</First>
+              <Last>Heinsohn</Last>
+            </Name>
+            <IACNumber>18515</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+        <Judge JudgeID="1">
+          <Name>
+            <First>Sanford</First>
+            <Last>Langworthy</Last>
+          </Name>
+          <IACNumber>431885</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Hella</First>
+              <Last>Comat</Last>
+            </Name>
+            <IACNumber>433272</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+        <Judge JudgeID="2">
+          <Name>
+            <First>Chris</First>
+            <Last>Pulley</Last>
+          </Name>
+          <IACNumber>8476</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Sheri</First>
+              <Last>Davis</Last>
+            </Name>
+            <IACNumber>24185</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+        <Judge JudgeID="3">
+          <Name>
+            <First>Sheri</First>
+            <Last>Davis</Last>
+          </Name>
+          <IACNumber>24185</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Larry</First>
+              <Last>Ernewein</Last>
+            </Name>
+            <IACNumber>12058</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+      </Flight>
+    </Category>
+    <Category CategoryID="5">
+      <Flight FlightID="1">
+        <Judge JudgeID="0">
+          <Name>
+            <First>Carole</First>
+            <Last>Holyk</Last>
+          </Name>
+          <IACNumber>2383</IACNumber>
+          <Assistant>
+            <Name>
+              <First>David</First>
+              <Last>Heinsohn</Last>
+            </Name>
+            <IACNumber>18515</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+          <Assistant>
+            <Name>
+              <First>Patrick</First>
+              <Last>Rebbetoy</Last>
+            </Name>
+            <IACNumber>16174</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+        <Judge JudgeID="1">
+          <Name>
+            <First>Sanford</First>
+            <Last>Langworthy</Last>
+          </Name>
+          <IACNumber>431885</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Sheri</First>
+              <Last>Davis</Last>
+            </Name>
+            <IACNumber>24185</IACNumber>
+            <Modifier>-4</Modifier>
+          </Assistant>
+        </Judge>
+        <Judge JudgeID="2">
+          <Name>
+            <First>Chris</First>
+            <Last>Pulley</Last>
+          </Name>
+          <IACNumber>8476</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Larry</First>
+              <Last>Ernewein</Last>
+            </Name>
+            <IACNumber>12058</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+        <Judge JudgeID="3">
+          <Name>
+            <First>Francesco</First>
+            <Last>Pallozzi</Last>
+          </Name>
+          <IACNumber>434884</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Brian</First>
+              <Last>Roodvoets</Last>
+            </Name>
+            <IACNumber>434247</IACNumber>
+            <Modifier>-4</Modifier>
+          </Assistant>
+        </Judge>
+      </Flight>
+      <Flight FlightID="2">
+        <Judge JudgeID="0">
+          <Name>
+            <First>Carole</First>
+            <Last>Holyk</Last>
+          </Name>
+          <IACNumber>2383</IACNumber>
+          <Assistant>
+            <Name>
+              <First>David</First>
+              <Last>Heinsohn</Last>
+            </Name>
+            <IACNumber>18515</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+          <Assistant>
+            <Name>
+              <First>Patrick</First>
+              <Last>Rebbetoy</Last>
+            </Name>
+            <IACNumber>16174</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+        <Judge JudgeID="1">
+          <Name>
+            <First>Sanford</First>
+            <Last>Langworthy</Last>
+          </Name>
+          <IACNumber>431885</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Sheri</First>
+              <Last>Davis</Last>
+            </Name>
+            <IACNumber>24185</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+        <Judge JudgeID="2">
+          <Name>
+            <First>Chris</First>
+            <Last>Pulley</Last>
+          </Name>
+          <IACNumber>8476</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Larry</First>
+              <Last>Ernewein</Last>
+            </Name>
+            <IACNumber>12058</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+        <Judge JudgeID="3">
+          <Name>
+            <First>Francesco</First>
+            <Last>Pallozzi</Last>
+          </Name>
+          <IACNumber>434884</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Brian</First>
+              <Last>Roodvoets</Last>
+            </Name>
+            <IACNumber>434247</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+      </Flight>
+      <Flight FlightID="3">
+        <Judge JudgeID="0">
+          <Name>
+            <First>Carole</First>
+            <Last>Holyk</Last>
+          </Name>
+          <IACNumber>2383</IACNumber>
+          <Assistant>
+            <Name>
+              <First>David</First>
+              <Last>Heinsohn</Last>
+            </Name>
+            <IACNumber>18515</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+          <Assistant>
+            <Name>
+              <First>Patrick</First>
+              <Last>Rebbetoy</Last>
+            </Name>
+            <IACNumber>16174</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+        <Judge JudgeID="1">
+          <Name>
+            <First>Sanford</First>
+            <Last>Langworthy</Last>
+          </Name>
+          <IACNumber>431885</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Sheri</First>
+              <Last>Davis</Last>
+            </Name>
+            <IACNumber>24185</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+        <Judge JudgeID="2">
+          <Name>
+            <First>Chris</First>
+            <Last>Pulley</Last>
+          </Name>
+          <IACNumber>8476</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Larry</First>
+              <Last>Ernewein</Last>
+            </Name>
+            <IACNumber>12058</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+        <Judge JudgeID="3">
+          <Name>
+            <First>Francesco</First>
+            <Last>Pallozzi</Last>
+          </Name>
+          <IACNumber>434884</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Brian</First>
+              <Last>Roodvoets</Last>
+            </Name>
+            <IACNumber>434247</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+      </Flight>
+    </Category>
+  </Judges>
+  <Pilots>
+    <Category CategoryID="2">
+      <Pilot PilotID="1">
+        <IACNumber>12058</IACNumber>
+        <Name>
+          <First>Larry</First>
+          <Last>Ernewein</Last>
+        </Name>
+        <Flights>Known Freestyle Unknown1 </Flights>
+        <Chapter>3</Chapter>
+        <FreestyleKs>7 14 19 18 10 14 13 16 11 5 0 0 0 0 0 0 0 0 0 0 6 </FreestyleKs>
+        <Aircraft>
+          <Make>Bucker Youngman</Make>
+          <Model>131</Model>
+          <NNumber>CFLXE</NNumber>
+        </Aircraft>
+      </Pilot>
+      <Pilot PilotID="2">
+        <IACNumber>430273</IACNumber>
+        <Name>
+          <First>Jan</First>
+          <Last>Wieckowski</Last>
+        </Name>
+        <Flights>Known Freestyle Unknown1 </Flights>
+        <Chapter>126</Chapter>
+        <FreestyleKs>7 14 19 18 10 14 13 16 11 5 0 0 0 0 0 0 0 0 0 0 6 </FreestyleKs>
+        <Aircraft>
+          <Make>Sukoi</Make>
+          <Model>29</Model>
+          <NNumber>n229Su</NNumber>
+        </Aircraft>
+      </Pilot>
+      <Pilot PilotID="3">
+        <IACNumber>434969</IACNumber>
+        <Name>
+          <First>Desmond</First>
+          <Last>Lightbody</Last>
+        </Name>
+        <Flights>Known Freestyle Unknown1 </Flights>
+        <Chapter>3</Chapter>
+        <FreestyleKs>7 14 19 18 10 14 13 16 11 5 0 0 0 0 0 0 0 0 0 0 6 </FreestyleKs>
+        <Aircraft>
+          <Make>Pitts</Make>
+          <Model>S2A</Model>
+          <NNumber>n3I482</NNumber>
+        </Aircraft>
+      </Pilot>
+      <Pilot PilotID="4">
+        <IACNumber>434884</IACNumber>
+        <Name>
+          <First>Francesco</First>
+          <Last>Pallozzi</Last>
+        </Name>
+        <Flights>Known Freestyle Unknown1 </Flights>
+        <Chapter>35</Chapter>
+        <FreestyleKs>7 14 19 18 10 14 13 16 11 5 0 0 0 0 0 0 0 0 0 0 6 </FreestyleKs>
+        <Aircraft>
+          <Make>Christen Eagle</Make>
+          <Model>II</Model>
+          <NNumber>n72wm</NNumber>
+        </Aircraft>
+      </Pilot>
+    </Category>
+    <Category CategoryID="3">
+      <Pilot PilotID="1">
+        <IACNumber>10467</IACNumber>
+        <Name>
+          <First>Weston</First>
+          <Last>Liu</Last>
+        </Name>
+        <Flights>Known Freestyle Unknown1 </Flights>
+        <Chapter>35</Chapter>
+        <FreestyleKs>9 10 15 14 11 19 10 13 17 16 11 17 14 14 0 0 0 0 0 0 8 </FreestyleKs>
+        <Aircraft>
+          <Make>Pitts</Make>
+          <Model>S2A</Model>
+          <NNumber>n78ps</NNumber>
+        </Aircraft>
+      </Pilot>
+      <Pilot PilotID="2">
+        <IACNumber>28094</IACNumber>
+        <Name>
+          <First>William</First>
+          <Last>Gordon</Last>
+        </Name>
+        <Flights>Known Freestyle Unknown1 </Flights>
+        <Chapter>35</Chapter>
+        <FreestyleKs>7 13 33 20 15 31 19 11 12 14 15 0 0 0 0 0 0 0 0 0 8 </FreestyleKs>
+        <Aircraft>
+          <Make>Pitts</Make>
+          <Model>S-2B</Model>
+          <NNumber>n5310s</NNumber>
+        </Aircraft>
+      </Pilot>
+      <Pilot PilotID="3">
+        <IACNumber>433272</IACNumber>
+        <Name>
+          <First>Hella</First>
+          <Last>Comat</Last>
+        </Name>
+        <Flights>Known Freestyle Unknown1 </Flights>
+        <Chapter>126</Chapter>
+        <FreestyleKs>14 10 13 13 15 11 6 6 18 17 15 17 17 13 5 0 0 0 0 0 8 </FreestyleKs>
+        <Aircraft>
+          <Make>Pitts</Make>
+          <Model>Special S1T</Model>
+          <NNumber>C-FWTT</NNumber>
+        </Aircraft>
+      </Pilot>
+      <Pilot PilotID="4">
+        <IACNumber>434862</IACNumber>
+        <Name>
+          <First>David</First>
+          <Last>Crescenzo</Last>
+        </Name>
+        <Flights>Known Freestyle Unknown1 </Flights>
+        <Chapter>52</Chapter>
+        <FreestyleKs>32 17 10 20 10 17 19 15 20 13 0 0 0 0 0 0 0 0 0 0 8 </FreestyleKs>
+        <Aircraft>
+          <Make>Pitts</Make>
+          <Model>S2B</Model>
+          <NNumber>79d</NNumber>
+        </Aircraft>
+      </Pilot>
+      <Pilot PilotID="5">
+        <IACNumber>8778</IACNumber>
+        <Name>
+          <First>Edwin</First>
+          <Last>Ruhl</Last>
+        </Name>
+        <Flights>Known Freestyle Unknown1 </Flights>
+        <Chapter></Chapter>
+        <FreestyleKs>32 17 10 20 10 17 19 15 20 13 0 0 0 0 0 0 0 0 0 0 8 </FreestyleKs>
+        <Aircraft>
+          <Make>Christien Eagl</Make>
+          <Model>2</Model>
+          <NNumber>n80CE</NNumber>
+        </Aircraft>
+      </Pilot>
+    </Category>
+    <Category CategoryID="4">
+      <Pilot PilotID="1">
+        <IACNumber>9728</IACNumber>
+        <Name>
+          <First>Hans</First>
+          <Last>Bok</Last>
+        </Name>
+        <Flights>Known Freestyle Unknown1 </Flights>
+        <Chapter>35</Chapter>
+        <FreestyleKs>28 34 23 36 34 24 21 18 14 15 24 29 0 0 0 0 0 0 0 0 12 </FreestyleKs>
+        <Aircraft>
+          <Make>Sukoi</Make>
+          <Model>29</Model>
+          <NNumber>54CP</NNumber>
+        </Aircraft>
+      </Pilot>
+      <Pilot PilotID="2">
+        <IACNumber>27516</IACNumber>
+        <Name>
+          <First>Mark</First>
+          <Last>Steward</Last>
+        </Name>
+        <Flights>Known Freestyle Unknown1 </Flights>
+        <Chapter>52</Chapter>
+        <FreestyleKs>37 31 13 29 22 17 28 19 24 34 17 29 0 0 0 0 0 0 0 0 12 </FreestyleKs>
+        <Aircraft>
+          <Make>Panzl</Make>
+          <Model>S-330</Model>
+          <NNumber>N540ML</NNumber>
+        </Aircraft>
+      </Pilot>
+    </Category>
+    <Category CategoryID="5">
+      <Pilot PilotID="1">
+        <IACNumber>13721</IACNumber>
+        <Name>
+          <First>Steven</First>
+          <Last>Grohsmeyer</Last>
+        </Name>
+        <Flights>Known Freestyle Unknown1 </Flights>
+        <Chapter></Chapter>
+        <FreestyleKs>56 39 56 49 25 38 47 57 53 0 0 0 0 0 0 0 0 0 0 0 26 </FreestyleKs>
+        <Aircraft>
+          <Make>eigenhawk solution</Make>
+          <Model></Model>
+          <NNumber>n7296</NNumber>
+        </Aircraft>
+      </Pilot>
+      <Pilot PilotID="2">
+        <IACNumber>27381</IACNumber>
+        <Name>
+          <First>Dennis</First>
+          <Last>Thompson</Last>
+        </Name>
+        <Flights>Known Freestyle Unknown1 </Flights>
+        <Chapter>52</Chapter>
+        <FreestyleKs>36 31 36 33 41 42 31 26 24 20 38 25 17 0 0 0 0 0 0 0 26 </FreestyleKs>
+        <Aircraft>
+          <Make>Edge </Make>
+          <Model>540</Model>
+          <NNumber>N5400T</NNumber>
+        </Aircraft>
+      </Pilot>
+    </Category>
+  </Pilots>
+  <KnownKFactors>
+    <Year>2012</Year>
+    <Category CategoryID="1">7 15 14 10 4 10 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3 </Category>
+    <Category CategoryID="2">17 7 4 14 15 16 14 17 10 10 0 0 0 0 0 0 0 0 0 0 6 </Category>
+    <Category CategoryID="3">23 9 12 11 17 14 15 14 25 21 14 10 0 0 0 0 0 0 0 0 8 </Category>
+    <Category CategoryID="4">25 35 34 28 24 25 36 20 30 0 0 0 0 0 0 0 0 0 0 0 12 </Category>
+    <Category CategoryID="5">45 42 55 28 25 35 23 48 41 0 0 0 0 0 0 0 0 0 0 0 20 </Category>
+    <Category CategoryID="6">40 40 40 40 40 40 40 40 40 40 0 0 0 0 0 0 0 0 0 0 0 </Category>
+  </KnownKFactors>
+  <UnKnownKFactors>
+    <One>
+      <Category CategoryID="3">32 17 10 20 10 17 19 15 20 13 0 0 0 0 0 0 0 0 0 0 8 </Category>
+      <Category CategoryID="4">16 16 39 34 36 28 14 15 29 10 30 0 0 0 0 0 0 0 0 0 12 </Category>
+      <Category CategoryID="5">36 31 36 33 41 42 31 26 24 20 38 25 17 0 0 0 0 0 0 0 20 </Category>
+    </One>
+    <Two>
+      <Category CategoryID="3">10 13 10 13 4 19 18 14 19 3 17 10 19 9 12 0 0 0 0 0 8 </Category>
+      <Category CategoryID="4">0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 12 </Category>
+      <Category CategoryID="5">0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 20 </Category>
+    </Two>
+  </UnKnownKFactors>
+  <Scores>
+    <Category CategoryID="2">
+      <Flight FlightID="1">
+        <Pilot PilotID="1">
+          <Judge JudgeID="1">
+            <Figures>-1.0 8.5 8.5 9.0 8.5 9.0 9.0 9.0 8.5 9.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.5 </Figures>
+          </Judge>
+          <Judge JudgeID="2">
+            <Figures>9.0 10.0 9.0 8.5 9.0 8.5 6.5 7.0 6.5 9.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.0 </Figures>
+          </Judge>
+          <Judge JudgeID="3">
+            <Figures>-1.0 8.5 7.0 9.5 9.0 9.0 8.0 8.0 8.0 9.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.0 </Figures>
+          </Judge>
+          <Penalty>0.0</Penalty>
+        </Pilot>
+        <Pilot PilotID="2">
+          <Judge JudgeID="1">
+            <Figures>8.5 9.5 9.0 8.0 9.0 9.0 8.5 9.5 9.0 9.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 9.0 </Figures>
+          </Judge>
+          <Judge JudgeID="2">
+            <Figures>5.0 8.0 7.0 6.0 7.0 5.0 8.0 7.5 7.5 8.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.0 </Figures>
+          </Judge>
+          <Judge JudgeID="3">
+            <Figures>8.0 9.0 9.0 8.0 9.0 9.0 9.5 9.5 8.5 9.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.5 </Figures>
+          </Judge>
+          <Penalty>0.0</Penalty>
+        </Pilot>
+        <Pilot PilotID="3">
+          <Judge JudgeID="1">
+            <Figures>9.5 9.0 8.5 8.0 8.5 9.0 8.0 8.0 8.0 9.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.5 </Figures>
+          </Judge>
+          <Judge JudgeID="2">
+            <Figures>9.0 9.0 9.0 8.5 8.0 6.5 6.5 7.0 6.0 9.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 9.0 </Figures>
+          </Judge>
+          <Judge JudgeID="3">
+            <Figures>9.0 7.5 9.0 7.5 7.5 7.5 7.0 9.0 8.0 8.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.0 </Figures>
+          </Judge>
+          <Penalty>0.0</Penalty>
+        </Pilot>
+        <Pilot PilotID="4">
+          <Judge JudgeID="1">
+            <Figures>9.0 10.0 9.0 8.0 9.0 9.5 9.0 8.5 9.0 9.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 9.0 </Figures>
+          </Judge>
+          <Judge JudgeID="2">
+            <Figures>9.0 9.5 9.0 8.5 8.5 7.5 8.5 10.0 8.5 9.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 9.0 </Figures>
+          </Judge>
+          <Judge JudgeID="3">
+            <Figures>9.5 9.0 9.0 7.5 8.0 9.0 8.0 9.0 8.5 9.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.0 </Figures>
+          </Judge>
+          <Penalty>0.0</Penalty>
+        </Pilot>
+      </Flight>
+      <Flight FlightID="2">
+        <Pilot PilotID="1">
+          <Judge JudgeID="1">
+            <Figures>9.0 9.5 9.5 9.0 9.5 9.0 8.5 9.5 7.5 9.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.5 </Figures>
+          </Judge>
+          <Judge JudgeID="2">
+            <Figures>9.0 10.0 9.0 9.0 8.5 9.5 9.0 8.5 8.5 9.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 10.0 </Figures>
+          </Judge>
+          <Judge JudgeID="3">
+            <Figures>9.0 9.5 8.0 9.0 8.5 7.5 7.0 9.0 8.0 9.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 9.0 </Figures>
+          </Judge>
+          <Penalty>0.0</Penalty>
+        </Pilot>
+        <Pilot PilotID="2">
+          <Judge JudgeID="1">
+            <Figures>8.5 9.5 10.0 9.0 9.5 9.0 8.5 9.0 9.0 9.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.5 </Figures>
+          </Judge>
+          <Judge JudgeID="2">
+            <Figures>8.5 9.0 10.0 8.5 8.5 8.0 7.5 7.5 9.0 9.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.5 </Figures>
+          </Judge>
+          <Judge JudgeID="3">
+            <Figures>9.0 9.5 8.0 8.0 9.0 9.0 9.0 8.5 8.0 8.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 9.0 </Figures>
+          </Judge>
+          <Penalty>0.0</Penalty>
+        </Pilot>
+        <Pilot PilotID="3">
+          <Judge JudgeID="1">
+            <Figures>0.0 9.5 9.0 9.0 8.0 8.0 8.5 8.5 8.0 7.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.0 </Figures>
+          </Judge>
+          <Judge JudgeID="2">
+            <Figures>0.0 8.0 7.5 6.5 7.5 8.0 9.5 8.5 7.5 8.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.0 </Figures>
+          </Judge>
+          <Judge JudgeID="3">
+            <Figures>0.0 8.0 9.0 7.5 8.5 8.0 7.0 7.5 8.0 9.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 9.0 </Figures>
+          </Judge>
+          <Penalty>0.0</Penalty>
+        </Pilot>
+        <Pilot PilotID="4">
+          <Judge JudgeID="1">
+            <Figures>9.0 9.5 9.0 9.5 9.5 9.0 9.0 9.5 9.0 9.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 9.0 </Figures>
+          </Judge>
+          <Judge JudgeID="2">
+            <Figures>9.0 9.5 9.0 8.5 8.5 8.0 7.5 9.0 9.0 9.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 9.0 </Figures>
+          </Judge>
+          <Judge JudgeID="3">
+            <Figures>9.5 9.5 9.0 9.0 9.0 8.0 8.5 9.0 7.5 9.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.5 </Figures>
+          </Judge>
+          <Penalty>0.0</Penalty>
+        </Pilot>
+      </Flight>
+      <Flight FlightID="3">
+        <Pilot PilotID="1">
+          <Judge JudgeID="1">
+            <Figures>9.0 9.5 9.5 9.0 9.5 8.5 9.0 9.0 9.5 9.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 9.0 </Figures>
+          </Judge>
+          <Judge JudgeID="2">
+            <Figures>9.5 9.5 10.0 9.0 9.5 9.0 8.5 8.5 10.0 9.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.0 </Figures>
+          </Judge>
+          <Judge JudgeID="3">
+            <Figures>9.5 9.5 9.0 9.0 9.5 8.5 9.0 9.5 8.5 9.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 9.0 </Figures>
+          </Judge>
+          <Penalty>0.0</Penalty>
+        </Pilot>
+        <Pilot PilotID="2">
+          <Judge JudgeID="1">
+            <Figures>8.5 9.0 9.5 0.0 0.0 8.5 9.0 7.5 7.0 8.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.5 </Figures>
+          </Judge>
+          <Judge JudgeID="2">
+            <Figures>8.5 8.0 9.0 0.0 0.0 8.0 8.5 4.0 6.5 8.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 9.0 </Figures>
+          </Judge>
+          <Judge JudgeID="3">
+            <Figures>9.5 9.5 9.0 0.0 0.0 -1.0 8.0 7.0 7.5 9.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.0 </Figures>
+          </Judge>
+          <Penalty>0.0</Penalty>
+        </Pilot>
+        <Pilot PilotID="3">
+          <Judge JudgeID="1">
+            <Figures>9.0 8.5 9.5 9.0 9.0 7.0 8.5 8.5 7.5 9.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.5 </Figures>
+          </Judge>
+          <Judge JudgeID="2">
+            <Figures>9.5 8.5 9.0 9.0 7.5 8.0 6.5 7.5 8.5 6.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 7.5 </Figures>
+          </Judge>
+          <Judge JudgeID="3">
+            <Figures>9.0 9.5 9.5 9.0 9.0 7.5 8.0 9.0 8.5 9.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.5 </Figures>
+          </Judge>
+          <Penalty>0.0</Penalty>
+        </Pilot>
+        <Pilot PilotID="4">
+          <Judge JudgeID="1">
+            <Figures>9.0 10.0 9.5 9.0 9.5 9.0 8.0 8.0 9.0 9.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.5 </Figures>
+          </Judge>
+          <Judge JudgeID="2">
+            <Figures>9.5 9.0 9.0 9.5 8.5 9.0 8.5 9.5 7.0 9.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.5 </Figures>
+          </Judge>
+          <Judge JudgeID="3">
+            <Figures>9.5 9.5 9.0 9.0 9.0 9.0 9.0 9.0 9.0 9.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.0 </Figures>
+          </Judge>
+          <Penalty>0.0</Penalty>
+        </Pilot>
+      </Flight>
+    </Category>
+    <Category CategoryID="3">
+      <Flight FlightID="1">
+        <Pilot PilotID="1">
+          <Judge JudgeID="1">
+            <Figures>8.5 10.0 10.0 0.0 8.5 8.5 9.0 7.5 8.0 8.0 5.0 9.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.5 </Figures>
+          </Judge>
+          <Judge JudgeID="2">
+            <Figures>0.0 9.0 9.0 7.5 8.5 8.5 8.5 6.5 7.5 7.5 8.0 9.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 7.5 </Figures>
+          </Judge>
+          <Judge JudgeID="3">
+            <Figures>8.5 10.0 9.0 7.5 8.5 8.5 8.0 7.0 6.5 8.0 4.0 10.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 9.0 </Figures>
+          </Judge>
+          <Penalty>0.0</Penalty>
+        </Pilot>
+        <Pilot PilotID="2">
+          <Judge JudgeID="1">
+            <Figures>8.5 9.5 10.0 9.0 9.0 8.5 8.0 8.5 8.5 9.0 8.5 9.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 9.5 </Figures>
+          </Judge>
+          <Judge JudgeID="2">
+            <Figures>9.0 10.0 9.0 8.5 9.0 9.0 6.0 7.5 8.5 8.5 8.0 9.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 7.5 </Figures>
+          </Judge>
+          <Judge JudgeID="3">
+            <Figures>8.5 9.0 8.5 8.5 8.0 9.5 8.0 9.0 9.0 8.5 9.0 10.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 9.0 </Figures>
+          </Judge>
+          <Penalty>0.0</Penalty>
+        </Pilot>
+        <Pilot PilotID="3">
+          <Judge JudgeID="1">
+            <Figures>8.0 8.5 9.0 9.5 8.5 9.0 8.5 8.5 8.5 6.0 9.0 9.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 9.0 </Figures>
+          </Judge>
+          <Judge JudgeID="2">
+            <Figures>9.0 10.0 9.0 9.0 8.0 9.0 8.5 7.5 8.5 6.0 6.5 9.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 9.0 </Figures>
+          </Judge>
+          <Judge JudgeID="3">
+            <Figures>8.0 9.0 9.0 9.5 7.5 8.0 8.5 8.0 9.0 4.0 10.0 9.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.5 </Figures>
+          </Judge>
+          <Penalty>0.0</Penalty>
+        </Pilot>
+        <Pilot PilotID="4">
+          <Judge JudgeID="1">
+            <Figures>9.0 9.5 9.0 10.0 8.5 8.0 9.5 9.0 9.5 9.0 8.5 9.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 9.0 </Figures>
+          </Judge>
+          <Judge JudgeID="2">
+            <Figures>8.5 9.0 6.5 8.5 8.5 8.5 9.0 7.0 9.0 7.5 5.0 8.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 7.0 </Figures>
+          </Judge>
+          <Judge JudgeID="3">
+            <Figures>8.0 8.5 7.0 7.5 7.5 7.0 9.0 8.5 7.5 7.5 4.0 9.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.5 </Figures>
+          </Judge>
+          <Penalty>0.0</Penalty>
+        </Pilot>
+        <Pilot PilotID="5">
+          <Judge JudgeID="1">
+            <Figures>8.0 9.5 9.0 9.0 9.0 9.0 8.5 8.5 9.0 8.5 9.0 9.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 9.0 </Figures>
+          </Judge>
+          <Judge JudgeID="2">
+            <Figures>8.5 9.0 9.0 9.0 7.5 9.0 8.0 8.5 8.0 6.5 9.0 8.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.0 </Figures>
+          </Judge>
+          <Judge JudgeID="3">
+            <Figures>7.5 10.0 7.0 8.0 8.0 8.0 9.0 7.0 7.5 8.0 8.0 8.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 7.5 </Figures>
+          </Judge>
+          <Penalty>0.0</Penalty>
+        </Pilot>
+      </Flight>
+      <Flight FlightID="2">
+        <Pilot PilotID="1">
+          <Judge JudgeID="1">
+            <Figures>9.5 9.5 9.5 9.5 9.5 9.5 9.5 9.5 9.0 9.0 10.0 9.0 9.0 9.5 0.0 0.0 0.0 0.0 0.0 0.0 9.5 </Figures>
+          </Judge>
+          <Judge JudgeID="2">
+            <Figures>9.0 8.5 9.0 8.0 7.5 7.5 9.0 8.5 8.5 8.5 9.0 9.0 8.5 7.5 0.0 0.0 0.0 0.0 0.0 0.0 7.5 </Figures>
+          </Judge>
+          <Judge JudgeID="3">
+            <Figures>10.0 8.0 9.0 7.0 10.0 8.5 8.0 8.5 9.0 7.5 9.5 8.0 8.5 7.0 0.0 0.0 0.0 0.0 0.0 0.0 8.5 </Figures>
+          </Judge>
+          <Penalty>0.0</Penalty>
+        </Pilot>
+        <Pilot PilotID="2">
+          <Judge JudgeID="1">
+            <Figures>9.0 9.5 9.0 9.5 9.5 9.0 9.5 9.0 9.0 9.5 9.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 9.5 </Figures>
+          </Judge>
+          <Judge JudgeID="2">
+            <Figures>9.5 9.0 9.0 9.0 9.5 8.0 8.0 8.5 8.5 8.5 8.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.0 </Figures>
+          </Judge>
+          <Judge JudgeID="3">
+            <Figures>10.0 9.0 8.0 8.5 10.0 8.0 10.0 8.0 8.5 9.0 9.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 9.0 </Figures>
+          </Judge>
+          <Penalty>0.0</Penalty>
+        </Pilot>
+        <Pilot PilotID="3">
+          <Judge JudgeID="1">
+            <Figures>9.0 9.5 9.0 9.0 8.5 8.5 9.5 9.0 9.0 9.5 9.5 9.0 9.0 9.0 8.5 0.0 0.0 0.0 0.0 0.0 9.5 </Figures>
+          </Judge>
+          <Judge JudgeID="2">
+            <Figures>9.0 9.0 9.0 8.5 9.0 8.5 9.0 8.5 8.5 8.5 8.0 8.5 8.5 9.0 9.0 0.0 0.0 0.0 0.0 0.0 8.0 </Figures>
+          </Judge>
+          <Judge JudgeID="3">
+            <Figures>8.0 9.5 8.5 8.0 9.0 9.0 10.0 9.0 8.0 10.0 8.0 7.5 8.0 8.5 7.5 0.0 0.0 0.0 0.0 0.0 7.5 </Figures>
+          </Judge>
+          <Penalty>0.0</Penalty>
+        </Pilot>
+        <Pilot PilotID="4">
+          <Judge JudgeID="1">
+            <Figures>9.5 9.0 9.5 9.5 9.0 9.0 8.5 8.0 8.5 9.0 8.5 9.0 9.0 9.5 9.0 0.0 0.0 0.0 0.0 0.0 9.0 </Figures>
+          </Judge>
+          <Judge JudgeID="2">
+            <Figures>10.0 8.5 9.0 9.5 9.0 8.5 10.0 9.5 6.5 8.5 8.5 9.0 9.0 9.0 9.0 0.0 0.0 0.0 0.0 0.0 8.5 </Figures>
+          </Judge>
+          <Judge JudgeID="3">
+            <Figures>8.5 8.5 8.0 7.5 9.5 7.5 7.0 7.5 7.5 -1.0 9.5 8.5 8.0 10.0 7.5 0.0 0.0 0.0 0.0 0.0 8.0 </Figures>
+          </Judge>
+          <Penalty>0.0</Penalty>
+        </Pilot>
+        <Pilot PilotID="5">
+          <Judge JudgeID="1">
+            <Figures>9.0 9.0 9.5 9.0 9.5 9.5 9.5 9.0 9.0 9.0 9.0 9.5 7.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.5 </Figures>
+          </Judge>
+          <Judge JudgeID="2">
+            <Figures>8.5 9.0 8.5 8.5 8.5 9.0 9.0 8.0 8.0 8.5 8.5 9.0 7.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.5 </Figures>
+          </Judge>
+          <Judge JudgeID="3">
+            <Figures>8.5 8.0 8.5 9.0 8.5 8.0 7.5 7.5 7.0 7.5 8.0 10.0 6.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 7.0 </Figures>
+          </Judge>
+          <Penalty>0.0</Penalty>
+        </Pilot>
+      </Flight>
+      <Flight FlightID="3">
+        <Pilot PilotID="1">
+          <Judge JudgeID="1">
+            <Figures>0.0 9.0 8.5 8.5 9.0 9.0 9.0 9.5 9.5 9.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 9.0 </Figures>
+          </Judge>
+          <Judge JudgeID="2">
+            <Figures>0.0 8.0 8.0 8.0 9.0 7.5 8.5 7.5 9.0 9.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.0 </Figures>
+          </Judge>
+          <Judge JudgeID="3">
+            <Figures>0.0 7.0 10.0 8.5 8.5 7.5 7.5 8.5 9.0 7.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.5 </Figures>
+          </Judge>
+          <Penalty>0.0</Penalty>
+        </Pilot>
+        <Pilot PilotID="2">
+          <Judge JudgeID="1">
+            <Figures>8.5 9.0 9.5 8.5 9.0 9.0 9.5 9.0 0.0 9.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 9.0 </Figures>
+          </Judge>
+          <Judge JudgeID="2">
+            <Figures>6.0 7.5 9.0 8.5 9.0 9.0 8.5 8.5 0.0 8.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 7.5 </Figures>
+          </Judge>
+          <Judge JudgeID="3">
+            <Figures>7.5 8.5 10.0 8.0 10.0 8.5 9.0 10.0 0.0 7.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 9.0 </Figures>
+          </Judge>
+          <Penalty>0.0</Penalty>
+        </Pilot>
+        <Pilot PilotID="3">
+          <Judge JudgeID="1">
+            <Figures>9.0 9.5 9.5 9.5 9.0 8.5 9.0 9.0 9.5 9.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 9.5 </Figures>
+          </Judge>
+          <Judge JudgeID="2">
+            <Figures>7.5 7.5 9.0 8.0 9.0 7.5 8.0 8.5 8.0 9.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.0 </Figures>
+          </Judge>
+          <Judge JudgeID="3">
+            <Figures>7.0 8.0 9.0 7.5 9.0 7.0 7.5 10.0 8.0 7.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 6.5 </Figures>
+          </Judge>
+          <Penalty>0.0</Penalty>
+        </Pilot>
+        <Pilot PilotID="4">
+          <Judge JudgeID="1">
+            <Figures>9.0 9.0 9.5 8.5 9.0 0.0 9.0 9.0 9.5 9.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 9.0 </Figures>
+          </Judge>
+          <Judge JudgeID="2">
+            <Figures>7.5 8.0 8.5 5.0 6.0 0.0 8.0 8.5 8.5 9.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 7.0 </Figures>
+          </Judge>
+          <Judge JudgeID="3">
+            <Figures>8.0 7.5 9.5 9.0 9.0 0.0 7.5 10.0 8.0 8.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 9.0 </Figures>
+          </Judge>
+          <Penalty>0.0</Penalty>
+        </Pilot>
+        <Pilot PilotID="5">
+          <Judge JudgeID="1">
+            <Figures>8.5 9.0 8.0 9.0 9.5 9.0 9.5 9.0 9.5 9.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 9.0 </Figures>
+          </Judge>
+          <Judge JudgeID="2">
+            <Figures>8.5 8.0 8.0 7.5 8.5 8.5 8.0 7.5 9.0 7.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.0 </Figures>
+          </Judge>
+          <Judge JudgeID="3">
+            <Figures>7.5 7.0 10.0 8.0 8.0 7.0 8.5 8.5 7.0 6.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 7.0 </Figures>
+          </Judge>
+          <Penalty>0.0</Penalty>
+        </Pilot>
+      </Flight>
+    </Category>
+    <Category CategoryID="4">
+      <Flight FlightID="1">
+        <Pilot PilotID="1">
+          <Judge JudgeID="1">
+            <Figures>8.5 9.0 8.5 9.0 9.0 9.0 8.0 8.5 8.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.5 </Figures>
+          </Judge>
+          <Judge JudgeID="2">
+            <Figures>7.5 8.5 8.5 8.5 8.5 9.0 8.0 7.5 7.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.0 </Figures>
+          </Judge>
+          <Judge JudgeID="3">
+            <Figures>9.5 8.0 9.0 6.5 8.5 9.5 9.0 9.5 9.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 9.0 </Figures>
+          </Judge>
+          <Penalty>0.0</Penalty>
+        </Pilot>
+        <Pilot PilotID="2">
+          <Judge JudgeID="1">
+            <Figures>9.5 8.0 7.5 8.0 9.0 9.0 9.0 9.0 8.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 9.0 </Figures>
+          </Judge>
+          <Judge JudgeID="2">
+            <Figures>9.0 5.0 8.0 8.5 8.5 8.5 7.5 9.0 9.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 9.0 </Figures>
+          </Judge>
+          <Judge JudgeID="3">
+            <Figures>8.5 8.0 8.0 7.0 9.0 7.5 8.0 8.0 9.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 9.0 </Figures>
+          </Judge>
+          <Penalty>0.0</Penalty>
+        </Pilot>
+      </Flight>
+      <Flight FlightID="2">
+        <Pilot PilotID="1">
+          <Judge JudgeID="1">
+            <Figures>9.0 9.0 9.0 9.0 8.5 9.0 9.5 9.5 9.5 9.0 9.0 9.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 9.0 </Figures>
+          </Judge>
+          <Judge JudgeID="2">
+            <Figures>8.5 9.0 9.0 9.0 8.0 8.0 9.0 8.5 9.0 9.0 9.0 9.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 9.0 </Figures>
+          </Judge>
+          <Judge JudgeID="3">
+            <Figures>8.5 8.5 9.0 9.0 9.0 9.0 8.5 8.0 9.0 9.0 8.5 8.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 9.0 </Figures>
+          </Judge>
+          <Penalty>0.0</Penalty>
+        </Pilot>
+        <Pilot PilotID="2">
+          <Judge JudgeID="1">
+            <Figures>9.5 9.0 9.5 9.5 9.0 9.0 8.5 9.0 9.0 9.0 9.0 9.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.5 </Figures>
+          </Judge>
+          <Judge JudgeID="2">
+            <Figures>8.5 9.0 9.5 8.5 9.0 9.0 9.0 9.0 8.5 8.0 9.5 9.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 9.0 </Figures>
+          </Judge>
+          <Judge JudgeID="3">
+            <Figures>8.5 7.0 9.0 9.0 9.5 8.5 8.0 9.0 8.0 8.5 9.0 9.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 9.0 </Figures>
+          </Judge>
+          <Penalty>0.0</Penalty>
+        </Pilot>
+      </Flight>
+      <Flight FlightID="3">
+        <Pilot PilotID="1">
+          <Judge JudgeID="1">
+            <Figures>9.5 9.5 8.5 9.0 9.0 8.0 8.5 8.5 9.0 9.5 8.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.0 </Figures>
+          </Judge>
+          <Judge JudgeID="2">
+            <Figures>9.0 8.5 8.5 7.5 8.5 8.5 9.0 7.5 7.5 9.0 8.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 6.0 </Figures>
+          </Judge>
+          <Judge JudgeID="3">
+            <Figures>9.0 9.0 7.5 6.0 7.0 7.0 7.0 8.0 6.5 8.5 -1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 4.0 </Figures>
+          </Judge>
+          <Penalty>0.0</Penalty>
+        </Pilot>
+        <Pilot PilotID="2">
+          <Judge JudgeID="1">
+            <Figures>9.0 8.5 8.5 9.0 9.0 9.0 9.0 9.5 9.0 10.0 8.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 9.0 </Figures>
+          </Judge>
+          <Judge JudgeID="2">
+            <Figures>9.0 9.0 8.0 7.5 6.5 8.5 9.0 9.0 6.5 9.0 6.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 7.5 </Figures>
+          </Judge>
+          <Judge JudgeID="3">
+            <Figures>9.5 9.0 8.0 8.0 6.5 -1.0 8.0 8.5 6.5 9.5 5.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.0 </Figures>
+          </Judge>
+          <Penalty>0.0</Penalty>
+        </Pilot>
+      </Flight>
+    </Category>
+    <Category CategoryID="5">
+      <Flight FlightID="1">
+        <Pilot PilotID="1">
+          <Judge JudgeID="1">
+            <Figures>9.0 9.0 8.5 8.5 8.0 9.0 8.0 8.5 8.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 9.0 </Figures>
+          </Judge>
+          <Judge JudgeID="2">
+            <Figures>8.5 8.5 8.5 8.0 8.5 9.0 9.0 8.5 7.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 9.0 </Figures>
+          </Judge>
+          <Judge JudgeID="3">
+            <Figures>8.0 8.5 7.5 7.0 5.0 8.0 10.0 7.0 6.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 9.0 </Figures>
+          </Judge>
+          <Penalty>0.0</Penalty>
+        </Pilot>
+        <Pilot PilotID="2">
+          <Judge JudgeID="1">
+            <Figures>9.5 8.0 9.0 8.5 9.0 9.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 9.0 </Figures>
+          </Judge>
+          <Judge JudgeID="2">
+            <Figures>6.5 8.5 8.0 8.0 9.0 8.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.0 </Figures>
+          </Judge>
+          <Judge JudgeID="3">
+            <Figures>9.0 8.0 7.5 7.0 7.0 9.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 10.0 </Figures>
+          </Judge>
+          <Penalty>0.0</Penalty>
+        </Pilot>
+      </Flight>
+      <Flight FlightID="2">
+        <Pilot PilotID="1">
+          <Judge JudgeID="1">
+            <Figures>9.0 9.0 9.0 8.5 8.5 9.0 9.0 8.5 9.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 9.5 </Figures>
+          </Judge>
+          <Judge JudgeID="2">
+            <Figures>8.5 8.5 8.5 8.5 7.5 9.0 7.5 8.5 6.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 7.0 </Figures>
+          </Judge>
+          <Judge JudgeID="3">
+            <Figures>8.5 9.0 7.5 8.0 8.5 7.5 8.0 8.0 6.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.0 </Figures>
+          </Judge>
+          <Penalty>0.0</Penalty>
+        </Pilot>
+        <Pilot PilotID="2">
+          <Judge JudgeID="1">
+            <Figures>9.0 8.5 9.0 9.0 9.0 9.0 8.5 9.0 8.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 9.5 </Figures>
+          </Judge>
+          <Judge JudgeID="2">
+            <Figures>6.5 6.5 6.5 7.5 7.0 7.5 7.5 8.5 9.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 7.5 </Figures>
+          </Judge>
+          <Judge JudgeID="3">
+            <Figures>8.0 7.0 7.5 7.5 6.5 9.5 7.0 8.5 4.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 9.0 </Figures>
+          </Judge>
+          <Penalty>0.0</Penalty>
+        </Pilot>
+      </Flight>
+      <Flight FlightID="3">
+        <Pilot PilotID="1">
+          <Judge JudgeID="1">
+            <Figures>8.0 9.0 8.5 8.5 9.0 9.0 7.5 0.0 9.0 9.5 8.5 8.0 7.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.5 </Figures>
+          </Judge>
+          <Judge JudgeID="2">
+            <Figures>9.0 9.0 8.5 7.5 8.5 7.0 7.5 7.5 8.5 8.5 8.5 7.0 7.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 7.5 </Figures>
+          </Judge>
+          <Judge JudgeID="3">
+            <Figures>7.5 8.0 7.5 7.5 8.0 8.5 7.0 7.5 -1.0 9.0 7.5 -1.0 9.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 9.0 </Figures>
+          </Judge>
+          <Penalty>0.0</Penalty>
+        </Pilot>
+        <Pilot PilotID="2">
+          <Judge JudgeID="1">
+            <Figures>9.0 9.0 9.0 8.0 9.0 9.5 0.0 0.0 9.0 8.0 7.0 8.0 9.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.5 </Figures>
+          </Judge>
+          <Judge JudgeID="2">
+            <Figures>7.5 8.5 9.0 6.5 4.0 7.5 4.5 0.0 9.0 5.5 7.5 7.5 7.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 7.0 </Figures>
+          </Judge>
+          <Judge JudgeID="3">
+            <Figures>8.0 10.0 7.5 6.5 7.0 8.0 -1.0 0.0 7.5 6.0 6.0 7.0 7.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 7.5 </Figures>
+          </Judge>
+          <Penalty>0.0</Penalty>
+        </Pilot>
+      </Flight>
+    </Category>
+  </Scores>
+</ContestResults>
