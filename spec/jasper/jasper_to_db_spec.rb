@@ -16,10 +16,10 @@ module IAC
     it 'captures a contest' do
       @contest.should_not be_nil
       @contest.id.should_not be_nil
-      @contest.name.should == "US Candian Challenge"
+      @contest.name.should == "Test Contest US Candian Challenge"
       @contest.start.day.should == 23
-      @contest.start.year.should == 2012
-      @contest.start.month.should == 06
+      @contest.start.year.should == 2013
+      @contest.start.month.should == 12
       @contest.region.should == 'NorthEast'
       @contest.director.should == 'Pat Barrett'
       @contest.city.should == 'Olean'

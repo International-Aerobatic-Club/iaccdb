@@ -10,7 +10,7 @@ module JaSPer
       @jasper.do_parse(parser)
     end
     it 'captures a contest' do
-      @jasper.contest_name.should == 'US Candian Challenge'
+      @jasper.contest_name.should == 'Test Contest US Candian Challenge'
       @jasper.contest_city.should == 'Olean'
       @jasper.contest_state.should == 'NY'
       @jasper.contest_chapter.should == '126'
@@ -18,9 +18,9 @@ module JaSPer
       @jasper.contest_director.should == 'Pat Barrett'
       cDate = @jasper.contest_date
       cDate.should_not be_nil
-      cDate.mon.should == 6
+      cDate.mon.should == 12
       cDate.day.should == 23
-      cDate.year.should == 2012
+      cDate.year.should == 2013
       @jasper.aircat.should == 'P'
     end
     it 'gives category names' do
