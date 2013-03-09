@@ -9,7 +9,7 @@ def results
     format.xml {
       begin
         jasper = Jasper::JasperParse.new
-        j2d = Jasper::JasperToDb.new
+        j2d = Jasper::JasperToDB.new
         parser = LibXML::XML::Parser.io(request.body)
         jasper.do_parse(parser)
         contest = j2d.process_contest(jasper)

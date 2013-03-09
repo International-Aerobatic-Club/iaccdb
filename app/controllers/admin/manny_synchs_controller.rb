@@ -15,7 +15,7 @@ class Admin::MannySynchsController < ApplicationController
   end
 
   def retrieve
-    Delayed::Job.enqueue RetrieveMannyJob.new(params[:manny_number])
+    Delayed::Job.enqueue Jobs::RetrieveMannyJob.new(params[:manny_number])
     flash[:notice] = "Queued manny number #{params[:manny_number]} for retrieval."
     redirect_to admin_manny_synchs_url
   end

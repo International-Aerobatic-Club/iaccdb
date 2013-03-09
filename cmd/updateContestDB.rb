@@ -67,7 +67,7 @@ if files.size == 0
   doList = reload ? curList : findMissingContests(curList)
   doList.each_key do |k| 
     puts "Queuing Contest #{k}"
-    Delayed::Job.enqueue RetrieveMannyJob.new(k)
+    Delayed::Job.enqueue Jobs::RetrieveMannyJob.new(k)
   end
   findSpuriousContests(curList).each_key do |k|
     removeContest(m2d, k)
@@ -77,7 +77,7 @@ else
     k = arg.to_i
     if (k != 0) 
       puts "Queuing Contest #{k}"
-      Delayed::Job.enqueue RetrieveMannyJob.new(k)
+      Delayed::Job.enqueue Jobs::RetrieveMannyJob.new(k)
     end
   end
 end
