@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'acro/pilotScraper'
+#require 'acro/pilotScraper'
 
 module ACRO
   describe PilotScraper do

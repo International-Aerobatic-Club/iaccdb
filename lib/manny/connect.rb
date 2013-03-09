@@ -1,6 +1,7 @@
 require "net/http"
 
-module MannyConnect
+module Manny
+module Connect
 
 MANNY_HOST = 'donkeykong.highroaddata.com'
 MANNY_PORT = 1001
@@ -25,4 +26,5 @@ def pull_contest_list(record_proc)
   end
 end
 
+end
 end

@@ -1,14 +1,14 @@
 require 'spec_helper'
-require 'iac/mannyParse'
-require 'iac/mannyToDB'
-require 'iac/judge_rollups'
+#require 'iac/mannyParse'
+#require 'iac/mannyToDB'
+#require 'iac/judge_rollups'
 
-module IAC
+module Manny
   describe MannyToDB do
     before(:all) do 
-      manny = Manny::MannyParse.new
+      manny = Manny::Parse.new
       IO.foreach('spec/manny/Contest_36.txt') { |line| manny.processLine(line) }
-      m2d = IAC::MannyToDB.new
+      m2d = Manny::MannyToDB.new
       @contest = m2d.process_contest(manny, true)
     end
     it 'Parses' do

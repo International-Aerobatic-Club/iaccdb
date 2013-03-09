@@ -1,5 +1,5 @@
 class Admin::MannySynchsController < ApplicationController
-  include MannyConnect
+  include Manny::Connect
 
   before_filter :authenticate
 

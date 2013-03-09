@@ -1,15 +1,15 @@
 # load the contest database from Manny files on the file system
 # use rails runner lib/iac/loadContestDB.rb <file>
-require "iac/mannyParse"
-require "iac/mannyToDB"
+#require "iac/mannyParse"
+#require "iac/mannyToDB"
 
 reload = !ARGV.empty? && ARGV[0] == 'reload'
 files = reload ? ARGV.drop(1) : ARGV
 pcs = []
-m2d = IAC::MannyToDB.new
+m2d = Manny::MannyToDb.new
 files.each do |f|
   begin
-    manny = Manny::MannyParse.new
+    manny = Manny::Parse.new
     puts "Reading manny data from #{f}"
     IO.foreach(f) { |line| manny.processLine(line) }
     puts "Loading contest data from #{manny.contest.name}"

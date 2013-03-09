@@ -1,16 +1,16 @@
 require 'spec_helper'
-require 'iac/jasper_parse'
-require 'iac/jasper_to_db'
+#require 'iac/jasper_parse'
+#require 'iac/jasper_to_db'
 require 'xml'
 
-module IAC
-  describe JaSPerToDB do
+module Jasper
+  describe JasperToDB do
     before(:all) do 
       testFile = 'spec/jasper/jasperResultsFormat.xml'
-      jasper = JaSPer::JaSPerParse.new
+      jasper = Jasper::JasperParse.new
       parser = XML::Parser.file(testFile)
       jasper.do_parse(parser)
-      j2d = IAC::JaSPerToDB.new
+      j2d = Jasper::JasperToDB.new
       @contest = j2d.process_contest(jasper)
     end
     it 'captures a contest' do

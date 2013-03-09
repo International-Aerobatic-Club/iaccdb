@@ -1,14 +1,14 @@
 # find contests from Manny not yet loaded into the database
 # retrieve those contests and load them
 # use rails runner cmd/updateContestDB.rb
-require "iac/mannyParse"
-require "iac/mannyToDB"
-require "iac/manny_connect"
-require "iac/findStars"
+#require "iac/mannyParse"
+#require "iac/mannyToDB"
+#require "iac/manny_connect"
+#require "iac/findStars"
 require "net/http"
 require "date"
 
-include MannyConnect
+include Manny::Connect
 
 #retrieve and process content of Manny contest list
 #tabs (09) delimit fields
@@ -61,7 +61,7 @@ end
 
 reload = !ARGV.empty? && ARGV[0] == 'reload'
 files = reload ? ARGV.drop(1) : ARGV
-m2d = IAC::MannyToDB.new
+m2d = Manny::MannyToDB.new
 if files.size == 0
   curList = processContestList
   doList = reload ? curList : findMissingContests(curList)

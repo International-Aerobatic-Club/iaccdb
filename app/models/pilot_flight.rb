@@ -1,4 +1,4 @@
-require 'iac/saComputer'
+#require 'iac/saComputer'
 
 class PilotFlight < ActiveRecord::Base
   belongs_to :flight
@@ -45,7 +45,7 @@ class PilotFlight < ActiveRecord::Base
   # compute or retrieve cached results
   # returns PfResult ActiveRecord instance for this pilot for this flight
   def results
-    sac = IAC::SAComputer.new(self)
+    sac = IAC::SaComputer.new(self)
     sac.computePilotFlight
   end
 end

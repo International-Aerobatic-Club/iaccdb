@@ -1,14 +1,14 @@
 # assume loaded with rails ActiveRecord
 # environment for IAC contest data application
 
-require "iac/mannyModel"
+#require 'manny/model'
 
 # this class contains methods to map the parsed manny model
 # into records of the contest database
 # for sanity:
 #   'm' prefixes variables that reference the manny model
 #   'd' prefixes variables that reference the database model
-module IAC
+module Manny
 class MannyToDB
 attr_reader :dContest
 

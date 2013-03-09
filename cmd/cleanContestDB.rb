@@ -3,7 +3,7 @@
 # use rails runner cmd/cleanContestDB.rb
 require "iac/manny_connect"
 
-include MannyConnect
+include Manny::Connect
 
 #retrieve and process content of Manny contest list
 #returns a list of manny contest id

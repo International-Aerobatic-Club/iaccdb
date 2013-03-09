@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'acro/contestScraper'
+#require 'acro/contestScraper'
 
 module ACRO
   describe ContestScraper do

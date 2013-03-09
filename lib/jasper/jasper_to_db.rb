@@ -6,8 +6,8 @@
 # 'j' prefixes variables that contain JaSPer parsed data
 # 'd' prefixes variables that reference the database madel
 
-module IAC
-class JaSPerToDB
+module Jasper
+class JasperToDB
 attr_reader :dContest
 
 # accept parsed XML JaSPer contest data

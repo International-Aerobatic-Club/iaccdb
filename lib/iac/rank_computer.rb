@@ -2,8 +2,8 @@
 # environment for IAC contest data application
 # for PfResult and PfjResult classes
 
-require 'ranking/computer'
-require 'log/config_logger'
+#require 'ranking/computer'
+#require 'log/config_logger'
 
 # this class contains methods to compute rankings from results.
 # It derives rankings from the scores, ranking pilots from highest

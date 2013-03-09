@@ -1,6 +1,7 @@
 require 'spec_helper'
 #require 'jobs/retrieve_manny_job'
 
+module Jobs
 describe RetrieveMannyJob do
   before(:each) do
     @job = RetrieveMannyJob.new(92)
@@ -24,4 +25,5 @@ describe RetrieveMannyJob do
     jobs = Failure.select('* from delayed_jobs')
     jobs.empty?.should be_false
   end
+end
 end

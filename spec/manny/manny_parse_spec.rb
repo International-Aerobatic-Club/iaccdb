@@ -1,10 +1,10 @@
 require 'spec_helper'
-require 'iac/mannyParse'
+#require 'iac/mannyParse'
 
 module Manny
-  describe MannyParse do
+  describe Parse do
     before(:all) do 
-      @manny = Manny::MannyParse.new
+      @manny = Manny::Parse.new
       IO.foreach('spec/manny/Contest_300.txt') { |line| @manny.processLine(line) }
       @contest = @manny.contest
     end

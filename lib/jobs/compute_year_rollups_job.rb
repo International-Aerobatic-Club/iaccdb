@@ -1,7 +1,8 @@
-require 'iac/judge_rollups'
+#require 'iac/judge_rollups'
 
 # This captures a job for delayed job
 # The job computes metric rollups for all contests in a year
+module Jobs
 class ComputeYearRollupsJob < Struct.new(:year)
   
   include JobsSay
@@ -24,4 +25,5 @@ class ComputeYearRollupsJob < Struct.new(:year)
     say "Success computing rollups for #{@year}"
   end
 
+end
 end

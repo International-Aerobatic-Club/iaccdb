@@ -1,6 +1,7 @@
-require 'lib/iac/constants'
+#require 'iac/constants'
 
 module Manny
+module Model
 
 class Seq
   attr_accessor :pres, :figs, :ctFigs
@@ -50,7 +51,7 @@ class Flight
   # returns nil when there is no specific sequence for the specified pid
   def seq_for(pid)
     seq = ks[pid]
-    MannyParse.logger.debug("seq_for flight #{fid}, pid #{pid} is #{seq}")
+    Parse.logger.debug("seq_for flight #{fid}, pid #{pid} is #{seq}")
     seq
   end
 
@@ -140,7 +141,7 @@ class Contest
   # on pri, spn, the known sequence isn't repeated for each flight
   # a spn free isn't repeated for the third flight
   def seq_for(cat, flt, pilot)
-    MannyParse.logger.debug("seq_for category #{cat}, flight #{flt}, pilot #{pilot}")
+    Parse.logger.debug("seq_for category #{cat}, flight #{flt}, pilot #{pilot}")
     case flt
     when 1
       # always the known
@@ -157,9 +158,9 @@ class Contest
       seq = flight(cat, 3).seq_for(0) || 
         flight(cat, 2).seq_for(pilot) || flight(cat, 1).seq_for(0)
     else
-      MannyParse.logger.error("seq_for missing sequence not flt 1, 2, or 3")
+      Parse.logger.error("seq_for missing sequence not flt 1, 2, or 3")
     end
-    MannyParse.logger.debug("seq_for seq is #{seq}")
+    Parse.logger.debug("seq_for seq is #{seq}")
     seq
   end
 
@@ -184,4 +185,5 @@ class Contest
   end
 end
 
+end
 end

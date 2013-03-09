@@ -1,4 +1,4 @@
-require 'lib/iac/constants'
+#require 'lib/iac/constants'
 
 class ContestsController < ApplicationController
   include IAC::Constants

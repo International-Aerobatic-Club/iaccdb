@@ -1,11 +1,11 @@
 require 'spec_helper'
-require 'iac/jasper_parse'
+#require 'iac/jasper_parse'
 require 'xml'
 
-module JaSPer
-  describe JaSPerParse do
+module Jasper
+  describe JasperParse do
     before(:all) do
-      @jasper = JaSPer::JaSPerParse.new
+      @jasper = Jasper::JasperParse.new
       parser = XML::Parser.file('spec/jasper/jasperResultsFormat.xml')
       @jasper.do_parse(parser)
     end

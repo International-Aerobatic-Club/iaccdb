@@ -1,6 +1,6 @@
 # use rails runner cmd/scrapeAcro.rb <file>
-require "acro/contest_extractor"
-require "acro/pilotScraper"
+#require "acro/contest_extractor"
+#require "acro/pilotScraper"
 
 #reload = !ARGV.empty? && ARGV[0] == 'reload'
 #args = reload ? ARGV.drop(1) : ARGV

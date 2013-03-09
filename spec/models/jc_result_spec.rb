@@ -1,6 +1,6 @@
 require 'spec_helper'
-require 'iac/mannyParse'
-require 'iac/mannyToDB'
+#require 'iac/mannyParse'
+#require 'iac/mannyToDB'
 
 module Model
   describe JcResult do
@@ -79,9 +79,9 @@ module Model
     end #context factory data
     context 'parsed data' do
       it 'computes category level judge results' do
-        manny = Manny::MannyParse.new
+        manny = Manny::Parse.new
         IO.foreach('spec/manny/Contest_300.txt') { |line| manny.processLine(line) }
-        m2d = IAC::MannyToDB.new
+        m2d = Manny::MannyToDB.new
         m2d.process_contest(manny, true)
         contest = Contest.first
         contest.should_not be nil

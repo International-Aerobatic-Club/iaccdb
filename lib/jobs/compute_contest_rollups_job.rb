@@ -1,5 +1,6 @@
 # This captures a job for delayed job
 # The job computes flight results for a contest
+module Jobs
 class ComputeContestRollupsJob < Struct.new(:contest)
   
   include JobsSay
@@ -20,4 +21,5 @@ class ComputeContestRollupsJob < Struct.new(:contest)
     Delayed::Job.enqueue ComputeYearRollupsJob.new(@contest.start.year)
   end
 
+end
 end

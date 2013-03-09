@@ -1,7 +1,7 @@
 class Admin::ContestsController < ApplicationController
   before_filter :authenticate
 
-  include MannyConnect
+  include Manny::Connect
 
   # GET /contests
   # GET /contests.xml

@@ -1,3 +1,4 @@
+module Jobs
 module JobsSay
   def say(text, level = Logger::INFO)
     logger = Delayed::Worker.logger
@@ -24,4 +25,5 @@ module JobsSay
       :description => 
         ':: ' + exception.message + " ::\n" + exception.backtrace.join("\n"))
   end
+end
 end

@@ -1,5 +1,5 @@
-module JaSPer
-class JaSPerParse
+module Jasper
+class JasperParse
   attr_reader :document
 
   def do_parse(parser)

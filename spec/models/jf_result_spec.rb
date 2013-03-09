@@ -1,12 +1,12 @@
 require 'spec_helper'
-require 'iac/mannyParse'
-require 'iac/mannyToDB'
+#require 'iac/mannyParse'
+#require 'iac/mannyToDB'
 
 describe JfResult do
   before(:all) do
-    manny = Manny::MannyParse.new
+    manny = Manny::Parse.new
     IO.foreach('spec/manny/Contest_300.txt') { |line| manny.processLine(line) }
-    m2d = IAC::MannyToDB.new
+    m2d = Manny::MannyToDB.new
     m2d.process_contest(manny, true)
     contest = Contest.first
     @flight2 = contest.flights.first(:conditions => { 

@@ -1,4 +1,4 @@
-require 'acro/pilotScraper'
+#require 'acro/pilotScraper'
 
 # scrape pilot scores from ACRO produced web site files
 module ACRO

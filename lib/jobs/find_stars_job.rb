@@ -1,7 +1,8 @@
-require "iac/findStars"
+#require "iac/findStars"
 
 # This captures a job for delayed job
 # The job computes flight results for a contest
+module Jobs
 class FindStarsJob < Struct.new(:contest)
   
   include JobsSay
@@ -21,4 +22,5 @@ class FindStarsJob < Struct.new(:contest)
     say "Success finding stars for #{@contest.year_name}"
   end
 
+end
 end

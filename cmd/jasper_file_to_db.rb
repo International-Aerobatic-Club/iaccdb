@@ -1,15 +1,15 @@
 # load the contest database from JaSPer files on the file system
 # use rails runner cmd/jasperFileToDB.rb <file>
-require "iac/jasperParse"
-require "iac/jasperToDB"
+#require "iac/jasperParse"
+#require "iac/jasperToDB"
 require 'xml'
 
 files = ARGV
 pcs = []
-j2d = IAC::JaSPerToDB.new
+j2d = Jasper::JasperToDB.new
 files.each do |f|
   begin
-    jasper = JaSPer::JaSPerParse.new
+    jasper = Jasper::JasperParse.new
     puts "Reading JaSPer data from #{f}"
     parser = XML::Parser.file(f)
     jasper.do_parse(parser)

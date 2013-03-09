@@ -1,8 +1,8 @@
-require 'iac/mannyModel'
-require 'log/config_logger'
+require 'manny/model'
+#require 'log/config_logger'
 
 module Manny
-class MannyParse
+class Parse
 include Log::ConfigLogger
 cattr_accessor :logger
 attr_reader :contest
@@ -60,7 +60,7 @@ def process_person(line)
   gName = columnValue(ma,2)
   famName = columnValue(ma,1)
   iac_id = ma[3].to_i
-  @contest.participants[pid] = Participant.new(gName, famName, iac_id)
+  @contest.participants[pid] = Model::Participant.new(gName, famName, iac_id)
   logger.debug "parsed manny line '#{line}' to participant #{pid} model #{@contest.participants[pid]}"
 end
 
@@ -195,13 +195,13 @@ def process_scores(line)
   fid = asc[1].to_i # flight
   pid = asc[2].to_i # pilot person
   jid = asc[3].to_i # judge person
-  seq = Seq.new
+  seq = Model::Seq.new
   seq.pres = asc[4].to_i
   for fi in 1 .. 20
     seq.figs[fi] = asc[fi+4].to_i
   end
   flight = @contest.flight(cid, fid)
-  score = Score.new(seq, pid, jid)
+  score = Model::Score.new(seq, pid, jid)
   flight.scores << score
   logger.debug "parsed manny line '#{line}' to scores model #{score} for flight #{flight}, pilot #{pid}, judge #{jid}"
 end
@@ -271,7 +271,7 @@ end
 
 def initialize
   @state = SEEK_SECTION
-  @contest = Manny::Contest.new
+  @contest = Model::Contest.new
 end
 
 def processLine(line)

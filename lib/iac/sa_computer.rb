@@ -5,7 +5,7 @@
 # this class contains methods to compute results and rankings
 # it follows the IAC straight average method
 module IAC
-class SAComputer
+class SaComputer
 
 def initialize(pilot_flight)
   @pilot_flight = pilot_flight

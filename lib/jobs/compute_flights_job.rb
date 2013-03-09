@@ -1,5 +1,6 @@
 # This captures a job for delayed job
 # The job computes flight results for a contest
+module Jobs
 class ComputeFlightsJob < Struct.new(:contest)
   
   include JobsSay
@@ -21,4 +22,5 @@ class ComputeFlightsJob < Struct.new(:contest)
     Delayed::Job.enqueue FindStarsJob.new(@contest)
   end
 
+end
 end
