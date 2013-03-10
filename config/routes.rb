@@ -25,7 +25,7 @@ Iac::Application.routes.draw do
       :controller => :manny_synchs, 
       :action => "show", 
       :as => 'manny_show'
-    put 'jasper', :controller => 'jasper', :action => 'results'
+    post 'jasper', :controller => 'jasper', :action => 'results'
   end
 
   ### Leaders namespace
