@@ -28,7 +28,7 @@ namespace :deploy do
 end
 
 # enable passenger
-after "deploy:symlink", :enable_passenger
+after "deploy:create_symlink", :enable_passenger
 desc "setup .htaccess for passenger"
 task :enable_passenger, :roles => :app do
   run "echo -e \"PassengerEnabled On\\nPassengerAppRoot #{current_path}\" >> #{File.join(current_path, 'public', '.htaccess')}"
@@ -36,14 +36,14 @@ task :enable_passenger, :roles => :app do
 end
 
 # link admin credentials
-after "deploy:symlink", :config_admin
+after "deploy:create_symlink", :config_admin
 desc "configure admin priveleges"
 task :config_admin, :roles => :app do
   run "ln ~/admin.yml #{File.join(current_path, 'config/admin.yml')}"
 end
 
 # link database credentials
-after "deploy:symlink", "db:config_access"
+after "deploy:create_symlink", "db:config_access"
 desc "configure database access priveleges"
 namespace :db do
   task :config_access, :except => { :no_release => true }, :role => :app do
