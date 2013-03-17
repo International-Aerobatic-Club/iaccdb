@@ -1,5 +1,3 @@
-#require 'lib/iac/constants'
-
 class ContestsController < ApplicationController
   include IAC::Constants
 
@@ -22,7 +20,7 @@ class ContestsController < ApplicationController
 
     respond_to do |format|
       format.html do
-        if @c_results
+        if @c_results && !@c_results.empty?
           render :show
         else
           render :raw, :notice => "Results unavailable"

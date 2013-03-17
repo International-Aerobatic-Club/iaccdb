@@ -1,0 +1,11 @@
+<p id="notice"><%= notice %></p>
+
+<h2><%= link_to(@flight.contest.name, contest_path(@flight.contest)) %></h2>
+<h1><%= @flight.displayName %></h1>
+<p>Chief judge <%= @flight.display_chief %></p>
+
+<% @pilot_flights.each do |pilot_flight| %>
+  <h2><%= pilot_flight.pilot.name %></h2>
+  <%= render :template => 'pilot_flights/flight' ,
+    :locals => { :pilot_flight => pilot_flight } %>
+<% end %>
