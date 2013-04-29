@@ -7,7 +7,7 @@ class JasperParse
   end
 
   def contest_id
-    nodes = @document.find('/ContestResults/ContestInfo/cdbID')
+    nodes = @document.find('/ContestResults/ContestInfo/cdbId')
     cid = nodes && nodes.first ? nodes.first.inner_xml : nil
     cid = cid.to_i if cid
   end
