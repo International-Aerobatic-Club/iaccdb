@@ -119,14 +119,14 @@ TransformerException
 private static void insertContestID(XPath xp, Document dataDoc, int cid)
 throws XPathExpressionException
 {
-  XPathExpression xpe = xp.compile("//ContestInfo/Id");
+  XPathExpression xpe = xp.compile("//ContestInfo/cdbId");
   Element idNode = (Element)xpe.evaluate(dataDoc, XPathConstants.NODE);
   Text idValue = dataDoc.createTextNode(Integer.toString(cid));
   if (idNode == null)
   {
     xpe = xp.compile("//ContestInfo");
     Node ciNode = (Element)xpe.evaluate(dataDoc, XPathConstants.NODE);
-    idNode = dataDoc.createElement("Id");
+    idNode = dataDoc.createElement("cdbId");
     idNode.appendChild(idValue);
     ciNode.insertBefore(idNode, ciNode.getFirstChild());
   }
