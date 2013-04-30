@@ -12,7 +12,7 @@ import javax.xml.transform.stream.*;
 class TestClientPost {
 
 private static String POST_FILE_NAME = "../spec/jasper/jasperResultsFormat.xml";
-private static String POST_URL = "http://localhost:3000";
+private static String POST_URL = "http://localhost:3000/admin/jasper.xml";
 
 private static void usage() {
   System.err.printf("First argument is the contest id. " +
@@ -92,17 +92,26 @@ TransformerException
   if (0 <= cid) {
     insertContestID(xp, dataDoc, cid);
   }
-  printDocument(dataDoc);
+  ClientPost post = new ClientPost(postURL);
+  printDocument(dataDoc, post.startDataStream());
+  if (post.postToCDB())
+  {
+    System.out.printf("Success, CDB contest ID is %d\n", post.getCdbId());
+  }
+  else
+  {
+    System.out.println("Fail.");
+  }
 }
 
-private static void printDocument(Document dataDoc)
+private static void printDocument(Document dataDoc, Writer out)
 throws TransformerConfigurationException,
 TransformerException
 {
   TransformerFactory tFactory = TransformerFactory.newInstance();
   Transformer transformer = tFactory.newTransformer();
   DOMSource source = new DOMSource(dataDoc);
-  StreamResult result = new StreamResult(System.out);
+  StreamResult result = new StreamResult(out);
   transformer.transform(source, result); 
 }
 
