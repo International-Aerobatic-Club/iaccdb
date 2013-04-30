@@ -11,7 +11,13 @@ def results
       parser = LibXML::XML::Parser.io(xml_data)
       jasper.do_parse(parser)
       contest = j2d.process_contest(jasper)
-      @contestID = contest.id
+      if (contest)
+        @contestID = contest.id
+        puts "admin/jasper_controller has #{@contestID}"
+        render :results
+      else
+        render :exception, :status => 400
+      end
     rescue Exception => ex
       @exception = ex
       render :exception, :status => 400
