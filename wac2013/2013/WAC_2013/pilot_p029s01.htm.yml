@@ -1,0 +1,129 @@
+--- !ruby/object:ACRO::PilotFlightData 
+flightID: 1
+flightName: "Unlimited Power : Programme 1: Known Compulsory"
+judges: 
+- Francis Itier (FRA)
+- Laszlo Liszkay (RSA)
+- Violeta Gedminaite (LTU)
+- Kimmo Virtanen (FIN)
+- Guy Auger (FRA)
+- Vladimir Kotelnikov (RUS)
+- Nick Buckenham (GBR)
+- Lyudmyla Zelenina (UKR)
+- Michael Gallaway (USA)
+- Mikhail Bezdenezhnyh (RUS)
+k_factors: 
+- 49
+- 46
+- 29
+- 64
+- 49
+- 41
+- 38
+- 34
+- 33
+- 40
+penalty: 0
+pilotID: 29
+pilotName: Gerald Cooper
+scores: 
+- - 80
+  - 70
+  - 70
+  - 75
+  - 55
+  - 75
+  - 60
+  - 75
+  - 80
+  - 75
+- - 90
+  - 80
+  - 90
+  - 85
+  - 55
+  - 80
+  - 60
+  - 80
+  - 0
+  - 70
+- - 80
+  - 75
+  - 80
+  - 75
+  - 60
+  - 80
+  - 70
+  - 80
+  - 85
+  - 80
+- - 80
+  - 70
+  - 80
+  - 75
+  - 70
+  - 75
+  - 65
+  - 80
+  - 80
+  - 85
+- - 80
+  - 80
+  - 85
+  - 80
+  - 0
+  - 75
+  - 70
+  - 80
+  - 75
+  - 90
+- - 75
+  - 70
+  - 80
+  - 75
+  - 60
+  - 80
+  - 65
+  - 70
+  - 80
+  - 75
+- - 80
+  - 65
+  - 85
+  - 75
+  - 65
+  - 70
+  - 70
+  - 75
+  - 85
+  - 85
+- - 80
+  - 75
+  - 80
+  - 80
+  - 65
+  - 70
+  - 65
+  - 80
+  - 80
+  - 80
+- - 75
+  - 80
+  - 85
+  - 75
+  - 0
+  - 75
+  - 60
+  - 80
+  - 85
+  - 85
+- - 75
+  - 70
+  - 75
+  - 75
+  - 40
+  - 75
+  - 60
+  - 75
+  - 75
+  - 75

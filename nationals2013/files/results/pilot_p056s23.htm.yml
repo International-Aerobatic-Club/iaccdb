@@ -1,0 +1,72 @@
+--- !ruby/object:ACRO::PilotFlightData 
+flightID: 23
+flightName: "Intermediate - Glider : Programme 1: Known Compulsory"
+judges: 
+- Peggy Riedinger
+- John Ostmeyer
+- Fred Weaver
+- Sheri Davis
+- Daniel Wisehart
+- Tom Rhodes
+- Charlie Harrison (USA)
+k_factors: 
+- 24
+- 20
+- 16
+- 16
+- 21
+- 19
+- 10
+penalty: 20
+pilotID: 56
+pilotName: Aaron Dripps
+scores: 
+- - 70
+  - 80
+  - 80
+  - 75
+  - 70
+  - 75
+  - 85
+- - 65
+  - 60
+  - 60
+  - 60
+  - 55
+  - 50
+  - 80
+- - 65
+  - 60
+  - 75
+  - 85
+  - 80
+  - 70
+  - 90
+- - 70
+  - 85
+  - 80
+  - 75
+  - 70
+  - 75
+  - 95
+- - 70
+  - 60
+  - 65
+  - 70
+  - 75
+  - 70
+  - 70
+- - 40
+  - 20
+  - 60
+  - 90
+  - 60
+  - 40
+  - 80
+- - 85
+  - 75
+  - 80
+  - 85
+  - 75
+  - 60
+  - 80

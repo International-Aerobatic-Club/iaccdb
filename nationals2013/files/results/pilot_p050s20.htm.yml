@@ -1,0 +1,88 @@
+--- !ruby/object:ACRO::PilotFlightData 
+flightID: 20
+flightName: "Advanced - Glider : Programme 2: 1st Unknown Compulsory"
+judges: 
+- Bill Denton (USA)
+- Curt Richmond (USA)
+- Hector Ramirez (USA)
+- Mike Galloway (USA)
+- Tim Baker (USA)
+- Tom Adams (USA)
+- Mike Steveson (USA)
+k_factors: 
+- 15
+- 18
+- 3
+- 14
+- 11
+- 6
+- 24
+- 21
+- 25
+penalty: 60
+pilotID: 50
+pilotName: James Nicklas
+scores: 
+- - 70
+  - 65
+  - 85
+  - 75
+  - 75
+  - 80
+  - 40
+  - 55
+  - 70
+- - 75
+  - 0
+  - 75
+  - 95
+  - 95
+  - 90
+  - 75
+  - 70
+  - 85
+- - 75
+  - 90
+  - 85
+  - 80
+  - 90
+  - 100
+  - 75
+  - 65
+  - 85
+- - 60
+  - 85
+  - 80
+  - 80
+  - 80
+  - 90
+  - 50
+  - 55
+  - 70
+- - 60
+  - 75
+  - 80
+  - 75
+  - 80
+  - 80
+  - 70
+  - 70
+  - 80
+- - 70
+  - 85
+  - 100
+  - 50
+  - 70
+  - 90
+  - 60
+  - 75
+  - 85
+- - 80
+  - 65
+  - 90
+  - 85
+  - 85
+  - 95
+  - 50
+  - 30
+  - 70

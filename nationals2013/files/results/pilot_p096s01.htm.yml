@@ -1,0 +1,96 @@
+--- !ruby/object:ACRO::PilotFlightData 
+flightID: 1
+flightName: "Unlimited - Power : Programme 1: Known Compulsory"
+judges: 
+- Marty Flournoy
+- Mike Forney
+- Steve Johnson
+- Matt Matticola
+- Kevin Campbell
+- Daniel Wisehart
+- Doug Sowder
+k_factors: 
+- 49
+- 46
+- 29
+- 64
+- 49
+- 41
+- 38
+- 34
+- 33
+- 40
+penalty: 30
+pilotID: 96
+pilotName: Debby Rihn
+scores: 
+- - 85
+  - 80
+  - 85
+  - 80
+  - 60
+  - 85
+  - 60
+  - 85
+  - 80
+  - 95
+- - 85
+  - 85
+  - 80
+  - 75
+  - 60
+  - 75
+  - 65
+  - 80
+  - 85
+  - 85
+- - 85
+  - 95
+  - 75
+  - 75
+  - 70
+  - 90
+  - 70
+  - 90
+  - 100
+  - 90
+- - 70
+  - 85
+  - 80
+  - 80
+  - 75
+  - 75
+  - 80
+  - 90
+  - 80
+  - 85
+- - 80
+  - 75
+  - 90
+  - 65
+  - 70
+  - 75
+  - 65
+  - 75
+  - 80
+  - 60
+- - 75
+  - 70
+  - 70
+  - 75
+  - 0
+  - 70
+  - 65
+  - 80
+  - 70
+  - 75
+- - 90
+  - 80
+  - 75
+  - 70
+  - 60
+  - 80
+  - 70
+  - 75
+  - 85
+  - 80

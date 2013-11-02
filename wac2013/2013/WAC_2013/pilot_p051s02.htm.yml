@@ -1,0 +1,129 @@
+--- !ruby/object:ACRO::PilotFlightData 
+flightID: 2
+flightName: "Unlimited Power : Programme 2: Free Programme"
+judges: 
+- Francis Itier (FRA)
+- Laszlo Liszkay (RSA)
+- Violeta Gedminaite (LTU)
+- Kimmo Virtanen (FIN)
+- Guy Auger (FRA)
+- Vladimir Kotelnikov (RUS)
+- Nick Buckenham (GBR)
+- Lyudmyla Zelenina (UKR)
+- Michael Gallaway (USA)
+- Mikhail Bezdenezhnyh (RUS)
+k_factors: 
+- 48
+- 43
+- 53
+- 47
+- 25
+- 59
+- 45
+- 49
+- 51
+- 40
+penalty: 0
+pilotID: 51
+pilotName: Melissa Pemberton
+scores: 
+- - 75
+  - 70
+  - 70
+  - 75
+  - 65
+  - 70
+  - 75
+  - 65
+  - 75
+  - 55
+- - 80
+  - 70
+  - 75
+  - 75
+  - 0
+  - 70
+  - 75
+  - 65
+  - 75
+  - 60
+- - 70
+  - 65
+  - 65
+  - 60
+  - 60
+  - 65
+  - 70
+  - 55
+  - 70
+  - 70
+- - 70
+  - 75
+  - 75
+  - 60
+  - 55
+  - 75
+  - 70
+  - 65
+  - 75
+  - 50
+- - 75
+  - 70
+  - 80
+  - 75
+  - 65
+  - 75
+  - 75
+  - 70
+  - 75
+  - 55
+- - 70
+  - 60
+  - 70
+  - 70
+  - 60
+  - 70
+  - 75
+  - 70
+  - 70
+  - 70
+- - 70
+  - 0
+  - 75
+  - 60
+  - 65
+  - 75
+  - 80
+  - 75
+  - 70
+  - 0
+- - 70
+  - 70
+  - 70
+  - 70
+  - 65
+  - 70
+  - 70
+  - 70
+  - 70
+  - 0
+- - 70
+  - 65
+  - 75
+  - 70
+  - 65
+  - 75
+  - 70
+  - 70
+  - 70
+  - 65
+- - 75
+  - 70
+  - 75
+  - 70
+  - 60
+  - 70
+  - 75
+  - 70
+  - 75
+  - 60

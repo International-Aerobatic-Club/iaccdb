@@ -1,0 +1,129 @@
+--- !ruby/object:ACRO::PilotFlightData 
+flightID: 2
+flightName: "Unlimited Power : Programme 2: Free Programme"
+judges: 
+- Francis Itier (FRA)
+- Laszlo Liszkay (RSA)
+- Violeta Gedminaite (LTU)
+- Kimmo Virtanen (FIN)
+- Guy Auger (FRA)
+- Vladimir Kotelnikov (RUS)
+- Nick Buckenham (GBR)
+- Lyudmyla Zelenina (UKR)
+- Michael Gallaway (USA)
+- Mikhail Bezdenezhnyh (RUS)
+k_factors: 
+- 42
+- 40
+- 83
+- 55
+- 60
+- 33
+- 31
+- 42
+- 34
+- 40
+penalty: 0
+pilotID: 14
+pilotName: Kathel Boulanger
+scores: 
+- - 75
+  - 70
+  - 80
+  - 80
+  - 80
+  - 75
+  - 70
+  - 65
+  - 65
+  - 85
+- - 75
+  - 70
+  - 75
+  - 80
+  - 80
+  - 80
+  - 75
+  - 75
+  - 65
+  - 80
+- - 80
+  - 70
+  - 75
+  - 80
+  - 70
+  - 75
+  - 80
+  - 70
+  - 65
+  - 80
+- - 75
+  - 70
+  - 70
+  - 75
+  - 80
+  - 75
+  - 80
+  - 75
+  - 60
+  - 80
+- - 80
+  - 75
+  - 80
+  - 80
+  - 85
+  - 80
+  - 75
+  - 70
+  - 75
+  - 90
+- - 75
+  - 80
+  - 75
+  - 70
+  - 80
+  - 70
+  - 75
+  - 75
+  - 60
+  - 80
+- - 80
+  - 75
+  - 70
+  - 70
+  - 75
+  - 85
+  - 70
+  - 75
+  - 60
+  - 80
+- - 80
+  - 75
+  - 75
+  - 75
+  - 80
+  - 80
+  - 75
+  - 80
+  - 70
+  - 85
+- - 65
+  - 75
+  - 0
+  - 70
+  - 80
+  - 85
+  - 75
+  - 65
+  - 50
+  - 85
+- - 75
+  - 75
+  - 70
+  - 80
+  - 80
+  - 75
+  - 75
+  - 70
+  - 70
+  - 80

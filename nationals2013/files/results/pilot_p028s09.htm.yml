@@ -1,0 +1,112 @@
+--- !ruby/object:ACRO::PilotFlightData 
+flightID: 9
+flightName: "Intermediate - Power : Programme 2: 1st Unknown Compulsory"
+judges: 
+- Julia Wood
+- Marty Flournoy
+- Tom Rhodes
+- Doug Sowder
+- Paul Thompson
+- Peggy Riedinger
+- John Morrisey
+k_factors: 
+- 16
+- 13
+- 15
+- 6
+- 20
+- 11
+- 23
+- 19
+- 10
+- 18
+- 24
+- 8
+penalty: 25
+pilotID: 28
+pilotName: Chris Olmsted
+scores: 
+- - 80
+  - 85
+  - 80
+  - 90
+  - 80
+  - 90
+  - 80
+  - 85
+  - 90
+  - 75
+  - 85
+  - 75
+- - 90
+  - 0
+  - 85
+  - 95
+  - 95
+  - 85
+  - 85
+  - 90
+  - 90
+  - 85
+  - 85
+  - 85
+- - 70
+  - 85
+  - 65
+  - 80
+  - 70
+  - 90
+  - 40
+  - 60
+  - 80
+  - 50
+  - 75
+  - 75
+- - 85
+  - 80
+  - 90
+  - 85
+  - 80
+  - 90
+  - 70
+  - 75
+  - 90
+  - 80
+  - 85
+  - 80
+- - 70
+  - 85
+  - 80
+  - 0
+  - 70
+  - 85
+  - 70
+  - 70
+  - 75
+  - 85
+  - 75
+  - 70
+- - 80
+  - 85
+  - 85
+  - 90
+  - 80
+  - 85
+  - 75
+  - 90
+  - 75
+  - 65
+  - 85
+  - 70
+- - 70
+  - 70
+  - 60
+  - 100
+  - 70
+  - 80
+  - 70
+  - 70
+  - 85
+  - 60
+  - 80
+  - 40

@@ -1,0 +1,104 @@
+--- !ruby/object:ACRO::PilotFlightData 
+flightID: 10
+flightName: "Standard - Power : Programme 1: Known Compulsory"
+judges: 
+- Daniel Wisehart
+- Peggy Riedinger
+- Fred Weaver
+- Tony Wood
+- Tom Rhodes
+- David Underwood
+- Liza Weaver
+k_factors: 
+- 13
+- 17
+- 18
+- 10
+- 18
+- 28
+- 10
+- 11
+- 14
+- 10
+- 6
+penalty: 0
+pilotID: 15
+pilotName: Jonathan Sepulveda
+scores: 
+- - 85
+  - 80
+  - 90
+  - 85
+  - 75
+  - 70
+  - 85
+  - 80
+  - 90
+  - 80
+  - 0
+- - 90
+  - 0
+  - 70
+  - 75
+  - 70
+  - 65
+  - 85
+  - 90
+  - 80
+  - 80
+  - 80
+- - 75
+  - 80
+  - 75
+  - 85
+  - 85
+  - 85
+  - 80
+  - 80
+  - 85
+  - 85
+  - 85
+- - 85
+  - 80
+  - 75
+  - 75
+  - 80
+  - 80
+  - 85
+  - 80
+  - 85
+  - 90
+  - 0
+- - 80
+  - 85
+  - 90
+  - 60
+  - 70
+  - 50
+  - 85
+  - 85
+  - 80
+  - 90
+  - 60
+- - 90
+  - 85
+  - 80
+  - 90
+  - 85
+  - 75
+  - 85
+  - 90
+  - 85
+  - 85
+  - 80
+- - 0
+  - 80
+  - 70
+  - 60
+  - 80
+  - 70
+  - 80
+  - 90
+  - 80
+  - 90
+  - 85

@@ -1,0 +1,120 @@
+--- !ruby/object:ACRO::PilotFlightData 
+flightID: 5
+flightName: "Advanced - Power : Programme 2: Free Programme"
+judges: 
+- Bill Denton (USA)
+- Curt Richmond (USA)
+- Hector Ramirez (USA)
+- Mike Galloway (USA)
+- Tim Baker (USA)
+- Tom Adams (USA)
+- Mike Steveson (USA)
+k_factors: 
+- 35
+- 18
+- 34
+- 13
+- 34
+- 20
+- 20
+- 25
+- 23
+- 31
+- 32
+- 15
+- 12
+penalty: 0
+pilotID: 10
+pilotName: Mark Nowosielski
+scores: 
+- - 85
+  - 90
+  - 80
+  - 85
+  - 80
+  - 80
+  - 85
+  - 75
+  - 90
+  - 75
+  - 80
+  - 80
+  - 85
+- - 80
+  - 95
+  - 75
+  - 95
+  - 75
+  - 95
+  - 80
+  - 90
+  - 90
+  - 75
+  - 70
+  - 85
+  - 95
+- - 90
+  - 90
+  - 85
+  - 90
+  - 95
+  - 80
+  - 85
+  - 85
+  - 90
+  - 85
+  - 85
+  - 75
+  - 90
+- - 80
+  - 85
+  - 75
+  - 90
+  - 80
+  - 80
+  - 85
+  - 70
+  - 75
+  - 80
+  - 85
+  - 65
+  - 90
+- - 90
+  - 90
+  - 85
+  - 85
+  - 80
+  - 80
+  - 80
+  - 85
+  - 85
+  - 90
+  - 85
+  - 85
+  - 90
+- - 70
+  - 95
+  - 70
+  - 85
+  - 80
+  - 70
+  - 90
+  - 75
+  - 85
+  - 85
+  - 75
+  - 90
+  - 95
+- - 80
+  - 95
+  - 90
+  - 100
+  - 80
+  - 90
+  - 0
+  - 90
+  - 90
+  - 85
+  - 85
+  - 85
+  - 85

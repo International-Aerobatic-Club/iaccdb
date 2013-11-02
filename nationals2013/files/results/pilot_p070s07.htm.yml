@@ -1,0 +1,104 @@
+--- !ruby/object:ACRO::PilotFlightData 
+flightID: 7
+flightName: "Intermediate - Power : Programme 1: Known Compulsory"
+judges: 
+- Peggy Riedinger
+- John Ostmeyer
+- Fred Weaver
+- Sheri Davis
+- Daniel Wisehart
+- Tom Rhodes
+- Charlie Harrison (USA)
+k_factors: 
+- 20
+- 13
+- 11
+- 21
+- 18
+- 26
+- 31
+- 13
+- 21
+- 7
+- 8
+penalty: 20
+pilotID: 70
+pilotName: Corey McGeeney
+scores: 
+- - 75
+  - 90
+  - 85
+  - 75
+  - 75
+  - 70
+  - 75
+  - 0
+  - 85
+  - 70
+  - 85
+- - 70
+  - 75
+  - 85
+  - 75
+  - 75
+  - 70
+  - 65
+  - 70
+  - 75
+  - 60
+  - 75
+- - 80
+  - 80
+  - 90
+  - 80
+  - 70
+  - 80
+  - 75
+  - 90
+  - 85
+  - 80
+  - 95
+- - 70
+  - 80
+  - 90
+  - 85
+  - 85
+  - 75
+  - 75
+  - 80
+  - 80
+  - 60
+  - 80
+- - 85
+  - 85
+  - 90
+  - 85
+  - 80
+  - 80
+  - 70
+  - 75
+  - 75
+  - 0
+  - 80
+- - 80
+  - 95
+  - 90
+  - 80
+  - 80
+  - 85
+  - 85
+  - 95
+  - 95
+  - 70
+  - 90
+- - 80
+  - 80
+  - 80
+  - 75
+  - 65
+  - 80
+  - 60
+  - 75
+  - 80
+  - 70
+  - 80

@@ -1,0 +1,136 @@
+--- !ruby/object:ACRO::PilotFlightData 
+flightID: 35
+flightName: "Unlimited - Power : Unlimited Power Free Unknown 1"
+judges: 
+- Paul Thompson
+- Mike Forney
+- Peggy Riedinger
+- Curt Richmond (USA)
+- Kevin Campbell
+- Matt Matticola
+- Doug Sowder
+k_factors: 
+- 6
+- 62
+- 37
+- 6
+- 34
+- 62
+- 38
+- 28
+- 42
+- 57
+- 6
+- 57
+- 6
+- 41
+- 20
+penalty: 90
+pilotID: 37
+pilotName: Sergey Prolagayev
+scores: 
+- - 80
+  - 50
+  - 65
+  - 90
+  - 70
+  - 45
+  - 75
+  - 75
+  - 75
+  - 55
+  - 0
+  - 40
+  - 80
+  - 70
+  - 85
+- - 95
+  - 65
+  - 90
+  - 95
+  - 90
+  - 70
+  - 90
+  - 80
+  - 85
+  - 0
+  - 0
+  - 60
+  - 90
+  - 0
+  - 75
+- - 90
+  - 75
+  - 70
+  - 90
+  - 80
+  - 65
+  - 75
+  - 85
+  - 85
+  - 70
+  - 0
+  - 0
+  - 90
+  - 75
+  - 75
+- - 95
+  - 75
+  - 75
+  - 100
+  - 0
+  - 55
+  - 70
+  - 85
+  - 75
+  - 0
+  - 0
+  - 0
+  - 90
+  - 60
+  - 80
+- - 85
+  - 55
+  - 70
+  - 90
+  - 80
+  - 55
+  - 85
+  - 85
+  - 80
+  - 65
+  - 0
+  - 0
+  - 90
+  - 70
+  - 70
+- - 0
+  - 75
+  - 60
+  - 85
+  - 95
+  - 50
+  - 80
+  - 80
+  - 75
+  - 40
+  - 0
+  - 65
+  - 85
+  - 60
+  - 60
+- - 90
+  - 0
+  - 80
+  - 80
+  - 80
+  - 0
+  - 75
+  - 90
+  - 80
+  - 70
+  - 0
+  - 50
+  - 85
+  - 70
+  - 70

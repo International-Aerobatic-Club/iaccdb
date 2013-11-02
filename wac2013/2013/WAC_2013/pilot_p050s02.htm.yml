@@ -1,0 +1,129 @@
+--- !ruby/object:ACRO::PilotFlightData 
+flightID: 2
+flightName: "Unlimited Power : Programme 2: Free Programme"
+judges: 
+- Francis Itier (FRA)
+- Laszlo Liszkay (RSA)
+- Violeta Gedminaite (LTU)
+- Kimmo Virtanen (FIN)
+- Guy Auger (FRA)
+- Vladimir Kotelnikov (RUS)
+- Nick Buckenham (GBR)
+- Lyudmyla Zelenina (UKR)
+- Michael Gallaway (USA)
+- Mikhail Bezdenezhnyh (RUS)
+k_factors: 
+- 49
+- 66
+- 52
+- 58
+- 49
+- 45
+- 31
+- 39
+- 31
+- 40
+penalty: 0
+pilotID: 50
+pilotName: David Martin
+scores: 
+- - 75
+  - 70
+  - 75
+  - 75
+  - 70
+  - 70
+  - 60
+  - 75
+  - 65
+  - 80
+- - 85
+  - 85
+  - 85
+  - 80
+  - 75
+  - 75
+  - 75
+  - 75
+  - 70
+  - 85
+- - 75
+  - 75
+  - 70
+  - 70
+  - 70
+  - 75
+  - 75
+  - 75
+  - 80
+  - 80
+- - 80
+  - 85
+  - 80
+  - 85
+  - 75
+  - 75
+  - 75
+  - 65
+  - 65
+  - 90
+- - 85
+  - 80
+  - 80
+  - 75
+  - 75
+  - 80
+  - 75
+  - 80
+  - 75
+  - 95
+- - 80
+  - 75
+  - 70
+  - 75
+  - 65
+  - 75
+  - 80
+  - 80
+  - 70
+  - 85
+- - 80
+  - 75
+  - 80
+  - 75
+  - 60
+  - 75
+  - 70
+  - 70
+  - 60
+  - 90
+- - 70
+  - 75
+  - 70
+  - 75
+  - 65
+  - 75
+  - 75
+  - 80
+  - 70
+  - 80
+- - 80
+  - 80
+  - 75
+  - 75
+  - 70
+  - 75
+  - 85
+  - 80
+  - 75
+  - 90
+- - 75
+  - 75
+  - 70
+  - 75
+  - 70
+  - 70
+  - 70
+  - 70
+  - 70
+  - 0

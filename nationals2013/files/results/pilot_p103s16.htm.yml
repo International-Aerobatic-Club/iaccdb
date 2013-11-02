@@ -1,0 +1,72 @@
+--- !ruby/object:ACRO::PilotFlightData 
+flightID: 16
+flightName: "Beginners : Primary Power #1"
+judges: 
+- Daniel Wisehart
+- Peggy Riedinger
+- Fred Weaver
+- Tony Wood
+- Tom Rhodes
+- David Underwood
+- Liza Weaver
+k_factors: 
+- 7
+- 15
+- 14
+- 10
+- 4
+- 10
+- 3
+penalty: 0
+pilotID: 103
+pilotName: Hollywood Hayden
+scores: 
+- - 100
+  - 70
+  - 80
+  - 60
+  - 75
+  - 90
+  - 80
+- - 90
+  - 75
+  - 80
+  - 75
+  - 0
+  - 0
+  - 80
+- - 80
+  - 70
+  - 75
+  - 85
+  - 70
+  - 90
+  - 85
+- - 90
+  - 70
+  - 85
+  - 75
+  - 75
+  - 90
+  - 80
+- - 80
+  - 80
+  - 80
+  - 50
+  - 60
+  - 80
+  - 80
+- - 80
+  - 70
+  - 85
+  - 70
+  - 70
+  - 0
+  - 85
+- - 95
+  - 70
+  - 80
+  - 70
+  - 70
+  - 90
+  - 90

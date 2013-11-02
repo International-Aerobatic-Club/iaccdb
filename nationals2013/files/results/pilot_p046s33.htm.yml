@@ -1,0 +1,104 @@
+--- !ruby/object:ACRO::PilotFlightData 
+flightID: 33
+flightName: "Standard - Power : Sportsman Power Free #2"
+judges: 
+- Tony Wood
+- Fred Weaver
+- David Underwood
+- Mike Steveson (USA)
+- Liza Weaver
+- Peggy Riedinger
+- Daniel Wisehart
+k_factors: 
+- 13
+- 17
+- 18
+- 10
+- 18
+- 28
+- 10
+- 11
+- 14
+- 10
+- 6
+penalty: 15
+pilotID: 46
+pilotName: Steven Davidsmeyer
+scores: 
+- - 80
+  - 75
+  - 80
+  - 75
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 75
+- - 70
+  - 70
+  - 80
+  - 85
+  - 75
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 60
+- - 90
+  - 85
+  - 90
+  - 70
+  - 80
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 85
+- - 0
+  - 70
+  - 80
+  - 70
+  - 70
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 65
+- - 85
+  - 80
+  - 80
+  - 65
+  - 70
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 80
+- - 90
+  - 80
+  - 75
+  - 70
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 65
+- - 90
+  - 85
+  - 75
+  - 75
+  - 70
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 70

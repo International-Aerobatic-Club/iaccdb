@@ -1,0 +1,129 @@
+--- !ruby/object:ACRO::PilotFlightData 
+flightID: 2
+flightName: "Unlimited Power : Programme 2: Free Programme"
+judges: 
+- Francis Itier (FRA)
+- Laszlo Liszkay (RSA)
+- Violeta Gedminaite (LTU)
+- Kimmo Virtanen (FIN)
+- Guy Auger (FRA)
+- Vladimir Kotelnikov (RUS)
+- Nick Buckenham (GBR)
+- Lyudmyla Zelenina (UKR)
+- Michael Gallaway (USA)
+- Mikhail Bezdenezhnyh (RUS)
+k_factors: 
+- 50
+- 57
+- 46
+- 24
+- 64
+- 63
+- 33
+- 56
+- 27
+- 40
+penalty: 0
+pilotID: 53
+pilotName: Hector Ramirez
+scores: 
+- - 65
+  - 70
+  - 70
+  - 0
+  - 70
+  - 70
+  - 75
+  - 75
+  - 65
+  - 70
+- - 80
+  - 75
+  - 70
+  - 80
+  - 70
+  - 75
+  - 85
+  - 80
+  - 70
+  - 75
+- - 70
+  - 75
+  - 75
+  - 70
+  - 0
+  - 75
+  - 80
+  - 75
+  - 65
+  - 75
+- - 65
+  - 70
+  - 75
+  - 60
+  - 60
+  - 75
+  - 80
+  - 70
+  - 75
+  - 70
+- - 80
+  - 75
+  - 70
+  - 0
+  - 70
+  - 80
+  - 85
+  - 70
+  - 60
+  - 90
+- - 75
+  - 80
+  - 70
+  - 65
+  - 70
+  - 75
+  - 85
+  - 80
+  - 60
+  - 80
+- - 80
+  - 80
+  - 60
+  - 0
+  - 65
+  - 65
+  - 75
+  - 85
+  - 60
+  - 90
+- - 75
+  - 70
+  - 75
+  - 75
+  - 65
+  - 70
+  - 80
+  - 70
+  - 70
+  - 75
+- - 80
+  - 75
+  - 75
+  - 75
+  - 60
+  - 75
+  - 80
+  - 75
+  - 70
+  - 75
+- - 70
+  - 75
+  - 70
+  - 65
+  - 70
+  - 0
+  - 75
+  - 75
+  - 65
+  - 75

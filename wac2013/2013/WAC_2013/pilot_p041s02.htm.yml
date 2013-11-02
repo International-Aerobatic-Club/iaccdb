@@ -1,0 +1,129 @@
+--- !ruby/object:ACRO::PilotFlightData 
+flightID: 2
+flightName: "Unlimited Power : Programme 2: Free Programme"
+judges: 
+- Francis Itier (FRA)
+- Laszlo Liszkay (RSA)
+- Violeta Gedminaite (LTU)
+- Kimmo Virtanen (FIN)
+- Guy Auger (FRA)
+- Vladimir Kotelnikov (RUS)
+- Nick Buckenham (GBR)
+- Lyudmyla Zelenina (UKR)
+- Michael Gallaway (USA)
+- Mikhail Bezdenezhnyh (RUS)
+k_factors: 
+- 51
+- 66
+- 46
+- 26
+- 52
+- 53
+- 22
+- 60
+- 44
+- 40
+penalty: 0
+pilotID: 41
+pilotName: Mikhail Mamistov
+scores: 
+- - 80
+  - 80
+  - 80
+  - 75
+  - 80
+  - 80
+  - 75
+  - 80
+  - 85
+  - 85
+- - 80
+  - 80
+  - 75
+  - 80
+  - 80
+  - 85
+  - 75
+  - 85
+  - 85
+  - 85
+- - 85
+  - 85
+  - 85
+  - 80
+  - 80
+  - 80
+  - 75
+  - 75
+  - 85
+  - 90
+- - 85
+  - 85
+  - 85
+  - 90
+  - 85
+  - 85
+  - 75
+  - 75
+  - 80
+  - 90
+- - 85
+  - 80
+  - 85
+  - 80
+  - 80
+  - 85
+  - 0
+  - 80
+  - 80
+  - 90
+- - 80
+  - 80
+  - 80
+  - 80
+  - 80
+  - 80
+  - 80
+  - 80
+  - 80
+  - 80
+- - 85
+  - 80
+  - 70
+  - 75
+  - 85
+  - 75
+  - 70
+  - 80
+  - 80
+  - 90
+- - 85
+  - 80
+  - 80
+  - 80
+  - 80
+  - 75
+  - 75
+  - 80
+  - 80
+  - 85
+- - 80
+  - 75
+  - 75
+  - 80
+  - 70
+  - 75
+  - 60
+  - 75
+  - 80
+  - 90
+- - 80
+  - 80
+  - 80
+  - 80
+  - 80
+  - 80
+  - 80
+  - 80
+  - 80
+  - 80

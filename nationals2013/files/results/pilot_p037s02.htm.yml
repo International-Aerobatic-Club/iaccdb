@@ -1,0 +1,88 @@
+--- !ruby/object:ACRO::PilotFlightData 
+flightID: 2
+flightName: "Unlimited - Power : Programme 2: Free Programme"
+judges: 
+- Marty Flournoy
+- Mike Forney
+- Steve Johnson
+- Matt Matticola
+- Kevin Campbell
+- Daniel Wisehart
+- Doug Sowder
+k_factors: 
+- 38
+- 64
+- 54
+- 35
+- 56
+- 50
+- 47
+- 22
+- 26
+penalty: 0
+pilotID: 37
+pilotName: Sergey Prolagayev
+scores: 
+- - 80
+  - 0
+  - 70
+  - 75
+  - 75
+  - 85
+  - 80
+  - 85
+  - 85
+- - 60
+  - 85
+  - 60
+  - 75
+  - 80
+  - 80
+  - 80
+  - 55
+  - 80
+- - 80
+  - 75
+  - 50
+  - 85
+  - 80
+  - 70
+  - 75
+  - 70
+  - 85
+- - 55
+  - 55
+  - 55
+  - 80
+  - 70
+  - 70
+  - 65
+  - 60
+  - 65
+- - 80
+  - 70
+  - 65
+  - 70
+  - 70
+  - 75
+  - 75
+  - 80
+  - 70
+- - 70
+  - 70
+  - 65
+  - 80
+  - 60
+  - 75
+  - 70
+  - 70
+  - 70
+- - 70
+  - 75
+  - 70
+  - 80
+  - 80
+  - 70
+  - 80
+  - 75
+  - 80

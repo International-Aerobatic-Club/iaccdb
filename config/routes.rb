@@ -55,6 +55,11 @@ Iac::Application.routes.draw do
 
   resources :flights, :only => [:show]
 
+  get 'judge/:judge_id/flight/:flight_id',
+    :controller => :judges,
+    :action => :histograms,
+    :as => 'judge_histograms'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

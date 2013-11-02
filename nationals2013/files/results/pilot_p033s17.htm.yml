@@ -1,0 +1,56 @@
+--- !ruby/object:ACRO::PilotFlightData 
+flightID: 17
+flightName: "Beginners : Primary Power #2"
+judges: 
+- Daniel Wisehart
+- Liza Weaver
+- Fred Weaver
+- David Underwood
+- Tom Rhodes
+k_factors: 
+- 7
+- 15
+- 14
+- 10
+- 4
+- 10
+- 3
+penalty: 0
+pilotID: 33
+pilotName: Jonathan Sievert
+scores: 
+- - 0
+  - 90
+  - 85
+  - 85
+  - 80
+  - 90
+  - 80
+- - 70
+  - 90
+  - 70
+  - 80
+  - 85
+  - 80
+  - 90
+- - 85
+  - 90
+  - 80
+  - 90
+  - 70
+  - 90
+  - 80
+- - 85
+  - 90
+  - 75
+  - 70
+  - 65
+  - 80
+  - 85
+- - 100
+  - 100
+  - 85
+  - 90
+  - 80
+  - 90
+  - 85

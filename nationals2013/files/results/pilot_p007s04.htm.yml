@@ -1,0 +1,96 @@
+--- !ruby/object:ACRO::PilotFlightData 
+flightID: 4
+flightName: "Advanced - Power : Programme 1: Known Compulsory"
+judges: 
+- Bill Denton (USA)
+- Curt Richmond (USA)
+- Hector Ramirez (USA)
+- Mike Galloway (USA)
+- Tim Baker (USA)
+- Tom Adams (USA)
+- Mike Steveson (USA)
+k_factors: 
+- 42
+- 41
+- 31
+- 21
+- 27
+- 28
+- 29
+- 22
+- 32
+- 30
+penalty: 20
+pilotID: 7
+pilotName: Margo Chase
+scores: 
+- - 60
+  - 40
+  - 70
+  - 70
+  - 55
+  - 65
+  - 65
+  - 65
+  - 70
+  - 70
+- - 65
+  - 70
+  - 75
+  - 70
+  - 70
+  - 75
+  - 70
+  - 65
+  - 80
+  - 80
+- - 80
+  - 60
+  - 80
+  - 80
+  - 65
+  - 75
+  - 70
+  - 80
+  - 90
+  - 80
+- - 55
+  - 50
+  - 80
+  - 70
+  - 60
+  - 40
+  - 50
+  - 70
+  - 70
+  - 75
+- - 85
+  - 0
+  - 80
+  - 85
+  - 75
+  - 80
+  - 70
+  - 80
+  - 80
+  - 80
+- - 75
+  - 60
+  - 65
+  - 80
+  - 60
+  - 65
+  - 75
+  - 70
+  - 75
+  - 90
+- - 65
+  - 75
+  - 80
+  - 70
+  - 70
+  - 60
+  - 55
+  - 65
+  - 65
+  - 60

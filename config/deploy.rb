@@ -1,9 +1,10 @@
 require 'delayed/recipes'
+require 'bundler/capistrano'
 
 set :user, 'iaccdbor'
 set :domain, 'iaccdb.org'
 set :application, 'cdb'
-set :repository, "#{user}@#{domain}:~/git/#{application}.git"
+set :repository, 'https://github.com/wbreeze/iaccdb.git'
 set :deploy_to, "/home/#{user}/rails/#{application}"
 default_run_options[:pty] = true
 
@@ -14,7 +15,6 @@ role :app, domain
 role :web, domain
 role :db, domain, :primary => true
 
-set :deploy_via, :remote_cache
 set :branch, 'master'
 set :scm_verbose, true
 set :use_sudo, false
@@ -53,15 +53,15 @@ namespace :db do
 end
 
 # install bundle
-after "deploy:update_code", :bundle_install
-desc "install prerequisite gems from Gemfile.lock"
-task :bundle_install, :roles => :app do
-  run "cd #{release_path} && bundle install --deployment"
-end
+#after "deploy:update_code", :bundle_install
+#desc "install prerequisite gems from Gemfile.lock"
+#task :bundle_install, :roles => :app do
+  #run "cd #{release_path} && bundle install --deployment"
+#end
 
 # delayed_job
-set :rails_env, "production"
-after "deploy:stop",    "delayed_job:stop"
-after "deploy:start",   "delayed_job:start"
-after "deploy:restart", "delayed_job:restart"
+#set :rails_env, "production"
+#after "deploy:stop",    "delayed_job:stop"
+#after "deploy:start",   "delayed_job:start"
+#after "deploy:restart", "delayed_job:restart"
 

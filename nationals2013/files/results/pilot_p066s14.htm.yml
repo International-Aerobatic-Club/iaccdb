@@ -1,0 +1,104 @@
+--- !ruby/object:ACRO::PilotFlightData 
+flightID: 14
+flightName: "Unlimited - Glider : Programme 2: Free Programme"
+judges: 
+- Paul Thompson
+- Mike Forney
+- Peggy Riedinger
+- Curt Richmond (USA)
+- Kevin Campbell
+- Matt Matticola
+- Doug Sowder
+k_factors: 
+- 32
+- 21
+- 25
+- 28
+- 20
+- 24
+- 18
+- 19
+- 18
+- 25
+- 35
+penalty: 0
+pilotID: 66
+pilotName: Eric Lentz-Gauthier
+scores: 
+- - 70
+  - 65
+  - 75
+  - 70
+  - 75
+  - 90
+  - 80
+  - 75
+  - 70
+  - 80
+  - 80
+- - 70
+  - 60
+  - 80
+  - 90
+  - 75
+  - 85
+  - 90
+  - 90
+  - 90
+  - 0
+  - 70
+- - 70
+  - 85
+  - 75
+  - 70
+  - 80
+  - 65
+  - 80
+  - 95
+  - 85
+  - 95
+  - 90
+- - 75
+  - 70
+  - 0
+  - 70
+  - 80
+  - 80
+  - 65
+  - 75
+  - 80
+  - 90
+  - 95
+- - 85
+  - 80
+  - 75
+  - 85
+  - 65
+  - 75
+  - 80
+  - 80
+  - 75
+  - 85
+  - 80
+- - 75
+  - 80
+  - 75
+  - 70
+  - 60
+  - 90
+  - 0
+  - 60
+  - 80
+  - 80
+  - 80
+- - 70
+  - 70
+  - 75
+  - 80
+  - 75
+  - 65
+  - 80
+  - 80
+  - 75
+  - 80
+  - 70

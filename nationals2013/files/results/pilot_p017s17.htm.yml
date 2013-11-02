@@ -1,0 +1,56 @@
+--- !ruby/object:ACRO::PilotFlightData 
+flightID: 17
+flightName: "Beginners : Primary Power #2"
+judges: 
+- Daniel Wisehart
+- Liza Weaver
+- Fred Weaver
+- David Underwood
+- Tom Rhodes
+k_factors: 
+- 7
+- 15
+- 14
+- 10
+- 4
+- 10
+- 3
+penalty: 0
+pilotID: 17
+pilotName: Jennifer Slack
+scores: 
+- - 0
+  - 70
+  - 80
+  - 75
+  - 70
+  - 70
+  - 70
+- - 90
+  - 80
+  - 85
+  - 70
+  - 80
+  - 80
+  - 85
+- - 80
+  - 90
+  - 80
+  - 80
+  - 75
+  - 0
+  - 95
+- - 95
+  - 90
+  - 75
+  - 85
+  - 90
+  - 90
+  - 90
+- - 0
+  - 85
+  - 60
+  - 70
+  - 90
+  - 75
+  - 80

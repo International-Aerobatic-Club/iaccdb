@@ -1,0 +1,104 @@
+--- !ruby/object:ACRO::PilotFlightData 
+flightID: 10
+flightName: "Standard - Power : Programme 1: Known Compulsory"
+judges: 
+- Daniel Wisehart
+- Peggy Riedinger
+- Fred Weaver
+- Tony Wood
+- Tom Rhodes
+- David Underwood
+- Liza Weaver
+k_factors: 
+- 13
+- 17
+- 18
+- 10
+- 18
+- 28
+- 10
+- 11
+- 14
+- 10
+- 6
+penalty: 5
+pilotID: 91
+pilotName: Russell Husbands
+scores: 
+- - 80
+  - 75
+  - 80
+  - 75
+  - 0
+  - 75
+  - 75
+  - 80
+  - 85
+  - 90
+  - 80
+- - 90
+  - 90
+  - 75
+  - 90
+  - 75
+  - 75
+  - 90
+  - 80
+  - 85
+  - 90
+  - 80
+- - 80
+  - 75
+  - 80
+  - 80
+  - 75
+  - 60
+  - 90
+  - 80
+  - 70
+  - 90
+  - 85
+- - 80
+  - 75
+  - 85
+  - 75
+  - 80
+  - 70
+  - 90
+  - 95
+  - 85
+  - 85
+  - 80
+- - 60
+  - 80
+  - 75
+  - 80
+  - 60
+  - 0
+  - 80
+  - 90
+  - 0
+  - 0
+  - 70
+- - 90
+  - 90
+  - 90
+  - 70
+  - 80
+  - 75
+  - 90
+  - 95
+  - 75
+  - 95
+  - 90
+- - 80
+  - 80
+  - 75
+  - 90
+  - 0
+  - 70
+  - 80
+  - 90
+  - 90
+  - 90
+  - 80

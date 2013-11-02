@@ -1,0 +1,129 @@
+--- !ruby/object:ACRO::PilotFlightData 
+flightID: 2
+flightName: "Unlimited Power : Programme 2: Free Programme"
+judges: 
+- Francis Itier (FRA)
+- Laszlo Liszkay (RSA)
+- Violeta Gedminaite (LTU)
+- Kimmo Virtanen (FIN)
+- Guy Auger (FRA)
+- Vladimir Kotelnikov (RUS)
+- Nick Buckenham (GBR)
+- Lyudmyla Zelenina (UKR)
+- Michael Gallaway (USA)
+- Mikhail Bezdenezhnyh (RUS)
+k_factors: 
+- 54
+- 39
+- 72
+- 50
+- 32
+- 56
+- 50
+- 44
+- 23
+- 40
+penalty: 0
+pilotID: 59
+pilotName: Emiliano Del
+scores: 
+- - 75
+  - 70
+  - 75
+  - 65
+  - 75
+  - 75
+  - 65
+  - 70
+  - 60
+  - 70
+- - 85
+  - 85
+  - 70
+  - 75
+  - 75
+  - 80
+  - 70
+  - 75
+  - 65
+  - 65
+- - 75
+  - 80
+  - 75
+  - 70
+  - 75
+  - 70
+  - 60
+  - 70
+  - 65
+  - 70
+- - 80
+  - 85
+  - 65
+  - 60
+  - 75
+  - 70
+  - 75
+  - 70
+  - 60
+  - 75
+- - 80
+  - 85
+  - 75
+  - 65
+  - 80
+  - 75
+  - 70
+  - 75
+  - 65
+  - 75
+- - 80
+  - 75
+  - 70
+  - 70
+  - 75
+  - 75
+  - 60
+  - 75
+  - 75
+  - 70
+- - 70
+  - 70
+  - 70
+  - 60
+  - 80
+  - 70
+  - 60
+  - 70
+  - 65
+  - 70
+- - 80
+  - 80
+  - 75
+  - 75
+  - 80
+  - 70
+  - 70
+  - 80
+  - 70
+  - 75
+- - 75
+  - 75
+  - 70
+  - 70
+  - 75
+  - 65
+  - 60
+  - 80
+  - 70
+  - 0
+- - 80
+  - 80
+  - 75
+  - 70
+  - 75
+  - 70
+  - 65
+  - 70
+  - 65
+  - 75

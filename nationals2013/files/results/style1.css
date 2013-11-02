@@ -1,0 +1,4 @@
+a:link       { color: #000080; text-decoration: none }
+a:visited    { color: #000080; text-decoration: none }
+a:hover      { color: #FF0000; text-decoration: underline }
+td, p, div   { font-family: Arial, Helvetica, sans-serif }

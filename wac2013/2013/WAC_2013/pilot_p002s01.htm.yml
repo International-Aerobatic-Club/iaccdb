@@ -1,0 +1,129 @@
+--- !ruby/object:ACRO::PilotFlightData 
+flightID: 1
+flightName: "Unlimited Power : Programme 1: Known Compulsory"
+judges: 
+- Francis Itier (FRA)
+- Laszlo Liszkay (RSA)
+- Violeta Gedminaite (LTU)
+- Kimmo Virtanen (FIN)
+- Guy Auger (FRA)
+- Vladimir Kotelnikov (RUS)
+- Nick Buckenham (GBR)
+- Lyudmyla Zelenina (UKR)
+- Michael Gallaway (USA)
+- Mikhail Bezdenezhnyh (RUS)
+k_factors: 
+- 49
+- 46
+- 29
+- 64
+- 49
+- 41
+- 38
+- 34
+- 33
+- 40
+penalty: 300
+pilotID: 2
+pilotName: Grant Piper
+scores: 
+- - 60
+  - 0
+  - 65
+  - 65
+  - 0
+  - 65
+  - 50
+  - 0
+  - 70
+  - 75
+- - 65
+  - 0
+  - 75
+  - 65
+  - 65
+  - 60
+  - 50
+  - 0
+  - 65
+  - 60
+- - 60
+  - 0
+  - 65
+  - 65
+  - 65
+  - 65
+  - 55
+  - 0
+  - 70
+  - 70
+- - 55
+  - 0
+  - 0
+  - 50
+  - 0
+  - 0
+  - 55
+  - 0
+  - 70
+  - 50
+- - 55
+  - 0
+  - 70
+  - 60
+  - 0
+  - 75
+  - 30
+  - 0
+  - 70
+  - 70
+- - 55
+  - 0
+  - 70
+  - 0
+  - 65
+  - 65
+  - 60
+  - 0
+  - 65
+  - 70
+- - 40
+  - 0
+  - 70
+  - 65
+  - 75
+  - 50
+  - 65
+  - 0
+  - 70
+  - 0
+- - 60
+  - 0
+  - 70
+  - 60
+  - 65
+  - 60
+  - 50
+  - 0
+  - 70
+  - 70
+- - 40
+  - 0
+  - 70
+  - 50
+  - 65
+  - 55
+  - 40
+  - 0
+  - 60
+  - 50
+- - 55
+  - 0
+  - 65
+  - 60
+  - 60
+  - 55
+  - 50
+  - 0
+  - 65
+  - 70

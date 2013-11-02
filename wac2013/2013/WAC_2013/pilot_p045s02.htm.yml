@@ -1,0 +1,129 @@
+--- !ruby/object:ACRO::PilotFlightData 
+flightID: 2
+flightName: "Unlimited Power : Programme 2: Free Programme"
+judges: 
+- Francis Itier (FRA)
+- Laszlo Liszkay (RSA)
+- Violeta Gedminaite (LTU)
+- Kimmo Virtanen (FIN)
+- Guy Auger (FRA)
+- Vladimir Kotelnikov (RUS)
+- Nick Buckenham (GBR)
+- Lyudmyla Zelenina (UKR)
+- Michael Gallaway (USA)
+- Mikhail Bezdenezhnyh (RUS)
+k_factors: 
+- 60
+- 65
+- 46
+- 37
+- 41
+- 46
+- 59
+- 41
+- 25
+- 40
+penalty: 0
+pilotID: 45
+pilotName: Hanspeter Rohner
+scores: 
+- - 70
+  - 75
+  - 75
+  - 75
+  - 75
+  - 75
+  - 70
+  - 65
+  - 55
+  - 70
+- - 75
+  - 70
+  - 80
+  - 80
+  - 85
+  - 80
+  - 75
+  - 70
+  - 65
+  - 70
+- - 75
+  - 70
+  - 85
+  - 80
+  - 75
+  - 80
+  - 70
+  - 70
+  - 60
+  - 75
+- - 75
+  - 75
+  - 70
+  - 65
+  - 65
+  - 75
+  - 70
+  - 55
+  - 55
+  - 70
+- - 80
+  - 80
+  - 75
+  - 80
+  - 80
+  - 75
+  - 80
+  - 80
+  - 60
+  - 80
+- - 70
+  - 75
+  - 80
+  - 70
+  - 80
+  - 70
+  - 75
+  - 70
+  - 65
+  - 70
+- - 60
+  - 80
+  - 70
+  - 0
+  - 60
+  - 75
+  - 65
+  - 65
+  - 50
+  - 80
+- - 75
+  - 70
+  - 75
+  - 70
+  - 70
+  - 75
+  - 70
+  - 70
+  - 65
+  - 65
+- - 70
+  - 70
+  - 65
+  - 75
+  - 70
+  - 75
+  - 75
+  - 65
+  - 50
+  - 70
+- - 70
+  - 70
+  - 75
+  - 70
+  - 70
+  - 75
+  - 70
+  - 65
+  - 60
+  - 65

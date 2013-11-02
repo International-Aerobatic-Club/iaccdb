@@ -147,7 +147,7 @@ def detect_flight_category(description)
   if !cat
     if /Pri/i =~ description
       cat = 'Primary'
-    elsif /Sport/i =~ description || /Spn/i =~ description
+    elsif /Sport|Standard/i =~ description || /Spn/i =~ description
       cat = 'Sportsman'
     elsif /Adv/i =~ description
       cat = 'Advanced'
@@ -164,8 +164,18 @@ end
 
 def detect_flight_name(description)
   name = nil
-  IAC::Constants::FLIGHT_NAMES.each do |fltName|
-    name = fltName if Regexp.new(fltName, 'i') =~ description
+  if /Team/i =~ description
+    name = 'Team Unknown' 
+  elsif /#1/ =~ description
+    name = 'Flight 1'
+  elsif /#2/ =~ description
+    name = 'Flight 2'
+  elsif /#3/ =~ description
+    name = 'Flight 3'
+  else
+    IAC::Constants::FLIGHT_NAMES.each do |fltName|
+      name = fltName if Regexp.new(fltName, 'i') =~ description
+    end
   end
   name
 end

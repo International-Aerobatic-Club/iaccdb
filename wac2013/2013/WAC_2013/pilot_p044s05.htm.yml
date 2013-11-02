@@ -1,0 +1,129 @@
+--- !ruby/object:ACRO::PilotFlightData 
+flightID: 5
+flightName: "Unlimited Power : 4-minute Freestyle Sequence"
+judges: 
+- Francis Itier (FRA)
+- Laszlo Liszkay (RSA)
+- Violeta Gedminaite (LTU)
+- Kimmo Virtanen (FIN)
+- Guy Auger (FRA)
+- Vladimir Kotelnikov (RUS)
+- Nick Buckenham (GBR)
+- Lyudmyla Zelenina (UKR)
+- Michael Gallaway (USA)
+- Mikhail Bezdenezhnyh (RUS)
+k_factors: 
+- 40
+- 40
+- 40
+- 40
+- 40
+- 40
+- 40
+- 40
+- 40
+- 40
+penalty: 0
+pilotID: 44
+pilotName: Nigel Hopkins
+scores: 
+- - 60
+  - 60
+  - 70
+  - 60
+  - 65
+  - 60
+  - 70
+  - 70
+  - 70
+  - 65
+- - 75
+  - 80
+  - 75
+  - 75
+  - 80
+  - 80
+  - 80
+  - 75
+  - 75
+  - 75
+- - 90
+  - 100
+  - 100
+  - 90
+  - 100
+  - 100
+  - 90
+  - 100
+  - 90
+  - 100
+- - 90
+  - 80
+  - 80
+  - 80
+  - 70
+  - 80
+  - 80
+  - 70
+  - 80
+  - 90
+- - 70
+  - 80
+  - 70
+  - 70
+  - 80
+  - 70
+  - 70
+  - 70
+  - 80
+  - 60
+- - 80
+  - 80
+  - 75
+  - 70
+  - 75
+  - 70
+  - 80
+  - 75
+  - 80
+  - 75
+- - 50
+  - 50
+  - 50
+  - 50
+  - 60
+  - 50
+  - 50
+  - 55
+  - 60
+  - 60
+- - 85
+  - 85
+  - 90
+  - 85
+  - 90
+  - 85
+  - 85
+  - 80
+  - 85
+  - 85
+- - 50
+  - 60
+  - 60
+  - 50
+  - 40
+  - 50
+  - 50
+  - 50
+  - 60
+  - 50
+- - 65
+  - 65
+  - 60
+  - 70
+  - 65
+  - 70
+  - 60
+  - 70
+  - 70
+  - 60

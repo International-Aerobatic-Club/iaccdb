@@ -1,0 +1,96 @@
+--- !ruby/object:ACRO::PilotFlightData 
+flightID: 15
+flightName: "Unlimited - Glider : Programme 2: 1st Unknown Compulsory"
+judges: 
+- Julia Wood
+- Marty Flournoy
+- Tom Rhodes
+- Doug Sowder
+- Paul Thompson
+- Peggy Riedinger
+- John Morrisey
+k_factors: 
+- 18
+- 5
+- 20
+- 29
+- 27
+- 5
+- 35
+- 18
+- 25
+- 35
+penalty: 40
+pilotID: 66
+pilotName: Eric Lentz-Gauthier
+scores: 
+- - 80
+  - 95
+  - 80
+  - 80
+  - 80
+  - 90
+  - 80
+  - 90
+  - 80
+  - 90
+- - 85
+  - 90
+  - 85
+  - 80
+  - 75
+  - 85
+  - 75
+  - 85
+  - 80
+  - 90
+- - 70
+  - 100
+  - 90
+  - 75
+  - 60
+  - 100
+  - 40
+  - 70
+  - 85
+  - 90
+- - 70
+  - 100
+  - 80
+  - 60
+  - 60
+  - 80
+  - 60
+  - 75
+  - 75
+  - 80
+- - 90
+  - 95
+  - 90
+  - 0
+  - 75
+  - 90
+  - 40
+  - 70
+  - 80
+  - 85
+- - 80
+  - 90
+  - 80
+  - 65
+  - 75
+  - 95
+  - 0
+  - 80
+  - 75
+  - 90
+- - 90
+  - 90
+  - 80
+  - 75
+  - 70
+  - 90
+  - 50
+  - 50
+  - 85
+  - 90

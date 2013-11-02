@@ -1,0 +1,88 @@
+--- !ruby/object:ACRO::PilotFlightData 
+flightID: 2
+flightName: "Unlimited - Power : Programme 2: Free Programme"
+judges: 
+- Marty Flournoy
+- Mike Forney
+- Steve Johnson
+- Matt Matticola
+- Kevin Campbell
+- Daniel Wisehart
+- Doug Sowder
+k_factors: 
+- 59
+- 41
+- 44
+- 45
+- 30
+- 34
+- 50
+- 53
+- 26
+penalty: 60
+pilotID: 73
+pilotName: Benjamin Freelove
+scores: 
+- - 80
+  - 85
+  - 75
+  - 85
+  - 75
+  - 75
+  - 70
+  - 75
+  - 90
+- - 85
+  - 70
+  - 60
+  - 70
+  - 60
+  - 70
+  - 75
+  - 70
+  - 80
+- - 90
+  - 90
+  - 65
+  - 80
+  - 70
+  - 80
+  - 65
+  - 70
+  - 85
+- - 65
+  - 75
+  - 65
+  - 80
+  - 80
+  - 85
+  - 65
+  - 0
+  - 65
+- - 80
+  - 75
+  - 75
+  - 85
+  - 75
+  - 80
+  - 80
+  - 75
+  - 65
+- - 75
+  - 65
+  - 70
+  - 60
+  - 70
+  - 65
+  - 75
+  - 70
+  - 70
+- - 80
+  - 85
+  - 85
+  - 80
+  - 80
+  - 65
+  - 75
+  - 0
+  - 80

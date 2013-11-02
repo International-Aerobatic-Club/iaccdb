@@ -4,9 +4,7 @@ import sys
 import subprocess
 
 url = "http://nationals.iac.org"
-if len(sys.argv) < 2:
-  print "say au or psi"
-dir = "/files/results/" + sys.argv[1] + "/"
+dir = "/files/results/"
 regex = re.compile(r"<a href=\"javascript:popUp\('([^>]+\.htm)'\)")
 ct = 0
 for line in sys.stdin.readlines():

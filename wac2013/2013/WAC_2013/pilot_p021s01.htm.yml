@@ -1,0 +1,129 @@
+--- !ruby/object:ACRO::PilotFlightData 
+flightID: 1
+flightName: "Unlimited Power : Programme 1: Known Compulsory"
+judges: 
+- Francis Itier (FRA)
+- Laszlo Liszkay (RSA)
+- Violeta Gedminaite (LTU)
+- Kimmo Virtanen (FIN)
+- Guy Auger (FRA)
+- Vladimir Kotelnikov (RUS)
+- Nick Buckenham (GBR)
+- Lyudmyla Zelenina (UKR)
+- Michael Gallaway (USA)
+- Mikhail Bezdenezhnyh (RUS)
+k_factors: 
+- 49
+- 46
+- 29
+- 64
+- 49
+- 41
+- 38
+- 34
+- 33
+- 40
+penalty: 0
+pilotID: 21
+pilotName: Pierre Varloteaux
+scores: 
+- - 80
+  - 70
+  - 80
+  - 75
+  - 75
+  - 80
+  - 65
+  - 80
+  - 80
+  - 80
+- - 85
+  - 75
+  - 80
+  - 70
+  - 70
+  - 75
+  - 65
+  - 70
+  - 75
+  - 65
+- - 75
+  - 50
+  - 70
+  - 70
+  - 70
+  - 75
+  - 65
+  - 75
+  - 75
+  - 80
+- - 85
+  - 70
+  - 80
+  - 75
+  - 70
+  - 70
+  - 65
+  - 75
+  - 80
+  - 75
+- - 90
+  - 80
+  - 90
+  - 80
+  - 75
+  - 85
+  - 70
+  - 85
+  - 85
+  - 85
+- - 80
+  - 70
+  - 80
+  - 70
+  - 70
+  - 80
+  - 70
+  - 80
+  - 75
+  - 80
+- - 70
+  - 65
+  - 85
+  - 65
+  - 70
+  - 70
+  - 40
+  - 75
+  - 0
+  - 85
+- - 75
+  - 70
+  - 75
+  - 65
+  - 70
+  - 70
+  - 70
+  - 75
+  - 80
+  - 80
+- - 75
+  - 65
+  - 85
+  - 70
+  - 65
+  - 70
+  - 60
+  - 75
+  - 85
+  - 80
+- - 70
+  - 75
+  - 75
+  - 70
+  - 70
+  - 75
+  - 60
+  - 75
+  - 75
+  - 75

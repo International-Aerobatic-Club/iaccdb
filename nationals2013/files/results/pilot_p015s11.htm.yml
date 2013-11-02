@@ -1,0 +1,80 @@
+--- !ruby/object:ACRO::PilotFlightData 
+flightID: 11
+flightName: "Standard - Power : Programme 2: Free Programme"
+judges: 
+- Daniel Wisehart
+- Liza Weaver
+- Fred Weaver
+- David Underwood
+- Tom Rhodes
+k_factors: 
+- 13
+- 17
+- 18
+- 10
+- 18
+- 28
+- 10
+- 11
+- 14
+- 10
+- 6
+penalty: 5
+pilotID: 15
+pilotName: Jonathan Sepulveda
+scores: 
+- - 70
+  - 80
+  - 80
+  - 90
+  - 70
+  - 70
+  - 85
+  - 80
+  - 85
+  - 80
+  - 60
+- - 80
+  - 80
+  - 80
+  - 70
+  - 75
+  - 70
+  - 90
+  - 85
+  - 80
+  - 85
+  - 80
+- - 85
+  - 80
+  - 80
+  - 90
+  - 70
+  - 75
+  - 90
+  - 0
+  - 75
+  - 80
+  - 75
+- - 90
+  - 95
+  - 85
+  - 90
+  - 85
+  - 75
+  - 80
+  - 85
+  - 75
+  - 85
+  - 80
+- - 80
+  - 80
+  - 70
+  - 80
+  - 70
+  - 50
+  - 80
+  - 100
+  - 75
+  - 80
+  - 70

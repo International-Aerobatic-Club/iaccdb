@@ -12,7 +12,7 @@ end
 
 group :development do
   # Deploy with Capistrano
-  gem 'capistrano'
+  gem 'capistrano', '~> 2.0'
   gem 'nokogiri'
 end
 

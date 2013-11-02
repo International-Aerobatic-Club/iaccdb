@@ -1,0 +1,129 @@
+--- !ruby/object:ACRO::PilotFlightData 
+flightID: 2
+flightName: "Unlimited Power : Programme 2: Free Programme"
+judges: 
+- Francis Itier (FRA)
+- Laszlo Liszkay (RSA)
+- Violeta Gedminaite (LTU)
+- Kimmo Virtanen (FIN)
+- Guy Auger (FRA)
+- Vladimir Kotelnikov (RUS)
+- Nick Buckenham (GBR)
+- Lyudmyla Zelenina (UKR)
+- Michael Gallaway (USA)
+- Mikhail Bezdenezhnyh (RUS)
+k_factors: 
+- 58
+- 56
+- 57
+- 41
+- 52
+- 56
+- 32
+- 43
+- 25
+- 40
+penalty: 0
+pilotID: 49
+pilotName: Brett Hunter
+scores: 
+- - 75
+  - 70
+  - 80
+  - 75
+  - 70
+  - 75
+  - 70
+  - 75
+  - 75
+  - 75
+- - 75
+  - 80
+  - 75
+  - 70
+  - 75
+  - 70
+  - 70
+  - 80
+  - 70
+  - 80
+- - 80
+  - 80
+  - 75
+  - 80
+  - 80
+  - 80
+  - 75
+  - 70
+  - 70
+  - 85
+- - 75
+  - 80
+  - 75
+  - 70
+  - 70
+  - 70
+  - 70
+  - 75
+  - 65
+  - 75
+- - 75
+  - 80
+  - 70
+  - 75
+  - 80
+  - 85
+  - 80
+  - 85
+  - 80
+  - 90
+- - 75
+  - 75
+  - 75
+  - 80
+  - 80
+  - 75
+  - 75
+  - 80
+  - 70
+  - 80
+- - 80
+  - 70
+  - 70
+  - 70
+  - 75
+  - 80
+  - 65
+  - 70
+  - 65
+  - 90
+- - 75
+  - 75
+  - 75
+  - 75
+  - 75
+  - 70
+  - 75
+  - 75
+  - 70
+  - 80
+- - 75
+  - 75
+  - 75
+  - 80
+  - 70
+  - 75
+  - 70
+  - 75
+  - 75
+  - 80
+- - 70
+  - 70
+  - 70
+  - 70
+  - 75
+  - 70
+  - 75
+  - 75
+  - 65
+  - 75

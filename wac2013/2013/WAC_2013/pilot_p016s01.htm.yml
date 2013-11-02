@@ -1,0 +1,129 @@
+--- !ruby/object:ACRO::PilotFlightData 
+flightID: 1
+flightName: "Unlimited Power : Programme 1: Known Compulsory"
+judges: 
+- Francis Itier (FRA)
+- Laszlo Liszkay (RSA)
+- Violeta Gedminaite (LTU)
+- Kimmo Virtanen (FIN)
+- Guy Auger (FRA)
+- Vladimir Kotelnikov (RUS)
+- Nick Buckenham (GBR)
+- Lyudmyla Zelenina (UKR)
+- Michael Gallaway (USA)
+- Mikhail Bezdenezhnyh (RUS)
+k_factors: 
+- 49
+- 46
+- 29
+- 64
+- 49
+- 41
+- 38
+- 34
+- 33
+- 40
+penalty: 30
+pilotID: 16
+pilotName: Alexandre Leboulanger
+scores: 
+- - 80
+  - 75
+  - 75
+  - 75
+  - 75
+  - 80
+  - 70
+  - 75
+  - 80
+  - 80
+- - 85
+  - 80
+  - 75
+  - 80
+  - 80
+  - 80
+  - 65
+  - 75
+  - 85
+  - 80
+- - 80
+  - 75
+  - 70
+  - 75
+  - 75
+  - 75
+  - 70
+  - 80
+  - 80
+  - 85
+- - 80
+  - 70
+  - 70
+  - 70
+  - 75
+  - 70
+  - 50
+  - 70
+  - 85
+  - 80
+- - 80
+  - 80
+  - 80
+  - 70
+  - 80
+  - 85
+  - 70
+  - 85
+  - 85
+  - 85
+- - 80
+  - 75
+  - 80
+  - 80
+  - 75
+  - 70
+  - 60
+  - 75
+  - 80
+  - 80
+- - 80
+  - 75
+  - 85
+  - 75
+  - 75
+  - 65
+  - 50
+  - 65
+  - 85
+  - 90
+- - 75
+  - 80
+  - 75
+  - 70
+  - 75
+  - 75
+  - 70
+  - 75
+  - 80
+  - 80
+- - 80
+  - 70
+  - 80
+  - 0
+  - 75
+  - 75
+  - 60
+  - 80
+  - 85
+  - 80
+- - 75
+  - 70
+  - 75
+  - 65
+  - 70
+  - 70
+  - 60
+  - 75
+  - 75
+  - 75
