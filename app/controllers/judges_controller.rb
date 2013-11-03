@@ -95,4 +95,31 @@ class JudgesController < ApplicationController
     @sj_results = j_results.sort { |a,b| b <=> a }
   end
 
+  def histograms
+    @judge_team = Judge.find(params[:judge_id])
+    @judge = Member.find(@judge_team.judge_id)
+    @f_result = FResult.find(params[:flight_id])
+    @flight = Flight.find(@f_result.flight_id)
+    @pilot_flights = @flight.pilot_flights
+    @figure_scores = []
+    @pilot_flights.each do |pf|
+      scores = Score.find_by_judge_id_and_pilot_flight_id(@judge_team.id, pf.id)
+      scores.values.each_with_index do |v, f|
+        @figure_scores[f] ||= []
+        @figure_scores[f] << v
+      end
+    end
+    @figure_histograms = []
+    @figure_scores.each_with_index do |scores, f|
+      @figure_histograms[f] ||= {}
+      scores.each do |s|
+        if s && s <= 100 then
+          s = s/10
+          s_count = @figure_histograms[f][s] || 0
+          @figure_histograms[f][s] = s_count + 1
+        end
+      end
+    end
+  end
+
 end

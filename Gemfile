@@ -6,6 +6,8 @@ gem 'delayed_job_active_record', '= 0.4.2'
 
 gem 'libxml-ruby'
 
+gem 'jquery-rails'
+
 group :development, :test do
   gem 'sqlite3-ruby', "= 1.2.5", :require => 'sqlite3'
 end

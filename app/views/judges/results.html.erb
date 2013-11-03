@@ -7,7 +7,7 @@
 <% j_results.each_with_index do |j_result, j| %>
   <tr>
   <td class='judge_name'><%= "J#{j+1}" %></td>
-  <td class='judge_name'><%= j_result.judge_name %></td>
+  <td class='judge_name'><%= link_to j_result.judge_name, judge_histograms_path(j_result.judge_id, j_result.f_result_id) %></td>
   <%= render :partial => 'judges/stats_column_values', :object => j_result %>
   </tr>
 <% end %>

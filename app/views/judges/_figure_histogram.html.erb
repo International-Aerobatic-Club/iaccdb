@@ -1,0 +1,20 @@
+  <h2>Figure Group <%= figure_histogram_counter + 1 %></h2>
+  <% barData = 'barData_' + figure_histogram_counter.to_s %>
+  <% hist_id = 'histogram_' + figure_histogram_counter.to_s %>
+  <script type="text/javascript">
+  $(function() {
+    var <%= barData %> = [
+<% data = []
+   figure_histogram.each do |key, value| 
+   data << "[#{key},#{value}]"
+   %>
+<% end %>
+   <%= data.join(',') %>
+             ];
+    showHistogram("<%= "\##{hist_id}" %>", <%= barData %>);
+  });
+  </script>
+
+    <div class="plot_container">
+      <div id="<%= hist_id %>" class="plot_target"></div>
+    </div>
