@@ -1,4 +1,4 @@
-  <h3><%= pilot_flight.flight.displayName %></h3>
+  <h3><%= link_to pilot_flight.flight.displayName, flight_path(pilot_flight.flight.id) %></h3>
   
   <% scores = pilot_flight.scores.order(:judge_id) %>
   <% pf_result = pilot_flight.pf_results.first %>
