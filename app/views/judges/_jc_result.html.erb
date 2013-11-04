@@ -1,0 +1,5 @@
+<tr>
+<td class='judge_name'><%= "J#{jc_result_counter+1}" %></td>
+<td class='judge_name'><%= jc_result.judge_name %></td>
+<%= render :partial => 'judges/stats_column_values', :object => jc_result %>
+</tr>
