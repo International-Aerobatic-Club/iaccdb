@@ -114,7 +114,7 @@ class JudgesController < ApplicationController
       @figure_histograms[f] ||= {}
       scores.each do |s|
         if s && s <= 100 then
-          s = s/10
+          s = s/10.0
           s_count = @figure_histograms[f][s] || 0
           @figure_histograms[f][s] = s_count + 1
         end
