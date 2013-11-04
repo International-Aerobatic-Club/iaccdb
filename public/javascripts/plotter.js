@@ -12,7 +12,7 @@ function gauss(u,s,x) {
 function normModel(u,s,total) {
   var normCurve = [];
   for (var i = 0; i < 10.0; i += 0.1) {
-     normCurve.push([i, gauss(u,s,i) * total]);
+     normCurve.push([i, gauss(u,s,i) * total/2.0]);
   }
   return normCurve;
 }
@@ -21,11 +21,10 @@ function normBars(u,s,total) {
   var normCurve = [];
   var sum = 0;
   for (var i = 0; i <= 10.0; i += 0.5) {
-     var y = gauss(u,s,i) * total;
+     var y = gauss(u,s,i) * total/2.0;
      normCurve.push([i, y]);
      sum += y;
   }
-  // console.log('sum is ' + sum);
   return normCurve;
 }
 
@@ -33,14 +32,18 @@ function showHistogram(target, data) {
   var total = 0;
   var count = 0;
   for (var i = 0; i < data.length; ++i) {
-    total += data[i][1] * data[i][0];
-    count += data[i][1];
+    if (data[i][0] != 0) {
+      total += data[i][1] * data[i][0];
+      count += data[i][1];
+    }
   }
   var mean = total / count;
   var stddev = 0;
   for (var i = 0; i < data.length; ++i) {
-     delta = data[i][0] - mean;
-     stddev += data[i][1] * delta * delta;
+    if (data[i][0] != 0) {
+      delta = data[i][0] - mean;
+      stddev += data[i][1] * delta * delta;
+    }
   }
   stddev = Math.sqrt(stddev / count);
   $.plot(target, 
