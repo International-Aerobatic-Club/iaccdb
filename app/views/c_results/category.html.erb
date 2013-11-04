@@ -54,5 +54,12 @@
 </tr>
 <% end %>
 </tbody></table>
-<%= render :template => 'judges/results',
-  :locals => { :j_results => c_result.jc_results } %>
+<table>
+<table class='judge_results'><thead>
+<tr>
+<th colspan='2'>Judge</th>
+<%= render :partial => 'judges/stats_column_headers' %>
+</tr>
+<tbody>
+<%= render :partial => 'judges/jc_result', :collection => c_result.jc_results %>
+</tbody></table>

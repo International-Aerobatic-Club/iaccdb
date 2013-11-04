@@ -27,7 +27,7 @@ penalty: 0
 pilotID: 47
 pilotName: Robert Armstrong
 scores: 
-- - 0
+- - 75
   - 70
   - 75
   - 65
@@ -77,7 +77,7 @@ scores:
   - 50
   - 70
   - 80
-- - 0
+- - 80
   - 75
   - 75
   - 70
@@ -107,7 +107,7 @@ scores:
   - 70
   - 75
   - 70
-- - 0
+- - 75
   - 75
   - 70
   - 70

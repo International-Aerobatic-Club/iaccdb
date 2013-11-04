@@ -26,7 +26,7 @@ penalty: 35
 pilotID: 99
 pilotName: Stan Burks
 scores: 
-- - 0
+- - 70
   - 0
   - 75
   - 80
@@ -49,7 +49,7 @@ scores:
   - 95
   - 80
   - 85
-  - 0
+  - 90
 - - 85
   - 0
   - 50

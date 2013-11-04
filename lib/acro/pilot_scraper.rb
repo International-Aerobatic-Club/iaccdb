@@ -55,7 +55,10 @@ def score(iFig, iJudge)
   startOffset = @hasFPSLines ? 4 : 5
   s = 0
   ar = rawRows
-  nStr = ar[iFig + startOffset].css('td')[iJudge + 1].text.strip
+  nTD = ar[iFig + startOffset].css('td')[iJudge + 1]
+  childSet = nTD.xpath('.//text()')
+  nGrade = childSet.last
+  nStr = nGrade.text.strip if nGrade
   unless nStr =~ /Z/
     s = nStr.to_f * 10
     s = s.to_i

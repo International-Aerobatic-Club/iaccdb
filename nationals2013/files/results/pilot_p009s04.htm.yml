@@ -25,7 +25,7 @@ pilotID: 9
 pilotName: Sammy Mason
 scores: 
 - - 70
-  - 0
+  - 30
   - 75
   - 80
   - 20
@@ -90,7 +90,7 @@ scores:
   - 80
   - 70
   - 80
-  - 0
+  - 70
   - 75
   - 85
   - 85

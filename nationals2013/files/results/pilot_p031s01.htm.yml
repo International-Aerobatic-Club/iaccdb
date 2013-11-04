@@ -25,7 +25,7 @@ pilotID: 31
 pilotName: Joe Brinker
 scores: 
 - - 85
-  - 0
+  - 90
   - 85
   - 75
   - 70
@@ -66,7 +66,7 @@ scores:
   - 70
 - - 80
   - 70
-  - 0
+  - 65
   - 70
   - 65
   - 65
