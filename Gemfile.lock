@@ -24,6 +24,8 @@ GEM
       activesupport (= 3.0.20)
       arel (~> 2.0.10)
       tzinfo (~> 0.3.23)
+    activerecord-mysql2-adapter (0.0.3)
+      mysql2
     activeresource (3.0.20)
       activemodel (= 3.0.20)
       activesupport (= 3.0.20)
@@ -136,6 +138,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activerecord-mysql2-adapter
   capistrano (~> 2.0)
   daemons
   database_cleaner
