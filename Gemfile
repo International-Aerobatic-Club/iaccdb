@@ -20,14 +20,13 @@ end
 
 # To use debugger (ruby-debug for Ruby 1.8.7+, ruby-debug19 for Ruby 1.9.2+)
 group :test do
-  gem 'ruby-debug'
-# gem 'ruby-debug19'
+  gem 'ruby-debug19'
   gem 'rspec-rails', '~> 2.6.0'
   gem 'factory_girl_rails', '~> 1.2.0'
   gem 'database_cleaner'
 end
 
 group :production do
-  gem 'mysql2', '~> 0.2.0'
+  gem 'mysql2'
   gem 'daemons'
 end
