@@ -1,15 +1,18 @@
 require 'delayed/recipes'
 require 'bundler/capistrano'
 
-set :user, 'iaccdbor'
-set :domain, 'iaccdb.org'
-set :application, 'cdb'
+set :user, 'webmaster'
+set :domain, 'iac.org'
+set :application, 'iaccdb'
 set :repository, 'https://github.com/wbreeze/iaccdb.git'
-set :deploy_to, "/home/#{user}/rails/#{application}"
+set :deploy_to, "/home/#{user}/#{application}"
 default_run_options[:pty] = true
 
 set :scm, :git
-set :rake, 'bundle exec rake'
+set :bundle_flags, "--deployment --quiet --binstubs"
+set :default_environment, {
+  'PATH' => "$HOME/iaccdb/.rbenv/shims:$HOME/iaccdb/.rbenv/bin:$PATH"
+}
 
 role :app, domain
 role :web, domain
@@ -27,19 +30,11 @@ namespace :deploy do
   end
 end
 
-# enable passenger
-after "deploy:create_symlink", :enable_passenger
-desc "setup .htaccess for passenger"
-task :enable_passenger, :roles => :app do
-  run "echo -e \"PassengerEnabled On\\nPassengerAppRoot #{current_path}\" >> #{File.join(current_path, 'public', '.htaccess')}"
-  run "rm -f ~/public_html && ln -s #{File.join(current_path, 'public')} ~/public_html"
-end
-
 # link admin credentials
 after "deploy:create_symlink", :config_admin
 desc "configure admin priveleges"
 task :config_admin, :roles => :app do
-  run "ln ~/admin.yml #{File.join(current_path, 'config/admin.yml')}"
+  run "ln #{File.join(deploy_to, '/admin.yml')} #{File.join(current_path, 'config/admin.yml')}"
 end
 
 # link database credentials
@@ -48,7 +43,7 @@ desc "configure database access priveleges"
 namespace :db do
   task :config_access, :except => { :no_release => true }, :role => :app do
     run "rm #{File.join(current_path, 'config/database.yml')}"
-    run "ln ~/database.yml #{File.join(current_path, 'config/database.yml')}"
+    run "ln #{File.join(deploy_to, '/database.yml')} #{File.join(current_path, 'config/database.yml')}"
   end
 end
 
