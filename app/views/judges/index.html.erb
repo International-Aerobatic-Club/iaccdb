@@ -12,7 +12,7 @@
     <% letter = lead_letter %>
   <% end %>
   <span class="para-index">
-  <%= link_to ("#{judge.name}", judge_path(judge)) %>
+  <%= link_to judge.name, judge_path(judge) %>
   </span>
 <% end %>
 </p>

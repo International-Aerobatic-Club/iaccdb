@@ -20,7 +20,7 @@
   <tr>
   <td class='pilot'>
     <% pilot = pilot_flight.pilot %>
-    <%= link_to ("#{pilot.name}", pilot_score_path(pilot, @flight.contest)) %>
+    <%= link_to pilot.name, pilot_score_path(pilot, @flight.contest) %>
   </td>
   <% @judge_results[pf_result].each do |pfj_result| %>
     <td class='total_average'>
