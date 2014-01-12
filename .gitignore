@@ -5,6 +5,7 @@
 db/*.sqlite3
 log/*.log
 tmp/**/*
+bin
 IACContestData
 AppleCup2012
 vendor/cache
