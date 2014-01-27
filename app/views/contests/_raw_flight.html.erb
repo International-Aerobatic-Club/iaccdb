@@ -4,6 +4,6 @@
 <h3>Pilots</h3>
 <% flight.pilot_flights.each do |pilot_flight| %>
   <% pilot = pilot_flight.pilot %>
-  <%= link_to ("#{pilot.name}", pilot_score_path(pilot, flight.contest)) %>
+  <%= link_to pilot.name, pilot_score_path(pilot, flight.contest) %>
   <%= ', ' %>
 <% end %>
