@@ -12,11 +12,11 @@ class LeadersController < ApplicationController
     cat_results = jy_results.group_by { |jy_result| jy_result.category }
     crop_results = {}
     cat_results.each do |cat, jy_results|
-      jy_results.sort! { |b,a| a.con <=> b.con }
-        #by_ct = a.pair_count <=> b.pair_count
-        #by_ct = a.gamma <=> b.gamma if by_ct == 0
-        #by_ct
-      #}
+      if (@year.to_i < 2013) then
+        jy_results.sort! { |b,a| a.con <=> b.con }
+      else
+        jy_results.sort! { |b,a| (a.con - a.dis) <=> (b.con - b.dis) }
+      end
       crop_results[cat] = jy_results.first(10)
     end    
     @results = crop_results.sort_by { |cat, jy_results| cat.sequence }
