@@ -44,7 +44,6 @@ td.avg {
   padding-left:6pt;
 }
 
-
 table.judge_leaders th {
   vertical-align:bottom;
 }
@@ -61,4 +60,14 @@ table.judge_cv th {
 
 table.judge_cv th.year {
   padding-top:8pt;
+  text-align:left;
 }
+
+table.judge_metric_glossary th {
+  text-align:right;
+}
+
+table.judge_metric_glossary {
+  margin-top:1ex;
+}
+

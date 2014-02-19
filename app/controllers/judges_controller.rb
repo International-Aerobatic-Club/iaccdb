@@ -15,6 +15,19 @@ class JudgesController < ApplicationController
     @jf_results.sort! do |a,b|
       b.f_result.flight.contest.start <=> a.f_result.flight.contest.start
     end
+    # year/category rollups stats report
+    jy_results_query = JyResult.includes(:category).order(
+       "year DESC").find_all_by_judge_id(id)
+    jy_by_year = jy_results_query.group_by { |r| r.year }
+    @j_results = [] # array of hash {year label, array of hash {category label, values}}
+    jy_by_year.each do |year, jy_results| 
+      j_year_results = [] # array of hash {category label, values}
+      jys = jy_results.sort_by { |jy_result| jy_result.category.sequence }
+      jys.each do |jy_result|
+        j_year_results << { :label => jy_result.category.name, :values => jy_result }
+      end
+      @j_results << { :label => year, :values => j_year_results }
+    end
   end
 
   def cv
