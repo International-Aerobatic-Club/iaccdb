@@ -19,7 +19,7 @@ class Contest < ActiveRecord::Base
   end
 
   def sobriquet
-    if !name.empty?
+    if name && !name.empty?
       name
     else
       id
