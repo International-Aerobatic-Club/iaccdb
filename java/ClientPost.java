@@ -38,9 +38,9 @@ receiving a reply.
 Get a new data stream with startDataStream() to make a new post.
 (You could hold on to the writer, but using it will have no effect
 after calling this method.)
-@return true if the post got a 200 response, else false.
+@return HTTP response code, 200 means successful.
 */
-public boolean postToCDB()
+public int postToCDB()
 throws IOException, ProtocolException, UnsupportedEncodingException
 {
   cdbId = -1;
@@ -69,13 +69,14 @@ throws IOException, ProtocolException, UnsupportedEncodingException
   out.flush ();
   out.close ();
 
-  wasSuccessful = connection.getResponseCode() == 200;
+  int responseCode = connection.getResponseCode();
+  wasSuccessful = responseCode == 200;
   if (wasSuccessful) {
     processResponse(connection.getInputStream());
   }
   connection.disconnect();
 
-  return wasSuccessful;
+  return responseCode;
 }
 
 /**

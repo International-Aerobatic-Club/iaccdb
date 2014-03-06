@@ -8,28 +8,42 @@ import org.xml.sax.*;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.*;
 import javax.xml.transform.stream.*;
+import org.apache.commons.cli.*;
 
 class TestClientPost {
 
 private static String POST_FILE_NAME = "../spec/jasper/jasperResultsFormat.xml";
 private static String POST_URL = "http://localhost:3000/admin/jasper.xml";
 
-private static void usage() {
-  System.err.printf("First argument is the contest id. " +
-     "Unspecified creates a new contest entry at the server.\n");
+public static Options buildOptions()
+{
+  Options options = new Options();
+  options.addOption("i", "cdbID", true, 
+    "Contest ID becomes cdbID for update existing contest at the server. Creates a new contest entry at the server if unspecified.");
+  options.addOption("d", "data", true, 
+    String.format("Contest XML data input file.  Default is \"%s\" if left unspecified.", POST_FILE_NAME));
+  options.addOption("p", "postURL", true,
+    String.format("URL at which to post.  Default is \"%s\" if left unspecified.", POST_URL));
+  return options;
 }
 
-private static int processCID(String argv[])
+public static CommandLine processOptions(String argv[], Options options)
+throws ParseException
 {
-  return (0 < argv.length) ? Integer.parseInt(argv[0]) : -1;
+  CommandLineParser optProc = new PosixParser();
+  return optProc.parse(options, argv);
 }
 
 public static void main(String argv[]) 
 {
   try {
-    URL postURL = new URL(POST_URL);
-    File inputFile = new File(POST_FILE_NAME);
-    int cid = processCID(argv);
+    Options opts = buildOptions();
+    HelpFormatter helper = new HelpFormatter();
+    CommandLine clOpts = processOptions(argv, opts);
+    int cid = Integer.parseInt(clOpts.getOptionValue('i', "-1"));
+    File inputFile = new File(clOpts.getOptionValue('d', POST_FILE_NAME));
+    URL postURL = new URL(clOpts.getOptionValue('p', POST_URL));
+    helper.printHelp("TestClientPost", opts);
     System.out.printf("Posting file %s\n", inputFile.getCanonicalFile());
     System.out.printf("Posting to %s\n", postURL.toString());
     if (0 <= cid) {
@@ -39,27 +53,22 @@ public static void main(String argv[])
   }
   catch (NumberFormatException ex)
   {
-    usage();
     System.err.print("First argument must be a number.");
   }
   catch (MalformedURLException ex)
   {
-    usage();
     System.err.printf("%s is not a valid URL\n", POST_URL);
   }
   catch (IOException ex)
   {
-    usage();
     System.err.printf("%s is not a good file.", POST_FILE_NAME);
   }
   catch (SAXException ex)
   {
-    usage();
     System.err.printf("%s failed to parse.", POST_FILE_NAME);
   }
   catch (XPathExpressionException ex)
   {
-    usage();
     System.err.printf("%s failed to query.", POST_FILE_NAME);
   }
   catch (ParserConfigurationException ex)
@@ -73,6 +82,10 @@ public static void main(String argv[])
   catch (TransformerException ex)
   {
     System.err.println("unable to output XML");
+  }
+  catch (ParseException ex)
+  {
+    System.err.println("Unable to parse command line options.");
   }
 }
 
@@ -94,13 +107,14 @@ TransformerException
   }
   ClientPost post = new ClientPost(postURL);
   printDocument(dataDoc, post.startDataStream());
-  if (post.postToCDB())
+  int postResult = post.postToCDB();
+  if (postResult == 200)
   {
     System.out.printf("Success, CDB contest ID is %d\n", post.getCdbId());
   }
   else
   {
-    System.out.println("Fail.");
+    System.out.printf("Fail. HTTP error code %d\n", postResult);
   }
 }
 
