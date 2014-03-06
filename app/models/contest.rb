@@ -6,8 +6,18 @@ class Contest < ActiveRecord::Base
   has_one :manny_synch, :dependent => :nullify
   has_many :failures, :dependent => :destroy
 
+  validates :name, :length => { :in => 4..48 }
+  validates :city, :length => { :maximum => 24 }
+  validates :state, :length => { :maximum => 2 }
+  validates :director, :length => { :maximum => 48 }
+  validates :region, :length => { :maximum => 16 }
+
   def to_s
     "#{name} on #{start.strftime('%b %d, %Y')}"
+  end
+
+  def state
+    self.state.strip.upcase
   end
 
   def place
