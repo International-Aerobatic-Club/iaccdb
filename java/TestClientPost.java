@@ -36,13 +36,15 @@ throws ParseException
 
 public static void main(String argv[]) 
 {
+  File inputFile = null;
+  URL postURL = null;
   try {
     Options opts = buildOptions();
     HelpFormatter helper = new HelpFormatter();
     CommandLine clOpts = processOptions(argv, opts);
     int cid = Integer.parseInt(clOpts.getOptionValue('i', "-1"));
-    File inputFile = new File(clOpts.getOptionValue('d', POST_FILE_NAME));
-    URL postURL = new URL(clOpts.getOptionValue('p', POST_URL));
+    inputFile = new File(clOpts.getOptionValue('d', POST_FILE_NAME));
+    postURL = new URL(clOpts.getOptionValue('p', POST_URL));
     helper.printHelp("TestClientPost", opts);
     System.out.printf("Posting file %s\n", inputFile.getCanonicalFile());
     System.out.printf("Posting to %s\n", postURL.toString());
@@ -53,39 +55,48 @@ public static void main(String argv[])
   }
   catch (NumberFormatException ex)
   {
-    System.err.print("First argument must be a number.");
+    System.err.printf("First argument must be a number, exception is %s.",
+      ex.getLocalizedMessage());
   }
   catch (MalformedURLException ex)
   {
-    System.err.printf("%s is not a valid URL\n", POST_URL);
+    System.err.printf("%s is not a valid URL, exception is %s", postURL,
+      ex.getLocalizedMessage());
   }
   catch (IOException ex)
   {
-    System.err.printf("%s is not a good file.", POST_FILE_NAME);
+    System.err.printf("IOException processing %s is %s.\n", inputFile, 
+      ex.getLocalizedMessage());
   }
   catch (SAXException ex)
   {
-    System.err.printf("%s failed to parse.", POST_FILE_NAME);
+    System.err.printf("%s failed to parse, exception is %s.\n", inputFile,
+      ex.getLocalizedMessage());
   }
   catch (XPathExpressionException ex)
   {
-    System.err.printf("%s failed to query.", POST_FILE_NAME);
+    System.err.printf("%s failed to query, exception is %s.\n", inputFile,
+      ex.getLocalizedMessage());
   }
   catch (ParserConfigurationException ex)
   {
-    System.err.println("unable to set up XML parser.");
+    System.err.printf("unable to set up XML parser, exception is %s.\n",
+      ex.getLocalizedMessage());
   }
   catch (TransformerConfigurationException ex)
   {
-    System.err.println("unable to set up XML output.");
+    System.err.printf("unable to set up XML output, exception is %s.\n",
+      ex.getLocalizedMessage());
   }
   catch (TransformerException ex)
   {
-    System.err.println("unable to output XML");
+    System.err.printf("unable to output XML, exception is %s.\n",
+      ex.getLocalizedMessage());
   }
   catch (ParseException ex)
   {
-    System.err.println("Unable to parse command line options.");
+    System.err.printf("Unable to parse command line options, exception is %s.\n",
+      ex.getLocalizedMessage());
   }
 }
 

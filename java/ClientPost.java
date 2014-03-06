@@ -70,10 +70,15 @@ throws IOException, ProtocolException, UnsupportedEncodingException
   out.close ();
 
   int responseCode = connection.getResponseCode();
-  wasSuccessful = responseCode == 200;
+  wasSuccessful = (200 == responseCode);
+  InputStream response;
   if (wasSuccessful) {
-    processResponse(connection.getInputStream());
+    response = connection.getInputStream();
   }
+  else {
+    response = connection.getErrorStream();
+  }
+  if (response != null) processResponse(response);
   connection.disconnect();
 
   return responseCode;
@@ -103,7 +108,7 @@ throws IOException
   Pattern p = Pattern.compile("<cdbId>\\s*(\\d+)");
   BufferedReader in = new BufferedReader(new InputStreamReader(response));
   String line = in.readLine();
-  while (cdbId == -1 && line != null) {
+  while (line != null) {
     System.out.println(line);
     Matcher m = p.matcher(line);
     if (m.find()) {
