@@ -16,10 +16,6 @@ class Contest < ActiveRecord::Base
     "#{name} on #{start.strftime('%b %d, %Y')}"
   end
 
-  def state
-    self.state.strip.upcase
-  end
-
   def place
     "#{city}, #{state} (#{region})"
   end
