@@ -34,7 +34,6 @@ private
 def updateOrCreateContest(id, contest_params)
   begin
     dContest = Contest.find(id)
-    logger.info "JasperToDB found contest #{dContest.name} for update"
     dContest.reset_to_base_attributes
     dContest.update(contest_params)
   rescue ActiveRecord::RecordNotFound
@@ -59,20 +58,16 @@ def process_scores(dContest, jasper)
   aircat = jasper.aircat
   jasper.categories_scored.each do |jCat|
     dCategory = category_for(jasper, aircat, jCat)
-    logger.debug "JasperToDB processing category #{dCategory.name}"
     jasper.flights_scored(jCat).each do |jFlt|
       dFlight = flight_for(dContest, dCategory, jasper, jCat, jFlt)
-      logger.debug "JasperToDB processing flight #{dFlight.displayName}"
       jasper.pilots_scored(jCat, jFlt).each do |jPilot|
         dPilot = pilot_for(jasper, jCat, jPilot)
-        logger.debug "JasperToDB processing pilot #{dPilot.name}"
         dSequence = sequence_for(jasper, jCat, jFlt, jPilot)
         dPilotFlight = pilot_flight_for(dFlight, dPilot, dSequence, jasper, jCat, jFlt, jPilot)
         jasper.judge_teams(jCat, jFlt).each do |jJudgeTeam|
           dJudge = judge_for(jasper, jCat, jFlt, jJudgeTeam)
           dAssist = judge_assist_for(jasper, jCat, jFlt, jJudgeTeam)
           dJudgeTeam = judge_team_for(dJudge, dAssist)
-          logger.debug "JasperToDB processing grades for #{dJudgeTeam.team_name}"
           process_grades(dJudgeTeam, dPilotFlight, dSequence, jasper, jCat, jFlt, jPilot, jJudgeTeam)
         end
       end
