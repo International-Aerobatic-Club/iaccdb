@@ -16,6 +16,7 @@ attr_reader :dContest
 def process_contest(jasper)
   jCID = jasper.contest_id
   dContest = nil
+  debugger
   if (jCID)
     dContest = updateOrCreateContest(jCID)
   else
@@ -35,6 +36,7 @@ private
 def updateOrCreateContest(id)
   begin
     dContest = Contest.find(id)
+    logger.info "JasperToDB found contest #{dContest.name} for update"
     dContest.reset_to_base_attributes
   rescue ActiveRecord::RecordNotFound
     dContest = createContest
@@ -43,16 +45,16 @@ def updateOrCreateContest(id)
 end
 
 def createContest
-  dContest = Contest.create
+  dContest = Contest.new
 end
 
 def set_contest_attributes(dContest, jasper)
-  dContest.name = jasper.contest_name
+  dContest.name = jasper.contest_name.strip.slice(0,48)
   dContest.start = jasper.contest_date
-  dContest.region = jasper.contest_region
-  dContest.director = jasper.contest_director
-  dContest.city = jasper.contest_city
-  dContest.state = jasper.contest_state
+  dContest.region = jasper.contest_region.strip.slice(0,16)
+  dContest.director = jasper.contest_director.strip.slice(0,48)
+  dContest.city = jasper.contest_city.strip.slice(0,24)
+  dContest.state = jasper.contest_state.strip.slice(0,2).upcase
   dContest.chapter = jasper.contest_chapter
   dContest.save
 end
@@ -61,16 +63,20 @@ def process_scores(dContest, jasper)
   aircat = jasper.aircat
   jasper.categories_scored.each do |jCat|
     dCategory = category_for(jasper, aircat, jCat)
+    logger.debug "JasperToDB processing category #{dCategory.name}"
     jasper.flights_scored(jCat).each do |jFlt|
       dFlight = flight_for(dContest, dCategory, jasper, jCat, jFlt)
+      logger.debug "JasperToDB processing flight #{dFlight.displayName}"
       jasper.pilots_scored(jCat, jFlt).each do |jPilot|
         dPilot = pilot_for(jasper, jCat, jPilot)
+        logger.debug "JasperToDB processing pilot #{dPilot.name}"
         dSequence = sequence_for(jasper, jCat, jFlt, jPilot)
         dPilotFlight = pilot_flight_for(dFlight, dPilot, dSequence, jasper, jCat, jFlt, jPilot)
         jasper.judge_teams(jCat, jFlt).each do |jJudgeTeam|
           dJudge = judge_for(jasper, jCat, jFlt, jJudgeTeam)
           dAssist = judge_assist_for(jasper, jCat, jFlt, jJudgeTeam)
           dJudgeTeam = judge_team_for(dJudge, dAssist)
+          logger.debug "JasperToDB processing grades for #{dJudgeTeam.team_name}"
           process_grades(dJudgeTeam, dPilotFlight, dSequence, jasper, jCat, jFlt, jPilot, jJudgeTeam)
         end
       end
