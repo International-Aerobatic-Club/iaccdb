@@ -5,7 +5,6 @@
 # into records of the contest database
 # 'j' prefixes variables that contain JaSPer parsed data
 # 'd' prefixes variables that reference the database madel
-
 module Jasper
 class JasperToDB
 attr_reader :dContest
@@ -16,14 +15,13 @@ attr_reader :dContest
 def process_contest(jasper)
   jCID = jasper.contest_id
   dContest = nil
-  debugger
+  contest_params = extract_contest_params_hash(jasper)
   if (jCID)
-    dContest = updateOrCreateContest(jCID)
+    dContest = updateOrCreateContest(jCID, contest_params)
   else
-    dContest = createContest
+    dContest = Contest.create(contest_params)
   end
   if dContest
-    set_contest_attributes(dContest, jasper)
     process_scores(dContest, jasper)
   end
   dContest
@@ -33,30 +31,28 @@ end
 private
 ###
 
-def updateOrCreateContest(id)
+def updateOrCreateContest(id, contest_params)
   begin
     dContest = Contest.find(id)
     logger.info "JasperToDB found contest #{dContest.name} for update"
     dContest.reset_to_base_attributes
+    dContest.update(contest_params)
   rescue ActiveRecord::RecordNotFound
-    dContest = createContest
+    dContest = Contest.create(contest_params)
   end
   dContest
 end
 
-def createContest
-  dContest = Contest.new
-end
-
-def set_contest_attributes(dContest, jasper)
-  dContest.name = jasper.contest_name.strip.slice(0,48)
-  dContest.start = jasper.contest_date
-  dContest.region = jasper.contest_region.strip.slice(0,16)
-  dContest.director = jasper.contest_director.strip.slice(0,48)
-  dContest.city = jasper.contest_city.strip.slice(0,24)
-  dContest.state = jasper.contest_state.strip.slice(0,2).upcase
-  dContest.chapter = jasper.contest_chapter
-  dContest.save
+def extract_contest_params_hash(jasper)
+  contest_params = {};
+  contest_params['name'] = jasper.contest_name.strip.slice(0,48)
+  contest_params['start'] = jasper.contest_date
+  contest_params['region'] = jasper.contest_region.strip.slice(0,16)
+  contest_params['director'] = jasper.contest_director.strip.slice(0,48)
+  contest_params['city'] = jasper.contest_city.strip.slice(0,24)
+  contest_params['state'] = jasper.contest_state.strip.slice(0,2).upcase
+  contest_params['chapter'] = jasper.contest_chapter
+  contest_params
 end
 
 def process_scores(dContest, jasper)
