@@ -1,10 +1,6 @@
 <h1>Judge <%= @judge.name %></h1>
 
-<table class='judge_cv'>
-  <%= render :partial => 'year_stats', :collection => @j_results %>
-</table>
-
-<%= render :partial => 'judge_metric_glossary' %>
+<%= render :partial => 'credits', :collection => @j_results %>
 
 <ul class="no-bullets">
   <%= render :partial => 'flight_record', :collection => @jf_results %>

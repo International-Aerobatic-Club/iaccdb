@@ -16,15 +16,17 @@ class JudgesController < ApplicationController
       b.f_result.flight.contest.start <=> a.f_result.flight.contest.start
     end
     # year/category rollups stats report
+    cur_year = Time.now.year
+    prior_year = cur_year - 1
     jy_results_query = JyResult.includes(:category).order(
-       "year DESC").find_all_by_judge_id(id)
+       'year DESC').where("#{prior_year} <= year").find_all_by_judge_id(id)
     jy_by_year = jy_results_query.group_by { |r| r.year }
-    @j_results = [] # array of hash {year label, array of hash {category label, values}}
+    @j_results = [] # array of hash {year label, array of string count for category}
     jy_by_year.each do |year, jy_results| 
       j_year_results = [] # array of hash {category label, values}
       jys = jy_results.sort_by { |jy_result| jy_result.category.sequence }
       jys.each do |jy_result|
-        j_year_results << { :label => jy_result.category.name, :values => jy_result }
+        j_year_results << "#{jy_result.pilot_count} #{jy_result.category.name}"
       end
       @j_results << { :label => year, :values => j_year_results }
     end
