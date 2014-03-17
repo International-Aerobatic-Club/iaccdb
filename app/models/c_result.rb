@@ -9,11 +9,11 @@ class CResult < ActiveRecord::Base
   has_many :f_results, :dependent => :nullify
 
   def to_s 
-    "c_result #{id} for #{contest}, #{category.name}
+    "c_result #{id} for #{contest}, #{category.name}"
   end
 
   def display_category
-    "#{category.name}
+    category.name
   end
 
   def rank_computer
