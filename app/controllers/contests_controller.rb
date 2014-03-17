@@ -16,7 +16,7 @@ class ContestsController < ApplicationController
   # GET /contests/1.xml
   def show
     @contest = Contest.find(params[:id])
-    @c_results = @contest.c_results
+    @c_results = @contest.c_results.sort { |a,b| a.category.sequence <=> b.category.sequence }
 
     respond_to do |format|
       format.html do
