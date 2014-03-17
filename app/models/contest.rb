@@ -79,9 +79,9 @@ private
   # creates c_result for category of flight if it doesn't exist
   # returns the c_result
   def c_result_for_flight(flight)
-    c_result = c_results.first(:conditions => { :category => flight.category })
+    c_result = c_results.first(:conditions => { :category_id => flight.category_id })
     if !c_result
-      c_result = c_results.build(:category => flight.category)
+      c_result = c_results.build(:category_id => flight.category_id)
       save
     end
     c_result

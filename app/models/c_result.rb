@@ -22,7 +22,7 @@ class CResult < ActiveRecord::Base
 
   def compute_category_totals_and_rankings(force = false)
     cat_flights = contest.flights.all(:conditions => {
-      :category => category })
+      :category_id => category_id })
     cur_pc_results = Set.new
     cur_jc_results = Set.new
     cur_f_results = []
