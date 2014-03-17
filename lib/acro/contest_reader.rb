@@ -93,15 +93,14 @@ def create_or_replace_pilot_flight(pilot_flight_data)
   aircat = detect_flight_aircat(pilot_flight_data.flightName)
   # create flight record first time id seen, infer category and flight
   if (category && name && aircat)
+    cat = Category.find_for_cat_aircat(category, aircat)
     Flight.where(
       :contest_id => @dContest, 
       :name => name, 
-      :category => category, 
-      :aircat => aircat).destroy_all
+      :category_id => cat.id).destroy_all
     flight = @dContest.flights.build(
      :name => name,
-     :category => category,
-     :aircat => aircat, 
+     :category_id => cat.id,
      :sequence => 0)
     flight.save
     @flights[pilot_flight_data.flightID] = flight
