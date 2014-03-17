@@ -3,16 +3,17 @@ require 'iac/rank_computer.rb'
 # Record need to recompute category results
 class CResult < ActiveRecord::Base
   belongs_to :contest
+  belongs_to :category
   has_many :pc_results, :dependent => :destroy
   has_many :jc_results, :dependent => :destroy
   has_many :f_results, :dependent => :nullify
 
   def to_s 
-    "c_result #{id} for #{contest}, #{category}, #{aircat}"
+    "c_result #{id} for #{contest}, #{category.name}
   end
 
   def display_category
-    "#{category} #{'Glider' if aircat == 'G'}"
+    "#{category.name}
   end
 
   def rank_computer
@@ -21,7 +22,7 @@ class CResult < ActiveRecord::Base
 
   def compute_category_totals_and_rankings(force = false)
     cat_flights = contest.flights.all(:conditions => {
-      :category => category, :aircat => aircat })
+      :category => category })
     cur_pc_results = Set.new
     cur_jc_results = Set.new
     cur_f_results = []
