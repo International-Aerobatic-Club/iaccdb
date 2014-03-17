@@ -18,7 +18,7 @@ def self.compute_jy_results (year)
     puts "add #{contest.year_name} to judge rollups"
     contest.c_results.each do |c_result|
       # get category
-      category = Category.find_for_cat_aircat(c_result.category, c_result.aircat)
+      category = c_result.category
       if category
         # all jc_result
         c_result.jc_results.each do |jc_result|
