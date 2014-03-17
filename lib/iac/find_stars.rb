@@ -33,7 +33,7 @@ include IAC::Constants
 #        if you get here, the pilot qualified
 def self.findStars (contest)
   stars = []
-  Categories.all.each do |cat|
+  Category.all.each do |cat|
     catch (:category) do
       catFlights = contest.flights.where({ :category_id => cat.id })
       ctFMin = (cat.category =~ /primary|sportsman/i) ? 1 : 2
