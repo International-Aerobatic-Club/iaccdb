@@ -1,0 +1,19 @@
+<h1>IAC Assistants</h1>
+
+<% letter = '' %>
+<% @assistants.each do |judge| %>
+  <% lead_letter = judge.family_name && judge.family_name[0] ? 
+       judge.family_name[0].chr.upcase : '?' %>
+  <% if lead_letter != letter %>
+    <% if letter != '' %>
+      </p> 
+    <% end %>
+    <p class='letter-index'>
+    <span class='letter-index'><%= lead_letter %></span>
+    <% letter = lead_letter %>
+  <% end %>
+  <span class="para-index">
+  <%= link_to judge.name, assistant_path(judge) %>
+  </span>
+<% end %>
+</p>
