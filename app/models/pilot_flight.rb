@@ -7,6 +7,7 @@ class PilotFlight < ActiveRecord::Base
   belongs_to :sequence
   has_many :pf_results, :dependent => :destroy
   has_many :pfj_results, :dependent => :destroy
+  has_one :contest, :through => :flight
 
   def to_s
     a = "Pilot_flight #{id} #{flight} for pilot #{pilot}"
