@@ -91,8 +91,6 @@ def flight_for(dContest, dCategory, jasper, jCat, jFlt)
   assist = chief_assist_for(jasper, jCat, jFlt)
   dContest.flights.create(
     :category_id => dCategory.id,
-    :category => dCategory.category,
-    :aircat => dCategory.aircat,
     :name => jasper.flight_name(jFlt),
     :sequence => jFlt,
     :chief_id => chief.id,
