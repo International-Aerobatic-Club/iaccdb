@@ -13,8 +13,6 @@ group :development, :test do
 end
 
 group :development do
-  # Deploy with Capistrano
-  gem 'capistrano', '~> 2.0'
   gem 'nokogiri'
   gem 'debugger'
 end
