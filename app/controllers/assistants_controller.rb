@@ -11,27 +11,35 @@ class AssistantsController < ApplicationController
     @assistant = Member.find(id)
     assists = Judge.find_all_by_assist_id(id)
     scores = Score.includes(:flight).find_all_by_judge_id(assists)
-    @flights_history = Flight.find_all_by_id(scores.map { |f| f.flight })
+    @flights_history = Flight.includes(:contest).find_all_by_id(scores.map { |f| f.flight })
+    @flights_history.sort!{ |a,b| a.contest.start <=> b.contest.start }
     cur_year = Time.now.year
     prior_year = cur_year - 1
-    flights_recent = @flights_history.delete_if { |flight| flight.contest.start.year < prior_year }
+    flights_recent = @flights_history.delete_if { |flight| flight.contest.year < prior_year }
 
-    #jy_results_query = JyResult.includes(:category).order(
-    #   'year DESC').where("#{prior_year} <= year").find_all_by_judge_id(assistants)
-    #jy_by_year = jy_results_query.group_by { |r| r.year }
-    #@j_results = [] # array of hash {year label, array of string count for category}
-    #@totals = {} # hash indexed by year label, value is total pilots for year
-    #jy_by_year.each do |year, jy_results| 
-    #  j_year_results = [] # array of hash {category label, values}
-    #  jys = jy_results.sort_by { |jy_result| jy_result.category.sequence }
-    #  total_count = 0
-    #  jys.each do |jy_result|
-    #    j_year_results << "#{jy_result.pilot_count} #{jy_result.category.name}"
-    #    total_count += jy_result.pilot_count
-    #  end
-    #  @j_results << { :label => year, :values => j_year_results }
-    #  @totals[year] = total_count
-    #end
+    flights_by_year = flights_recent.group_by { |f| f.contest.year }
+    @flight_assists = [] # array of hash indexed by year label, value is hash category, count
+    @totals = {} # hash indexed by year label, value is total pilots for year
+    flights_by_year.each do |year, flights| 
+      flight_year_results = {} # hash {category label, count}
+      fys = flights.sort_by { |flight| flight.category.sequence }
+      total_count = 0
+      fys.each do |flight|
+        flight_year_results[flight.category] ||= 0
+        flight_year_results[flight.category] += flight.pilot_flights.count
+        total_count += flight.pilot_flights.count
+      end
+      flight_counts_by_category = []
+      Category.order(:sequence).each do |cat|
+        if flight_year_results[cat]
+          flight_counts_by_category << "#{flight_year_results[cat]} #{cat.name}"
+        end
+      end
+      @flight_assists << { :label => year, :values => flight_counts_by_category }
+      @totals[year] = total_count
+    end
+    puts @flight_assists.to_yaml
+    puts @totals.to_yaml
   end
 
 end

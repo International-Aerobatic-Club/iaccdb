@@ -1,8 +1,7 @@
 <h1>Assistant <%= @assistant.name %></h1>
 
-<!--
-<%= render :partial => 'credits', :collection => @j_results %>
--->
+<%= render :partial => 'judges/credits', :collection => @flight_assists, 
+  :locals => { :role => 'assisted' } %>
 
 <ul class="no-bullets">
   <%= render :partial => 'flight_record', :collection => @flights_history %>
