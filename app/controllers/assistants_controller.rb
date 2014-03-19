@@ -18,7 +18,7 @@ class AssistantsController < ApplicationController
     flights_recent = @flights_history.delete_if { |flight| flight.contest.year < prior_year }
 
     flights_by_year = flights_recent.group_by { |f| f.contest.year }
-    @flight_assists = [] # array of hash indexed by year label, value is hash category, count
+    @flight_assists = [] # array of hash indexed by year, value is string count and category
     @totals = {} # hash indexed by year label, value is total pilots for year
     flights_by_year.each do |year, flights| 
       flight_year_results = {} # hash {category label, count}
@@ -38,8 +38,7 @@ class AssistantsController < ApplicationController
       @flight_assists << { :label => year, :values => flight_counts_by_category }
       @totals[year] = total_count
     end
-    puts @flight_assists.to_yaml
-    puts @totals.to_yaml
+    @flight_assists.sort! { |a,b| b[:label] <=> a[:label] }
   end
 
 end
