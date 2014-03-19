@@ -58,8 +58,7 @@ class JudgesController < ApplicationController
         j_cat_results = []
         jc_cat = jc_by_year[year].select do |jc_result| 
           c_result = jc_result.c_result
-          cat = Category.find_for_cat_aircat(c_result.category, c_result.aircat)
-          cat == jy_result.category
+          c_result.category == jy_result.category
         end
         jc_cat.each do |jc_result|
           j_cat_results << {

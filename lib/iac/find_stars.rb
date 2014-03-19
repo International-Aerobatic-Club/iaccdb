@@ -14,7 +14,6 @@ include IAC::Constants
 #  :family_name => last name as a string
 #  :iacID => IAC member number
 #  :category => name of category for which qualified as a string
-#  :aircat => 'P' or 'G' for power or glider
 #  :scoresURL => URL to examine the pilot scores
 #  :contest => Contest name
 #  :date => Contest start date
@@ -34,51 +33,44 @@ include IAC::Constants
 #        if you get here, the pilot qualified
 def self.findStars (contest)
   stars = []
-  CONTEST_CATEGORIES.each_with_index do |cat, iCat|
-    AIRPLANE_CATEGORIES.each do |aircat|
-      catch (:category) do
-        catFlights = contest.flights.where({
-          :category => cat,
-          :aircat => aircat})
-        ctFMin = (iCat < 2) ? 1 : 2
-        if (ctFMin <= catFlights.length) then
-          flight = catFlights.first
-          catPilots = flight.pilots
-          # pilots of first flight sufficient; a pilot must fly every flight
-          catPilots.each do |pilot|
-            catch (:pilot) do
-              catFlights.each do |flight|
-                # if not three judges, break category (minimum three judges)
-                ctJ = flight.count_judges
-                throw :category if ctJ < 3
-                maxBlw5 = (ctJ == 3) ? 0 : 1
-                pilotFlight = flight.pilot_flights.find_by_pilot_id(pilot)
-                throw :pilot if !pilotFlight
-                test_pilot_flight stars, pilotFlight, maxBlw5
-              end # each flight
-              stars << { :given_name => pilot.given_name,
-                         :family_name => pilot.family_name,
-                         :iacID => pilot.iac_id,
-                         :category => cat,
-                         :aircat => aircat,
-                         :scoresURL => make_scores_url(pilot, contest),
-                         :contest => contest.name,
-                         :date => contest.start
-                       }
-              CResult.where({
-                :contest_id => contest,
-                :category => cat,
-                :aircat => aircat}).each do |c_result|
-                c_result.pc_results.where(:pilot_id => pilot).each do |pc_result|
-                  pc_result.star_qualifying = true
-                  pc_result.save
-                end
+  Category.all.each do |cat|
+    catch (:category) do
+      catFlights = contest.flights.where({ :category_id => cat.id })
+      ctFMin = (cat.category =~ /primary|sportsman/i) ? 1 : 2
+      if (ctFMin <= catFlights.length) then
+        flight = catFlights.first
+        catPilots = flight.pilots
+        # pilots of first flight sufficient; a pilot must fly every flight
+        catPilots.each do |pilot|
+          catch (:pilot) do
+            catFlights.each do |flight|
+              # if not three judges, break category (minimum three judges)
+              ctJ = flight.count_judges
+              throw :category if ctJ < 3
+              maxBlw5 = (ctJ == 3) ? 0 : 1
+              pilotFlight = flight.pilot_flights.find_by_pilot_id(pilot)
+              throw :pilot if !pilotFlight
+              test_pilot_flight stars, pilotFlight, maxBlw5
+            end # each flight
+            stars << { :given_name => pilot.given_name,
+                       :family_name => pilot.family_name,
+                       :iacID => pilot.iac_id,
+                       :category => cat.name,
+                       :scoresURL => make_scores_url(pilot, contest),
+                       :contest => contest.name,
+                       :date => contest.start
+                     }
+            CResult.where({ :contest_id => contest, 
+                :category_id => cat.id }).each do |c_result|
+              c_result.pc_results.where(:pilot_id => pilot).each do |pc_result|
+                pc_result.star_qualifying = true
+                pc_result.save
               end
-            end # catch pilot
-          end # each pilot
-        end # if sufficient flights
-      end # catch category
-    end # each aircat 
+            end
+          end # catch pilot
+        end # each pilot
+      end # if sufficient flights
+    end # catch category
   end # each category
   stars
 end

@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,19 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120327203049) do
+ActiveRecord::Schema.define(:version => 20140317075955) do
 
   create_table "c_results", :force => true do |t|
     t.integer  "contest_id"
-    t.string   "category"
-    t.boolean  "need_compute",              :default => true
+    t.boolean  "need_compute", :default => true
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "aircat",       :limit => 1, :default => "P"
     t.integer  "category_id"
   end
-
-  add_index "c_results", ["category", "aircat"], :name => "c_contest_category"
 
   create_table "categories", :force => true do |t|
     t.integer  "sequence",                 :null => false
@@ -80,14 +77,12 @@ ActiveRecord::Schema.define(:version => 20120327203049) do
 
   create_table "flights", :force => true do |t|
     t.integer  "contest_id",                :null => false
-    t.string   "category",    :limit => 16, :null => false
     t.string   "name",        :limit => 16, :null => false
     t.integer  "sequence",                  :null => false
     t.integer  "chief_id"
     t.integer  "assist_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "aircat",      :limit => 1
     t.integer  "category_id"
   end
 

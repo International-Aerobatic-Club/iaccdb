@@ -16,7 +16,7 @@
 <% @flights.each do |flight| %>
   <tr>
     <td><%= flight.contest_id %></td>
-    <td><%= flight.category %></td>
+    <td><%= flight.category.name %></td>
     <td><%= flight.name %></td>
     <td><%= flight.sequence %></td>
     <td><%= flight.chief_id %></td>

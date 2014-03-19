@@ -1,5 +1,6 @@
 class Flight < ActiveRecord::Base
   belongs_to :contest
+  belongs_to :category
   belongs_to :chief, :foreign_key => "chief_id", :class_name => 'Member'
   belongs_to :assist, :foreign_key => "assist_id", :class_name => 'Member'
   has_many :pilot_flights, :dependent => :destroy
@@ -11,11 +12,11 @@ class Flight < ActiveRecord::Base
   end
 
   def displayName
-    "#{displayCategory} #{name if category != 'Four Minute Free'}"
+    "#{displayCategory} #{name if category.category != 'four minute'}"
   end
 
   def displayCategory
-    "#{category} #{'Glider' if aircat == 'G'}"
+    category.name
   end
 
   def display_chief

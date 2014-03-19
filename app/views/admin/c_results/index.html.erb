@@ -5,7 +5,7 @@
 <%= link_to "#{@contest.sobriquet} (#{@contest.id})", admin_contest_path(@contest) %>
 
 <% @c_results.each do |c_result| %>
-  <h3><%= "#{c_result.category} #{c_result.aircat} (#{c_result.id})" %></h3>
+  <h3><%= "#{c_result.category.name} (#{c_result.id})" %></h3>
   <h4>pc_results</h4>
   <table><thead><tr><th>id</th><th>pilot</th><th>result</th><th>need_compute</th></tr></thead>
   <tbody>

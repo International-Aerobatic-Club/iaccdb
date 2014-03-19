@@ -1,5 +1,7 @@
 class Category < ActiveRecord::Base
   has_many :jy_results
+  has_many :flights
+  has_many :c_results
 
   def self.find_for_cat_aircat(cat, aircat)
     mycat = Category.find_by_category_and_aircat(cat, aircat)
