@@ -10,9 +10,8 @@ class AssistantsController < ApplicationController
     id = params[:id]
     @assistant = Member.find(id)
     assists = Judge.find_all_by_assist_id(id)
-    scores = Score.find_all_by_judge_id(assists)
-    pilot_flights = PilotFlight.find_all_by_id(scores.map { |s| s.pilot_flight_id })
-    @flights_history = Flight.find_all_by_id(pilot_flights.map { |f| f.flight_id })
+    scores = Score.includes(:flight).find_all_by_judge_id(assists)
+    @flights_history = Flight.find_all_by_id(scores.map { |f| f.flight })
     cur_year = Time.now.year
     prior_year = cur_year - 1
     flights_recent = @flights_history.delete_if { |flight| flight.contest.start.year < prior_year }
