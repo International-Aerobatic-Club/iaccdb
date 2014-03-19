@@ -24,6 +24,10 @@ class Contest < ActiveRecord::Base
     "#{start.year} #{sobriquet}"
   end
 
+  def year
+    start.year if start
+  end
+
   def sobriquet
     if name && !name.empty?
       name
