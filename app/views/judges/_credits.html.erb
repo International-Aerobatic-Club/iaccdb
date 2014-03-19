@@ -1,4 +1,5 @@
-<p>During <%= credits[:label] %> judged 
+<% role ||= 'judged' %>
+<p>During <%= credits[:label] %>, <%= role %>
 <%= @totals[credits[:label]] %> flights:
 <%= credits[:values].join(', ') %>
 </p>
