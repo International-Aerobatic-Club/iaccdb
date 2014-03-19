@@ -11,12 +11,11 @@ class AssistantsController < ApplicationController
     @assistant = Member.find(id)
     assists = Judge.find_all_by_assist_id(id)
     scores = Score.includes(:flight).find_all_by_judge_id(assists)
-    @flights_history = Flight.includes(:contest).find_all_by_id(scores.map { |f| f.flight })
-    @flights_history.sort!{ |a,b| a.contest.start <=> b.contest.start }
+    @flights_history = scores.map { |s| s.flight }
+    @flights_history.uniq!.sort!{ |a,b| b.contest.start <=> a.contest.start }
     cur_year = Time.now.year
     prior_year = cur_year - 1
-    flights_recent = @flights_history.delete_if { |flight| flight.contest.year < prior_year }
-
+    flights_recent = @flights_history.select { |flight| prior_year <= flight.contest.year }
     flights_by_year = flights_recent.group_by { |f| f.contest.year }
     @flight_assists = [] # array of hash indexed by year, value is string count and category
     @totals = {} # hash indexed by year label, value is total pilots for year
