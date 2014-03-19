@@ -1,6 +1,10 @@
 class Score < ActiveRecord::Base
   belongs_to :pilot_flight
   belongs_to :judge
+  has_one :pilot, :through => :pilot_flight
+  has_one :contest, :through => :pilot_flight
+  has_one :category, :through => :pilot_flight
+  has_one :flight, :through => :pilot_flight
 
   serialize :values
 

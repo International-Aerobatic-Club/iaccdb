@@ -8,6 +8,7 @@ class PilotFlight < ActiveRecord::Base
   has_many :pf_results, :dependent => :destroy
   has_many :pfj_results, :dependent => :destroy
   has_one :contest, :through => :flight
+  has_one :category, :through => :flight
 
   def to_s
     a = "Pilot_flight #{id} #{flight} for pilot #{pilot}"
