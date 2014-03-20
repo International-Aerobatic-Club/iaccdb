@@ -12,3 +12,4 @@ vendor/cache
 nationals2011
 nationals2012
 .DS_Store
+dbBackup/
