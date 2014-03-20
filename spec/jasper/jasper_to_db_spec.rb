@@ -18,7 +18,7 @@ module Jasper
       @contest.id.should_not be_nil
       @contest.name.should == "Test Contest US Candian Challenge"
       @contest.start.day.should == 23
-      @contest.start.year.should == 2013
+      @contest.start.year.should == 2014
       @contest.start.month.should == 12
       @contest.region.should == 'NorthEast'
       @contest.director.should == 'Pat Barrett'
@@ -27,7 +27,8 @@ module Jasper
       @contest.chapter.should == 126
     end
     it 'captures flights' do
-      flights = @contest.flights.where(:category => 'Unlimited', :name => 'Unknown')
+      cat = Category.find_for_cat_aircat('Unlimited', 'P')
+      flights = @contest.flights.where(:category_id => cat.id, :name => 'Unknown')
       flights.count.should == 1
       flights.first.chief.iac_id.should == 2383
       flights.first.assist.iac_id.should == 18515
@@ -51,16 +52,16 @@ module Jasper
       judge_team.should_not be_nil
     end
     it 'captures pilot flights' do
-      flight = @contest.flights.where(:category => 'Intermediate', :name => 'Unknown').first
+      cat = Category.find_for_cat_aircat('Intermediate', 'P')
+      flight = @contest.flights.where(:category_id => cat.id, :name => 'Unknown').first
       pilot = Member.find_by_iac_id(10467)
       pilot_flight = PilotFlight.find_by_flight_id_and_pilot_id(flight.id, pilot.id)
       pilot_flight.should_not be_nil
       pilot_flight.penalty_total.should == 100
     end
     it 'captures known sequences' do
-      flight = @contest.flights.where(
-        :name => 'Known', 
-        :category => 'Sportsman').first
+      cat = Category.find_for_cat_aircat('Sportsman', 'P')
+      flight = @contest.flights.where( :name => 'Known', :category_id => cat.id).first
       flight.should_not be_nil
       pilot = Member.where(:family_name => 'Ernewein').first
       pilot.should_not be_nil
@@ -73,9 +74,8 @@ module Jasper
       sequence.k_values.should == [17, 7, 4, 14, 15, 16, 14, 17, 10, 10, 6]
     end
     it 'captures free sequences' do
-      flight = @contest.flights.where(
-        :name => 'Free', 
-        :category => 'Sportsman').first
+      cat = Category.find_for_cat_aircat('Sportsman', 'P')
+      flight = @contest.flights.where( :name => 'Free', :category_id => cat.id).first
       flight.should_not be_nil
       pilot = Member.where(:family_name => 'Ernewein').first
       pilot.should_not be_nil
@@ -88,9 +88,8 @@ module Jasper
       sequence.k_values.should == [6, 15, 21, 16, 8, 16, 15, 14, 12, 4, 6]
     end
     it 'captures sportsman second free sequences' do
-      flight = @contest.flights.where(
-        :name => 'Unknown', 
-        :category => 'Sportsman').first
+      cat = Category.find_for_cat_aircat('Sportsman', 'P')
+      flight = @contest.flights.where( :name => 'Unknown', :category_id => cat.id).first
       flight.should_not be_nil
       pilot = Member.where(:family_name => 'Ernewein').first
       pilot.should_not be_nil
@@ -103,9 +102,8 @@ module Jasper
       sequence.k_values.should == [6, 15, 21, 16, 8, 16, 15, 14, 12, 4, 6]
     end
     it 'captures unknown sequences' do
-      flight = @contest.flights.where(
-        :name => 'Unknown', 
-        :category => 'Unlimited').first
+      cat = Category.find_for_cat_aircat('Unlimited', 'P')
+      flight = @contest.flights.where( :name => 'Unknown', :category_id => cat.id).first
       flight.should_not be_nil
       pilot = Member.where(:iac_id => '13721').first
       pilot.should_not be_nil
@@ -118,9 +116,8 @@ module Jasper
       sequence.k_values.should == [36, 31, 36, 33, 41, 42, 31, 26, 24, 20, 38, 25, 17, 20]
     end
     it 'captures second unknown sequences' do
-      flight = @contest.flights.where(
-        :name => 'Unknown II', 
-        :category => 'Intermediate').first
+      cat = Category.find_for_cat_aircat('Intermediate', 'P')
+      flight = @contest.flights.where( :name => 'Unknown II', :category_id => cat.id).first
       flight.should_not be_nil
       pilot = Member.where(:iac_id => '10467').first
       pilot.should_not be_nil
@@ -133,9 +130,8 @@ module Jasper
       sequence.k_values.should == [10, 13, 10, 13, 4, 19, 18, 14, 19, 3, 17, 10, 19, 9, 12, 8]
     end
     it 'captures scores' do
-      flight = @contest.flights.where(
-        :name => 'Free', 
-        :category => 'Sportsman').first
+      cat = Category.find_for_cat_aircat('Sportsman', 'P')
+      flight = @contest.flights.where( :name => 'Free', :category_id => cat.id).first
       flight.should_not be_nil
       pilot = Member.where(:family_name => 'Ernewein').first
       pilot.should_not be_nil

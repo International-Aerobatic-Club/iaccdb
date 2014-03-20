@@ -20,7 +20,7 @@ module Jasper
       cDate.should_not be_nil
       cDate.mon.should == 12
       cDate.day.should == 23
-      cDate.year.should == 2013
+      cDate.year.should == 2014
       @jasper.aircat.should == 'P'
     end
     it 'gives category names' do
