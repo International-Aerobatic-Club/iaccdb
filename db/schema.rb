@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140317075955) do
+ActiveRecord::Schema.define(:version => 20140320180548) do
 
   create_table "c_results", :force => true do |t|
     t.integer  "contest_id"
@@ -38,6 +38,17 @@ ActiveRecord::Schema.define(:version => 20140317075955) do
     t.integer  "chapter"
     t.string   "director",   :limit => 48
     t.string   "region",     :limit => 16
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "data_posts", :force => true do |t|
+    t.integer  "contest_id"
+    t.text     "data"
+    t.boolean  "is_integrated",     :default => false
+    t.boolean  "has_error",         :default => false
+    t.string   "error_description"
+    t.boolean  "is_obsolete",       :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
