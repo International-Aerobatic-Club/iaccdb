@@ -27,6 +27,18 @@ def process_contest(jasper)
   dContest
 end
 
+def extract_contest_params_hash(jasper)
+  contest_params = {};
+  contest_params['name'] = jasper.contest_name.strip.slice(0,48) || 'missing contest name'
+  contest_params['start'] = jasper.contest_date
+  contest_params['region'] = jasper.contest_region.strip.slice(0,16)
+  contest_params['director'] = jasper.contest_director.strip.slice(0,48)
+  contest_params['city'] = jasper.contest_city.strip.slice(0,24)
+  contest_params['state'] = jasper.contest_state.strip.slice(0,2).upcase
+  contest_params['chapter'] = jasper.contest_chapter
+  contest_params
+end
+
 ###
 private
 ###
@@ -40,18 +52,6 @@ def updateOrCreateContest(id, contest_params)
     dContest = Contest.create(contest_params)
   end
   dContest
-end
-
-def extract_contest_params_hash(jasper)
-  contest_params = {};
-  contest_params['name'] = jasper.contest_name.strip.slice(0,48) || 'missing contest name'
-  contest_params['start'] = jasper.contest_date
-  contest_params['region'] = jasper.contest_region.strip.slice(0,16)
-  contest_params['director'] = jasper.contest_director.strip.slice(0,48)
-  contest_params['city'] = jasper.contest_city.strip.slice(0,24)
-  contest_params['state'] = jasper.contest_state.strip.slice(0,2).upcase
-  contest_params['chapter'] = jasper.contest_chapter
-  contest_params
 end
 
 def process_scores(dContest, jasper)
