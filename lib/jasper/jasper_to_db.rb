@@ -44,7 +44,7 @@ end
 
 def extract_contest_params_hash(jasper)
   contest_params = {};
-  contest_params['name'] = jasper.contest_name.strip.slice(0,48)
+  contest_params['name'] = jasper.contest_name.strip.slice(0,48) || 'missing contest name'
   contest_params['start'] = jasper.contest_date
   contest_params['region'] = jasper.contest_region.strip.slice(0,16)
   contest_params['director'] = jasper.contest_director.strip.slice(0,48)
