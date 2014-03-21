@@ -4,9 +4,20 @@ class Category < ActiveRecord::Base
   has_many :c_results
 
   def self.find_for_cat_aircat(cat, aircat)
-    mycat = Category.find_by_category_and_aircat(cat, aircat)
+    aircat = aircat && aircat =~ /g/i ? 'G' : 'P'
+    mycat = Category.find_by_category_and_aircat(cat.downcase, aircat)
     if !mycat
-      if cat =~ /four minute/i
+      if /Pri|Bas/i =~ cat
+        mycat = Category.find_by_category_and_aircat('primary', aircat)
+      elsif /Spn|Sport|Standard/i =~ cat
+        mycat = Category.find_by_category_and_aircat('sportsman', aircat)
+      elsif /Adv/i =~ cat
+        mycat = Category.find_by_category_and_aircat('advanced', aircat)
+      elsif /Imdt|Intmdt/i =~ cat
+        mycat = Category.find_by_category_and_aircat('intermediate', aircat)
+      elsif /Unl/i =~ cat
+        mycat = Category.find_by_category_and_aircat('unlimited', aircat)
+      elsif /Minute|Four/i =~ cat
         mycat = Category.find_by_category_and_aircat('four minute', 'P')
       end
     end
