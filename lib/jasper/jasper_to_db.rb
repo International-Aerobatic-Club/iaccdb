@@ -47,7 +47,7 @@ def updateOrCreateContest(id, contest_params)
   begin
     dContest = Contest.find(id)
     dContest.reset_to_base_attributes
-    dContest.update(contest_params)
+    dContest.update_attributes(contest_params)
   rescue ActiveRecord::RecordNotFound
     dContest = Contest.create(contest_params)
   end

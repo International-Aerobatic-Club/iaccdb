@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140320180548) do
+ActiveRecord::Schema.define(:version => 20140321204657) do
 
   create_table "c_results", :force => true do |t|
     t.integer  "contest_id"
@@ -78,12 +78,13 @@ ActiveRecord::Schema.define(:version => 20140320180548) do
   end
 
   create_table "failures", :force => true do |t|
-    t.string   "step",        :limit => 16
+    t.string   "step",         :limit => 16
     t.integer  "contest_id"
     t.integer  "manny_id"
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "data_post_id"
   end
 
   create_table "flights", :force => true do |t|

@@ -7,8 +7,7 @@ def results
   status = 200
   begin
     xml_data = params[:contest_xml]
-    post_record = DataPost.new
-    post_record.save
+    post_record = DataPost.create
     if xml_data && xml_data.is_a?(String)
       logger.info "JasperController: parse xml param"
       post_record.data = xml_data
@@ -48,6 +47,7 @@ def results
   end
   self.formats = [:xml]
   if (@exception == nil)
+    Delayed::Job.enqueue ProcessJasperJob.new(post_record.id)
     render :results
   else
     render :exception, :status => status
