@@ -9,14 +9,14 @@ def results
     xml_data = params[:contest_xml]
     post_record = DataPost.new
     post_record.save
-    if xml_data.respond_to? :read
-        logger.info "JasperController: read xml file"
-        post_record.data = xml_data.read
-        post_record.save
-    elsif xml_data.is_a?(String)
-        logger.info "JasperController: parse xml param"
-        post_record.data = xml_data
-        post_record.save
+    if xml_data && xml_data.is_a?(String)
+      logger.info "JasperController: parse xml param"
+      post_record.data = xml_data
+      post_record.save
+    elsif xml_data
+      logger.info "JasperController: read xml file"
+      post_record.data = xml_data.read
+      post_record.save
     else
       @exception = "invalid post"
       status = 400
@@ -32,7 +32,7 @@ def results
       if (@contest_id == nil)
         j2d = Jasper::JasperToDB.new
         contest = Contest.create j2d.extract_contest_params_hash(jasper)
-        @contestID = contest.id
+        @contest_id = contest.id
       end
       post_record.contest_id = @contest_id
       post_record.save
@@ -46,6 +46,7 @@ def results
     post_record.error_description = @exception
     post_record.save
   end
+  self.formats = [:xml]
   if (@exception == nil)
     render :results
   else
