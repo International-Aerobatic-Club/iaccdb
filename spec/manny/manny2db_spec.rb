@@ -36,9 +36,9 @@ module Manny
       #puts "sequence is #{sequence}"
     end
     it 'captures a sportsman submitted free for a second flight' do
-      flight = @contest.flights.where(
-        :name => 'Free', 
-        :category => 'Sportsman').first
+      category = Category.find_for_cat_aircat('Sportsman', 'P')
+      flight = @contest.flights.where( :name => 'Free', 
+        :category_id => category.id).first
       flight.should_not be nil
       pilot = Member.where(:family_name => 'Hartvigsen').first
       pilot.should_not be nil
@@ -50,9 +50,9 @@ module Manny
         [11, 17, 10, 13, 18, 3, 18, 11, 6, 9, 4, 10, 7, 6]
     end
     it 'captures a sportsman submitted free for a third flight' do
-      flight = @contest.flights.where(
-        :name => 'Unknown', 
-        :category => 'Sportsman').first
+      category = Category.find_for_cat_aircat('Sportsman', 'P')
+      flight = @contest.flights.where( :name => 'Unknown', 
+        :category_id => category.id).first
       flight.should_not be nil
       pilot = Member.where(:family_name => 'Hartvigsen').first
       pilot.should_not be nil
@@ -64,9 +64,9 @@ module Manny
         [11, 17, 10, 13, 18, 3, 18, 11, 6, 9, 4, 10, 7, 6]
     end
     it 'captures the sportsman known for a second flight' do
-      flight = @contest.flights.where(
-        :name => 'Unknown', 
-        :category => 'Sportsman').first
+      category = Category.find_for_cat_aircat('Sportsman', 'P')
+      flight = @contest.flights.where( :name => 'Unknown', 
+        :category_id => category.id).first
       flight.should_not be nil
       pilot = Member.where(:family_name => 'Cohen').first
       pilot.should_not be nil
@@ -78,9 +78,9 @@ module Manny
         [7, 13, 16, 13, 19, 18, 13, 10, 18, 10, 6]
     end
     it 'gets the intermediate unknown' do
-      flight = @contest.flights.where(
-        :name => 'Unknown', 
-        :category => 'Intermediate').first
+      category = Category.find_for_cat_aircat('Intermediate', 'P')
+      flight = @contest.flights.where( :name => 'Unknown', 
+        :category_id => category.id).first
       flight.should_not be nil
       pilot = Member.where(:family_name => 'Wells').first
       pilot.should_not be nil
@@ -92,9 +92,9 @@ module Manny
         [25, 14, 12, 15, 19, 25, 31, 11, 23, 8]
     end
     it 'captures scores' do
-      flight = @contest.flights.where(
-        :name => 'Free', 
-        :category => 'Sportsman').first # manny 2, 2
+      category = Category.find_for_cat_aircat('Sportsman', 'P')
+      flight = @contest.flights.where( :name => 'Free', 
+        :category_id => category.id).first
       flight.should_not be nil
       pilot = Member.where(:family_name => 'Cohen').first # manny_id 6
       pilot.should_not be nil
@@ -111,9 +111,9 @@ module Manny
         [85, 90, 65, 100, 80, 85, 90, 100, 0, 90, 85]
     end
     it 'captures penalties' do
-      flight = @contest.flights.where(
-        :name => 'Free', 
-        :category => 'Sportsman').first # manny 2, 2
+      category = Category.find_for_cat_aircat('Sportsman', 'P')
+      flight = @contest.flights.where( :name => 'Free', 
+        :category_id => category.id).first
       flight.should_not be nil
       pilot = Member.where(:family_name => 'Cohen').first # manny_id 6
       pilot.should_not be nil
