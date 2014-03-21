@@ -47,7 +47,7 @@ def results
   end
   self.formats = [:xml]
   if (@exception == nil)
-    Delayed::Job.enqueue ProcessJasperJob.new(post_record.id)
+    Delayed::Job.enqueue Jobs::ProcessJasperJob.new(post_record.id)
     render :results
   else
     render :exception, :status => status
