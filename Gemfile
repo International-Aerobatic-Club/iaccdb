@@ -8,6 +8,8 @@ gem 'libxml-ruby'
 
 gem 'jquery-rails'
 
+gem 'chronic'
+
 group :development, :test do
   gem 'sqlite3-ruby', "= 1.2.5", :require => 'sqlite3'
 end

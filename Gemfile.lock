@@ -32,6 +32,7 @@ GEM
     activesupport (3.0.20)
     arel (2.0.10)
     builder (2.1.2)
+    chronic (0.10.2)
     columnize (0.3.6)
     daemons (1.1.9)
     database_cleaner (1.2.0)
@@ -118,6 +119,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord-mysql2-adapter
+  chronic
   daemons
   database_cleaner
   debugger
