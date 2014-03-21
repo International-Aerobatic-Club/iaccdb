@@ -5,6 +5,7 @@ require 'spec_helper'
 module Manny
   describe MannyToDB do
     before(:all) do 
+      clean_db
       manny = Manny::Parse.new
       IO.foreach('spec/manny/Contest_300.txt') { |line| manny.processLine(line) }
       m2d = Manny::MannyToDB.new

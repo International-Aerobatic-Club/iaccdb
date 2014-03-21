@@ -5,8 +5,7 @@ require 'rspec/rails'
 RSpec.configure do |config|
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
-    DatabaseCleaner.clean_with :truncation
-    load "#{Rails.root}/db/seeds.rb"
+    clean_db
   end
 
   config.before(:each) do
@@ -18,6 +17,11 @@ RSpec.configure do |config|
   end
 
   config.mock_with :rspec
+end
+
+def clean_db
+  DatabaseCleaner.clean_with :truncation
+  load "#{Rails.root}/db/seeds.rb"
 end
 
 def reset_db
