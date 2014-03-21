@@ -169,12 +169,12 @@ class Contest
   end
 
   def manny_date=(value)
-    @manny_date = Time.parse(value + ' UTC')
+    @manny_date = Chronic.parse(value)
   end
 
   def record_date=(value)
     begin
-      @record_date = Time.parse(value + ' UTC')
+      @record_date = Chronic.parse(value)
     rescue ArgumentError
       @record_date = Time.now
     end
