@@ -2,10 +2,8 @@ require 'spec_helper'
 
 describe Contest do
   it 'cleans the contest data on reset_to_base_attributes' do
-    contest = Contest.new
-    contest.save
-    flight = contest.flights.create(:category => 'Unlimited', 
-        :name => 'Known', :sequence => 1)
+    flight = create(:flight)
+    contest = flight.contest
     c_result = contest.c_results.create
     failure = contest.failures.create
     fid = flight.id
