@@ -61,31 +61,36 @@ FactoryGirl.define do
   factory :contest do |r|
     r.sequence(:name) { |n| "Test contest #{n}" }
     r.city 'Danbury'
-    r.state 'Connecticut'
+    r.state 'CT'
     r.start '2011-09-25'
     r.director 'Ron Chadwick'
+  end
+### Category
+  factory :category do
+    category 'Intermediate'
+    aircat 'P'
+    name 'Intermediate Power'
+    # sequence is a FactoryGirl method
+    add_attribute :sequence, 1
   end
 ### Flight
   factory :flight do |r|
     r.association :contest
-    r.category 'Advanced'
+    r.association :category
     r.name 'Known'
     r.sequence(:sequence) { |n| n }
-    r.aircat 'P'
   end
   factory :nationals_imdt_known, :class => Flight do |r|
     r.association :contest, :factory => :nationals
-    r.category 'Intermediate'
+    r.association :category
     r.name 'Known'
     r.sequence(:sequence) { |n| n }
-    r.aircat 'P'
   end
   factory :nationals_imdt_free, :class => Flight do |r|
     r.association :contest, :factory => :nationals
-    r.category 'Intermediate'
+    r.association :category
     r.name 'Free'
     r.sequence(:sequence) { |n| n }
-    r.aircat 'P'
   end
 ### Sequence
   factory :sequence do |r|
