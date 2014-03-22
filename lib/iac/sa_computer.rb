@@ -4,8 +4,13 @@
 
 # this class contains methods to compute results and rankings
 # it follows the IAC straight average method
+# revised 2014 to support soft and hard zero distinction
 module IAC
 class SaComputer
+
+AVERAGE = -1
+CONFERENCE_AVERAGE = -2
+HARD_ZERO = -3
 
 def initialize(pilot_flight)
   @pilot_flight = pilot_flight
@@ -16,7 +21,7 @@ end
 # Does no computation if there are no sequence figure k values 
 # Does no computation if pf_result entry is more recent than scores
 # Returns the PfResult ActiveRecord instance
-def computePilotFlight
+def computePilotFlight(has_soft_zero)
   @pf = @pilot_flight.pf_results.first || @pilot_flight.pf_results.build
   @seq = @pilot_flight.sequence
   @kays = @seq ? @seq.k_values : nil
@@ -24,7 +29,11 @@ def computePilotFlight
   @pf.flight_value = 0
   @pf.adj_flight_value = 0
   if @kays
-    computeNonZeroValues(@pilot_flight.scores)
+    # map soft zero to hard zero if has_soft_zero is false
+    grades = has_soft_zero ? @pilot_flight.scores : @pilot_flight.scores.map do |s|
+      s == 0 ? -3 : s
+    end
+    computeNonZeroValues(grades)
     resolveAverages
     storeGradedValues
     resolveZeros
@@ -39,33 +48,40 @@ private
 ###
 
 def computeNonZeroValues(pfScores)
-  # scaled score for a figure is judge grade * k value
-  # Matrix of scaled scores indexed [figure][judge]
+  # @fjsx: scaled score for a figure is judge grade * k value
+  #   Matrix of scaled scores indexed [figure][judge]
+  # @judges: Judge for each index [j]
+  # @zero_ct: count of hard zero scores for figure [f]
+  # @score_ct: count of non-average scores for figure [f]
+  #   Is count for which hard zeros must be a majority
+  #   Includes grades, conference averages, and hard zeros
+  # @grade_ct: count of grades for figure [f]
+  #   Is number of grades given (including soft zeros) 
+  #   for the average computation
+  # @score_total: total of scaled scores for figure [f]
   @fjsx = []
   @kays.length.times { @fjsx << [] }
-  # Judges for each index [j]
   @judges = []
-  # count of zero scores for figure [f]
   @zero_ct = Array.new(@kays.length, 0)
-  # count of non-zero scores for figure [f]
+  @grade_ct = Array.new(@kays.length, 0)
   @score_ct = Array.new(@kays.length, 0)
-  # total of scaled scores for figure [f]
   @score_total = Array.new(@kays.length, 0)
   pfScores.each do |score|
     @judges << score.judge
     score.values.each_with_index do |v, f|
       if f < @kays.length
-        @zero_ct[f] += 1 if v == 0
         if 0 < v
           x = v * @kays[f]
-          @score_ct[f] += 1
           @score_total[f] += x
           @fjsx[f] << x
         else
           @fjsx[f] << v
         end
+        @zero_ct[f] += 1 if v == HARD_ZERO
+        @score_ct[f] += 1 if v != AVERAGE
+        @grade_ct[f] += 1 if 0 <= v
       else
-        raise ArgumentError,
+        logger.error
           "More scores than K values in #{self}, judge #{score.judge}, flight #{score.pilot_flight},
           scores #{score}, kays #{@kays.join(', ')}"
       end
@@ -75,10 +91,11 @@ end
 
 def resolveAverages
   @kays.length.times do |f|
-    if @score_ct[f] + @zero_ct[f] < @judges.length
+    if @score_ct[f] < @judges.length
       avg = average_score(f)
       @fjsx[f].length.times do |j|
-        if @fjsx[f][j] < 0
+        grade = @fjsx[f][j]
+        if grade == CONFERENCE_AVERAGE || grade == AVERAGE
           @fjsx[f][j] = avg 
         end
       end
@@ -108,7 +125,7 @@ end
 def resolveZeros
   @kays.length.times do |f|
     if 0 < @zero_ct[f]
-      if (@score_ct[f] < @zero_ct[f])
+      if (@score_ct[f] - @zero_ct[f] < @zero_ct[f])
         # majority zero
         @fjsx[f].length.times do |j|
           @fjsx[f][j] = 0
@@ -117,7 +134,7 @@ def resolveZeros
         # minority zero
         avg = average_score(f)
         @fjsx[f].length.times do |j|
-          if @fjsx[f][j] == 0
+          if @fjsx[f][j] == HARD_ZERO
             @fjsx[f][j] = avg 
           end
         end
@@ -128,8 +145,8 @@ end
 
 # rounds to the nearest 10th (rememeber scores are * 10)
 def average_score(figure)
-  if 0 < @score_ct[figure]
-    (@score_total[figure].to_f / @score_ct[figure]).round
+  if 0 < @grade_ct[figure] && 0 < @score_total[figure]
+    (@score_total[figure].to_f / @grade_ct[figure]).round
   else
     0
   end
