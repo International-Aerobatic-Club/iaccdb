@@ -10,8 +10,8 @@ class FResult < ActiveRecord::Base
     a += "pilot_flight results [\n\t#{pf_results.join("\n\t")}\n]" if pf_results
   end
 
-  def results
-    compute_pf_results
+  def results(has_soft_zero)
+    compute_pf_results(has_soft_zero)
     compute_jf_results
     save
     pf_results
@@ -25,8 +25,8 @@ class FResult < ActiveRecord::Base
     IAC::RankComputer.instance
   end
 
-  def compute_pf_results
-    cur_pf_results = rank_computer.computeFlight(flight)
+  def compute_pf_results(has_soft_zero)
+    cur_pf_results = rank_computer.computeFlight(flight, has_soft_zero)
     self.pf_results.each do |pf_result|
       self.pf_results.delete(pf_result) if !cur_pf_results.include?(pf_result)
     end

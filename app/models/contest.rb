@@ -46,7 +46,7 @@ class Contest < ActiveRecord::Base
   # compute results for all flights of the contest
   def compute_flights
     flights.each do |flight|
-      flight.compute_flight_results
+      flight.compute_flight_results(2014 <= year)
     end
   end
 

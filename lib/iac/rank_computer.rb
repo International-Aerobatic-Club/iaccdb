@@ -127,7 +127,7 @@ module IAC
     # Does no computation if there are no sequence figure k values 
     # Does the figure computations only if all fly the same sequence
     # Returns the array of pf_results
-    def computeFlight(flight)
+    def computeFlight(flight, has_soft_zero)
       seq = nil
       same = true
       flight.pilot_flights.each do |pilot_flight|
@@ -135,7 +135,7 @@ module IAC
         same &&= seq != nil && seq == pilot_flight.sequence
       end
       if seq
-        pf_results = computeFlightOverallRankings(flight)
+        pf_results = computeFlightOverallRankings(flight, has_soft_zero)
         computeFlightFigureRankings(flight, pf_results) if same
       else
         pf_results = []
@@ -189,14 +189,14 @@ module IAC
     # Creates or updates pfj_result, pf_result
     # Does no computation if there are no sequence figure k values 
     # Returns the flight
-    def computeFlightOverallRankings(flight)
+    def computeFlightOverallRankings(flight, has_soft_zero)
       logger.info "Computing rankings for #{flight}"
       pf_results = []
       flight_values = []
       adjusted_flight_values = []
       judge_pilot_flight_values = {} #flight_values lookup by judge
       flight.pilot_flights.each do |pilot_flight|
-        pf_result = pilot_flight.results
+        pf_result = pilot_flight.results(has_soft_zero)
         pf_result.judge_teams.each do |judge|
           if (!judge_pilot_flight_values[judge])
             judge_pilot_flight_values[judge] = Array.new
