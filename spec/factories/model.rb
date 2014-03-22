@@ -225,13 +225,11 @@ FactoryGirl.define do
 ### CResult
   factory :c_result do |r|
     r.association :contest
-    r.category 'Advanced'
-    r.aircat 'P'
+    r.association :category, :category => 'Advanced'
   end
   factory :existing_c_result, :class => CResult do |r|
     r.association :contest, :factory => :nationals
-    r.category 'Intermediate'
-    r.aircat 'P'
+    r.association :category, :category => 'Intermediate'
   end
 ### PcResult
   factory :pc_result do |r|
