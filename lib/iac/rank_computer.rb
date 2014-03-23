@@ -15,6 +15,8 @@ module IAC
     include Singleton
     include Log::ConfigLogger
     cattr_accessor :logger
+
+    HARD_ZERO = -30
     
     def computeJudgeMetrics(flight, f_result)
       jf_results_by_judge = {}
@@ -50,7 +52,7 @@ module IAC
               pf_result.flight_value if 0 < pf_result.flight_value
             pfj_result.computed_values.each_with_index do |computed, i|
               graded = pfj_result.graded_values[i]
-              jf_result.minority_zero_ct += 1 if graded < computed
+              jf_result.minority_zero_ct += 1 if graded == HARD_ZERO && 0 < computed 
               jf_result.minority_grade_ct += 1 if computed < graded
             end
           end
@@ -265,7 +267,9 @@ module IAC
           # graded value matrix
           pilot_figure_graded_values = 
             judge_pilot_figure_graded_values[judge] || Array.new
-          pilot_figure_graded_values << pfj_result.graded_values
+          # treat HZ as zero for purposes of rank computation
+          graded_values = pfj_result.graded_values.map { |g| g < 0 ? 0 : g }
+          pilot_figure_graded_values << graded_values
           judge_pilot_figure_graded_values[judge] =
             pilot_figure_graded_values
         end
