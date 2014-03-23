@@ -27,6 +27,5 @@ def clean_db
 end
 
 def reset_db
-  DatabaseCleaner.clean
-  DatabaseCleaner.start
+  clean_db
 end
