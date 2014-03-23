@@ -79,14 +79,18 @@ module Model
     end #context factory data
     context 'parsed data' do
       it 'computes category level judge results' do
+        reset_db
         manny = Manny::Parse.new
         IO.foreach('spec/manny/Contest_300.txt') { |line| manny.processLine(line) }
         m2d = Manny::MannyToDB.new
         m2d.process_contest(manny, true)
         contest = Contest.first
         contest.should_not be nil
+        contest.flights.should_not be_nil
+        contest.flights.count.should eq 12
         c_results = contest.results
         c_results.should_not be nil
+        c_results.count.should eq 4
         c_result = c_results.first
         c_result.should_not be nil
         c_result.f_results.should_not be nil
