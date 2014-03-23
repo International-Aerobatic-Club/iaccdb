@@ -31,7 +31,7 @@ def computePilotFlight(has_soft_zero)
   if @kays
     computeNonZeroValues(@pilot_flight.scores, has_soft_zero)
     resolveAverages
-    storeGradedValues(has_soft_zero)
+    storeGradedValues
     resolveZeros
     computeTotals
     storeResults
@@ -101,24 +101,21 @@ def resolveAverages
   end
 end
 
-def storeGradedValues(has_soft_zero)
+def storeGradedValues
   @judges.each_with_index do |judge, j|
     pfj = @pilot_flight.pfj_results.where(:judge_id => judge).first
     if !pfj 
       pfj = @pilot_flight.pfj_results.build(:judge => judge)
     end
-    pfj.graded_values = make_judge_values(j, has_soft_zero)
+    pfj.graded_values = make_judge_values(j)
     pfj.save
   end
 end
 
-def make_judge_values(j, has_soft_zero = true)
+def make_judge_values(j)
   jsa = []
   @kays.length.times do |f|
-    grade = @fjsx[f][j]
-    #convert hard zeros back to zero for reporting when there is no soft zero
-    grade = 0 if grade == HARD_ZERO && !has_soft_zero
-    jsa << grade
+    jsa << @fjsx[f][j]
   end
   jsa
 end
