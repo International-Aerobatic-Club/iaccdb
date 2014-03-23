@@ -5,8 +5,10 @@
 #   for each figure after all computations, including zero adjustments.
 #   Values are stored as integer number of tenths (scaled * 10).
 #
-# graded_values holds the k scaled value for each figure, with average grades
-#   replaced by a grade computed from grades of the other judges
+# graded_values holds the k scaled value for each figure, with average 
+#   and conference-average grades
+#   replaced by a grade computed from grades of the other judges.
+#   Hard zeros are coded as -30
 #   Values are stored as integer number of tenths (scaled * 10).
 #
 # computed_ranks holds the effective rank given the pilot by the judge,
