@@ -46,7 +46,7 @@ class PilotFlight < ActiveRecord::Base
 
   # compute or retrieve cached results
   # returns PfResult ActiveRecord instance for this pilot for this flight
-  def results(has_soft_zero)
+  def results(has_soft_zero = false)
     sac = IAC::SaComputer.new(self)
     sac.computePilotFlight(has_soft_zero)
   end
