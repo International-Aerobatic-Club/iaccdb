@@ -78,7 +78,7 @@ module Model
         pf = @pilot_flight.results
         pf.flight_value.round(2).should == 1827
       end
-      it 'throws exception if k values for some but not for all' do
+      it 'logs error if k values for some but not for all' do
         @pilot_flight.sequence.k_values.pop
         @pilot_flight.sequence.save.should == true
         @pilot_flight.sequence.k_values.length.should == 13
@@ -92,7 +92,10 @@ module Model
           :pilot_id => pilot, 
           :flight_id => flight})
         @pilot_flight.should_not be nil
-        lambda { @pilot_flight.results }.should raise_error(ArgumentError)
+        logger = double()
+        Rails.logger = logger
+        logger.should_receive(:error).exactly(3).times
+        @pilot_flight.results
       end
     end
     it 'behaves on empty sequence' do
@@ -102,7 +105,7 @@ module Model
         :values => [60, 0, 0, 0, 0])
       Factory.create(:score,
         :pilot_flight => @pf,
-        :values => [-1, 0, 0, 0, 0])
+        :values => [-10, 0, 0, 0, 0])
       @pf.results
     end
     context 'mixed grades, averages, and zeros' do
@@ -120,11 +123,11 @@ module Model
         Factory.create(:score,
           :pilot_flight => @pf,
           :judge => @judges[1],
-          :values => [-1, 0, 90, -1, -1, -1])
+          :values => [-10, 0, 90, -10, -10, -10])
         Factory.create(:score,
           :pilot_flight => @pf,
           :judge => @judges[2],
-          :values => [80, 60, 0, 70, -1, -1])
+          :values => [80, 60, 0, 70, -10, -10])
         Factory.create(:score,
           :pilot_flight => @pf,
           :judge => @judges[3],
