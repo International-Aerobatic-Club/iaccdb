@@ -160,7 +160,7 @@ module Model
         @res.figure_results[2].should == 0
       end
       it 'converts minority zero and averages to the average' do
-        @res.for_judge(@judges[0]).graded_values[3].should == 0
+        @res.for_judge(@judges[0]).graded_values[3].should == -30
         @res.for_judge(@judges[1]).graded_values[3].should == 140
         @res.for_judge(@judges[0]).computed_values[3].should == 140
         @res.for_judge(@judges[1]).computed_values[3].should == 140
