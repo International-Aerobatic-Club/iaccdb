@@ -24,4 +24,8 @@ class Category < ActiveRecord::Base
     mycat
   end
 
+  def to_s
+    name
+  end
+
 end
