@@ -8,9 +8,9 @@
 module IAC
 class SaComputer
 
-AVERAGE = -1
-CONFERENCE_AVERAGE = -2
-HARD_ZERO = -3
+AVERAGE = -10
+CONFERENCE_AVERAGE = -20
+HARD_ZERO = -30
 
 def initialize(pilot_flight)
   @pilot_flight = pilot_flight
@@ -29,11 +29,7 @@ def computePilotFlight(has_soft_zero)
   @pf.flight_value = 0
   @pf.adj_flight_value = 0
   if @kays
-    # map soft zero to hard zero if has_soft_zero is false
-    grades = has_soft_zero ? @pilot_flight.scores : @pilot_flight.scores.map do |s|
-      s == 0 ? -3 : s
-    end
-    computeNonZeroValues(grades)
+    computeNonZeroValues(@pilot_flight.scores, has_soft_zero)
     resolveAverages
     storeGradedValues
     resolveZeros
@@ -47,7 +43,7 @@ end
 private
 ###
 
-def computeNonZeroValues(pfScores)
+def computeNonZeroValues(pfScores, has_soft_zero)
   # @fjsx: scaled score for a figure is judge grade * k value
   #   Matrix of scaled scores indexed [figure][judge]
   # @judges: Judge for each index [j]
@@ -75,13 +71,15 @@ def computeNonZeroValues(pfScores)
           @score_total[f] += x
           @fjsx[f] << x
         else
+          # map soft zero to hard zero if has_soft_zero is false
+          v = HARD_ZERO if !has_soft_zero && v == 0
           @fjsx[f] << v
         end
         @zero_ct[f] += 1 if v == HARD_ZERO
         @score_ct[f] += 1 if v != AVERAGE
         @grade_ct[f] += 1 if 0 <= v
       else
-        logger.error
+        Rails.logger.error
           "More scores than K values in #{self}, judge #{score.judge}, flight #{score.pilot_flight},
           scores #{score}, kays #{@kays.join(', ')}"
       end
