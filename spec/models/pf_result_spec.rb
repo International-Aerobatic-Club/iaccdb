@@ -188,5 +188,122 @@ module Model
         @res.flight_value.round(2).should == 42.0
       end
     end
+    context 'mixed grades, conference averages, averages, soft zeros, and hard zeros' do
+      before(:each) do
+        seq = Factory.create(:sequence,
+          :k_values => [2,2,2,2,2,2,2,2,2])
+        @pf = Factory.create(:pilot_flight,
+          :sequence => seq)
+        @judges = []
+        5.times { @judges << Factory.create(:judge) }
+        Factory.create(:score,
+          :pilot_flight => @pf,
+          :judge => @judges[0],
+          :values => [-10, -10, -10,  60,  70,  80, -30, -30, -30])
+        Factory.create(:score,
+          :pilot_flight => @pf,
+          :judge => @judges[1],
+          :values => [ 40,  30, -10,  80, -30, -10, -30,   0, -30])
+        Factory.create(:score,
+          :pilot_flight => @pf,
+          :judge => @judges[2],
+          :values => [-30, -30, -30, -30, -30, -30,   0, -30,   0])
+        Factory.create(:score,
+          :pilot_flight => @pf,
+          :judge => @judges[3],
+          :values => [-30, -20,  50, -30, -30, -30, -30,  70,   0])
+        Factory.create(:score,
+          :pilot_flight => @pf,
+          :judge => @judges[4],
+          :values => [-20, -20, -20, -20, -20, -20, -20,  80,  90])
+        @res = @pf.results(true) # has soft zero
+        #
+        #    GRADED                    COMPUTED
+        #     j1, j2, j3, j4, j5   A   j1, j2, j3, j4, j5   Avg
+        # f1:  A,  4, HZ, HZ, CA : 4 :  4,  4,  4,  4,  4 =  4 =  8
+        # f2:  A,  3, HZ, CA, CA : 3 :  3,  3,  3,  3,  3 =  3 =  6
+        # f3:  A,  A, HZ,  5, CA : 5 :  5,  5,  5,  5,  5 =  5 = 10
+        # f4:  6,  8, HZ, HZ, CA : 7 :  6,  8,  7,  7,  7 =  7 = 14 
+        # f5:  7, HZ, HZ, HZ, CA : 0 :  0,  0,  0,  0,  0 =  0 =  0
+        # f6:  8,  A, HZ, HZ, CA : 8 :  8,  8,  8,  8,  8 =  8 = 16
+        # f7: HZ, HZ,  0, HZ, CA : 0 :  0,  0,  0,  0,  0 =  0 =  0
+        # f8: HZ,  0, HZ,  7,  8 : 5 :  5,  0,  5,  7,  8 =  5 = 10
+        # f9: HZ, HZ,  0,  0,  9 : 3 :  3,  3,  0,  0,  9 =  5 = 10
+        #                              68, 62, 64, 68, 88 = 70   74       
+        #
+      end
+      it 'converts A, 4, HZ, HZ, CA to 4 (one grade, two averages, minority HZ)' do
+        @res.for_judge(@judges[0]).computed_values[0].should == 80
+        @res.for_judge(@judges[1]).computed_values[0].should == 80
+        @res.for_judge(@judges[2]).computed_values[0].should == 80
+        @res.for_judge(@judges[3]).computed_values[0].should == 80
+        @res.for_judge(@judges[4]).computed_values[0].should == 80
+        @res.figure_results[0].should == 80
+      end
+      it 'converts A, 3, HZ, CA, CA to 3 (one grade, three averages, minority HZ)' do
+        @res.for_judge(@judges[0]).computed_values[1].should == 60
+        @res.for_judge(@judges[1]).computed_values[1].should == 60
+        @res.for_judge(@judges[2]).computed_values[1].should == 60
+        @res.for_judge(@judges[3]).computed_values[1].should == 60
+        @res.for_judge(@judges[4]).computed_values[1].should == 60
+        @res.figure_results[1].should == 60
+      end
+      it 'converts A, A, HZ, 5, CA to 5 (one grade, three avereges, minority HZ)' do
+        @res.for_judge(@judges[0]).computed_values[2].should == 100
+        @res.for_judge(@judges[1]).computed_values[2].should == 100
+        @res.for_judge(@judges[2]).computed_values[2].should == 100
+        @res.for_judge(@judges[3]).computed_values[2].should == 100
+        @res.for_judge(@judges[4]).computed_values[2].should == 100
+        @res.figure_results[2].should == 100
+      end
+      it 'converts 6, 8, HZ, HZ, CA to 6, 8, 7, 7, 7 (minority zero due to CA)' do
+        @res.for_judge(@judges[0]).computed_values[3].should == 120
+        @res.for_judge(@judges[1]).computed_values[3].should == 160
+        @res.for_judge(@judges[2]).computed_values[3].should == 140
+        @res.for_judge(@judges[3]).computed_values[3].should == 140
+        @res.for_judge(@judges[4]).computed_values[3].should == 140
+        @res.figure_results[3].should == 140
+      end
+      it 'converts 7, HZ, HZ, HZ, CA to 0 (majority zero)' do
+        @res.for_judge(@judges[0]).computed_values[4].should == 0
+        @res.for_judge(@judges[1]).computed_values[4].should == 0
+        @res.for_judge(@judges[2]).computed_values[4].should == 0
+        @res.for_judge(@judges[3]).computed_values[4].should == 0
+        @res.for_judge(@judges[4]).computed_values[4].should == 0
+        @res.figure_results[4].should == 0
+      end
+      it 'converts 8, A, HZ, HZ, CA to 8 (one grade, minority zero due to A and CA)' do
+        @res.for_judge(@judges[0]).computed_values[5].should == 160
+        @res.for_judge(@judges[1]).computed_values[5].should == 160
+        @res.for_judge(@judges[2]).computed_values[5].should == 160
+        @res.for_judge(@judges[3]).computed_values[5].should == 160
+        @res.for_judge(@judges[4]).computed_values[5].should == 160
+        @res.figure_results[5].should == 160
+      end
+      it 'converts HZ, HZ, 0, HZ, CA to 0 (majority zero with soft zero and CA)' do
+        @res.for_judge(@judges[0]).computed_values[6].should == 0
+        @res.for_judge(@judges[1]).computed_values[6].should == 0
+        @res.for_judge(@judges[2]).computed_values[6].should == 0
+        @res.for_judge(@judges[3]).computed_values[6].should == 0
+        @res.for_judge(@judges[4]).computed_values[6].should == 0
+        @res.figure_results[6].should == 0
+      end
+      it 'converts HZ, 0, HZ, 7, 8 to 5, 0, 5, 7, 8 (minority zero with soft zero in average)' do
+        @res.for_judge(@judges[0]).computed_values[7].should == 100
+        @res.for_judge(@judges[1]).computed_values[7].should ==   0
+        @res.for_judge(@judges[2]).computed_values[7].should == 100
+        @res.for_judge(@judges[3]).computed_values[7].should == 140
+        @res.for_judge(@judges[4]).computed_values[7].should == 160
+        @res.figure_results[7].should == 100
+      end
+      it 'converts HZ, HZ, 0, 0, 9 to 3, 3, 0, 0, 9 (minority zero with two soft zero in average)' do
+        @res.for_judge(@judges[0]).computed_values[8].should == 60
+        @res.for_judge(@judges[1]).computed_values[8].should == 60
+        @res.for_judge(@judges[2]).computed_values[8].should == 0
+        @res.for_judge(@judges[3]).computed_values[8].should == 0
+        @res.for_judge(@judges[4]).computed_values[8].should == 180
+        @res.figure_results[8].should == 60
+      end
+    end
   end
 end
