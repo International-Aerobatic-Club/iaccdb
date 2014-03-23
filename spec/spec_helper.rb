@@ -3,6 +3,8 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 
 RSpec.configure do |config|
+  config.include FactoryGirl::Syntax::Methods
+
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
     clean_db
@@ -25,6 +27,5 @@ def clean_db
 end
 
 def reset_db
-  DatabaseCleaner.clean
-  DatabaseCleaner.start
+  clean_db
 end

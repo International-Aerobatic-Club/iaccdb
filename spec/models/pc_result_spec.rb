@@ -18,6 +18,7 @@ module Model
         judge_lynne = Factory.create(:judge_lynne)
         known_flight = Factory.create(:nationals_imdt_known,
           :contest => @contest)
+        @imdt_cat = known_flight.category
         @adams_flight = Factory.create(:adams_known,
           :flight => known_flight, :pilot => @adams)
         Factory.create(:adams_known_klein, 
@@ -41,7 +42,7 @@ module Model
           :pilot_flight => denton_flight,
           :judge => judge_lynne)
         free_flight = Factory.create(:nationals_imdt_free,
-          :contest => @contest)
+          :contest => @contest, :category => @imdt_cat)
         @adams_flight = Factory.create(:adams_free,
           :flight => free_flight, :pilot => @adams)
         Factory.create(:adams_free_klein, 
@@ -69,14 +70,14 @@ module Model
 
       it 'finds two pilots in category results' do
         c_result = @c_results.first(:conditions => {
-          :category => 'Intermediate' })
+          :category_id => @imdt_cat.id })
         c_result.should_not be nil
         c_result.pc_results.size.should == 2
       end
 
       it 'computes category total for pilot' do
         c_result = @c_results.first(:conditions => {
-          :category => 'Intermediate' })
+          :category_id => @imdt_cat.id })
         c_result.should_not be nil
         pc_result = c_result.pc_results.first(:conditions => {
           :pilot_id => @adams })
@@ -90,7 +91,7 @@ module Model
 
       it 'computes category rank for pilot' do
         c_result = @c_results.first(:conditions => {
-          :category => 'Intermediate' })
+          :category_id => @imdt_cat.id })
         c_result.should_not be nil
         pc_result = c_result.pc_results.first(:conditions => {
           :pilot_id => @adams })

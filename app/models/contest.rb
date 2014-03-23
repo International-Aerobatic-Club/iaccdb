@@ -54,8 +54,9 @@ class Contest < ActiveRecord::Base
   # return array of category results
   def compute_contest_rollups
     cur_results = Set.new
-    flights.each do |flight|
-      cur_results.add c_result_for_flight(flight)
+    cats = flights.collect { |f| f.category }
+    cats.uniq.each do |cat|
+      cur_results.add find_or_create_c_result(cat)
     end
     # all cur_results are now either present or added to c_results
     c_results.each do |c_result|
@@ -83,10 +84,10 @@ private
 ###
   # creates c_result for category of flight if it doesn't exist
   # returns the c_result
-  def c_result_for_flight(flight)
-    c_result = c_results.first(:conditions => { :category_id => flight.category_id })
+  def find_or_create_c_result(cat)
+    c_result = c_results.first(:conditions => { :category_id => cat.id })
     if !c_result
-      c_result = c_results.build(:category_id => flight.category_id)
+      c_result = c_results.build(:category_id => cat.id)
       save
     end
     c_result

@@ -5,6 +5,7 @@ module Model
     context 'real_scores' do
       before(:each) do
         reset_db
+        @category = Category.find_by_category_and_aircat('intermediate', 'P')
         @pilot_flight = Factory.create(:adams_known)
         judge_team = Factory.create(:judge_klein)
         Factory.create(:adams_known_klein, 
@@ -26,6 +27,7 @@ module Model
         judge_teams.include?(@judge_jim).should == true
       end
       it 'computes and caches figure and flight values' do
+        pf_update = @pf.updated_at
         pfj = @pf.for_judge(@judge_jim)
         pfj.computed_values.should == 
           [2090, 1000, 1400, 1530, 1620, 2125, 2125,
@@ -33,7 +35,7 @@ module Model
         pfj.flight_value.should == 18365
         @pf.flight_value.should == 1789
         pfn = @pilot_flight.results
-        (@pf.updated_at <= pfn.updated_at).should be_true
+        (pf_update <= pfn.updated_at).should be_true
       end
       it 'updates cached values when scores change' do
         scores = @pilot_flight.scores.where(:judge_id => @judge_jim).first
@@ -43,9 +45,7 @@ module Model
         scores.save.should == true
         contest = Contest.first(:conditions => {:start => '2011-09-25'})
         contest.should_not be nil
-        flight = contest.flights.first(:conditions => {
-          :category => 'Intermediate', 
-          :name => 'Known'})
+        flight = contest.flights.first
         flight.should_not be nil
         pilot = Member.find_by_iac_id(1999)
         pilot.should_not be nil
@@ -67,9 +67,7 @@ module Model
         @pilot_flight.sequence.save.should == true
         contest = Contest.first(:conditions => {:start => '2011-09-25'})
         contest.should_not be nil
-        flight = contest.flights.first(:conditions => {
-          :category => 'Intermediate', 
-          :name => 'Known'})
+        flight = contest.flights.first
         flight.should_not be nil
         pilot = Member.find_by_iac_id(1999)
         pilot.should_not be nil
@@ -86,9 +84,7 @@ module Model
         @pilot_flight.sequence.k_values.length.should == 13
         contest = Contest.first(:conditions => {:start => '2011-09-25'})
         contest.should_not be nil
-        flight = contest.flights.first(:conditions => {
-          :category => 'Intermediate', 
-          :name => 'Known'})
+        flight = contest.flights.first
         flight.should_not be nil
         pilot = Member.find_by_iac_id(1999)
         pilot.should_not be nil

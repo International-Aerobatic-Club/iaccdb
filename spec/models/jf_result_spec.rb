@@ -1,16 +1,16 @@
 require 'spec_helper'
-#require 'iac/mannyParse'
-#require 'iac/mannyToDB'
 
 describe JfResult do
   before(:all) do
+    reset_db
     manny = Manny::Parse.new
     IO.foreach('spec/manny/Contest_300.txt') { |line| manny.processLine(line) }
     m2d = Manny::MannyToDB.new
     m2d.process_contest(manny, true)
     contest = Contest.first
+    @pri_cat = Category.find_by_category_and_aircat('primary', 'P')
     @flight2 = contest.flights.first(:conditions => { 
-      :category => 'Primary', :name => 'Free' })
+      :category_id => @pri_cat.id, :name => 'Free' })
     f_result = @flight2.compute_flight_results.first
     lr = Member.first(:conditions => {
       :family_name => 'Ramirez',
@@ -53,7 +53,7 @@ describe JfResult do
     judge = scores.judge
     contest = Contest.first
     flight = contest.flights.first(:conditions => { 
-      :category => 'Primary', :name => 'Free' })
+      :category_id => @pri_cat.id, :name => 'Free' })
     f_result = flight.compute_flight_results.first
     jf_result = f_result.jf_results.first(:conditions => {
       :judge_id => judge })
@@ -73,7 +73,7 @@ describe JfResult do
     judge.should_not be nil
     contest = Contest.first
     flight = contest.flights.first(:conditions => { 
-      :category => 'Primary', :name => 'Free' })
+      :category_id => @pri_cat.id, :name => 'Free' })
     f_result = flight.compute_flight_results.first
     jf_result = f_result.jf_results.first(:conditions => {
       :judge_id => judge })
