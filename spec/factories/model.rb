@@ -202,7 +202,7 @@ FactoryGirl.define do
   factory :adams_free_jim, :class => Score do |r|
     r.association :pilot_flight, :factory => :adams_free
     r.association :judge, :factory => :judge_jim
-    r.values [90, 90, 95, 95, 95, 85, 85, -1, 90, 100, 80, 85, 95, 90]
+    r.values [90, 90, 95, 95, 95, 85, 85, -10, 90, 100, 80, 85, 95, 90]
   end
   factory :adams_free_lynne, :class => Score do |r|
     r.association :pilot_flight, :factory => :adams_free
