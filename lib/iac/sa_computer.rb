@@ -89,7 +89,7 @@ end
 
 def resolveAverages
   @kays.length.times do |f|
-    if @score_ct[f] < @judges.length
+    if @grade_ct[f] < @judges.length
       avg = average_score(f)
       @fjsx[f].length.times do |j|
         grade = @fjsx[f][j]
