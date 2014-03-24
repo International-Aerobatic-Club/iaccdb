@@ -3,5 +3,6 @@
 <td><%= job.attempts %></td>
 <td><%= job.last_error %></td>
 <td><%= job.locked_by %></td>
+<td><%= job.handler[23,80] %></td>
 <td><%= link_to 'show', admin_queue_path(job) %>
 </tr>
