@@ -1,0 +1,18 @@
+<h1>Admin Data Post</h1>
+<% if flash[:notice] %>
+  <p id="notice" ><%= flash[:notice] %></p>
+<% end %>
+<p><%= link_to 'back to list', admin_data_posts_path %> |
+<%= link_to 'download data', admin_data_post_download_path(@data_post) %> |
+<%= link_to 'resubmit', admin_data_post_resubmit_path(@data_post) %></p>
+<ul>
+<li>Contest id: <%= @data_post.contest ? @data_post.contest_id : missing %></li>
+<li>Contest name: <%= @data_post.contest ? @data_post.contest.year_name : missing %></li>
+<li>Is integrated? <%= @data_post.is_integrated ? 'Yes' : 'No' %>.</li>
+<li>Is obsolete? <%= @data_post.is_obsolete ? 'Yes' : 'No' %>.</li>
+<li>Has error? <%= @data_post.has_error ? 'Yes' : 'No' %>.</li>
+<% if @data_post.has_error %>
+<li>Error description: <%= @data_post.error_description %></li>
+<% end %>
+</ul>
+<pre><%= @data_post.data %></pre>

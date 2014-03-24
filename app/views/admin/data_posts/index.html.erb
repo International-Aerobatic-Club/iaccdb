@@ -1,0 +1,11 @@
+<%= render 'admin/admin_menu' %>
+<h1>Admin Data Posts</h1>
+<table>
+<thead>
+<tr><th>Contest</th><th>is_integrated</th><th>is_obsolete</th><th>has_error</th><th>error</th>
+<th/></tr>
+</thead>
+<tbody>
+<%= render :partial=>:data_post, :collection => @data_posts %>
+</tbody>
+</table>

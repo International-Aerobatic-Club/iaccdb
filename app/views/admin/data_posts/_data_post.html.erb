@@ -1,0 +1,8 @@
+<tr>
+<td><%= data_post.contest ? data_post.contest.year_name : 'missing' %></td>
+<td><%= data_post.is_integrated ? 'Yes' : 'No' %></td>
+<td><%= data_post.is_obsolete ? 'Yes' : 'No' %></td>
+<td><%= data_post.has_error ? 'Yes' : 'No' %></td>
+<td><%= data_post.error_description %></td>
+<td><%= link_to 'show', admin_data_post_path(data_post) %>
+</tr>
