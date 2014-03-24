@@ -1,0 +1,703 @@
+<?xml version="1.0"?>
+<ContestResults>
+  <Version>
+     <XMLFormat>1.0</XMLFormat>
+     <JaSPer>3.1.37</JaSPer>
+     <Generated>Tue Mar 04 09:36:46 MST 2014</Generated>
+  </Version>
+  <ContestInfo>
+    <Id>443</Id>
+    <Contest>Canadian Western Championships</Contest>
+    <City>Rocky Mountain House</City>
+    <State>Other</State>
+    <Date>12/23/14</Date>
+    <Director>Dave Barbet</Director>
+    <HostChapter>77</HostChapter>
+    <Region>NorthWest</Region>
+    <Type>Powered</Type>
+    <Comment></Comment>
+  </ContestInfo>  <Judges>
+    <Category CategoryID="1">
+      <Flight FlightID="1">
+        <Judge JudgeID="0">
+          <Name>
+            <First>Tom</First>
+            <Last>Lockhart</Last>
+          </Name>
+          <IACNumber>27419</IACNumber>
+        </Judge>
+        <Judge JudgeID="1">
+          <Name>
+            <First>Charlie</First>
+            <Last>Teeuwsen</Last>
+          </Name>
+          <IACNumber>11225</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Miles</First>
+              <Last>Crane</Last>
+            </Name>
+            <IACNumber>8102</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+        <Judge JudgeID="2">
+          <Name>
+            <First>Tom</First>
+            <Last>Lockhart</Last>
+          </Name>
+          <IACNumber>27419</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Donn</First>
+              <Last>Richardson</Last>
+            </Name>
+            <IACNumber>24210</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+        <Judge JudgeID="3">
+          <Name>
+            <First>Patrick</First>
+            <Last>Spencer</Last>
+          </Name>
+          <IACNumber>17050</IACNumber>
+          <Assistant>
+            <Name>
+              <First>James</First>
+              <Last>Sorensen</Last>
+            </Name>
+            <IACNumber>430643</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+      </Flight>
+    </Category>
+    <Category CategoryID="2">
+      <Flight FlightID="1">
+        <Judge JudgeID="0">
+          <Name>
+            <First>Tom</First>
+            <Last>Lockhart</Last>
+          </Name>
+          <IACNumber>27419</IACNumber>
+        </Judge>
+        <Judge JudgeID="1">
+          <Name>
+            <First>Tom</First>
+            <Last>Lockhart</Last>
+          </Name>
+          <IACNumber>27419</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Donn</First>
+              <Last>Richardson</Last>
+            </Name>
+            <IACNumber>24210</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+        <Judge JudgeID="2">
+          <Name>
+            <First>Miles</First>
+            <Last>Crane</Last>
+          </Name>
+          <IACNumber>8102</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Charlie</First>
+              <Last>Teeuwsen</Last>
+            </Name>
+            <IACNumber>11225</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+        <Judge JudgeID="3">
+          <Name>
+            <First>Patrick</First>
+            <Last>Spencer</Last>
+          </Name>
+          <IACNumber>17050</IACNumber>
+          <Assistant>
+            <Name>
+              <First>James</First>
+              <Last>Sorensen</Last>
+            </Name>
+            <IACNumber>430643</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+      </Flight>
+    </Category>
+    <Category CategoryID="3">
+      <Flight FlightID="1">
+        <Judge JudgeID="0">
+          <Name>
+            <First>Tom</First>
+            <Last>Lockhart</Last>
+          </Name>
+          <IACNumber>27419</IACNumber>
+        </Judge>
+        <Judge JudgeID="1">
+          <Name>
+            <First>Patrick</First>
+            <Last>Spencer</Last>
+          </Name>
+          <IACNumber>17050</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Neill</First>
+              <Last>Cook</Last>
+            </Name>
+            <IACNumber>436716</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+        <Judge JudgeID="2">
+          <Name>
+            <First>Tom</First>
+            <Last>Lockhart</Last>
+          </Name>
+          <IACNumber>27419</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Lenora</First>
+              <Last>Crane</Last>
+            </Name>
+            <IACNumber>436317</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+        <Judge JudgeID="3">
+          <Name>
+            <First>Jerzy</First>
+            <Last>Strzyz</Last>
+          </Name>
+          <IACNumber>27990</IACNumber>
+        </Judge>
+      </Flight>
+    </Category>
+    <Category CategoryID="4">
+      <Flight FlightID="1">
+        <Judge JudgeID="0">
+          <Name>
+            <First>Tom</First>
+            <Last>Lockhart</Last>
+          </Name>
+          <IACNumber>27419</IACNumber>
+        </Judge>
+        <Judge JudgeID="1">
+          <Name>
+            <First>Patrick</First>
+            <Last>Spencer</Last>
+          </Name>
+          <IACNumber>17050</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Neill</First>
+              <Last>Cook</Last>
+            </Name>
+            <IACNumber>436716</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+        <Judge JudgeID="2">
+          <Name>
+            <First>Tom</First>
+            <Last>Lockhart</Last>
+          </Name>
+          <IACNumber>27419</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Lenora</First>
+              <Last>Crane</Last>
+            </Name>
+            <IACNumber>436317</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+        <Judge JudgeID="3">
+          <Name>
+            <First>Jerzy</First>
+            <Last>Strzyz</Last>
+          </Name>
+          <IACNumber>27990</IACNumber>
+        </Judge>
+      </Flight>
+    </Category>
+    <Category CategoryID="5">
+      <Flight FlightID="1">
+        <Judge JudgeID="0">
+          <Name>
+            <First>Tom</First>
+            <Last>Lockhart</Last>
+          </Name>
+          <IACNumber>27419</IACNumber>
+        </Judge>
+        <Judge JudgeID="1">
+          <Name>
+            <First>Tom</First>
+            <Last>Lockhart</Last>
+          </Name>
+          <IACNumber>27419</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Donn</First>
+              <Last>Richardson</Last>
+            </Name>
+            <IACNumber>24210</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+        <Judge JudgeID="2">
+          <Name>
+            <First>Miles</First>
+            <Last>Crane</Last>
+          </Name>
+          <IACNumber>8102</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Charlie</First>
+              <Last>Teeuwsen</Last>
+            </Name>
+            <IACNumber>11225</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+        <Judge JudgeID="3">
+          <Name>
+            <First>Patrick</First>
+            <Last>Spencer</Last>
+          </Name>
+          <IACNumber>17050</IACNumber>
+          <Assistant>
+            <Name>
+              <First>James</First>
+              <Last>Sorensen</Last>
+            </Name>
+            <IACNumber>430643</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+      </Flight>
+    </Category>
+    <Category CategoryID="6">
+      <Flight FlightID="1">
+      </Flight>
+    </Category>
+  </Judges>
+  <Pilots>
+    <Category CategoryID="1">
+      <Pilot PilotID="1">
+        <IACNumber>999201</IACNumber>
+        <Name>
+          <First>Michael</First>
+          <Last>Smith</Last>
+        </Name>
+        <Flights>Known Freestyle Unknown1 </Flights>
+        <Chapter></Chapter>
+        <Aircraft>
+          <Make>Christian</Make>
+          <Model>Eagle</Model>
+          <NNumber>C-GSBB</NNumber>
+        </Aircraft>      </Pilot>
+      <Pilot PilotID="2">
+        <IACNumber>9992022</IACNumber>
+        <Name>
+          <First>KELLY</First>
+          <Last>BROUWER</Last>
+        </Name>
+        <Flights>Known Freestyle Unknown1 </Flights>
+        <Chapter></Chapter>
+        <Aircraft>
+          <Make>SUKHOI</Make>
+          <Model>29</Model>
+          <NNumber></NNumber>
+        </Aircraft>      </Pilot>
+    </Category>
+    <Category CategoryID="2">
+      <Pilot PilotID="1">
+        <IACNumber>999200</IACNumber>
+        <Name>
+          <First>Michael</First>
+          <Last>plouffe</Last>
+        </Name>
+        <Flights>Known Freestyle Unknown1 </Flights>
+        <Chapter></Chapter>
+        <Aircraft>
+          <Make>pitts</Make>
+          <Model>S1S</Model>
+          <NNumber>C-FALR</NNumber>
+        </Aircraft>      </Pilot>
+      <Pilot PilotID="2">
+        <IACNumber>435183</IACNumber>
+        <Name>
+          <First>Randy</First>
+          <Last>Skiba</Last>
+        </Name>
+        <Flights>Known Freestyle Unknown1 </Flights>
+        <Chapter>77</Chapter>
+        <Aircraft>
+          <Make>giles</Make>
+          <Model>200</Model>
+          <NNumber>CGXRS</NNumber>
+        </Aircraft>      </Pilot>
+      <Pilot PilotID="3">
+        <IACNumber>435974</IACNumber>
+        <Name>
+          <First>Rick</First>
+          <Last>Feicht</Last>
+        </Name>
+        <Flights>Known Freestyle Unknown1 </Flights>
+        <Chapter>77</Chapter>
+        <Aircraft>
+          <Make>Yak</Make>
+          <Model>55M</Model>
+          <NNumber>CGSZL</NNumber>
+        </Aircraft>      </Pilot>
+      <Pilot PilotID="5">
+        <IACNumber>436716</IACNumber>
+        <Name>
+          <First>Neill</First>
+          <Last>Cook</Last>
+        </Name>
+        <Flights>Known Freestyle Unknown1 </Flights>
+        <Chapter></Chapter>
+        <Aircraft>
+          <Make>Bellanca</Make>
+          <Model>8KCAB</Model>
+          <NNumber>C_GWYA</NNumber>
+        </Aircraft>      </Pilot>
+    </Category>
+    <Category CategoryID="3">
+      <Pilot PilotID="1">
+        <IACNumber>24210</IACNumber>
+        <Name>
+          <First>Donn</First>
+          <Last>Richardson</Last>
+        </Name>
+        <Flights>Known Freestyle Unknown1 </Flights>
+        <Chapter></Chapter>
+        <FreestyleKs>19 12 6 10 14 21 17 15 19 13 17 13 14 0 0 0 0 0 0 0 8 </FreestyleKs>
+        <Aircraft>
+          <Make>CHRISTIAN</Make>
+          <Model>EAGLE</Model>
+          <NNumber>C_FPNB</NNumber>
+        </Aircraft>      </Pilot>
+      <Pilot PilotID="2">
+        <IACNumber>434481</IACNumber>
+        <Name>
+          <First>Kyle</First>
+          <Last>Petryshen</Last>
+        </Name>
+        <Flights>Known Freestyle Unknown1 </Flights>
+        <Chapter></Chapter>
+        <FreestyleKs>25 17 25 10 14 18 16 18 14 19 14 0 0 0 0 0 0 0 0 0 8 </FreestyleKs>
+        <Aircraft>
+          <Make>Sukhoi</Make>
+          <Model>29</Model>
+          <NNumber>N129TH</NNumber>
+        </Aircraft>      </Pilot>
+      <Pilot PilotID="3">
+        <IACNumber>430643</IACNumber>
+        <Name>
+          <First>James</First>
+          <Last>Sorensen</Last>
+        </Name>
+        <Flights>Known Freestyle Unknown1 </Flights>
+        <Chapter></Chapter>
+        <FreestyleKs>24 17 25 17 14 18 11 18 14 18 14 0 0 0 0 0 0 0 0 0 8 </FreestyleKs>
+      </Pilot>
+      <Pilot PilotID="4">
+        <IACNumber>435145</IACNumber>
+        <Name>
+          <First>Stefan</First>
+          <Last>Trischuk</Last>
+        </Name>
+        <Flights>Known Freestyle Unknown1 </Flights>
+        <Chapter>77</Chapter>
+        <FreestyleKs>18 17 17 13 15 6 6 22 23 18 25 10 0 0 0 0 0 0 0 0 8 </FreestyleKs>
+        <Aircraft>
+          <Make>ULTIMATE</Make>
+          <Model>10-150</Model>
+          <NNumber>C-FGYD</NNumber>
+        </Aircraft>      </Pilot>
+    </Category>
+    <Category CategoryID="4">
+      <Pilot PilotID="1">
+        <IACNumber>11225</IACNumber>
+        <Name>
+          <First>Charlie</First>
+          <Last>Teeuwsen</Last>
+        </Name>
+        <Flights>Known Freestyle Unknown1 </Flights>
+        <Chapter>77</Chapter>
+        <FreestyleKs>37 36 18 15 42 32 16 11 31 26 22 14 0 0 0 0 0 0 0 0 12 </FreestyleKs>
+        <Aircraft>
+          <Make>giles</Make>
+          <Model>g200</Model>
+          <NNumber>cfamp</NNumber>
+        </Aircraft>      </Pilot>
+      <Pilot PilotID="2">
+        <IACNumber>8102</IACNumber>
+        <Name>
+          <First>Miles</First>
+          <Last>Crane</Last>
+        </Name>
+        <Flights>Known Freestyle Unknown1 </Flights>
+        <Chapter>77</Chapter>
+        <FreestyleKs>34 26 31 13 25 31 18 30 24 25 29 14 0 0 0 0 0 0 0 0 12 </FreestyleKs>
+        <Aircraft>
+          <Make>yakolev</Make>
+          <Model>55</Model>
+          <NNumber>CGSZL</NNumber>
+        </Aircraft>      </Pilot>
+    </Category>
+    <Category CategoryID="5">
+      <Pilot PilotID="1">
+        <IACNumber>27990</IACNumber>
+        <Name>
+          <First>Jerzy</First>
+          <Last>Strzyz</Last>
+        </Name>
+        <Flights>Known Freestyle Unknown1 </Flights>
+        <Chapter>77</Chapter>
+        <FreestyleKs>41 62 55 29 51 54 55 42 31 0 0 0 0 0 0 0 0 0 0 0 26 </FreestyleKs>
+        <Aircraft>
+          <Make>sukhoi</Make>
+          <Model>26mx</Model>
+          <NNumber>CGSUK</NNumber>
+        </Aircraft>      </Pilot>
+      <Pilot PilotID="2">
+        <IACNumber>432448</IACNumber>
+        <Name>
+          <First>Dave</First>
+          <Last>Barbet</Last>
+        </Name>
+        <Flights>Known Freestyle Unknown1 </Flights>
+        <Chapter>77</Chapter>
+        <FreestyleKs>53 31 72 45 35 56 50 47 31 0 0 0 0 0 0 0 0 0 0 0 26 </FreestyleKs>
+        <Aircraft>
+          <Make>pitts</Make>
+          <Model>s1</Model>
+          <NNumber>GJGB</NNumber>
+        </Aircraft>      </Pilot>
+    </Category>
+    <Category CategoryID="6">
+    </Category>
+  </Pilots>
+  <KnownKFactors>
+    <Year>2013</Year>
+    <Category CategoryID="1">7 15 14 10 4 10 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3 </Category>
+    <Category CategoryID="2">13 17 18 10 18 28 10 11 14 10 0 0 0 0 0 0 0 0 0 0 6 </Category>
+    <Category CategoryID="3">20 13 11 21 18 26 31 13 21 7 0 0 0 0 0 0 0 0 0 0 8 </Category>
+    <Category CategoryID="4">42 41 31 21 27 28 29 22 32 0 0 0 0 0 0 0 0 0 0 0 12 </Category>
+    <Category CategoryID="5">49 46 29 64 49 41 38 34 33 0 0 0 0 0 0 0 0 0 0 0 20 </Category>
+    <Category CategoryID="6">40 40 40 40 40 40 40 40 40 40 0 0 0 0 0 0 0 0 0 0 0 </Category>
+  </KnownKFactors>
+  <UnKnownKFactors>
+    <One>
+      <Category CategoryID="3">14 21 25 30 18 13 10 25 18 0 0 0 0 0 0 0 0 0 0 0 8 </Category>
+      <Category CategoryID="4">31 32 33 41 28 25 26 34 25 0 0 0 0 0 0 0 0 0 0 0 12 </Category>
+      <Category CategoryID="5">29 35 37 30 30 37 37 36 33 37 39 20 0 0 0 0 0 0 0 0 20 </Category>
+    </One>
+    <Two>
+      <Category CategoryID="3">0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 8 </Category>
+      <Category CategoryID="4">0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 12 </Category>
+      <Category CategoryID="5">0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 20 </Category>
+    </Two>
+  </UnKnownKFactors>
+  <Scores>    <Category CategoryID="1">
+      <Flight FlightID="1">
+        <Pilot PilotID="1">
+          <Judge JudgeID="1">
+            <Figures>8.0 8.0 7.0 7.0 8.0 8.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 9.0 </Figures>
+          </Judge>
+          <Judge JudgeID="2">
+            <Figures>7.0 7.0 7.0 6.0 10.0 9.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 6.0 </Figures>
+          </Judge>
+          <Judge JudgeID="3">
+            <Figures>7.5 9.0 7.5 8.0 9.5 9.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.0 </Figures>
+          </Judge>
+          <Penalty>0.0</Penalty>
+        </Pilot>
+        <Pilot PilotID="2">
+          <Judge JudgeID="1">
+            <Figures>8.0 0.0 3.0 7.0 8.0 8.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 4.0 </Figures>
+          </Judge>
+          <Judge JudgeID="2">
+            <Figures>9.0 6.0 4.0 7.0 7.0 9.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 5.0 </Figures>
+          </Judge>
+          <Judge JudgeID="3">
+            <Figures>7.0 4.0 7.0 6.0 9.0 9.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 6.0 </Figures>
+          </Judge>
+          <Penalty>0.0</Penalty>
+        </Pilot>
+      </Flight>
+    </Category>
+    <Category CategoryID="2">
+      <Flight FlightID="1">
+        <Pilot PilotID="1">
+          <Judge JudgeID="1">
+            <Figures>10.0 7.0 7.0 8.0 9.0 9.0 7.0 8.0 8.0 9.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 7.0 </Figures>
+          </Judge>
+          <Judge JudgeID="2">
+            <Figures>7.0 8.0 7.0 7.0 8.0 8.0 7.0 8.0 7.0 9.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 9.0 </Figures>
+          </Judge>
+          <Judge JudgeID="3">
+            <Figures>7.0 7.5 8.0 8.0 7.0 7.0 7.5 9.0 8.0 9.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.0 </Figures>
+          </Judge>
+          <Penalty>0.0</Penalty>
+        </Pilot>
+        <Pilot PilotID="2">
+          <Judge JudgeID="1">
+            <Figures>7.0 9.0 7.0 6.0 7.0 7.0 9.0 0.0 8.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 6.0 </Figures>
+          </Judge>
+          <Judge JudgeID="2">
+            <Figures>8.0 7.0 9.0 8.0 8.0 7.0 9.0 0.0 8.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 6.0 </Figures>
+          </Judge>
+          <Judge JudgeID="3">
+            <Figures>8.0 8.0 9.0 7.5 8.0 8.0 9.0 0.0 8.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 6.0 </Figures>
+          </Judge>
+          <Penalty>5.0</Penalty>
+        </Pilot>
+        <Pilot PilotID="3">
+          <Judge JudgeID="1">
+            <Figures>10.0 9.0 7.0 6.0 8.0 8.0 9.0 9.0 9.0 7.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.0 </Figures>
+          </Judge>
+          <Judge JudgeID="2">
+            <Figures>9.0 10.0 8.0 7.0 7.0 8.0 8.0 7.0 8.0 8.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.0 </Figures>
+          </Judge>
+          <Judge JudgeID="3">
+            <Figures>9.5 10.0 9.5 7.0 8.5 8.0 7.0 9.0 8.5 -1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.0 </Figures>
+          </Judge>
+          <Penalty>0.0</Penalty>
+        </Pilot>
+        <Pilot PilotID="5">
+          <Judge JudgeID="1">
+            <Figures>8.0 7.0 7.0 6.0 6.0 6.0 9.0 9.0 9.0 10.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.0 </Figures>
+          </Judge>
+          <Judge JudgeID="2">
+            <Figures>8.0 8.0 8.0 6.0 7.0 7.0 9.0 8.0 8.0 8.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.0 </Figures>
+          </Judge>
+          <Judge JudgeID="3">
+            <Figures>8.0 8.0 8.0 7.0 7.0 6.0 9.0 9.0 8.0 9.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.0 </Figures>
+          </Judge>
+          <Penalty>5.0</Penalty>
+        </Pilot>
+      </Flight>
+    </Category>
+    <Category CategoryID="3">
+      <Flight FlightID="1">
+        <Pilot PilotID="1">
+          <Judge JudgeID="1">
+            <Figures>9.0 9.5 8.0 8.0 7.0 9.0 7.0 8.0 8.0 9.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 9.0 </Figures>
+          </Judge>
+          <Judge JudgeID="2">
+            <Figures>9.0 7.0 9.0 7.0 7.0 7.0 6.0 7.0 7.0 7.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 9.0 </Figures>
+          </Judge>
+          <Judge JudgeID="3">
+            <Figures>7.0 8.0 8.0 8.0 8.0 7.5 6.0 8.0 8.5 10.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 10.0 </Figures>
+          </Judge>
+          <Penalty>0.0</Penalty>
+        </Pilot>
+        <Pilot PilotID="2">
+          <Judge JudgeID="1">
+            <Figures>9.0 9.0 9.5 9.5 9.0 9.0 6.0 9.0 9.5 8.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.5 </Figures>
+          </Judge>
+          <Judge JudgeID="2">
+            <Figures>9.0 8.0 9.0 8.0 9.0 9.0 7.0 7.0 9.0 9.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.0 </Figures>
+          </Judge>
+          <Judge JudgeID="3">
+            <Figures>7.5 8.0 9.0 8.0 9.0 7.0 6.0 7.5 7.0 8.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.5 </Figures>
+          </Judge>
+          <Penalty>0.0</Penalty>
+        </Pilot>
+        <Pilot PilotID="3">
+          <Judge JudgeID="1">
+            <Figures>6.5 7.0 9.0 8.5 8.0 7.0 6.0 7.0 7.5 7.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.0 </Figures>
+          </Judge>
+          <Judge JudgeID="2">
+            <Figures>9.0 8.0 9.0 8.0 9.0 9.0 6.0 8.0 8.0 8.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.0 </Figures>
+          </Judge>
+          <Judge JudgeID="3">
+            <Figures>8.5 9.0 8.0 8.0 9.0 7.5 8.0 7.5 7.5 9.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 9.0 </Figures>
+          </Judge>
+          <Penalty>0.0</Penalty>
+        </Pilot>
+        <Pilot PilotID="4">
+          <Judge JudgeID="1">
+            <Figures>9.5 9.0 9.0 8.5 9.0 8.0 6.0 8.5 9.0 9.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.0 </Figures>
+          </Judge>
+          <Judge JudgeID="2">
+            <Figures>8.0 8.0 9.0 7.0 7.0 9.0 7.0 9.0 8.0 6.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.0 </Figures>
+          </Judge>
+          <Judge JudgeID="3">
+            <Figures>8.5 9.0 9.5 8.5 9.0 8.0 7.5 9.0 8.0 7.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.0 </Figures>
+          </Judge>
+          <Penalty>15.0</Penalty>
+        </Pilot>
+      </Flight>
+    </Category>
+    <Category CategoryID="4">
+      <Flight FlightID="1">
+        <Pilot PilotID="1">
+          <Judge JudgeID="1">
+            <Figures>7.5 7.0 0.0 7.0 4.0 9.0 7.5 7.5 8.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 7.0 </Figures>
+          </Judge>
+          <Judge JudgeID="2">
+            <Figures>8.0 9.0 0.0 7.0 -1.0 7.0 5.0 7.0 7.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 7.0 </Figures>
+          </Judge>
+          <Judge JudgeID="3">
+            <Figures>8.0 7.0 0.0 8.5 -1.0 8.0 7.0 6.5 6.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.5 </Figures>
+          </Judge>
+          <Penalty>100.0</Penalty>
+        </Pilot>
+        <Pilot PilotID="2">
+          <Judge JudgeID="1">
+            <Figures>7.5 7.5 8.0 8.0 6.0 9.5 9.0 8.0 9.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 9.0 </Figures>
+          </Judge>
+          <Judge JudgeID="2">
+            <Figures>9.0 7.0 8.0 9.0 7.0 10.0 8.0 7.0 7.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.0 </Figures>
+          </Judge>
+          <Judge JudgeID="3">
+            <Figures>6.5 8.0 7.5 9.0 6.0 9.5 9.0 8.0 7.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 7.5 </Figures>
+          </Judge>
+          <Penalty>0.0</Penalty>
+        </Pilot>
+      </Flight>
+    </Category>
+    <Category CategoryID="5">
+      <Flight FlightID="1">
+        <Pilot PilotID="1">
+          <Judge JudgeID="1">
+            <Figures>9.0 9.0 9.0 8.0 8.0 9.0 8.0 9.0 9.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.0 </Figures>
+          </Judge>
+          <Judge JudgeID="2">
+            <Figures>8.0 9.0 8.0 7.0 9.0 7.0 7.0 9.0 8.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 9.0 </Figures>
+          </Judge>
+          <Judge JudgeID="3">
+            <Figures>9.0 9.0 8.0 8.5 9.5 8.0 8.0 7.5 9.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 9.0 </Figures>
+          </Judge>
+          <Penalty>0.0</Penalty>
+        </Pilot>
+        <Pilot PilotID="2">
+          <Judge JudgeID="1">
+            <Figures>9.0 8.0 9.0 8.0 8.0 7.0 8.0 8.0 9.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 9.0 </Figures>
+          </Judge>
+          <Judge JudgeID="2">
+            <Figures>9.0 7.0 8.0 7.0 9.0 6.0 7.0 7.0 8.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.0 </Figures>
+          </Judge>
+          <Judge JudgeID="3">
+            <Figures>8.0 8.0 9.0 7.0 9.0 8.0 7.0 9.0 9.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.0 </Figures>
+          </Judge>
+          <Penalty>90.0</Penalty>
+        </Pilot>
+      </Flight>
+    </Category>
+    <Category CategoryID="6">
+      <Flight FlightID="1">
+      </Flight>
+    </Category>
+  </Scores>
+</ContestResults>
