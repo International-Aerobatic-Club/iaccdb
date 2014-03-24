@@ -1,7 +1,11 @@
 <h1>Admin::Failure</h1>
 <p><%= link_to 'back to list', admin_failures_path %></p>
-<p>Step: <%= @failure.step %></p>
-<p>Contest id: <%= @failure.contest_id %></p>
-<p>Contest name: <%= @failure.contest.year_name if @failure.contest %></p>
-<p>Manny number: <%= @failure.manny_id %></p>
-<p>Details: <pre><%= @failure.description %></pre></p>
+<ul>
+<li>Step: <%= @failure.step %></li>
+<li>Contest id: <%= @failure.contest_id || 'missing' %></li>
+<li>Contest name: <%= @failure.contest.year_name if @failure.contest %></li>
+<li>Manny number: <%= @failure.manny_id %></li>
+<li>Data post id: <%= @failure.manny_id %></li>
+<li>Updated: <%= @failure.updated_at %></li>
+</ul>
+<pre><%= @failure.description %></pre>
