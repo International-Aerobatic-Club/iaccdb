@@ -12,8 +12,6 @@ class Admin::FailuresController < ApplicationController
   def destroy
     @failure = Failure.find(params[:id])
     @failure.destroy
-
     redirect_to(admin_failures_url)
   end
-
 end

@@ -15,6 +15,7 @@ Iac::Application.routes.draw do
     resources :members, :only => [:index, :edit, :update, :show]
     resources :failures, :only => [:index, :show, :destroy]
     resources :data_posts, :only => [:index, :show]
+    resources :queues, :only => [:index, :show]
     post "members/merge_preview"
     post "members/merge"
     get 'manny_list', 

@@ -1,0 +1,10 @@
+<%= render 'admin/admin_menu' %>
+<h1>Admin Job Queue</h1>
+<table>
+<thead>
+<tr><th>Timestamp</th><th>Attempts</th><th>Error</th><th>Locked by</th><th/></tr>
+</thead>
+<tbody>
+<%= render :partial=>'job', :collection => @jobs %>
+</tbody>
+</table>

@@ -1,0 +1,11 @@
+<h1>Admin Queued Job</h1>
+<p><%= link_to 'back to list', admin_queues_path %></p>
+<ul>
+<li>Created: <%= @job.created_at %></li>
+<li>Attemts: <%= @job.attempts %></li>
+<li>Locked by: <%= @job.locked_by %></li>
+<li>Last error: <%= @job.last_error %></li>
+<li>Updated: <%= @job.updated_at %></li>
+</ul>
+<pre><%= @job.handler %></pre>
+
