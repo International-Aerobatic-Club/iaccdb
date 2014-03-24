@@ -10,6 +10,8 @@
 <li>Contest name: <%= @data_post.contest ? @data_post.contest.year_name : 'missing' %></li>
 <li>Is integrated? <%= @data_post.is_integrated ? 'Yes' : 'No' %>.</li>
 <li>Is obsolete? <%= @data_post.is_obsolete ? 'Yes' : 'No' %>.</li>
+<li>created_at: <%= @data_post.created_at %>.</li>
+<li>updated_at: <%= @data_post.updated_at %>.</li>
 <li>Has error? <%= @data_post.has_error ? 'Yes' : 'No' %>.</li>
 <% if @data_post.has_error %>
 <li>Error description: <%= @data_post.error_description %></li>
