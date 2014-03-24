@@ -6,8 +6,8 @@
 <%= link_to 'download data', admin_data_post_download_path(@data_post) %> |
 <%= link_to 'resubmit', admin_data_post_resubmit_path(@data_post) %></p>
 <ul>
-<li>Contest id: <%= @data_post.contest ? @data_post.contest_id : missing %></li>
-<li>Contest name: <%= @data_post.contest ? @data_post.contest.year_name : missing %></li>
+<li>Contest id: <%= @data_post.contest ? @data_post.contest_id : 'missing' %></li>
+<li>Contest name: <%= @data_post.contest ? @data_post.contest.year_name : 'missing' %></li>
 <li>Is integrated? <%= @data_post.is_integrated ? 'Yes' : 'No' %>.</li>
 <li>Is obsolete? <%= @data_post.is_obsolete ? 'Yes' : 'No' %>.</li>
 <li>Has error? <%= @data_post.has_error ? 'Yes' : 'No' %>.</li>
