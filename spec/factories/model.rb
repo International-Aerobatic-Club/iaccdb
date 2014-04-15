@@ -258,4 +258,8 @@ FactoryGirl.define do
     r.association :flight
     r.association :c_result
   end
+### DataPost
+  factory :data_post do |r|
+    r.association :contest
+  end
 end

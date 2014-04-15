@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140321204657) do
+ActiveRecord::Schema.define(:version => 20140415131503) do
 
   create_table "c_results", :force => true do |t|
     t.integer  "contest_id"
@@ -44,7 +44,6 @@ ActiveRecord::Schema.define(:version => 20140321204657) do
 
   create_table "data_posts", :force => true do |t|
     t.integer  "contest_id"
-    t.text     "data"
     t.boolean  "is_integrated",     :default => false
     t.boolean  "has_error",         :default => false
     t.string   "error_description"
