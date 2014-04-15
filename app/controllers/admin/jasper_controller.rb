@@ -10,11 +10,11 @@ def results
     post_record = DataPost.create
     if xml_data && xml_data.is_a?(String)
       logger.info "JasperController: parse xml param"
-      post_record.data = xml_data
+      post_record.store(xml_data)
       post_record.save
     elsif xml_data
       logger.info "JasperController: read xml file"
-      post_record.data = xml_data.read
+      post_record.store(xml_data.read)
       post_record.save
     else
       @exception = "invalid post"
@@ -28,7 +28,7 @@ def results
       jasper = Jasper::JasperParse.new
       jasper.do_parse(parser)
       @contest_id = jasper.contest_id
-      if (@contest_id == nil)
+      if (@contest_id == nil || @contest_id <= 0)
         j2d = Jasper::JasperToDB.new
         contest = Contest.create j2d.extract_contest_params_hash(jasper)
         @contest_id = contest.id
