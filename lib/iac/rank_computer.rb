@@ -27,7 +27,7 @@ module IAC
         logger.info "Computing ranks and judge metrics for #{pilot_flight}"
         pf_result = pilot_flight.pf_results.first
         if pf_result
-          p = pf_result.flight_rank
+          p = pf_result.flight_rank || 0
           p_ranks << p
           pilot_flight.pfj_results.each do |pfj_result|
             logger.info "Computing #{pfj_result}"
@@ -45,7 +45,7 @@ module IAC
             jf_result.pilot_count += 1
             jf_result.total_k += pilot_flight.sequence.total_k
             jf_result.figure_count += pilot_flight.sequence.figure_count
-            j = pfj_result.flight_rank
+            j = pfj_result.flight_rank || 0
             j_rank_for_jf[jf_result] << j
             jf_result.sigma_ri_delta += (j - p).abs *
               (pfj_result.flight_value.fdiv(10) - pf_result.flight_value).abs / 
@@ -69,20 +69,28 @@ module IAC
         avg_j_ranks = average_ranks(j_ranks)
         (0 ... pilot_count).each do |ip|
           # values for rho
-          p = avg_p_ranks[ip] - avg_rank
-          j = avg_j_ranks[ip] - avg_rank
+          ap = avg_p_ranks[ip] || 0
+          aj = avg_j_ranks[ip] || 0
+          p = ap - avg_rank
+          j = aj - avg_rank
           jf_result.ftsdxdy += 4 * j * p
           jf_result.ftsdx2 += 4 * j * j
           jf_result.ftsdy2 += 4 * p * p
-          d = p_ranks[ip] - j_ranks[ip]
+          p_rank = p_ranks[ip] || 0
+          j_rank = j_ranks[ip] || 0
+          d = p_rank - j_rank
           jf_result.sigma_d2 += d * d
           # concordant and discordant counts
           (ip+1 ... pilot_count).each do |jp|
-            if (j_ranks[ip] < j_ranks[jp] && p_ranks[ip] < p_ranks[jp]) ||
-               (j_ranks[ip] > j_ranks[jp] && p_ranks[ip] > p_ranks[jp])
+            jip = j_ranks[ip] || 0
+            jjp = j_ranks[jp] || 0
+            pip = p_ranks[ip] || 0
+            pjp = p_ranks[jp] || 0
+            if (jip < jjp && pip < pjp) ||
+               (jip > jjp && pip > pjp)
               jf_result.con += 1
-            elsif (j_ranks[ip] < j_ranks[jp] && p_ranks[ip] > p_ranks[jp]) ||
-                  (j_ranks[ip] > j_ranks[jp] && p_ranks[ip] < p_ranks[jp])
+            elsif (jip < jjp && pip > pjp) ||
+                  (jip > jjp && pip < pjp)
               jf_result.dis += 1
             end
           end
