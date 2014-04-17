@@ -11,7 +11,7 @@ class ProcessJasperJob < Struct.new(:data_post_id)
   def perform
     say "Performing process JaSPer data post #{data_post_id}"
     post_record = DataPost.find(data_post_id)
-    parser = LibXML::XML::Parser.string(post_record.data)
+    parser = LibXML::XML::Parser.file(post_record.filename)
     jasper = Jasper::JasperParse.new
     jasper.do_parse(parser)
     @contest_id = jasper.contest_id
