@@ -2,7 +2,8 @@ source 'http://rubygems.org'
 
 gem 'rails', "~> 3.0.0"
 
-gem 'delayed_job_active_record', '= 0.4.2'
+gem 'delayed_job'
+gem 'delayed_job_active_record'
 
 gem 'libxml-ruby'
 
