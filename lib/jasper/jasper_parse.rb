@@ -236,6 +236,9 @@ class JasperParse
     case jFlt
     when 2 # free
       nodes = @document.find("/ContestResults/Pilots/Category[@CategoryID=#{jCat}]/Pilot[@PilotID=#{jPilot}]/FreestyleKs")
+      if (nodes.length == 0)
+        nodes = @document.find("/ContestResults/KnownKFactors/Category[@CategoryID=#{jCat}]")
+      end
     when 3 # unknown
       nodes = @document.find("/ContestResults/UnKnownKFactors/One/Category[@CategoryID=#{jCat}]")
     when 4 # unknown II

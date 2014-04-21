@@ -77,7 +77,7 @@ module Jasper
       cat = Category.find_for_cat_aircat('Sportsman', 'P')
       flight = @contest.flights.where( :name => 'Free', :category_id => cat.id).first
       flight.should_not be_nil
-      pilot = Member.where(:family_name => 'Ernewein').first
+      pilot = Member.where(:family_name => 'Wieckowski').first
       pilot.should_not be_nil
       pilot_flight = flight.pilot_flights.where(:pilot_id => pilot).first
       pilot_flight.should_not be_nil
@@ -85,13 +85,13 @@ module Jasper
       sequence.should_not be_nil
       sequence.figure_count.should == 11
       sequence.total_k.should == 133
-      sequence.k_values.should == [6, 15, 21, 16, 8, 16, 15, 14, 12, 4, 6]
+      sequence.k_values.should == [7, 14, 19, 18, 10, 14, 13, 16, 11, 5, 6]
     end
     it 'captures sportsman second free sequences' do
       cat = Category.find_for_cat_aircat('Sportsman', 'P')
       flight = @contest.flights.where( :name => 'Unknown', :category_id => cat.id).first
       flight.should_not be_nil
-      pilot = Member.where(:family_name => 'Ernewein').first
+      pilot = Member.where(:family_name => 'Wieckowski').first
       pilot.should_not be_nil
       pilot_flight = flight.pilot_flights.where(:pilot_id => pilot).first
       pilot_flight.should_not be_nil
@@ -99,7 +99,7 @@ module Jasper
       sequence.should_not be_nil
       sequence.figure_count.should == 11
       sequence.total_k.should == 133
-      sequence.k_values.should == [6, 15, 21, 16, 8, 16, 15, 14, 12, 4, 6]
+      sequence.k_values.should == [7, 14, 19, 18, 10, 14, 13, 16, 11, 5, 6]
     end
     it 'captures unknown sequences' do
       cat = Category.find_for_cat_aircat('Unlimited', 'P')

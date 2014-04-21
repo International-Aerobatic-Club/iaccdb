@@ -78,8 +78,11 @@ module Jasper
     it 'gives k values' do
       @jasper.k_values_for(1, 2, 1).should == '7 15 14 10 4 10 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3 '
       @jasper.k_values_for(2, 1, 1).should == '17 7 4 14 15 16 14 17 10 10 0 0 0 0 0 0 0 0 0 0 6 '
-      @jasper.k_values_for(2, 2, 1).should == '6 15 21 16 8 16 15 14 12 4 0 0 0 0 0 0 0 0 0 0 6 '
-      @jasper.k_values_for(2, 3, 1).should == '6 15 21 16 8 16 15 14 12 4 0 0 0 0 0 0 0 0 0 0 6 '
+      @jasper.k_values_for(2, 1, 2).should == '17 7 4 14 15 16 14 17 10 10 0 0 0 0 0 0 0 0 0 0 6 '
+      @jasper.k_values_for(2, 2, 1).should == '17 7 4 14 15 16 14 17 10 10 0 0 0 0 0 0 0 0 0 0 6 '
+      @jasper.k_values_for(2, 2, 2).should == '7 14 19 18 10 14 13 16 11 5 0 0 0 0 0 0 0 0 0 0 6 '
+      @jasper.k_values_for(2, 3, 1).should == '17 7 4 14 15 16 14 17 10 10 0 0 0 0 0 0 0 0 0 0 6 '
+      @jasper.k_values_for(2, 3, 2).should == '7 14 19 18 10 14 13 16 11 5 0 0 0 0 0 0 0 0 0 0 6 '
       @jasper.k_values_for(3, 2, 1).should == '9 10 15 14 11 19 10 13 17 16 11 17 14 14 0 0 0 0 0 0 8 '
       @jasper.k_values_for(3, 3, 1).should == '32 17 10 20 10 17 19 15 20 13 0 0 0 0 0 0 0 0 0 0 8 '
     end
