@@ -11,14 +11,14 @@ class ProcessJasperJob < Struct.new(:data_post_id)
   def perform
     say "Performing process JaSPer data post #{data_post_id}"
     post_record = DataPost.find(data_post_id)
+    @contest_id = post_record.contest_id
     parser = LibXML::XML::Parser.file(post_record.filename)
     jasper = Jasper::JasperParse.new
     jasper.do_parse(parser)
-    @contest_id = jasper.contest_id
     say "Parsed contest, #{jasper.contest_name} #{jasper.contest_date}"
     @record_year = jasper.contest_date.year
     j2d = Jasper::JasperToDB.new
-    @contest = j2d.process_contest(jasper)
+    @contest = j2d.process_contest(jasper, @contest_id)
     post_record.is_integrated = true
     post_record.save
   end

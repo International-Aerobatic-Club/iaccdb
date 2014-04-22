@@ -11,13 +11,16 @@ attr_reader :dContest
 
 # accept parsed XML JaSPer contest data
 # appropriately update or create records in the contest database
-# return the id of the contest
-def process_contest(jasper)
-  jCID = jasper.contest_id
+# contest_id is the id for the contest created and assigned for 
+#   the posted data, but not recorded in the posted data, 
+#   when the data was posted
+# returns the contest
+def process_contest(jasper, contest_id = nil)
+  contest_id = jasper.contest_id if contest_id == nil
   dContest = nil
   contest_params = extract_contest_params_hash(jasper)
-  if (jCID)
-    dContest = updateOrCreateContest(jCID, contest_params)
+  if (contest_id)
+    dContest = updateOrCreateContest(contest_id, contest_params)
   else
     dContest = Contest.create(contest_params)
   end
