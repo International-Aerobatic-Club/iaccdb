@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140415131503) do
+ActiveRecord::Schema.define(:version => 20140506110816) do
+
+  create_table "airplanes", :force => true do |t|
+    t.string   "make"
+    t.string   "model"
+    t.string   "reg"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "c_results", :force => true do |t|
     t.integer  "contest_id"
@@ -232,7 +240,7 @@ ActiveRecord::Schema.define(:version => 20140415131503) do
     t.integer  "pilot_id"
     t.integer  "flight_id"
     t.integer  "sequence_id"
-    t.integer  "aircraft_id"
+    t.integer  "airplane_id"
     t.string   "chapter",       :limit => 8
     t.datetime "created_at"
     t.datetime "updated_at"
