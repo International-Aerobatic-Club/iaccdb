@@ -5,6 +5,7 @@ class PilotFlight < ActiveRecord::Base
   belongs_to :pilot, :class_name => 'Member'
   has_many :scores, :dependent => :destroy
   belongs_to :sequence
+  belongs_to :airplane
   has_many :pf_results, :dependent => :destroy
   has_many :pfj_results, :dependent => :destroy
   has_one :contest, :through => :flight
