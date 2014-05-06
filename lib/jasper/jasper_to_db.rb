@@ -65,8 +65,9 @@ def process_scores(dContest, jasper)
       dFlight = flight_for(dContest, dCategory, jasper, jCat, jFlt)
       jasper.pilots_scored(jCat, jFlt).each do |jPilot|
         dPilot = pilot_for(jasper, jCat, jPilot)
+        dAirplane = airplane_for(jasper, jCat, jPilot)
         dSequence = sequence_for(jasper, jCat, jFlt, jPilot)
-        dPilotFlight = pilot_flight_for(dFlight, dPilot, dSequence, jasper, jCat, jFlt, jPilot)
+        dPilotFlight = pilot_flight_for(dFlight, dPilot, dSequence, dAirplane, jasper, jCat, jFlt, jPilot)
         jasper.judge_teams(jCat, jFlt).each do |jJudgeTeam|
           dJudge = judge_for(jasper, jCat, jFlt, jJudgeTeam)
           dAssist = judge_assist_for(jasper, jCat, jFlt, jJudgeTeam)
@@ -127,6 +128,12 @@ def pilot_for(jasper, jCat, jPilot)
     jasper.pilot_last_name(jCat, jPilot))
 end
 
+def airplane_for(jasper, jCat, jPilot)
+  Airplane.find_or_create_by_make_model_reg(jasper.airplane_make(jCat, jPilot),
+    jasper.airplane_model(jCat, jPilot),
+    jasper.airplane_reg(jCat, jPilot))
+end
+
 def judge_for(jasper, jCat, jFlt, jJudgeTeam)
   member_for(
     jasper.judge_iac_number(jCat, jFlt, jJudgeTeam),
@@ -156,11 +163,12 @@ def sequence_for(jasper, jCat, jFlt, jPilot)
   Sequence.find_or_create(ks)
 end
 
-def pilot_flight_for(dFlight, dPilot, dSequence, jasper, jCat, jFlt, jPilot)
+def pilot_flight_for(dFlight, dPilot, dSequence, dAirplane, jasper, jCat, jFlt, jPilot)
   PilotFlight.create(
     :flight_id => dFlight.id,
     :pilot_id => dPilot.id,
     :sequence_id => dSequence.id,
+    :airplane_id => dAirplane.id,
     :chapter => jasper.pilot_chapter(jCat, jPilot),
     :penalty_total => jasper.penalty(jCat, jFlt, jPilot))
 end

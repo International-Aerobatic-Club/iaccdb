@@ -59,6 +59,20 @@ module Jasper
       pilot_flight.should_not be_nil
       pilot_flight.penalty_total.should == 100
     end
+    it 'captures airplanes' do
+      cat = Category.find_for_cat_aircat('Sportsman', 'P')
+      flight = @contest.flights.where( :name => 'Known', :category_id => cat.id).first
+      flight.should_not be_nil
+      pilot = Member.where(:family_name => 'Ernewein').first
+      pilot.should_not be_nil
+      pilot_flight = flight.pilot_flights.where(:pilot_id => pilot).first
+      pilot_flight.should_not be_nil
+      airplane = pilot_flight.airplane
+      airplane.should_not be_nil
+      airplane.make.should == 'Bucker Youngman'
+      airplane.model.should == '131'
+      airplane.reg.should == 'CFLXE'
+    end
     it 'captures known sequences' do
       cat = Category.find_for_cat_aircat('Sportsman', 'P')
       flight = @contest.flights.where( :name => 'Known', :category_id => cat.id).first
