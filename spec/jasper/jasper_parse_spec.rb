@@ -59,6 +59,11 @@ module Jasper
       @jasper.pilot_last_name(2,3).should == 'Lightbody'
       @jasper.pilot_chapter(2,3).should == '3'
     end
+    it 'gives airplane' do
+      @jasper.airplane_make(4,1).should == 'Sukoi'
+      @jasper.airplane_model(4,1).should == '29'
+      @jasper.airplane_reg(4,1).should == '54CP'
+    end
     it 'gives judge' do
       @jasper.judge_iac_number(2,1,1).should == '431885'
       @jasper.judge_first_name(2,1,1).should == 'Sanford'

@@ -172,6 +172,21 @@ class JasperParse
     nodes = @document.find("/ContestResults/Pilots/Category[@CategoryID=#{jCat}]/Pilot[@PilotID=#{jPilot}]/Chapter")
     nodes && nodes.first ? nodes.first.inner_xml : ''
   end
+  
+  def airplane_make(jCat, jPilot)
+    nodes = @document.find("/ContestResults/Pilots/Category[@CategoryID=#{jCat}]/Pilot[@PilotID=#{jPilot}]/Aircraft/Make")
+    nodes && nodes.first ? nodes.first.inner_xml : ''
+  end
+
+  def airplane_model(jCat, jPilot)
+    nodes = @document.find("/ContestResults/Pilots/Category[@CategoryID=#{jCat}]/Pilot[@PilotID=#{jPilot}]/Aircraft/Model")
+    nodes && nodes.first ? nodes.first.inner_xml : ''
+  end
+
+  def airplane_reg(jCat, jPilot)
+    nodes = @document.find("/ContestResults/Pilots/Category[@CategoryID=#{jCat}]/Pilot[@PilotID=#{jPilot}]/Aircraft/NNumber")
+    nodes && nodes.first ? nodes.first.inner_xml : ''
+  end
 
   def penalty(jCat, jFlt, jPilot)
     nodes =
