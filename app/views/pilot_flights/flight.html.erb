@@ -1,8 +1,10 @@
-  <h3><%= link_to pilot_flight.flight.displayName, flight_path(pilot_flight.flight.id) %></h3>
-  
-  <% scores = pilot_flight.scores.order(:judge_id) %>
   <% pf_result = pilot_flight.pf_results.first %>
+
+  <h3><%= link_to pilot_flight.flight.displayName, flight_path(pilot_flight.flight.id) %>
+  <%= pilot_flight.airplane.description if pilot_flight.airplane %></h3>
+
   <% sequence = pilot_flight.sequence %>
+  <% scores = pilot_flight.scores.order(:judge_id) %>
   <% ctJudge = scores.size %>
   <% pfj_results = [] %>
   <% if 0 < ctJudge %>

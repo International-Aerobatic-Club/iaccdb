@@ -2,6 +2,7 @@
 
 <table class='pilot_results'><thead><tr>
   <th colspan='2'>Pilot</th>
+  <th>Airplane</th>
 <% flight_order = [] %>
 <% c_result.f_results.order(:id).each do |f_result| %>
   <th colspan='3'>
@@ -20,6 +21,10 @@
   <td class="pilot">
     <%= link_to("#{pilot.name}", pilot_score_path(pilot, @contest)) %>
   </td>
+  <% pf_result = pc_result.pf_results.first %>
+  <% pilot_flight = pf_result.pilot_flight if pf_result %>
+  <% airplane = pilot_flight.airplane if pilot_flight %>
+  <td class='airplane'><%= airplane.description if airplane %></td>
   <% total_possible = 0 %>
   <% flight_index = 0 %>
   <% pc_result.pf_results.order(:f_result_id).each do |pf_result| %>
