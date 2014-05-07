@@ -17,4 +17,8 @@ class Airplane < ActiveRecord::Base
     plane
   end
 
+  def description
+    "#{make} #{model} #{reg}"
+  end
+
 end
