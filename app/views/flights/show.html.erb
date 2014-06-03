@@ -8,8 +8,10 @@
 <tr>
 <th>Pilot</th>
 <th>Airplane</th>
-<% @judge_results.values[0].each_with_index do |pfj_result, j| %>
-  <th colspan='2'><%= "J#{j+1}" %></th>
+<% if @judge_results.values[0] %>
+  <% @judge_results.values[0].each_with_index do |pfj_result, j| %>
+    <th colspan='2'><%= "J#{j+1}" %></th>
+  <% end %>
 <% end %>
 <th colspan='3'>Score</th>
 <th>Pnlt</th>
