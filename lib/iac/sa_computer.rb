@@ -174,10 +174,18 @@ def storeResults
     flight_total += @j_totals[j]
   end
   @kays.length.times do |f|
-    @f_totals[f] = (@f_totals[f] / @judges.length.to_f).round.to_i
+    if (0 < @judges.length)
+      @f_totals[f] = (@f_totals[f] / @judges.length.to_f).round.to_i
+    else
+      @f_totals[f] = 0
+    end
   end
   @pf.figure_results = @f_totals
-  flight_avg = flight_total / (@judges.length * 10.0) # scores are stored * 10
+  if (0 < @judges.length)
+    flight_avg = flight_total / (@judges.length * 10.0) # scores are stored * 10
+  else
+    flight_avg = 0
+  end
   @pf.flight_value = flight_avg
   flight_avg -= @pilot_flight.penalty_total
   @pf.adj_flight_value = flight_avg < 0 ? 0 : flight_avg
