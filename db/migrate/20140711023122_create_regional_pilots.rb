@@ -1,12 +1,12 @@
 class CreateRegionalPilots < ActiveRecord::Migration
   def self.up
     create_table :regional_pilots do |t|
-      t.id :pilot_id
+      t.integer :pilot_id
       t.string :region, :limit => 16, :null => false
-      t.int :year
+      t.integer :year
       t.decimal :percentage, :precision => 5, :scale => 2
       t.boolean :qualified, :default => false
-      t.int :rank
+      t.integer :rank
 
       t.timestamps
     end
