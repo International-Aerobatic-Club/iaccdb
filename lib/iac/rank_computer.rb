@@ -16,8 +16,6 @@ module IAC
     include Log::ConfigLogger
     cattr_accessor :logger
 
-    HARD_ZERO = -30
-    
     def computeJudgeMetrics(flight, f_result)
       jf_results_by_judge = {}
       p_ranks = []
