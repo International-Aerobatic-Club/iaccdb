@@ -12,6 +12,14 @@ class CResult < ActiveRecord::Base
     "c_result #{id} for #{contest}, #{category.name}"
   end
 
+  def year
+    contest.year
+  end
+
+  def region
+    contest.region
+  end
+
   def display_category
     category.name
   end

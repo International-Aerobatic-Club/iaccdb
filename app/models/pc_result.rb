@@ -2,10 +2,24 @@ class PcResult < ActiveRecord::Base
   belongs_to :pilot, :class_name => 'Member'
   belongs_to :c_result
   has_many :pf_results
+  has_many :region_contests
+  has_many :regional_pilots, :through => :region_contests
 
   def to_s 
     a = "pc_result for pilot #{pilot} value #{category_value}, "
     a += "pilot_flight results [\n\t#{pf_results.join("\n\t")}\n]" if pf_results
+  end
+
+  def category
+    c_result.category
+  end
+
+  def year
+    c_result.year
+  end
+
+  def region
+    c_result.region
   end
 
   def compute_category_totals(f_results)
