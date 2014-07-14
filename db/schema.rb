@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140711023234) do
+ActiveRecord::Schema.define(:version => 20140714223823) do
 
   create_table "airplanes", :force => true do |t|
     t.string   "make"
@@ -256,13 +256,14 @@ ActiveRecord::Schema.define(:version => 20140711023234) do
 
   create_table "regional_pilots", :force => true do |t|
     t.integer  "pilot_id"
-    t.string   "region",     :limit => 16,                                                  :null => false
+    t.string   "region",      :limit => 16,                                                  :null => false
     t.integer  "year"
-    t.decimal  "percentage",               :precision => 5, :scale => 2
-    t.boolean  "qualified",                                              :default => false
+    t.decimal  "percentage",                :precision => 5, :scale => 2
+    t.boolean  "qualified",                                               :default => false
     t.integer  "rank"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "category_id"
   end
 
   create_table "scores", :force => true do |t|
