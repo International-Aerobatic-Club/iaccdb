@@ -47,6 +47,8 @@ Iac::Application.routes.draw do
     root :to => "contests#index"
     get 'judges/:year', :action => :judges
     get 'judges', :action => :judges
+    get 'regionals/:year', :action => :regionals
+    get 'regionals', :action => :regionals
   end
 
   ### Default namespace
