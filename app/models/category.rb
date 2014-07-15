@@ -2,6 +2,7 @@ class Category < ActiveRecord::Base
   has_many :jy_results
   has_many :flights
   has_many :c_results
+  has_many :region_pilots
 
   def self.find_for_cat_aircat(cat, aircat)
     aircat = aircat && aircat =~ /g/i ? 'G' : 'P'

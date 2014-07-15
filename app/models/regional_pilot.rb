@@ -2,6 +2,7 @@ class RegionalPilot < ActiveRecord::Base
   has_many :region_contest
   has_many :pc_results, :through => :region_contest
   belongs_to :pilot, :class_name => 'Member'
+  belongs_to :category
 
   def self.find_or_create_given_pc_result(pc_result)
     RegionalPilot.where(pilot_id: pc_result.pilot, 
