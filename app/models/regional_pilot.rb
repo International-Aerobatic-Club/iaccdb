@@ -4,14 +4,18 @@ class RegionalPilot < ActiveRecord::Base
   belongs_to :pilot, :class_name => 'Member'
   belongs_to :category
 
-  def self.find_or_create_given_pc_result(pc_result)
-    RegionalPilot.where(pilot_id: pc_result.pilot, 
-        category_id: pc_result.category,
-        region: pc_result.region,
-        year: pc_result.year).first ||
-    RegionalPilot.create(pilot_id: pc_result.pilot,
-        category_id: pc_result.category,
-        region: pc_result.region,
-        year: pc_result.year)
+  def self.find_or_create_given_result(year, region, category_id, pilot_id)
+    RegionalPilot.where(pilot_id: pilot_id, 
+        category_id: category_id,
+        region: region,
+        year: year).first ||
+    RegionalPilot.create(pilot_id: pilot_id, 
+        category_id: category_id,
+        region: region,
+        year: year)
+  end
+
+  def to_s
+    "#{pilot.name} #{category.name} #{region} #{year}"
   end
 end
