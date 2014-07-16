@@ -1,1 +1,5 @@
-<p><%= regional_series_pilot.pilot.name %></p>
+<tr><td><%= "\u2713" if regional_series_pilot.qualified %></td>
+<td><%= regional_series_pilot.rank %></td>
+<td><%= regional_series_pilot.pilot.name %></td>
+<td><%= regional_series_pilot.percentage %>%</td>
+</tr>

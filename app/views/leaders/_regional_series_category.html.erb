@@ -1,2 +1,6 @@
-<h3><%= regional_series_category[0] %></h3>
+<h3><%= region %> <%= regional_series_category[0] %></h3>
+<table>
+<tbody>
 <%= render :partial => 'regional_series_pilot', :collection => regional_series_category[1] %>
+</tbody>
+</table>

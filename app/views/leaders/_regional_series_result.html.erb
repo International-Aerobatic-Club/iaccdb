@@ -1,2 +1,3 @@
 <h2><%= regional_series_result[0] %></h2>
-<%= render :partial => 'regional_series_category', :collection => regional_series_result[1] %>
+<%= render :partial => 'regional_series_category', :collection => regional_series_result[1],
+  :locals => { :region => regional_series_result[0] } %>
