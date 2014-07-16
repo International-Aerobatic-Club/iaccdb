@@ -12,12 +12,16 @@ def self.is_national(region)
 end
 
 # Accumulate pc_results for contest onto regional_pilots
-def self.accumulate_contest (contest)
+def self.accumulate_contest (year, region, contest)
   puts "..Including #{contest.year_name} #{contest.place}"
   contest.c_results.each do |c_result|
     c_result.pc_results.each do |pc_result|
-      regional_pilot = RegionalPilot.find_or_create_given_pc_result pc_result
+      #puts "...finding regional pilot for #{pc_result.pilot}"
+      regional_pilot = RegionalPilot.find_or_create_given_result(
+         year, region, pc_result.category.id, pc_result.pilot.id)
+      #puts "....regional pilot is #{regional_pilot}"
       regional_pilot.pc_results << pc_result
+      #puts "....regional pilot contest count is #{regional_pilot.pc_results.count}"
     end
   end
 end
@@ -28,24 +32,28 @@ end
 # Competitors will have a result in each category they have competed
 # Does not currently ignore H/C (for patch) results
 def self.compute_results (year, region)
+  RegionalPilot.destroy_all(:year => year, :region => region)
   #first find the contests in the region 
   contests = Contest.where("year(start) = #{year} and region = '#{region}'")
   contests.each do |contest|
-    accumulate_contest contest
+    accumulate_contest year, region, contest
   end
   nationals = Contest.where("year(start) = #{year} and region = 'National'")
   nationals.each do |contest|
-    accumulate_contest contest
+    accumulate_contest year, region, contest
   end
+  RegionalPilot.where(:year => year, :region => region).update_all(:percentage => 65.0)
 end
 
-# Compute every competitor's eligibility in every region.
+# Compute every competitor's eligibility in region.
 # Does not currently account for chapter membership.
 def self.compute_eligibility (year, region)
+  RegionalPilot.where(:year => year, :region => region).update_all(:qualified => true)
 end
 
-# Compute ranking for every competitor X region X category
+# Compute ranking for every competitor X category in region
 def self.compute_ranking (year, region)
+  RegionalPilot.where(:year => year, :region => region).update_all(:rank => 1)
 end
 
 # Compute regional series results given year and region
