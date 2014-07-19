@@ -36,7 +36,7 @@ class LeadersController < ApplicationController
       cat_results = rp.group_by { |rpc| rpc.category }
       cat_results.each do |cat, rpc|
         puts "Category #{cat} region #{region} has region_pilots: #{rpc}"
-        rpc.sort! { |b,a| a.rank <=> b.rank }
+        rpc.sort! { |a,b| a.rank <=> b.rank }
       end    
       sorted_regions[region] = cat_results.sort_by { |cat, rpc| cat.sequence }
     end
