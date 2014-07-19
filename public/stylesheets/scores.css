@@ -6,6 +6,14 @@ td.percentage {
   text-align:right;
 }
 
+td.regional_series_pilot_contest {
+  padding-left: 12pt;
+}
+
+td.regional_series_pilot_name {
+  font-weight:bold;
+}
+
 td.k_value {
   text-align:right;
   padding-left: 4pt;
