@@ -18,6 +18,7 @@ div.flightScores {
 
 div#navigation ul {
   margin-top: 0px;
+  width:100px;
   list-style-type: none;
 }
 
