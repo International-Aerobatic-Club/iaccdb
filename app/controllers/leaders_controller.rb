@@ -28,10 +28,10 @@ class LeadersController < ApplicationController
   def regionals
     @year = params[:year] || Time.now.year
     @years = RegionalPilot.select("distinct year").all.collect{|rp| rp.year}.sort{|a,b| b <=> a}
-    region_pilots = RegionalPilot.includes(:category, :pilot).where(["year = ?", @year])
+    region_pilots = RegionalPilot.includes(:category, :pilot, :pc_results).joins(:region_contest).where(['year = ?', @year]).group('regional_pilot_id').having('count(distinct pc_result_id) > 1')
     sorted_regions = {}
+    @region_categories = {}
     region_results = region_pilots.group_by { |rp| rp.region }
-    puts "region_results is #{region_results}"
     region_results.each do |region, rp|
       cat_results = rp.group_by { |rpc| rpc.category }
       cat_results.each do |cat, rpc|
@@ -39,8 +39,10 @@ class LeadersController < ApplicationController
         rpc.sort! { |a,b| a.rank <=> b.rank }
       end    
       sorted_regions[region] = cat_results.sort_by { |cat, rpc| cat.sequence }
+      @region_categories[region] = cat_results.keys
     end
     @results = sorted_regions.sort
+    @regions = sorted_regions.keys
   end
 
 end
