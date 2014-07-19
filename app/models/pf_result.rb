@@ -32,6 +32,10 @@ class PfResult < ActiveRecord::Base
     "pf_result #{id} for pilot_flight #{pilot_flight.id}"
   end
 
+  def pct_possible
+    adj_flight_value / total_possible
+  end
+
   # Return the pfj_result for a judge team that contributed to
   # this flight result
   def for_judge(judge)

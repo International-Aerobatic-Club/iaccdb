@@ -22,8 +22,13 @@ class PcResult < ActiveRecord::Base
     c_result.region
   end
 
+  def pct_possible
+    category_value / total_possible
+  end
+
   def compute_category_totals(f_results)
     self.category_value = 0
+    self.total_possible = 0
     cur_pf_results = []
     f_results.each do |f_result|
       f_result.pf_results.each do |pf_result|
@@ -32,6 +37,7 @@ class PcResult < ActiveRecord::Base
     end
     cur_pf_results.each do |pf_result|
       self.category_value += pf_result.adj_flight_value
+      self.total_possible += pf_result.total_possible
       pf_results << pf_result if !pf_results.include?(pf_result)
     end
     pf_results.each do |pf_result|

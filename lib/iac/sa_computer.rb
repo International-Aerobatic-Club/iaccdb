@@ -27,6 +27,7 @@ def computePilotFlight(has_soft_zero)
   @kays = @seq ? @seq.k_values : nil
   @kays = nil if @kays && @kays.length == 0
   @pf.flight_value = 0
+  @pf.total_possible = @seq.total_k
   @pf.adj_flight_value = 0
   if @kays
     computeNonZeroValues(@pilot_flight.scores, has_soft_zero)

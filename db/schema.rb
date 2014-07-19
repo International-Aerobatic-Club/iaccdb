@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140714223823) do
+ActiveRecord::Schema.define(:version => 20140718111906) do
 
   create_table "airplanes", :force => true do |t|
     t.string   "make"
@@ -205,6 +205,7 @@ ActiveRecord::Schema.define(:version => 20140714223823) do
     t.boolean  "need_compute",                                  :default => true
     t.integer  "c_result_id"
     t.boolean  "star_qualifying",                               :default => false
+    t.integer  "total_possible"
   end
 
   create_table "pf_results", :force => true do |t|
@@ -220,6 +221,7 @@ ActiveRecord::Schema.define(:version => 20140714223823) do
     t.integer  "pc_result_id"
     t.integer  "f_result_id"
     t.string   "figure_ranks"
+    t.integer  "total_possible"
   end
 
   create_table "pfj_results", :force => true do |t|
