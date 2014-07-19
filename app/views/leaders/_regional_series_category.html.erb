@@ -1,4 +1,4 @@
-<a name='<%= region_category_link_name(region, regional_series_category[0]) %>'/a>
+<a class='target' name='<%= region_category_link_name(region, regional_series_category[0]) %>'/>
 <h3 class='regional'><%= region %> <%= regional_series_category[0] %></h3>
 <div class='navigation'>
 <%= render :partial => 'regional_series_category_link', :collection => @region_categories[region].reject { |r| r == regional_series_category[0] }, :locals => { :region => region } %>

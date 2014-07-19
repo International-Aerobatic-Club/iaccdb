@@ -1,4 +1,4 @@
-<a name='<%= regional_series_result[0] %>'/>
+<a class='target' name='<%= regional_series_result[0] %>'/>
 <h2 class='regional'><%= regional_series_result[0] %></h2>
 <div class='navigation'>
 <%= render :partial => 'regional_series_regions', :collection => @regions.reject { |r| r == regional_series_result[0] } %>
