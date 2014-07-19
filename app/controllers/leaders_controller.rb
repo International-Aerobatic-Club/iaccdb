@@ -39,10 +39,10 @@ class LeadersController < ApplicationController
         rpc.sort! { |a,b| a.rank <=> b.rank }
       end    
       sorted_regions[region] = cat_results.sort_by { |cat, rpc| cat.sequence }
-      @region_categories[region] = cat_results.keys
+      @region_categories[region] = cat_results.keys.sort_by { |cat| cat.sequence }
     end
     @results = sorted_regions.sort
-    @regions = sorted_regions.keys
+    @regions = sorted_regions.keys.sort
   end
 
 end
