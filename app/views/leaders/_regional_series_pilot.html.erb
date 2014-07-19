@@ -1,5 +1,7 @@
 <tr><td><%= "\u2713" if regional_series_pilot.qualified %></td>
-<td><%= regional_series_pilot.rank %></td>
-<td><%= regional_series_pilot.pilot.name %></td>
-<td><%= regional_series_pilot.percentage %>%</td>
+<td><%= regional_series_pilot.rank if regional_series_pilot.qualified %></td>
+<td class='regional_series_pilot_name'><%= regional_series_pilot.pilot.name %></td>
+<td><%= decimal_two(regional_series_pilot.percentage) %>%</td>
 </tr>
+<%= render :partial => 'regional_series_pilot_contest', 
+   :collection => regional_series_pilot.pc_results %>
