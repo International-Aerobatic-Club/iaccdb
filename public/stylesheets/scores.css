@@ -14,6 +14,12 @@ td.regional_series_pilot_name {
   font-weight:bold;
 }
 
+h2.regional { margin-bottom:0px; }
+h3.regional { margin-bottom:0px; }
+div.navigation { 
+  margin-top:0px; margin-bottom:1ex; 
+}
+
 td.k_value {
   text-align:right;
   padding-left: 4pt;
