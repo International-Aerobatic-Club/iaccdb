@@ -1,5 +1,9 @@
 <tr><td colspan='2'/>
-<td class='regional_series_pilot_contest'><%= regional_series_pilot_contest.contest.name %></td>
-<td><%= decimal_pct_two(regional_series_pilot_contest.category_value,
+<td class='regional_series_pilot_contest'>
+<%= link_to regional_series_pilot_contest.contest.name, 
+  contest_path(regional_series_pilot_contest.contest) %></td>
+<td class='total_average'><%= decimal_two(regional_series_pilot_contest.category_value) %></td>
+<td class='total_average'><%= regional_series_pilot_contest.total_possible %></td>
+<td class='total_percent'><%= decimal_pct_two(regional_series_pilot_contest.category_value,
   regional_series_pilot_contest.total_possible) %>%</td>
 </tr>
