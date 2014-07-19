@@ -25,7 +25,6 @@
   <% pilot_flight = pf_result.pilot_flight if pf_result %>
   <% airplane = pilot_flight.airplane if pilot_flight %>
   <td class='airplane'><%= airplane.description if airplane %></td>
-  <% total_possible = 0 %>
   <% flight_index = 0 %>
   <% pc_result.pf_results.order(:f_result_id).each do |pf_result| %>
     <!-- insert and blank columns -->
@@ -38,11 +37,9 @@
     <td class='total_average'>
       <%= decimal_two(pf_result.adj_flight_value) %>
     </td>
-    <% possible = pf_result.pilot_flight.sequence.total_k %>
     <td class='percentage'>
-      <%= score_pct_two(pf_result.adj_flight_value, possible) %>%
+      <%= score_pct_two(pf_result.adj_flight_value, pf_result.total_possible) %>%
     </td>
-    <% total_possible += possible %>
     <td class='rank'>(<%= pf_result.adj_flight_rank %>)</td>
   <% end %>
   <% while flight_index < flight_order.size do %>
@@ -53,7 +50,7 @@
     <%= decimal_two(pc_result.category_value) %>
   </td>
   <td class='percentage'>
-    <%= score_pct_two(pc_result.category_value, total_possible) %>%
+    <%= score_pct_two(pc_result.category_value, pc_result.total_possible) %>%
   </td>
   <td class='rank'>(<%= pc_result.category_rank %>)</td>
 </tr>
