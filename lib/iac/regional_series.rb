@@ -8,7 +8,11 @@ module IAC
 class RegionalSeries
 
 def self.is_national(region)
-  /national/i =~ region
+  /National/i =~ region
+end
+
+def self.required_contest_count(region)
+  (/NorthWest/i =~ region) ? 2 : 3;
 end
 
 # Accumulate pc_results for contest onto regional_pilots
@@ -42,18 +46,46 @@ def self.compute_results (year, region)
   nationals.each do |contest|
     accumulate_contest year, region, contest
   end
-  RegionalPilot.where(:year => year, :region => region).update_all(:percentage => 65.0)
+  RegionalPilot.where(:year => year, :region => region).each do |rp|
+    apc = rp.pc_results.collect { |pc| pc.pct_possible }
+    apc.sort!.reverse!
+    pc_ct = apc.count
+    pc_req = required_contest_count(region)
+    pc_use = pc_ct < pc_req ? pc_ct : pc_req
+    apc = apc.slice(0, pc_use)
+    avg_pct = apc.inject(0.0) { |ttl, pct| ttl += pct }
+    avg_pct /= pc_use
+    rp.update_attributes(:percentage => avg_pct, :qualified => (pc_use == pc_req))
+  end
 end
 
 # Compute every competitor's eligibility in region.
 # Does not currently account for chapter membership.
 def self.compute_eligibility (year, region)
-  RegionalPilot.where(:year => year, :region => region).update_all(:qualified => true)
+  #RegionalPilot.where(:year => year, :region => region).update_all(:qualified => true)
+  # already accomplished by compute_results
 end
 
 # Compute ranking for every competitor X category in region
 def self.compute_ranking (year, region)
-  RegionalPilot.where(:year => year, :region => region).update_all(:rank => 1)
+  #RegionalPilot.where(:year => year, :region => region).update_all(:rank => 1)
+  regional_pilots = RegionalPilot.where(:year => year, :region => region).order(
+    'qualified desc, percentage desc')
+  cat_pilots = regional_pilots.group_by { |p| p.category_id }
+  cat_pilots.each do |cat, pilots|
+    rank = 1
+    next_rank = 2
+    prev_qual = false
+    prev_pct = 0
+    pilots.each do |rp|
+      rp.rank = rank
+      rank = next_rank if prev_qual != rp.qualified || prev_pct != rp.percentage
+      next_rank += 1
+      prev_qual = rp.qualified
+      prev_pct = rp.percentage
+      rp.save
+    end
+  end
 end
 
 # Compute regional series results given year and region
