@@ -2,9 +2,6 @@
 # environment for IAC contest data application
 # for PfResult and PfjResult classes
 
-#require 'ranking/computer'
-#require 'log/config_logger'
-
 # this class contains methods to compute rankings from results.
 # It derives rankings from the scores, ranking pilots from highest
 # to lowest score.
@@ -50,7 +47,7 @@ module IAC
               pf_result.flight_value if 0 < pf_result.flight_value
             pfj_result.computed_values.each_with_index do |computed, i|
               graded = pfj_result.graded_values[i]
-              jf_result.minority_zero_ct += 1 if graded == HARD_ZERO && 0 < computed 
+              jf_result.minority_zero_ct += 1 if graded == Constants::HARD_ZERO && 0 < computed 
               jf_result.minority_grade_ct += 1 if computed < graded
             end
           end

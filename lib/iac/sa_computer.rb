@@ -8,10 +8,6 @@
 module IAC
 class SaComputer
 
-AVERAGE = -10
-CONFERENCE_AVERAGE = -20
-HARD_ZERO = -30
-
 def initialize(pilot_flight)
   @pilot_flight = pilot_flight
 end
@@ -27,8 +23,8 @@ def computePilotFlight(has_soft_zero)
   @kays = @seq ? @seq.k_values : nil
   @kays = nil if @kays && @kays.length == 0
   @pf.flight_value = 0
-  @pf.total_possible = @seq.total_k
   @pf.adj_flight_value = 0
+  @pf.total_possible = 0
   if @kays
     computeNonZeroValues(@pilot_flight.scores, has_soft_zero)
     resolveAverages
@@ -73,11 +69,11 @@ def computeNonZeroValues(pfScores, has_soft_zero)
           @fjsx[f] << x
         else
           # map soft zero to hard zero if has_soft_zero is false
-          v = HARD_ZERO if !has_soft_zero && v == 0
+          v = Constants::HARD_ZERO if !has_soft_zero && v == 0
           @fjsx[f] << v
         end
-        @zero_ct[f] += 1 if v == HARD_ZERO
-        @score_ct[f] += 1 if v != AVERAGE
+        @zero_ct[f] += 1 if v == Constants::HARD_ZERO
+        @score_ct[f] += 1 if v != Constants::AVERAGE
         @grade_ct[f] += 1 if 0 <= v
       else
         Rails.logger.error
@@ -94,7 +90,7 @@ def resolveAverages
       avg = average_score(f)
       @fjsx[f].length.times do |j|
         grade = @fjsx[f][j]
-        if grade == CONFERENCE_AVERAGE || grade == AVERAGE
+        if grade == Constants::CONFERENCE_AVERAGE || grade == Constants::AVERAGE
           @fjsx[f][j] = avg 
         end
       end
@@ -133,7 +129,7 @@ def resolveZeros
         # minority zero
         avg = average_score(f)
         @fjsx[f].length.times do |j|
-          if @fjsx[f][j] == HARD_ZERO
+          if @fjsx[f][j] == Constants::HARD_ZERO
             @fjsx[f][j] = avg 
           end
         end
@@ -190,6 +186,7 @@ def storeResults
   @pf.flight_value = flight_avg
   flight_avg -= @pilot_flight.penalty_total
   @pf.adj_flight_value = flight_avg < 0 ? 0 : flight_avg
+  @pf.total_possible = @seq.total_k * 10
   @pf.save
 end
 

@@ -7,6 +7,10 @@ module Constants
   POWER_CATEGORY = 'P'
   GLIDER_CATEGORY = 'G'
 
+  AVERAGE = -10
+  CONFERENCE_AVERAGE = -20
+  HARD_ZERO = -30
+
   def airplane_category_name(aircat)
     case aircat 
       when POWER_CATEGORY then 'Power'
