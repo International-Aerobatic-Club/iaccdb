@@ -22,8 +22,12 @@ class PcResult < ActiveRecord::Base
     c_result.region
   end
 
+  def contest
+    c_result.contest
+  end
+
   def pct_possible
-    category_value / total_possible
+    category_value * 100.0 / total_possible
   end
 
   def compute_category_totals(f_results)
