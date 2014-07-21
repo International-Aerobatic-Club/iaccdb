@@ -37,7 +37,7 @@
     <%= decimal_two(pf_result.flight_value) %>
   </td>
   <td class='percentage'>
-    <%= score_pct_two(pf_result.flight_value, pilot_flight.sequence.total_k) %>%
+    <%= score_pct_two(pf_result.flight_value, pf_result.total_possible) %>%
   </td>
   <td class='overall_rank'>(<%= pf_result.flight_rank %>)</td>
   <td class='points'><%= pilot_flight.penalty_total %></td>

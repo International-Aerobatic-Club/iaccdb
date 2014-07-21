@@ -11,12 +11,6 @@ module ApplicationHelper
   def score_pct_two(n,d)
     n ||= 0
     d ||= 1
-    decimal_two((n * 10.0).fdiv(d))
-  end
-
-  def decimal_pct_two(n,d)
-    n ||= 0
-    d ||= 1
     decimal_two((n * 100.0).fdiv(d))
   end
 
