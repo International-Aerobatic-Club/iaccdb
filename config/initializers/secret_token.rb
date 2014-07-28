@@ -4,4 +4,4 @@
 # If you change this key, all old signed cookies will become invalid!
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-Iac::Application.config.secret_token = '7a6764e92ea20803005c4ae32c88b2c1612098a5437c39b4e91c8ac5d644a022d1194540fb0e0fee8edd6a6fa2da60d810ae45f273e9f1da3e889d61218079cb'
+Iac::Application.config.secret_token = '214b2ff2d2088be1974fc7043c2cbbc69abee5f6ae9b189131ad697b2b223dc20f773a98ad60f637691e19519573f84c3ec6e510104d4f89635c52fb77f75a7f'

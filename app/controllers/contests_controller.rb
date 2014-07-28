@@ -5,7 +5,7 @@ class ContestsController < ApplicationController
   # GET /contests.xml
   def index
     @contests = Contest.order("start DESC")
-
+debugger
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @contests }
