@@ -1,5 +1,5 @@
 // Have Sprockets pull the flot javascript files into this one during asset compilation
-//= require_tree ./flot
+//= require ./flot/jquery.flot.js
 
 // Plot functions for judge grade distribution overlaid on the normal
 
