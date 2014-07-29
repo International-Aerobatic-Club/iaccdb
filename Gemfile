@@ -35,4 +35,6 @@ end
 group :production do
   gem 'mysql2'
   gem 'daemons'
+  # support for execjs asset precompilation
+  gem 'therubyracer'
 end
