@@ -1,3 +1,6 @@
+// Have Sprockets pull the flot javascript files into this one during asset compilation
+//= require_tree ./flot
+
 // Plot functions for judge grade distribution overlaid on the normal
 
 function gauss(u,s,x) {
