@@ -42,11 +42,13 @@ more flights of the category.</p>
 for each flight flown in the category, and the overall
 score and rank.  Each row lists 
 flight and overall results for a single pilot.  
+</p><p>
+A star ★  to the left of the pilot name means that the performance
+qualifies for an IAC stars achievment award.
 </p>
-<p>The judge results metrics show
-rollups for all flights judged in the category.
+<p>The judge results metrics show rollups for all flights judged in the category.
 <p>
-<img class='notes_image' src="/images/Category.png"/>
+<%= image_tag 'Category.png', :class=>'notes_image' %>
 <p class='notes_text'>
 <ol>
 <li>Each link at the top of the flight column
@@ -73,7 +75,7 @@ further notes about the numbers in the columns next to the judge names.</li>
 at one contest measured-up in front of one judging line.
 It shows rankings given the pilots by each judge, penalties,
 and points before and after penalties.</p>
-<img class='notes_image' src="/images/Flight.png"/>
+<%= image_tag 'Flight.png', :class=>'notes_image' %>
 <p class='notes_text'><ol>
 <li>Each link in the pilot column leads to the scoring detail for all
 flights flown by the pilot at the contest.</li>
@@ -99,7 +101,7 @@ further notes about the numbers in the columns next to the judge names.</li>
 <a name="grades"></a><h2>Grades</h2>
 <p>The details for a pilot show every grade from every judge for
 every flight flown by one pilot at one contest.</p>
-<img class='notes_image' src="/images/PilotFlight.png"/>
+<%= image_tag 'PilotFlight.png', :class => 'notes_image' %>
 <p class='notes_text'><ol>
 <li>The F column shows the figure number, 'P' for Presentation.</li>
 <li>The individual judge columns show the grade given by each judge
@@ -145,12 +147,10 @@ penalties.  Penalties sometimes alter the final rankings of the pilots.</p>
 <dd>is the full computation of the Spearman Rank Corellation Coefficent
 formulated as follows, multiplied by 100.
 <p>
-<img
-src="/images/rhoform.png"
-alt="\rho = \frac{\sum_p(x_p-\bar{x})(y_p-\bar{y})}{\sqrt{\sum_p (x_p-\bar{x})^2 \sum_p(y_p-\bar{y})^2}}"/>
-<img
-src="/images/rhodef.png"
-alt="$x_p$ and $y_p$ are judge and result ranks for pilot p adjusted for ties.  When $1 < m$ pilots have the same rank $r$, the values for $x_p$ (or $y_p$) are the average $r + (m - 1)/2$ of the positions they cover.  For example, with three tied for third, $x_p$ is $(3+4+5)/3 = 3 + (3-1)/2 = 4$."/>
+<%= image_tag 'rhoform.png',
+:alt => "\rho = \frac{\sum_p(x_p-\bar{x})(y_p-\bar{y})}{\sqrt{\sum_p (x_p-\bar{x})^2 \sum_p(y_p-\bar{y})^2}}" %>
+<%= image_tag 'rhodef.png',
+:alt => "$x_p$ and $y_p$ are judge and result ranks for pilot p adjusted for ties.  When $1 < m$ pilots have the same rank $r$, the values for $x_p$ (or $y_p$) are the average $r + (m - 1)/2$ of the positions they cover.  For example, with three tied for third, $x_p$ is $(3+4+5)/3 = 3 + (3-1)/2 = 4$." %>
 </p><p>
 rho ranges from -100 to 100.  
 100 means the judge ranked the pilots exactly the same as the result
@@ -170,7 +170,7 @@ track the three separate sums from all flights.
 <dd>is the CIVA computation that scales differences in the judge score and
 overall score by the difference in rank.  The formula is:
 <p>
-<img src='/images/RI.png'/>
+<%= image_tag 'RI.png' %>
 </p>
 <p>A zero RI represents perfect agreement in the rankings.  Larger numbers
 are worse.  Find more information about RI in the FAI Sporting Code, Section 6:
@@ -188,12 +188,10 @@ is the Goodman and Kruskal gamma correlation coefficient
 multiplied by 100.  
 The formula is:
 <p>
-<img class="inline-formula"
-src="/images/gammaform.png"
-alt="\gamma=\frac{N_c-N_d}{N_c+N_d}"/>
-<img class="inline-formula"
-src="/images/gammadef.png"
-alt="$N_c$ is the number of concordant pairs.  $N_d$ is the number of discordant pairs."/>
+<%= image_tag 'gammaform.png', :class => "inline-formula",
+:alt => "\gamma=\frac{N_c-N_d}{N_c+N_d}" %>
+<%= image_tag 'gammadef.png', :class => "inline-formula",
+:alt => "$N_c$ is the number of concordant pairs.  $N_d$ is the number of discordant pairs." %>
 </p>
 <p>
 The formula uses counts of differences in paired rankings.  If the
