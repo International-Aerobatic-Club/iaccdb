@@ -1,6 +1,8 @@
 require 'iac/rank_computer.rb'
 
 class Contest < ActiveRecord::Base
+  attr_accessible :name, :city, :state, :start, :chapter, :director, :region
+
   has_many :flights, :dependent => :destroy
   has_many :c_results, :dependent => :destroy
   has_one :manny_synch, :dependent => :nullify
