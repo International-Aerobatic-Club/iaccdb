@@ -151,7 +151,7 @@ end
 def judge_team_for(dJudge, dAssist)
   dJudgeTeam = Judge.find_by_judge_id_and_assist_id(dJudge.id, dAssist.id)
   if (dJudgeTeam == nil)
-    dJudgeTeam = Judge.create(:judge => dJudge, :assist => dAssist)
+    dJudgeTeam = Judge.create(:judge_id => dJudge.id, :assist_id => dAssist.id)
   end
   dJudgeTeam
 end
