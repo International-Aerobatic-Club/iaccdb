@@ -2,6 +2,8 @@ require 'libxml'
 
 class Admin::JasperController < ApplicationController
 
+skip_before_filter :verify_authenticity_token
+
 def results
   @exception = nil
   status = 200
