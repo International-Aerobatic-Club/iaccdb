@@ -1,4 +1,6 @@
 class Sequence < ActiveRecord::Base
+  attr_protected :id
+
   has_many :pilot_flight
 
   serialize :k_values

@@ -1,4 +1,6 @@
 class DataPost < ActiveRecord::Base
+  attr_accessible :step, :is_integrated, :has_error, :error_description, :is_obsolete
+
   belongs_to :contest
 
   def filename

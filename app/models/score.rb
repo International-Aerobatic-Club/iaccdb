@@ -1,4 +1,6 @@
 class Score < ActiveRecord::Base
+  attr_accessible :pilot_flight_id, :judge_id, :values
+
   belongs_to :pilot_flight
   belongs_to :judge
   has_one :pilot, :through => :pilot_flight

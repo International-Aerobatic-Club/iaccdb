@@ -2,6 +2,8 @@ require 'iac/rank_computer.rb'
 
 # Record need to recompute category results
 class CResult < ActiveRecord::Base
+  attr_accessible :contest_id, :need_compute, :category_id
+
   belongs_to :contest
   belongs_to :category
   has_many :pc_results, :dependent => :destroy

@@ -1,6 +1,8 @@
 #require 'iac/saComputer'
 
 class PilotFlight < ActiveRecord::Base
+  attr_accessible :pilot_id, :flight_id, :sequence_id, :airplane_id, :chapter, :penalty_total
+
   belongs_to :flight
   belongs_to :pilot, :class_name => 'Member'
   has_many :scores, :dependent => :destroy

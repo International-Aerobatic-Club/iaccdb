@@ -1,4 +1,6 @@
 class JyResult < ActiveRecord::Base
+  attr_protected :id
+
   belongs_to :judge, :class_name => 'Member'
   belongs_to :category
 

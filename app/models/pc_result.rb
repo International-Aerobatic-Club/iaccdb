@@ -1,4 +1,6 @@
 class PcResult < ActiveRecord::Base
+  attr_protected :id
+
   belongs_to :pilot, :class_name => 'Member'
   belongs_to :c_result
   has_many :pf_results

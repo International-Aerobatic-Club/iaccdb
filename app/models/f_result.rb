@@ -1,5 +1,7 @@
 # Record need to recompute flight results
 class FResult < ActiveRecord::Base
+  attr_accessible :flight_id, :need_compute, :c_result_id
+
   belongs_to :flight
   belongs_to :c_result
   has_many :pf_results, :dependent => :destroy

@@ -1,4 +1,6 @@
 class Member < ActiveRecord::Base
+  attr_protected :id
+
   has_many :chief, :foreign_key => 'chief_id', :class_name => 'Flight'
   has_many :assistChief, :foreign_key => 'assist_id', :class_name => 'Flight'
   has_many :pilot_flights, :foreign_key => 'pilot_id'

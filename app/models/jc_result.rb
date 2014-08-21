@@ -1,4 +1,6 @@
 class JcResult < ActiveRecord::Base
+  attr_protected :id
+
   belongs_to :judge, :class_name => 'Member'
   belongs_to :c_result
   has_many :jf_results, :dependent => :destroy

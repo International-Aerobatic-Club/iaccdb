@@ -4,6 +4,8 @@ class Category < ActiveRecord::Base
   has_many :c_results
   has_many :region_pilots
 
+  attr_accessible :sequence, :category, :aircat, :name
+
   def self.find_for_cat_aircat(cat, aircat)
     aircat = aircat && aircat =~ /g/i ? 'G' : 'P'
     mycat = Category.find_by_category_and_aircat(cat.downcase, aircat)
