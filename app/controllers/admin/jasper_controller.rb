@@ -32,7 +32,7 @@ def results
       @contest_id = jasper.contest_id
       if (@contest_id == nil || @contest_id <= 0)
         j2d = Jasper::JasperToDB.new
-        contest = Contest.create j2d.extract_contest_params_hash(jasper)
+        contest = Contest.create! j2d.extract_contest_params_hash(jasper)
         @contest_id = contest.id
       end
       post_record.contest_id = @contest_id
