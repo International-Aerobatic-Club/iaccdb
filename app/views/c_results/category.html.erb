@@ -15,15 +15,16 @@
 <% c_result.pc_results.order(:category_rank).each do |pc_result| %>
 <tr>
   <% pilot = pc_result.pilot %>
+  <% pf_result = pc_result.pf_results.first %>
+  <% pilot_flight = pf_result.pilot_flight if pf_result %>
+  <% airplane = pilot_flight.airplane if pilot_flight %>
   <td class='star'>
     <%= pc_result.star_qualifying ? '★' : ' ' %>
   </td>
   <td class="pilot">
     <%= link_to("#{pilot.name}", pilot_score_path(pilot, @contest)) if pilot %>
+    <%= "(#{pilot_flight.chapter})" if pilot_flight.chapter %>
   </td>
-  <% pf_result = pc_result.pf_results.first %>
-  <% pilot_flight = pf_result.pilot_flight if pf_result %>
-  <% airplane = pilot_flight.airplane if pilot_flight %>
   <td class='airplane'><%= airplane.description if airplane %></td>
   <% flight_index = 0 %>
   <% pc_result.pf_results.order(:f_result_id).each do |pf_result| %>
