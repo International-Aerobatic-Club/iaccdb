@@ -1,7 +1,7 @@
 <h3><%= c_result.display_category %></h3>
 
 <table class='pilot_results'><thead><tr>
-  <th colspan='2'>Pilot</th>
+  <th colspan='3'>Pilot</th>
   <th>Airplane</th>
 <% flight_order = [] %>
 <% c_result.f_results.order(:id).each do |f_result| %>
@@ -23,7 +23,9 @@
   </td>
   <td class="pilot">
     <%= link_to("#{pilot.name}", pilot_score_path(pilot, @contest)) if pilot %>
-    <%= "(#{pilot_flight.chapter})" if pilot_flight.chapter %>
+  </td>
+  <td class="chapter">
+    <%= "(#{pilot_flight.chapter})" if pilot_flight.chapter && !pilot_flight.chapter.strip.empty? %>
   </td>
   <td class='airplane'><%= airplane.description if airplane %></td>
   <% flight_index = 0 %>
