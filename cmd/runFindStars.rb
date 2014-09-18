@@ -1,12 +1,8 @@
 # use rails runner lib/iac/runFindStars.rb 
 # will check all of the contests
-require "iac/findStars"
-
-include IAC::Constants
 
 year = ARGV.empty? ? 0 : ARGV[0].to_i
 year = Date.today.year if year < 1990
-#stars = IAC::FindStars.findStars(Contest.first())
 stars = []
 Contest.where('year(start) = ?', year).each do |contest|
   puts "Checking #{contest.to_s}..."
