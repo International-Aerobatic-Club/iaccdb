@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 module ACRO
   describe ContestReader do
     it 'creates a new contest' do
@@ -9,22 +7,26 @@ module ACRO
       ct = Contest.where(:start => '2011-09-25').first
       cs.dContest.should == ct
     end
+
     it 'finds an existing contest' do
       ec = Factory(:existing_contest)
       cs = ContestReader.new('spec/acro/existingContest.yml')
       cs.dContest.should == ec
     end
+
     it 'finds missing data' do
       lambda { 
         ContestReader.new('spec/acro/faultyContest.yml')
       }.should raise_error('Missing data for contest city')
     end
+
     it 'finds pilot data files' do
       cs = ContestReader.new('spec/acro/newContest.yml')
       cs.files.size.should == 7
       File.exist?(cs.files.first).should == true
       File.file?(cs.files.first).should == true
     end
+
     it 'creates judge member records' do
       md = Member.where(:given_name => 'Debby')
       md.empty?.should == true
@@ -35,6 +37,7 @@ module ACRO
       md = Member.where(:given_name => 'Debby').first
       mr.should == md
     end
+
     it 'finds existing judge members' do
       cs = ContestReader.new('spec/acro/newContest.yml')
       cs.files.each do |pf|
@@ -47,6 +50,7 @@ module ACRO
       aj = Judge.where(:judge_id => stols.first)
       aj.size.should == 1
     end
+
     it 'creates pilot member records' do
       md = Member.where(:given_name => 'Kelly')
       md.empty?.should == true
@@ -57,6 +61,7 @@ module ACRO
       md = Member.where(:family_name => 'Adams').first
       mr.should == md
     end
+
     it 'finds existing pilot members' do
       cs = ContestReader.new('spec/acro/newContest.yml')
       cs.files.each do |pf|
@@ -68,6 +73,7 @@ module ACRO
       apf = PilotFlight.where(:pilot_id => ballews.first)
       apf.size.should == 2
     end
+
     it 'creates flight records' do
       ct = Contest.where(:start => '2011-09-25')
       ct.empty?.should == true
@@ -96,6 +102,7 @@ module ACRO
       scores[3].values[11].should == 85
       scores[1].values[12].should == 70
     end
+
     it 'adds to existing flight records' do
       cs = ContestReader.new('spec/acro/newContest.yml')
       cs.files.each do |pf|
@@ -107,6 +114,7 @@ module ACRO
       fla.size.should == 4
       fla.first.pilot_flights.size.should == 2
     end
+
     it 'stores the penalty' do
       cs = ContestReader.new('spec/acro/newContest.yml')
       ps = PilotScraper.new('spec/acro/pilot_p002s17.htm')
@@ -121,6 +129,7 @@ module ACRO
       pf = fl.pilot_flights.first
       pf.penalty_total.should == 110
     end
+
     it 'stores figure k values' do
       cs = ContestReader.new('spec/acro/newContest.yml')
       ps = PilotScraper.new('spec/acro/pilot_p002s17.htm')
