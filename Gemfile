@@ -18,6 +18,7 @@ group :assets do
 end
 
 group :development, :test do
+  gem 'rspec-rails'
   gem 'sqlite3-ruby'
 end
 
@@ -27,8 +28,7 @@ group :development do
 end
 
 group :test do
-  gem 'rspec-rails', '~> 2.6.0'
-  gem 'factory_girl_rails', '~> 1.2.0'
+  gem 'factory_girl_rails'
   gem 'database_cleaner'
 end
 
