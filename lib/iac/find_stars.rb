@@ -89,8 +89,10 @@ def self.test_pilot_flight(stars, pilotFlight, max_below_five)
     count_below_five = 0
     (1 ... figure.length).each do |j|
       grade = figure[j]
-      count_below_five += 1 if 0 <= grade && grade < 50
-      throw :pilot if max_below_five < count_below_five
+      if (0 <= grade && grade < 50) || grade == Constants::HARD_ZERO
+        count_below_five += 1 
+        throw :pilot if max_below_five < count_below_five
+      end
     end
   end
 end
