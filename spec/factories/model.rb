@@ -66,19 +66,18 @@ FactoryGirl.define do
     r.director 'Ron Chadwick'
   end
 ### Category
-  factory :category do
-    category 'Intermediate'
-    aircat 'P'
-    name 'Intermediate Power'
-    # sequence is a FactoryGirl method
-    add_attribute :sequence, 1
+  factory :category do |c|
+    c.category 'Intermediate'
+    c.aircat 'P'
+    c.name 'Intermediate Power'
+    c.sequence(:sequence)
   end
 ### Flight
   factory :flight do |r|
     r.association :contest
     r.association :category
     r.name 'Known'
-    r.sequence(:sequence) { |n| n }
+    r.sequence(:sequence)
   end
   factory :nationals_imdt_known, :class => Flight do |r|
     r.association :contest, :factory => :nationals
