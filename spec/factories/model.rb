@@ -234,7 +234,7 @@ FactoryGirl.define do
 ### PcResult
   factory :pc_result do |r|
     r.association :c_result
-    r.association :pilot
+    r.association :pilot, :factory => :member
   end
   factory :existing_pc_result, :class => PcResult do |r|
     r.association :c_result, :factory => :existing_c_result
