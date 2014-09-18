@@ -17,6 +17,8 @@ module IAC
       create(:score, values: [90, 90, 95, 90], pilot_flight: pf)
       cres = create(:c_result, contest: ctst, category: cat)
       pcres = create(:pc_result, c_result: cres, pilot: pilot)
+      pcres.star_qualifying = true
+      pcres.save
       FindStars.findStars(ctst)
       pcres.reload
       expect(pcres.star_qualifying).to be false
