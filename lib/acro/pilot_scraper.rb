@@ -18,6 +18,7 @@ def initialize(file)
   @pilotID = flds[1].to_i
   @flightID = flds[2].to_i
   @hasFPSLines = /FairPlay/.match(@doc.xpath('id("table7")/tr[1]').text) != nil
+  @has2014SpreaderRow = @doc.xpath('id("table7")/tr[7]/td').count == 1
 end
 
 def pilotName
@@ -35,7 +36,8 @@ def judges
   judgeLine = @doc.xpath('id("table7")/tr[6]')
   nStr = judgeLine.text.strip
   nStr.split(',').collect do |s|
-    s[s.index('-')+2,s.length]
+    raw = s[s.index('-')+2,s.length]
+    raw.sub(/\([A-Z]+\)/,'').strip
   end
 end
 
@@ -44,6 +46,10 @@ def k_factors
   ar = rawRows
   startOffset = @hasFPSLines ? 5 : 6
   endOffset = @hasFPSLines ? 3 : 2
+  if @has2014SpreaderRow
+    startOffset += 1
+    endOffset += 1
+  end
   (startOffset .. ar.size-endOffset).each do |itr|
     nStr = ar[itr].css('td')[1].text.strip
     ks << nStr.to_i
@@ -53,6 +59,7 @@ end
 
 def score(iFig, iJudge)
   startOffset = @hasFPSLines ? 4 : 5
+  startOffset += 1 if @has2014SpreaderRow
   s = 0
   ar = rawRows
   nTD = ar[iFig + startOffset].css('td')[iJudge + 1]
