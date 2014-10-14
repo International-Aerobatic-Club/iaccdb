@@ -87,5 +87,41 @@ module ACRO
         @ps.penalty.should == 90
       end
     end
+    describe "2014 FPS" do
+      before(:all) do
+        @ps = PilotScraper.new('spec/acro/pilot_p006s28.htm')
+      end
+      it 'finds the pilot flight file' do
+        @ps.pilotID.should == 6
+        @ps.flightID.should == 28
+      end
+      it 'finds the pilot and sequence names' do
+        @ps.pilotName.should == 'Michael Gallaway'
+        @ps.flightName.should == 'Unlimited - Power : Free Unknown Sequence'
+      end
+      it 'finds the judges in the flight file' do
+        aj = @ps.judges
+        aj.length.should == 7
+        aj[0].should == 'Steve Johnson'
+        aj[6].should == 'Doug Sowder'
+      end
+      it 'finds the k factors for the flight' do
+        ak = @ps.k_factors
+        ak.length.should == 15
+        ak[0].should == 45
+        ak[4].should == 49
+        ak[9].should == 45
+        ak[14].should == 20
+      end
+      it 'finds scores for figures' do
+        @ps.score(1,3).should == 80
+        @ps.score(1,7).should == 90
+        @ps.score(5,3).should == 60
+        @ps.score(10,7).should == 75
+      end
+      it 'finds penalty amount for flight' do
+        @ps.penalty.should == 120
+      end
+    end
   end
 end
