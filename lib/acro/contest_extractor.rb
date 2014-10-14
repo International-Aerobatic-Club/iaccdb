@@ -1,6 +1,3 @@
-#require 'acro/pilotScraper'
-#require 'acro/pilot_flight_data'
-
 # scrape pilot scores from ACRO produced web site files
 # output yml files that contain the scores
 # had to do this because could not get nokogiri installed on server
