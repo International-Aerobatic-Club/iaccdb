@@ -7,8 +7,8 @@ if (ctlFile)
   contest_reader = ACRO::ContestReader.new(ctlFile)
   pcs = contest_reader.read_contest
   if pcs.empty?
-    puts "Success reading #{contest_reader.dContest.year_name}."
-    Delayed::Job.enqueue Jobs::ComputeFlightsJob.new(contest_reader.dContest)
+    puts "Success reading #{contest_reader.contest_record.year_name}."
+    Delayed::Job.enqueue Jobs::ComputeFlightsJob.new(contest_reader.contest_record)
     puts "Results computation queued for processing."
   else
     puts "There were problems with these contest files:"
