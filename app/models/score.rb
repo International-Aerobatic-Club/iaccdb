@@ -1,5 +1,5 @@
 class Score < ActiveRecord::Base
-  attr_accessible :pilot_flight_id, :judge_id, :values
+  attr_protected :id
 
   belongs_to :pilot_flight
   belongs_to :judge
