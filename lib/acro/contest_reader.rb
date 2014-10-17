@@ -1,39 +1,34 @@
-#require 'acro/pilot_flight_data'
-
 # read into the database pilot scores from 
 #   extracted PilotFlightData YAML files
 # see contest_extractor.rb
 module ACRO
 class ContestReader
 
-attr_reader :dContest 
-attr_reader :pDir 
+attr_reader :contest_record 
 
-def initialize(ctlFile)
-  cData = YAML.load_file(ctlFile)
-  cName = checkData(cData, 'contestName')
-  cDate = checkData(cData, 'startDate')
-  @dContest = Contest.where(:name => cName, :start => cDate).first
-  if !@dContest then
-    @dContest = Contest.new(
-      :name => cName,
-      :city => checkData(cData, 'city'),
-      :state => checkData(cData, 'state'),
-      :start => cDate,
-      :chapter => cData['chapter'],
-      :director => checkData(cData, 'director'),
-      :region => cData['region'])
-    @dContest.save
+def initialize(control_file)
+  @contest_info = ControlFile.new(control_file)
+  @contest_record = Contest.where(:name => @contest_info.name, 
+    :start => @contest_info.start_date).first
+  if !@contest_record then
+    @contest_record = Contest.new(
+      :name => @contest_info.name,
+      :city => @contest_info.city,
+      :state => @contest_info.state,
+      :start => @contest_info.start_date,
+      :chapter => @contest_info.chapter,
+      :director => @contest_info.director,
+      :region => @contest_info.region
+    @contest_record.save
   end
-  @pDir = Dir.new(File.dirname(ctlFile))
   @flights = {}
   @judge_teams = {}
 end
 
 def read_contest
-  puts "Contest reader processing contest, #{@dContest.year_name}"
+  puts "Contest reader processing contest, #{@contest_record.year_name}"
   pcs = []
-  files.each do |f|
+  @contest_info.pilot_flight_result_files.each do |f|
     begin
       puts "Contest reader processing file, #{f}"
       pilot_flight_data = YAML.load_file(f)
@@ -48,11 +43,6 @@ def read_contest
   pcs
 end
 
-def files
-  pfs = @pDir.find_all { |name| name =~ /^pilot_p\d{3}s\d\d\.htm.yml$/ }
-  pfs.collect { |fn| File.join(@pDir.path, fn) }
-end
-
 #pilot_flight_data is an ACRO::PilotScraper
 def process_pilotFlight(pilot_flight_data)
   # get member records for pilot, judges
@@ -64,7 +54,7 @@ def process_pilotFlight(pilot_flight_data)
     flight = create_or_replace_pilot_flight(pilot_flight_data)
   end
   # add the scores and figure k's
-  pilot_flight = flight.pilot_flights.build(:pilot => pilot_member)
+  pilot_flight = flight.pilot_flights.build(:pilot_id => pilot_member.id)
   kays = pilot_flight_data.k_factors
   (1 .. judge_members.size).each do |j|
     values = []
@@ -95,10 +85,10 @@ def create_or_replace_pilot_flight(pilot_flight_data)
   if (category && name && aircat)
     cat = Category.find_for_cat_aircat(category, aircat)
     Flight.where(
-      :contest_id => @dContest, 
+      :contest_id => @contest_record, 
       :name => name, 
       :category_id => cat.id).destroy_all
-    flight = @dContest.flights.build(
+    flight = @contest_record.flights.build(
      :name => name,
      :category_id => cat.id,
      :sequence => 0)
@@ -112,7 +102,7 @@ def create_or_replace_pilot_flight(pilot_flight_data)
 end
 
 def make_judge_team(judge)
-  judge_team = Judge.new(:judge => judge)
+  judge_team = Judge.new(:judge_id => judge.id)
   @judge_teams[judge] = judge_team
   judge_team.save
   judge_team
@@ -124,14 +114,6 @@ def find_member(name)
   parts.shift
   family = parts.join(' ')
   Member.find_or_create_by_name(0, given, family)
-end
-
-def checkData(cData, field)
-  datum = cData[field]
-  if !datum
-    raise ArgumentError, "Missing data for contest #{field}"
-  end
-  datum
 end
 
 def detect_flight_category(description)
