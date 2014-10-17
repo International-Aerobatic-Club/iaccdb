@@ -8,18 +8,19 @@ attr_reader :contest_record
 
 def initialize(control_file)
   @contest_info = ControlFile.new(control_file)
+  @participant_list = ParticipantList.new
+  @participant_list.read(@contest_info.data_directory)
   @contest_record = Contest.where(:name => @contest_info.name, 
     :start => @contest_info.start_date).first
   if !@contest_record then
-    @contest_record = Contest.new(
+    @contest_record = Contest.create(
       :name => @contest_info.name,
       :city => @contest_info.city,
       :state => @contest_info.state,
       :start => @contest_info.start_date,
       :chapter => @contest_info.chapter,
       :director => @contest_info.director,
-      :region => @contest_info.region
-    @contest_record.save
+      :region => @contest_info.region)
   end
   @flights = {}
   @judge_teams = {}
@@ -36,7 +37,7 @@ def read_contest
     rescue Exception => e
       puts "\nSomething went wrong with #{f}:"
       puts e.message
-      puts e.backtrace.each.join("\n")
+      puts e.backtrace.join("\n")
       pcs << f
     end
   end
@@ -109,11 +110,16 @@ def make_judge_team(judge)
 end
 
 def find_member(name)
-  parts = name.split(' ')
-  given = parts[0]
-  parts.shift
-  family = parts.join(' ')
-  Member.find_or_create_by_name(0, given, family)
+  participant = @participant_list.participant(name)
+  if participant
+    Member.find(participant.db_id)
+  else
+    parts = name.split(' ')
+    given = parts[0]
+    parts.shift
+    family = parts.join(' ')
+    Member.find_or_create_by_name(0, given, family)
+  end
 end
 
 def detect_flight_category(description)
@@ -126,7 +132,7 @@ def detect_flight_category(description)
     end
   end
   if !cat
-    if /Pri/i =~ description
+    if /Pri|Begin/i =~ description
       cat = 'Primary'
     elsif /Sport|Standard/i =~ description || /Spn/i =~ description
       cat = 'Sportsman'
@@ -147,11 +153,11 @@ def detect_flight_name(description)
   name = nil
   if /Team/i =~ description
     name = 'Team Unknown' 
-  elsif /#1/ =~ description
+  elsif /#1|1st/ =~ description
     name = 'Flight 1'
-  elsif /#2/ =~ description
+  elsif /#2|2nd/ =~ description
     name = 'Flight 2'
-  elsif /#3/ =~ description
+  elsif /#3|3rd/ =~ description
     name = 'Flight 3'
   else
     IAC::Constants::FLIGHT_NAMES.each do |fltName|
@@ -163,7 +169,7 @@ end
 
 def detect_flight_aircat(description)
   aircat = nil
-  if /Power|Four|Minute|Primary/i =~ description
+  if /Power|Four|Minute|Primary|Beginners/i =~ description
     aircat = IAC::Constants::POWER_CATEGORY
   elsif /Glider/i =~ description
     aircat = IAC::Constants::GLIDER_CATEGORY
