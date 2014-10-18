@@ -1,0 +1,37 @@
+Nationals has been running for many years with the CIVA ACRO software.
+This means, in order to compute regional series, collegiate, and L. Paul Soucy results,
+we must somehow integrate the outputs from ACRO into this data.
+
+The approach taken here is to screen scrape the ACRO web outputs.
+ACRO does have some CSV format outputs; but, it's extra work to get them, the web
+screens have the same information, and it's just as easy to scrape the web screens
+as to scrape the CSV.
+
+All of this work is done from the command line.  There are no admin UI interfaces
+for accomplishing it.
+
+The 'cmd' directory contains a number of utilities.  The following assist with
+integrating the Nationals results, with brief descriptions:
+
+extractACRO.rb : does the screen scraping and generates YAML (.yml) files with the
+scraped data.
+
+memberlist.sql : has the query needed to generate a member list for name resolution
+Use it to produce the memberlist.txt file for the resolve_names step.
+
+resolve_names.rb : is an interactive console driven program for identifying the member
+records from the names.  It produces a file participants.yml that contains the
+mapping from each judge or pilot name in the ACRO files to a member record
+
+read_extract.rb : reads the pilot-flight raw scores into the database.  It uses the
+participants.yml file, if present, to identify member records.
+
+Of all of these, the first utility that touches the contest database is read_extract.rb.
+That writes sequences, judge pairs, pilots, the contest record, and scores.  It kicks-off
+a delayed job to compute results from the raw scores.
+
+The computed results will differ from the published results because they do not use
+the same computation used by ACRO.  It is useful to run them, however, as they verify
+the completeness and integrity of the imported raw grading data.
+
+
