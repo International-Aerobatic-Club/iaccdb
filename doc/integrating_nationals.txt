@@ -35,3 +35,12 @@ the same computation used by ACRO.  It is useful to run them, however, as they v
 the completeness and integrity of the imported raw grading data.
 
 
+In 2014 the pilot flights for Unlimited Power Unknown and Team Unknown both have the
+same name, 'Unlimited - Power : Free Unknown Sequence'.  It is necessary to identify
+all of the pilot_p*s28.htm.yml files and substitute a unique flight title.
+Either that or use the sequence identifier in the name to disambiguate.
+This would mean doing something like the participants.yml to map id's to flights.
+Easier this round to simply disambiguate the description in the files.
+
+sed -e '2 s/Free Unknown Sequence/Free Unknown Team Sequence/' 
+
