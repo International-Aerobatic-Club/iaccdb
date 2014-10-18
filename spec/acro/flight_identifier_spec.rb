@@ -22,12 +22,12 @@ module ACRO
 
     it 'gets the basic flights' do
       expect(detect_flight_name('Known')).to eq 'Known'
-      expect(detect_flight_name('Flight #1')).to eq 'Flight 1'
-      expect(detect_flight_name('Flight #2')).to eq 'Flight 2'
-      expect(detect_flight_name('1st Flight')).to eq 'Flight 1'
-      expect(detect_flight_name('2nd Flight')).to eq 'Flight 2'
-      expect(detect_flight_name('3rd Flight')).to eq 'Flight 3'
-      expect(detect_flight_name('Flight #3')).to eq 'Flight 3'
+      expect(detect_flight_name('Primary Flight #1')).to eq 'Flight 1'
+      expect(detect_flight_name('Primary Flight #2')).to eq 'Flight 2'
+      expect(detect_flight_name('Primary 1st Flight')).to eq 'Flight 1'
+      expect(detect_flight_name('Primary 2nd Flight')).to eq 'Flight 2'
+      expect(detect_flight_name('Primary 3rd Flight')).to eq 'Flight 3'
+      expect(detect_flight_name('Primary Flight #3')).to eq 'Flight 3'
       expect(detect_flight_name('Team Flight')).to eq 'Team Unknown'
       expect(detect_flight_name('Unknown')).to eq 'Unknown'
       expect(detect_flight_name('Free')).to eq 'Free'
@@ -39,6 +39,41 @@ module ACRO
       expect(detect_flight_aircat('Four')).to eq 'P'
       expect(detect_flight_aircat('Minute')).to eq 'P'
       expect(detect_flight_aircat('Primary')).to eq 'P'
+    end
+
+    it 'gets "Beginners : Programme 2: Free Programme"' do
+      description = 'Beginners : Programme 2: Free Programme'
+      expect(detect_flight_aircat(description)).to eq 'P'
+      expect(detect_flight_name(description)).to eq 'Flight 2'
+      expect(detect_flight_category(description)).to eq 'Primary'
+    end
+
+    it 'gets "Beginners : Programme 3: Free Programme"' do
+      description = 'Beginners : Programme 3: Free Programme'
+      expect(detect_flight_aircat(description)).to eq 'P'
+      expect(detect_flight_name(description)).to eq 'Flight 3'
+      expect(detect_flight_category(description)).to eq 'Primary'
+    end
+
+    it 'gets "Intermediate - Glider : Programme 2: Free Programme"' do
+      description = 'Intermediate - Glider : Programme 2: Free Programme'
+      expect(detect_flight_aircat(description)).to eq 'G'
+      expect(detect_flight_name(description)).to eq 'Free'
+      expect(detect_flight_category(description)).to eq 'Intermediate'
+    end
+
+    it 'gets "Standard - Power : Programme 2: Free Programme"' do
+      description = 'Standard - Power : Programme 2: Free Programme'
+      expect(detect_flight_aircat(description)).to eq 'P'
+      expect(detect_flight_name(description)).to eq 'Flight 2'
+      expect(detect_flight_category(description)).to eq 'Sportsman'
+    end
+
+    it 'gets "Sports - Glider : Programme 3: Free Programme"' do
+      description = 'Sports - Glider : Programme 3: Free Programme'
+      expect(detect_flight_aircat(description)).to eq 'G'
+      expect(detect_flight_name(description)).to eq 'Flight 3'
+      expect(detect_flight_category(description)).to eq 'Sportsman'
     end
 
   end

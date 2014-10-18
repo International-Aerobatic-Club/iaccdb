@@ -3,7 +3,7 @@
 # see contest_extractor.rb
 module ACRO
 class ContestReader
-include 'flight_identifier'
+include FlightIdentifier
 
 attr_reader :contest_record 
 

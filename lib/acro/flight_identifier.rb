@@ -31,13 +31,16 @@ module FlightIdentifier
     name = nil
     if /Team/i =~ description
       name = 'Team Unknown' 
-    elsif /#1|1st/ =~ description
-      name = 'Flight 1'
-    elsif /#2|2nd/ =~ description
-      name = 'Flight 2'
-    elsif /#3|3rd/ =~ description
-      name = 'Flight 3'
-    else
+    elsif /Primary|Sportsman/ =~ detect_flight_category(description)
+      if /#1|1st/ =~ description
+        name = 'Flight 1'
+      elsif /#2|2nd|Programme 2/ =~ description
+        name = 'Flight 2'
+      elsif /#3|3rd|Programme 3/ =~ description
+        name = 'Flight 3'
+      end
+    end
+    if !name
       IAC::Constants::FLIGHT_NAMES.each do |fltName|
         name = fltName if Regexp.new(fltName, 'i') =~ description
       end
