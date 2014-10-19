@@ -16,6 +16,9 @@ integrating the Nationals results, with brief descriptions:
 extractACRO.rb : does the screen scraping and generates YAML (.yml) files with the
 scraped data.
 
+showFlights.rb : displays the scraped flight names and the detected attributes, as
+a check.
+
 memberlist.sql : has the query needed to generate a member list for name resolution
 Use it to produce the memberlist.txt file for the resolve_names step.
 
@@ -43,4 +46,11 @@ This would mean doing something like the participants.yml to map id's to flights
 Easier this round to simply disambiguate the description in the files.
 
 sed -e '2 s/Free Unknown Sequence/Free Unknown Team Sequence/' 
+
+Now that said, we need to leave the Team Unknown out of the picture.
+It isn't part of the competition, only a team selection flight.
+So, to be pragmatic, delete those pilot_flight records
+
+rm pilot_p*s28.htm.yml
+
 
