@@ -4,6 +4,8 @@ class PilotFlightData
 attr_accessor :pilotName
 attr_accessor :flightName
 attr_accessor :pilotID
+attr_accessor :aircraft
+attr_accesser :registration
 attr_accessor :flightID
 # array of judge names
 attr_accessor :judges

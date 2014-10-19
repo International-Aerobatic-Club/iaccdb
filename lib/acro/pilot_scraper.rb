@@ -5,6 +5,9 @@ class PilotScraper
 
 attr_reader :pilotID
 attr_reader :flightID
+attr_reader :pilotName
+attr_reader :aircraft
+attr_reader :registration
 
 def initialize(file)
   filtered = ""
@@ -19,12 +22,22 @@ def initialize(file)
   @flightID = flds[2].to_i
   @hasFPSLines = /FairPlay/.match(@doc.xpath('id("table7")/tr[1]').text) != nil
   @has2014SpreaderRow = @doc.xpath('id("table7")/tr[7]/td').count == 1
+  parsePilotAircraft(@doc.xpath('id("table7")/tr[2]').text)
 end
 
-def pilotName
-  pilotLine = @doc.xpath('id("table7")/tr[2]')
-  aStr = pilotLine.text.strip.split(' ')
-  aStr[0] + ' ' + aStr[1]
+def parsePilotAircraft(pilotLine)
+  aStr = pilotLine.strip.split(' ')
+  aHyph = pilotLine.strip.split('-')
+  if aHyph.length == 1
+    first = aStr.shift
+    last = aStr.shift
+    @pilotName = first + ' ' + last
+  else
+    @pilotName = aHyph[0].strip
+    aStr = aHyph[1].strip.split(' ') 
+  end
+  @registration = aStr.pop
+  @aircraft = aStr.join(' ')
 end
 
 def flightName

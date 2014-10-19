@@ -87,6 +87,7 @@ module ACRO
         @ps.penalty.should == 90
       end
     end
+
     describe "2014 FPS" do
       before(:all) do
         @ps = PilotScraper.new('spec/acro/pilot_p006s28.htm')
@@ -121,6 +122,36 @@ module ACRO
       end
       it 'finds penalty amount for flight' do
         @ps.penalty.should == 120
+      end
+    end
+
+    describe 'Pilot and aircraft parsing' do
+      before(:all) do
+        @ps = PilotScraper.new('spec/acro/pilot_p001s16.htm')
+      end
+      it 'parses "Paul Thomson - Decathlon N725JM"' do
+        @ps.parsePilotAircraft('Paul Thomson - Decathlon N725JM')
+        expect(@ps.aircraft).to eq 'Decathlon'
+        expect(@ps.pilotName).to eq 'Paul Thomson'
+        expect(@ps.registration).to eq 'N725JM'
+      end
+      it 'parses "Sean Van Hatten - Decathlon N210XD"' do
+        @ps.parsePilotAircraft('Sean Van Hatten - Decathlon N210XD')
+        expect(@ps.aircraft).to eq 'Decathlon'
+        expect(@ps.pilotName).to eq 'Sean Van Hatten'
+        expect(@ps.registration).to eq 'N210XD'
+      end
+      it 'parses " Michael Gallaway - Extra 300 SX N540BG "' do
+        @ps.parsePilotAircraft(' Michael Gallaway - Extra 300 SX N540BG ')
+        expect(@ps.aircraft).to eq 'Extra 300 SX'
+        expect(@ps.pilotName).to eq 'Michael Gallaway'
+        expect(@ps.registration).to eq 'N540BG'
+      end
+      it 'parses "Kelly Adams  Staudacher 300D  N804Q"' do
+        @ps.parsePilotAircraft('Kelly Adams  Staudacher 300D  N804Q')
+        expect(@ps.aircraft).to eq 'Staudacher 300D'
+        expect(@ps.pilotName).to eq 'Kelly Adams'
+        expect(@ps.registration).to eq 'N804Q'
       end
     end
   end

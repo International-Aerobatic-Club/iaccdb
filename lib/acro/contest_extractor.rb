@@ -49,6 +49,8 @@ def process_pilotFlight(pScrape)
   pfd.flightName = pScrape.flightName
   pfd.pilotID = pScrape.pilotID
   pfd.pilotName = pScrape.pilotName
+  pfd.aircraft = pScrape.aircraft
+  pfd.registration = pScrape.registration
   pfd.judges = pScrape.judges
   pfd.k_factors = pScrape.k_factors
   pfd.scores = []
