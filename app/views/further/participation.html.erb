@@ -1,0 +1,15 @@
+<p>Shows counts of individuals who participated in posted contests, 
+by year, by category, and overall each year.  Note that overall will not
+be a total, because the same individual can participate in more than one
+category in any given year.</p>
+<h3>Judges</h3>
+<%= render :partial => 'category_years', :locals  => { 
+  cat_years: @cat_year_judge_count,
+  cats: @categories,
+  years: @years } %>
+<h3>Pilots</h3>
+<%= render :partial => 'category_years', :locals  => { 
+  cat_years: @cat_year_pilot_count,
+  cats: @categories,
+  years: @years } %>
+<pre>

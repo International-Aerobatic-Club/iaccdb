@@ -1,0 +1,17 @@
+<table class='category-years'>
+<thead>
+<tr><th>Category</th>
+<% years.each do |year| %>
+  <th><%= year %></th>
+<% end %>
+</tr>
+</thead>
+<tbody>
+<% cats.each do |cat| %>
+<tr><th><%= cat.name %></th>
+  <% years.each do |year| %>
+    <td><%= cat_year_select(cat_years, cat, year, 'count') %></td>
+  <% end %>
+<% end %>
+</tbody>
+</table>
