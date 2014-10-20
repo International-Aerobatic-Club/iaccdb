@@ -78,6 +78,11 @@ Iac::Application.routes.draw do
     :action => :histograms,
     :as => 'judge_histograms'
 
+  namespace :further do
+    get 'participation/:year', :action => :participation
+    get 'participation', :action => :participation
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
