@@ -79,7 +79,6 @@ Iac::Application.routes.draw do
     :as => 'judge_histograms'
 
   namespace :further do
-    get 'participation/:year', :action => :participation
     get 'participation', :action => :participation
   end
 
