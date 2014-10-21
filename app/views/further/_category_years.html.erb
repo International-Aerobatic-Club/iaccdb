@@ -8,10 +8,16 @@
 </thead>
 <tbody>
 <% cats.each do |cat| %>
-<tr><th><%= cat.name %></th>
-  <% years.each do |year| %>
-    <td><%= cat_year_select(cat_years, cat, year, 'count') %></td>
-  <% end %>
+  <tr><th><%= cat %></th>
+    <% years.each do |year| %>
+      <td><%= cat_year_select(cat_years, cat.id, year, 'count') %></td>
+    <% end %>
+  </tr>
 <% end %>
+<tr><th>Any Category</th>
+  <% years.each do |year| %>
+    <td><%= cat_year_select(cat_years, 'any', year, 'count') %></td>
+  <% end %>
+</tr>
 </tbody>
 </table>
