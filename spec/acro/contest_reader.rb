@@ -1,30 +1,26 @@
 require 'spec_helper'
-#require 'acro/contestScraper'
 
 module ACRO
-  describe ContestScraper do
-    before(:each) do
-      reset_db
-    end
+  describe ContestReader do
     it 'creates a new contest' do
       ct = Contest.where(:start => '2011-09-25')
       ct.empty?.should == true
-      cs = ContestScraper.new('spec/acro/newContest.yml')
+      cs = ContestReader.new('spec/acro/newContest.yml')
       ct = Contest.where(:start => '2011-09-25').first
       cs.dContest.should == ct
     end
     it 'finds an existing contest' do
       ec = Factory(:existing_contest)
-      cs = ContestScraper.new('spec/acro/existingContest.yml')
+      cs = ContestReader.new('spec/acro/existingContest.yml')
       cs.dContest.should == ec
     end
     it 'finds missing data' do
       lambda { 
-        ContestScraper.new('spec/acro/faultyContest.yml')
+        ContestReader.new('spec/acro/faultyContest.yml')
       }.should raise_error('Missing data for contest city')
     end
     it 'finds pilot data files' do
-      cs = ContestScraper.new('spec/acro/newContest.yml')
+      cs = ContestReader.new('spec/acro/newContest.yml')
       cs.files.size.should == 7
       File.exist?(cs.files.first).should == true
       File.file?(cs.files.first).should == true
@@ -32,7 +28,7 @@ module ACRO
     it 'creates judge member records' do
       md = Member.where(:given_name => 'Debby')
       md.empty?.should == true
-      cs = ContestScraper.new('spec/acro/newContest.yml')
+      cs = ContestReader.new('spec/acro/newContest.yml')
       ps = PilotScraper.new('spec/acro/pilot_p002s17.htm')
       cs.process_pilotFlight(ps)
       mr = Member.where(:family_name => 'Rihn-Harvey').first
@@ -40,7 +36,7 @@ module ACRO
       mr.should == md
     end
     it 'finds existing judge members' do
-      cs = ContestScraper.new('spec/acro/newContest.yml')
+      cs = ContestReader.new('spec/acro/newContest.yml')
       cs.files.each do |pf|
         ps = PilotScraper.new(pf)
         cs.process_pilotFlight(ps)
@@ -54,7 +50,7 @@ module ACRO
     it 'creates pilot member records' do
       md = Member.where(:given_name => 'Kelly')
       md.empty?.should == true
-      cs = ContestScraper.new('spec/acro/newContest.yml')
+      cs = ContestReader.new('spec/acro/newContest.yml')
       ps = PilotScraper.new('spec/acro/pilot_p002s17.htm')
       cs.process_pilotFlight(ps)
       mr = Member.where(:given_name => 'Kelly').first
@@ -62,7 +58,7 @@ module ACRO
       mr.should == md
     end
     it 'finds existing pilot members' do
-      cs = ContestScraper.new('spec/acro/newContest.yml')
+      cs = ContestReader.new('spec/acro/newContest.yml')
       cs.files.each do |pf|
         ps = PilotScraper.new(pf)
         cs.process_pilotFlight(ps)
@@ -75,7 +71,7 @@ module ACRO
     it 'creates flight records' do
       ct = Contest.where(:start => '2011-09-25')
       ct.empty?.should == true
-      cs = ContestScraper.new('spec/acro/newContest.yml')
+      cs = ContestReader.new('spec/acro/newContest.yml')
       ps = PilotScraper.new('spec/acro/pilot_p002s17.htm')
       cs.process_pilotFlight(ps)
       ct = Contest.where(:start => '2011-09-25').first
@@ -101,7 +97,7 @@ module ACRO
       scores[1].values[12].should == 70
     end
     it 'adds to existing flight records' do
-      cs = ContestScraper.new('spec/acro/newContest.yml')
+      cs = ContestReader.new('spec/acro/newContest.yml')
       cs.files.each do |pf|
         ps = PilotScraper.new(pf)
         cs.process_pilotFlight(ps)
@@ -112,7 +108,7 @@ module ACRO
       fla.first.pilot_flights.size.should == 2
     end
     it 'stores the penalty' do
-      cs = ContestScraper.new('spec/acro/newContest.yml')
+      cs = ContestReader.new('spec/acro/newContest.yml')
       ps = PilotScraper.new('spec/acro/pilot_p002s17.htm')
       cs.process_pilotFlight(ps)
       ct = Contest.where(:start => '2011-09-25').first
@@ -126,7 +122,7 @@ module ACRO
       pf.penalty_total.should == 110
     end
     it 'stores figure k values' do
-      cs = ContestScraper.new('spec/acro/newContest.yml')
+      cs = ContestReader.new('spec/acro/newContest.yml')
       ps = PilotScraper.new('spec/acro/pilot_p002s17.htm')
       cs.process_pilotFlight(ps)
       ct = Contest.where(:start => '2011-09-25').first
