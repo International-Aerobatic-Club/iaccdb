@@ -5,8 +5,11 @@ class ResultScraper
 include AcroWebOutputReader
 include FlightIdentifier
 
+HEADING_ROW = 3
+
 def initialize(file)
   web_file = read_file(file)
+  puts web_file
   @doc = Nokogiri::HTML(web_file)
 end
 
@@ -19,6 +22,18 @@ end
 def category_name
   cat_line = description
   detect_flight_category(cat_line)
+end
+
+def pilots
+  pilots = []
+  atr = the_rows
+  itr = HEADING_ROW + 1
+  while (0 < atr[itr].text.strip.length && itr < atr.length) do
+    puts "#{itr}: #{atr[itr].text}"
+    pilots << atr[itr].css('td[3]').text.strip
+    itr += 1
+  end
+  pilots
 end
 
 
@@ -52,16 +67,8 @@ end
 private
 ###
 
-def theRows
-  @doc.css('table#table7 tr')
-end
-
-def rawRows
-  @doc.xpath('id("table7")/tr[td[@bgcolor]]')
-end
-
-def penaltyRow
-  @doc.xpath('id("table7")/tr[td[contains(.,"penalties")]]');
+def the_rows
+  @doc.css('#table1').xpath('.//tr')
 end
 
 end #class
