@@ -7,6 +7,7 @@ module ACRO
         # the non-breaking spaces don't encode as white space to strip
         f.each_line do |l| 
           fl = l.gsub(/<font[^>]+>|<\/font[\s>]|&nbsp;|[[:cntrl:]]|<p\s[^>]+>|<\/p\s+>/,' ') 
+          fl = fl.gsub(/<\/tr>\s+<td/, '</tr><tr><td')
           filtered << "#{fl}\n"
         end
       end

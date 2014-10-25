@@ -26,5 +26,9 @@ module ACRO
       expect(/>>/ !~ @filtered).to eq true
     end
 
+    it 'converts end row followed by start cell into end row, start row, start cell' do
+      expect(/<\/tr>\s+<td/ !~ @filtered).to eq true
+    end
+
   end
 end
