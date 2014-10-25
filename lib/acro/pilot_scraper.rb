@@ -2,6 +2,7 @@ require 'nokogiri'
 
 module ACRO
 class PilotScraper
+include AcroWebOutputReader
 
 attr_reader :pilotID
 attr_reader :flightID
@@ -10,13 +11,8 @@ attr_reader :aircraft
 attr_reader :registration
 
 def initialize(file)
-  filtered = ""
-  File.open(file,'r') do |f|
-    # the ACRO outputs have missing font end tags
-    # the non-breaking spaces don't encode as white space to strip
-    f.each_line { |l| filtered << l.gsub(/<font[^>]+>|<\/font>|&nbsp;/,' ') }
-  end
-  @doc = Nokogiri::HTML(filtered)
+  web_file = read_file(file)
+  @doc = Nokogiri::HTML(web_file)
   flds = /p(\d+)s(\d+)/.match(file)
   @pilotID = flds[1].to_i
   @flightID = flds[2].to_i
