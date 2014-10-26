@@ -40,7 +40,6 @@ def process_pilot_flight(pilot_scraper)
     @scores << values
   end
   @penalty = pilot_scraper.penalty
-  pfd
 end
 
 end #class
