@@ -28,7 +28,7 @@ def process_category_result(result_scraper)
   @description = result_scraper.description
   @pilots = result_scraper.pilots
   @flight_names = result_scraper.flights
-  @result_totals = []
+  @flight_results = []
   @category_results = []
   @category_percentages = []
   (0 ... @pilots.size).each do |p|
@@ -36,7 +36,7 @@ def process_category_result(result_scraper)
     (0 ... @flight_names.size).each do |f|
       values << result_scraper.flight_total(p, f)
     end
-    @result_totals << values
+    @flight_results << values
     @category_results << result_scraper.result(p)
     @category_percentages << result_scraper.result_percentage(p)
   end
