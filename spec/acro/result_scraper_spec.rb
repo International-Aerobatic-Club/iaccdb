@@ -40,9 +40,9 @@ module ACRO
       expect(@rs.result(11)).to eq 7356.2
     end
     it 'finds result percentages' do
-      expect(@rs.result_percenage(0)).to eq 81.926
-      expect(@rs.result_percenage(5)).to eq 75.133
-      expect(@rs.result_percenage(11)).to eq 54.329
+      expect(@rs.result_percentage(0)).to eq 81.926
+      expect(@rs.result_percentage(5)).to eq 75.133
+      expect(@rs.result_percentage(11)).to eq 54.329
     end
   end
 end

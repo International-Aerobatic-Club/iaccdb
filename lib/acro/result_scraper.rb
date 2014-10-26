@@ -63,7 +63,7 @@ def result(pilot)
   cell.text.to_f
 end
 
-def result_percenage(pilot)
+def result_percentage(pilot)
   columns = pilot_columns(pilot)
   cell = columns[flight_column_offset + @flight_count + 1]
   cell.text.to_f
