@@ -5,28 +5,30 @@
 module ACRO
 class ContestExtractor
 
-attr_reader :dContest 
-attr_reader :pDir 
-
 def initialize(ctlFile)
-  cData = YAML.load_file(ctlFile)
-  cName = checkData(cData, 'contestName')
-  cDate = checkData(cData, 'startDate')
   @pDir = Dir.new(File.dirname(ctlFile))
 end
 
-def scrapeContest
+def scrape_contest
   pcs = []
-  files.each do |f|
+  pilot_files.each do |f|
     begin
-      pScrape = ACRO::PilotScraper.new(f)
-      pfd = process_pilotFlight(pScrape)
+      pilot_scraper = PilotScraper.new(f)
+      pfd = PilotFlightData.new
+      pfd.process_pilot_flight(pilot_scraper)
       File.open(f + '.yml', "w") {|out| YAML.dump(pfd, out)}
     rescue Exception => e
-      puts "\nSomething went wrong with #{f}:"
-      puts e.message
-      e.backtrace.each { |l| puts l }
-      pcs << f
+      pcs << report_problem(e, f)
+    end
+  end
+  category_files.each do |f|
+    begin
+      result_scraper = ResultScraper.new(f)
+      pcr = CategoryResult.new
+      pcr.process_category_result(result_scraper)
+      File.open(f + '.yml', "w") {|out| YAML.dump(pcr, out)}
+    rescue Exception => e
+      pcs << report_problem(e, f)
     end
   end
   pcs
@@ -36,33 +38,21 @@ end
   private
 ### 
 
-def files
+def report_problem(exception, file_name)
+  puts "\nSomething went wrong with #{file_name}:"
+  puts exception.message
+  exception.backtrace.each { |l| puts l }
+  file_name
+end
+
+def pilot_files
   pfs = @pDir.find_all { |name| name =~ /^pilot_p\d{3}s\d\d\.htm$/ }
   pfs.collect { |fn| File.join(@pDir.path, fn) }
 end
 
-#pScrape is an ACRO::PilotScraper
-def process_pilotFlight(pScrape)
-  pfd = ACRO::PilotFlightData.new
-  # get member records for pilot, judges
-  pfd.flightID = pScrape.flightID
-  pfd.flightName = pScrape.flightName
-  pfd.pilotID = pScrape.pilotID
-  pfd.pilotName = pScrape.pilotName
-  pfd.aircraft = pScrape.aircraft
-  pfd.registration = pScrape.registration
-  pfd.judges = pScrape.judges
-  pfd.k_factors = pScrape.k_factors
-  pfd.scores = []
-  (1 .. pfd.judges.size).each do |j|
-    values = []
-    (1 .. pfd.k_factors.size).each do |f|
-      values << pScrape.score(f, j)
-    end
-    pfd.scores << values
-  end
-  pfd.penalty = pScrape.penalty
-  pfd
+def category_files
+  cfs = @pDir.find_all { |name| name =~ /^multi_\w+\.htm$/ }
+  cfs.collect { |fn| File.join(@pDir.path, fn) }
 end
 
 def checkData(cData, field)
