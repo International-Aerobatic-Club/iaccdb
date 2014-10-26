@@ -9,7 +9,6 @@ HEADING_ROW = 3
 
 def initialize(file)
   web_file = read_file(file)
-  puts web_file
   @doc = Nokogiri::HTML(web_file)
 end
 
@@ -53,36 +52,21 @@ def flights
 end
 
 def flight_total(pilot, flight)
-  row = the_rows[HEADING_ROW + pilot + 1]
-  columns = row.css('td')
+  columns = pilot_columns(pilot)
   cell = columns[flight_column_offset + flight]
-  cell.text.strip.to_f
+  cell.text.to_f
 end
 
-def score(iFig, iJudge)
-  startOffset = @hasFPSLines ? 4 : 5
-  startOffset += 1 if @has2014SpreaderRow
-  s = 0
-  ar = rawRows
-  nTD = ar[iFig + startOffset].css('td')[iJudge + 1]
-  childSet = nTD.xpath('.//text()')
-  nGrade = childSet.last
-  nStr = nGrade.text.strip if nGrade
-  unless nStr =~ /Z/
-    s = nStr.to_f * 10
-    s = s.to_i
-  end
-  s
+def result(pilot)
+  columns = pilot_columns(pilot)
+  cell = columns[flight_column_offset + @flight_count]
+  cell.text.to_f
 end
 
-def penalty
-  pr = penaltyRow
-  mp = /Minus\s+(\d+)\s+penalties/.match(pr.text)
-  if mp
-    mp[1].to_i
-  else
-    0
-  end
+def result_percenage(pilot)
+  columns = pilot_columns(pilot)
+  cell = columns[flight_column_offset + @flight_count + 1]
+  cell.text.to_f
 end
 
 ###
@@ -91,6 +75,10 @@ private
 
 def the_rows
   @doc.css('#table1').xpath('.//tr')
+end
+
+def pilot_columns(pilot)
+  the_rows[HEADING_ROW + pilot + 1].css('td')
 end
 
 def flight_column_offset
