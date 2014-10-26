@@ -8,7 +8,7 @@ args = ARGV
 ctlFile = args[0]
 if (ctlFile)
   cScrape = ACRO::ContestExtractor.new(ctlFile)
-  pcs = cScrape.scrapeContest
+  pcs = cScrape.scrape_contest
   if !pcs.empty?
     puts "There were problems with these:"
     pcs.each { |f| puts f }
