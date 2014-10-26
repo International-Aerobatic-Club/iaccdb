@@ -29,13 +29,35 @@ def pilots
   atr = the_rows
   itr = HEADING_ROW + 1
   while (0 < atr[itr].text.strip.length && itr < atr.length) do
-    puts "#{itr}: #{atr[itr].text}"
     pilots << atr[itr].css('td[3]').text.strip
     itr += 1
   end
   pilots
 end
 
+def flights
+  flights = []
+  offset = 0
+  @flight_column_offset = nil
+  hr = the_rows[HEADING_ROW]
+  hr.css('td').each do |col|
+    header = col.text.strip
+    if header.length != 0 && /Rank|Pilot|plane|registration|total|all/i !~ header
+      flights << header
+      @flight_column_offset ||= offset
+    end
+    offset += 1
+  end
+  @flight_count = flights.length
+  flights
+end
+
+def flight_total(pilot, flight)
+  row = the_rows[HEADING_ROW + pilot + 1]
+  columns = row.css('td')
+  cell = columns[flight_column_offset + flight]
+  cell.text.strip.to_f
+end
 
 def score(iFig, iJudge)
   startOffset = @hasFPSLines ? 4 : 5
@@ -69,6 +91,11 @@ private
 
 def the_rows
   @doc.css('#table1').xpath('.//tr')
+end
+
+def flight_column_offset
+  flights if !@flight_column_offset
+  @flight_column_offset
 end
 
 end #class
