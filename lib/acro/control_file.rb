@@ -50,8 +50,14 @@ class ControlFile
 
   # ACRO pilot_flight result file name format
   def pilot_flight_result_files
-    pfs = self.data_directory.find_all { |name| name =~ /^pilot_p\d{3}s\d\d\.htm.yml$/ }
+    pfs = self.data_directory.find_all { |name| name =~ /^pilot_p\d{3}s\d\d\.htm\.yml$/ }
     pfs.collect { |fn| File.join(self.data_directory.path, fn) }
+  end
+
+  # ACRO multi_flight results file name format
+  def category_result_files
+    crs = self.data_directory.find_all { |name| name =~ /^multi_.*\.htm\.yml$/ }
+    crs.collect { |fn| File.join(self.data_directory.path, fn) }
   end
 
   # name of file with mapping from participant name to member record identifier
