@@ -10,13 +10,13 @@ as to scrape the CSV.
 All of this work is done from the command line.  There are no admin UI interfaces
 for accomplishing it.
 
-The 'cmd' directory contains a number of utilities.  The following assist with
+The 'cmd/acro' directory contains a number of utilities.  The following assist with
 integrating the Nationals results, with brief descriptions:
 
-extractACRO.rb : does the screen scraping and generates YAML (.yml) files with the
+scrape_html_to_yaml.rb : does the screen scraping and generates YAML (.yml) files with the
 scraped data.
 
-showFlights.rb : displays the scraped flight names and the detected attributes, as
+show_flights.rb : displays the scraped flight names and the detected attributes, as
 a check.
 
 memberlist.sql : has the query needed to generate a member list for name resolution
@@ -26,10 +26,16 @@ resolve_names.rb : is an interactive console driven program for identifying the 
 records from the names.  It produces a file participants.yml that contains the
 mapping from each judge or pilot name in the ACRO files to a member record
 
-read_extract.rb : reads the pilot-flight raw scores into the database.  It uses the
+import_yml_extracts.rb : reads the pilot-flight raw scores into the database.  It uses the
 participants.yml file, if present, to identify member records.
 
-Of all of these, the first utility that touches the contest database is read_extract.rb.
+results_list.rb : produces a list of category and flight results, results_list.yml for edit
+
+patch_results.rb : reads category and flight results totals from multi_ yml files, together
+with participants.yml and results_list.yml to patch result computations into the 
+contest data.
+
+Of all of these, the first utility that touches the contest database is import_yml_extracts.rb.
 That writes sequences, judge pairs, pilots, the contest record, and scores.  It kicks-off
 a delayed job to compute results from the raw scores.
 
@@ -37,6 +43,14 @@ The computed results will differ from the published results because they do not 
 the same computation used by ACRO.  It is useful to run them, however, as they verify
 the completeness and integrity of the imported raw grading data.
 
+The second utility that touches the contest database is patch_results.rb.  This overwrites the computed flight and category results for each pilot.
+
+** Using the utilities for 2014
+
+Pull the results postings from the web.
+Create the contest control file in the directory that contains the downloaded results postings.
+Run scrape_html_to_yaml.rb to do the screen scraping and generates YAML (.yml) files from the
+results postings.
 
 In 2014 the pilot flights for Unlimited Power Unknown and Team Unknown both have the
 same name, 'Unlimited - Power : Free Unknown Sequence'.  It is necessary to identify
@@ -52,5 +66,33 @@ It isn't part of the competition, only a team selection flight.
 So, to be pragmatic, delete those pilot_flight records
 
 rm pilot_p*s28.htm.yml
+
+and delete the team result overall posting
+
+rm multi_R012s08s17s26s28.htm.yml
+
+Now we can run the pilot and judge name resolution, so that names match to the correct members on import.
+
+First, generate the member file.
+
+Run cmd/acro/resolve_names.rb as a ruby program (not under rails)
+
+With the name resolution done, we can import the pilot flight data-- all of the grades.
+
+Run cmd/acro/import_yml_extracts.rb with the rails runner to create the contest and all of the grades in the database.
+
+Run the jobs:workoff rake task to compute results from the imported data.  We need this to have the result records and judge metrics.
+
+Run cmd/acro/resolve_names.rb a second time, or edit the participants.yml file with id's of newly created members.  Those were,
+
+*** list of new members from nationals
+
+Edit the contest.yml file with the id of the contest
+
+Now patch the IAC computed results with the results computed by ACRO.  They are different.
+
+Use the rails runner to run cmd/acro/patch_results.rb
+
+Finally, kick off the process to compute the regionals.
 
 
