@@ -58,7 +58,11 @@ def process_category(rfr, category_results)
         "Missing ID or flight match for #{category_results.description} #{flight.flight_name}"
     end
   end
-  patch_pilot_results_for_category(category_results)
+  if d_category_id
+    patch_pilot_results_for_category(category_results, d_category_id)
+  else
+    raise "Cannot determine category for #{category_results.description}"
+  end
 end
 
 ###
@@ -79,13 +83,21 @@ def patch_pilot_results_for_category_flight(category_results, f, d_flight)
         raise "Failed to find result for pilot #{pilot} in flight #{d_flight.displayName}"
       end
     else
-      raise "Failed to find flight for pilot #{pilot} in flight #{d_flight.displayName}"
+      # this isn't necessarily a failure, but a warning
+      puts "WARN: Failed to find flight for pilot #{pilot} in flight #{d_flight.displayName}"
     end
   end
 end
 
-def patch_pilot_results_for_category(category_results)
-  
+def patch_pilot_results_for_category(category_results, d_category_id)
+  d_cat_result = @d_contest.c_results.where(category_id: d_category_id).first
+  category_results.pilots.each_with_index do |pilot, p|
+    d_pilot = find_member(pilot)
+    d_pcr = d_cat_result.pc_results.where(pilot_id: d_pilot.id).first
+    d_pcr.category_value = category_results.category_results[p]
+    d_pcr.save
+    puts "#{pilot} in #{category_results.category_name} scored #{d_pcr.category_value}"
+  end
 end
 
 def find_member(name)
