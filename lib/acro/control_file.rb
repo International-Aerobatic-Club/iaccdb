@@ -9,6 +9,7 @@ module ACRO
 #director: 'Gray Brandt'
 #region : 'National'
 #chapter : 'IAC'
+#contest_id : 0
 class ControlFile
   PARTICIPANT_FILE_NAME = 'participant_mapping.yml'
   attr_reader :data_directory 
@@ -46,6 +47,10 @@ class ControlFile
   # returns 'National' if not specified
   def region
     @control_data['region'] | 'National'
+  end
+
+  def contest_id
+    check_data(@control_data, 'contest_id')
   end
 
   # ACRO pilot_flight result file name format
