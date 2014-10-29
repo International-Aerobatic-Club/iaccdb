@@ -9,6 +9,7 @@ def initialize(control_file)
   @participant_list.read(@contest_info.data_directory)
   @results_list = ResultsList.new(control_file)
   @results_list.read_from_file
+  @rank_computer = IAC::RankComputer.instance
 end
 
 def patch_flight_results
@@ -87,6 +88,7 @@ def patch_pilot_results_for_category_flight(category_results, f, d_flight)
       puts "WARN: Failed to find flight for pilot #{pilot} in flight #{d_flight.displayName}"
     end
   end
+  @rank_computer.compute_flight_rankings(d_flight)
 end
 
 def patch_pilot_results_for_category(category_results, d_category_id)
@@ -98,6 +100,7 @@ def patch_pilot_results_for_category(category_results, d_category_id)
     d_pcr.save
     puts "#{pilot} in #{category_results.category_name} scored #{d_pcr.category_value}"
   end
+  @rank_computer.compute_category_ranks(d_cat_result)
 end
 
 def find_member(name)

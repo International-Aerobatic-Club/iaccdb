@@ -99,7 +99,7 @@ module IAC
     end
 
     # Compute rank for each pilot in a contest category
-    def computeCategory(c_result)
+    def compute_category_ranks(c_result)
       logger.info "Computing ranks for #{c_result}"
       category_values = []
       c_result.pc_results.each do |pc_result|
@@ -130,7 +130,7 @@ module IAC
     # Accepts a flight
     # Creates or updates pfj_result, pf_result
     # Does no computation if there are no sequence figure k values 
-    # Does the figure computations only if all fly the same sequence
+    # Does figure computations if all fly the same sequence
     # Returns the array of pf_results
     def computeFlight(flight, has_soft_zero)
       seq = nil
@@ -140,12 +140,22 @@ module IAC
         same &&= seq != nil && seq == pilot_flight.sequence
       end
       if seq
-        pf_results = computeFlightOverallRankings(flight, has_soft_zero)
+        flight.pilot_flights.each do |pilot_flight|
+          pf_result = pilot_flight.results(has_soft_zero)
+        end
+        pf_results = computeFlightOverallRankings(flight)
         computeFlightFigureRankings(flight, pf_results) if same
       else
         pf_results = []
       end
       pf_results
+    end
+
+    # Recompute rankings of pilots given existing results
+    # Accepts a flight
+    # Does no result computations, only computes the rankings
+    def compute_flight_rankings(flight)
+      computeFlightOverallRankings(flight)
     end
 
   ###
@@ -194,14 +204,14 @@ module IAC
     # Creates or updates pfj_result, pf_result
     # Does no computation if there are no sequence figure k values 
     # Returns the flight
-    def computeFlightOverallRankings(flight, has_soft_zero)
+    def computeFlightOverallRankings(flight)
       logger.info "Computing rankings for #{flight}"
       pf_results = []
       flight_values = []
       adjusted_flight_values = []
       judge_pilot_flight_values = {} #flight_values lookup by judge
       flight.pilot_flights.each do |pilot_flight|
-        pf_result = pilot_flight.results(has_soft_zero)
+        pf_result = pilot_flight.pf_results.first
         pf_result.judge_teams.each do |judge|
           if (!judge_pilot_flight_values[judge])
             judge_pilot_flight_values[judge] = Array.new
