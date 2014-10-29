@@ -55,7 +55,7 @@ class CResult < ActiveRecord::Base
         pc_results.delete(pc_result) 
       end
     end
-    rank_computer.computeCategory(self)
+    rank_computer.compute_category_ranks(self)
     jc_results.each do |jc_result|
       if cur_jc_results.include?(jc_result)
         jc_result.compute_category_totals(f_results)
