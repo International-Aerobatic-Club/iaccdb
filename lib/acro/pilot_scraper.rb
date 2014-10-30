@@ -23,7 +23,7 @@ end
 
 def parsePilotAircraft(pilotLine)
   aStr = pilotLine.strip.split(' ')
-  aHyph = pilotLine.strip.split('-')
+  aHyph = pilotLine.strip.split(' - ')
   if aHyph.length == 1
     first = aStr.shift
     last = aStr.shift
