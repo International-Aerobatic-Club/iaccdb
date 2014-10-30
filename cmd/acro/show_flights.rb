@@ -1,6 +1,6 @@
 # no need to use rails runner
 # use ruby cmd/show_flights.rb <file>
-require_relative File.expand_path('../../config/environment', __FILE__)
+require_relative File.expand_path('../../../config/environment', __FILE__)
 
 args = ARGV
 ctlFile = args[0]
