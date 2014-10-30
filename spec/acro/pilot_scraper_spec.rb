@@ -153,6 +153,12 @@ module ACRO
         expect(@ps.pilotName).to eq 'Kelly Adams'
         expect(@ps.registration).to eq 'N804Q'
       end
+      it 'parses "John Owens - Pitts S-2B  N549JE"' do
+        @ps.parsePilotAircraft('John Owens - Pitts S-2B  N549JE')
+        expect(@ps.aircraft).to eq 'Pitts S-2B'
+        expect(@ps.pilotName).to eq 'John Owens'
+        expect(@ps.registration).to eq 'N549JE'
+      end
     end
   end
 end

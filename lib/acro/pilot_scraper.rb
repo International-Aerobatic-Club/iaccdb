@@ -29,8 +29,9 @@ def parsePilotAircraft(pilotLine)
     last = aStr.shift
     @pilotName = first + ' ' + last
   else
-    @pilotName = aHyph[0].strip
-    aStr = aHyph[1].strip.split(' ') 
+    @pilotName = aHyph.shift.strip
+    rmdr = aHyph.join('-')
+    aStr = rmdr.strip.split(' ')
   end
   @registration = aStr.pop
   @aircraft = aStr.join(' ')
