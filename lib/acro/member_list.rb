@@ -1,6 +1,6 @@
 # read CSV (tab delimited) mysql output of member list producd by query,
 # mysql <'select given_name, family_name, id, iac_id from members;' >memberlist.txt
-require 'CSV'
+require 'csv'
 module ACRO
 class MemberList
   FILE_NAME='memberlist.txt'
