@@ -1,5 +1,4 @@
 require 'spec_helper'
-#require 'acro/pilotScraper'
 
 module ACRO
   describe PilotScraper do
@@ -119,6 +118,14 @@ module ACRO
         @ps.score(1,7).should == 90
         @ps.score(5,3).should == 60
         @ps.score(10,7).should == 75
+      end
+      it 'finds hard zeros' do
+        @ps.score(4,1).should == IAC::Constants::HARD_ZERO
+        @ps.score(4,7).should == IAC::Constants::HARD_ZERO
+      end
+      it 'finds averages' do
+        @ps.score(8,1).should == IAC::Constants::AVERAGE
+        @ps.score(11,6).should == IAC::Constants::AVERAGE
       end
       it 'finds penalty amount for flight' do
         @ps.penalty.should == 120

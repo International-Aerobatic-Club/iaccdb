@@ -76,7 +76,11 @@ def score(iFig, iJudge)
   childSet = nTD.xpath('.//text()')
   nGrade = childSet.last
   nStr = nGrade.text.strip if nGrade
-  unless nStr =~ /Z/
+  if nStr =~ /Z/
+    s = IAC::Constants::HARD_ZERO
+  elsif nStr =~ /AVG/
+    s = IAC::Constants::AVERAGE
+  elsif nStr
     s = nStr.to_f * 10
     s = s.to_i
   end
