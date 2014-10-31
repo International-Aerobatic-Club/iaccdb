@@ -1,6 +1,8 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
-<style>
+<style type="text/css">
 p.code { margin-left: 3em; font-family: monospace; white-space: pre }
 span.code { font-family: monospace }
 </style>
@@ -117,7 +119,8 @@ members on import.
 </p><p>
 First, generate the member file. We didn't write a program for this, rather, we simply
 run a SQL query against the database.
-</p><p class='code'>mysql --defaults-extra-file=./.my.cnf iaccdb <current/cmd/acro/memberlist.sql >shared/nationals2014/memberlist.txt</p>
+</p>
+<p class='code'>mysql --defaults-extra-file=./.my.cnf iaccdb &lt;cmd/acro/memberlist.sql &gt;nationals2014/memberlist.txt</p>
 <p>Now we run the member name matching program.  Because it is interacive, we run it as a ruby
 program.  (The rails runner is non-interactive.)
 </p>
@@ -129,21 +132,71 @@ We select the correct member record for the name presented.
 The program outputs a name resolution file, <span class='code'>participants.yml</code.
 that matches ACRO entered names to member records.</p>
 <p>With the name resolution done, we can import the pilot flight data-- all of the grades.
-This is the first command that writes to the database, so we back it up first.
+This is the first command that writes to the database, so we first make a back-up.
 </p>
+<p class='code'>mysqldump --defaults-extra-file=./.my.cnf iaccdb &gt;20141030pre-nats.sql
+rails runner cmd/acro/import_yml_extracts.rb nationals2014/contest.yml
+</p>
+<p>The command creates the contest and all of the grades in the database.
+It leaves an asynchronous task to make the IAC results computations.
+If the jobs worker is not already running on the server, Run 
+<span class='code'>rake jobs:workoff</span>.  
+The job computes results from the imported data.  
+We need this to have the result records and judge metrics.
+It takes some time to run.  That is a subject for investigation.
+</p><p>
+Run <span class='code'>ruby cmd/acro/resolve_names.rb</span> a second time, 
+or edit the <span class='code'>participants.yml</span> file with id's of newly 
+created members.  Better to edit the file and search for nil, then fill-out the
+entry in the format of the others:
+</p>
+<p class='code'>Jim Johnson: !ruby/object:ACRO::ParticipantList::Participant
+  db_id: '617'
+  given_name: Jim
+  family_name: Johnson
+  iad_db_id: '0'</p>
+<p>We are not readily able to specify IAC id's, so leave them zero.
+Find the db_id, which is the most important value, by browsing the contest online.
+Find the pilot or judge and check their link URL:
+</p><p class='code'>https://iaccdb.iac.org/pilots/2552/scores/456</p>
+<p>The number after "pilots", 2552 in the example, is the db_id.
+These numbers will be consecutive, newly created id numbers.</p>
 <p>
-Run cmd/acro/import_yml_extracts.rb with the rails runner to create the contest and all of the grades in the database.
-</p><p>
-Run the jobs:workoff rake task to compute results from the imported data.  We need this to have the result records and judge metrics.
-</p><p>
-Run cmd/acro/resolve_names.rb a second time, or edit the participants.yml file with id's of newly created members.
-</p><p>
-Edit the contest.yml file with the id of the contest
-</p><p>
-Now patch the IAC computed results with the results computed by ACRO.  They are different.
-Use the rails runner to run cmd/acro/patch_results.rb
-</p><p>
-Finally, kick off the process to compute the regionals.
+
+Edit the contest.yml file with the id of the contest.  Find the id of the contest
+in the URL,</p>
+<p class='code'>https://iaccdb.iac.org/contests/456</p>
+<p>The number after contests, 456 in the example, is the contest id.
+The contest.yml control file should now have an additional line,</p>
+<p class='code'>---
+contestName: 'U.S. National Aerobatic Championships'
+startDate: '2014-09-21'
+city: 'Sherman and Denison'
+state: 'TX'
+director: 'Gray Brandt'
+contest_id: 456
 </p>
+<p>We can usually identify the category, and possibly line-up the flight names from
+the overall results postings with the flights in the individual pilot files.  Rather than
+take a chance with heuristic matching, however, it's straightforward to manually
+identify the flights in the overall results files with flights now present in the
+iac database.  To generate the list of flights, run</p>
+<p class='code'>rails runner cmd/acro/results_list.rb ~/iaccdb/shared/nationals2014/contest.yml</p>
+<p>This produces a file, <span class='code'>results_list.yml</span> which we edit.
+Wherever we find 'missing_id' we insert the correct iac database id for the flight result.
+Find the database id's in the url's for the flights, for example:</p>
+<p class='code'>https://iaccdb.iac.org/flights/6653</p>
+<p>has database id 6653. Take care because the flights for a category do not
+necessarily display in the same order in the file as on the results display.</p>
+
+<p>Now patch the IAC computed results with the results computed by ACRO.  They are different.
+</p><p class='code'>rails runner cmd/acro/patch_results.rb nationals2014/contest.yml</p>
+<p>Compare the posted overall category and flight result scores with those
+in the original ACRO posted results.  If they match, all is well.</p>
+<p>
+With Nationals loaded, we recompute the regionals.</p>
+<p class='code'>rails runner cmd/recompute_regionals.rb 2014</p>
+<p>Take care not to queue a job to recompute the contest, else the patched results
+are overwritten.</p>
 </body>
 </html>
