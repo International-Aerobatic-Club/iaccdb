@@ -50,6 +50,8 @@ def process_category(rfr, category_results)
       end
       if d_flight.contest_id == @d_contest.id
           patch_pilot_results_for_category_flight(category_results, f, d_flight)
+          d_flight.sequence = flight.sequence
+          d_flight.save
       else
         # this is a safety check to constrain flight id mistake to a single contest
         raise "Flight #{d_flight.displayName} is not a flight of #{@d_contest.name}"

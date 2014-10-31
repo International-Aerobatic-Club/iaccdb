@@ -27,10 +27,12 @@ class ResultsList
   class ResultsFlight
     attr_accessor :flight_name
     attr_accessor :flight_id
+    attr_accessor :sequence
 
     def initialize(flight_name)
       @flight_name = flight_name
       @flight_id = 'missing_id'
+      @sequence = 1
     end
   end
 
