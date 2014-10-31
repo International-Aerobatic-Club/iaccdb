@@ -32,8 +32,7 @@ private
 
 def match_name_to_record(name)
   parts = name.split(' ')
-  @given = parts[0]
-  parts.shift
+  @given = parts.shift
   @family = parts.join(' ')
   select_and_return_member initials_strategy
 end
