@@ -159,11 +159,11 @@ module ACRO
         expect(@ps.pilotName).to eq 'John Owens'
         expect(@ps.registration).to eq 'N549JE'
       end
-      it 'parses "Debby Rihn-Harvey - Pitts S-2B N123RH"' do
-        @ps.parsePilotAircraft('Debby Rihn-Harvey - Pitts S-2B N123RH')
-        expect(@ps.aircraft).to eq 'Pitts S-2B'
+      it 'parses "Debby Rihn-Harvey - XtremeAir  DEFXA"' do
+        @ps.parsePilotAircraft('Debby Rihn-Harvey - XtremeAir  DEFXA')
+        expect(@ps.aircraft).to eq 'XtremeAir'
         expect(@ps.pilotName).to eq 'Debby Rihn-Harvey'
-        expect(@ps.registration).to eq 'N123RH'
+        expect(@ps.registration).to eq 'DEFXA'
       end
     end
   end
