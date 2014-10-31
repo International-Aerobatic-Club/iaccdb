@@ -208,7 +208,45 @@ Wherever we find 'missing_id' we insert the correct iac database id for the flig
 Find the database id's in the url's for the flights, for example:</p>
 <p class='code'>https://iaccdb.iac.org/flights/6653</p>
 <p>has database id 6653. Take care because the flights for a category do not
-necessarily display in the same order in the file as on the results display.</p>
+necessarily display in the same order in the file as on the results display.
+Here is a portion of the file.  The first entry has been edited.
+The second entry has not.</p>
+<p class='code'>- !ruby/object:ACRO::ResultsList::ResultsFile
+  file_name: multi_R001s06s15s24.htm.yml
+  category: Advanced
+  description: Advanced Power
+  flights:
+  - !ruby/object:ACRO::ResultsList::ResultsFlight
+    flight_name: Known P1
+    flight_id: 6462
+    sequence: 1
+  - !ruby/object:ACRO::ResultsList::ResultsFlight
+    flight_name: ! 'Free #1'
+    flight_id: 6463
+    sequence: 2
+  - !ruby/object:ACRO::ResultsList::ResultsFlight
+    flight_name: Free Unk
+    flight_id: 6464
+    sequence: 3
+- !ruby/object:ACRO::ResultsList::ResultsFile
+  file_name: multi_R002s07s16s25.htm.yml
+  category: Advanced
+  description: Advanced Glider
+  flights:
+  - !ruby/object:ACRO::ResultsList::ResultsFlight
+    flight_name: Known P1
+    flight_id: missing_id
+    sequence: 1
+  - !ruby/object:ACRO::ResultsList::ResultsFlight
+    flight_name: ! 'Free #1'
+    flight_id: missing_id
+    sequence: 1
+  - !ruby/object:ACRO::ResultsList::ResultsFlight
+    flight_name: Free Unk
+    flight_id: missing_id
+    sequence: 1</p>
+<p>You can edit the sequence to get the correct sequence of columns in the results
+display.</p>
 
 <p>Now patch the IAC computed results with the results computed by ACRO.  They are different.
 </p><p class='code'>rails runner cmd/acro/patch_results.rb nationals2014/contest.yml</p>
@@ -218,6 +256,6 @@ in the original ACRO posted results.  If they match, all is well.</p>
 With Nationals loaded, we recompute the regionals.</p>
 <p class='code'>rails runner cmd/recompute_regionals.rb 2014</p>
 <p>Take care not to queue a job to recompute the contest, else the patched results
-are overwritten.</p>
+are overwritten.  We're done.</p>
 </body>
 </html>
