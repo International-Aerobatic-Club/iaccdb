@@ -71,7 +71,8 @@ cd nationals2014
 wget --mirror --convert-links https://nationals.iac.org/files/results/index.htm</p>
 
 <p>Unfortunately, this does not pull the individual pilot files that contain the grades from the judges.  This is because the links to those are encoded as javascript actions rather than as links.  In order to get them, we run a python script over the downloaded result files:</p>
-<p class='code'>cat nationals.iac.org/files/results/link* | python ../cmd/acro/stripPilots.py</p>
+<p class='code'>cat nationals.iac.org/files/results/link* | python ../cmd/acro/stripPilots.py
+cd ..</p>
 
 <p>Create the contest control file in the directory that contains the downloaded results postings.  This contains the contest meta information needed, see 
 <span class='code'>lib/acro/control_file.rb</span> for documentation of the format.
@@ -85,6 +86,26 @@ state: 'TX'
 director: 'Gray Brandt'
 </p>
 
+<p>Run the flights list to ensure that the category and flight are correctly identified
+for the results.</p>
+
+<p class='code'>ruby cmd/acro/show_flights.rb nationals2014/contest.yml</p>
+
+<p>The first item in each line of the output shows the title from the ACRO published results.
+The next items show the inferred category, class, and flight.  
+Check these over and, if there's a problem, figure it out.  
+The inference is accomplished with <span class='code'>lib/acro/flight_identifer.rb</span>.
+Here is a sample of the output:</p>
+<p class='code'>'Unlimited - Power : Known Sequence', Unlimited, P, Known
+'Unlimited - Power : Programme 2: Free Programme', Unlimited, P, Free
+'Unlimited - Power : Free Unknown Sequence', Unlimited, P, Unknown
+'Standard - Power : Known Sequence', Sportsman, P, Known
+'Standard - Power : Programme 2: Free Programme', Sportsman, P, Flight 2
+'Standard - Power : Programme 3: Free Programme', Sportsman, P, Flight 3
+'Sports - Glider : Known Sequence', Sportsman, G, Known
+'Sports - Glider : Programme 2: Free Programme', Sportsman, G, Flight 2
+'Sports - Glider : Programme 3: Free Programme', Sportsman, G, Flight 3</p>
+
 <p>Now we're ready to 
 do the screen scraping that generates YAML (.yml) files from the results postings.
 For convenience, we move these files up to the nationals subdirectory.</p>
@@ -96,7 +117,7 @@ In 2014 the pilot flights for Unlimited Power Unknown and Team Unknown both have
 same name, 'Unlimited - Power : Free Unknown Sequence'.  It is necessary to identify
 all of the <span class='code'>pilot_p*s28.htm.yml</span>
 files and substitute a unique flight title.
-Either that or use the sequence identifier in the name to disambiguate.
+Either that or use the sequence identifier in the file name to disambiguate.
 We would manually produce a file that maps id's to flights.
 Easier this round to simply disambiguate the description in the files.
 </p>
@@ -127,7 +148,7 @@ program.  (The rails runner is non-interactive.)
 <p class='code'>ruby cmd/acro/resolve_names.rb nationals2014/contest.yml</p>
 <p>
 This presents a dialog with the found name and suggested name matches for each pilot
-and judge in the ACRO resuts files.
+and judge in the ACRO results files.
 We select the correct member record for the name presented.
 The program outputs a name resolution file, <span class='code'>participants.yml</code.
 that matches ACRO entered names to member records.</p>
