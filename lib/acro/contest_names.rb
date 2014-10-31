@@ -47,7 +47,7 @@ def select_and_return_member(result)
   searching = true
   while searching
     puts "#{display_name}"
-    result.sort! { |a,b| a['family_name'] <=> b['family_name'] }
+    result.sort! { |a,b| a['family_name'] <=> b['family_name'] } if result
     write_candidates(result)
     puts "Select record to match '#{display_name}'"
     puts 'You type a number or a, b, c, d, N, ?'
