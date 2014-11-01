@@ -1,13 +1,3 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
-   "http://www.w3.org/TR/html4/strict.dtd">
-<html>
-<head>
-<style type="text/css">
-p.code { margin-left: 3em; font-family: monospace; white-space: pre }
-span.code { font-family: monospace }
-</style>
-</head>
-<body>
 <h1>Integrating IAC Nationals data from CIVA ACRO</h1>
 <p>Nationals has been running for many years with the CIVA ACRO software.
 This means, in order to compute regional series, collegiate, and L. Paul Soucy results,
@@ -30,7 +20,7 @@ integrating the Nationals results, with brief descriptions:
 <dt>scrape_html_to_yaml.rb </dt><dd> does the screen scraping and generates YAML (.yml) files with the
 scraped data.
 </dd>
-<dt>show_flights.rb </dt><dd> displays the scraped flight names and the detected attributes, as
+<dt>show_flights.rb</dt><dd> displays the scraped flight names and the detected attributes, as
 a check.
 </dd>
 <dt>memberlist.sql </dt><dd> has the query needed to generate a member list for name resolution
@@ -260,5 +250,3 @@ With Nationals loaded, we recompute the regionals.</p>
 <p class='code'>rails runner cmd/recompute_regionals.rb 2014</p>
 <p>Take care not to queue a job to recompute the contest, else the patched results
 are overwritten.  We're done.</p>
-</body>
-</html>

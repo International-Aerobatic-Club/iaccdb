@@ -24,4 +24,9 @@ img.inline-formula {
 span.inline-formula {
   font-style: italic;
 }
-
+p.code { 
+  margin-left: 3em; font-family: monospace; white-space: pre 
+}
+span.code { 
+  font-family: monospace 
+}
