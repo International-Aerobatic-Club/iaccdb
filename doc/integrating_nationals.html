@@ -11,12 +11,13 @@ span.code { font-family: monospace }
 <h1>Integrating IAC Nationals data from CIVA ACRO</h1>
 <p>Nationals has been running for many years with the CIVA ACRO software.
 This means, in order to compute regional series, collegiate, and L. Paul Soucy results,
-we must somehow integrate the outputs from ACRO into this data.
+we must somehow integrate the outputs from ACRO into the IAC data.
 </p><p>
 The approach taken here is to screen scrape the ACRO web outputs.
 ACRO does have some CSV format outputs; but, it's extra work to get them, the web
-screens have the same information, and it's just as easy to scrape the web screens
-as to scrape the CSV.
+screens have the same information, and it's almost as easy to scrape the web screens
+as to scrape the CSV. It turns out not really as easy, but it is convenient to scrape
+the data from the already published outputs versus special outputs.
 </p>
 <h2>Overview</h2>
 <p>
@@ -163,9 +164,11 @@ It leaves an asynchronous task to make the IAC results computations.
 If the jobs worker is not already running on the server, Run 
 <span class='code'>rake jobs:workoff</span>.  
 The job computes results from the imported data.  
-We need this to have the result records and judge metrics.
+We run this to create the result records and judge metrics.
 It takes some time to run.  That is a subject for investigation.
 </p><p>
+After adding the grades, we now have member records for the members who
+were not yet present in the database.
 Run <span class='code'>ruby cmd/acro/resolve_names.rb</span> a second time, 
 or edit the <span class='code'>participants.yml</span> file with id's of newly 
 created members.  Better to edit the file and search for nil, then fill-out the
