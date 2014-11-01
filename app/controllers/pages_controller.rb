@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  def notes
+  def page_view
+    render params[:title]
   end
-
 end

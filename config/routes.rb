@@ -54,7 +54,7 @@ Iac::Application.routes.draw do
   ### Default namespace
   root :to => "contests#index"
 
-  get "pages/notes"
+  get "pages/:title" => 'pages#page_view', :as => 'pages'
 
   resources :contests, :only => [:index, :show]
 

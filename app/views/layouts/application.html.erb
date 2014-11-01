@@ -32,7 +32,7 @@
     <li><%= link_to 'Judges', judges_path %></li>
     <li><%= link_to 'Assistants', assistants_path %></li>
     <li><%= link_to 'Counts', further_participation_path %></li>
-    <li><%= link_to 'Notes', pages_notes_path %></li>
+    <li><%= link_to 'Notes', pages_path(:notes) %></li>
   </ul>
   <h3>Leaders</h3>
   <ul class='no_bullets'>
@@ -49,7 +49,7 @@
     official results published at 
     <a href="http://www.usnationalaerobatics.org/IAC/IAC_Scores.asp">www.usnationalaerobatics.org</a>.</p>
     <p>See the 
-    <%= link_to 'Notes page', pages_notes_path %>
+    <%= link_to 'Notes page', pages_path(:notes) %>
     for explanations of the numbers.</p>
     <p>These pages appear to you thanks to: </p>
     <ul>

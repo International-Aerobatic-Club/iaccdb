@@ -1,11 +1,11 @@
-  <th><%= link_to 'ρ', pages_notes_path(:anchor => 'metrics'), :title => 'The Spearman Rank Corellation Coefficient scaled to range from -100 to 100. 100 means the judge ranked the pilots exactly the same as the result ranking before penalties.', :class => 'linked_tooltip_header' %></th>
-  <th><%= link_to 'ri', pages_notes_path(:anchor => 'metrics'), :title => "ri is the CIVA computation that scales differences in the judge score and overall score by the difference in rank. A zero RI represents perfect agreement in the rankings.", :class => 'linked_tooltip_header' %></th>
-  <th><%= link_to 'γ', pages_notes_path(:anchor => 'metrics'), :title => "The Goodman and Kruskal gamma correlation coefficient scaled to range from -100 to 100.  100 means the judge ranked the pilots exactly the same as the result ranking before penalties.", :class => 'linked_tooltip_header' %></th>
-  <th><%= link_to 'Np', pages_notes_path(:anchor => 'metrics'), :title => "The number of pilots judged", :class => 'linked_tooltip_header' %></th>
-  <th><%= link_to 'Npp', pages_notes_path(:anchor => 'metrics'), :title => "The number of pilot pairs judged, Np * (Np - 1) / 2", :class => 'linked_tooltip_header' %></th>
-  <th><%= link_to 'Nf', pages_notes_path(:anchor => 'metrics'), :title => "The number of flights judged", :class => 'linked_tooltip_header' %></th>
-  <th><%= link_to 'Fza', pages_notes_path(:anchor => 'metrics'), :title => "The average number of pilots in a flight", :class => 'linked_tooltip_header' %></th>
-  <th><%= link_to 'Ng', pages_notes_path(:anchor => 'metrics'), :title => "The number of grades given", :class => 'linked_tooltip_header' %></th>
-  <th><%= link_to 'Ka', pages_notes_path(:anchor => 'metrics'), :title => "The average K of figures graded", :class => 'linked_tooltip_header' %></th>
-  <th><%= link_to 'Mz', pages_notes_path(:anchor => 'metrics'), :title => "The number of minority hard zero grades", :class => 'linked_tooltip_header' %></th>
-  <th><%= link_to 'Mg', pages_notes_path(:anchor => 'metrics'), :title => "The number of minority grades", :class => 'linked_tooltip_header' %></th>
+  <th><%= link_to 'ρ', pages_path(:notes, :anchor => 'metrics'), :title => 'The Spearman Rank Corellation Coefficient scaled to range from -100 to 100. 100 means the judge ranked the pilots exactly the same as the result ranking before penalties.', :class => 'linked_tooltip_header' %></th>
+  <th><%= link_to 'ri', pages_path(:notes, :anchor => 'metrics'), :title => "ri is the CIVA computation that scales differences in the judge score and overall score by the difference in rank. A zero RI represents perfect agreement in the rankings.", :class => 'linked_tooltip_header' %></th>
+  <th><%= link_to 'γ', pages_path(:notes, :anchor => 'metrics'), :title => "The Goodman and Kruskal gamma correlation coefficient scaled to range from -100 to 100.  100 means the judge ranked the pilots exactly the same as the result ranking before penalties.", :class => 'linked_tooltip_header' %></th>
+  <th><%= link_to 'Np', pages_path(:notes, :anchor => 'metrics'), :title => "The number of pilots judged", :class => 'linked_tooltip_header' %></th>
+  <th><%= link_to 'Npp', pages_path(:notes, :anchor => 'metrics'), :title => "The number of pilot pairs judged, Np * (Np - 1) / 2", :class => 'linked_tooltip_header' %></th>
+  <th><%= link_to 'Nf', pages_path(:notes, :anchor => 'metrics'), :title => "The number of flights judged", :class => 'linked_tooltip_header' %></th>
+  <th><%= link_to 'Fza', pages_path(:notes, :anchor => 'metrics'), :title => "The average number of pilots in a flight", :class => 'linked_tooltip_header' %></th>
+  <th><%= link_to 'Ng', pages_path(:notes, :anchor => 'metrics'), :title => "The number of grades given", :class => 'linked_tooltip_header' %></th>
+  <th><%= link_to 'Ka', pages_path(:notes, :anchor => 'metrics'), :title => "The average K of figures graded", :class => 'linked_tooltip_header' %></th>
+  <th><%= link_to 'Mz', pages_path(:notes, :anchor => 'metrics'), :title => "The number of minority hard zero grades", :class => 'linked_tooltip_header' %></th>
+  <th><%= link_to 'Mg', pages_path(:notes, :anchor => 'metrics'), :title => "The number of minority grades", :class => 'linked_tooltip_header' %></th>
