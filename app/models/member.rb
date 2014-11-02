@@ -9,6 +9,8 @@ class Member < ActiveRecord::Base
   has_many :assist, :foreign_key => 'assist_id', :class_name => 'Judge'
   has_many :jc_results, :foreign_key => 'judge_id'
   has_many :jy_results, :foreign_key => 'judge_id'
+  has_many :teams, :through => :result_members, :foreign_key => 'result_id'
+  has_many :results
 
   def name
     "#{given_name} #{family_name}"

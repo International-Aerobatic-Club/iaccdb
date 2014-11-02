@@ -6,6 +6,7 @@ class PcResult < ActiveRecord::Base
   has_many :pf_results
   has_many :region_contests
   has_many :regional_pilots, :through => :region_contests
+  has_many :results, :through => :result_accums
 
   def to_s 
     a = "pc_result for pilot #{pilot} value #{category_value}, "
