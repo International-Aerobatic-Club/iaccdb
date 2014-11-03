@@ -6,4 +6,8 @@ class Result < ActiveRecord::Base
   has_many :pc_results, :through => :result_accums
   belongs_to :pilot, :class_name => 'Member'
   belongs_to :category
+
+  def result_percent
+    points_possible && points ? points * 100.0 / points_possible : 0.0
+  end
 end
