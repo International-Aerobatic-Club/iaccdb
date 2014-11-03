@@ -261,4 +261,25 @@ FactoryGirl.define do
   factory :data_post do |r|
     r.association :contest
   end
+### Result
+  factory :result do |r|
+    r.association :pilot, :factory => :member
+    r.association :category
+    r.year 2014
+    r.region 'SouthCentral'
+    factory :result_with_members do
+      after(:create) do |result, evaluator|
+        create_list(:member, 4).each do |m|
+          result.members << m
+        end
+      end
+    end
+    factory :result_with_accums do
+      after(:create) do |result, evaluator|
+        create_list(:pc_result, 4).each do |p|
+          p.results << p
+        end
+      end
+    end
+  end
 end
