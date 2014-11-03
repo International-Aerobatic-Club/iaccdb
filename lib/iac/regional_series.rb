@@ -6,10 +6,7 @@
 # Third, it ranks competitors based on their results and eligibility.
 module IAC
 class RegionalSeries
-
-def self.is_national(region)
-  /National/i =~ region
-end
+include IAC::Region
 
 def self.required_contest_count(region)
   (/NorthWest/i =~ region) ? 2 : 3;
