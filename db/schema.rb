@@ -299,10 +299,10 @@ ActiveRecord::Schema.define(:version => 20141102191625) do
     t.string   "name"
     t.boolean  "qualified"
     t.integer  "rank"
-    t.integer  "points"
+    t.decimal  "points",          :precision => 9, :scale => 2
     t.integer  "points_possible"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",                                    :null => false
+    t.datetime "updated_at",                                    :null => false
   end
 
   create_table "scores", :force => true do |t|
