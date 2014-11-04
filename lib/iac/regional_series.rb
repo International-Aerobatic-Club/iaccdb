@@ -8,12 +8,12 @@ module IAC
 class RegionalSeries
 include IAC::Region
 
-def self.required_contest_count(region)
+def required_contest_count(region)
   (/NorthWest/i =~ region) ? 2 : 3;
 end
 
 # Accumulate pc_results for contest onto regional_pilots
-def self.accumulate_contest (year, region, contest)
+def accumulate_contest (year, region, contest)
   puts "..Including #{contest.year_name} #{contest.place}"
   contest.c_results.each do |c_result|
     c_result.pc_results.each do |pc_result|
@@ -32,7 +32,7 @@ end
 # Other competitors will have a result in regions where they have participated in a contest.
 # Competitors will have a result in each category they have competed
 # Does not currently ignore H/C (for patch) results
-def self.compute_results (year, region)
+def compute_results (year, region)
   RegionalPilot.destroy_all(:year => year, :region => region)
   #first find the contests in the region 
   contests = Contest.where("year(start) = #{year} and region = '#{region}'")
@@ -58,13 +58,13 @@ end
 
 # Compute every competitor's eligibility in region.
 # Does not currently account for chapter membership.
-def self.compute_eligibility (year, region)
+def compute_eligibility (year, region)
   #RegionalPilot.where(:year => year, :region => region).update_all(:qualified => true)
   # already accomplished by compute_results
 end
 
 # Compute ranking for every competitor X category in region
-def self.compute_ranking (year, region)
+def compute_ranking (year, region)
   #RegionalPilot.where(:year => year, :region => region).update_all(:rank => 1)
   regional_pilots = RegionalPilot.where(:year => year, :region => region).order(
     'qualified desc, percentage desc')
@@ -86,7 +86,7 @@ def self.compute_ranking (year, region)
 end
 
 # Compute regional series results given year and region
-def self.compute_regional (year, region)
+def compute_regional (year, region)
   puts "Computing regional series results for region #{region}, contest year #{year}"
   compute_results year, region
   compute_eligibility year, region
@@ -94,7 +94,7 @@ def self.compute_regional (year, region)
 end
 
 # Compute regional series results given contest
-def self.compute_regional_for_contest (contest)
+def compute_regional_for_contest (contest)
   if is_national(contest.region)
     compute_all_regions contest.year
   else
@@ -103,7 +103,7 @@ def self.compute_regional_for_contest (contest)
 end
 
 # Compute all regions. Necessary after the Nationals.
-def self.compute_all_regions (year)
+def compute_all_regions (year)
   contests = Contest.where('year(start) = ?', year)
   regions = contests.inject([]) { |ra, c| ra << c.region }
   regions.uniq!

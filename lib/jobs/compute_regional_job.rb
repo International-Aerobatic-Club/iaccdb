@@ -9,7 +9,8 @@ class ComputeRegionalJob < Struct.new(:contest)
     @contest = contest
     @description = "Region #{contest.region}, year #{contest.year}"
     say "Computing regional series standings for #{@description}"
-    IAC::RegionalSeries.compute_regional_for_contest(contest) 
+    series = IAC::RegionalSeries.new
+    series.compute_regional_for_contest(contest) 
   end
 
   def error(job, exception)
