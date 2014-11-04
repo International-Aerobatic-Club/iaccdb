@@ -1,4 +1,9 @@
-<h1>L. Paul Soucy Results</h1>
+<h1>L. Paul Soucy Results, <%= @year %></h1>
+<p>
+<% @years.each do |year| %>
+  <%= link_to year, leaders_soucy_path(year) %>
+<% end %>
+</p>
 <%= render 'soucy_results/nationals_notice' unless @nationals %>
 <p>Pilots' scores are best combination of two
 contests flown, plus the U.S. National Aerobatic Championships,
