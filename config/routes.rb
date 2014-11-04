@@ -49,6 +49,8 @@ Iac::Application.routes.draw do
     get 'judges', :action => :judges
     get 'regionals/:year', :action => :regionals
     get 'regionals', :action => :regionals
+    get 'soucy/:year', :action => :soucy
+    get 'soucy', :action => :soucy
   end
 
   ### Default namespace
