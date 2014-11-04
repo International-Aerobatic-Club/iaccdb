@@ -1,0 +1,13 @@
+<h1>L. Paul Soucy Results</h1>
+<%= render 'soucy_results/nationals_notice' unless @nationals %>
+<p>Pilots' scores are best combination of two
+contests flown, plus the U.S. National Aerobatic Championships,
+regardless of category.</p>
+<table class='soucy'>
+<thead>
+<tr><th colspan='2'/><th>points</th><th>possible</th><th>percent</th></tr>
+</thead>
+<tbody>
+<%= render @soucies %>
+</tbody>
+</table>

@@ -1,0 +1,8 @@
+<tr class='soucy-pilot'>
+<td><%= soucy_result.rank if soucy_result.qualified %></td>
+<td><%= soucy_result.pilot.name %></td>
+<td><%= score_two(soucy_result.points) %></td>
+<td><%= soucy_result.points_possible %></td>
+<td><%= score_two(soucy_result.result_percent) %>%</td>
+</tr>
+<%= render soucy_result.pc_results %>
