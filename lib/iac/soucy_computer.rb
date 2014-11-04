@@ -7,7 +7,6 @@
 # Fourth, ranks competitors based on their results and eligibility.
 module IAC
 class SoucyComputer
-include IAC::Region
 
 def initialize (year)
   @year = year
@@ -69,8 +68,10 @@ def integrate_nationals
 end
 
 def compute_rankings
-  rankings = Ranking::Computer.ranks_for(@soucies.collect { |soucy| soucy.result_percent }) 
-  @soucies.each_with_index do |soucy,i|
+  qualifiers = @soucies.select { |soucy| soucy.qualified }
+  percentages = qualifiers.collect { |soucy| soucy.result_percent } 
+  rankings = Ranking::Computer.ranks_for(percentages)
+  qualifiers.each_with_index do |soucy,i|
     soucy.rank = rankings[i]
     soucy.save
   end
