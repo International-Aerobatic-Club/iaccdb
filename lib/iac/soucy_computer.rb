@@ -75,6 +75,14 @@ def compute_rankings
     soucy.rank = rankings[i]
     soucy.save
   end
+  qual_count = qualifiers.size
+  non_quals = @soucies - qualifiers
+  percentages = non_quals.collect { |soucy| soucy.result_percent } 
+  rankings = Ranking::Computer.ranks_for(percentages)
+  non_quals.each_with_index do |soucy,i|
+    soucy.rank = qual_count + rankings[i]
+    soucy.save
+  end
 end
 
 end
