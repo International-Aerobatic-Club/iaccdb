@@ -12,8 +12,9 @@ def compute_best_pair
       best_total, best_possible, best_ratio = total, possible, ratio
     end
   end
-  points = best_total
-  points_possible = best_possible
+  self.points = best_total
+  self.points_possible = best_possible
+  self.qualified = false
   save
 end
 
@@ -21,11 +22,11 @@ def integrate_national_result(nationals)
   nationals_result = PcResult.joins(:c_result => :contest).where(
     "pilot_id = ? and contests.id = ?", pilot.id, nationals.id).first
   if nationals_result
-    points += nationals_result.category_result
-    points_possible += nationals.result.total_possible
-    qualified = true
+    self.points += nationals_result.category_result
+    self.points_possible += nationals.result.total_possible
+    self.qualified = true
   else
-    qualified = false
+    self.qualified = false
   end
   save
 end
