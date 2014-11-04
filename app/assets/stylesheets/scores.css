@@ -28,6 +28,10 @@ tr.soucy_pilot {
   font-weight:bold;
 }
 
+table.soucy td.percentage {
+  padding-left:1em;
+}
+
 h2.regional { margin-bottom:0px; }
 h3.regional { margin-bottom:0px; }
 div.navigation { 
