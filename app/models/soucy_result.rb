@@ -22,9 +22,11 @@ def integrate_national_result(nationals)
   nationals_result = PcResult.joins(:c_result => :contest).where(
     "pilot_id = ? and contests.id = ?", pilot.id, nationals.id).first
   if nationals_result
-    self.points += nationals_result.category_result
-    self.points_possible += nationals.result.total_possible
+    self.points += nationals_result.category_value
+    self.points_possible += nationals_result.total_possible
     self.qualified = true
+    pcrs = self.pc_results.all
+    self.pc_results << nationals_result unless pcrs.include?(nationals_result)
   else
     self.qualified = false
   end
