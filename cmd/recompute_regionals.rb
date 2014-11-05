@@ -4,7 +4,8 @@ require "iac/regional_series"
 
 year = ARGV.empty? ? 0 : ARGV[0].to_i
 if (0 < year)
-  IAC::RegionalSeries.compute_all_regions year
+  series = IAC::RegionalSeries.new
+  series.compute_all_regions year
 else
   puts 'specify a year'
 end

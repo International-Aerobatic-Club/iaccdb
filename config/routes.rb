@@ -45,10 +45,12 @@ Iac::Application.routes.draw do
   ### Leaders namespace
   namespace :leaders do
     root :to => "contests#index"
-    get 'judges/:year', :action => :judges
-    get 'judges', :action => :judges
-    get 'regionals/:year', :action => :regionals
-    get 'regionals', :action => :regionals
+    get 'judges/:year', :action => :judges, :as => :judges
+    get 'judges', :action => :judges, :as => :recent_judges
+    get 'regionals/:year', :action => :regionals, :as => :regionals
+    get 'regionals', :action => :regionals, :as => :recent_regionals
+    get 'soucy/:year', :action => :soucy, :as => :soucy
+    get 'soucy', :action => :soucy, :as => :recent_soucy
   end
 
   ### Default namespace

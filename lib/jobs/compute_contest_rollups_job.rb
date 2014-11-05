@@ -19,6 +19,8 @@ class ComputeContestRollupsJob < Struct.new(:contest)
   def success(job)
     say "Success computing contest rollups for #{@contest.year_name}"
     Delayed::Job.enqueue ComputeYearRollupsJob.new(@contest.start.year)
+    Delayed::Job.enqueue ComputeRegionalJob.new(@contest)
+    Delayed::Job.enqueue ComputeSoucyJob.new(@contest)
   end
 
 end

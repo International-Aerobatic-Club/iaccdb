@@ -7,6 +7,7 @@ td.score,
 td.figure_number,
 th.figure_number,
 td.total_average,
+td.points_possible,
 td.percentage {
   text-align:right;
 }
@@ -17,6 +18,18 @@ td.regional_series_pilot_contest {
 
 td.regional_series_pilot_name {
   font-weight:bold;
+}
+
+tr.soucy_contest td.contest_name {
+  text-align:right;
+}
+
+tr.soucy_pilot {
+  font-weight:bold;
+}
+
+table.soucy td.percentage {
+  padding-left:1em;
 }
 
 h2.regional { margin-bottom:0px; }

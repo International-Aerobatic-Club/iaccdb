@@ -1,0 +1,22 @@
+<h1>L. Paul Soucy Results, <%= @year %></h1>
+<p>
+<% @years.each do |year| %>
+  <%= link_to year, leaders_soucy_path(year) %>
+<% end %>
+</p>
+<%= render 'soucy_results/nationals_notice' unless @nationals %>
+<p>Pilots' scores are best combination of two
+contests flown, plus the U.S. National Aerobatic Championships,
+regardless of category.
+Results are provisional until all contests for the year are
+flown and the winner announced.
+We display only the top ten.
+</p>
+<table class='soucy'>
+<thead>
+<tr><th colspan='2'/><th>points</th><th>possible</th><th>percent</th></tr>
+</thead>
+<tbody>
+<%= render @soucies %>
+</tbody>
+</table>

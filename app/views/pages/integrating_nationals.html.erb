@@ -49,11 +49,14 @@ the same computation used by ACRO.  It is useful to run them, however, as they v
 the completeness and integrity of the imported raw grading data.
 They also generate the figure ranks and judge metrics.
 </p><p>
-The second utility that touches the contest database is patch_results.rb.  This overwrites the computed flight and category results for each pilot.
+The second utility that touches the contest database is patch_results.rb.  
+This overwrites the IAC computed flight and category results for each pilot 
+with the ACRO computed results.
 </p>
 <h2>Using the utilities for 2014</h2>
 <p>Following are detailed steps used to integrate Nationals 2014 results into IACCDB.
 </p>
+<h3>Retrieve the results</h3>
 <p>Pull the results postings from the web.  We make a directory for these and change to it
 before pulling them.  This keeps them separate from other years, where they would otherwise
 overlap.</p>
@@ -64,6 +67,8 @@ wget --mirror --convert-links https://nationals.iac.org/files/results/index.htm<
 <p>Unfortunately, this does not pull the individual pilot files that contain the grades from the judges.  This is because the links to those are encoded as javascript actions rather than as links.  In order to get them, we run a python script over the downloaded result files:</p>
 <p class='code'>cat nationals.iac.org/files/results/link* | python ../cmd/acro/stripPilots.py
 cd ..</p>
+
+<h3>Scrape the results</h3>
 
 <p>Create the contest control file in the directory that contains the downloaded results postings.  This contains the contest meta information needed, see 
 <span class='code'>lib/acro/control_file.rb</span> for documentation of the format.
@@ -121,6 +126,8 @@ and delete the team result overall posting as well</p>
 <p class='code'>rm nationals2014/pilot_p*s28.htm.yml
 rm nationals2014/multi_R012s08s17s26s28.htm.yml</p>
 
+<h3>Match names to member records</h3>
+
 <p>Before we import this data into IACCDB, we have to ensure that the pilot names
 used in the ACRO files will match member names as used in IACCDB.  Without this important
 step, we get duplicate pilots with different name spellings in IACCDB.  Some pilots 
@@ -143,6 +150,9 @@ and judge in the ACRO results files.
 We select the correct member record for the name presented.
 The program outputs a name resolution file, <span class='code'>participants.yml</code.
 that matches ACRO entered names to member records.</p>
+
+<h3>Import the pilot-flight grades</h3>
+
 <p>With the name resolution done, we can import the pilot flight data-- all of the grades.
 This is the first command that writes to the database, so we first make a back-up.
 </p>
@@ -156,7 +166,12 @@ If the jobs worker is not already running on the server, Run
 The job computes results from the imported data.  
 We run this to create the result records and judge metrics.
 It takes some time to run.  That is a subject for investigation.
-</p><p>
+</p>
+
+<h3>Import the ACRO computed results</h3>
+
+<h4>Match new participant names and identify the contest</h4>
+<p>
 After adding the grades, we now have member records for the members who
 were not yet present in the database.
 Run <span class='code'>ruby cmd/acro/resolve_names.rb</span> a second time, 
@@ -190,6 +205,8 @@ state: 'TX'
 director: 'Gray Brandt'
 contest_id: 456
 </p>
+<h4>Match category result files and flight headings to flight records</h4>
+
 <p>We can usually identify the category, and possibly line-up the flight names from
 the overall results postings with the flights in the individual pilot files.  Rather than
 take a chance with heuristic matching, however, it's straightforward to manually
@@ -241,10 +258,15 @@ The second entry has not.</p>
 <p>We edit the sequence values to get the correct sequence of columns in the results
 display.</p>
 
+<h4>Patch the ACRO computed results</h4>
+
 <p>Now patch the IAC computed results with the results computed by ACRO.  They are different.
 </p><p class='code'>rails runner cmd/acro/patch_results.rb nationals2014/contest.yml</p>
 <p>Compare the posted overall category and flight result scores with those
 in the original ACRO posted results.  If they match, all is well.</p>
+
+<h3>Recompute Regionals</h4>
+
 <p>
 With Nationals loaded, we recompute the regionals.</p>
 <p class='code'>rails runner cmd/recompute_regionals.rb 2014</p>

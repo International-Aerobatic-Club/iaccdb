@@ -1,7 +1,7 @@
 class LeadersController < ApplicationController
   def judges
-    @year = params[:year] || Time.now.year
     @years = JyResult.select("distinct year").all.collect{|jy_result|
+    @year = params[:year] || @years.first
     jy_result.year}.sort{|a,b| b <=> a}
     jy_results = JyResult.includes(:category, :judge).select(
       [:pilot_count, :sigma_ri_delta, :con, :dis, :minority_zero_ct,
@@ -26,8 +26,8 @@ class LeadersController < ApplicationController
   end
 
   def regionals
-    @year = params[:year] || Time.now.year
     @years = RegionalPilot.select("distinct year").all.collect{|rp| rp.year}.sort{|a,b| b <=> a}
+    @year = params[:year] || @years.first
     region_pilots = RegionalPilot.includes(:category, :pilot, :pc_results).joins(:region_contest).where(['year = ?', @year]).group('regional_pilot_id').having('count(distinct pc_result_id) > 1')
     sorted_regions = {}
     @region_categories = {}
@@ -43,6 +43,14 @@ class LeadersController < ApplicationController
     end
     @results = sorted_regions.sort
     @regions = sorted_regions.keys.sort
+  end
+
+  def soucy
+    @years = SoucyResult.select("distinct year").all.collect{|rp| rp.year}.sort{|a,b| b <=> a}
+    @year = params[:year] || @years.first
+    @soucies = SoucyResult.includes(:pc_results).where("year = ?", @year
+      ).order('qualified desc, rank').limit(10)
+    @nationals = Contest.where("year(start) = ? and region = 'National'", @year).first
   end
 
 end

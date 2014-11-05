@@ -1,0 +1,8 @@
+<tr class='soucy_pilot'>
+<td class='rank'><%= soucy_result.rank if soucy_result.qualified %></td>
+<td class='pilot_name'><%= soucy_result.pilot.name %></td>
+<td class='points'><%= decimal_two(soucy_result.points) %></td>
+<td class='points_possible'><%= soucy_result.points_possible %></td>
+<td class='percentage'><%= decimal_two(soucy_result.result_percent) %>%</td>
+</tr>
+<%= render soucy_result.pc_results %>

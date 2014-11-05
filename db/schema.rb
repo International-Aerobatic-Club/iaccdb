@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140718111906) do
+ActiveRecord::Schema.define(:version => 20141102191625) do
 
   create_table "airplanes", :force => true do |t|
     t.string   "make"
@@ -268,6 +268,43 @@ ActiveRecord::Schema.define(:version => 20140718111906) do
     t.integer  "category_id"
   end
 
+  create_table "result_accums", :force => true do |t|
+    t.integer  "result_id"
+    t.integer  "pc_result_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "result_accums", ["pc_result_id"], :name => "index_result_accums_on_pc_result_id"
+  add_index "result_accums", ["result_id", "pc_result_id"], :name => "index_result_accums_on_result_id_and_pc_result_id", :unique => true
+  add_index "result_accums", ["result_id"], :name => "index_result_accums_on_result_id"
+
+  create_table "result_members", :force => true do |t|
+    t.integer  "member_id"
+    t.integer  "result_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "result_members", ["member_id", "result_id"], :name => "index_result_members_on_member_id_and_result_id", :unique => true
+  add_index "result_members", ["member_id"], :name => "index_result_members_on_member_id"
+  add_index "result_members", ["result_id"], :name => "index_result_members_on_result_id"
+
+  create_table "results", :force => true do |t|
+    t.string   "type"
+    t.integer  "year"
+    t.integer  "category_id"
+    t.integer  "pilot_id"
+    t.string   "region"
+    t.string   "name"
+    t.boolean  "qualified"
+    t.integer  "rank"
+    t.decimal  "points",          :precision => 9, :scale => 2
+    t.integer  "points_possible"
+    t.datetime "created_at",                                    :null => false
+    t.datetime "updated_at",                                    :null => false
+  end
+
   create_table "scores", :force => true do |t|
     t.integer  "pilot_flight_id"
     t.integer  "judge_id"
@@ -286,5 +323,11 @@ ActiveRecord::Schema.define(:version => 20140718111906) do
   end
 
   add_index "sequences", ["figure_count", "total_k", "mod_3_total"], :name => "by_attrs"
+
+  create_table "writers", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
 end

@@ -20,7 +20,6 @@ class ComputeFlightsJob < Struct.new(:contest)
     say "Success computing flights for #{@contest.year_name}"
     Delayed::Job.enqueue ComputeContestRollupsJob.new(@contest)
     Delayed::Job.enqueue FindStarsJob.new(@contest)
-    Delayed::Job.enqueue ComputeRegionalJob.new(@contest)
   end
 
 end
