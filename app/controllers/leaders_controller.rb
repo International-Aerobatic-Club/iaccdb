@@ -1,8 +1,8 @@
 class LeadersController < ApplicationController
   def judges
-    @years = JyResult.select("distinct year").all.collect{|jy_result|
+    @years = JyResult.select("distinct year").all.collect { |jy_result| jy_result.year }
+    @years.sort!{|a,b| b <=> a}
     @year = params[:year] || @years.first
-    jy_result.year}.sort{|a,b| b <=> a}
     jy_results = JyResult.includes(:category, :judge).select(
       [:pilot_count, :sigma_ri_delta, :con, :dis, :minority_zero_ct,
        :minority_grade_ct, :pair_count, :ftsdx2, :ftsdy2, :ftsdxdy, :sigma_d2,
