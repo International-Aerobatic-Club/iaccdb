@@ -1,0 +1,20 @@
+<%= form_for([:hq, @team], :url => hq_collegiate_index_path) do |f| %>
+  <% if @team.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@team.errors.count, "error") %> prohibited this team from being saved:</h2>
+
+      <ul>
+      <% @team.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= f.label :name, 'Team name: ' %>
+  <%= f.text_field :name %>
+
+  <div class="actions">
+    <%= f.submit 'Add Collegiate Team' %>
+  </div>
+  <%= f.hidden_field :year %>
+<% end %>

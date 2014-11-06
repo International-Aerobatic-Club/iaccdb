@@ -1,5 +1,15 @@
 Iac::Application.routes.draw do
 
+  ### HQ Namespace
+  namespace :hq do
+    resources :collegiate, :controller => :collegiate_results, :except => [:index, :new]
+    scope :module => :collegiate_results do
+      get 'collegiate_teams/:year', :action => :index, :as => :collegiate_teams_index
+      get 'collegiate_teams/', :action => :index, :as => :current_collegiate_teams
+      get 'collegiate_teams/:year/new', :action => :new, :as => :new_collegiate_team
+    end
+  end
+
   ### Admin Namespace
   namespace :admin do
     root :to => "contests#index"
