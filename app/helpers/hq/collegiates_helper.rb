@@ -1,0 +1,2 @@
+module Hq::CollegiatesHelper
+end

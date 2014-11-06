@@ -1,0 +1,22 @@
+<h1>Collegiate Teams, <%= @year %></h1>
+
+<table>
+<thead>
+  <tr>
+    <th>Name</th>
+    <th colspan='3'>Actions</th>
+  </tr>
+</thead>
+<tbody>
+<% @teams.each do |team| %>
+  <tr>
+    <td><%= team.name %></td>
+    <td><%= link_to 'Show', hq_collegiate_path(team) %></td>
+    <td><%= link_to 'Edit', edit_hq_collegiate_path(team) %></td>
+    <td><%= link_to 'Destroy', hq_collegiate_path(team), method: :delete, data: { confirm: 'Permanently remove the team?' } %></td>
+  </tr>
+<% end %>
+</tbody>
+</table>
+
+<%= link_to 'Add Collegiate Team', hq_new_collegiate_team_path(@year) %>
