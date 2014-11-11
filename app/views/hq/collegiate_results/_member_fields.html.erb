@@ -1,0 +1,10 @@
+<fieldset>
+  <%= fm.label :iac_id, 'IAC number: ' %>
+  <%= fm.text_field :iac_id %>
+  <%= fm.label :family_name, 'Family (last) name: ' %>
+  <%= fm.text_field :family_name %>
+  <%= fm.label :given_name, 'Given (first) name: ' %>
+  <%= fm.text_field :given_name %>
+  <%= fm.hidden_field :_destroy %>
+  <%= link_to 'remove', '#', class: 'remove_fields' %>
+</fieldset>

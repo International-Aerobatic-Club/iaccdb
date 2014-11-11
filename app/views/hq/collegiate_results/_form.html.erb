@@ -13,6 +13,11 @@
   <%= f.label :name, 'Team name: ' %>
   <%= f.text_field :name %>
 
+  <%= f.fields_for :members do |fm| %>
+    <%= render 'member_fields', :fm => fm %>
+  <% end %>
+  <%= link_to_add_fields 'Add member', f, :members %>
+
   <div class="actions">
     <%= f.submit 'Add Collegiate Team' %>
   </div>
