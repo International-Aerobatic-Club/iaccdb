@@ -57,6 +57,7 @@ Iac::Application.routes.draw do
   root :to => "contests#index"
 
   get "pages/:title" => 'pages#page_view', :as => 'pages'
+  get '/robots.:format' => 'pages#robots'
 
   resources :contests, :only => [:index, :show]
 
