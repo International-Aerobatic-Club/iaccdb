@@ -27,6 +27,10 @@ class Category < ActiveRecord::Base
     mycat
   end
 
+  def is_primary
+    /primary|basic/i =~ self.category
+  end
+
   def to_s
     name
   end
