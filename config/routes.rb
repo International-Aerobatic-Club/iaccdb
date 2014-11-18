@@ -61,6 +61,8 @@ Iac::Application.routes.draw do
     get 'regionals', :action => :regionals, :as => :recent_regionals
     get 'soucy/:year', :action => :soucy, :as => :soucy
     get 'soucy', :action => :soucy, :as => :recent_soucy
+    get 'collegiate/:year', :action => :collegiate, :as => :collegiate
+    get 'collegiate', :action => :collegiate, :as => :recent_collegiate
   end
 
   ### Default namespace

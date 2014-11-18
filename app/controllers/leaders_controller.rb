@@ -53,4 +53,11 @@ class LeadersController < ApplicationController
     @nationals = Contest.where("year(start) = ? and region = 'National'", @year).first
   end
 
+  def collegiate
+    @years = CollegiateResult.select("distinct year").all.collect{|rp| rp.year}.sort{|a,b| b <=> a}
+    @year = params[:year] || @years.first
+    @collegiates = CollegiateResult.includes(:pc_results).where("year = ?", @year
+      ).order('qualified desc, rank')
+  end
+
 end
