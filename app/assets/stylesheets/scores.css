@@ -20,14 +20,26 @@ td.regional_series_pilot_name {
   font-weight:bold;
 }
 
+table.collegiate tr.contest td.name,
+table.collegiate td.pilot,
 tr.soucy_contest td.contest_name {
   text-align:right;
 }
 
+table.collegiate td.pilot {
+  font-weight:bold
+}
+
+tr.collegiate_team,
 tr.soucy_pilot {
   font-weight:bold;
 }
 
+tr.collegiate_team td {
+  font-size:120%;
+}
+
+table.collegiate td.percentage,
 table.soucy td.percentage {
   padding-left:1em;
 }
