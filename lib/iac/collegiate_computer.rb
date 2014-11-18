@@ -15,12 +15,7 @@ end
 def recompute_team
   CollegiateResult.where(:year => @year).each do |team|
     puts "Computing #{team}"
-    pilots = team.members.all # array of pilot members
-    pilot_contests = {}
-    pilots.each do |pilot|
-      pilot_contests[pilot] = pilot.contests(@year)
-    end
-    compute_best_result(team, CollegiateTeamComputer.new(pilot_contests))
+    compute_best_result(team, CollegiateTeamComputer.new(team.pilot_contests))
     team.save
     puts "Computed #{team}"
   end
