@@ -1,0 +1,21 @@
+<h1>Collegiate Team Results, <%= @year %></h1>
+<p>
+<% @years.each do |year| %>
+  <%= link_to year, leaders_collegiate_path(year) %>
+<% end %>
+</p>
+<p>Collegiate team scores are best combination of one non-Primary pilot result
+and any category results from two other pilots.
+Teams qualify by having a non-Primary competitor at three contests and
+three or more pilots at three contests.
+Results are provisional until all contests for the year are
+flown and the winner announced.
+</p>
+<table class='collegiate'>
+<thead>
+<tr><th colspan='2'/><th>points</th><th>possible</th><th>percent</th></tr>
+</thead>
+<tbody>
+<%= render @collegiates %>
+</tbody>
+</table>

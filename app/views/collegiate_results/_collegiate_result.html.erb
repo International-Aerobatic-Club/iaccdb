@@ -1,0 +1,9 @@
+<tr class='collegiate_team'>
+<td class='rank'><%= collegiate_result.rank if collegiate_result.qualified %></td>
+<td class='team_name'><%= collegiate_result.name %></td>
+<td class='points'><%= decimal_two(collegiate_result.points) %></td>
+<td class='points_possible'><%= collegiate_result.points_possible %></td>
+<td class='percentage'><%= decimal_two(collegiate_result.result_percent) %>%</td>
+</tr>
+<%= pilot_contests = collegiate_result.pilot_contests
+render :partial => 'collegiate_results/pilot', :collection => pilot_contests.keys, :locals => { pilot_contests: pilot_contests } %>
