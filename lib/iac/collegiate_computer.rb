@@ -6,6 +6,11 @@ def initialize (year)
   @year = year
 end
 
+def recompute
+  recompute_team
+  recompute_individual
+end
+
 # Compute the year's team result
 # For each collegieate team
 #   Extract list of pilots

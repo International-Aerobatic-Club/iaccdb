@@ -21,6 +21,7 @@ class ComputeContestRollupsJob < Struct.new(:contest)
     Delayed::Job.enqueue ComputeYearRollupsJob.new(@contest.start.year)
     Delayed::Job.enqueue ComputeRegionalJob.new(@contest)
     Delayed::Job.enqueue ComputeSoucyJob.new(@contest)
+    Delayed::Job.enqueue ComputeCollegiateJob.new(@contest)
   end
 
 end
