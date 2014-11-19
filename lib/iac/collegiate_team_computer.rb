@@ -6,12 +6,14 @@ class Result
   attr_accessor :total_possible
   attr_accessor :combination
   attr_accessor :qualified
+  attr_accessor :has_non_primary
 
   def initialize
     @total = 0.0
     @total_possible = 0
     @combination = []
     @qualified = false
+    @has_non_primary = false
   end
 
   def self.dup(result)
@@ -20,17 +22,24 @@ class Result
     dup.total_possible = result.total_possible
     dup.combination = Array.new(result.combination)
     dup.qualified = result.qualified
+    dup.has_non_primary = result.has_non_primary
     dup
   end
 
   def update(pc_result)
-    @total += pc_result.category_value
-    @total_possible += pc_result.total_possible
-    @combination << pc_result
+    self.total += pc_result.category_value
+    self.total_possible += pc_result.total_possible
+    self.combination << pc_result
+    self.has_non_primary = self.has_non_primary || !pc_result.category.is_primary
   end
 
   def value
-    @total_possible != 0 ? @total / @total_possible : 0
+    self.total_possible != 0 ? self.total / self.total_possible : 0
+  end
+
+  def <(other)
+    (!self.has_non_primary && other.has_non_primary) ||
+    self.value < other.value
   end
 end
 
@@ -38,6 +47,8 @@ end
 def initialize(pilot_contests)
   @pilot_contests = pilot_contests
   @pilots = pilot_contests.keys
+  # disregard pilots with no contest participation
+  @pilots.delete_if { |pilot| @pilot_contests[pilot].size == 0 }
 end
 
 # For each pilot participating in Sportsman or above
@@ -59,7 +70,9 @@ def compute_result
   initialize_counts
   @best_result = Result.new
   @best_result.qualified = is_qualified?
-  compute_best_result_p(@pilots, 3, @best_result, 0 < @non_primary_participant_occurrence_count)
+  pilot_count = @pilots.size
+  combination_size = 3 < pilot_count ? 3 : pilot_count
+  compute_best_result_p(@pilots, combination_size, @best_result)
   @best_result
 end
 
@@ -79,16 +92,17 @@ end
 # unused_pilots: array of pilot not already incorporated
 # pilots_needed: count of additional pilots needed for a solution
 # cur_result: current accumulated result of pilot flights used so far
-# need_non_primary: true if a non-primary result is needed in the solution
-def compute_best_result_p(unused_pilots, pilots_needed, cur_result, need_non_primary)
+def compute_best_result_p(unused_pilots, pilots_needed, cur_result)
   if (pilots_needed == 0 || unused_pilots.empty?)
-    if @best_result.value < cur_result.value
+    if @best_result < cur_result
       @best_result = cur_result
     end
   else
-    unused_pilots.each do |pilot|
-      compute_best_result_pc(pilot, unused_pilots - [pilot], pilots_needed - 1, 
-        cur_result, need_non_primary)
+    (0 .. unused_pilots.size - pilots_needed).each do |i|
+      compute_best_result_pc(unused_pilots[i],
+        unused_pilots[i+1 .. unused_pilots.size],
+        pilots_needed - 1, 
+        cur_result)
     end
   end
 end
@@ -98,15 +112,12 @@ end
 # unused_pilots: array of pilot not already incorporated
 # pilots_needed: count of additional pilots needed for a solution
 # cur_result: current accumulated result of pilot flights used so far
-# need_non_primary: true if a non-primary result is needed in the solution
-def compute_best_result_pc(pilot, unused_pilots, pilots_needed, cur_result, need_non_primary)
+def compute_best_result_pc(pilot, unused_pilots, pilots_needed, cur_result)
   pilot_results = @pilot_contests[pilot]
   pilot_results.each do |pc_result|
-    if !need_non_primary || !pc_result.category.is_primary
-      new_result = Result.dup(cur_result)
-      new_result.update(pc_result)
-      compute_best_result_p(unused_pilots, pilots_needed, new_result, false)
-    end
+    new_result = Result.dup(cur_result)
+    new_result.update(pc_result)
+    compute_best_result_p(unused_pilots, pilots_needed, new_result)
   end
 end
 
