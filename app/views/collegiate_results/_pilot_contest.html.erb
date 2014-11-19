@@ -1,6 +1,7 @@
 <tr class='contest'>
-<td colspan='2' class='name'><%= pilot_contest.contest.name %></td>
-<td class='points'><%= pilot_contest.category_value %></td>
+<td colspan='2' class='name'><%= pilot_contest.contest.name %>, 
+<%= pilot_contest.category.category.capitalize %></td>
+<td class='points'><%= decimal_two(pilot_contest.category_value) %></td>
 <td class='points_possible'><%= pilot_contest.total_possible %></td>
 <td class='percentage'><%= decimal_two(pilot_contest.pct_possible) %>%</td>
 </tr>
