@@ -20,8 +20,7 @@ def recompute_team
     team.qualified = result.qualified
     team.points = result.total
     team.points_possible = result.total_possible
-    puts "result combination has #{result.combination.join(',')}"
-    puts 'TBD patch pc_results on team with result[:combination]'
+    team.update_results(result.combination)
     team.save
   end
   RankComputer.compute_result_rankings(teams)
