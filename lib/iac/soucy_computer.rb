@@ -17,7 +17,7 @@ def recompute
   @soucies = soucies_for_pilots
   @soucies.each { |soucy| soucy.compute_best_pair }
   integrate_nationals
-  compute_rankings
+  RankComputer.compute_result_rankings(@soucies)
 end
 
 ###
@@ -64,24 +64,6 @@ def integrate_nationals
   nationals = nationals.first
   if nationals
     @soucies.each { |soucy| soucy.integrate_national_result(nationals) }
-  end
-end
-
-def compute_rankings
-  qualifiers = @soucies.select { |soucy| soucy.qualified }
-  percentages = qualifiers.collect { |soucy| soucy.result_percent } 
-  rankings = Ranking::Computer.ranks_for(percentages)
-  qualifiers.each_with_index do |soucy,i|
-    soucy.rank = rankings[i]
-    soucy.save
-  end
-  qual_count = qualifiers.size
-  non_quals = @soucies - qualifiers
-  percentages = non_quals.collect { |soucy| soucy.result_percent } 
-  rankings = Ranking::Computer.ranks_for(percentages)
-  non_quals.each_with_index do |soucy,i|
-    soucy.rank = qual_count + rankings[i]
-    soucy.save
   end
 end
 

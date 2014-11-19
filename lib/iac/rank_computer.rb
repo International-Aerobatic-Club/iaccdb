@@ -158,6 +158,25 @@ module IAC
       computeFlightOverallRankings(flight)
     end
 
+    # Compute rankings of Result given array of Result
+    def self.compute_result_rankings(results)
+      qualifiers = results.select { |result| result.qualified }
+      percentages = qualifiers.collect { |result| result.result_percent } 
+      rankings = Ranking::Computer.ranks_for(percentages)
+      qualifiers.each_with_index do |result,i|
+        result.rank = rankings[i]
+        result.save
+      end
+      qual_count = qualifiers.size
+      non_quals = results - qualifiers
+      percentages = non_quals.collect { |result| result.result_percent } 
+      rankings = Ranking::Computer.ranks_for(percentages)
+      non_quals.each_with_index do |result,i|
+        result.rank = qual_count + rankings[i]
+        result.save
+      end
+    end
+
   ###
   private
   ###
