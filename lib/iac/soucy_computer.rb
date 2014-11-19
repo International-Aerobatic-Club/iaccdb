@@ -40,13 +40,8 @@ def engage_soucy_for_pilot(pilot)
   soucy = SoucyResult.where(:pilot_id => pilot.id, :year => @year).first_or_create
   to_be_results = PcResult.joins(:c_result => :contest).where(
     "pilot_id = ? and contests.region != 'National' and year(contests.start) = ?",
-    pilot.id, @year)
-  existing_results = soucy.pc_results.all
-  to_remove = existing_results - to_be_results
-  to_add = to_be_results - existing_results
-  to_remove.each { |pc_result| soucy.pc_results.delete(pc_result) }
-  to_add.each { |pc_result| soucy.pc_results.push(pc_result) }
-  soucy
+    pilot.id, @year).all
+  soucy.update_results(to_be_results)
 end
 
 # remove any soucies for year not in the list
