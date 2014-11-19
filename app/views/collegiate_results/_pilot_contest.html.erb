@@ -4,4 +4,5 @@
 <td class='points'><%= decimal_two(pilot_contest.category_value) %></td>
 <td class='points_possible'><%= pilot_contest.total_possible %></td>
 <td class='percentage'><%= decimal_two(pilot_contest.pct_possible) %>%</td>
+<td class='team_contribution'><%= 't' if combination.include? pilot_contest %></td>
 </tr>

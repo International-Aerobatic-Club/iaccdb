@@ -1,4 +1,5 @@
 <tr class='pilot'>
   <td colspan='2', class='pilot'><%= pilot.name %></td>
+  <td colspan='4'/>
 </tr>
-<%= render :partial => 'collegiate_results/pilot_contest', :collection => pilot_contests[pilot] %>
+<%= render :partial => 'collegiate_results/pilot_contest', :collection => pilot_contests[pilot], :locals => { combination: combination } %>

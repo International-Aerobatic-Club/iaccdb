@@ -30,6 +30,11 @@ table.collegiate td.pilot {
   font-weight:bold
 }
 
+td.team_contribution {
+  font-weight:bold;
+  font-family:ariel sans-serif;
+}
+
 tr.collegiate_team,
 tr.soucy_pilot {
   font-weight:bold;
