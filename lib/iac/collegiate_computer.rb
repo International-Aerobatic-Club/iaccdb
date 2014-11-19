@@ -13,8 +13,8 @@ end
 #   Determine qualification
 #   Determine best score combination
 def recompute_team
-  CollegiateResult.where(:year => @year).each do |team|
-    puts "Computing #{team}"
+  teams = CollegiateResult.where(:year => @year).all
+  teams.each do |team|
     ctc = CollegiateTeamComputer.new(team.pilot_contests)
     result = ctc.compute_result
     team.qualified = result.qualified
@@ -23,8 +23,8 @@ def recompute_team
     puts "result combination has #{result.combination.join(',')}"
     puts 'TBD patch pc_results on team with result[:combination]'
     team.save
-    puts "Computed #{team}"
   end
+  RankComputer.compute_result_rankings(teams)
 end
 
 # Compute the year's individual results
