@@ -1,0 +1,12 @@
+<tr class='pilot'>
+  <td colspan='2' class='pilot'><%= collegiate_individual.pilot.name %></td>
+  <td class='rank'>
+    <%= collegiate_individual.rank if collegiate_individual.qualified %>
+  </td>
+  <td class='points'><%= decimal_two(collegiate_individual.points) %></td>
+  <td class='points_possible'><%= collegiate_individual.points_possible %></td>
+  <td class='percentage'><%= decimal_two(collegiate_individual.result_percent) %>%</td>
+</tr>
+<%= render :partial => 'collegiate_results/pilot_contest',
+   :collection => collegiate_individual.pc_results,
+   :locals => { combination: combination } %>
