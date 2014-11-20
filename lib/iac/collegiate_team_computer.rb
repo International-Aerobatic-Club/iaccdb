@@ -46,7 +46,7 @@ end
 # pilot_contests is hash pilot => pc_results
 def initialize(pilot_contests)
   @pilot_contests = pilot_contests
-  @pilots = pilot_contests.keys
+  @pilots = @pilot_contests.keys
   # disregard pilots with no contest participation
   @pilots.delete_if { |pilot| @pilot_contests[pilot].size == 0 }
 end

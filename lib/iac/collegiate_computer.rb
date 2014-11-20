@@ -33,7 +33,10 @@ end
 
 # Compute the year's individual results
 def recompute_individual
-  puts 'Individual to be developed'
+  cic = CollegiateIndividualComputer.new(@year)
+  cic.recompute
+  results = CollegiateIndividualResult.where(:year => @year).all
+  RankComputer.compute_result_rankings(results)
 end
 
 ###
