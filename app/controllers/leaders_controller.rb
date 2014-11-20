@@ -58,6 +58,13 @@ class LeadersController < ApplicationController
     @year = params[:year] || @years.first
     @collegiates = CollegiateResult.includes(:pc_results).where("year = ?", @year
       ).order('qualified desc, rank')
+    i_results = CollegiateIndividualResult.where("year = ?", @year).order('qualified desc, rank')
+    # hash of pilot to pilot's collegiate individual result
+    @college_pilots = {}
+    @collegiates.each do |cr|
+      pilots = cr.members
+      @college_pilots[cr] = i_results.select { |r| pilots.include? r.pilot }
+    end
   end
 
 end
