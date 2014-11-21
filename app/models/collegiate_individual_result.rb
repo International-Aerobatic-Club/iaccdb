@@ -5,14 +5,14 @@ def compute_result
   best_possible = 0
   best_ratio = 0.0
   results = pc_results.all
-  if 3 < results.size
+  if results.size < 3
     csz = results.size
     self.qualified = false
   else
     csz = 3
     self.qualified = true
   end
-  pc_results.all.combination(csz) do |triple|
+  results.combination(csz) do |triple|
     total = triple.inject(0.0) { |t,r| t + r.category_value }
     possible = triple.inject(0) { |t,r| t + r.total_possible }
     ratio = 0 < possible ? total / possible : 0.0
