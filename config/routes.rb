@@ -95,6 +95,7 @@ Iac::Application.routes.draw do
 
   namespace :further do
     get 'participation', :action => :participation
+    get 'airplanes', :action => :airplane_make_model
   end
 
   # The priority is based upon order of creation:

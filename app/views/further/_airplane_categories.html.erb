@@ -1,0 +1,6 @@
+<h2><%= airplane_categories %></h2> 
+<table><thead><tr><th>Make</th><th>Model</th><th>Category</th><th>Flights</th></thead>
+<tbody>
+  <%= render partial: 'further/airplanes', collection: airplanes[airplane_categories] %>
+</tbody>
+</table>

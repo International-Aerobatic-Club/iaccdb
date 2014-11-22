@@ -28,4 +28,19 @@ class FurtherController < ApplicationController
 
     @categories = Category.order(:sequence)
   end
+
+  def airplane_make_model
+    airplanes_with_cat = Airplane.joins(
+      :pilot_flights => :category
+      ).select(
+        'count(pilot_flights.id) as flight_count, make, model, categories.name as category'
+      ).group('make, model, categories.id'
+      )
+   @airplanes = airplanes_with_cat.inject({}) do |m,a| 
+     puts "m is #{m}, a.category is #{a.category}, m[a.category] is #{m[a.category]}"
+     m[a.category] ||= []
+     m[a.category] << a
+     m
+   end
+  end
 end
