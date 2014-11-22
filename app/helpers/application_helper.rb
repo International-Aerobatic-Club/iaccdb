@@ -1,6 +1,8 @@
 module ApplicationHelper
   def decimal_two(v)
-    sprintf('%.02f', v  ? v : 0)
+    #sprintf('%.02f', v  ? v : 0)
+    v ||= 0
+    number_with_precision(v, precision: 2)
   end
 
   def score_two(v)
@@ -17,6 +19,11 @@ module ApplicationHelper
   def k_score_two(k)
     k ||= 0
     decimal_two(k * 10)
+  end
+
+  def points(v)
+    v ||= 0
+    number_with_delimiter(v)
   end
 
   def link_to_add_fields(name, form, association)
