@@ -7,7 +7,6 @@ module Model
     end
     context 'real_scores' do
       before(:each) do
-        reset_db
         @contest = Factory.create(:nationals)
         @adams = Factory.create(:tom_adams)
         @denton = Factory.create(:bill_denton)

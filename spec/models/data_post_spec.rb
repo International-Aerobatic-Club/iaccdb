@@ -2,7 +2,6 @@ module Model
   describe DataPost do
     context 'factory data' do
       before(:all) do
-        reset_db
         @data_post = Factory.create(:data_post)
       end
 

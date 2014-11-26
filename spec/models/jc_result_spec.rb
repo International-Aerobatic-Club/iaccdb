@@ -2,7 +2,6 @@ module Model
   describe JcResult do
     context 'factory data' do
       before(:all) do
-        reset_db
         @contest = Factory.create(:contest)
         @c_result = Factory.create(:c_result,
           :contest => @contest)
@@ -75,7 +74,6 @@ module Model
     end #context factory data
     context 'parsed data' do
       it 'computes category level judge results' do
-        reset_db
         manny = Manny::Parse.new
         IO.foreach('spec/manny/Contest_300.txt') { |line| manny.processLine(line) }
         m2d = Manny::MannyToDB.new

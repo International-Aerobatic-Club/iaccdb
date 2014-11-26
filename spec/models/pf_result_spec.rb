@@ -2,7 +2,6 @@ module Model
   describe PfResult do
     context 'real_scores' do
       before(:each) do
-        reset_db
         @category = Category.find_by_category_and_aircat('intermediate', 'P')
         @pilot_flight = Factory.create(:adams_known)
         judge_team = Factory.create(:judge_klein)

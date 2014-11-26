@@ -4,7 +4,6 @@
 module IAC
   describe RankComputer do
     before(:each) do
-      reset_db
       @contest = Factory.create(:contest)
       @flight = Factory.create(:flight, :contest => @contest)
       seq = Factory.create(:sequence, :k_values => [2,2,2,2,2])
