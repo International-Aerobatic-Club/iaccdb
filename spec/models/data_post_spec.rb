@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 module Model
   describe DataPost do
     context 'factory data' do

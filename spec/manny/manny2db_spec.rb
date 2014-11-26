@@ -1,7 +1,3 @@
-require 'spec_helper'
-#require 'iac/mannyParse'
-#require 'iac/mannyToDB'
-
 module Manny
   describe MannyToDB do
     before(:all) do 

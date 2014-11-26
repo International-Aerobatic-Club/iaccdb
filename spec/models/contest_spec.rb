@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe Contest do
   it 'cleans the contest data on reset_to_base_attributes' do
     flight = create(:flight)

@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 module ACRO
   describe ResultScraper do
     before(:all) do

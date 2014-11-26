@@ -1,7 +1,3 @@
-require 'spec_helper'
-#require 'iac/mannyParse'
-#require 'iac/mannyToDB'
-
 module Model
   describe JcResult do
     context 'factory data' do

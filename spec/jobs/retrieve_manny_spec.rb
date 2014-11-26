@@ -1,6 +1,3 @@
-require 'spec_helper'
-#require 'jobs/retrieve_manny_job'
-
 module Jobs
 describe RetrieveMannyJob do
   before(:each) do

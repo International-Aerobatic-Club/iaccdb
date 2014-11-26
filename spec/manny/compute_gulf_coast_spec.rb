@@ -1,8 +1,3 @@
-require 'spec_helper'
-#require 'iac/mannyParse'
-#require 'iac/mannyToDB'
-#require 'iac/judge_rollups'
-
 module Manny
   describe MannyToDB do
     before(:all) do 

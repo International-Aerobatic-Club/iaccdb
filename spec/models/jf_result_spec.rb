@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe JfResult do
   before(:all) do
     reset_db

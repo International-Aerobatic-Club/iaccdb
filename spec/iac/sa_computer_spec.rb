@@ -1,6 +1,3 @@
-require 'spec_helper'
-require 'ranking/computer'
-
 module Ranking
   describe Computer do
     it 'reports ranks from vector of scalars' do

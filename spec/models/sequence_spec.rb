@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 module Model
   describe Sequence do
     before(:all) do

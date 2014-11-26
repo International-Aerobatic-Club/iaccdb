@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe Airplane do
   it 'captures make, model, and registration' do
     make = 'Bucher Jungman'

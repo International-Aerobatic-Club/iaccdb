@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 module Model
   describe PcResult do
     it 'finds cached data' do

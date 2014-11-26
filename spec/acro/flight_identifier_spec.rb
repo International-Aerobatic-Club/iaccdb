@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 module ACRO
   describe FlightIdentifier do
     include FlightIdentifier

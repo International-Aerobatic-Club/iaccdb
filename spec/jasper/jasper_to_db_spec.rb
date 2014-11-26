@@ -1,6 +1,3 @@
-require 'spec_helper'
-#require 'iac/jasper_parse'
-#require 'iac/jasper_to_db'
 require 'xml'
 
 module Jasper

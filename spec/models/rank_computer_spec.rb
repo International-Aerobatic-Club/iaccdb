@@ -1,6 +1,3 @@
-
-require 'spec_helper'
-
 # Test computation of rank values
 # All of the numbers come from the spreadsheet, FlightComputation.ods
 # found in this directory

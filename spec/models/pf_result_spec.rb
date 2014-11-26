@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 module Model
   describe PfResult do
     context 'real_scores' do

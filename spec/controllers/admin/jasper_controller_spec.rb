@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe Admin::JasperController do
   before(:all) do
     file = File.new('spec/jasper/jasperResultsFormat.xml')
