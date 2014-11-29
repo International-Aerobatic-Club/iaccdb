@@ -2,8 +2,8 @@
 # spec/support/database_cleaner.rb
 RSpec.configure do |config|
   config.before(:suite) do
-    DatabaseCleaner.strategy = :truncation, { :except => %w[cat_classes qualities sim_types price_plans] }
-    DatabaseCleaner.clean_with(:truncation)
+    DatabaseCleaner.strategy = :truncation, {:except => %w[categories]}
+    DatabaseCleaner.clean
   end
 
   config.around(:example) do |test|
