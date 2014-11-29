@@ -1,19 +1,8 @@
 module ACRO
-
-  RSpec.configure do |c|
-    c.include ParticipantListHelper
-  end
-
   describe ParticipantList do
-
     before(:all) do
-      @part_list = create_participant_list
-      @part_list.write('spec/acro')
+      @part_list = ParticipantList::new
       @members = participant_list_members
-    end
-
-    after(:all) do
-      File.delete('spec/acro/participant_list.yml')
     end
 
     it 'writes and reads back' do
