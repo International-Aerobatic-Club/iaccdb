@@ -4,6 +4,8 @@ require 'spec_helper'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
+helper_dir = File.expand_path('../helpers', __FILE__)
+Dir.glob(File.join(helper_dir, '*_helper.rb')) { |f| require f }
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
