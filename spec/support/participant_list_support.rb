@@ -37,7 +37,6 @@ RSpec.configure do |config|
   end
 
   config.after(:suite) do
-    puts "ACRO_PART_LIST_FILE #{part_list_file}"
     File.delete(part_list_file)
   end
 end
