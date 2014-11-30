@@ -1,7 +1,7 @@
 module ACRO
   describe ResultScraper do
     before(:all) do
-      @rs = ResultScraper.new('spec/acro/multi_R011s08s17s26.htm')
+      @rs = ResultScraper.new(data_sample_file('multi_R011s08s17s26.htm'))
     end
     it 'finds the category and title' do
       expect(@rs.description).to eq 'US National Champion - Unlimited'
