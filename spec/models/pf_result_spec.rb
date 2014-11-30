@@ -32,7 +32,7 @@ module Model
         pfj.flight_value.should == 18365
         @pf.flight_value.should == 1789
         pfn = @pilot_flight.results
-        (pf_update <= pfn.updated_at).should be_true
+        (pf_update <= pfn.updated_at).should eq true
       end
       it 'updates cached values when scores change' do
         scores = @pilot_flight.scores.where(:judge_id => @judge_jim).first
