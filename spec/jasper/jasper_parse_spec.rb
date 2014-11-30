@@ -4,7 +4,7 @@ module Jasper
   describe JasperParse do
     before(:all) do
       @jasper = Jasper::JasperParse.new
-      parser = XML::Parser.file('spec/jasper/jasperResultsFormat.xml')
+      parser = XML::Parser.file('spec/fixtures/jasper/jasperResultsFormat.xml')
       @jasper.do_parse(parser)
     end
     it 'captures a contest' do
