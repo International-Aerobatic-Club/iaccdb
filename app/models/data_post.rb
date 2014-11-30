@@ -10,7 +10,7 @@ class DataPost < ActiveRecord::Base
   def filename
     post_dir = DataPost.post_dir
     if (!Dir.exist?(post_dir))
-      Dir.mkdir(spost_dir)
+      Dir.mkdir(post_dir)
     end
     File.join(post_dir,"JaSPer_post_#{id}.xml")
   end
