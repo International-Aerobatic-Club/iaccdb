@@ -3,7 +3,7 @@ module ACRO
     include AcroWebOutputReader
 
     before :all do
-      @filtered = read_file('spec/acro/multi_R011s08s17s26.htm')
+      @filtered = read_file(data_sample_file('multi_R011s08s17s26.htm'))
       expect(@filtered).to_not be_nil
       expect(@filtered.length).to be > 40
     end
