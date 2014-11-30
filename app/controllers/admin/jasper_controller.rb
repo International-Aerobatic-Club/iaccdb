@@ -21,6 +21,7 @@ def results
       status = 400
       post_record.has_error = true
       post_record.error_description = @exception
+      post_record.store('<ContestResults/>')
     end
     post_record.save
     if (@exception == nil)

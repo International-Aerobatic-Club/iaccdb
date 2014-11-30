@@ -38,7 +38,7 @@ describe Admin::JasperController do
     prcd.should_not be_nil
     expect(prcd.has_error).to eq true
     prcd.error_description.should_not be_nil
-    prcd.data.should be_nil
+    prcd.data.should_not be_nil
   end
 
   it 'writes post data failure record on failure' do
