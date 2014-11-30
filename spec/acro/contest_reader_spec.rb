@@ -2,7 +2,6 @@ module ACRO
 
   describe ContestReader do
     it 'creates a new contest' do
-      puts Contest.all
       ct = Contest.where(:start => '2011-09-25')
       ct.empty?.should == true
       cs = ContestReader.new(contest_data_file('newContest.yml'))
@@ -36,7 +35,6 @@ module ACRO
     it 'finds existing judge members' do
       cs = ContestReader.new(contest_data_file('newContest.yml'))
       cs.read_contest
-      puts "Judges: #{Judge.all.join("\n")}"
       Judge.all.size.should == 18
       stols = Member.where(:family_name => 'Stoltenberg')
       stols.size.should == 1
