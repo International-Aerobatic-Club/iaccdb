@@ -1,14 +1,14 @@
 module ACRO
   describe ContestExtractor do
     before :all do
-      cs = ContestExtractor.new('spec/acro/newContest.yml')
+      cs = ContestExtractor.new(contest_data_file('newContest.yml'))
       cs.scrape_contest
     end
     it 'creates pilot flight yml files' do
-      expect(File.exists?('spec/acro/pilot_p001s16.htm.yml')).to eq true
-      expect(File.exists?('spec/acro/pilot_p002s17.htm.yml')).to eq true
-      expect(File.exists?('spec/acro/pilot_p035s09.htm.yml')).to eq true
-      pfd = YAML.load_file('spec/acro/pilot_p035s09.htm.yml')
+      expect(File.exists?(contest_data_file('pilot_p001s16.htm.yml'))).to eq true
+      expect(File.exists?(contest_data_file('pilot_p002s17.htm.yml'))).to eq true
+      expect(File.exists?(contest_data_file('pilot_p035s09.htm.yml'))).to eq true
+      pfd = YAML.load_file(contest_data_file('pilot_p035s09.htm.yml'))
       expect(pfd).to_not be_nil
       expect(pfd.judges).to_not be nil
       expect(pfd.judges.size).to eq 7
@@ -29,8 +29,8 @@ module ACRO
       expect(pfd.scores[6][13]).to eq 95
     end
     it 'creates category yml files' do
-      expect(File.exists?('spec/acro/multi_R011s08s17s26.htm.yml')).to eq true
-      cr = YAML.load_file('spec/acro/multi_R011s08s17s26.htm.yml')
+      expect(File.exists?(data_sample_file('multi_R011s08s17s26.htm.yml'))).to eq true
+      cr = YAML.load_file(data_sample_file('multi_R011s08s17s26.htm.yml'))
       expect(cr).to_not be_nil
       expect(cr.category_name).to eq 'Unlimited'
       expect(cr.description).to eq 'US National Champion - Unlimited'
