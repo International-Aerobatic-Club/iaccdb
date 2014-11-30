@@ -2,7 +2,7 @@ module ACRO
   describe PilotScraper do
     describe "Reads FPS annotated reports" do
       it 'ignores 60% annotation' do
-        @ps = PilotScraper.new('spec/acro/pilot_p034s03.htm')
+        @ps = PilotScraper.new(data_sample_file('pilot_p034s03.htm'))
         @ps.score(1,1).should == 60
         @ps.score(3,2).should == 0
         @ps.score(3,8).should == 45
@@ -11,7 +11,7 @@ module ACRO
     end
     describe "2011 not FPS" do
       before(:all) do
-        @ps = PilotScraper.new('spec/acro/pilot_p001s16.htm')
+        @ps = PilotScraper.new(contest_data_file('pilot_p001s16.htm'))
       end
       it 'finds the pilot flight file' do
         @ps.pilotID.should == 1
@@ -45,12 +45,12 @@ module ACRO
       end
     end
     it 'finds the no penalty amount for the flight' do
-      @ps = PilotScraper.new('spec/acro/pilot_p002s17.htm')
+      @ps = PilotScraper.new(contest_data_file('pilot_p002s17.htm'))
       @ps.penalty.should == 0
     end
     describe "2012 FPS" do
       before(:all) do
-        @ps = PilotScraper.new('spec/acro/pilot_p035s09.htm')
+        @ps = PilotScraper.new(contest_data_file('pilot_p035s09.htm'))
       end
       it 'finds the pilot flight file' do
         @ps.pilotID.should == 35
@@ -87,7 +87,7 @@ module ACRO
 
     describe "2014 FPS" do
       before(:all) do
-        @ps = PilotScraper.new('spec/acro/pilot_p006s28.htm')
+        @ps = PilotScraper.new(data_sample_file('pilot_p006s28.htm'))
       end
       it 'finds the pilot flight file' do
         @ps.pilotID.should == 6
@@ -132,7 +132,7 @@ module ACRO
 
     describe 'Pilot and aircraft parsing' do
       before(:all) do
-        @ps = PilotScraper.new('spec/acro/pilot_p001s16.htm')
+        @ps = PilotScraper.new(contest_data_file('pilot_p001s16.htm'))
       end
       it 'parses "Paul Thomson - Decathlon N725JM"' do
         @ps.parsePilotAircraft('Paul Thomson - Decathlon N725JM')
