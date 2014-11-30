@@ -13,18 +13,16 @@ def results
     if xml_data && xml_data.is_a?(String)
       logger.info "JasperController: parse xml param"
       post_record.store(xml_data)
-      post_record.save
     elsif xml_data
       logger.info "JasperController: read xml file"
       post_record.store(xml_data.read)
-      post_record.save
     else
       @exception = "invalid post"
       status = 400
       post_record.has_error = true
       post_record.error_description = @exception
-      post_record.save
     end
+    post_record.save
     if (@exception == nil)
       parser = LibXML::XML::Parser.string(post_record.data)
       jasper = Jasper::JasperParse.new
