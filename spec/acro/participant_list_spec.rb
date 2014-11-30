@@ -7,7 +7,7 @@ module ACRO
 
     it 'writes and reads back' do
       npart_list = ParticipantList::new
-      npart_list.read('spec/acro')
+      npart_list.read(CONTEST_DATA_FILE_PATH)
       m1 = npart_list.participant(@members[0][:name])
       expect(m1).to_not be_nil
       expect(m1.db_id).to eq 1
