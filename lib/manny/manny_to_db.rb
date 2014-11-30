@@ -144,12 +144,13 @@ def process_flight(mContest, mCat, mFlight, seq)
   # have to check for scores before creating a flight
   if !mFlight.scores.empty? && !mFlight.judges.empty?
     dCategory = Category.find_for_cat_aircat(mCat.name, mContest.aircat)
-    dFlight = Flight.create(
-      :contest => @dContest,
-      :category_id => dCategory.id,
-      :name => mFlight.name,
-      :sequence => seq)
+    if !dCategory
+      Contest.logger.error "Missing category for #{mCat.name}, #{mContest.aircat}"
+    end
+    dFlight = Flight.new(:name => mFlight.name, :sequence => seq)
     dFlight.chief = @parts[mFlight.chief] if mFlight.chief
+    dFlight.contest = @dContest
+    dFlight.category = dCategory
     dFlight.save
     process_flight_judges(dFlight, mFlight)
     process_flight_scores(dFlight, mContest, mCat, mFlight)
@@ -216,12 +217,14 @@ def process_flight_scores(dFlight, mContest, mCat, mFlight)
 end
 
 def get_pilot_flight(dPilot, dFlight, chapter)
-  PilotFlight.where(:pilot_id => dPilot, 
-      :flight_id => dFlight).first ||
-    PilotFlight.create(
-      :pilot => dPilot,
-      :flight => dFlight,
-      :chapter => chapter)
+  pf = PilotFlight.where(:pilot_id => dPilot, :flight_id => dFlight).first
+  if (!pf)
+    pf = PilotFlight.new
+    pf.pilot = dPilot
+    pf.flight = dFlight
+    pf.chapter = chapter
+  end
+  pf
 end
 
 end #class
