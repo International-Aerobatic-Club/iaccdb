@@ -2,19 +2,19 @@ module Model
   describe JcResult do
     context 'factory data' do
       before(:all) do
-        @contest = Factory.create(:contest)
-        @c_result = Factory.create(:c_result,
+        @contest = create(:contest)
+        @c_result = create(:c_result,
           :contest => @contest)
-        @flight = Factory.create(:flight,
+        @flight = create(:flight,
           :contest => @contest)
-        @judge_team = Factory.create(:judge)
-        @jc_result = Factory.create(:jc_result, 
+        @judge_team = create(:judge)
+        @jc_result = create(:jc_result, 
           :c_result => @c_result, 
           :judge => @judge_team.judge)
-        @f_result = Factory.create(:f_result, 
+        @f_result = create(:f_result, 
           :flight => @flight, 
           :c_result => @c_result)
-        @jf_result_1 = Factory.create(:jf_result,
+        @jf_result_1 = create(:jf_result,
           :f_result => @f_result,
           :jc_result => @jc_result,
           :judge => @judge_team,
@@ -31,7 +31,7 @@ module Model
           :dis => 3,
           :minority_zero_ct => 1,
           :minority_grade_ct => 2)
-        @jf_result_2 = Factory.create(:jf_result,
+        @jf_result_2 = create(:jf_result,
           :f_result => @f_result,
           :jc_result => @jc_result,
           :judge => @judge_team,

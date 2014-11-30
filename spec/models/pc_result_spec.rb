@@ -1,65 +1,65 @@
 module Model
   describe PcResult do
     it 'finds cached data' do
-      pc_result = Factory.create(:existing_pc_result)
+      pc_result = create(:existing_pc_result)
       pc_result.category_value.should == 4992.14
       pc_result.category_rank.should == 1
     end
     context 'real_scores' do
       before(:each) do
-        @contest = Factory.create(:nationals)
-        @adams = Factory.create(:tom_adams)
-        @denton = Factory.create(:bill_denton)
-        judge_klein = Factory.create(:judge_klein)
-        @judge_jim = Factory.create(:judge_jim)
-        judge_lynne = Factory.create(:judge_lynne)
-        known_flight = Factory.create(:nationals_imdt_known,
+        @contest = create(:nationals)
+        @adams = create(:tom_adams)
+        @denton = create(:bill_denton)
+        judge_klein = create(:judge_klein)
+        @judge_jim = create(:judge_jim)
+        judge_lynne = create(:judge_lynne)
+        known_flight = create(:nationals_imdt_known,
           :contest => @contest)
         @imdt_cat = known_flight.category
-        @adams_flight = Factory.create(:adams_known,
+        @adams_flight = create(:adams_known,
           :flight => known_flight, :pilot => @adams)
-        Factory.create(:adams_known_klein, 
+        create(:adams_known_klein, 
           :pilot_flight => @adams_flight,
           :judge => judge_klein)
-        Factory.create(:adams_known_jim, 
+        create(:adams_known_jim, 
           :pilot_flight => @adams_flight,
           :judge => @judge_jim)
-        Factory.create(:adams_known_lynne, 
+        create(:adams_known_lynne, 
           :pilot_flight => @adams_flight,
           :judge => judge_lynne)
-        denton_flight = Factory.create(:denton_known,
+        denton_flight = create(:denton_known,
           :flight => known_flight, :pilot => @denton)
-        Factory.create(:denton_known_klein, 
+        create(:denton_known_klein, 
           :pilot_flight => denton_flight,
           :judge => judge_klein)
-        Factory.create(:denton_known_jim, 
+        create(:denton_known_jim, 
           :pilot_flight => denton_flight,
           :judge => @judge_jim)
-        Factory.create(:denton_known_lynne, 
+        create(:denton_known_lynne, 
           :pilot_flight => denton_flight,
           :judge => judge_lynne)
-        free_flight = Factory.create(:nationals_imdt_free,
+        free_flight = create(:nationals_imdt_free,
           :contest => @contest, :category => @imdt_cat)
-        @adams_flight = Factory.create(:adams_free,
+        @adams_flight = create(:adams_free,
           :flight => free_flight, :pilot => @adams)
-        Factory.create(:adams_free_klein, 
+        create(:adams_free_klein, 
           :pilot_flight => @adams_flight,
           :judge => judge_klein)
-        Factory.create(:adams_free_jim, 
+        create(:adams_free_jim, 
           :pilot_flight => @adams_flight,
           :judge => @judge_jim)
-        Factory.create(:adams_free_lynne, 
+        create(:adams_free_lynne, 
           :pilot_flight => @adams_flight,
           :judge => judge_lynne)
-        denton_flight = Factory.create(:denton_free,
+        denton_flight = create(:denton_free,
           :flight => free_flight, :pilot => @denton)
-        Factory.create(:denton_free_klein, 
+        create(:denton_free_klein, 
           :pilot_flight => denton_flight,
           :judge => judge_klein)
-        Factory.create(:denton_free_jim, 
+        create(:denton_free_jim, 
           :pilot_flight => denton_flight,
           :judge => @judge_jim)
-        Factory.create(:denton_free_lynne, 
+        create(:denton_free_lynne, 
           :pilot_flight => denton_flight,
           :judge => judge_lynne)
         @c_results = @contest.results
@@ -102,11 +102,11 @@ module Model
     end
    
     it 'behaves on empty sequence' do
-      @pf = Factory.create(:pilot_flight)
-      Factory.create(:score,
+      @pf = create(:pilot_flight)
+      create(:score,
         :pilot_flight => @pf,
         :values => [60, 0, 0, 0, 0])
-      Factory.create(:score,
+      create(:score,
         :pilot_flight => @pf,
         :values => [-1, 0, 0, 0, 0])
       flight = @pf.flight

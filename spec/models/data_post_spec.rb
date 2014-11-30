@@ -2,7 +2,7 @@ module Model
   describe DataPost do
     context 'factory data' do
       before(:all) do
-        @data_post = Factory.create(:data_post)
+        @data_post = create(:data_post)
       end
 
       it 'ensures a directory for posts' do

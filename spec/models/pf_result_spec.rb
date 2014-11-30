@@ -3,17 +3,17 @@ module Model
     context 'real_scores' do
       before(:each) do
         @category = Category.find_by_category_and_aircat('intermediate', 'P')
-        @pilot_flight = Factory.create(:adams_known)
-        judge_team = Factory.create(:judge_klein)
-        Factory.create(:adams_known_klein, 
+        @pilot_flight = create(:adams_known)
+        judge_team = create(:judge_klein)
+        create(:adams_known_klein, 
           :pilot_flight => @pilot_flight,
           :judge => judge_team)
-        @judge_jim = Factory.create(:judge_jim)
-        Factory.create(:adams_known_jim, 
+        @judge_jim = create(:judge_jim)
+        create(:adams_known_jim, 
           :pilot_flight => @pilot_flight,
           :judge => @judge_jim)
-        judge_team = Factory.create(:judge_lynne)
-        Factory.create(:adams_known_lynne, 
+        judge_team = create(:judge_lynne)
+        create(:adams_known_lynne, 
           :pilot_flight => @pilot_flight,
           :judge => judge_team)
         @pf = @pilot_flight.results
@@ -96,40 +96,40 @@ module Model
       end
     end
     it 'behaves on empty sequence' do
-      @pf = Factory.create(:pilot_flight)
-      Factory.create(:score,
+      @pf = create(:pilot_flight)
+      create(:score,
         :pilot_flight => @pf,
         :values => [60, 0, 0, 0, 0])
-      Factory.create(:score,
+      create(:score,
         :pilot_flight => @pf,
         :values => [-10, 0, 0, 0, 0])
       @pf.results
     end
     context 'mixed grades, averages, and zeros' do
       before(:each) do
-        seq = Factory.create(:sequence,
+        seq = create(:sequence,
           :k_values => [2,2,2,2,2,2])
-        @pf = Factory.create(:pilot_flight,
+        @pf = create(:pilot_flight,
           :sequence => seq)
         @judges = []
-        5.times { @judges << Factory.create(:judge) }
-        Factory.create(:score,
+        5.times { @judges << create(:judge) }
+        create(:score,
           :pilot_flight => @pf,
           :judge => @judges[0],
           :values => [60, 0, 60, 0, 80, 0])
-        Factory.create(:score,
+        create(:score,
           :pilot_flight => @pf,
           :judge => @judges[1],
           :values => [-10, 0, 90, -10, -10, -10])
-        Factory.create(:score,
+        create(:score,
           :pilot_flight => @pf,
           :judge => @judges[2],
           :values => [80, 60, 0, 70, -10, -10])
-        Factory.create(:score,
+        create(:score,
           :pilot_flight => @pf,
           :judge => @judges[3],
           :values => [80, 70, 0, 80, 0, 0])
-        Factory.create(:score,
+        create(:score,
           :pilot_flight => @pf,
           :judge => @judges[4],
           :values => [60, 80, 0, 60, 0, 0])
@@ -187,29 +187,29 @@ module Model
     end
     context 'mixed grades, conference averages, averages, soft zeros, and hard zeros' do
       before(:each) do
-        seq = Factory.create(:sequence,
+        seq = create(:sequence,
           :k_values => [2,2,2,2,2,2,2,2,2])
-        @pf = Factory.create(:pilot_flight,
+        @pf = create(:pilot_flight,
           :sequence => seq)
         @judges = []
-        5.times { @judges << Factory.create(:judge) }
-        Factory.create(:score,
+        5.times { @judges << create(:judge) }
+        create(:score,
           :pilot_flight => @pf,
           :judge => @judges[0],
           :values => [-10, -10, -10,  60,  70,  80, -30, -30, -30])
-        Factory.create(:score,
+        create(:score,
           :pilot_flight => @pf,
           :judge => @judges[1],
           :values => [ 40,  30, -10,  80, -30, -10, -30,   0, -30])
-        Factory.create(:score,
+        create(:score,
           :pilot_flight => @pf,
           :judge => @judges[2],
           :values => [-30, -30, -30, -30, -30, -30,   0, -30,   0])
-        Factory.create(:score,
+        create(:score,
           :pilot_flight => @pf,
           :judge => @judges[3],
           :values => [-30, -20,  50, -30, -30, -30, -30,  70,   0])
-        Factory.create(:score,
+        create(:score,
           :pilot_flight => @pf,
           :judge => @judges[4],
           :values => [-20, -20, -20, -20, -20, -20, -20,  80,  90])
