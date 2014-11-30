@@ -1,5 +1,16 @@
 module ACRO
 module ParticipantListTest
+  CONTEST_DATA_FILE_PATH = 'spec/acro/contest_data'
+  DATA_SAMPLE_FILE_PATH = 'spec/acro/sample_data'
+
+  def contest_data_file(name)
+    File.join(CONTEST_DATA_FILE_PATH,name)
+  end
+
+  def data_sample_file(name)
+    File.join(DATA_SAMPLE_FILE_PATH,name)
+  end
+
   def participant_list_members
     [
       { name: 'Marv Miniski', 
@@ -28,7 +39,8 @@ end
 RSpec.configure do |config|
   include ACRO::ParticipantListTest
   config.include ACRO::ParticipantListTest
-  acro_test_path = File.expand_path('../../../spec/acro', __FILE__)
+  rel_cd_path = File.join('../../..', CONTEST_DATA_FILE_PATH)
+  acro_test_path = File.expand_path(rel_cd_path, __FILE__)
   part_list_file = File.join(acro_test_path, ACRO::ParticipantList::LIST_NAME)
 
   config.before(:suite) do
