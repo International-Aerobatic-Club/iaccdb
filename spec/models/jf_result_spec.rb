@@ -1,5 +1,5 @@
 describe JfResult do
-  before(:all) do
+  before(:each) do
     manny = Manny::Parse.new
     IO.foreach('spec/manny/Contest_300.txt') { |line| manny.processLine(line) }
     m2d = Manny::MannyToDB.new
