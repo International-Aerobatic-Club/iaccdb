@@ -2,8 +2,8 @@ require 'xml'
 
 module Jasper
   describe JasperToDB do
-    before(:all) do 
-      testFile = 'spec/jasper/jasperResultsFormat.xml'
+    before(:each) do 
+      testFile = 'spec/fixtures/jasper/jasperResultsFormat.xml'
       jasper = Jasper::JasperParse.new
       parser = XML::Parser.file(testFile)
       jasper.do_parse(parser)
