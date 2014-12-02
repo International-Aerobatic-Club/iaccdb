@@ -1,7 +1,6 @@
 module Manny
   describe MannyToDB do
-    before(:all) do 
-      clean_db
+    before(:each) do 
       manny = Manny::Parse.new
       IO.foreach('spec/manny/Contest_36.txt') { |line| manny.processLine(line) }
       m2d = Manny::MannyToDB.new
