@@ -1,9 +1,9 @@
 module Model
-  describe PcResult do
+  describe PcResult, :type => :model do
     it 'finds cached data' do
       pc_result = create(:existing_pc_result)
-      pc_result.category_value.should == 4992.14
-      pc_result.category_rank.should == 1
+      expect(pc_result.category_value).to eq(4992.14)
+      expect(pc_result.category_rank).to eq(1)
     end
     context 'real_scores' do
       before(:each) do
@@ -68,36 +68,36 @@ module Model
       it 'finds two pilots in category results' do
         c_result = @c_results.first(:conditions => {
           :category_id => @imdt_cat.id })
-        c_result.should_not be nil
-        c_result.pc_results.size.should == 2
+        expect(c_result).not_to be nil
+        expect(c_result.pc_results.size).to eq(2)
       end
 
       it 'computes category total for pilot' do
         c_result = @c_results.first(:conditions => {
           :category_id => @imdt_cat.id })
-        c_result.should_not be nil
+        expect(c_result).not_to be nil
         pc_result = c_result.pc_results.first(:conditions => {
           :pilot_id => @adams })
-        pc_result.should_not be nil
-        pc_result.category_value.round(2).should == 3474.83
+        expect(pc_result).not_to be nil
+        expect(pc_result.category_value.round(2)).to eq(3474.83)
         pc_result = c_result.pc_results.first(:conditions => {
           :pilot_id => @denton })
-        pc_result.should_not be nil
-        pc_result.category_value.round(2).should == 3459.33
+        expect(pc_result).not_to be nil
+        expect(pc_result.category_value.round(2)).to eq(3459.33)
       end
 
       it 'computes category rank for pilot' do
         c_result = @c_results.first(:conditions => {
           :category_id => @imdt_cat.id })
-        c_result.should_not be nil
+        expect(c_result).not_to be nil
         pc_result = c_result.pc_results.first(:conditions => {
           :pilot_id => @adams })
-        pc_result.should_not be nil
-        pc_result.category_rank.should == 1
+        expect(pc_result).not_to be nil
+        expect(pc_result.category_rank).to eq(1)
         pc_result = c_result.pc_results.first(:conditions => {
           :pilot_id => @denton })
-        pc_result.should_not be nil
-        pc_result.category_rank.should == 2
+        expect(pc_result).not_to be nil
+        expect(pc_result.category_rank).to eq(2)
       end
     end
    

@@ -1,4 +1,4 @@
-describe JfResult do
+describe JfResult, :type => :model do
   before(:each) do
     manny = Manny::Parse.new
     IO.foreach('spec/manny/Contest_300.txt') { |line| manny.processLine(line) }
@@ -23,24 +23,24 @@ describe JfResult do
       :judge_id => j2 })
   end
   it 'computes the Spearman rank coefficient for each judge of a flight' do
-    @jf_result1.rho.should == 54
-    @jf_result2.rho.should == 77
+    expect(@jf_result1.rho).to eq(54)
+    expect(@jf_result2.rho).to eq(77)
   end
   it 'computes the CIVA RI formula for each judge of a flight' do
-    @jf_result1.ri.should == 4.39
-    @jf_result2.ri.should == 3.74
+    expect(@jf_result1.ri).to eq(4.39)
+    expect(@jf_result2.ri).to eq(3.74)
   end
   it 'computes the Kendal tau for each judge of a flight' do
-    @jf_result1.tau.should == 47
-    @jf_result2.tau.should == 60
+    expect(@jf_result1.tau).to eq(47)
+    expect(@jf_result2.tau).to eq(60)
   end
   it 'computes the Gamma for each judge of a flight' do
-    @jf_result1.gamma.should == 47
-    @jf_result2.gamma.should == 60
+    expect(@jf_result1.gamma).to eq(47)
+    expect(@jf_result2.gamma).to eq(60)
   end
   it 'computes the standard correlation coefficient for each judge of a flight' do
-    @jf_result1.cc.should == 54
-    @jf_result2.cc.should == 77
+    expect(@jf_result1.cc).to eq(54)
+    expect(@jf_result2.cc).to eq(77)
   end
   it 'computes the number of minority zeros from each judge for a flight' do
     pilot_flight = @flight2.pilot_flights.first
@@ -54,7 +54,7 @@ describe JfResult do
     f_result = flight.compute_flight_results.first
     jf_result = f_result.jf_results.first(:conditions => {
       :judge_id => judge })
-    jf_result.minority_zero_ct.should == 1
+    expect(jf_result.minority_zero_ct).to eq(1)
   end
   it 'computes the number of minority grades from each judge for a flight' do
     pilot_flight = @flight2.pilot_flights.first
@@ -67,19 +67,19 @@ describe JfResult do
         judge = scores.judge
       end
     end
-    judge.should_not be nil
+    expect(judge).not_to be nil
     contest = Contest.first
     flight = contest.flights.first(:conditions => { 
       :category_id => @pri_cat.id, :name => 'Free' })
     f_result = flight.compute_flight_results.first
     jf_result = f_result.jf_results.first(:conditions => {
       :judge_id => judge })
-    jf_result.minority_grade_ct.should == 1
+    expect(jf_result.minority_grade_ct).to eq(1)
   end
   it 'counts the number of grades given by every judge for a flight' do
-    @flight2.count_figures_graded.should == 42
+    expect(@flight2.count_figures_graded).to eq(42)
   end
   it 'counts the number of pilots graded by every judge for a flight' do
-    @flight2.count_pilots.should == 6
+    expect(@flight2.count_pilots).to eq(6)
   end
 end

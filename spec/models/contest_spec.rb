@@ -1,4 +1,4 @@
-describe Contest do
+describe Contest, :type => :model do
   it 'cleans the contest data on reset_to_base_attributes' do
     flight = create(:flight)
     contest = flight.contest
@@ -7,18 +7,18 @@ describe Contest do
     fid = flight.id
     crid = c_result.id
     faid = failure.id
-    Flight.find(fid).should_not be_nil
-    CResult.find(crid).should_not be_nil
-    Failure.find(faid).should_not be_nil
-    contest.flights.should_not be_empty
-    contest.c_results.should_not be_empty
-    contest.failures.should_not be_empty
+    expect(Flight.find(fid)).not_to be_nil
+    expect(CResult.find(crid)).not_to be_nil
+    expect(Failure.find(faid)).not_to be_nil
+    expect(contest.flights).not_to be_empty
+    expect(contest.c_results).not_to be_empty
+    expect(contest.failures).not_to be_empty
     contest.reset_to_base_attributes
     expect {Flight.find(fid)}.to raise_error(ActiveRecord::RecordNotFound)
     expect {CResult.find(crid)}.to raise_error(ActiveRecord::RecordNotFound)
     expect {Failure.find(faid)}.to raise_error(ActiveRecord::RecordNotFound)
-    contest.flights.should be_empty
-    contest.c_results.should be_empty
-    contest.failures.should be_empty
+    expect(contest.flights).to be_empty
+    expect(contest.c_results).to be_empty
+    expect(contest.failures).to be_empty
   end
 end

@@ -3,10 +3,10 @@ module ACRO
     describe "Reads FPS annotated reports" do
       it 'ignores 60% annotation' do
         @ps = PilotScraper.new(data_sample_file('pilot_p034s03.htm'))
-        @ps.score(1,1).should == 60
-        @ps.score(3,2).should == 0
-        @ps.score(3,8).should == 45
-        @ps.score(14,7).should == 55
+        expect(@ps.score(1,1)).to eq(60)
+        expect(@ps.score(3,2)).to eq(0)
+        expect(@ps.score(3,8)).to eq(45)
+        expect(@ps.score(14,7)).to eq(55)
       end
     end
     describe "2011 not FPS" do
@@ -14,74 +14,74 @@ module ACRO
         @ps = PilotScraper.new(contest_data_file('pilot_p001s16.htm'))
       end
       it 'finds the pilot flight file' do
-        @ps.pilotID.should == 1
-        @ps.flightID.should == 16
+        expect(@ps.pilotID).to eq(1)
+        expect(@ps.flightID).to eq(16)
       end
       it 'finds the pilot and sequence names' do
-        @ps.pilotName.should == 'Kelly Adams'
-        @ps.flightName.should == 'Advanced - Power : Known Power'
+        expect(@ps.pilotName).to eq('Kelly Adams')
+        expect(@ps.flightName).to eq('Advanced - Power : Known Power')
       end
       it 'finds the judges in the flight file' do
         aj = @ps.judges
-        aj.length.should == 7
-        aj[0].should == 'Debby Rihn-Harvey'
-        aj[6].should == 'Bill Denton'
+        expect(aj.length).to eq(7)
+        expect(aj[0]).to eq('Debby Rihn-Harvey')
+        expect(aj[6]).to eq('Bill Denton')
       end
       it 'finds the k factors for the flight' do
         ak = @ps.k_factors
-        ak.length.should == 10
-        ak[0].should == 41
-        ak[4].should == 31
-        ak[9].should == 12
+        expect(ak.length).to eq(10)
+        expect(ak[0]).to eq(41)
+        expect(ak[4]).to eq(31)
+        expect(ak[9]).to eq(12)
       end
       it 'finds scores for figures' do
-        @ps.score(1,3).should == 65
-        @ps.score(1,7).should == 85
-        @ps.score(5,3).should == 0
-        @ps.score(10,7).should == 90
+        expect(@ps.score(1,3)).to eq(65)
+        expect(@ps.score(1,7)).to eq(85)
+        expect(@ps.score(5,3)).to eq(0)
+        expect(@ps.score(10,7)).to eq(90)
       end
       it 'finds penalty amount for flight' do
-        @ps.penalty.should == 20
+        expect(@ps.penalty).to eq(20)
       end
     end
     it 'finds the no penalty amount for the flight' do
       @ps = PilotScraper.new(contest_data_file('pilot_p002s17.htm'))
-      @ps.penalty.should == 0
+      expect(@ps.penalty).to eq(0)
     end
     describe "2012 FPS" do
       before(:all) do
         @ps = PilotScraper.new(contest_data_file('pilot_p035s09.htm'))
       end
       it 'finds the pilot flight file' do
-        @ps.pilotID.should == 35
-        @ps.flightID.should == 9
+        expect(@ps.pilotID).to eq(35)
+        expect(@ps.flightID).to eq(9)
       end
       it 'finds the pilot and sequence names' do
-        @ps.pilotName.should == 'Rob Holland'
-        @ps.flightName.should == 'Unlimited Power : 1st Unknown Sequence'
+        expect(@ps.pilotName).to eq('Rob Holland')
+        expect(@ps.flightName).to eq('Unlimited Power : 1st Unknown Sequence')
       end
       it 'finds the judges in the flight file' do
         aj = @ps.judges
-        aj.length.should == 7
-        aj[0].should == 'Chris Rudd'
-        aj[6].should == 'Mike Forney'
+        expect(aj.length).to eq(7)
+        expect(aj[0]).to eq('Chris Rudd')
+        expect(aj[6]).to eq('Mike Forney')
       end
       it 'finds the k factors for the flight' do
         ak = @ps.k_factors
-        ak.length.should == 14
-        ak[0].should == 57
-        ak[4].should == 16
-        ak[9].should == 37
-        ak[13].should == 20
+        expect(ak.length).to eq(14)
+        expect(ak[0]).to eq(57)
+        expect(ak[4]).to eq(16)
+        expect(ak[9]).to eq(37)
+        expect(ak[13]).to eq(20)
       end
       it 'finds scores for figures' do
-        @ps.score(1,3).should == 80
-        @ps.score(1,7).should == 90
-        @ps.score(5,3).should == 90
-        @ps.score(10,7).should == 95
+        expect(@ps.score(1,3)).to eq(80)
+        expect(@ps.score(1,7)).to eq(90)
+        expect(@ps.score(5,3)).to eq(90)
+        expect(@ps.score(10,7)).to eq(95)
       end
       it 'finds penalty amount for flight' do
-        @ps.penalty.should == 90
+        expect(@ps.penalty).to eq(90)
       end
     end
 
@@ -90,43 +90,43 @@ module ACRO
         @ps = PilotScraper.new(data_sample_file('pilot_p006s28.htm'))
       end
       it 'finds the pilot flight file' do
-        @ps.pilotID.should == 6
-        @ps.flightID.should == 28
+        expect(@ps.pilotID).to eq(6)
+        expect(@ps.flightID).to eq(28)
       end
       it 'finds the pilot and sequence names' do
-        @ps.pilotName.should == 'Michael Gallaway'
-        @ps.flightName.should == 'Unlimited - Power : Free Unknown Sequence'
+        expect(@ps.pilotName).to eq('Michael Gallaway')
+        expect(@ps.flightName).to eq('Unlimited - Power : Free Unknown Sequence')
       end
       it 'finds the judges in the flight file' do
         aj = @ps.judges
-        aj.length.should == 7
-        aj[0].should == 'Steve Johnson'
-        aj[6].should == 'Doug Sowder'
+        expect(aj.length).to eq(7)
+        expect(aj[0]).to eq('Steve Johnson')
+        expect(aj[6]).to eq('Doug Sowder')
       end
       it 'finds the k factors for the flight' do
         ak = @ps.k_factors
-        ak.length.should == 15
-        ak[0].should == 45
-        ak[4].should == 49
-        ak[9].should == 45
-        ak[14].should == 20
+        expect(ak.length).to eq(15)
+        expect(ak[0]).to eq(45)
+        expect(ak[4]).to eq(49)
+        expect(ak[9]).to eq(45)
+        expect(ak[14]).to eq(20)
       end
       it 'finds scores for figures' do
-        @ps.score(1,3).should == 80
-        @ps.score(1,7).should == 90
-        @ps.score(5,3).should == 60
-        @ps.score(10,7).should == 75
+        expect(@ps.score(1,3)).to eq(80)
+        expect(@ps.score(1,7)).to eq(90)
+        expect(@ps.score(5,3)).to eq(60)
+        expect(@ps.score(10,7)).to eq(75)
       end
       it 'finds hard zeros' do
-        @ps.score(4,1).should == IAC::Constants::HARD_ZERO
-        @ps.score(4,7).should == IAC::Constants::HARD_ZERO
+        expect(@ps.score(4,1)).to eq(IAC::Constants::HARD_ZERO)
+        expect(@ps.score(4,7)).to eq(IAC::Constants::HARD_ZERO)
       end
       it 'finds averages' do
-        @ps.score(8,1).should == IAC::Constants::AVERAGE
-        @ps.score(11,6).should == IAC::Constants::AVERAGE
+        expect(@ps.score(8,1)).to eq(IAC::Constants::AVERAGE)
+        expect(@ps.score(11,6)).to eq(IAC::Constants::AVERAGE)
       end
       it 'finds penalty amount for flight' do
-        @ps.penalty.should == 120
+        expect(@ps.penalty).to eq(120)
       end
     end
 

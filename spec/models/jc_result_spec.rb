@@ -1,5 +1,5 @@
 module Model
-  describe JcResult do
+  describe JcResult, :type => :model do
     context 'factory data' do
       before(:all) do
         @contest = create(:contest)
@@ -51,25 +51,25 @@ module Model
         @jc_result.compute_category_totals(@flight.f_results)
       end
       it 'computes the Spearman rank coefficient' do
-        @jc_result.rho.should == 94
+        expect(@jc_result.rho).to eq(94)
       end
       it 'computes the CIVA RI formula' do
-        @jc_result.ri.should == 3.33
+        expect(@jc_result.ri).to eq(3.33)
       end
       it 'computes the Kendal tau' do
-        @jc_result.tau.should == 62
+        expect(@jc_result.tau).to eq(62)
       end
       it 'computes the Gamma' do
-        @jc_result.gamma.should == 62
+        expect(@jc_result.gamma).to eq(62)
       end
       it 'computes the standard correlation coefficient' do
-        @jc_result.cc.should == 78
+        expect(@jc_result.cc).to eq(78)
       end
       it 'computes the number of minority zeros' do
-        @jc_result.minority_zero_ct.should == 4
+        expect(@jc_result.minority_zero_ct).to eq(4)
       end
       it 'computes the number of minority grades' do
-        @jc_result.minority_grade_ct.should == 3
+        expect(@jc_result.minority_grade_ct).to eq(3)
       end
     end #context factory data
     context 'parsed data' do
@@ -79,19 +79,19 @@ module Model
         m2d = Manny::MannyToDB.new
         m2d.process_contest(manny, true)
         contest = Contest.first
-        contest.should_not be nil
-        contest.flights.should_not be_nil
-        contest.flights.count.should eq 12
+        expect(contest).not_to be nil
+        expect(contest.flights).not_to be_nil
+        expect(contest.flights.count).to eq 12
         c_results = contest.results
-        c_results.should_not be nil
-        c_results.count.should eq 4
+        expect(c_results).not_to be nil
+        expect(c_results.count).to eq 4
         c_result = c_results.first
-        c_result.should_not be nil
-        c_result.f_results.should_not be nil
+        expect(c_result).not_to be nil
+        expect(c_result.f_results).not_to be nil
         f_result = c_result.f_results.first
-        f_result.should_not be nil
+        expect(f_result).not_to be nil
         flight = f_result.flight
-        flight.should_not be nil 
+        expect(flight).not_to be nil 
       end
     end
   end #JcResult

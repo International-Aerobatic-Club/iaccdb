@@ -1,4 +1,4 @@
-describe Airplane do
+describe Airplane, :type => :model do
   it 'captures make, model, and registration' do
     make = 'Bucher Jungman'
     model = '131'

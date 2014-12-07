@@ -1,5 +1,5 @@
 module Model
-  describe PfResult do
+  describe PfResult, :type => :model do
     context 'real_scores' do
       before(:each) do
         @category = Category.find_by_category_and_aircat('intermediate', 'P')
@@ -20,78 +20,80 @@ module Model
       end
       it 'finds judges' do
         judge_teams = @pf.judge_teams
-        judge_teams.length.should == 3
-        judge_teams.include?(@judge_jim).should == true
+        expect(judge_teams.length).to eq(3)
+        expect(judge_teams.include?(@judge_jim)).to eq(true)
       end
       it 'computes and caches figure and flight values' do
         pf_update = @pf.updated_at
         pfj = @pf.for_judge(@judge_jim)
-        pfj.computed_values.should == 
+        expect(pfj.computed_values).to eq( 
           [2090, 1000, 1400, 1530, 1620, 2125, 2125,
            1400, 900, 1440, 1105, 510, 360, 760]
-        pfj.flight_value.should == 18365
-        @pf.flight_value.should == 1789
+        )
+        expect(pfj.flight_value).to eq(18365)
+        expect(@pf.flight_value).to eq(1789)
         pfn = @pilot_flight.results
-        (pf_update <= pfn.updated_at).should eq true
+        expect(pf_update <= pfn.updated_at).to eq true
       end
       it 'updates cached values when scores change' do
         scores = @pilot_flight.scores.where(:judge_id => @judge_jim).first
         va = scores.values
         va[3] = 80
         va[12] = 100
-        scores.save.should == true
+        expect(scores.save).to eq(true)
         contest = Contest.first(:conditions => {:start => '2011-09-25'})
-        contest.should_not be nil
+        expect(contest).not_to be nil
         flight = contest.flights.first
-        flight.should_not be nil
+        expect(flight).not_to be nil
         pilot = Member.find_by_iac_id(1999)
-        pilot.should_not be nil
+        expect(pilot).not_to be nil
         @pilot_flight = PilotFlight.first(:conditions => {
           :pilot_id => pilot, 
           :flight_id => flight})
-        @pilot_flight.should_not be nil
+        expect(@pilot_flight).not_to be nil
         pf = @pilot_flight.results
         pfj = pf.for_judge(@judge_jim)
-        pfj.should_not be nil
-        pfj.computed_values.should == 
+        expect(pfj).not_to be nil
+        expect(pfj.computed_values).to eq( 
           [2090, 1000, 1400, 1360, 1620, 2125, 2125,
            1400, 900, 1440, 1105, 510, 400, 760]
-        pfj.flight_value.should == 18235
-        pf.flight_value.round(2).should == 1784.67
+        )
+        expect(pfj.flight_value).to eq(18235)
+        expect(pf.flight_value.round(2)).to eq(1784.67)
       end
       it 'updates cached values when sequence changes' do
         @pilot_flight.sequence.k_values[13] = 12
-        @pilot_flight.sequence.save.should == true
+        expect(@pilot_flight.sequence.save).to eq(true)
         contest = Contest.first(:conditions => {:start => '2011-09-25'})
-        contest.should_not be nil
+        expect(contest).not_to be nil
         flight = contest.flights.first
-        flight.should_not be nil
+        expect(flight).not_to be nil
         pilot = Member.find_by_iac_id(1999)
-        pilot.should_not be nil
+        expect(pilot).not_to be nil
         @pilot_flight = PilotFlight.first(:conditions => {
           :pilot_id => pilot, 
           :flight_id => flight})
-        @pilot_flight.should_not be nil
+        expect(@pilot_flight).not_to be nil
         pf = @pilot_flight.results
-        pf.flight_value.round(2).should == 1827
+        expect(pf.flight_value.round(2)).to eq(1827)
       end
       it 'logs error if k values for some but not for all' do
         @pilot_flight.sequence.k_values.pop
-        @pilot_flight.sequence.save.should == true
-        @pilot_flight.sequence.k_values.length.should == 13
+        expect(@pilot_flight.sequence.save).to eq(true)
+        expect(@pilot_flight.sequence.k_values.length).to eq(13)
         contest = Contest.first(:conditions => {:start => '2011-09-25'})
-        contest.should_not be nil
+        expect(contest).not_to be nil
         flight = contest.flights.first
-        flight.should_not be nil
+        expect(flight).not_to be nil
         pilot = Member.find_by_iac_id(1999)
-        pilot.should_not be nil
+        expect(pilot).not_to be nil
         @pilot_flight = PilotFlight.first(:conditions => {
           :pilot_id => pilot, 
           :flight_id => flight})
-        @pilot_flight.should_not be nil
+        expect(@pilot_flight).not_to be nil
         logger = double()
         Rails.logger = logger
-        logger.should_receive(:error).exactly(3).times
+        expect(logger).to receive(:error).exactly(3).times
         @pilot_flight.results
       end
     end
@@ -143,46 +145,46 @@ module Model
         @res = @pf.results
       end
       it 'converts average grade to the average' do
-        @res.for_judge(@judges[1]).computed_values[0].should == 140
-        @res.figure_results[0].should == 140
+        expect(@res.for_judge(@judges[1]).computed_values[0]).to eq(140)
+        expect(@res.figure_results[0]).to eq(140)
       end
       it 'converts minority zero to the average' do
-        @res.figure_results[1].should == 140
+        expect(@res.figure_results[1]).to eq(140)
       end
       it 'converts minority grade to zero' do
-        @res.for_judge(@judges[0]).graded_values[2].should == 120
-        @res.for_judge(@judges[1]).graded_values[2].should == 180
-        @res.for_judge(@judges[0]).computed_values[2].should == 0
-        @res.for_judge(@judges[1]).computed_values[2].should == 0
-        @res.figure_results[2].should == 0
+        expect(@res.for_judge(@judges[0]).graded_values[2]).to eq(120)
+        expect(@res.for_judge(@judges[1]).graded_values[2]).to eq(180)
+        expect(@res.for_judge(@judges[0]).computed_values[2]).to eq(0)
+        expect(@res.for_judge(@judges[1]).computed_values[2]).to eq(0)
+        expect(@res.figure_results[2]).to eq(0)
       end
       it 'converts minority zero and averages to the average' do
-        @res.for_judge(@judges[0]).graded_values[3].should == -30
-        @res.for_judge(@judges[1]).graded_values[3].should == 140
-        @res.for_judge(@judges[0]).computed_values[3].should == 140
-        @res.for_judge(@judges[1]).computed_values[3].should == 140
-        @res.figure_results[3].should == 140
+        expect(@res.for_judge(@judges[0]).graded_values[3]).to eq(-30)
+        expect(@res.for_judge(@judges[1]).graded_values[3]).to eq(140)
+        expect(@res.for_judge(@judges[0]).computed_values[3]).to eq(140)
+        expect(@res.for_judge(@judges[1]).computed_values[3]).to eq(140)
+        expect(@res.figure_results[3]).to eq(140)
       end
       it 'converts minority grade and averages to zero' do
-        @res.for_judge(@judges[0]).graded_values[4].should == 160
-        @res.for_judge(@judges[1]).graded_values[4].should == 160
-        @res.for_judge(@judges[2]).graded_values[4].should == 160
-        @res.for_judge(@judges[0]).computed_values[4].should == 0
-        @res.for_judge(@judges[1]).computed_values[4].should == 0
-        @res.for_judge(@judges[2]).computed_values[4].should == 0
-        @res.figure_results[4].should == 0
+        expect(@res.for_judge(@judges[0]).graded_values[4]).to eq(160)
+        expect(@res.for_judge(@judges[1]).graded_values[4]).to eq(160)
+        expect(@res.for_judge(@judges[2]).graded_values[4]).to eq(160)
+        expect(@res.for_judge(@judges[0]).computed_values[4]).to eq(0)
+        expect(@res.for_judge(@judges[1]).computed_values[4]).to eq(0)
+        expect(@res.for_judge(@judges[2]).computed_values[4]).to eq(0)
+        expect(@res.figure_results[4]).to eq(0)
       end
       it 'computes flight values with only zeros and averages' do
-        @res.for_judge(@judges[1]).graded_values[5].should == 0
-        @res.figure_results[5].should == 0
+        expect(@res.for_judge(@judges[1]).graded_values[5]).to eq(0)
+        expect(@res.figure_results[5]).to eq(0)
       end
       it 'computes flight values with resolved zeros and averages' do
-        @res.for_judge(@judges[0]).flight_value.should == 400
-        @res.for_judge(@judges[1]).flight_value.should == 420
-        @res.for_judge(@judges[2]).flight_value.should == 420
-        @res.for_judge(@judges[3]).flight_value.should == 460
-        @res.for_judge(@judges[4]).flight_value.should == 400
-        @res.flight_value.round(2).should == 42.0
+        expect(@res.for_judge(@judges[0]).flight_value).to eq(400)
+        expect(@res.for_judge(@judges[1]).flight_value).to eq(420)
+        expect(@res.for_judge(@judges[2]).flight_value).to eq(420)
+        expect(@res.for_judge(@judges[3]).flight_value).to eq(460)
+        expect(@res.for_judge(@judges[4]).flight_value).to eq(400)
+        expect(@res.flight_value.round(2)).to eq(42.0)
       end
     end
     context 'mixed grades, conference averages, averages, soft zeros, and hard zeros' do
@@ -230,76 +232,76 @@ module Model
         #
       end
       it 'converts A, 4, HZ, HZ, CA to 4 (one grade, two averages, minority HZ)' do
-        @res.for_judge(@judges[0]).computed_values[0].should == 80
-        @res.for_judge(@judges[1]).computed_values[0].should == 80
-        @res.for_judge(@judges[2]).computed_values[0].should == 80
-        @res.for_judge(@judges[3]).computed_values[0].should == 80
-        @res.for_judge(@judges[4]).computed_values[0].should == 80
-        @res.figure_results[0].should == 80
+        expect(@res.for_judge(@judges[0]).computed_values[0]).to eq(80)
+        expect(@res.for_judge(@judges[1]).computed_values[0]).to eq(80)
+        expect(@res.for_judge(@judges[2]).computed_values[0]).to eq(80)
+        expect(@res.for_judge(@judges[3]).computed_values[0]).to eq(80)
+        expect(@res.for_judge(@judges[4]).computed_values[0]).to eq(80)
+        expect(@res.figure_results[0]).to eq(80)
       end
       it 'converts A, 3, HZ, CA, CA to 3 (one grade, three averages, minority HZ)' do
-        @res.for_judge(@judges[0]).computed_values[1].should == 60
-        @res.for_judge(@judges[1]).computed_values[1].should == 60
-        @res.for_judge(@judges[2]).computed_values[1].should == 60
-        @res.for_judge(@judges[3]).computed_values[1].should == 60
-        @res.for_judge(@judges[4]).computed_values[1].should == 60
-        @res.figure_results[1].should == 60
+        expect(@res.for_judge(@judges[0]).computed_values[1]).to eq(60)
+        expect(@res.for_judge(@judges[1]).computed_values[1]).to eq(60)
+        expect(@res.for_judge(@judges[2]).computed_values[1]).to eq(60)
+        expect(@res.for_judge(@judges[3]).computed_values[1]).to eq(60)
+        expect(@res.for_judge(@judges[4]).computed_values[1]).to eq(60)
+        expect(@res.figure_results[1]).to eq(60)
       end
       it 'converts A, A, HZ, 5, CA to 5 (one grade, three avereges, minority HZ)' do
-        @res.for_judge(@judges[0]).computed_values[2].should == 100
-        @res.for_judge(@judges[1]).computed_values[2].should == 100
-        @res.for_judge(@judges[2]).computed_values[2].should == 100
-        @res.for_judge(@judges[3]).computed_values[2].should == 100
-        @res.for_judge(@judges[4]).computed_values[2].should == 100
-        @res.figure_results[2].should == 100
+        expect(@res.for_judge(@judges[0]).computed_values[2]).to eq(100)
+        expect(@res.for_judge(@judges[1]).computed_values[2]).to eq(100)
+        expect(@res.for_judge(@judges[2]).computed_values[2]).to eq(100)
+        expect(@res.for_judge(@judges[3]).computed_values[2]).to eq(100)
+        expect(@res.for_judge(@judges[4]).computed_values[2]).to eq(100)
+        expect(@res.figure_results[2]).to eq(100)
       end
       it 'converts 6, 8, HZ, HZ, CA to 6, 8, 7, 7, 7 (minority zero due to CA)' do
-        @res.for_judge(@judges[0]).computed_values[3].should == 120
-        @res.for_judge(@judges[1]).computed_values[3].should == 160
-        @res.for_judge(@judges[2]).computed_values[3].should == 140
-        @res.for_judge(@judges[3]).computed_values[3].should == 140
-        @res.for_judge(@judges[4]).computed_values[3].should == 140
-        @res.figure_results[3].should == 140
+        expect(@res.for_judge(@judges[0]).computed_values[3]).to eq(120)
+        expect(@res.for_judge(@judges[1]).computed_values[3]).to eq(160)
+        expect(@res.for_judge(@judges[2]).computed_values[3]).to eq(140)
+        expect(@res.for_judge(@judges[3]).computed_values[3]).to eq(140)
+        expect(@res.for_judge(@judges[4]).computed_values[3]).to eq(140)
+        expect(@res.figure_results[3]).to eq(140)
       end
       it 'converts 7, HZ, HZ, HZ, CA to 0 (majority zero)' do
-        @res.for_judge(@judges[0]).computed_values[4].should == 0
-        @res.for_judge(@judges[1]).computed_values[4].should == 0
-        @res.for_judge(@judges[2]).computed_values[4].should == 0
-        @res.for_judge(@judges[3]).computed_values[4].should == 0
-        @res.for_judge(@judges[4]).computed_values[4].should == 0
-        @res.figure_results[4].should == 0
+        expect(@res.for_judge(@judges[0]).computed_values[4]).to eq(0)
+        expect(@res.for_judge(@judges[1]).computed_values[4]).to eq(0)
+        expect(@res.for_judge(@judges[2]).computed_values[4]).to eq(0)
+        expect(@res.for_judge(@judges[3]).computed_values[4]).to eq(0)
+        expect(@res.for_judge(@judges[4]).computed_values[4]).to eq(0)
+        expect(@res.figure_results[4]).to eq(0)
       end
       it 'converts 8, A, HZ, HZ, CA to 8 (one grade, minority zero due to A and CA)' do
-        @res.for_judge(@judges[0]).computed_values[5].should == 160
-        @res.for_judge(@judges[1]).computed_values[5].should == 160
-        @res.for_judge(@judges[2]).computed_values[5].should == 160
-        @res.for_judge(@judges[3]).computed_values[5].should == 160
-        @res.for_judge(@judges[4]).computed_values[5].should == 160
-        @res.figure_results[5].should == 160
+        expect(@res.for_judge(@judges[0]).computed_values[5]).to eq(160)
+        expect(@res.for_judge(@judges[1]).computed_values[5]).to eq(160)
+        expect(@res.for_judge(@judges[2]).computed_values[5]).to eq(160)
+        expect(@res.for_judge(@judges[3]).computed_values[5]).to eq(160)
+        expect(@res.for_judge(@judges[4]).computed_values[5]).to eq(160)
+        expect(@res.figure_results[5]).to eq(160)
       end
       it 'converts HZ, HZ, 0, HZ, CA to 0 (majority zero with soft zero and CA)' do
-        @res.for_judge(@judges[0]).computed_values[6].should == 0
-        @res.for_judge(@judges[1]).computed_values[6].should == 0
-        @res.for_judge(@judges[2]).computed_values[6].should == 0
-        @res.for_judge(@judges[3]).computed_values[6].should == 0
-        @res.for_judge(@judges[4]).computed_values[6].should == 0
-        @res.figure_results[6].should == 0
+        expect(@res.for_judge(@judges[0]).computed_values[6]).to eq(0)
+        expect(@res.for_judge(@judges[1]).computed_values[6]).to eq(0)
+        expect(@res.for_judge(@judges[2]).computed_values[6]).to eq(0)
+        expect(@res.for_judge(@judges[3]).computed_values[6]).to eq(0)
+        expect(@res.for_judge(@judges[4]).computed_values[6]).to eq(0)
+        expect(@res.figure_results[6]).to eq(0)
       end
       it 'converts HZ, 0, HZ, 7, 8 to 5, 0, 5, 7, 8 (minority zero with soft zero in average)' do
-        @res.for_judge(@judges[0]).computed_values[7].should == 100
-        @res.for_judge(@judges[1]).computed_values[7].should ==   0
-        @res.for_judge(@judges[2]).computed_values[7].should == 100
-        @res.for_judge(@judges[3]).computed_values[7].should == 140
-        @res.for_judge(@judges[4]).computed_values[7].should == 160
-        @res.figure_results[7].should == 100
+        expect(@res.for_judge(@judges[0]).computed_values[7]).to eq(100)
+        expect(@res.for_judge(@judges[1]).computed_values[7]).to eq(0)
+        expect(@res.for_judge(@judges[2]).computed_values[7]).to eq(100)
+        expect(@res.for_judge(@judges[3]).computed_values[7]).to eq(140)
+        expect(@res.for_judge(@judges[4]).computed_values[7]).to eq(160)
+        expect(@res.figure_results[7]).to eq(100)
       end
       it 'converts HZ, HZ, 0, 0, 9 to 3, 3, 0, 0, 9 (minority zero with two soft zero in average)' do
-        @res.for_judge(@judges[0]).computed_values[8].should == 60
-        @res.for_judge(@judges[1]).computed_values[8].should == 60
-        @res.for_judge(@judges[2]).computed_values[8].should == 0
-        @res.for_judge(@judges[3]).computed_values[8].should == 0
-        @res.for_judge(@judges[4]).computed_values[8].should == 180
-        @res.figure_results[8].should == 60
+        expect(@res.for_judge(@judges[0]).computed_values[8]).to eq(60)
+        expect(@res.for_judge(@judges[1]).computed_values[8]).to eq(60)
+        expect(@res.for_judge(@judges[2]).computed_values[8]).to eq(0)
+        expect(@res.for_judge(@judges[3]).computed_values[8]).to eq(0)
+        expect(@res.for_judge(@judges[4]).computed_values[8]).to eq(180)
+        expect(@res.figure_results[8]).to eq(60)
       end
     end
   end

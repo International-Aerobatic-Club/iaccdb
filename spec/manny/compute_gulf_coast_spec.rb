@@ -7,9 +7,9 @@ module Manny
       @contest = m2d.process_contest(manny, true)
     end
     it 'Parses' do
-      @contest.should_not be nil
-      @contest.start.year.should == 2005
-      @contest.name.should == '2005 Gulf Coast Regional'
+      expect(@contest).not_to be nil
+      expect(@contest.start.year).to eq(2005)
+      expect(@contest.name).to eq('2005 Gulf Coast Regional')
     end
     describe 'flights' do
       it 'computes' do

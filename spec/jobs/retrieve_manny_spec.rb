@@ -12,7 +12,7 @@ describe RetrieveMannyJob do
       end
     end
     contest = @job.perform
-    Contest.find(contest.id).should_not be nil
+    expect(Contest.find(contest.id)).not_to be nil
   end
 
   it 'places an entry in the failure table on failure' do
@@ -21,7 +21,7 @@ describe RetrieveMannyJob do
     rescue Exception => ex
       @job.error(@job, ex)
     end
-    Failure.first.should_not be nil
+    expect(Failure.first).not_to be nil
   end
 
   it 'queues a flight computation job on success' do
