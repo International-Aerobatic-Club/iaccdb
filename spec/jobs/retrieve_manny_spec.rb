@@ -3,7 +3,14 @@ describe RetrieveMannyJob do
   before(:each) do
     @job = RetrieveMannyJob.new(92)
   end
+
   it 'retrieves a contest into the database' do
+    allow(@job).to receive(:pull_contest) do |manny_id, rcd_block|
+      test_path = File.expand_path('../../manny/Contest_300.txt', __FILE__)
+      File.open(test_path) do |input|
+        input.each { |line| rcd_block.call(line) }
+      end
+    end
     contest = @job.perform
     Contest.find(contest.id).should_not be nil
   end
@@ -19,8 +26,8 @@ describe RetrieveMannyJob do
 
   it 'queues a flight computation job on success' do
     @job.success(@job)
-    jobs = Failure.select('* from delayed_jobs')
-    jobs.empty?.should be_false
+    jobs = Delayed::Job.all
+    expect(jobs.empty?).to eq false
   end
 end
 end
