@@ -36,9 +36,7 @@ def self.verify_for_that_warm_fuzzy_feeling
   end
 end
 
-def self.initial_roster
-  clear_the_boards
-
+def self.initialize_roster
   team = add_team('United States Air Force Academy')
   check_add_member(team, find_member('Bradley','Belveal','437355'))
   check_add_member(team, find_member('Douglas','Clark','437351'))
@@ -65,25 +63,22 @@ def self.initial_roster
   check_add_member(team, find_member('Rosemary','Coe','436830'))
   check_add_member(team, find_member('William','Sullivan','436817'))
   check_add_member(team, find_member('Wolfgang','Brink','437243'))
+  check_add_member(team, find_member('Cortland','Dines','437143'))
 
   team = add_team('Embry Riddle Aeronautical University, Daytona')
   check_add_member(team, find_member('Alain','Aguayo','435356'))
   check_add_member(team, find_member('John','DeGennaro','437111'))
   check_add_member(team, find_member('Michael','Breshears','436478'))
-end
-
-def self.december_additions
-  team = find_team('Embry Riddle Aeronautical University, Daytona')
-  check_add_member(team, find_member('Cortland','Dines','437143'))
 
   team = add_team('Ventura College')
   check_add_member(team, find_member('Sam','Mason','435270'))
   check_add_member(team, find_member('Zachary','Corr','436954'))
 end
 
-initial_roster
-december_additions
-
+clear_the_boards
+initialize_roster
 verify_for_that_warm_fuzzy_feeling
+cc = IAC::CollegiateComputer.new(year)
+cc.recompute
 
 end
