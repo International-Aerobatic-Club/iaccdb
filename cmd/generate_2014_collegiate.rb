@@ -68,7 +68,7 @@ def self.initial_roster
 
   team = add_team('Embry Riddle Aeronautical University, Daytona')
   check_add_member(team, find_member('Alain','Aguayo','435356'))
-  check_add_member(team, find_member('John','DeGannaro','437111'))
+  check_add_member(team, find_member('John','DeGennaro','437111'))
   check_add_member(team, find_member('Michael','Breshears','436478'))
 end
 
