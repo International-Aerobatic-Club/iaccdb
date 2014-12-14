@@ -69,6 +69,7 @@ def self.initialize_roster
   check_add_member(team, find_member('Alain','Aguayo','435356'))
   check_add_member(team, find_member('John','DeGennaro','437111'))
   check_add_member(team, find_member('Michael','Breshears','436478'))
+  check_add_member(team, find_member('Cortland','Dines','437143'))
 
   team = add_team('Ventura College')
   check_add_member(team, find_member('Sam','Mason','435270'))
@@ -78,7 +79,5 @@ end
 clear_the_boards
 initialize_roster
 verify_for_that_warm_fuzzy_feeling
-cc = IAC::CollegiateComputer.new(year)
-cc.recompute
 
 end
