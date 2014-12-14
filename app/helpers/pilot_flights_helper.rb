@@ -28,7 +28,7 @@ module PilotFlightsHelper
   end
 
   def points(points)
-    sprintf('%.2f', points)
+    decimal_two(points)
   end
 
   def show_judge_team(judge_team)
