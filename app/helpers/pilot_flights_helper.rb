@@ -13,7 +13,7 @@ module PilotFlightsHelper
 
   def rank(rank)
     if rank
-      "(#{sprintf('%2d', rank)})"
+      raw("(#{sprintf('%2d', rank)})".gsub(/\s/, '&nbsp;'))
     else
       ''
     end
