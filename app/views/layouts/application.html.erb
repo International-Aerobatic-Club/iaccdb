@@ -26,36 +26,38 @@
 </head>
 <body>
 
-<nav class="top-bar">
-  <ul class="title-area">
-    <li class="name">
-      <h1><%= link_to "IAC CDB", root_path %></a></h1>
-    </li>
-    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
-  </ul>
-  <section class="top-bar-section">
-    <ul>
-      <li class='has-dropdown'><%= link_to 'Navigate', '#' %>
-        <ul class='dropdown'>
-          <li><%= link_to 'Contests', contests_path %></li>
-          <li><%= link_to 'Pilots', pilots_path %></li>
-          <li><%= link_to 'Judges', judges_path %></li>
-          <li><%= link_to 'Assistants', assistants_path %></li>
-          <li><%= link_to 'Counts', further_participation_path %></li>
-          <li><%= link_to 'Notes', pages_path(:notes) %></li>
-        </ul>
+<div class="fixed">
+  <nav class="top-bar">
+    <ul class="title-area">
+      <li class="name">
+        <h1><%= link_to "IAC CDB", root_path %></a></h1>
       </li>
-      <li class='has-dropdown'><%= link_to 'Leaders', '#' %>
-        <ul class='dropdown'>
-          <li><%= link_to 'Regional', leaders_recent_regionals_path %></li>
-          <li><%= link_to 'Collegiate', leaders_recent_collegiate_path %></li>
-          <li><%= link_to 'Soucy', leaders_recent_soucy_path %></li>
-          <li><%= link_to 'Judges', leaders_recent_judges_path %></li>
-        </ul>
-      </li>
+      <li class="toggle-topbar menu-icon"><a><span></span></a></li>
     </ul>
-  </section>
-</nav>
+    <section class="top-bar-section">
+      <ul>
+        <li class='has-dropdown'><%= link_to 'Navigate', '#' %>
+          <ul class='dropdown'>
+            <li><%= link_to 'Contests', contests_path %></li>
+            <li><%= link_to 'Pilots', pilots_path %></li>
+            <li><%= link_to 'Judges', judges_path %></li>
+            <li><%= link_to 'Assistants', assistants_path %></li>
+            <li><%= link_to 'Counts', further_participation_path %></li>
+            <li><%= link_to 'Notes', pages_path(:notes) %></li>
+          </ul>
+        </li>
+        <li class='has-dropdown'><%= link_to 'Leaders', '#' %>
+          <ul class='dropdown'>
+            <li><%= link_to 'Regional', leaders_recent_regionals_path %></li>
+            <li><%= link_to 'Collegiate', leaders_recent_collegiate_path %></li>
+            <li><%= link_to 'Soucy', leaders_recent_soucy_path %></li>
+            <li><%= link_to 'Judges', leaders_recent_judges_path %></li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+  </nav>
+</div>
 
 <div id="content">
   <%= yield %>
