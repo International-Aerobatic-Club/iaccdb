@@ -16,27 +16,13 @@ div.flightScores {
   visibility:hidden;
 }
 
-div#navigation ul {
-  margin-top: 0px;
-  width:100px;
-  list-style-type: none;
-}
-
 ul.bare {
   margin-top: 0px;
   list-style-type: none;
 }
 
-div#navigation {
-  position:fixed;
-  vertical-align:top;
-  top: 10px;
-}
-
 div#content {
-  margin-left: 110px;
   padding-left: 10px;
-  border-left: 2pt solid black;
 }
 
 div#content p {
@@ -44,6 +30,7 @@ div#content p {
 }
 
 div#footer {
+  padding-top: 20px;
   font-style: italic;
   font-size: 6pt;
   color: #77a;
