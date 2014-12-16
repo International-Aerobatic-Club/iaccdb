@@ -6,11 +6,13 @@
   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" /> 
   <%= stylesheet_link_tag 'application' %>
   <%= javascript_include_tag 'application' %>
-  <%= csrf_meta_tag %>
+  <%= javascript_include_tag "vendor/custom.modernizr" %>
+  <%= csrf_meta_tags %>
   <meta name="title" content="IAC Aerobatic Contest Data"/>
   <meta name="description" 
     content="Contest data and computed statistics for aerobatic contests
     of the International Aerobatic Club (IAC)"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="google-site-verification" content="eQl6GaBq3jeBLlrEB-P_EoeE78yAPDRAhtPfB7b1ypw" />
   <meta property="og:title" content="IAC Aerobatic Contest Data"/>
   <meta property="og:type" content="website"/>
@@ -24,24 +26,36 @@
 </head>
 <body>
 
-<div id='navigation'>
-  <h3>Navigate</h3>
-  <ul class="no_bullets">
-    <li><%= link_to 'Contests', contests_path %></li>
-    <li><%= link_to 'Pilots', pilots_path %></li>
-    <li><%= link_to 'Judges', judges_path %></li>
-    <li><%= link_to 'Assistants', assistants_path %></li>
-    <li><%= link_to 'Counts', further_participation_path %></li>
-    <li><%= link_to 'Notes', pages_path(:notes) %></li>
+<nav class="top-bar">
+  <ul class="title-area">
+    <li class="name">
+      <h1><%= link_to "IAC CDB", root_path %></a></h1>
+    </li>
+    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
   </ul>
-  <h3>Leaders</h3>
-  <ul class='no_bullets'>
-  <li><%= link_to 'Regional', leaders_recent_regionals_path %></li>
-  <li><%= link_to 'Collegiate', leaders_recent_collegiate_path %></li>
-  <li><%= link_to 'Soucy', leaders_recent_soucy_path %></li>
-  <li><%= link_to 'Judges', leaders_recent_judges_path %></li>
-  </ul>
-</div>
+  <section class="top-bar-section">
+    <ul>
+      <li class='has-dropdown'><%= link_to 'Navigate', '#' %>
+        <ul class='dropdown'>
+          <li><%= link_to 'Contests', contests_path %></li>
+          <li><%= link_to 'Pilots', pilots_path %></li>
+          <li><%= link_to 'Judges', judges_path %></li>
+          <li><%= link_to 'Assistants', assistants_path %></li>
+          <li><%= link_to 'Counts', further_participation_path %></li>
+          <li><%= link_to 'Notes', pages_path(:notes) %></li>
+        </ul>
+      </li>
+      <li class='has-dropdown'><%= link_to 'Leaders', '#' %>
+        <ul class='dropdown'>
+          <li><%= link_to 'Regional', leaders_recent_regionals_path %></li>
+          <li><%= link_to 'Collegiate', leaders_recent_collegiate_path %></li>
+          <li><%= link_to 'Soucy', leaders_recent_soucy_path %></li>
+          <li><%= link_to 'Judges', leaders_recent_judges_path %></li>
+        </ul>
+      </li>
+    </ul>
+  </section>
+</nav>
 
 <div id="content">
   <%= yield %>
