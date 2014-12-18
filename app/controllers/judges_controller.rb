@@ -9,9 +9,9 @@ class JudgesController < ApplicationController
   def show
     id = params[:id]
     @judge = Member.find(id)
-    judges = Judge.find_all_by_judge_id(id)
+    judges = Judge.where(:judge_id => id)
     @jf_results =
-      JfResult.includes(:f_result).find_all_by_judge_id(judges)
+      JfResult.includes(:f_result).where(:judge_id => judges)
     @jf_results.sort! do |a,b|
       b.f_result.flight.contest.start <=> a.f_result.flight.contest.start
     end
@@ -19,7 +19,7 @@ class JudgesController < ApplicationController
     cur_year = Time.now.year
     prior_year = cur_year - 1
     jy_results_query = JyResult.includes(:category).order(
-       'year DESC').where("#{prior_year} <= year").find_all_by_judge_id(id)
+       'year DESC').where("#{prior_year} <= year").where(:judge_id => id)
     jy_by_year = jy_results_query.group_by { |r| r.year }
     @j_results = [] # array of hash {year label, array of string count for category}
     @totals = {} # hash indexed by year label, value is total pilots for year
@@ -40,9 +40,9 @@ class JudgesController < ApplicationController
     id = params[:id]
     @judge = Member.find(id)
     jy_results_query = JyResult.includes(:category).order(
-       "year DESC").find_all_by_judge_id(id)
+       "year DESC").where(:judge_id => id)
     jy_by_year = jy_results_query.group_by { |r| r.year }
-    jc_results_query = JcResult.includes(:c_result).find_all_by_judge_id(id)
+    jc_results_query = JcResult.includes(:c_result).where(:judge_id => id)
     jc_by_year = jc_results_query.group_by { |r| r.c_result.contest.start.year }
     career_category_results = {} # hash by category
     career_rollup = JyResult.new :judge => @judge

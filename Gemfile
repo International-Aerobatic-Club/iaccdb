@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', "~> 3.2.0"
+gem 'rails', "~> 4.0.0"
 
 gem 'delayed_job'
 gem 'delayed_job_active_record'
@@ -10,11 +10,9 @@ gem 'jquery-rails'
 gem 'chronic'
 gem 'zurb-foundation'
 
-group :assets do
-  gem 'sass-rails', "~> 3.2.3"
-  gem 'coffee-rails', "~> 3.2.1"
-  gem 'uglifier', ">= 1.0.3"
-end
+gem 'sass-rails'
+gem 'coffee-rails'
+gem 'uglifier'
 
 group :development, :test do
   gem 'rspec-rails'
@@ -37,3 +35,6 @@ group :production do
   # support for execjs asset precompilation
   gem 'therubyracer'
 end
+
+### Transition to Rails 4.0 - Migrate away from these
+gem 'protected_attributes'

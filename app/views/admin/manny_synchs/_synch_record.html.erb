@@ -12,7 +12,7 @@
   <% end %>
   <td>
     <%= link_to 'delete', admin_manny_synch_path(synch_record), 
-      :confirm => 'Will delete the contest, too, okay?', 
+      data: { :confirm => 'Will delete the contest, too, okay?' }, 
       :method => :delete %>
   </td>
   <td>

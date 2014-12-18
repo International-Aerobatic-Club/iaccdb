@@ -9,8 +9,8 @@ class AssistantsController < ApplicationController
   def show
     id = params[:id]
     @assistant = Member.find(id)
-    assists = Judge.find_all_by_assist_id(id)
-    scores = Score.includes(:flight).find_all_by_judge_id(assists)
+    assists = Judge.where(:assist_id => id)
+    scores = Score.includes(:flight).where(:judge_id => assists)
     @flights_history = scores.map { |s| s.flight }
     @flights_history.uniq!.sort!{ |a,b| b.contest.start <=> a.contest.start }
     cur_year = Time.now.year

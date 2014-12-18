@@ -15,7 +15,7 @@
       <%= hidden_field_tag "selected[#{member.id}]" %>
     </p>
   <% end %>
-  <%= submit_tag :merge, :confirm => 'Be careful. This cannot be undone.' %>
+  <%= submit_tag :merge, data: { :confirm => 'Be careful. This cannot be undone.' } %>
   <%= link_to :cancel, admin_members_path(:anchor => @target) %>
   <p>"Merge" will place all of the following with
   the selected member and delete the other member(s).</p>
