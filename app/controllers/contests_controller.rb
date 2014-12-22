@@ -1,5 +1,4 @@
 class ContestsController < ApplicationController
-  include IAC::Constants
 
   # GET /contests
   # GET /contests.xml
