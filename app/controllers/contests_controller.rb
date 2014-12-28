@@ -4,6 +4,15 @@ class ContestsController < ApplicationController
   # GET /contests.xml
   def index
     @contests = Contest.order("start DESC")
+    respond_to do |format|
+      format.html
+      format.xml do
+        render xml: @contests.to_xml
+      end
+      format.json do
+        render json: @contests.to_json
+      end
+    end
   end
 
   # GET /contests/1
