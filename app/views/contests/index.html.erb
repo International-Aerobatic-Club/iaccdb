@@ -1,4 +1,9 @@
-<h1>IAC Contests</h1>
+<h1>IAC Contests, <%= @year %></h1>
+<p>
+<% @years.each do |year| %>
+  <%= link_to year, contests_path(:year => year) %>
+<% end %>
+</p>
 
 <ul class="no-bullets">
 <%= render @contests %>

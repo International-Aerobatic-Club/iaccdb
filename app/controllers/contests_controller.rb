@@ -3,7 +3,10 @@ class ContestsController < ApplicationController
   # GET /contests
   # GET /contests.xml
   def index
-    @contests = Contest.order("start DESC")
+    @years = Contest.select("distinct year(start) as anum").all.collect { |contest| contest.anum }
+    @years.sort!{|a,b| b <=> a}
+    @year = params[:year] || @years.first
+    @contests = Contest.where('year(start) = ?', @year).order("start DESC")
     respond_to do |format|
       format.html
       format.xml do
