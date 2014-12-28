@@ -1,0 +1,4311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<contests type="array">
+  <contest>
+    <id type="integer">460</id>
+    <name>Sebring Fall #70</name>
+    <city>Sebring</city>
+    <state>FL</state>
+    <start type="date">2014-11-07</start>
+    <chapter type="integer">23</chapter>
+    <director>Jim Wells</director>
+    <region>SouthEast</region>
+    <created-at type="dateTime">2014-11-07T16:17:22Z</created-at>
+    <updated-at type="dateTime">2014-11-07T16:17:22Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">459</id>
+    <name>Blue Ridge Hammerfest</name>
+    <city>Morganton</city>
+    <state>NC</state>
+    <start type="date">2014-10-30</start>
+    <chapter type="integer">19</chapter>
+    <director>Brandon NeSmith</director>
+    <region>NorthEast</region>
+    <created-at type="dateTime">2014-11-02T19:40:19Z</created-at>
+    <updated-at type="dateTime">2014-11-02T19:40:19Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">461</id>
+    <name>Ben Glattstein International Adventure Classic</name>
+    <city>Keystone Heights</city>
+    <state>FL</state>
+    <start type="date">2014-10-17</start>
+    <chapter type="integer">288</chapter>
+    <director>Michael Breshears</director>
+    <region>SouthEast</region>
+    <created-at type="dateTime">2014-12-05T04:06:37Z</created-at>
+    <updated-at type="dateTime">2014-12-05T04:10:54Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">455</id>
+    <name>San Diego Hammerheads AKROFEST</name>
+    <city>Borrego Springs</city>
+    <state>CA</state>
+    <start type="date">2014-10-11</start>
+    <chapter type="integer">36</chapter>
+    <director>Yolandi Joostie</director>
+    <region>SouthWest</region>
+    <created-at type="dateTime">2014-10-16T13:48:48Z</created-at>
+    <updated-at type="dateTime">2014-10-16T13:48:48Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">454</id>
+    <name>Aces High Aerobatic Contest</name>
+    <city>Newton</city>
+    <state>KS</state>
+    <start type="date">2014-10-10</start>
+    <chapter type="integer">119</chapter>
+    <director>Ross Schoneboom</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2014-10-13T23:16:38Z</created-at>
+    <updated-at type="dateTime">2014-10-13T23:16:38Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">458</id>
+    <name>U.S. National Aerobatic Championships</name>
+    <city>Sherman and Denison</city>
+    <state>TX</state>
+    <start type="date">2014-09-21</start>
+    <chapter type="integer">36</chapter>
+    <director>Gray Brandt</director>
+    <region>National</region>
+    <created-at type="dateTime">2014-11-01T19:31:00Z</created-at>
+    <updated-at type="dateTime">2014-11-01T19:53:36Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">453</id>
+    <name>2014 Salem Regional Aerobatic Contest</name>
+    <city>Salem</city>
+    <state>IL</state>
+    <start type="date">2014-09-13</start>
+    <chapter type="integer">61</chapter>
+    <director>Bruce Ballew</director>
+    <region>MidAmerica</region>
+    <created-at type="dateTime">2014-09-14T15:25:18Z</created-at>
+    <updated-at type="dateTime">2014-09-14T15:25:18Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">451</id>
+    <name>Rocky Mountain Oyster Invitational - Powered</name>
+    <city>Lamar</city>
+    <state>CO</state>
+    <start type="date">2014-09-13</start>
+    <chapter type="integer">5</chapter>
+    <director>Jamie Treat</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2014-09-13T22:49:58Z</created-at>
+    <updated-at type="dateTime">2014-09-14T13:35:45Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">452</id>
+    <name>Rocky Mountain Oyster Invitational - Glider</name>
+    <city>Lamar</city>
+    <state>CO</state>
+    <start type="date">2014-09-13</start>
+    <chapter type="integer">5</chapter>
+    <director>Jamie Treat</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2014-09-13T22:50:26Z</created-at>
+    <updated-at type="dateTime">2014-09-14T13:35:06Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">448</id>
+    <name>The Bill Thomas US / Canada Aerobatic Challenge</name>
+    <city>Olean</city>
+    <state>NY</state>
+    <start type="date">2014-09-06</start>
+    <chapter type="integer">126</chapter>
+    <director>Pat Barrett</director>
+    <region>NorthEast</region>
+    <created-at type="dateTime">2014-09-07T18:28:29Z</created-at>
+    <updated-at type="dateTime">2014-09-07T18:28:29Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">447</id>
+    <name>East Coast Aerobatic Contest</name>
+    <city>Midland</city>
+    <state>VA</state>
+    <start type="date">2014-09-06</start>
+    <chapter type="integer">11</chapter>
+    <director>Adam Cope</director>
+    <region>NorthEast</region>
+    <created-at type="dateTime">2014-09-07T15:49:54Z</created-at>
+    <updated-at type="dateTime">2014-09-07T15:49:54Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">449</id>
+    <name>Harold Neumann Barnstormer</name>
+    <city>Olathe</city>
+    <state>KS</state>
+    <start type="date">2014-09-05</start>
+    <chapter type="integer">15</chapter>
+    <director>Greg Shetterly</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2014-09-09T20:14:58Z</created-at>
+    <updated-at type="dateTime">2014-09-09T20:14:58Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">450</id>
+    <name>Apple Turn Over</name>
+    <city>Ephrata</city>
+    <state>WA</state>
+    <start type="date">2014-09-05</start>
+    <chapter type="integer">0</chapter>
+    <director>Peggy Riedinger</director>
+    <region>NorthWest</region>
+    <created-at type="dateTime">2014-09-10T03:50:55Z</created-at>
+    <updated-at type="dateTime">2014-09-10T03:50:55Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">446</id>
+    <name>Happiness is Delano</name>
+    <city>Delano</city>
+    <state>CA</state>
+    <start type="date">2014-08-30</start>
+    <chapter type="integer">26</chapter>
+    <director>Steve  De La Cruz</director>
+    <region>SouthWest</region>
+    <created-at type="dateTime">2014-09-07T05:14:01Z</created-at>
+    <updated-at type="dateTime">2014-09-07T05:14:01Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">443</id>
+    <name>Rocky Mountain House Challenge</name>
+    <city>Rocky Mountain House</city>
+    <state>AL</state>
+    <start type="date">2014-08-29</start>
+    <chapter type="integer">0</chapter>
+    <director>Dave Barbet</director>
+    <region>NorthWest</region>
+    <created-at type="dateTime">2014-09-01T19:40:02Z</created-at>
+    <updated-at type="dateTime">2014-09-01T19:40:10Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">445</id>
+    <name>Hill Country Hammerfest</name>
+    <city>Llano</city>
+    <state>TX</state>
+    <start type="date">2014-08-29</start>
+    <chapter type="integer">107</chapter>
+    <director>Jeffery Poehlmann</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2014-09-02T19:24:11Z</created-at>
+    <updated-at type="dateTime">2014-09-02T19:24:11Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">444</id>
+    <name>Rebel Regional</name>
+    <city>Union City</city>
+    <state>TN</state>
+    <start type="date">2014-08-29</start>
+    <chapter type="integer">27</chapter>
+    <director>Michael Rinker</director>
+    <region>SouthEast</region>
+    <created-at type="dateTime">2014-09-01T23:15:10Z</created-at>
+    <updated-at type="dateTime">2014-09-01T23:15:10Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">440</id>
+    <name>Beaver State Regional</name>
+    <city>Pendleton</city>
+    <state>OR</state>
+    <start type="date">2014-08-15</start>
+    <chapter type="integer">77</chapter>
+    <director>Christopher Branson</director>
+    <region>NorthWest</region>
+    <created-at type="dateTime">2014-08-22T01:39:40Z</created-at>
+    <updated-at type="dateTime">2014-08-22T01:39:40Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">441</id>
+    <name>Kathy Jaffe Challenge</name>
+    <city>Lumberton</city>
+    <state>NJ</state>
+    <start type="date">2014-08-13</start>
+    <chapter type="integer">52</chapter>
+    <director>Ronald Mann, John Fellenzer</director>
+    <region>NorthEast</region>
+    <created-at type="dateTime">2014-08-22T01:43:52Z</created-at>
+    <updated-at type="dateTime">2014-08-22T01:43:52Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">439</id>
+    <name>Hoosier Hoedown</name>
+    <city>Kokomo</city>
+    <state>IN</state>
+    <start type="date">2014-08-09</start>
+    <chapter type="integer">124</chapter>
+    <director>Mike Wild</director>
+    <region>MidAmerica</region>
+    <created-at type="dateTime">2014-08-22T01:23:57Z</created-at>
+    <updated-at type="dateTime">2014-08-22T01:23:57Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">442</id>
+    <name>Upper Canada Open 2014</name>
+    <city>Tillsonburg, Ontario, Ca</city>
+    <state>OT</state>
+    <start type="date">2014-08-03</start>
+    <chapter type="integer">3</chapter>
+    <director>Bjarni Tryggvason</director>
+    <region>MidAmerica</region>
+    <created-at type="dateTime">2014-08-22T01:48:37Z</created-at>
+    <updated-at type="dateTime">2014-08-22T01:48:37Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">438</id>
+    <name>Can-Am Cutbank</name>
+    <city>Cutbank</city>
+    <state>MT</state>
+    <start type="date">2014-07-25</start>
+    <chapter type="integer">0</chapter>
+    <director>Robert Harris</director>
+    <region>NorthWest</region>
+    <created-at type="dateTime">2014-08-22T01:08:24Z</created-at>
+    <updated-at type="dateTime">2014-08-22T01:21:23Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">436</id>
+    <name>Doug Yost Challenge</name>
+    <city>Spencer</city>
+    <state>IA</state>
+    <start type="date">2014-07-19</start>
+    <chapter type="integer">78</chapter>
+    <director>Dan Pichelman</director>
+    <region>MidAmerica</region>
+    <created-at type="dateTime">2014-07-20T19:00:16Z</created-at>
+    <updated-at type="dateTime">2014-07-20T19:00:16Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">437</id>
+    <name>Best Box in Texas</name>
+    <city>Edna</city>
+    <state>TX</state>
+    <start type="date">2014-07-18</start>
+    <chapter type="integer">25</chapter>
+    <director>Denny Beacham</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2014-07-24T15:03:47Z</created-at>
+    <updated-at type="dateTime">2014-07-24T15:03:47Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">435</id>
+    <name>Green Mountain Aerobatic Contest</name>
+    <city>Springfield</city>
+    <state>VT</state>
+    <start type="date">2014-07-11</start>
+    <chapter type="integer">35</chapter>
+    <director>William Gordon</director>
+    <region>NorthEast</region>
+    <created-at type="dateTime">2014-07-16T01:27:57Z</created-at>
+    <updated-at type="dateTime">2014-07-16T01:27:57Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">434</id>
+    <name>Michigan Aerobatic Open</name>
+    <city>Jackson</city>
+    <state>MI</state>
+    <start type="date">2014-06-28</start>
+    <chapter type="integer">88</chapter>
+    <director>Brian Roodvoets</director>
+    <region>MidAmerica</region>
+    <created-at type="dateTime">2014-07-03T17:38:26Z</created-at>
+    <updated-at type="dateTime">2014-07-03T17:38:26Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">433</id>
+    <name>Apple Cup</name>
+    <city>Ephrata</city>
+    <state>WA</state>
+    <start type="date">2014-06-27</start>
+    <chapter type="integer">67</chapter>
+    <director>Jerry Riedinger &amp;amp; Larry James</director>
+    <region>NorthWest</region>
+    <created-at type="dateTime">2014-07-02T04:20:11Z</created-at>
+    <updated-at type="dateTime">2014-07-02T04:20:11Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">431</id>
+    <name>Lonestar Aerobatic Championships</name>
+    <city>Sherman</city>
+    <state>TX</state>
+    <start type="date">2014-06-20</start>
+    <chapter type="integer">24</chapter>
+    <director>Kathleen Kyer</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2014-06-23T12:42:48Z</created-at>
+    <updated-at type="dateTime">2014-06-23T12:42:48Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">432</id>
+    <name>Midwest Aerobatic Championship</name>
+    <city>Seward</city>
+    <state>NE</state>
+    <start type="date">2014-06-20</start>
+    <chapter type="integer">80</chapter>
+    <director>David Moll</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2014-06-23T19:35:09Z</created-at>
+    <updated-at type="dateTime">2014-06-23T19:35:09Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">430</id>
+    <name>Ohio Aerobatic Open - IAC Open East Championship</name>
+    <city>Bellefontaine</city>
+    <state>OH</state>
+    <start type="date">2014-06-13</start>
+    <chapter type="integer">34</chapter>
+    <director>Chris Keegan</director>
+    <region>MidAmerica</region>
+    <created-at type="dateTime">2014-06-14T12:59:27Z</created-at>
+    <updated-at type="dateTime">2014-06-14T12:59:27Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">429</id>
+    <name>Bear Creek Bash</name>
+    <city>Rome</city>
+    <state>GA</state>
+    <start type="date">2014-05-30</start>
+    <chapter type="integer">3</chapter>
+    <director>Ken Lumpkin</director>
+    <region>SouthEast</region>
+    <created-at type="dateTime">2014-06-03T14:16:30Z</created-at>
+    <updated-at type="dateTime">2014-06-04T19:12:59Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">427</id>
+    <name>Coalinga Western Showdown</name>
+    <city>Coalinga</city>
+    <state>CA</state>
+    <start type="date">2014-05-30</start>
+    <chapter type="integer">38</chapter>
+    <director>Martin Price</director>
+    <region>SouthWest</region>
+    <created-at type="dateTime">2014-05-30T21:43:16Z</created-at>
+    <updated-at type="dateTime">2014-06-04T15:32:24Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">428</id>
+    <name>Acroblast</name>
+    <city>Wildwood</city>
+    <state>NJ</state>
+    <start type="date">2014-05-30</start>
+    <chapter type="integer">58</chapter>
+    <director>Dave Crescenzo</director>
+    <region>NorthEast</region>
+    <created-at type="dateTime">2014-06-02T13:18:50Z</created-at>
+    <updated-at type="dateTime">2014-06-02T13:18:50Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">426</id>
+    <name>Ben Lowell Aerial Confrontation</name>
+    <city>Lamar</city>
+    <state>CO</state>
+    <start type="date">2014-05-24</start>
+    <chapter type="integer">12</chapter>
+    <director>Chris Leach</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2014-05-24T18:38:16Z</created-at>
+    <updated-at type="dateTime">2014-05-24T19:16:52Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">423</id>
+    <name>Duel in the Desert</name>
+    <city>Apple Valley</city>
+    <state>CA</state>
+    <start type="date">2014-05-02</start>
+    <chapter type="integer">49</chapter>
+    <director>Chris Olmsted</director>
+    <region>SouthWest</region>
+    <created-at type="dateTime">2014-05-04T06:17:43Z</created-at>
+    <updated-at type="dateTime">2014-05-04T06:17:43Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">424</id>
+    <name>Carolina Boogie</name>
+    <city>Wilson</city>
+    <state>NC</state>
+    <start type="date">2014-05-02</start>
+    <chapter type="integer">19</chapter>
+    <director>Eric Sandifer</director>
+    <region>NorthEast</region>
+    <created-at type="dateTime">2014-05-04T14:49:49Z</created-at>
+    <updated-at type="dateTime">2014-05-04T14:49:49Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">425</id>
+    <name>Sebring Spring Contest</name>
+    <city>Sebring</city>
+    <state>FL</state>
+    <start type="date">2014-05-01</start>
+    <chapter type="integer">23</chapter>
+    <director>John McKinney</director>
+    <region>SouthEast</region>
+    <created-at type="dateTime">2014-05-06T02:02:30Z</created-at>
+    <updated-at type="dateTime">2014-05-06T02:02:30Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">421</id>
+    <name>San Diego Hammerheads Roundup</name>
+    <city>Borrego Springs</city>
+    <state>CA</state>
+    <start type="date">2014-04-11</start>
+    <chapter type="integer">36</chapter>
+    <director>Yolandi Jooste</director>
+    <region>SouthWest</region>
+    <created-at type="dateTime">2014-04-22T00:10:45Z</created-at>
+    <updated-at type="dateTime">2014-04-22T00:10:45Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">418</id>
+    <name>2014 Phil Schacht Aerobatic Kickoff</name>
+    <city>Keystone Heights</city>
+    <state>FL</state>
+    <start type="date">2014-03-20</start>
+    <chapter type="integer">288</chapter>
+    <director>Andrea Luethi</director>
+    <region>SouthEast</region>
+    <created-at type="dateTime">2014-04-13T21:01:23Z</created-at>
+    <updated-at type="dateTime">2014-04-13T21:01:23Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">402</id>
+    <name>Fall Sebring 2013</name>
+    <city>Sebring</city>
+    <state>FL</state>
+    <start type="date">2013-11-01</start>
+    <chapter type="integer">23</chapter>
+    <director>Dennis Jones</director>
+    <region>SouthEast</region>
+    <created-at type="dateTime">2013-11-05T09:15:14Z</created-at>
+    <updated-at type="dateTime">2013-11-05T09:15:14Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">408</id>
+    <name>Blue Ridge Hammerfest</name>
+    <city>Morganton</city>
+    <state>NC</state>
+    <start type="date">2013-10-18</start>
+    <chapter type="integer">19</chapter>
+    <director>Brandon NeSmith</director>
+    <region>NorthEast</region>
+    <created-at type="dateTime">2014-03-21T15:04:08Z</created-at>
+    <updated-at type="dateTime">2014-03-21T15:04:08Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">398</id>
+    <name>AKROFEST</name>
+    <city>Borrego Springs</city>
+    <state>CA</state>
+    <start type="date">2013-10-11</start>
+    <chapter type="integer">36</chapter>
+    <director>Gray Brandt/William Hill</director>
+    <region>SouthWest</region>
+    <created-at type="dateTime">2013-10-22T15:00:19Z</created-at>
+    <updated-at type="dateTime">2013-10-22T15:00:19Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">400</id>
+    <name>U.S. National Aerobatic Championships</name>
+    <city>Denison</city>
+    <state>TX</state>
+    <start type="date">2013-09-22</start>
+    <chapter type="integer">67</chapter>
+    <director>John Smutny</director>
+    <region>National</region>
+    <created-at type="dateTime">2013-11-04T19:52:15Z</created-at>
+    <updated-at type="dateTime">2013-11-04T19:56:21Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">389</id>
+    <name>Extra Ephrata Contest</name>
+    <city>Ephrata</city>
+    <state>WA</state>
+    <start type="date">2013-09-13</start>
+    <chapter type="integer">67</chapter>
+    <director>Peggy Riedinger</director>
+    <region>NorthWest</region>
+    <created-at type="dateTime">2013-10-16T02:02:09Z</created-at>
+    <updated-at type="dateTime">2013-10-16T02:02:09Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">386</id>
+    <name>East Coast Aerobatic Contest</name>
+    <city>Midland</city>
+    <state>VA</state>
+    <start type="date">2013-09-07</start>
+    <chapter type="integer">11</chapter>
+    <director>Scott Francis</director>
+    <region>NorthEast</region>
+    <created-at type="dateTime">2013-10-16T02:01:23Z</created-at>
+    <updated-at type="dateTime">2013-10-16T02:01:23Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">388</id>
+    <name>Ace's High Aerobatic Contest</name>
+    <city>Newton</city>
+    <state>KS</state>
+    <start type="date">2013-09-06</start>
+    <chapter type="integer">119</chapter>
+    <director>Ross Schoneboom</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2013-10-16T02:01:48Z</created-at>
+    <updated-at type="dateTime">2013-10-16T02:01:48Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">399</id>
+    <name>Canadian Western Championships</name>
+    <city>Rocky Mountain House</city>
+    <state>Ot</state>
+    <start type="date">2013-09-06</start>
+    <chapter type="integer">77</chapter>
+    <director>Dave Barbet</director>
+    <region>NorthWest</region>
+    <created-at type="dateTime">2013-10-22T15:00:26Z</created-at>
+    <updated-at type="dateTime">2013-10-22T15:00:26Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">384</id>
+    <name>Hill Country Hammerfest</name>
+    <city>Austin</city>
+    <state>TX</state>
+    <start type="date">2013-08-31</start>
+    <chapter type="integer">107</chapter>
+    <director>Michael Carver</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2013-10-16T02:00:54Z</created-at>
+    <updated-at type="dateTime">2013-10-16T02:00:54Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">390</id>
+    <name>Happiness is Delano</name>
+    <city>Delano</city>
+    <state>CA</state>
+    <start type="date">2013-08-31</start>
+    <chapter type="integer">26</chapter>
+    <director>Stephen De La Cruz</director>
+    <region>SouthWest</region>
+    <created-at type="dateTime">2013-10-16T02:02:29Z</created-at>
+    <updated-at type="dateTime">2013-10-16T02:02:29Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">385</id>
+    <name>Beaver State Regional, IAC Open Championship Wes</name>
+    <city>Pendleton</city>
+    <state>OR</state>
+    <start type="date">2013-08-23</start>
+    <chapter type="integer">77</chapter>
+    <director>John Smutny &amp;  Co. CD - Christopher Branson</director>
+    <region>NorthWest</region>
+    <created-at type="dateTime">2013-10-16T02:01:04Z</created-at>
+    <updated-at type="dateTime">2014-02-19T23:55:01Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">382</id>
+    <name>Upper Canada Open 2013</name>
+    <city>Chatham, Ontario, Canada</city>
+    <state>Ot</state>
+    <start type="date">2013-08-23</start>
+    <chapter type="integer">3</chapter>
+    <director>William (Bill) Ludwig</director>
+    <region>MidAmerica</region>
+    <created-at type="dateTime">2013-10-16T02:00:44Z</created-at>
+    <updated-at type="dateTime">2013-10-16T02:00:44Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">383</id>
+    <name>Oshkosh Air Maneuvers Challenge</name>
+    <city>Oshkosh</city>
+    <state>WI</state>
+    <start type="date">2013-08-23</start>
+    <chapter type="integer">1</chapter>
+    <director>Audra Hoy</director>
+    <region>MidAmerica</region>
+    <created-at type="dateTime">2013-10-16T02:00:47Z</created-at>
+    <updated-at type="dateTime">2013-10-16T02:00:47Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">380</id>
+    <name>Doug Yost Challenge</name>
+    <city>Spencer</city>
+    <state>IA</state>
+    <start type="date">2013-08-17</start>
+    <chapter type="integer">78</chapter>
+    <director>Aaron McCartan</director>
+    <region>MidAmerica</region>
+    <created-at type="dateTime">2013-10-16T02:00:38Z</created-at>
+    <updated-at type="dateTime">2013-10-16T02:00:38Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">406</id>
+    <name>Tequila Cup Glider</name>
+    <city>Marana</city>
+    <state>AZ</state>
+    <start type="date">2013-08-11</start>
+    <chapter type="integer">62</chapter>
+    <director>Jim Ward</director>
+    <region>SouthWest</region>
+    <created-at type="dateTime">2014-03-21T02:38:44Z</created-at>
+    <updated-at type="dateTime">2014-05-26T05:10:41Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">407</id>
+    <name>Tequila Cup Power</name>
+    <city>Marana</city>
+    <state>AZ</state>
+    <start type="date">2013-08-11</start>
+    <chapter type="integer">62</chapter>
+    <director>Jim Ward</director>
+    <region>SouthWest</region>
+    <created-at type="dateTime">2014-03-21T02:38:45Z</created-at>
+    <updated-at type="dateTime">2014-05-26T05:10:56Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">379</id>
+    <name>Kathy Jaffe Challenge</name>
+    <city>Lumberton</city>
+    <state>NJ</state>
+    <start type="date">2013-08-10</start>
+    <chapter type="integer">52</chapter>
+    <director>Mark Matiolli</director>
+    <region>NorthEast</region>
+    <created-at type="dateTime">2013-10-16T02:00:33Z</created-at>
+    <updated-at type="dateTime">2013-10-16T02:00:33Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">381</id>
+    <name>Hoosier Hoedown</name>
+    <city>Kokomo</city>
+    <state>IN</state>
+    <start type="date">2013-08-10</start>
+    <chapter type="integer">124</chapter>
+    <director>Sheri Davis</director>
+    <region>MidAmerica</region>
+    <created-at type="dateTime">2013-10-16T02:00:41Z</created-at>
+    <updated-at type="dateTime">2013-10-16T02:00:41Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">370</id>
+    <name>Bear Creek Bash, Power</name>
+    <city>Rome</city>
+    <state>GA</state>
+    <start type="date">2013-07-28</start>
+    <chapter type="integer">3</chapter>
+    <director>Mark Nowosielski</director>
+    <region>SouthEast</region>
+    <created-at type="dateTime">2013-10-16T01:59:52Z</created-at>
+    <updated-at type="dateTime">2014-03-24T18:37:12Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">371</id>
+    <name>Bear Creek Bash, Glider</name>
+    <city>Rome</city>
+    <state>GA</state>
+    <start type="date">2013-07-28</start>
+    <chapter type="integer">3</chapter>
+    <director>Mark Nowosielski</director>
+    <region>SouthEast</region>
+    <created-at type="dateTime">2013-10-16T01:59:59Z</created-at>
+    <updated-at type="dateTime">2014-03-24T18:36:48Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">378</id>
+    <name>Can Am challenge</name>
+    <city>Cut bank</city>
+    <state>MT</state>
+    <start type="date">2013-07-19</start>
+    <chapter type="integer">77</chapter>
+    <director>Bob Harris</director>
+    <region>NorthWest</region>
+    <created-at type="dateTime">2013-10-16T02:00:30Z</created-at>
+    <updated-at type="dateTime">2013-10-16T02:00:30Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">377</id>
+    <name>Salem Regional Aerobatic Contest</name>
+    <city>Salem</city>
+    <state>IL</state>
+    <start type="date">2013-07-13</start>
+    <chapter type="integer">61</chapter>
+    <director>Bruce Ballew</director>
+    <region>MidAmerica</region>
+    <created-at type="dateTime">2013-10-16T02:00:25Z</created-at>
+    <updated-at type="dateTime">2013-10-16T02:00:25Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">375</id>
+    <name>HotPoxia</name>
+    <city>Sterling</city>
+    <state>CO</state>
+    <start type="date">2013-07-13</start>
+    <chapter type="integer">12</chapter>
+    <director>Dagmar Kress</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2013-10-16T02:00:18Z</created-at>
+    <updated-at type="dateTime">2013-10-16T02:00:18Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">376</id>
+    <name>Green Mountain Aerobatic Contest</name>
+    <city>Springfield</city>
+    <state>VT</state>
+    <start type="date">2013-07-12</start>
+    <chapter type="integer">35</chapter>
+    <director>Bill Gordon</director>
+    <region>NorthEast</region>
+    <created-at type="dateTime">2013-10-16T02:00:20Z</created-at>
+    <updated-at type="dateTime">2013-10-16T02:00:20Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">373</id>
+    <name>Michigan Aerobatic Open</name>
+    <city>Jackson</city>
+    <state>MI</state>
+    <start type="date">2013-07-06</start>
+    <chapter type="integer">88</chapter>
+    <director>Brian Roodvoets</director>
+    <region>MidAmerica</region>
+    <created-at type="dateTime">2013-10-16T02:00:13Z</created-at>
+    <updated-at type="dateTime">2013-10-16T02:00:13Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">397</id>
+    <name>Midwest Aerobatic Championship</name>
+    <city>Seward</city>
+    <state>NE</state>
+    <start type="date">2013-06-28</start>
+    <chapter type="integer">80</chapter>
+    <director>David Moll</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2013-10-16T02:03:11Z</created-at>
+    <updated-at type="dateTime">2013-10-16T02:03:11Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">396</id>
+    <name>Apple Cup</name>
+    <city>Ephrata</city>
+    <state>WA</state>
+    <start type="date">2013-06-21</start>
+    <chapter type="integer">67</chapter>
+    <director>Jerry Riedinger &amp; Will Allen</director>
+    <region>NorthWest</region>
+    <created-at type="dateTime">2013-10-16T02:03:06Z</created-at>
+    <updated-at type="dateTime">2013-10-16T02:03:06Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">372</id>
+    <name>Lonestar Aerobatic Championships</name>
+    <city>Grayson County</city>
+    <state>TX</state>
+    <start type="date">2013-06-20</start>
+    <chapter type="integer">24</chapter>
+    <director>Michael Gallaway</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2013-10-16T02:00:06Z</created-at>
+    <updated-at type="dateTime">2013-10-16T02:00:06Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">395</id>
+    <name>Wildwoods AcroBlast, IAC Open Championship Ea</name>
+    <city>Lower Township</city>
+    <state>NJ</state>
+    <start type="date">2013-06-14</start>
+    <chapter type="integer">58</chapter>
+    <director>Craig Wisman</director>
+    <region>NorthEast</region>
+    <created-at type="dateTime">2013-10-16T02:03:00Z</created-at>
+    <updated-at type="dateTime">2014-02-19T23:55:22Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">394</id>
+    <name>Ohio Aerobatic Open</name>
+    <city>Marysville</city>
+    <state>OH</state>
+    <start type="date">2013-06-14</start>
+    <chapter type="integer">34</chapter>
+    <director>Sheri Davis</director>
+    <region>MidAmerica</region>
+    <created-at type="dateTime">2013-10-16T02:02:56Z</created-at>
+    <updated-at type="dateTime">2013-10-16T02:02:56Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">392</id>
+    <name>Northern California Aerobatic Contest</name>
+    <city>Coalinga</city>
+    <state>CA</state>
+    <start type="date">2013-06-07</start>
+    <chapter type="integer">38</chapter>
+    <director>Martin Price</director>
+    <region>SouthWest</region>
+    <created-at type="dateTime">2013-10-16T02:02:48Z</created-at>
+    <updated-at type="dateTime">2013-10-16T02:02:48Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">374</id>
+    <name>Armed Forces Memorial Aerobatic Contest</name>
+    <city>Grenada</city>
+    <state>MS</state>
+    <start type="date">2013-05-31</start>
+    <chapter type="integer">27</chapter>
+    <director>Wayne Roberts</director>
+    <region>SouthEast</region>
+    <created-at type="dateTime">2013-10-16T02:00:15Z</created-at>
+    <updated-at type="dateTime">2013-10-16T02:00:15Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">368</id>
+    <name>Duel in the Desert</name>
+    <city>Apple Valley</city>
+    <state>CA</state>
+    <start type="date">2013-05-03</start>
+    <chapter type="integer">49</chapter>
+    <director>Chris Olmsted</director>
+    <region>SouthWest</region>
+    <created-at type="dateTime">2013-10-16T01:59:32Z</created-at>
+    <updated-at type="dateTime">2013-10-16T01:59:32Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">369</id>
+    <name>Sebring Spring 2013</name>
+    <city>Sebring</city>
+    <state>FL</state>
+    <start type="date">2013-05-02</start>
+    <chapter type="integer">23</chapter>
+    <director>Mike Mays</director>
+    <region>SouthEast</region>
+    <created-at type="dateTime">2013-10-16T01:59:39Z</created-at>
+    <updated-at type="dateTime">2013-10-16T01:59:39Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">391</id>
+    <name>Early Bird</name>
+    <city>Brenham</city>
+    <state>TX</state>
+    <start type="date">2013-04-26</start>
+    <chapter type="integer">25</chapter>
+    <director>Gary Walker</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2013-10-16T02:02:45Z</created-at>
+    <updated-at type="dateTime">2013-10-16T02:02:45Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">393</id>
+    <name>Great Plains Collegiate Challenge</name>
+    <city>McPherson</city>
+    <state>KS</state>
+    <start type="date">2013-04-26</start>
+    <chapter type="integer">80</chapter>
+    <director>David Moll</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2013-10-16T02:02:55Z</created-at>
+    <updated-at type="dateTime">2013-10-16T02:02:55Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">364</id>
+    <name>Ben Lowell Aerobatic Confrontation</name>
+    <city>USAF Academy</city>
+    <state>CO</state>
+    <start type="date">2013-04-19</start>
+    <chapter type="integer">12</chapter>
+    <director>Jeff Riddlebarger</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2013-10-16T01:59:19Z</created-at>
+    <updated-at type="dateTime">2013-10-16T01:59:19Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">365</id>
+    <name>Ben Lowell Aerobatic Confrontation</name>
+    <city>USAF Academy</city>
+    <state>CO</state>
+    <start type="date">2013-04-19</start>
+    <chapter type="integer">12</chapter>
+    <director>Jeff Riddlebarger</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2013-10-16T01:59:23Z</created-at>
+    <updated-at type="dateTime">2013-10-16T01:59:23Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">363</id>
+    <name>Borrego Hammerhead Roundup</name>
+    <city>Borrego Springs</city>
+    <state>CA</state>
+    <start type="date">2013-04-12</start>
+    <chapter type="integer">36</chapter>
+    <director>Yolandi Jooste</director>
+    <region>SouthWest</region>
+    <created-at type="dateTime">2013-10-16T01:59:13Z</created-at>
+    <updated-at type="dateTime">2013-10-16T01:59:13Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">367</id>
+    <name>Carolina Boogie</name>
+    <city>Wilson</city>
+    <state>NC</state>
+    <start type="date">2013-04-03</start>
+    <chapter type="integer">19</chapter>
+    <director>Eric Sandifer</director>
+    <region>NorthEast</region>
+    <created-at type="dateTime">2013-10-16T01:59:29Z</created-at>
+    <updated-at type="dateTime">2013-10-16T01:59:29Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">366</id>
+    <name>Phil Schact Aerobatic Kickoff</name>
+    <city>Keystone Heights</city>
+    <state>FL</state>
+    <start type="date">2013-03-22</start>
+    <chapter type="integer">288</chapter>
+    <director>Alain Aguayo</director>
+    <region>SouthEast</region>
+    <created-at type="dateTime">2013-10-16T01:59:26Z</created-at>
+    <updated-at type="dateTime">2013-10-16T01:59:26Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">409</id>
+    <name>Tequila Cup</name>
+    <city>Marana</city>
+    <state>AZ</state>
+    <start type="date">2012-11-09</start>
+    <chapter type="integer">69</chapter>
+    <director>Jim Ward</director>
+    <region>SouthWest</region>
+    <created-at type="dateTime">2014-03-21T15:52:47Z</created-at>
+    <updated-at type="dateTime">2014-03-21T15:52:47Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">410</id>
+    <name>Tequila Cup</name>
+    <city>Marana</city>
+    <state>AZ</state>
+    <start type="date">2012-11-09</start>
+    <chapter type="integer">38</chapter>
+    <director>Jim Ward</director>
+    <region>SouthWest</region>
+    <created-at type="dateTime">2014-03-21T15:52:51Z</created-at>
+    <updated-at type="dateTime">2014-03-21T15:52:51Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">362</id>
+    <name>Fall Sebring 68</name>
+    <city>Sebring</city>
+    <state>FL</state>
+    <start type="date">2012-11-01</start>
+    <chapter type="integer">23</chapter>
+    <director>Mike Mays</director>
+    <region>SouthEast</region>
+    <created-at type="dateTime">2012-12-19T09:08:31Z</created-at>
+    <updated-at type="dateTime">2012-12-19T09:08:31Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">358</id>
+    <name>Ben Glattstein International Adventure Classic</name>
+    <city>Keystone Heights</city>
+    <state>FL</state>
+    <start type="date">2012-10-19</start>
+    <chapter type="integer">288</chapter>
+    <director>Lori Costello</director>
+    <region>SouthEast</region>
+    <created-at type="dateTime">2012-11-03T15:28:28Z</created-at>
+    <updated-at type="dateTime">2012-11-03T15:28:28Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">359</id>
+    <name>Ben Glattstein International Adventure Classic</name>
+    <city>Keystone Heights</city>
+    <state>FL</state>
+    <start type="date">2012-10-19</start>
+    <chapter type="integer">288</chapter>
+    <director>Lori Costello</director>
+    <region>SouthEast</region>
+    <created-at type="dateTime">2012-11-03T15:29:03Z</created-at>
+    <updated-at type="dateTime">2012-11-03T15:29:03Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">357</id>
+    <name>Mason Dixon Clash</name>
+    <city>Farmville</city>
+    <state>VA</state>
+    <start type="date">2012-10-19</start>
+    <chapter type="integer">19</chapter>
+    <director>Eric Sandifer</director>
+    <region>NorthEast</region>
+    <created-at type="dateTime">2012-10-24T08:08:20Z</created-at>
+    <updated-at type="dateTime">2012-10-24T08:08:20Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">360</id>
+    <name>Thunder over the Valley</name>
+    <city>Westfield</city>
+    <state>MA</state>
+    <start type="date">2012-10-14</start>
+    <chapter type="integer">35</chapter>
+    <director>Bob Cipolli</director>
+    <region>NorthEast</region>
+    <created-at type="dateTime">2012-11-05T16:57:52Z</created-at>
+    <updated-at type="dateTime">2012-11-05T16:57:52Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">356</id>
+    <name>Borrego AKROFEST</name>
+    <city>Borrego Springs</city>
+    <state>CA</state>
+    <start type="date">2012-10-12</start>
+    <chapter type="integer">36</chapter>
+    <director>Gray Brandt/Bill Hill</director>
+    <region>SouthWest</region>
+    <created-at type="dateTime">2012-10-24T08:08:12Z</created-at>
+    <updated-at type="dateTime">2012-10-24T08:08:12Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">355</id>
+    <name>U.S. National Aerobatic Championships</name>
+    <city>Denison</city>
+    <state>TX</state>
+    <start type="date">2012-09-23</start>
+    <chapter type="integer" nil="true"/>
+    <director>Aaron McCartan</director>
+    <region nil="true"/>
+    <created-at type="dateTime">2012-10-04T18:30:05Z</created-at>
+    <updated-at type="dateTime">2012-10-04T18:30:05Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">354</id>
+    <name>Rocky Mountain Oyster Invitational</name>
+    <city>Lamar</city>
+    <state>CO</state>
+    <start type="date">2012-09-15</start>
+    <chapter type="integer">5</chapter>
+    <director>Jamie Treat</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-09-20T08:08:16Z</created-at>
+    <updated-at type="dateTime">2012-09-20T08:08:16Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">353</id>
+    <name>Rocky Mountain Oyseter Invitational</name>
+    <city>Lamar</city>
+    <state>CO</state>
+    <start type="date">2012-09-15</start>
+    <chapter type="integer">5</chapter>
+    <director>Jamie Treat</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-09-20T08:08:12Z</created-at>
+    <updated-at type="dateTime">2012-09-20T08:08:12Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">352</id>
+    <name>East Coast Aerobatic Contest</name>
+    <city>Midland</city>
+    <state>VA</state>
+    <start type="date">2012-09-08</start>
+    <chapter type="integer">11</chapter>
+    <director>Scott Francis</director>
+    <region>NorthEast</region>
+    <created-at type="dateTime">2012-09-16T15:59:42Z</created-at>
+    <updated-at type="dateTime">2012-09-16T15:59:42Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">348</id>
+    <name>Air Capital Eagles ACE's High Aerobatic Contest</name>
+    <city>Newton</city>
+    <state>KS</state>
+    <start type="date">2012-09-07</start>
+    <chapter type="integer">119</chapter>
+    <director>A.J. Hefel</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-09-13T08:08:07Z</created-at>
+    <updated-at type="dateTime">2012-09-13T08:08:07Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">349</id>
+    <name>Hill Country Hammerfest</name>
+    <city>Austin</city>
+    <state>TX</state>
+    <start type="date">2012-09-01</start>
+    <chapter type="integer">107</chapter>
+    <director>John Harlan</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-09-13T08:08:14Z</created-at>
+    <updated-at type="dateTime">2012-09-13T08:08:14Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">350</id>
+    <name>Delano Contest</name>
+    <city>Delano</city>
+    <state>CA</state>
+    <start type="date">2012-08-31</start>
+    <chapter type="integer">26</chapter>
+    <director>Steven De La Cruz</director>
+    <region>SouthWest</region>
+    <created-at type="dateTime">2012-09-13T08:08:19Z</created-at>
+    <updated-at type="dateTime">2012-09-13T08:08:19Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">351</id>
+    <name>Upper Canada Open 2012</name>
+    <city>Hanover</city>
+    <state>Ot</state>
+    <start type="date">2012-08-25</start>
+    <chapter type="integer">3</chapter>
+    <director>Bjarni Tryggvason</director>
+    <region>MidAmerica</region>
+    <created-at type="dateTime">2012-09-16T15:59:36Z</created-at>
+    <updated-at type="dateTime">2012-09-16T15:59:36Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">347</id>
+    <name>Beaver State Regional</name>
+    <city>Pendleton</city>
+    <state>OR</state>
+    <start type="date">2012-08-24</start>
+    <chapter type="integer">77</chapter>
+    <director>John Smutny</director>
+    <region>NorthWest</region>
+    <created-at type="dateTime">2012-09-03T08:08:08Z</created-at>
+    <updated-at type="dateTime">2012-09-03T08:08:08Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">345</id>
+    <name>Harold Neumann Barnstormer 2012</name>
+    <city>Olathe</city>
+    <state>KS</state>
+    <start type="date">2012-08-18</start>
+    <chapter type="integer">15</chapter>
+    <director>Greg Shetterly</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-08-21T08:08:17Z</created-at>
+    <updated-at type="dateTime">2012-08-21T08:08:17Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">346</id>
+    <name>Kathy Jaffe Challenge</name>
+    <city>Lumberton</city>
+    <state>NJ</state>
+    <start type="date">2012-08-17</start>
+    <chapter type="integer">52</chapter>
+    <director>Mark Mattioli</director>
+    <region>NorthEast</region>
+    <created-at type="dateTime">2012-08-23T08:08:13Z</created-at>
+    <updated-at type="dateTime">2012-08-23T08:08:13Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">344</id>
+    <name>Doug Yost Challenge</name>
+    <city>Spencer</city>
+    <state>IA</state>
+    <start type="date">2012-08-11</start>
+    <chapter type="integer">78</chapter>
+    <director>Justin Hickson</director>
+    <region>MidAmerica</region>
+    <created-at type="dateTime">2012-08-18T08:08:11Z</created-at>
+    <updated-at type="dateTime">2012-08-18T08:08:11Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">343</id>
+    <name>Hoosier Hoedown</name>
+    <city>Kokomo</city>
+    <state>IN</state>
+    <start type="date">2012-08-04</start>
+    <chapter type="integer">124</chapter>
+    <director>Mike Wild</director>
+    <region>MidAmerica</region>
+    <created-at type="dateTime">2012-08-14T12:00:03Z</created-at>
+    <updated-at type="dateTime">2012-08-14T12:00:03Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">331</id>
+    <name>CanAm Aerobatic Challenge</name>
+    <city>Cut Bank</city>
+    <state>WA</state>
+    <start type="date">2012-07-27</start>
+    <chapter type="integer">77</chapter>
+    <director>Robert Harris</director>
+    <region>NorthWest</region>
+    <created-at type="dateTime">2012-08-01T18:09:47Z</created-at>
+    <updated-at type="dateTime">2012-08-01T18:09:47Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">341</id>
+    <name>Heuer Classic</name>
+    <city>DeKalb</city>
+    <state>IL</state>
+    <start type="date">2012-07-14</start>
+    <chapter type="integer">1</chapter>
+    <director>Nancy Sonneschein</director>
+    <region>MidAmerica</region>
+    <created-at type="dateTime">2012-08-01T20:11:40Z</created-at>
+    <updated-at type="dateTime">2012-08-01T20:11:40Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">335</id>
+    <name>High Planes HotPoxia Fest</name>
+    <city>Sterling</city>
+    <state>CO</state>
+    <start type="date">2012-07-14</start>
+    <chapter type="integer">12</chapter>
+    <director>Dagmar Kress</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-08-01T18:13:55Z</created-at>
+    <updated-at type="dateTime">2012-08-01T18:13:55Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">333</id>
+    <name>Green Mountain Aerobatic Contest</name>
+    <city>Springfield</city>
+    <state>VT</state>
+    <start type="date">2012-07-13</start>
+    <chapter type="integer">35</chapter>
+    <director>Bill Gordon</director>
+    <region>NorthEast</region>
+    <created-at type="dateTime">2012-08-01T18:13:44Z</created-at>
+    <updated-at type="dateTime">2012-08-01T18:13:44Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">332</id>
+    <name>Return of the Aerobatist - Redlands 2012</name>
+    <city>Redlands</city>
+    <state>CA</state>
+    <start type="date">2012-07-13</start>
+    <chapter type="integer">49</chapter>
+    <director>Casey Erickson</director>
+    <region>SouthWest</region>
+    <created-at type="dateTime">2012-08-01T18:09:50Z</created-at>
+    <updated-at type="dateTime">2012-08-01T18:09:50Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">328</id>
+    <name>The 2012 Michigan Aerobatic Open</name>
+    <city>Reynolds Field, Jackson</city>
+    <state>MI</state>
+    <start type="date">2012-07-07</start>
+    <chapter type="integer">88</chapter>
+    <director>Don Weaver</director>
+    <region>MidAmerica</region>
+    <created-at type="dateTime">2012-07-18T08:08:19Z</created-at>
+    <updated-at type="dateTime">2012-07-18T08:08:19Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">337</id>
+    <name>2012 Wildwoods Acroblast</name>
+    <city>Lower Township</city>
+    <state>NJ</state>
+    <start type="date">2012-06-29</start>
+    <chapter type="integer">58</chapter>
+    <director>Craig Wisman</director>
+    <region>NorthEast</region>
+    <created-at type="dateTime">2012-08-01T18:14:04Z</created-at>
+    <updated-at type="dateTime">2012-08-01T18:14:04Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">336</id>
+    <name>Salem Regional Aerobatic Contest</name>
+    <city>Salem</city>
+    <state>IL</state>
+    <start type="date">2012-06-29</start>
+    <chapter type="integer">61</chapter>
+    <director>Bruce Ballew</director>
+    <region>MidAmerica</region>
+    <created-at type="dateTime">2012-08-01T18:13:58Z</created-at>
+    <updated-at type="dateTime">2012-08-01T18:13:58Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">330</id>
+    <name>US Candian Challenge</name>
+    <city>Olean</city>
+    <state>NY</state>
+    <start type="date">2012-06-23</start>
+    <chapter type="integer">126</chapter>
+    <director>Pat Barrett</director>
+    <region>NorthEast</region>
+    <created-at type="dateTime">2012-08-01T08:08:35Z</created-at>
+    <updated-at type="dateTime">2012-08-01T08:08:35Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">342</id>
+    <name>Apple Cup</name>
+    <city>Ephrata</city>
+    <state>WA</state>
+    <start type="date">2012-06-22</start>
+    <chapter type="integer">67</chapter>
+    <director></director>
+    <region>NorthWest</region>
+    <created-at type="dateTime">2012-08-05T20:40:45Z</created-at>
+    <updated-at type="dateTime">2012-08-05T20:40:45Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">338</id>
+    <name>Midwest Aerobatic Championship</name>
+    <city>Seward</city>
+    <state>NE</state>
+    <start type="date">2012-06-22</start>
+    <chapter type="integer">80</chapter>
+    <director>David Moll</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-08-01T18:14:11Z</created-at>
+    <updated-at type="dateTime">2012-08-01T18:14:11Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">339</id>
+    <name>Ohio Open</name>
+    <city>Marysville</city>
+    <state>OH</state>
+    <start type="date">2012-06-15</start>
+    <chapter type="integer">34</chapter>
+    <director>Jeff Granger</director>
+    <region>MidAmerica</region>
+    <created-at type="dateTime">2012-08-01T18:14:16Z</created-at>
+    <updated-at type="dateTime">2012-08-01T18:14:16Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">322</id>
+    <name>Bear Creek Aerobatic Bash</name>
+    <city>Hampton</city>
+    <state>GA</state>
+    <start type="date">2012-06-01</start>
+    <chapter type="integer">3</chapter>
+    <director>Chris Rudd</director>
+    <region>SouthEast</region>
+    <created-at type="dateTime">2012-06-05T18:29:14Z</created-at>
+    <updated-at type="dateTime">2012-06-05T18:29:14Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">321</id>
+    <name>Lonestar Aerobatic Championship</name>
+    <city>Grayson County</city>
+    <state>TX</state>
+    <start type="date">2012-06-01</start>
+    <chapter type="integer">24</chapter>
+    <director>BJ Boyle</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-06-05T18:29:08Z</created-at>
+    <updated-at type="dateTime">2012-06-05T18:29:08Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">320</id>
+    <name>Ben Lowell Aerial Confrontation</name>
+    <city>Sterling</city>
+    <state>CO</state>
+    <start type="date">2012-05-26</start>
+    <chapter type="integer">12</chapter>
+    <director>Mike Forney</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-06-05T18:29:05Z</created-at>
+    <updated-at type="dateTime">2012-06-05T18:29:05Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">318</id>
+    <name>2012 Carolina Boogie</name>
+    <city>Wilson</city>
+    <state>NC</state>
+    <start type="date">2012-05-18</start>
+    <chapter type="integer">19</chapter>
+    <director>Eric Sandifer</director>
+    <region>NorthEast</region>
+    <created-at type="dateTime">2012-05-25T14:40:31Z</created-at>
+    <updated-at type="dateTime">2012-05-25T14:40:31Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">316</id>
+    <name>Jersey Skylands Aerobatic Championships</name>
+    <city>West Milford</city>
+    <state>NJ</state>
+    <start type="date">2012-05-18</start>
+    <chapter type="integer">52</chapter>
+    <director>John Fellenzer</director>
+    <region>NorthEast</region>
+    <created-at type="dateTime">2012-05-25T13:54:36Z</created-at>
+    <updated-at type="dateTime">2012-05-25T13:54:36Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">317</id>
+    <name>Armed Forces Memorial Aerobatic Competition</name>
+    <city>Grenada</city>
+    <state>MS</state>
+    <start type="date">2012-05-18</start>
+    <chapter type="integer">27</chapter>
+    <director>Chris Rudd</director>
+    <region>SouthEast</region>
+    <created-at type="dateTime">2012-05-25T14:13:10Z</created-at>
+    <updated-at type="dateTime">2012-05-25T14:13:10Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">314</id>
+    <name>Los Angeles Gold Cup</name>
+    <city>Apple Valley</city>
+    <state>CA</state>
+    <start type="date">2012-05-03</start>
+    <chapter type="integer">49</chapter>
+    <director>Casey Erickson</director>
+    <region>SouthWest</region>
+    <created-at type="dateTime">2012-05-13T13:56:11Z</created-at>
+    <updated-at type="dateTime">2012-05-13T13:56:11Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">313</id>
+    <name>67th Sebring Spring Contest</name>
+    <city>Sebring</city>
+    <state>FL</state>
+    <start type="date">2012-05-03</start>
+    <chapter type="integer">23</chapter>
+    <director>Mike Mays</director>
+    <region>SouthEast</region>
+    <created-at type="dateTime">2012-05-13T13:51:56Z</created-at>
+    <updated-at type="dateTime">2012-05-13T13:51:56Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">312</id>
+    <name>Borrego Hammerhead Up</name>
+    <city>Borrego Springs</city>
+    <state>CA</state>
+    <start type="date">2012-04-13</start>
+    <chapter type="integer">36</chapter>
+    <director>Casey Erickson</director>
+    <region>SouthWest</region>
+    <created-at type="dateTime">2012-05-13T12:49:05Z</created-at>
+    <updated-at type="dateTime">2012-05-13T12:49:05Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">411</id>
+    <name>Phil Schacht Aerobatic Kickoff</name>
+    <city>Keystone Heights</city>
+    <state>FL</state>
+    <start type="date">2012-03-21</start>
+    <chapter type="integer">288</chapter>
+    <director>TJ Woodyard</director>
+    <region>SouthEast</region>
+    <created-at type="dateTime">2014-03-21T15:52:56Z</created-at>
+    <updated-at type="dateTime">2014-03-21T15:52:56Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">281</id>
+    <name>Tequila Cup - Glider</name>
+    <city>Marana</city>
+    <state>AZ</state>
+    <start type="date">2011-11-04</start>
+    <chapter type="integer">69</chapter>
+    <director>Jim Ward</director>
+    <region>SouthWest</region>
+    <created-at type="dateTime">2012-03-19T02:23:59Z</created-at>
+    <updated-at type="dateTime">2012-03-19T12:23:50Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">270</id>
+    <name>Tequila Cup</name>
+    <city>Marana</city>
+    <state>AZ</state>
+    <start type="date">2011-11-04</start>
+    <chapter type="integer">69</chapter>
+    <director>Jim Ward</director>
+    <region>SouthWest</region>
+    <created-at type="dateTime">2012-03-19T02:22:57Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:22:57Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">259</id>
+    <name>Sebring Fall 64th Contest</name>
+    <city>Sebring</city>
+    <state>FL</state>
+    <start type="date">2011-11-03</start>
+    <chapter type="integer">23</chapter>
+    <director>John McKinney</director>
+    <region>SouthEast</region>
+    <created-at type="dateTime">2012-03-19T02:21:46Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:21:46Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">412</id>
+    <name>Ben Glattstein International Adventure Classic</name>
+    <city>Keystone Heights</city>
+    <state>FL</state>
+    <start type="date">2011-10-21</start>
+    <chapter type="integer">288</chapter>
+    <director>Ryan Waller</director>
+    <region>SouthEast</region>
+    <created-at type="dateTime">2014-03-21T15:58:45Z</created-at>
+    <updated-at type="dateTime">2014-03-21T15:58:45Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">248</id>
+    <name>Ben Glattstein International Adventure Classic</name>
+    <city>Keystone Heights</city>
+    <state>FL</state>
+    <start type="date">2011-10-21</start>
+    <chapter type="integer">288</chapter>
+    <director>Ryan Waller</director>
+    <region>SouthEast</region>
+    <created-at type="dateTime">2012-03-19T02:20:56Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:20:56Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">319</id>
+    <name>Borrego AKROFEST</name>
+    <city>Borrego Springs</city>
+    <state>CA</state>
+    <start type="date">2011-10-14</start>
+    <chapter type="integer">36</chapter>
+    <director>Yolandi Joostie</director>
+    <region>SouthWest</region>
+    <created-at type="dateTime">2012-05-25T14:41:54Z</created-at>
+    <updated-at type="dateTime">2012-05-25T14:41:54Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">186</id>
+    <name>Keene Fall Classic</name>
+    <city>Keene</city>
+    <state>NH</state>
+    <start type="date">2011-10-08</start>
+    <chapter type="integer">35</chapter>
+    <director>Farrell Woods</director>
+    <region>NorthEast</region>
+    <created-at type="dateTime">2012-03-19T02:15:43Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:15:43Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">226</id>
+    <name>Rocky Mountain Invitational</name>
+    <city>Lamar</city>
+    <state>CO</state>
+    <start type="date">2011-10-08</start>
+    <chapter type="integer">5</chapter>
+    <director>Jamie Treat</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-03-19T02:19:09Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:19:09Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">167</id>
+    <name>Mason Dixon Clash</name>
+    <city>Farmville</city>
+    <state>VA</state>
+    <start type="date">2011-10-07</start>
+    <chapter type="integer">19</chapter>
+    <director>Pat Hayes</director>
+    <region>NorthEast</region>
+    <created-at type="dateTime">2012-03-19T02:14:30Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:14:30Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">309</id>
+    <name>Ohio Fall Frolic</name>
+    <city>Bellefontaine</city>
+    <state>OH</state>
+    <start type="date">2011-10-01</start>
+    <chapter type="integer">34</chapter>
+    <director>Steve Buchenroth, Chris Keegan</director>
+    <region>MidAmerica</region>
+    <created-at type="dateTime">2012-03-19T16:52:32Z</created-at>
+    <updated-at type="dateTime">2012-03-19T16:52:32Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">310</id>
+    <name>U.S. National Aerobatic Championships</name>
+    <city>Denison</city>
+    <state>TX</state>
+    <start type="date">2011-09-25</start>
+    <chapter type="integer" nil="true"/>
+    <director>Vicky Benzing</director>
+    <region>National</region>
+    <created-at type="dateTime">2012-03-19T18:03:48Z</created-at>
+    <updated-at type="dateTime">2012-03-19T18:24:37Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">111</id>
+    <name>East Coast Aerobatic Contest</name>
+    <city>Warrenton</city>
+    <state>VA</state>
+    <start type="date">2011-09-10</start>
+    <chapter type="integer">11</chapter>
+    <director>Scott Francis</director>
+    <region>NorthEast</region>
+    <created-at type="dateTime">2012-03-19T02:10:38Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:10:38Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">127</id>
+    <name>ACE's High Aerobatic Contest</name>
+    <city>Newton</city>
+    <state>KS</state>
+    <start type="date">2011-09-10</start>
+    <chapter type="integer">119</chapter>
+    <director>Lori Hefe/Ross Schoneboom</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-03-19T02:11:34Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:11:34Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">94</id>
+    <name>2011 High Planes Hypoxia Fest</name>
+    <city>Lamar</city>
+    <state>CO</state>
+    <start type="date">2011-09-03</start>
+    <chapter type="integer">12</chapter>
+    <director>DJ Molny</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-03-19T02:09:30Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:09:30Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">102</id>
+    <name>Happiness Is Delano</name>
+    <city>Delano</city>
+    <state>CA</state>
+    <start type="date">2011-09-02</start>
+    <chapter type="integer">26</chapter>
+    <director>Steve De La Cruz</director>
+    <region>SouthWest</region>
+    <created-at type="dateTime">2012-03-19T02:09:56Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:09:56Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">73</id>
+    <name>Harold Neumann Barnstormer 2011</name>
+    <city>Olathe</city>
+    <state>KS</state>
+    <start type="date">2011-08-27</start>
+    <chapter type="integer">15</chapter>
+    <director>Greg Shetterly</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-03-19T02:08:03Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:08:03Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">63</id>
+    <name>Upper Canada Open</name>
+    <city>Hanover, Ontario, Canada</city>
+    <state>Ot</state>
+    <start type="date">2011-08-26</start>
+    <chapter type="integer">3</chapter>
+    <director>Larry Ernewein</director>
+    <region>MidAmerica</region>
+    <created-at type="dateTime">2012-03-19T02:07:21Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:07:21Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">147</id>
+    <name>Nor-Am</name>
+    <city>Ephrata</city>
+    <state>WA</state>
+    <start type="date">2011-08-26</start>
+    <chapter type="integer">67</chapter>
+    <director>Les Mitchell</director>
+    <region>NorthWest</region>
+    <created-at type="dateTime">2012-03-19T02:12:50Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:12:50Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">46</id>
+    <name>Doug Yost Challenge</name>
+    <city>Spencer</city>
+    <state>IA</state>
+    <start type="date">2011-08-13</start>
+    <chapter type="integer">78</chapter>
+    <director>Justin Hickson</director>
+    <region>MidAmerica</region>
+    <created-at type="dateTime">2012-03-19T02:06:10Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:06:10Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">37</id>
+    <name>Beaver State Regional Championships</name>
+    <city>Pendleton</city>
+    <state>OR</state>
+    <start type="date">2011-08-12</start>
+    <chapter type="integer">77</chapter>
+    <director>Harris/Toppel</director>
+    <region>NorthWest</region>
+    <created-at type="dateTime">2012-03-19T02:05:28Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:05:28Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">79</id>
+    <name>Hoosier Hoedown</name>
+    <city>Kokomo</city>
+    <state>IN</state>
+    <start type="date">2011-08-06</start>
+    <chapter type="integer">124</chapter>
+    <director>Mike Wild</director>
+    <region>MidAmerica</region>
+    <created-at type="dateTime">2012-03-19T02:08:35Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:08:35Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">29</id>
+    <name>Hill Country Hammerfest</name>
+    <city>Llano</city>
+    <state>TX</state>
+    <start type="date">2011-08-05</start>
+    <chapter type="integer">107</chapter>
+    <director>Jack Stovall</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-03-19T02:04:55Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:04:55Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">22</id>
+    <name>Kathy Jaffe Challenge</name>
+    <city>Hammonton</city>
+    <state>NJ</state>
+    <start type="date">2011-08-05</start>
+    <chapter type="integer">52</chapter>
+    <director>David Crescenzo</director>
+    <region>NorthEast</region>
+    <created-at type="dateTime">2012-03-19T02:04:23Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:04:23Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">305</id>
+    <name>Can AM Northwest</name>
+    <city>Cut Bank</city>
+    <state>MT</state>
+    <start type="date">2011-07-21</start>
+    <chapter type="integer">77</chapter>
+    <director>Harris/Toppel</director>
+    <region>NorthWest</region>
+    <created-at type="dateTime">2012-03-19T02:25:52Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:25:52Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">296</id>
+    <name>Salem Regional Aerobatic Contest</name>
+    <city>Salem</city>
+    <state>IL</state>
+    <start type="date">2011-07-16</start>
+    <chapter type="integer">61</chapter>
+    <director>Bruce Ballew</director>
+    <region>MidAmerica</region>
+    <created-at type="dateTime">2012-03-19T02:25:13Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:25:13Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">275</id>
+    <name>Michigan Aerobatic Open</name>
+    <city>Jackson</city>
+    <state>MI</state>
+    <start type="date">2011-07-09</start>
+    <chapter type="integer">88</chapter>
+    <director>Don Weaver</director>
+    <region>MidAmerica</region>
+    <created-at type="dateTime">2012-03-19T02:23:25Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:23:25Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">264</id>
+    <name>Green Mountain Aerobatic Contest</name>
+    <city>Springfield</city>
+    <state>VT</state>
+    <start type="date">2011-07-08</start>
+    <chapter type="integer">35</chapter>
+    <director>Bill Gordon</director>
+    <region>NorthEast</region>
+    <created-at type="dateTime">2012-03-19T02:22:17Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:22:17Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">253</id>
+    <name>Midwest Aerobatic Championships 2011</name>
+    <city>Seward</city>
+    <state>NE</state>
+    <start type="date">2011-06-25</start>
+    <chapter type="integer">80</chapter>
+    <director>Doug Roth</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-03-19T02:21:26Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:21:26Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">242</id>
+    <name>Apple Cup</name>
+    <city>Ephrata</city>
+    <state>WA</state>
+    <start type="date">2011-06-24</start>
+    <chapter type="integer">67</chapter>
+    <director>Jerry Reidinger &amp; Ann Marie Ward</director>
+    <region>NorthWest</region>
+    <created-at type="dateTime">2012-03-19T02:20:17Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:20:17Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">231</id>
+    <name>Ohio Aerobatic Open</name>
+    <city>Marysville</city>
+    <state>OH</state>
+    <start type="date">2011-06-17</start>
+    <chapter type="integer">34</chapter>
+    <director>Jeff Granger / Chris Keegan</director>
+    <region>MidAmerica</region>
+    <created-at type="dateTime">2012-03-19T02:19:31Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:19:31Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">209</id>
+    <name>2011 No CA Cloud Dancer Hoedown</name>
+    <city>Paso Robles</city>
+    <state>CA</state>
+    <start type="date">2011-06-10</start>
+    <chapter type="integer">38</chapter>
+    <director>Martin Price</director>
+    <region>SouthWest</region>
+    <created-at type="dateTime">2012-03-19T02:17:23Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:17:23Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">199</id>
+    <name>Wildwoods AcroBlast</name>
+    <city>Lower Township</city>
+    <state>NJ</state>
+    <start type="date">2011-06-10</start>
+    <chapter type="integer">58</chapter>
+    <director>Craig Wisman</director>
+    <region>NorthEast</region>
+    <created-at type="dateTime">2012-03-19T02:16:34Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:16:34Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">218</id>
+    <name>Lone Star Aerobatic Championships</name>
+    <city>Sherman</city>
+    <state>TX</state>
+    <start type="date">2011-06-09</start>
+    <chapter type="integer">24</chapter>
+    <director>Mark Jacobson</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-03-19T02:18:14Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:18:14Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">172</id>
+    <name>Heuer</name>
+    <city>DeKalb</city>
+    <state>IL</state>
+    <start type="date">2011-06-04</start>
+    <chapter type="integer">1</chapter>
+    <director>Jim Klick</director>
+    <region>MidAmerica</region>
+    <created-at type="dateTime">2012-03-19T02:14:47Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:14:47Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">189</id>
+    <name>Southeast Aerobatic Open</name>
+    <city>Rome</city>
+    <state>GA</state>
+    <start type="date">2011-06-03</start>
+    <chapter type="integer">3</chapter>
+    <director>Ken Lumpkin</director>
+    <region>SouthEast</region>
+    <created-at type="dateTime">2012-03-19T02:15:56Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:15:56Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">161</id>
+    <name>Armed Forces Memorial</name>
+    <city>Grenada</city>
+    <state>MS</state>
+    <start type="date">2011-05-20</start>
+    <chapter type="integer">27</chapter>
+    <director>Wayne Roberts</director>
+    <region>SouthEast</region>
+    <created-at type="dateTime">2012-03-19T02:13:56Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:13:56Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">151</id>
+    <name>Ben Lowell Aerial Confrontation</name>
+    <city>Sterling</city>
+    <state>CO</state>
+    <start type="date">2011-05-14</start>
+    <chapter type="integer">12</chapter>
+    <director>Mike Forney</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-03-19T02:13:12Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:13:12Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">143</id>
+    <name>Jersey Skylands Aerobatic Championships</name>
+    <city>West Milford</city>
+    <state>NJ</state>
+    <start type="date">2011-05-13</start>
+    <chapter type="integer">52</chapter>
+    <director>John Fellenzer</director>
+    <region>NorthEast</region>
+    <created-at type="dateTime">2012-03-19T02:12:40Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:12:40Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">134</id>
+    <name>Sebring Spring 63rd Contest</name>
+    <city>Sebring</city>
+    <state>FL</state>
+    <start type="date">2011-05-05</start>
+    <chapter type="integer">23</chapter>
+    <director>John McKinney</director>
+    <region>SouthEast</region>
+    <created-at type="dateTime">2012-03-19T02:12:07Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:12:07Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">181</id>
+    <name>LA Gold Cup - Duel in the Desert</name>
+    <city>Apple Valley</city>
+    <state>CA</state>
+    <start type="date">2011-05-05</start>
+    <chapter type="integer">49</chapter>
+    <director>Casey Erickson</director>
+    <region>SouthWest</region>
+    <created-at type="dateTime">2012-03-19T02:15:18Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:15:18Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">90</id>
+    <name>Phil Schacht</name>
+    <city>Keystone Heights</city>
+    <state>FL</state>
+    <start type="date">2011-03-26</start>
+    <chapter type="integer">288</chapter>
+    <director>Andrea Luethi</director>
+    <region>SouthEast</region>
+    <created-at type="dateTime">2012-03-19T02:09:19Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:09:19Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">109</id>
+    <name>Phil Schacht</name>
+    <city>Keystone Heights</city>
+    <state>FL</state>
+    <start type="date">2011-03-26</start>
+    <chapter type="integer">288</chapter>
+    <director>Andrea Luethi</director>
+    <region>SouthEast</region>
+    <created-at type="dateTime">2012-03-19T02:10:34Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:10:34Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">117</id>
+    <name>The Inland Empire Strikes Back</name>
+    <city>Redlands</city>
+    <state>CA</state>
+    <start type="date">2011-03-18</start>
+    <chapter type="integer">49</chapter>
+    <director>Casey Erickson</director>
+    <region>SouthWest</region>
+    <created-at type="dateTime">2012-03-19T02:11:04Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:11:04Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">67</id>
+    <name>Tequila Cup</name>
+    <city>Marana</city>
+    <state>AZ</state>
+    <start type="date">2010-11-12</start>
+    <chapter type="integer">62</chapter>
+    <director>Jim Ward</director>
+    <region>SouthWest</region>
+    <created-at type="dateTime">2012-03-19T02:07:44Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:07:44Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">57</id>
+    <name>Tequila Cup</name>
+    <city>Marana</city>
+    <state>AZ</state>
+    <start type="date">2010-11-12</start>
+    <chapter type="integer">62</chapter>
+    <director>Jim Ward</director>
+    <region>SouthWest</region>
+    <created-at type="dateTime">2012-03-19T02:07:02Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:07:02Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">48</id>
+    <name>62nd Fall Sebring</name>
+    <city>Sebring</city>
+    <state>FL</state>
+    <start type="date">2010-11-04</start>
+    <chapter type="integer">23</chapter>
+    <director>David Prince</director>
+    <region>SouthEast</region>
+    <created-at type="dateTime">2012-03-19T02:06:14Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:06:14Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">300</id>
+    <name>Phil Schacht Aerobatic Finale 2010</name>
+    <city>Keystone Heights</city>
+    <state>FL</state>
+    <start type="date">2010-10-22</start>
+    <chapter type="integer">288</chapter>
+    <director>Charlie Wilkinson</director>
+    <region>SouthEast</region>
+    <created-at type="dateTime">2012-03-19T02:25:27Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:25:27Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">291</id>
+    <name>Phil Schacht Aerobatic Finale 2010</name>
+    <city>Keystone Heights</city>
+    <state>FL</state>
+    <start type="date">2010-10-22</start>
+    <chapter type="integer">288</chapter>
+    <director>Charlie Wilkinson</director>
+    <region>SouthEast</region>
+    <created-at type="dateTime">2012-03-19T02:24:47Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:24:47Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">280</id>
+    <name>Borrego Springs</name>
+    <city>Borrego Springs</city>
+    <state>CA</state>
+    <start type="date">2010-10-14</start>
+    <chapter type="integer">36</chapter>
+    <director>Casey Erickson</director>
+    <region>SouthWest</region>
+    <created-at type="dateTime">2012-03-19T02:23:51Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:23:51Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">41</id>
+    <name>Rocky Mountain Invitational</name>
+    <city>Lamar</city>
+    <state>CO</state>
+    <start type="date">2010-10-09</start>
+    <chapter type="integer">5</chapter>
+    <director>Jamie Treat</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-03-19T02:05:43Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:05:43Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">33</id>
+    <name>Rocky Mountain Invitational</name>
+    <city>Lamar</city>
+    <state>CO</state>
+    <start type="date">2010-10-09</start>
+    <chapter type="integer">5</chapter>
+    <director>Jamie Treat</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-03-19T02:05:12Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:05:12Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">25</id>
+    <name>Mason Dixon Clash</name>
+    <city>Farmville</city>
+    <state>VA</state>
+    <start type="date">2010-10-08</start>
+    <chapter type="integer">19</chapter>
+    <director>Pat Hayes</director>
+    <region>NorthEast</region>
+    <created-at type="dateTime">2012-03-19T02:04:40Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:04:40Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">269</id>
+    <name>APPLE TURNOVER</name>
+    <city>EPHRATA</city>
+    <state>WA</state>
+    <start type="date">2010-09-10</start>
+    <chapter type="integer">67</chapter>
+    <director>JERRY RIEDINGER &amp; JOHN SMUTNY</director>
+    <region>NorthWest</region>
+    <created-at type="dateTime">2012-03-19T02:22:56Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:22:56Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">247</id>
+    <name>East Coast Aerobatic Contest</name>
+    <city>Midland</city>
+    <state>VA</state>
+    <start type="date">2010-09-10</start>
+    <chapter type="integer">11</chapter>
+    <director>Scott Francis</director>
+    <region>NorthEast</region>
+    <created-at type="dateTime">2012-03-19T02:20:53Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:20:53Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">258</id>
+    <name>Apple Turnover</name>
+    <city>Ephrata</city>
+    <state>WA</state>
+    <start type="date">2010-09-10</start>
+    <chapter type="integer">67</chapter>
+    <director>Jerry Riedinger &amp; John Smutny</director>
+    <region>NorthWest</region>
+    <created-at type="dateTime">2012-03-19T02:21:42Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:21:42Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">225</id>
+    <name>Happiness is Delano</name>
+    <city>Delano</city>
+    <state>CA</state>
+    <start type="date">2010-09-04</start>
+    <chapter type="integer">26</chapter>
+    <director>Steve De La Cruz</director>
+    <region>SouthWest</region>
+    <created-at type="dateTime">2012-03-19T02:18:58Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:18:58Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">212</id>
+    <name>Harold Neumann Barnstormer</name>
+    <city>Olathe</city>
+    <state>KS</state>
+    <start type="date">2010-08-28</start>
+    <chapter type="integer">15</chapter>
+    <director>Paul Thomson</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-03-19T02:17:45Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:17:45Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">235</id>
+    <name>Adm. John Towers Regional Aerobatic Contest</name>
+    <city>Rome</city>
+    <state>GA</state>
+    <start type="date">2010-08-27</start>
+    <chapter type="integer">3</chapter>
+    <director></director>
+    <region>SouthEast</region>
+    <created-at type="dateTime">2012-03-19T02:19:50Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:19:50Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">203</id>
+    <name>Doug Youst Challenge</name>
+    <city>Spencer</city>
+    <state>IA</state>
+    <start type="date">2010-08-14</start>
+    <chapter type="integer">78</chapter>
+    <director>Aaron McCarten</director>
+    <region>MidAmerica</region>
+    <created-at type="dateTime">2012-03-19T02:16:54Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:16:54Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">193</id>
+    <name>Beaver State Regional</name>
+    <city>Pendleton</city>
+    <state>OR</state>
+    <start type="date">2010-08-13</start>
+    <chapter type="integer">77</chapter>
+    <director>Robert Harris &amp; Noel Jones</director>
+    <region>NorthWest</region>
+    <created-at type="dateTime">2012-03-19T02:16:11Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:16:11Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">176</id>
+    <name>Kathy Jaffe Challenge</name>
+    <city>Lumberton</city>
+    <state>NJ</state>
+    <start type="date">2010-08-09</start>
+    <chapter type="integer">52</chapter>
+    <director>Ron Chadwick</director>
+    <region>NorthEast</region>
+    <created-at type="dateTime">2012-03-19T02:14:56Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:14:56Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">165</id>
+    <name>Hoosier Hoedown</name>
+    <city>Kokomo</city>
+    <state>IN</state>
+    <start type="date">2010-08-07</start>
+    <chapter type="integer">124</chapter>
+    <director>Giles Henderson; Jim Klick</director>
+    <region>MidAmerica</region>
+    <created-at type="dateTime">2012-03-19T02:14:17Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:14:17Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">184</id>
+    <name>Hill Country Hammerfest</name>
+    <city>Llano</city>
+    <state>TX</state>
+    <start type="date">2010-08-06</start>
+    <chapter type="integer">107</chapter>
+    <director>Jeffery Poehlmann</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-03-19T02:15:34Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:15:34Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">155</id>
+    <name>Salem Regional Aerobatic Contest</name>
+    <city>Salem</city>
+    <state>IL</state>
+    <start type="date">2010-07-16</start>
+    <chapter type="integer">61</chapter>
+    <director>Bruce Ballew</director>
+    <region>MidAmerica</region>
+    <created-at type="dateTime">2012-03-19T02:13:24Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:13:24Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">121</id>
+    <name>Cut Bank</name>
+    <city>Cut Bank</city>
+    <state>MT</state>
+    <start type="date">2010-07-10</start>
+    <chapter type="integer">77</chapter>
+    <director>Jones &amp; Harris</director>
+    <region>NorthWest</region>
+    <created-at type="dateTime">2012-03-19T02:11:22Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:11:22Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">106</id>
+    <name>Green Mountain Aerobatic Contest</name>
+    <city>Springfield</city>
+    <state>VT</state>
+    <start type="date">2010-07-09</start>
+    <chapter type="integer">35</chapter>
+    <director>Bill Gordon</director>
+    <region>NorthEast</region>
+    <created-at type="dateTime">2012-03-19T02:10:20Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:10:20Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">97</id>
+    <name>12th Annual Okie Dust Devi l</name>
+    <city>Weatherford</city>
+    <state>OK</state>
+    <start type="date">2010-07-08</start>
+    <chapter type="integer">59</chapter>
+    <director>John Creswell</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-03-19T02:09:39Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:09:39Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">146</id>
+    <name>Michigan Aerobatic Open</name>
+    <city>Jackson</city>
+    <state>MI</state>
+    <start type="date">2010-07-08</start>
+    <chapter type="integer">88</chapter>
+    <director>Robb Butts</director>
+    <region>MidAmerica</region>
+    <created-at type="dateTime">2012-03-19T02:12:47Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:12:47Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">129</id>
+    <name>Midwest Aerobatic</name>
+    <city>Seward</city>
+    <state>NE</state>
+    <start type="date">2010-06-26</start>
+    <chapter type="integer">80</chapter>
+    <director>Lynn Bowes</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-03-19T02:11:45Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:11:45Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">80</id>
+    <name>Wildwoods AcroBlast</name>
+    <city>Lower Township</city>
+    <state>NJ</state>
+    <start type="date">2010-06-25</start>
+    <chapter type="integer">52</chapter>
+    <director>Craig Wisman</director>
+    <region>NorthEast</region>
+    <created-at type="dateTime">2012-03-19T02:08:37Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:08:37Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">137</id>
+    <name>2010 Robert L Heuer Classic</name>
+    <city>Kankakee</city>
+    <state>IL</state>
+    <start type="date">2010-06-25</start>
+    <chapter type="integer">1</chapter>
+    <director>Shane Stolarik</director>
+    <region>MidAmerica</region>
+    <created-at type="dateTime">2012-03-19T02:12:19Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:12:19Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">44</id>
+    <name>Apple Cup 2010</name>
+    <city>Ephrata</city>
+    <state>WA</state>
+    <start type="date">2010-06-18</start>
+    <chapter type="integer">67</chapter>
+    <director>Ann Marie Ward &amp; Jim Ward</director>
+    <region>NorthWest</region>
+    <created-at type="dateTime">2012-03-19T02:06:00Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:06:00Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">53</id>
+    <name>Ohio Aerobatic Open</name>
+    <city>Marysville</city>
+    <state>OH</state>
+    <start type="date">2010-06-18</start>
+    <chapter type="integer">34</chapter>
+    <director>Jeff Granger and Chris Keegan</director>
+    <region>MidAmerica</region>
+    <created-at type="dateTime">2012-03-19T02:06:45Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:06:45Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">36</id>
+    <name>Northern California Supreme Box Ballet</name>
+    <city>Paso Robles</city>
+    <state>CA</state>
+    <start type="date">2010-06-11</start>
+    <chapter type="integer">38</chapter>
+    <director>Martin Price</director>
+    <region>SouthWest</region>
+    <created-at type="dateTime">2012-03-19T02:05:17Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:05:17Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">14</id>
+    <name>Lonestar Aerobatic Championships</name>
+    <city>Sherman</city>
+    <state>TX</state>
+    <start type="date">2010-06-11</start>
+    <chapter type="integer">24</chapter>
+    <director>Bill Denton</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-03-19T02:03:52Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:03:52Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">8</id>
+    <name>US Canadian Aerobatic Challenge</name>
+    <city>Olean</city>
+    <state>NY</state>
+    <start type="date">2010-06-05</start>
+    <chapter type="integer">126</chapter>
+    <director>Pat  Barrett</director>
+    <region>NorthEast</region>
+    <created-at type="dateTime">2012-03-19T02:03:26Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:03:26Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">61</id>
+    <name>Southeast Aerobatic Open</name>
+    <city>Hampton</city>
+    <state>GA</state>
+    <start type="date">2010-06-04</start>
+    <chapter type="integer">3</chapter>
+    <director>Marty Flournoy</director>
+    <region>SouthEast</region>
+    <created-at type="dateTime">2012-03-19T02:07:13Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:07:13Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">71</id>
+    <name>Southeast Aerobatic Open</name>
+    <city>Hampton</city>
+    <state>GA</state>
+    <start type="date">2010-06-04</start>
+    <chapter type="integer">3</chapter>
+    <director>Marty Flournoy</director>
+    <region>SouthEast</region>
+    <created-at type="dateTime">2012-03-19T02:07:57Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:07:57Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">302</id>
+    <name>Ben Lowell Aerial Confrontation</name>
+    <city>Greeley</city>
+    <state>CO</state>
+    <start type="date">2010-05-29</start>
+    <chapter type="integer">12</chapter>
+    <director>Mike Forney</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-03-19T02:25:37Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:25:37Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">293</id>
+    <name>Jersey Skylands Aerobatic Championships</name>
+    <city>West Milford</city>
+    <state>NJ</state>
+    <start type="date">2010-05-13</start>
+    <chapter type="integer">52</chapter>
+    <director>Steve Seidel</director>
+    <region>NorthEast</region>
+    <created-at type="dateTime">2012-03-19T02:25:00Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:25:00Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">283</id>
+    <name>Armed Forces Memorial</name>
+    <city>Grenada</city>
+    <state>MS</state>
+    <start type="date">2010-05-13</start>
+    <chapter type="integer">27</chapter>
+    <director>Wayne Roberts</director>
+    <region>SouthEast</region>
+    <created-at type="dateTime">2012-03-19T02:24:05Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:24:05Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">272</id>
+    <name>Armed Forces Memorial</name>
+    <city>Grenada</city>
+    <state>MS</state>
+    <start type="date">2010-05-13</start>
+    <chapter type="integer">27</chapter>
+    <director>Wayne Roberts</director>
+    <region>SouthEast</region>
+    <created-at type="dateTime">2012-03-19T02:23:12Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:23:12Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">261</id>
+    <name>Sebring 61st Spring Contest</name>
+    <city>Sebring</city>
+    <state>FL</state>
+    <start type="date">2010-05-06</start>
+    <chapter type="integer">23</chapter>
+    <director>David Prince</director>
+    <region>SouthEast</region>
+    <created-at type="dateTime">2012-03-19T02:21:55Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:21:55Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">82</id>
+    <name>Carolina Boogie</name>
+    <city>Lumberton</city>
+    <state>NC</state>
+    <start type="date">2010-04-30</start>
+    <chapter type="integer">19</chapter>
+    <director>Bryan Taylor</director>
+    <region>NorthEast</region>
+    <created-at type="dateTime">2012-03-19T02:08:49Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:08:49Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">249</id>
+    <name>LA Gold Cup 2010</name>
+    <city>Apple Valley</city>
+    <state>CA</state>
+    <start type="date">2010-04-29</start>
+    <chapter type="integer">49</chapter>
+    <director>Casey Erickson</director>
+    <region>SouthWest</region>
+    <created-at type="dateTime">2012-03-19T02:21:03Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:21:03Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">227</id>
+    <name>Borrego Hammerhead Roundup</name>
+    <city>Borrego Springs</city>
+    <state>CA</state>
+    <start type="date">2010-04-09</start>
+    <chapter type="integer">36</chapter>
+    <director>Gray Brandt</director>
+    <region>SouthWest</region>
+    <created-at type="dateTime">2012-03-19T02:19:11Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:19:11Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">197</id>
+    <name>Keystone Aerobatic Kickoff</name>
+    <city>Keystone Heights</city>
+    <state>FL</state>
+    <start type="date">2010-03-19</start>
+    <chapter type="integer">288</chapter>
+    <director>Carolina Lenz-Anderson</director>
+    <region>SouthEast</region>
+    <created-at type="dateTime">2012-03-19T02:16:23Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:16:23Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">207</id>
+    <name>Keystone Aerobatic Kickoff</name>
+    <city>Keystone</city>
+    <state>FL</state>
+    <start type="date">2010-03-19</start>
+    <chapter type="integer">288</chapter>
+    <director>Carolina Lenz-Anderson</director>
+    <region>SouthEast</region>
+    <created-at type="dateTime">2012-03-19T02:17:15Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:17:15Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">180</id>
+    <name>Fall 2009 Phil Schacht Aerobatic Finale</name>
+    <city>Keystone Heights</city>
+    <state>FL</state>
+    <start type="date">2009-12-11</start>
+    <chapter type="integer">288</chapter>
+    <director>Mikhael Ponso</director>
+    <region>SouthEast</region>
+    <created-at type="dateTime">2012-03-19T02:15:17Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:15:17Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">170</id>
+    <name>Fall 2009 Phil Schacht Aerobatic Finale</name>
+    <city>Keystone Heights</city>
+    <state>FL</state>
+    <start type="date">2009-12-11</start>
+    <chapter type="integer">288</chapter>
+    <director>Mikhael Ponso</director>
+    <region>SouthEast</region>
+    <created-at type="dateTime">2012-03-19T02:14:42Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:14:42Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">149</id>
+    <name>Fall Sebring 2009 #60</name>
+    <city>Sebring</city>
+    <state>FL</state>
+    <start type="date">2009-11-05</start>
+    <chapter type="integer" nil="true"/>
+    <director>Mike Mays</director>
+    <region>SouthEast</region>
+    <created-at type="dateTime">2012-03-19T02:13:07Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:13:07Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">141</id>
+    <name>Tequila Cup</name>
+    <city>Marana</city>
+    <state>AZ</state>
+    <start type="date">2009-11-05</start>
+    <chapter type="integer">62</chapter>
+    <director>Jim Ward</director>
+    <region>SouthWest</region>
+    <created-at type="dateTime">2012-03-19T02:12:32Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:12:32Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">159</id>
+    <name>Sebring Fall 2009 #60</name>
+    <city>Sebring</city>
+    <state>FL</state>
+    <start type="date">2009-11-05</start>
+    <chapter type="integer">23</chapter>
+    <director>Mike Mays</director>
+    <region>SouthEast</region>
+    <created-at type="dateTime">2012-03-19T02:13:45Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:13:45Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">125</id>
+    <name>Bear Creek Boogie</name>
+    <city>Hampton</city>
+    <state>GA</state>
+    <start type="date">2009-10-23</start>
+    <chapter type="integer">3</chapter>
+    <director>Tim Walter</director>
+    <region>SouthEast</region>
+    <created-at type="dateTime">2012-03-19T02:11:31Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:11:31Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">85</id>
+    <name>East Coast Aerobatic Contest</name>
+    <city>Warrenton</city>
+    <state>VA</state>
+    <start type="date">2009-09-18</start>
+    <chapter type="integer">11</chapter>
+    <director>Scott Francis</director>
+    <region>NorthEast</region>
+    <created-at type="dateTime">2012-03-19T02:09:00Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:09:00Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">70</id>
+    <name>2009 Harold Neumann Barnstormer</name>
+    <city>New Century</city>
+    <state>KS</state>
+    <start type="date">2009-09-05</start>
+    <chapter type="integer">15</chapter>
+    <director>Brenda Lea</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-03-19T02:07:54Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:07:54Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">51</id>
+    <name>Happiness is Delano</name>
+    <city>Delano</city>
+    <state>CA</state>
+    <start type="date">2009-09-05</start>
+    <chapter type="integer">26</chapter>
+    <director>John Howell</director>
+    <region>SouthWest</region>
+    <created-at type="dateTime">2012-03-19T02:06:34Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:06:34Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">60</id>
+    <name>Gulf Coast Regional Aerobatic Contest</name>
+    <city>Brenham</city>
+    <state>TX</state>
+    <start type="date">2009-09-05</start>
+    <chapter type="integer">25</chapter>
+    <director>Bryan Butler</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-03-19T02:07:10Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:07:10Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">31</id>
+    <name>High Planes Hypoxia Fest</name>
+    <city>Sterling</city>
+    <state>CO</state>
+    <start type="date">2009-08-15</start>
+    <chapter type="integer">12</chapter>
+    <director>Bob Freeman</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-03-19T02:05:01Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:05:01Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">39</id>
+    <name>Doug Youst Challenge</name>
+    <city>Spencer Iowa</city>
+    <state>IA</state>
+    <start type="date">2009-08-15</start>
+    <chapter type="integer">78</chapter>
+    <director></director>
+    <region>MidAmerica</region>
+    <created-at type="dateTime">2012-03-19T02:05:37Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:05:37Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">24</id>
+    <name>Kathy Jaffe Challenge</name>
+    <city>Lumberton</city>
+    <state>NJ</state>
+    <start type="date">2009-08-14</start>
+    <chapter type="integer">52</chapter>
+    <director>Ron Chadwick</director>
+    <region>NorthEast</region>
+    <created-at type="dateTime">2012-03-19T02:04:34Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:04:34Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">4</id>
+    <name>Hill Country Hammerfest</name>
+    <city>Llano</city>
+    <state>TX</state>
+    <start type="date">2009-08-07</start>
+    <chapter type="integer">107</chapter>
+    <director>Andrew Wright</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-03-19T02:03:14Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:03:14Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">18</id>
+    <name>2009 Beaver State Regional</name>
+    <city>Pendleton</city>
+    <state>OR</state>
+    <start type="date">2009-08-07</start>
+    <chapter type="integer">77</chapter>
+    <director>Robert Harris &amp; Robert Toppel</director>
+    <region>NorthWest</region>
+    <created-at type="dateTime">2012-03-19T02:04:08Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:04:08Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">288</id>
+    <name>Salem Regional</name>
+    <city>Salem</city>
+    <state>IL</state>
+    <start type="date">2009-07-17</start>
+    <chapter type="integer">61</chapter>
+    <director>Bruce Ballew</director>
+    <region>MidAmerica</region>
+    <created-at type="dateTime">2012-03-19T02:24:27Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:24:27Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">255</id>
+    <name>Michigan Aerobatic Challenge</name>
+    <city>Jackson</city>
+    <state>MI</state>
+    <start type="date">2009-07-11</start>
+    <chapter type="integer">88</chapter>
+    <director>Robb Butts</director>
+    <region>MidAmerica</region>
+    <created-at type="dateTime">2012-03-19T02:21:34Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:21:34Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">244</id>
+    <name>11th Annual Okie Dust Devil</name>
+    <city>Weatherford</city>
+    <state>OK</state>
+    <start type="date">2009-07-10</start>
+    <chapter type="integer">59</chapter>
+    <director>John Creswell</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-03-19T02:20:36Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:20:36Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">266</id>
+    <name>Green Mountain Aerobatic Contest</name>
+    <city>North Springfield</city>
+    <state>VT</state>
+    <start type="date">2009-07-09</start>
+    <chapter type="integer">35</chapter>
+    <director>William Gordon</director>
+    <region>NorthEast</region>
+    <created-at type="dateTime">2012-03-19T02:22:34Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:22:34Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">277</id>
+    <name>Midwest Aerobatic Contest</name>
+    <city>Seward</city>
+    <state>NE</state>
+    <start type="date">2009-06-30</start>
+    <chapter type="integer">80</chapter>
+    <director>Doug Roth</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-03-19T02:23:39Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:23:39Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">222</id>
+    <name>Wildwoods AcroBlast</name>
+    <city>Lower Township</city>
+    <state>NJ</state>
+    <start type="date">2009-06-26</start>
+    <chapter type="integer">52</chapter>
+    <director>Craig Wisman</director>
+    <region>NorthEast</region>
+    <created-at type="dateTime">2012-03-19T02:18:40Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:18:40Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">206</id>
+    <name>APPLE CUP</name>
+    <city>EPHRATA</city>
+    <state>WA</state>
+    <start type="date">2009-06-19</start>
+    <chapter type="integer">67</chapter>
+    <director>JERRY RIEDINGER &amp; JIM WARD</director>
+    <region>NorthWest</region>
+    <created-at type="dateTime">2012-03-19T02:17:06Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:17:06Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">233</id>
+    <name>Ohio Aerobatic Open</name>
+    <city>Marysville</city>
+    <state>OH</state>
+    <start type="date">2009-06-19</start>
+    <chapter type="integer">34</chapter>
+    <director>Chris Keegan and Jeff Granger</director>
+    <region>MidAmerica</region>
+    <created-at type="dateTime">2012-03-19T02:19:38Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:19:38Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">11</id>
+    <name>Southeast Aerobatic Open</name>
+    <city>Hampton</city>
+    <state>GA</state>
+    <start type="date">2009-06-12</start>
+    <chapter type="integer">3</chapter>
+    <director>Marty Flournoy</director>
+    <region>SouthEast</region>
+    <created-at type="dateTime">2012-03-19T02:03:34Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:03:34Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">298</id>
+    <name>Lonestar Aerobatic Championships</name>
+    <city>Sherman/Denison</city>
+    <state>TX</state>
+    <start type="date">2009-06-12</start>
+    <chapter type="integer">24</chapter>
+    <director>JJ Humphrey</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-03-19T02:25:18Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:25:18Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">196</id>
+    <name>Heuer</name>
+    <city>Kankakee</city>
+    <state>IL</state>
+    <start type="date">2009-06-05</start>
+    <chapter type="integer">1</chapter>
+    <director>David Underwood</director>
+    <region>MidAmerica</region>
+    <created-at type="dateTime">2012-03-19T02:16:18Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:16:18Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">187</id>
+    <name>Northern California Gleaming the Box</name>
+    <city>Paso Robles</city>
+    <state>CA</state>
+    <start type="date">2009-06-05</start>
+    <chapter type="integer">38</chapter>
+    <director>Tom Myers</director>
+    <region>SouthWest</region>
+    <created-at type="dateTime">2012-03-19T02:15:44Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:15:44Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">163</id>
+    <name>Ben Lowell Aerial Confrontation</name>
+    <city>Air Force Academy</city>
+    <state>CO</state>
+    <start type="date">2009-05-30</start>
+    <chapter type="integer" nil="true"/>
+    <director>Capt Patrick Smiley</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-03-19T02:14:11Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:14:11Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">174</id>
+    <name>Ben Lowell Aerial Confrontation</name>
+    <city>USAFA</city>
+    <state>CO</state>
+    <start type="date">2009-05-30</start>
+    <chapter type="integer" nil="true"/>
+    <director>Capt Patrick Smiley</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-03-19T02:14:53Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:14:53Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">153</id>
+    <name>2nd Annual Carolina Boogie</name>
+    <city>Lumberton</city>
+    <state>NC</state>
+    <start type="date">2009-05-28</start>
+    <chapter type="integer">19</chapter>
+    <director>Bryan Taylor</director>
+    <region>NorthEast</region>
+    <created-at type="dateTime">2012-03-19T02:13:14Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:13:14Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">144</id>
+    <name>Sebring 59</name>
+    <city>Sebring</city>
+    <state>FL</state>
+    <start type="date">2009-05-06</start>
+    <chapter type="integer">23</chapter>
+    <director>Hubie Tolson</director>
+    <region>SouthEast</region>
+    <created-at type="dateTime">2012-03-19T02:12:41Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:12:41Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">135</id>
+    <name>Sebring 59</name>
+    <city>Sebring</city>
+    <state>FL</state>
+    <start type="date">2009-05-06</start>
+    <chapter type="integer">23</chapter>
+    <director>Hubie Tolson</director>
+    <region>SouthEast</region>
+    <created-at type="dateTime">2012-03-19T02:12:11Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:12:11Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">128</id>
+    <name>LA Gold Cup</name>
+    <city>Apple Valley</city>
+    <state>CA</state>
+    <start type="date">2009-05-01</start>
+    <chapter type="integer">49</chapter>
+    <director>Patrick Dugan</director>
+    <region>SouthWest</region>
+    <created-at type="dateTime">2012-03-19T02:11:38Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:11:38Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">112</id>
+    <name>Chuck Alley Cajun Aerobatic Contest</name>
+    <city>Estherwood</city>
+    <state>LA</state>
+    <start type="date">2009-05-01</start>
+    <chapter type="integer">72</chapter>
+    <director>David Tracy</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-03-19T02:10:40Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:10:40Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">104</id>
+    <name>Borrego Minifest</name>
+    <city>Borrego Springs</city>
+    <state>CA</state>
+    <start type="date">2009-04-18</start>
+    <chapter type="integer">36</chapter>
+    <director>Randy Owens &amp; Gray Brandt</director>
+    <region>SouthWest</region>
+    <created-at type="dateTime">2012-03-19T02:10:08Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:10:08Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">95</id>
+    <name>Phil Schact Aerobatic Kickoff</name>
+    <city>Keystone</city>
+    <state>FL</state>
+    <start type="date">2009-03-20</start>
+    <chapter type="integer" nil="true"/>
+    <director>Carolina Lenz Anderson</director>
+    <region>SouthEast</region>
+    <created-at type="dateTime">2012-03-19T02:09:33Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:09:33Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">87</id>
+    <name>Phil Schact Aerobatic Kickoff</name>
+    <city>Keystone</city>
+    <state>FL</state>
+    <start type="date">2009-03-20</start>
+    <chapter type="integer">288</chapter>
+    <director>Carolina Lenz Anderson</director>
+    <region>SouthEast</region>
+    <created-at type="dateTime">2012-03-19T02:09:07Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:09:07Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">64</id>
+    <name>Sebring Fall 2008 #58</name>
+    <city>Sebring</city>
+    <state>FL</state>
+    <start type="date">2008-11-06</start>
+    <chapter type="integer">23</chapter>
+    <director>Mike Mays</director>
+    <region>SouthEast</region>
+    <created-at type="dateTime">2012-03-19T02:07:24Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:07:24Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">304</id>
+    <name>Borrego Akrofest</name>
+    <city>Borrego Springs</city>
+    <state>CA</state>
+    <start type="date">2008-10-17</start>
+    <chapter type="integer">36</chapter>
+    <director>Joshua Muncie</director>
+    <region>SouthWest</region>
+    <created-at type="dateTime">2012-03-19T02:25:45Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:25:45Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">295</id>
+    <name>Mason Dixon Clash</name>
+    <city>Farmville</city>
+    <state>VA</state>
+    <start type="date">2008-10-17</start>
+    <chapter type="integer">19</chapter>
+    <director>Chris Rudd</director>
+    <region>NorthEast</region>
+    <created-at type="dateTime">2012-03-19T02:25:08Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:25:08Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">274</id>
+    <name>Rebel Regional</name>
+    <city>Union City</city>
+    <state>TN</state>
+    <start type="date">2008-10-11</start>
+    <chapter type="integer">27</chapter>
+    <director>Michael Rinker</director>
+    <region>SouthEast</region>
+    <created-at type="dateTime">2012-03-19T02:23:20Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:23:20Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">263</id>
+    <name>Rocky Mountain Invitational</name>
+    <city>Lamar</city>
+    <state>CO</state>
+    <start type="date">2008-10-04</start>
+    <chapter type="integer">5</chapter>
+    <director>Jamie Treat</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-03-19T02:22:14Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:22:14Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">251</id>
+    <name>Rocky Mountain Invitational-Glider</name>
+    <city>Lamar</city>
+    <state>CO</state>
+    <start type="date">2008-10-04</start>
+    <chapter type="integer">5</chapter>
+    <director>Jamie Treat</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-03-19T02:21:17Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:21:17Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">285</id>
+    <name>Illinois State Open</name>
+    <city>Kankakee</city>
+    <state>IL</state>
+    <start type="date">2008-09-05</start>
+    <chapter type="integer">1</chapter>
+    <director>Jim Klick</director>
+    <region>MidAmerica</region>
+    <created-at type="dateTime">2012-03-19T02:24:13Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:24:13Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">239</id>
+    <name>Apple Turnover</name>
+    <city>Ephrata</city>
+    <state>WA</state>
+    <start type="date">2008-09-05</start>
+    <chapter type="integer">67</chapter>
+    <director>John Smutny &amp; Jerry Riedinger</director>
+    <region>NorthWest</region>
+    <created-at type="dateTime">2012-03-19T02:20:08Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:20:08Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">229</id>
+    <name>Harold Neumann Barnstormer</name>
+    <city>Olathe</city>
+    <state>KS</state>
+    <start type="date">2008-09-05</start>
+    <chapter type="integer">15</chapter>
+    <director>Paul Thomson</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-03-19T02:19:22Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:19:22Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">74</id>
+    <name>Gulf Coast Regional Aerobatic Competition</name>
+    <city>Brenham</city>
+    <state>TX</state>
+    <start type="date">2008-08-30</start>
+    <chapter type="integer">25</chapter>
+    <director>Bryan Butler</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-03-19T02:08:09Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:08:09Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">200</id>
+    <name>Doug Yost Challenge</name>
+    <city>Albert Lea</city>
+    <state>MN</state>
+    <start type="date">2008-08-23</start>
+    <chapter type="integer">78</chapter>
+    <director>Mike Niccum</director>
+    <region>MidAmerica</region>
+    <created-at type="dateTime">2012-03-19T02:16:35Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:16:35Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">190</id>
+    <name>Kathy Jaffe Challenge</name>
+    <city>Lumberton</city>
+    <state>NJ</state>
+    <start type="date">2008-08-22</start>
+    <chapter type="integer">52</chapter>
+    <director>Ron Chadwick</director>
+    <region>NorthEast</region>
+    <created-at type="dateTime">2012-03-19T02:16:02Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:16:02Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">173</id>
+    <name>Hill Country Hammerfest</name>
+    <city>Llano</city>
+    <state>TX</state>
+    <start type="date">2008-08-08</start>
+    <chapter type="integer">107</chapter>
+    <director>Jeffery Poehlmann</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-03-19T02:14:50Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:14:50Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">182</id>
+    <name>Salem Regional Aerobatic Contest</name>
+    <city>Salem</city>
+    <state>IL</state>
+    <start type="date">2008-07-26</start>
+    <chapter type="integer">61</chapter>
+    <director>Bill Perman</director>
+    <region>MidAmerica</region>
+    <created-at type="dateTime">2012-03-19T02:15:24Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:15:24Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">123</id>
+    <name>Henry Haigh Challenge</name>
+    <city>Jackson</city>
+    <state>MI</state>
+    <start type="date">2008-07-12</start>
+    <chapter type="integer">88</chapter>
+    <director>Robb Butts</director>
+    <region>MidAmerica</region>
+    <created-at type="dateTime">2012-03-19T02:11:26Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:11:26Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">139</id>
+    <name>10th AnnualOkie Dust Devil</name>
+    <city>Weatherford</city>
+    <state>OK</state>
+    <start type="date">2008-07-11</start>
+    <chapter type="integer">59</chapter>
+    <director>John Cresswell</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-03-19T02:12:24Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:12:24Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">219</id>
+    <name>Green Mountain Aerobatic Contest</name>
+    <city>Springfield</city>
+    <state>VT</state>
+    <start type="date">2008-07-11</start>
+    <chapter type="integer">35</chapter>
+    <director>Bill Gordon</director>
+    <region>NorthEast</region>
+    <created-at type="dateTime">2012-03-19T02:18:19Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:18:19Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">115</id>
+    <name>Midwest Aerobatic Club Challenge</name>
+    <city>Seward</city>
+    <state>NE</state>
+    <start type="date">2008-06-28</start>
+    <chapter type="integer">80</chapter>
+    <director>Chandy Clanton</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-03-19T02:10:53Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:10:53Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">107</id>
+    <name>Wildwoods AcroBlast</name>
+    <city>Lower Township</city>
+    <state>NJ</state>
+    <start type="date">2008-06-27</start>
+    <chapter type="integer">58</chapter>
+    <director>Craig Wisman</director>
+    <region>NorthEast</region>
+    <created-at type="dateTime">2012-03-19T02:10:23Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:10:23Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">131</id>
+    <name>Ohio Aerobatic Open</name>
+    <city>Marysville</city>
+    <state>OH</state>
+    <start type="date">2008-06-20</start>
+    <chapter type="integer">34</chapter>
+    <director>Caleb Vernick and Chris Keegan</director>
+    <region>MidAmerica</region>
+    <created-at type="dateTime">2012-03-19T02:11:51Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:11:51Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">99</id>
+    <name>2008 Beaver State Regional</name>
+    <city>Pendleton</city>
+    <state>OR</state>
+    <start type="date">2008-06-19</start>
+    <chapter type="integer">77</chapter>
+    <director>Robert Harris &amp; Robert Toppel</director>
+    <region>NorthWest</region>
+    <created-at type="dateTime">2012-03-19T02:09:43Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:09:43Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">77</id>
+    <name>Paso Robles</name>
+    <city>Paso Robles</city>
+    <state>CA</state>
+    <start type="date">2008-06-06</start>
+    <chapter type="integer">38</chapter>
+    <director>Tom Myers</director>
+    <region>SouthWest</region>
+    <created-at type="dateTime">2012-03-19T02:08:25Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:08:25Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">91</id>
+    <name>Robert Heuer Classic</name>
+    <city>Peru</city>
+    <state>IL</state>
+    <start type="date">2008-06-06</start>
+    <chapter type="integer">1</chapter>
+    <director>Doug Bartlett</director>
+    <region>MidAmerica</region>
+    <created-at type="dateTime">2012-03-19T02:09:25Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:09:25Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">83</id>
+    <name>Lonestar Aerobatic Championships</name>
+    <city>Sherman/Denison</city>
+    <state>TX</state>
+    <start type="date">2008-06-05</start>
+    <chapter type="integer">24</chapter>
+    <director>Bud Judy</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-03-19T02:08:52Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:08:52Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">58</id>
+    <name>PA Aerobatic Championships</name>
+    <city>Farmville</city>
+    <state>VA</state>
+    <start type="date">2008-05-30</start>
+    <chapter type="integer">58</chapter>
+    <director>JD Johnson</director>
+    <region>NorthEast</region>
+    <created-at type="dateTime">2012-03-19T02:07:05Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:07:05Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">68</id>
+    <name>2008 Southeast Aerobatic Open</name>
+    <city>Hampton</city>
+    <state>GA</state>
+    <start type="date">2008-05-30</start>
+    <chapter type="integer">3</chapter>
+    <director>Marty Flournoy</director>
+    <region>SouthEast</region>
+    <created-at type="dateTime">2012-03-19T02:07:45Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:07:45Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">49</id>
+    <name>Apple Cup</name>
+    <city>Ephrata</city>
+    <state>WA</state>
+    <start type="date">2008-05-23</start>
+    <chapter type="integer">67</chapter>
+    <director>Carol Burch\Ann Marie Ward</director>
+    <region>NorthWest</region>
+    <created-at type="dateTime">2012-03-19T02:06:22Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:06:22Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">26</id>
+    <name>Two Design</name>
+    <city>Giddings</city>
+    <state>TX</state>
+    <start type="date">2008-05-17</start>
+    <chapter type="integer">25</chapter>
+    <director>Lynne Stoltenberg</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-03-19T02:04:43Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:04:43Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">34</id>
+    <name>Two Design Mini</name>
+    <city>Brenham</city>
+    <state>TX</state>
+    <start type="date">2008-05-17</start>
+    <chapter type="integer">25</chapter>
+    <director>Lynne Stoltenberg</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-03-19T02:05:14Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:05:14Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">19</id>
+    <name>Ben Lowell Memorial</name>
+    <city>Sterling</city>
+    <state>CO</state>
+    <start type="date">2008-05-15</start>
+    <chapter type="integer">12</chapter>
+    <director>Dick Bevington</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-03-19T02:04:15Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:04:15Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">42</id>
+    <name>Los Angeles Gold Cup</name>
+    <city>Apple Valley</city>
+    <state>CA</state>
+    <start type="date">2008-05-02</start>
+    <chapter type="integer">49</chapter>
+    <director>Patrick Dugan</director>
+    <region>SouthWest</region>
+    <created-at type="dateTime">2012-03-19T02:05:44Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:05:44Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">12</id>
+    <name>Sebring 57th</name>
+    <city>Sebring</city>
+    <state>FL</state>
+    <start type="date">2008-05-01</start>
+    <chapter type="integer">23</chapter>
+    <director>Alan Bush</director>
+    <region>SouthEast</region>
+    <created-at type="dateTime">2012-03-19T02:03:40Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:03:40Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">6</id>
+    <name>Carolina Boogie</name>
+    <city>Lumberton</city>
+    <state>NC</state>
+    <start type="date">2008-04-25</start>
+    <chapter type="integer">19</chapter>
+    <director>Bryan Taylor</director>
+    <region>NorthEast</region>
+    <created-at type="dateTime">2012-03-19T02:03:19Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:03:19Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">297</id>
+    <name>Chuck Alley Cajun Aerobatic Contest</name>
+    <city>LeGros</city>
+    <state>LA</state>
+    <start type="date">2008-04-24</start>
+    <chapter type="integer">72</chapter>
+    <director>Bubba Vidrine</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-03-19T02:25:17Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:25:17Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">290</id>
+    <name>Borrego Minifest</name>
+    <city>Borrego Springs</city>
+    <state>CA</state>
+    <start type="date">2008-04-12</start>
+    <chapter type="integer">36</chapter>
+    <director>Randy Owens / Gray Brandt</director>
+    <region>SouthWest</region>
+    <created-at type="dateTime">2012-03-19T02:24:43Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:24:43Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">279</id>
+    <name>Phil Schacht Aerobatic Kickoff</name>
+    <city>Starke</city>
+    <state>FL</state>
+    <start type="date">2008-04-04</start>
+    <chapter type="integer">288</chapter>
+    <director>Carolina Lenz</director>
+    <region>SouthEast</region>
+    <created-at type="dateTime">2012-03-19T02:23:47Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:23:47Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">268</id>
+    <name>Copperstate</name>
+    <city>Marana</city>
+    <state>AZ</state>
+    <start type="date">2008-03-28</start>
+    <chapter type="integer">69</chapter>
+    <director>John Van Houten</director>
+    <region>SouthWest</region>
+    <created-at type="dateTime">2012-03-19T02:22:48Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:22:48Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">257</id>
+    <name>Copperstate-Glider</name>
+    <city>Marana</city>
+    <state>AZ</state>
+    <start type="date">2008-03-27</start>
+    <chapter type="integer">69</chapter>
+    <director>John Van Houten</director>
+    <region>SouthWest</region>
+    <created-at type="dateTime">2012-03-19T02:21:40Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:21:40Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">166</id>
+    <name>Tequila Cup</name>
+    <city>Marana</city>
+    <state>AZ</state>
+    <start type="date">2007-11-09</start>
+    <chapter type="integer">62</chapter>
+    <director>Maryilnn Holland</director>
+    <region>SouthWest</region>
+    <created-at type="dateTime">2012-03-19T02:14:24Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:14:24Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">177</id>
+    <name>Tequila Cup-Glider</name>
+    <city>Marana</city>
+    <state>AZ</state>
+    <start type="date">2007-11-09</start>
+    <chapter type="integer">62</chapter>
+    <director>Maryilnn Holland</director>
+    <region>SouthWest</region>
+    <created-at type="dateTime">2012-03-19T02:15:06Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:15:06Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">156</id>
+    <name>Sebring 56th Contest</name>
+    <city>Sebring</city>
+    <state>FL</state>
+    <start type="date">2007-11-08</start>
+    <chapter type="integer">23</chapter>
+    <director>Vic Britt</director>
+    <region>SouthEast</region>
+    <created-at type="dateTime">2012-03-19T02:13:29Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:13:29Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">122</id>
+    <name>Rocky Mountain Invitational</name>
+    <city>Lamar</city>
+    <state>CO</state>
+    <start type="date">2007-10-20</start>
+    <chapter type="integer">5</chapter>
+    <director>Jamie Treat</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-03-19T02:11:24Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:11:24Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">130</id>
+    <name>Rocky Mountain Invitational - Gliders</name>
+    <city>Lamar</city>
+    <state>CO</state>
+    <start type="date">2007-10-20</start>
+    <chapter type="integer">5</chapter>
+    <director>Jamie Treat</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-03-19T02:11:50Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:11:50Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">110</id>
+    <name>Harold Neumann Barnstormer</name>
+    <city>Olathe</city>
+    <state>KS</state>
+    <start type="date">2007-09-07</start>
+    <chapter type="integer">15</chapter>
+    <director>Paul Thomson</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-03-19T02:10:35Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:10:35Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">185</id>
+    <name>Illinois State Open</name>
+    <city>Peru</city>
+    <state>IL</state>
+    <start type="date">2007-09-07</start>
+    <chapter type="integer">1</chapter>
+    <director>Craig Henry</director>
+    <region>MidAmerica</region>
+    <created-at type="dateTime">2012-03-19T02:15:38Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:15:38Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">72</id>
+    <name>Apple Turnover</name>
+    <city>Ephrata</city>
+    <state>WA</state>
+    <start type="date">2007-09-07</start>
+    <chapter type="integer">67</chapter>
+    <director>John Smutny &amp; John Pierson</director>
+    <region>NorthWest</region>
+    <created-at type="dateTime">2012-03-19T02:07:58Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:07:58Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">62</id>
+    <name>East Coast Aerobatics Contest</name>
+    <city>Warrenton</city>
+    <state>VA</state>
+    <start type="date">2007-09-07</start>
+    <chapter type="integer">11</chapter>
+    <director>Scott Francis</director>
+    <region>NorthEast</region>
+    <created-at type="dateTime">2012-03-19T02:07:18Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:07:18Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">194</id>
+    <name>Gulf Coast Regional</name>
+    <city>Edna</city>
+    <state>TX</state>
+    <start type="date">2007-09-01</start>
+    <chapter type="integer">25</chapter>
+    <director>Dan Clark</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-03-19T02:16:15Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:16:15Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">54</id>
+    <name>Happiness Is Delano</name>
+    <city>Delano</city>
+    <state>CA</state>
+    <start type="date">2007-09-01</start>
+    <chapter type="integer">26</chapter>
+    <director>Bob Meyer</director>
+    <region>SouthWest</region>
+    <created-at type="dateTime">2012-03-19T02:06:50Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:06:50Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">28</id>
+    <name>Aspen Leaf Acro Challenge</name>
+    <city>Sterling</city>
+    <state>CO</state>
+    <start type="date">2007-08-25</start>
+    <chapter type="integer">12</chapter>
+    <director>Earl Allen</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-03-19T02:04:51Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:04:51Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">21</id>
+    <name>Kathy Jaffe Challenge</name>
+    <city>Medford, NJ</city>
+    <state>NJ</state>
+    <start type="date">2007-08-24</start>
+    <chapter type="integer">52</chapter>
+    <director>Ron Chadwick</director>
+    <region>NorthEast</region>
+    <created-at type="dateTime">2012-03-19T02:04:19Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:04:19Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">15</id>
+    <name>Beaver State Regional</name>
+    <city>Pendleton</city>
+    <state>OR</state>
+    <start type="date">2007-08-10</start>
+    <chapter type="integer">77</chapter>
+    <director>Harris / Toppel</director>
+    <region>NorthWest</region>
+    <created-at type="dateTime">2012-03-19T02:03:58Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:03:58Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">45</id>
+    <name>Doug Yost Challenge</name>
+    <city>Cumberland</city>
+    <state>WI</state>
+    <start type="date">2007-08-04</start>
+    <chapter type="integer">78</chapter>
+    <director>Joe Wakely</director>
+    <region>MidAmerica</region>
+    <created-at type="dateTime">2012-03-19T02:06:07Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:06:07Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">301</id>
+    <name>Canadian Open Aerobatic Contest</name>
+    <city>Abbotsford, BC</city>
+    <state></state>
+    <start type="date">2007-07-20</start>
+    <chapter type="integer">8</chapter>
+    <director>Royden Heays</director>
+    <region>NorthWest</region>
+    <created-at type="dateTime">2012-03-19T02:25:33Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:25:33Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">292</id>
+    <name>Salem Regional Challenge</name>
+    <city>Salem</city>
+    <state>IL</state>
+    <start type="date">2007-07-14</start>
+    <chapter type="integer">61</chapter>
+    <director>William Perman</director>
+    <region>MidAmerica</region>
+    <created-at type="dateTime">2012-03-19T02:24:49Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:24:49Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">282</id>
+    <name>Okie Dust Devil</name>
+    <city>Weatherford</city>
+    <state>OK</state>
+    <start type="date">2007-07-13</start>
+    <chapter type="integer">59</chapter>
+    <director>John Creswell</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-03-19T02:24:01Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:24:01Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">234</id>
+    <name>Henry Haigh Challenge</name>
+    <city>Jackson</city>
+    <state>MI</state>
+    <start type="date">2007-07-06</start>
+    <chapter type="integer">88</chapter>
+    <director>Robert Butts</director>
+    <region>MidAmerica</region>
+    <created-at type="dateTime">2012-03-19T02:19:45Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:19:45Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">271</id>
+    <name>Apple Cup</name>
+    <city>Ephrata</city>
+    <state>WA</state>
+    <start type="date">2007-06-26</start>
+    <chapter type="integer">67</chapter>
+    <director>Ann Marie Ward/Carol Burch</director>
+    <region>NorthWest</region>
+    <created-at type="dateTime">2012-03-19T02:23:02Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:23:02Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">230</id>
+    <name>Green Mountain Aerobatic Contest</name>
+    <city>Springfield</city>
+    <state>VT</state>
+    <start type="date">2007-06-15</start>
+    <chapter type="integer">35</chapter>
+    <director>Hans Bok</director>
+    <region>NorthEast</region>
+    <created-at type="dateTime">2012-03-19T02:19:25Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:19:25Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">241</id>
+    <name>Heuer Classic</name>
+    <city>Aurora</city>
+    <state>IL</state>
+    <start type="date">2007-06-08</start>
+    <chapter type="integer">1</chapter>
+    <director>Todd Ashcraft</director>
+    <region>MidAmerica</region>
+    <created-at type="dateTime">2012-03-19T02:20:13Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:20:13Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">217</id>
+    <name>Aerobatic Supremacifest</name>
+    <city>Paso Robles</city>
+    <state>CA</state>
+    <start type="date">2007-06-08</start>
+    <chapter type="integer">38</chapter>
+    <director>Tom Myers</director>
+    <region>SouthWest</region>
+    <created-at type="dateTime">2012-03-19T02:18:04Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:18:04Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">208</id>
+    <name>Lonestar Aerobatic Championship</name>
+    <city>Sherman/Denison</city>
+    <state>TX</state>
+    <start type="date">2007-06-08</start>
+    <chapter type="integer">24</chapter>
+    <director>Patrick Clark</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-03-19T02:17:16Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:17:16Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">260</id>
+    <name>PA Aerobatic Championships</name>
+    <city>Maytown</city>
+    <state>PA</state>
+    <start type="date">2007-06-01</start>
+    <chapter type="integer">58</chapter>
+    <director>JD Johnson</director>
+    <region>NorthEast</region>
+    <created-at type="dateTime">2012-03-19T02:21:53Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:21:53Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">224</id>
+    <name>Southeast Aerobatic Championships</name>
+    <city>Hampton</city>
+    <state>GA</state>
+    <start type="date">2007-06-01</start>
+    <chapter type="integer">3</chapter>
+    <director>Marty Flournoy</director>
+    <region>SouthEast</region>
+    <created-at type="dateTime">2012-03-19T02:18:51Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:18:51Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">213</id>
+    <name>Ben Lowell Aerial Confontation</name>
+    <city>Sterling</city>
+    <state>CO</state>
+    <start type="date">2007-05-19</start>
+    <chapter type="integer">12</chapter>
+    <director>Dick Bevington</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-03-19T02:17:51Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:17:51Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">198</id>
+    <name>LA Gold Cup</name>
+    <city>Apple Valley</city>
+    <state>CA</state>
+    <start type="date">2007-05-18</start>
+    <chapter type="integer">49</chapter>
+    <director>Dick Stonehouse</director>
+    <region>SouthWest</region>
+    <created-at type="dateTime">2012-03-19T02:16:26Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:16:26Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">2</id>
+    <name>Sebring 55th</name>
+    <city>Sebring</city>
+    <state>FL</state>
+    <start type="date">2007-05-02</start>
+    <chapter type="integer">23</chapter>
+    <director>Victor Britt</director>
+    <region>SouthEast</region>
+    <created-at type="dateTime">2012-03-19T02:00:16Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:00:16Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">150</id>
+    <name>Borrego MiniFest</name>
+    <city>Borrego Springs</city>
+    <state>CA</state>
+    <start type="date">2007-04-14</start>
+    <chapter type="integer">36</chapter>
+    <director>Joshua Muncie</director>
+    <region>SouthWest</region>
+    <created-at type="dateTime">2012-03-19T02:13:08Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:13:08Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">171</id>
+    <name>Chuck Alley Cajun Aerobatic Contest</name>
+    <city>Sulphur</city>
+    <state>LA</state>
+    <start type="date">2007-04-12</start>
+    <chapter type="integer">72</chapter>
+    <director>Bubba Vidrine</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-03-19T02:14:45Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:14:45Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">160</id>
+    <name>Keystone Aerobatic Kickoff</name>
+    <city>Keystone Heights</city>
+    <state>FL</state>
+    <start type="date">2007-03-24</start>
+    <chapter type="integer">288</chapter>
+    <director>Aaron Prosser</director>
+    <region>SouthEast</region>
+    <created-at type="dateTime">2012-03-19T02:13:50Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:13:50Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">142</id>
+    <name>Copperstate</name>
+    <city>Coolidge</city>
+    <state>AZ</state>
+    <start type="date">2007-03-16</start>
+    <chapter type="integer">69</chapter>
+    <director>Kathi Gibbs</director>
+    <region>SouthWest</region>
+    <created-at type="dateTime">2012-03-19T02:12:37Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:12:37Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">76</id>
+    <name>Sebring 54th</name>
+    <city>Sebring</city>
+    <state>FL</state>
+    <start type="date">2006-11-09</start>
+    <chapter type="integer">23</chapter>
+    <director>Jim Alsip</director>
+    <region>SouthEast</region>
+    <created-at type="dateTime">2012-03-19T02:08:15Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:08:15Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">40</id>
+    <name>Tequila Cup</name>
+    <city>Coolidge</city>
+    <state>AZ</state>
+    <start type="date">2006-11-03</start>
+    <chapter type="integer">62</chapter>
+    <director>Kirk Vanderziel</director>
+    <region>SouthWest</region>
+    <created-at type="dateTime">2012-03-19T02:05:39Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:05:39Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">126</id>
+    <name>Mason Dixon Clash</name>
+    <city>Farmville</city>
+    <state>VA</state>
+    <start type="date">2006-10-28</start>
+    <chapter type="integer">19</chapter>
+    <director>Jim Walker</director>
+    <region>NorthEast</region>
+    <created-at type="dateTime">2012-03-19T02:11:32Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:11:32Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">32</id>
+    <name>Borrego Akrofest</name>
+    <city>Borrego Springs</city>
+    <state>CA</state>
+    <start type="date">2006-10-19</start>
+    <chapter type="integer">36</chapter>
+    <director>Gray Brandt</director>
+    <region>SouthWest</region>
+    <created-at type="dateTime">2012-03-19T02:05:04Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:05:04Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">93</id>
+    <name>Rocky Mountain Invitational</name>
+    <city>Lamar</city>
+    <state>CO</state>
+    <start type="date">2006-10-14</start>
+    <chapter type="integer">5</chapter>
+    <director>Jamie Treat</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-03-19T02:09:29Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:09:29Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">47</id>
+    <name>Rocky Mountain Invitational - Gliders</name>
+    <city>Lamar</city>
+    <state>CO</state>
+    <start type="date">2006-10-14</start>
+    <chapter type="integer">5</chapter>
+    <director>Jamie Treat</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-03-19T02:06:13Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:06:13Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">5</id>
+    <name>Harold Neumann Barnstormer</name>
+    <city>Olathe</city>
+    <state>KS</state>
+    <start type="date">2006-10-07</start>
+    <chapter type="integer">15</chapter>
+    <director>Lee Crites/Connie Johnson</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-03-19T02:03:17Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:03:17Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">287</id>
+    <name>East Coast Aerobatic Contest</name>
+    <city>Warrenton</city>
+    <state>VA</state>
+    <start type="date">2006-09-16</start>
+    <chapter type="integer">11</chapter>
+    <director>Scott Francis</director>
+    <region>NorthEast</region>
+    <created-at type="dateTime">2012-03-19T02:24:25Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:24:25Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">66</id>
+    <name>2006 Gulf Coast Regional</name>
+    <city>Conroe</city>
+    <state>TX</state>
+    <start type="date">2006-09-02</start>
+    <chapter type="integer">25</chapter>
+    <director>Peter Toung</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-03-19T02:07:38Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:07:38Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">265</id>
+    <name>Marta Bohn-Meyer Memorial</name>
+    <city>Delano</city>
+    <state>CA</state>
+    <start type="date">2006-09-01</start>
+    <chapter type="integer">26</chapter>
+    <director>Roger Rourke, Gerrit Vanderzeil</director>
+    <region>SouthWest</region>
+    <created-at type="dateTime">2012-03-19T02:22:24Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:22:24Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">192</id>
+    <name>Aspen Leaf Acro Challenge-Glider</name>
+    <city>Sterling</city>
+    <state>CO</state>
+    <start type="date">2006-08-26</start>
+    <chapter type="integer">12</chapter>
+    <director>DJ Molny</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-03-19T02:16:09Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:16:09Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">164</id>
+    <name>Aspen Leaf Acro Challenge</name>
+    <city>Sterling</city>
+    <state>CO</state>
+    <start type="date">2006-08-26</start>
+    <chapter type="integer">12</chapter>
+    <director>DJ Molny</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-03-19T02:14:14Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:14:14Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">81</id>
+    <name>Beaverstate Regional</name>
+    <city>Pendleton</city>
+    <state>OR</state>
+    <start type="date">2006-08-25</start>
+    <chapter type="integer">77</chapter>
+    <director>Greg Howard</director>
+    <region>NorthWest</region>
+    <created-at type="dateTime">2012-03-19T02:08:42Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:08:42Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">183</id>
+    <name>Green Mountain Aerobatic Contest</name>
+    <city>Springfield</city>
+    <state>VT</state>
+    <start type="date">2006-08-25</start>
+    <chapter type="integer">35</chapter>
+    <director>Hans Bok</director>
+    <region>NorthEast</region>
+    <created-at type="dateTime">2012-03-19T02:15:30Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:15:30Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">175</id>
+    <name>Illinois State Open</name>
+    <city>Peru</city>
+    <state>IL</state>
+    <start type="date">2006-08-25</start>
+    <chapter type="integer">1</chapter>
+    <director>Doug Bartlett</director>
+    <region>MidAmerica</region>
+    <created-at type="dateTime">2012-03-19T02:14:55Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:14:55Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">1</id>
+    <name>Montreal Acro Challenge</name>
+    <city>St. Hyacinthe, Quebec, C</city>
+    <state>Ot</state>
+    <start type="date">2006-08-06</start>
+    <chapter type="integer">2</chapter>
+    <director>John Wyman</director>
+    <region>NorthEast</region>
+    <created-at type="dateTime">2012-03-19T01:55:44Z</created-at>
+    <updated-at type="dateTime">2012-03-19T01:55:44Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">232</id>
+    <name>Hill Country Hammerfest</name>
+    <city>Llano</city>
+    <state>TX</state>
+    <start type="date">2006-08-04</start>
+    <chapter type="integer">107</chapter>
+    <director>John Harlan</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-03-19T02:19:35Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:19:35Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">276</id>
+    <name>Salem Regional Aerobatic Challenge</name>
+    <city>Salem</city>
+    <state>IL</state>
+    <start type="date">2006-07-22</start>
+    <chapter type="integer">61</chapter>
+    <director>William H. Perman, PhD</director>
+    <region>MidAmerica</region>
+    <created-at type="dateTime">2012-03-19T02:23:31Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:23:31Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">120</id>
+    <name>Canadian Open Aerobatic Contest 2006</name>
+    <city>Abbotsford, BC</city>
+    <state>Ot</state>
+    <start type="date">2006-07-21</start>
+    <chapter type="integer">8</chapter>
+    <director>Les Mitchell / Guido Lepore</director>
+    <region>NorthWest</region>
+    <created-at type="dateTime">2012-03-19T02:11:18Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:11:18Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">254</id>
+    <name>2006 CAN-AM Aerobatic Championship</name>
+    <city>Jackson</city>
+    <state>MI</state>
+    <start type="date">2006-07-07</start>
+    <chapter type="integer">88</chapter>
+    <director>Scott Gusakov</director>
+    <region>MidAmerica</region>
+    <created-at type="dateTime">2012-03-19T02:21:29Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:21:29Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">202</id>
+    <name>Okie Dust Devil</name>
+    <city>Weatherford</city>
+    <state>OK</state>
+    <start type="date">2006-07-07</start>
+    <chapter type="integer">59</chapter>
+    <director>John Creswell</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-03-19T02:16:45Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:16:45Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">136</id>
+    <name>Midwest Aerobatic Championships</name>
+    <city>Seward</city>
+    <state>NE</state>
+    <start type="date">2006-06-24</start>
+    <chapter type="integer">80</chapter>
+    <director>Lynn Bowes</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-03-19T02:12:17Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:12:17Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">243</id>
+    <name>Ohio Aerobatic Open</name>
+    <city>Marysville</city>
+    <state>OH</state>
+    <start type="date">2006-06-23</start>
+    <chapter type="integer">34</chapter>
+    <director>Gordon Penner</director>
+    <region>MidAmerica</region>
+    <created-at type="dateTime">2012-03-19T02:20:29Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:20:29Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">101</id>
+    <name>Doug Yost Challenge - Cumberland</name>
+    <city>Cumberland</city>
+    <state>WI</state>
+    <start type="date">2006-06-17</start>
+    <chapter type="integer">78</chapter>
+    <director>Mike Niccum</director>
+    <region>MidAmerica</region>
+    <created-at type="dateTime">2012-03-19T02:09:53Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:09:53Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">105</id>
+    <name>Northern California Aerobatic Contest</name>
+    <city>Paso Robles</city>
+    <state>CA</state>
+    <start type="date">2006-06-15</start>
+    <chapter type="integer">38</chapter>
+    <director>Terry Lauck</director>
+    <region>SouthWest</region>
+    <created-at type="dateTime">2012-03-19T02:10:10Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:10:10Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">96</id>
+    <name>The 2006 Heuer Classic</name>
+    <city>Aurora</city>
+    <state>IL</state>
+    <start type="date">2006-06-09</start>
+    <chapter type="integer" nil="true"/>
+    <director>Christopher Coltrin</director>
+    <region>MidAmerica</region>
+    <created-at type="dateTime">2012-03-19T02:09:34Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:09:34Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">88</id>
+    <name>Apple Cup 2006</name>
+    <city>Ephrata</city>
+    <state>WA</state>
+    <start type="date">2006-06-09</start>
+    <chapter type="integer">67</chapter>
+    <director>John Smutny, John Pierson</director>
+    <region>NorthWest</region>
+    <created-at type="dateTime">2012-03-19T02:09:13Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:09:13Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">154</id>
+    <name>Lonestar Aerobatic Contest</name>
+    <city>Sherman/Denison</city>
+    <state>TX</state>
+    <start type="date">2006-06-08</start>
+    <chapter type="integer">24</chapter>
+    <director>BJ Boyle</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-03-19T02:13:17Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:13:17Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">52</id>
+    <name>PA Aerobatic Championships</name>
+    <city>Maytown</city>
+    <state>PA</state>
+    <start type="date">2006-06-02</start>
+    <chapter type="integer">58</chapter>
+    <director>JD Johnson</director>
+    <region>NorthEast</region>
+    <created-at type="dateTime">2012-03-19T02:06:42Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:06:42Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">65</id>
+    <name>Southeast Aerobatic Open</name>
+    <city>Hampton</city>
+    <state>GA</state>
+    <start type="date">2006-06-02</start>
+    <chapter type="integer">3</chapter>
+    <director>Steve Haslup</director>
+    <region>SouthEast</region>
+    <created-at type="dateTime">2012-03-19T02:07:33Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:07:33Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">145</id>
+    <name>Rocky Mtn Aerobatic Challenge</name>
+    <city>Sterling</city>
+    <state>CO</state>
+    <start type="date">2006-05-27</start>
+    <chapter type="integer">12</chapter>
+    <director>Clyde Cable</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-03-19T02:12:42Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:12:42Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">75</id>
+    <name>Okie Twistoff 2006</name>
+    <city>Claremore</city>
+    <state>OK</state>
+    <start type="date">2006-05-19</start>
+    <chapter type="integer">10</chapter>
+    <director>Tom Culver</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-03-19T02:08:12Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:08:12Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">148</id>
+    <name>Los Angeles Gold Cup</name>
+    <city>Apple Valley</city>
+    <state>CA</state>
+    <start type="date">2006-05-04</start>
+    <chapter type="integer">49</chapter>
+    <director>Steve Andelin</director>
+    <region>SouthWest</region>
+    <created-at type="dateTime">2012-03-19T02:12:59Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:12:59Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">133</id>
+    <name>Sebring Aerobatic Contest</name>
+    <city>Sebring</city>
+    <state>FL</state>
+    <start type="date">2006-05-04</start>
+    <chapter type="integer">23</chapter>
+    <director>Denny Jones</director>
+    <region>SouthEast</region>
+    <created-at type="dateTime">2012-03-19T02:12:01Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:12:01Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">256</id>
+    <name>Doc Harvey "One Design"</name>
+    <city>Giddings</city>
+    <state>TX</state>
+    <start type="date">2006-04-29</start>
+    <chapter type="integer">25</chapter>
+    <director>Klayton Kirland</director>
+    <region>SouthCentral</region>
+    <created-at type="dateTime">2012-03-19T02:21:39Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:21:39Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">215</id>
+    <name>Borrego MiniFest</name>
+    <city>Borrego Springs</city>
+    <state>CA</state>
+    <start type="date">2006-04-08</start>
+    <chapter type="integer">36</chapter>
+    <director>Michael Church</director>
+    <region>SouthWest</region>
+    <created-at type="dateTime">2012-03-19T02:17:57Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:17:57Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">278</id>
+    <name>2006 Copperstate Championships-Glider</name>
+    <city>Coolidge</city>
+    <state>AZ</state>
+    <start type="date">2006-03-30</start>
+    <chapter type="integer">69</chapter>
+    <director>George Norris</director>
+    <region>SouthWest</region>
+    <created-at type="dateTime">2012-03-19T02:23:45Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:23:45Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">267</id>
+    <name>2006 Copperstate Championships</name>
+    <city>Coolidge</city>
+    <state>AZ</state>
+    <start type="date">2006-03-30</start>
+    <chapter type="integer">69</chapter>
+    <director>George Norris</director>
+    <region>SouthWest</region>
+    <created-at type="dateTime">2012-03-19T02:22:42Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:22:42Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">205</id>
+    <name>High Desert Aerobatics Minifest</name>
+    <city>Reno - Stead</city>
+    <state>NV</state>
+    <start type="date">2006-03-18</start>
+    <chapter type="integer">118</chapter>
+    <director>Tim Brill</director>
+    <region>SouthWest</region>
+    <created-at type="dateTime">2012-03-19T02:17:04Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:17:04Z</updated-at>
+  </contest>
+  <contest>
+    <id type="integer">223</id>
+    <name>Keystone Aerobatic Kickoff</name>
+    <city>Keystone Heights</city>
+    <state>FL</state>
+    <start type="date">2006-03-17</start>
+    <chapter type="integer">288</chapter>
+    <director>Erica Anderson</director>
+    <region>SouthEast</region>
+    <created-at type="dateTime">2012-03-19T02:18:46Z</created-at>
+    <updated-at type="dateTime">2012-03-19T02:18:46Z</updated-at>
+  </contest>
+</contests>
