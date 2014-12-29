@@ -13,7 +13,7 @@ class ContestsController < ApplicationController
         render xml: @contests.to_xml
       end
       format.json do
-        render json: @contests.to_json
+        render json: @contests.as_json
       end
     end
   end
@@ -24,7 +24,16 @@ class ContestsController < ApplicationController
     @contest = Contest.find(params[:id])
     @c_results = @contest.c_results.sort { |a,b| a.category.sequence <=> b.category.sequence }
     if @c_results && !@c_results.empty?
-      render :show
+      respond_to do |format|
+        format.html
+          render :show
+        format.xml do
+          render xml: @contest.to_xml
+        end
+        format.json do
+          render json: @contest.as_json
+        end
+      end
     else
       render :raw, :notice => "Results unavailable"
     end
