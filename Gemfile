@@ -13,6 +13,7 @@ gem 'zurb-foundation'
 gem 'sass-rails'
 gem 'coffee-rails'
 gem 'uglifier'
+gem 'jbuilder'
 
 group :development, :test do
   gem 'rspec-rails'
