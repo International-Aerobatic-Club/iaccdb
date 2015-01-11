@@ -22,13 +22,16 @@ class Member < ActiveRecord::Base
     "Member #{id} #{name}, IAC #{iac_id}"
   end
 
+  # Although this is not private, you should not call it directly.
+  # Use find_or_create_by_iac_number
   # find or create member with bad or mismatched IAC ID
-  # member family and given names must match exatly, otherwise
+  # member family and given names must match exactly and uniquely, otherwise
   # this creates a new member record
   def self.find_or_create_by_name(iac_id, given_name, family_name)
     dm = Member.where(:family_name => family_name,
-      :given_name =>given_name).first
-    if dm
+      :given_name =>given_name)
+    if dm.count == 1
+      dm = dm.first
       Member.logger.info "Found by name member #{dm.to_s}"
     else
       dm = Member.create(
