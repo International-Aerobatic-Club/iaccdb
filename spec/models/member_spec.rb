@@ -43,4 +43,24 @@ describe Member, :type => :model do
     expect(found.given_name).to eq 'Bart'
     expect(found.family_name).to eq 'Paulie'
   end
+
+  it 'finds matching iac_id, family_name if multiple iac_id with different family_name' do
+    iac_number = 206806
+    mr_1 = Member.create(iac_id: iac_number, 
+      family_name: 'Griffim', given_name: 'Patrick')
+    mr_2 = Member.create(iac_id: iac_number, 
+      family_name: 'Grifwith', given_name: 'Patrick')
+    mr_3 = Member.create(iac_id: iac_number, 
+      family_name: 'Griffith', given_name: 'Patrick')
+    mr_4 = Member.create(iac_id: iac_number, 
+      family_name: 'Griffin', given_name: 'Patrick')
+    found = Member.find_or_create_by_iac_number(iac_number, 'Pat', 'Griffim')
+    expect(found).to eq mr_1
+    found = Member.find_or_create_by_iac_number(iac_number, 'Pat', 'Grifwith')
+    expect(found).to eq mr_2
+    found = Member.find_or_create_by_iac_number(iac_number, 'Pat', 'Griffith')
+    expect(found).to eq mr_3
+    found = Member.find_or_create_by_iac_number(iac_number, 'Pat', 'Griffin')
+    expect(found).to eq mr_4
+  end
 end

@@ -22,11 +22,11 @@ class Member < ActiveRecord::Base
     "Member #{id} #{name}, IAC #{iac_id}"
   end
 
-  # Although this is not private, you should not call it directly.
+  # Do not call this if you have an IAC number.
   # Use find_or_create_by_iac_number
-  # find or create member with bad or mismatched IAC ID
-  # member family and given names must match exactly and uniquely, otherwise
-  # this creates a new member record
+  # This will find or create member with bad or mismatched IAC ID
+  # Returns record where member family and given names match exactly and uniquely, 
+  # otherwise this creates a new member record
   def self.find_or_create_by_name(iac_id, given_name, family_name)
     dm = Member.where(:family_name => family_name,
       :given_name =>given_name)
@@ -47,19 +47,13 @@ class Member < ActiveRecord::Base
   # IAC ID and family name must match exactly, otherwise this falls
   # back to exact match of family name and given name
   def self.find_or_create_by_iac_number(iac_id, given_name, family_name)
-    dm = Member.where(:iac_id => iac_id).first
-    if dm 
-      Member.logger.info "Found member #{dm.to_s}"
-      if dm.family_name.downcase != family_name.downcase
-        # different, fallback to name match
-        Member.logger.warn "Member family name mismatch." +
-          " caller has #{family_name}"
-        dm = Member.find_or_create_by_name(iac_id, given_name, family_name)
-      end
-    else
-      dm = Member.find_or_create_by_name(iac_id, given_name, family_name)
+    mmr = nil
+    dm = Member.where(:iac_id => iac_id)
+    if 0 < dm.count
+      mmra = dm.to_a.select { |m| m.family_name.downcase == family_name.downcase }
+      mmr = mmra[0] if (mmra.size == 1)
     end
-    dm
+    mmr ||= Member.find_or_create_by_name(iac_id, given_name, family_name)
   end
 
   def judge_flights
