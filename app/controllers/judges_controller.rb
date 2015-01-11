@@ -12,7 +12,7 @@ class JudgesController < ApplicationController
     judges = Judge.where(:judge_id => id)
     @jf_results =
       JfResult.includes(:f_result).where(:judge_id => judges)
-    @jf_results.sort! do |a,b|
+    @jf_results.to_a.sort! do |a,b|
       b.f_result.flight.contest.start <=> a.f_result.flight.contest.start
     end
     # year/category rollups stats report
