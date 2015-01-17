@@ -277,7 +277,7 @@ FactoryGirl.define do
     factory :result_with_accums do
       after(:create) do |result, evaluator|
         create_list(:pc_result, 4).each do |p|
-          p.results << p
+          result.pc_results << p
         end
       end
     end
