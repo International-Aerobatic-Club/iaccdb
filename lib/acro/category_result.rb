@@ -22,6 +22,14 @@ attr_accessor :category_results
 # category_percentages[p] is percent of points taken by pilot p, zero indexed
 attr_accessor :category_percentages
 
+def initialize
+  self.pilots = []
+  self.flight_names = []
+  self.flight_results = []
+  self.category_results = []
+  self.category_percentages = []
+end
+
 # result_scraper is an ACRO::ResultScraper
 def process_category_result(result_scraper)
   @category_name = result_scraper.category_name
