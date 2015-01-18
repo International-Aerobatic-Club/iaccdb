@@ -31,8 +31,7 @@ class CResult < ActiveRecord::Base
   end
 
   def compute_category_totals_and_rankings(force = false)
-    cat_flights = contest.flights.all(:conditions => {
-      :category_id => category_id })
+    cat_flights = contest.flights.where(:category_id => category_id)
     cur_pc_results = Set.new
     cur_jc_results = Set.new
     cur_f_results = []
@@ -74,8 +73,7 @@ class CResult < ActiveRecord::Base
     rpc_results = []
     f_result.pf_results.each do |pf_result|
       pilot = pf_result.pilot_flight.pilot
-      pc_result = pc_results.first(:conditions => { 
-        :pilot_id => pilot })
+      pc_result = pc_results.where(:pilot_id => pilot_id).first
       if !pc_result
         pc_result = pc_results.build(:pilot => pilot)
         save # so next round finds the new result
@@ -89,8 +87,7 @@ class CResult < ActiveRecord::Base
     rjc_results = []
     f_result.jf_results.each do |jf_result|
       judge = jf_result.judge.judge
-      jc_result = jc_results.first(:conditions => { 
-        :judge_id => judge })
+      jc_result = jc_results.where(:judge_id => judge_id).first
       if !jc_result
         jc_result = jc_results.build(:judge => judge)
         save # so next round finds the new result

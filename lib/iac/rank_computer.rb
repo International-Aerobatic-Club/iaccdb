@@ -30,9 +30,8 @@ module IAC
             jf_result = jf_results_by_judge[judge]
             if !jf_result
               jf_result = 
-                f_result.jf_results.first(:conditions => {
-                  :judge_id => judge}) ||
-                f_result.jf_results.build(:judge => judge)
+                f_result.jf_results.where(:judge_id => judge.id).first ||
+                f_result.jf_results.create(:judge => judge)
               jf_result.zero_reset
               j_rank_for_jf[jf_result] = []
               jf_results_by_judge[judge] = jf_result

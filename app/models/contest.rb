@@ -87,7 +87,7 @@ private
   # creates c_result for category of flight if it doesn't exist
   # returns the c_result
   def find_or_create_c_result(cat)
-    c_result = c_results.first(:conditions => { :category_id => cat.id })
+    c_result = c_results.where(:category_id => cat.id).first
     if !c_result
       c_result = c_results.build(:category_id => cat.id)
       save
