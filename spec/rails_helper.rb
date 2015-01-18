@@ -3,7 +3,8 @@ ENV["RAILS_ENV"] ||= 'test'
 require 'spec_helper'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
-# Add additional requires below this line. Rails is not loaded until this point!
+# Rails is now loaded.
+# Add additional requires below this line. 
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -19,6 +20,12 @@ require 'rspec/rails'
 # require only the support files necessary.
 #
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
+
+# autoload_paths failing to work for some reason
+Dir[Rails.root.join("lib/**/*.rb")].each { |f| require f }
+
+# new way to load seeds in test
+Rails.application.load_seed
 
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
