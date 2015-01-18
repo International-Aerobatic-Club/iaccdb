@@ -73,7 +73,7 @@ class CResult < ActiveRecord::Base
     rpc_results = []
     f_result.pf_results.each do |pf_result|
       pilot = pf_result.pilot_flight.pilot
-      pc_result = pc_results.where(:pilot_id => pilot_id).first
+      pc_result = pc_results.where(:pilot_id => pilot.id).first
       if !pc_result
         pc_result = pc_results.build(:pilot => pilot)
         save # so next round finds the new result
@@ -87,7 +87,7 @@ class CResult < ActiveRecord::Base
     rjc_results = []
     f_result.jf_results.each do |jf_result|
       judge = jf_result.judge.judge
-      jc_result = jc_results.where(:judge_id => judge_id).first
+      jc_result = jc_results.where(:judge_id => judge.id).first
       if !jc_result
         jc_result = jc_results.build(:judge => judge)
         save # so next round finds the new result
