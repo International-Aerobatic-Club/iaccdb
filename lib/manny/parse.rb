@@ -1,6 +1,3 @@
-require 'manny/model'
-#require 'log/config_logger'
-
 module Manny
 class Parse
 include Log::ConfigLogger
@@ -272,6 +269,7 @@ end
 def initialize
   @state = SEEK_SECTION
   @contest = Model::Contest.new
+  self.logger = Rails.logger
 end
 
 def processLine(line)
