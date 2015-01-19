@@ -1,7 +1,8 @@
 module Model
   describe JcResult, :type => :model do
     context 'factory data' do
-      before(:all) do
+      before(:context) do
+        DatabaseCleaner.start
         @contest = create(:contest)
         @c_result = create(:c_result,
           :contest => @contest)
@@ -49,6 +50,9 @@ module Model
           :minority_zero_ct => 3,
           :minority_grade_ct => 1)
         @jc_result.compute_category_totals(@flight.f_results)
+      end
+      after(:context) do
+        DatabaseCleaner.clean
       end
       it 'computes the Spearman rank coefficient' do
         expect(@jc_result.rho).to eq(94)

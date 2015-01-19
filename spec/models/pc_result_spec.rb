@@ -66,36 +66,29 @@ module Model
       end
 
       it 'finds two pilots in category results' do
-        c_result = @c_results.first(:conditions => {
-          :category_id => @imdt_cat.id })
+        c_result = @c_results.where(:category_id => @imdt_cat.id).first
         expect(c_result).not_to be nil
         expect(c_result.pc_results.size).to eq(2)
       end
 
       it 'computes category total for pilot' do
-        c_result = @c_results.first(:conditions => {
-          :category_id => @imdt_cat.id })
+        c_result = @c_results.where(:category_id => @imdt_cat.id).first
         expect(c_result).not_to be nil
-        pc_result = c_result.pc_results.first(:conditions => {
-          :pilot_id => @adams })
+        pc_result = c_result.pc_results.where(:pilot_id => @adams).first
         expect(pc_result).not_to be nil
         expect(pc_result.category_value.round(2)).to eq(3474.83)
-        pc_result = c_result.pc_results.first(:conditions => {
-          :pilot_id => @denton })
+        pc_result = c_result.pc_results.where(:pilot_id => @denton).first
         expect(pc_result).not_to be nil
         expect(pc_result.category_value.round(2)).to eq(3459.33)
       end
 
       it 'computes category rank for pilot' do
-        c_result = @c_results.first(:conditions => {
-          :category_id => @imdt_cat.id })
+        c_result = @c_results.where(:category_id => @imdt_cat.id).first
         expect(c_result).not_to be nil
-        pc_result = c_result.pc_results.first(:conditions => {
-          :pilot_id => @adams })
+        pc_result = c_result.pc_results.where(:pilot_id => @adams).first
         expect(pc_result).not_to be nil
         expect(pc_result.category_rank).to eq(1)
-        pc_result = c_result.pc_results.first(:conditions => {
-          :pilot_id => @denton })
+        pc_result = c_result.pc_results.where(:pilot_id => @denton).first
         expect(pc_result).not_to be nil
         expect(pc_result.category_rank).to eq(2)
       end

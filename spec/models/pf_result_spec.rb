@@ -41,15 +41,15 @@ module Model
         va[3] = 80
         va[12] = 100
         expect(scores.save).to eq(true)
-        contest = Contest.first(:conditions => {:start => '2011-09-25'})
+        contest = Contest.where(:start => '2011-09-25').first
         expect(contest).not_to be nil
         flight = contest.flights.first
         expect(flight).not_to be nil
         pilot = Member.find_by_iac_id(1999)
         expect(pilot).not_to be nil
-        @pilot_flight = PilotFlight.first(:conditions => {
-          :pilot_id => pilot, 
-          :flight_id => flight})
+        @pilot_flight = PilotFlight.where(
+          :pilot_id => pilot.id, 
+          :flight_id => flight.id).first
         expect(@pilot_flight).not_to be nil
         pf = @pilot_flight.results
         pfj = pf.for_judge(@judge_jim)
@@ -64,15 +64,15 @@ module Model
       it 'updates cached values when sequence changes' do
         @pilot_flight.sequence.k_values[13] = 12
         expect(@pilot_flight.sequence.save).to eq(true)
-        contest = Contest.first(:conditions => {:start => '2011-09-25'})
+        contest = Contest.where(:start => '2011-09-25').first
         expect(contest).not_to be nil
         flight = contest.flights.first
         expect(flight).not_to be nil
         pilot = Member.find_by_iac_id(1999)
         expect(pilot).not_to be nil
-        @pilot_flight = PilotFlight.first(:conditions => {
-          :pilot_id => pilot, 
-          :flight_id => flight})
+        @pilot_flight = PilotFlight.where(
+          :pilot_id => pilot.id, 
+          :flight_id => flight.id).first
         expect(@pilot_flight).not_to be nil
         pf = @pilot_flight.results
         expect(pf.flight_value.round(2)).to eq(1827)
@@ -81,15 +81,15 @@ module Model
         @pilot_flight.sequence.k_values.pop
         expect(@pilot_flight.sequence.save).to eq(true)
         expect(@pilot_flight.sequence.k_values.length).to eq(13)
-        contest = Contest.first(:conditions => {:start => '2011-09-25'})
+        contest = Contest.where(:start => '2011-09-25').first
         expect(contest).not_to be nil
         flight = contest.flights.first
         expect(flight).not_to be nil
         pilot = Member.find_by_iac_id(1999)
         expect(pilot).not_to be nil
-        @pilot_flight = PilotFlight.first(:conditions => {
-          :pilot_id => pilot, 
-          :flight_id => flight})
+        @pilot_flight = PilotFlight.where(
+          :pilot_id => pilot.id, 
+          :flight_id => flight.id).first
         expect(@pilot_flight).not_to be nil
         logger = double()
         Rails.logger = logger

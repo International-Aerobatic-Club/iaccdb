@@ -1,26 +1,24 @@
 describe JfResult, :type => :model do
-  before(:each) do
+  before(:context) do
     manny = Manny::Parse.new
     IO.foreach('spec/manny/Contest_300.txt') { |line| manny.processLine(line) }
     m2d = Manny::MannyToDB.new
     m2d.process_contest(manny, true)
     contest = Contest.first
+    contest.results
     @pri_cat = Category.find_by_category_and_aircat('primary', 'P')
-    @flight2 = contest.flights.first(:conditions => { 
-      :category_id => @pri_cat.id, :name => 'Free' })
+    @flight2 = contest.flights.where(:category_id => @pri_cat.id, :name => 'Free').first
     f_result = @flight2.compute_flight_results.first
-    lr = Member.first(:conditions => {
+    lr = Member.where(
       :family_name => 'Ramirez',
-      :given_name => 'Laurie' })
-    mf = Member.first(:conditions => {
+      :given_name => 'Laurie').first
+    mf = Member.where(
       :family_name => 'Flournoy',
-      :given_name => 'Martin' })
-    j1 = Judge.first(:conditions => { :judge_id => lr })
-    j2 = Judge.first(:conditions => { :judge_id => mf })
-    @jf_result1 = f_result.jf_results.first(:conditions => {
-      :judge_id => j1 })
-    @jf_result2 = f_result.jf_results.first(:conditions => {
-      :judge_id => j2 })
+      :given_name => 'Martin').first
+    j1 = Judge.where(:judge_id => lr.id).first
+    j2 = Judge.where(:judge_id => mf.id).first
+    @jf_result1 = f_result.jf_results.where(:judge_id => j1.id).first
+    @jf_result2 = f_result.jf_results.where(:judge_id => j2.id).first
   end
   it 'computes the Spearman rank coefficient for each judge of a flight' do
     expect(@jf_result1.rho).to eq(54)
@@ -49,11 +47,9 @@ describe JfResult, :type => :model do
     scores.save
     judge = scores.judge
     contest = Contest.first
-    flight = contest.flights.first(:conditions => { 
-      :category_id => @pri_cat.id, :name => 'Free' })
+    flight = contest.flights.where(:category_id => @pri_cat.id, :name => 'Free').first
     f_result = flight.compute_flight_results.first
-    jf_result = f_result.jf_results.first(:conditions => {
-      :judge_id => judge })
+    jf_result = f_result.jf_results.where(:judge_id => judge.id).first
     expect(jf_result.minority_zero_ct).to eq(1)
   end
   it 'computes the number of minority grades from each judge for a flight' do
@@ -69,11 +65,9 @@ describe JfResult, :type => :model do
     end
     expect(judge).not_to be nil
     contest = Contest.first
-    flight = contest.flights.first(:conditions => { 
-      :category_id => @pri_cat.id, :name => 'Free' })
+    flight = contest.flights.where(:category_id => @pri_cat.id, :name => 'Free').first
     f_result = flight.compute_flight_results.first
-    jf_result = f_result.jf_results.first(:conditions => {
-      :judge_id => judge })
+    jf_result = f_result.jf_results.where(:judge_id => judge.id).first
     expect(jf_result.minority_grade_ct).to eq(1)
   end
   it 'counts the number of grades given by every judge for a flight' do

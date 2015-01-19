@@ -118,8 +118,7 @@ module Manny
       expect(flight).not_to be nil
       pilot = Member.where(:family_name => 'Cohen').first # manny_id 6
       expect(pilot).not_to be nil
-      pilot_flight = flight.pilot_flights.first(
-        :conditions => { :pilot_id => pilot, })
+      pilot_flight = flight.pilot_flights.where(:pilot_id => pilot.id).first
       expect(pilot_flight).not_to be nil
       expect(pilot_flight.penalty_total).to eq(10)
     end
