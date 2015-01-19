@@ -25,7 +25,7 @@ module IAC
           p = pf_result.flight_rank || 0
           p_ranks << p
           pilot_flight.pfj_results.each do |pfj_result|
-            logger.info "Computing #{pfj_result}"
+            logger.debug "Incorporating #{pfj_result}"
             judge = pfj_result.judge
             jf_result = jf_results_by_judge[judge]
             if !jf_result
@@ -49,6 +49,7 @@ module IAC
               jf_result.minority_zero_ct += 1 if graded == Constants::HARD_ZERO && 0 < computed 
               jf_result.minority_grade_ct += 1 if computed < graded
             end
+            logger.debug "Updated jf_result #{jf_result}"
           end
         end
       end
@@ -58,7 +59,7 @@ module IAC
       pilot_count = p_ranks.length
       avg_rank = (pilot_count + 1) / 2.0
       jf_results_by_judge.each do |judge, jf_result|
-        logger.info "Computing ranks for #{jf_result}"
+        logger.debug "Computing ranks for #{jf_result}"
         j_ranks = j_rank_for_jf[jf_result]
         avg_j_ranks = average_ranks(j_ranks)
         (0 ... pilot_count).each do |ip|
@@ -93,6 +94,7 @@ module IAC
         jf_result.pair_count = pilot_count * (pilot_count - 1) / 2
         jf_result.ri_total = calc_ri(jf_result.sigma_ri_delta, pilot_count)
         jf_result.save
+        logger.debug "Computed jf_result ranks #{jf_result}"
       end
       jf_results_by_judge.values
     end
@@ -286,7 +288,7 @@ module IAC
       judge_pilot_figure_graded_values = {} #graded_values lookup by judge
       pilot_figure_results = [] # figure results from each pilot
       pf_results.each do |pf_result|
-        logger.info "Computing figure rankings for #{pf_result.to_s}" 
+        logger.debug "Computing figure rankings for #{pf_result.to_s}" 
         pf_result.judge_teams.each do |judge|
           pfj_result = pf_result.for_judge(judge)
           # computed value matrix
