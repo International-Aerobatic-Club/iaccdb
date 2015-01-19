@@ -2,13 +2,15 @@
 # spec/support/database_cleaner.rb
 RSpec.configure do |config|
   config.before(:suite) do
-    DatabaseCleaner.strategy = :truncation, {:except => %w[categories]}
-    DatabaseCleaner.clean
+    DatabaseCleaner.clean_with :truncation, {:except => %w[categories]}
+    DatabaseCleaner.strategy = :transaction
   end
 
-  config.around(:example) do |test|
-    DatabaseCleaner.cleaning do
-      test.run
-    end
+  config.before(:context) do
+    DatabaseCleaner.start
+  end
+
+  config.after(:context) do
+    DatabaseCleaner.clean
   end
 end
