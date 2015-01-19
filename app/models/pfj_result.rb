@@ -35,6 +35,12 @@ class PfjResult < ActiveRecord::Base
   serialize :graded_ranks
 
   def to_s
-    "pfj_result #{id} for pilot_flight #{pilot_flight.id}, judge #{judge.id}"
+    "pfj_result #{id} for pilot_flight #{pilot_flight.id}, judge #{judge.id}\n"\
+    "computed_values: #{computed_values}\n"\
+    "computed_ranks: #{computed_ranks}\n"\
+    "flight_value: #{flight_value}\n"\
+    "flight_rank: #{flight_rank}\n"\
+    "graded_values: #{graded_values}\n"\
+    "graded_ranks: #{graded_ranks}\n"\
   end
 end
