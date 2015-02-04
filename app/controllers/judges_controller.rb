@@ -140,4 +140,45 @@ class JudgesController < ApplicationController
     end
   end
 
+  def activity
+    # Hash "auto-vivification", see: 
+    # http://stackoverflow.com/questions/170223/hashes-of-hashes-idiom-in-ruby
+    # Result is a triple-nested hash which we key via IAC#, 
+    # Experience Type (ChiefJudge, LineAssist, etc.), and Category Type (AdvUnl / Other)
+    judge_experience = Hash.new { |h, k| h[k] = Hash.new { |h,k| h[k] = Hash.new(0) } }
+
+    # 'year' is passed in via the HTTP GET request
+    if (params[:year])
+      @year = params[:year]
+    else
+      c_year = Contest.select('max(year(start)) as max_year').first
+      @year = c_year.max_year
+    end
+
+    # Get Category.id values for Adv & Unl, Power & Glider
+    adv_unl_ids = Category.where(category: [ 'Advanced', 'Unlimited' ]).pluck(:id)
+
+    contests = Contest.where(['year(start) = ?', @year]).includes(:flights)
+    contests.each do |contest|
+      contest.flights.each do |flight|
+
+        pf_count = flight.pilot_flights.all.size
+        category_type = (adv_unl_ids.find_index(flight.category_id) ? 'AdvUnl' : 'Other')
+
+        judge_experience[flight.chief.iac_id]['ChiefJudge'][category_type] += pf_count
+        if (flight.assist)
+          judge_experience[flight.assist.iac_id]['ChiefAssist'][category_type] += pf_count
+        end
+
+        FResult.where(flight_id: flight.id).jf_results.first.judges.each do |judge|
+          judge_experience[judge.iac_id]['LineJudge'][category_type] += pf_count
+          if judge.assist
+            judge_experience[assist.iac_id]['LineAssist'][category_type] += pf_count
+          end
+        end
+      end
+    end
+    return judge_experience.to_json
+  end
+
 end
