@@ -78,6 +78,8 @@ FactoryGirl.define do
     r.association :category
     r.name 'Known'
     r.sequence(:sequence)
+    r.association :chief, :factory => :member
+    r.association :assist, :factory => :member
   end
   factory :nationals_imdt_known, :class => Flight do |r|
     r.association :contest, :factory => :nationals
@@ -214,6 +216,11 @@ FactoryGirl.define do
     r.values [75, 80, 80, 85, 85, 85, 85, 85, 80, 80, 85, 80, 85, 85]
   end
 ### PfjResult
+  factory :pfj_result do |r|
+    r.association :pilot_flight
+    r.association :judge
+    r.graded_values [75, 80, 80, 85, 85, 85, 85, 85, 80, 80, 85, 80, 85, 85]
+  end
   factory :existing_pfj_result, :class => PfjResult do |r|
     r.association :pilot_flight, :factory => :adams_known
     r.association :judge, :factory => :judge_jim
