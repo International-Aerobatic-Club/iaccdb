@@ -63,4 +63,11 @@ describe Member, :type => :model do
     found = Member.find_or_create_by_iac_number(iac_number, 'Pat', 'Griffin')
     expect(found).to eq mr_4
   end
+
+  it 'correctly merges two members' do
+    mr_1 = create(:member)
+    mr_2 = create(:member)
+    mr_1.merge_member(mr_2)
+    expect(Members.find(mr_2.id)).to match_array([])
+  end
 end
