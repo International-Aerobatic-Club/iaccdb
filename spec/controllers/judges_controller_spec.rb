@@ -40,7 +40,7 @@ describe JudgesController, :type => :controller do
     [c2fa, c2fs].each do |flt|
       flt.pilot_flights.each do |pf|
         [j3a1, j2a3].each do |j|
-          create :score, pilot_flight: pf, judge: j
+          @score = create :score, pilot_flight: pf, judge: j
         end
       end
     end
@@ -54,10 +54,11 @@ describe JudgesController, :type => :controller do
     @a3 = j2a3.assist.iac_id.to_s
   end
 
-  it 'responds with complete judge experience data' do
+  it 'responds with complete recent judge experience data' do
     response = get :activity
-    activity = JSON.parse(response.body)
-    puts "Activity is: #{activity}"
+    data = JSON.parse(response.body)
+    year = data['Year']
+    activity = data['Activity']
     expect(activity[@cj]).to_not be nil
     expect(activity[@cj]['ChiefJudge']).to_not be nil
     expect(activity[@cj]['ChiefJudge']['AdvUnl']).to eq 2
@@ -90,5 +91,23 @@ describe JudgesController, :type => :controller do
     expect(activity[@a3]['LineAssist']).to_not be nil
     expect(activity[@a3]['LineAssist']['AdvUnl']).to eq 1
     expect(activity[@a3]['LineAssist']['PrimSptInt']).to eq 1
+  end
+
+  it 'responds with specific year data' do
+    response = get :activity, parameters: {year:2011}
+    data = JSON.parse(response.body)
+    year = data['Year']
+    activity = data['Activity']
+    expect(year).to eq 2011
+    expect(activity[@a3]).to_not be nil
+  end
+
+  it 'behaves when missing judge for score' do
+    @score.judge = nil
+    @score.save
+    response = get :activity, parameters: {year:2011}
+    data = JSON.parse(response.body)
+    year = data['Year']
+    expect(year).to eq 2011
   end
 end

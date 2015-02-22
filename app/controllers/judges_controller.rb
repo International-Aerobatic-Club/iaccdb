@@ -163,9 +163,8 @@ class JudgesController < ApplicationController
         @judge_experience[flight.chief.iac_id]['ChiefJudge'][category_type] += pf_count unless flight.chief.nil?
         # TODO: Expand to handle multiple Chief Assistants
         @judge_experience[flight.assist.iac_id]['ChiefAssist'][category_type] += pf_count unless flight.assist.nil?
-        Score.joins(:pilot_flight).where(
-            pilot_flights: { flight_id: flight.id }).each do |s|
-          judge = s.judge
+        Judge.joins(scores: [:pilot_flight]).where(
+            pilot_flights: { flight_id: flight.id }).each do |judge|
           @judge_experience[judge.judge.iac_id]['LineJudge'][category_type] += pf_count
           if judge.assist
             @judge_experience[judge.assist.iac_id]['LineAssist'][category_type] += pf_count
@@ -173,7 +172,8 @@ class JudgesController < ApplicationController
         end
       end
     end
-    render json: @judge_experience
+    response = {'Year' => @year, 'Activity' => @judge_experience}
+    render json: response
   end
 
 end
