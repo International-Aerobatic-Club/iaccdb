@@ -140,12 +140,19 @@ class JudgesController < ApplicationController
     end
   end
 
+
+  # Report judging activity relevant to implement Rules 2.6.1, 2.6.2, and 2.6.3
   def activity
+
     # Hash "auto-vivification", see: 
     # http://stackoverflow.com/questions/170223/hashes-of-hashes-idiom-in-ruby
-    # Result is a triple-nested hash which we key via IAC#, Experience Type
-    # (ChiefJudge, LineAssist, etc.), and Category Type (AdvUnl / PrimSptInt)
-    @judge_experience = Hash.new { |h, k| h[k] = Hash.new { |h,k| h[k] = Hash.new(0) } }
+    # Result is a quadruple-nested hash which we key via IAC#, Contest #,
+    # Experience Type (ChiefJudge, LineAssist, etc.),
+    # and Category Type (AdvUnl / PrimSptInt)
+    @judge_experience = Hash.new { |h,k| h[k] = Hash.new { |h,k| h[k] = Hash.new { |h,k| h[k] = Hash.new(0) } } }
+
+    # Create a hash of Member.id => Member.iac_id
+    mh = Member.pluck(:id, :iac_id).to_h
 
     # 'year' may be passed in via the HTTP GET request.
     # If not, use the year of the newest Contest.
@@ -154,26 +161,47 @@ class JudgesController < ApplicationController
     # Get Category.id values for Adv & Unl, Power & Glider
     adv_unl_ids = Category.where(category: [ 'Advanced', 'Unlimited' ]).pluck(:id)
 
+    # Get all Contest objects for the year in question
     contests = Contest.where(['year(start) = ?', @year]).includes(:flights)
+
     contests.each do |contest|
+
+      # For each flight (e.g., Known/Free/Unknown)
       contest.flights.each do |flight|
+
+        # Count the number of pilot flights
         pf_count = flight.pilot_flights.all.size
+
+        # Determine whether the flight was Advanced/Unlimited or not
         category_type = (adv_unl_ids.find_index(flight.category_id) ? 'AdvUnl' : 'PrimSptInt')
 
-        @judge_experience[flight.chief.iac_id]['ChiefJudge'][category_type] += pf_count unless flight.chief.nil?
+        # Tally Chief Judge experience
+        @judge_experience[mh[flight.chief_id]][contest.id]['ChiefJudge'][category_type] += pf_count unless flight.chief.nil?
+
+        # Tally Chief Assistant experience
         # TODO: Expand to handle multiple Chief Assistants
-        @judge_experience[flight.assist.iac_id]['ChiefAssist'][category_type] += pf_count unless flight.assist.nil?
-        Judge.joins(scores: [:pilot_flight]).where(
-            pilot_flights: { flight_id: flight.id }).each do |judge|
-          @judge_experience[judge.judge.iac_id]['LineJudge'][category_type] += pf_count
-          if judge.assist
-            @judge_experience[judge.assist.iac_id]['LineAssist'][category_type] += pf_count
-          end
+        @judge_experience[mh[flight.assist_id]][contest.id]['ChiefAssist'][category_type] += pf_count unless flight.assist.nil?
+
+        # Tally experience for Line Judges and Line Judge Assistants
+        Judge.joins(scores: [:pilot_flight]).where(pilot_flights: { flight_id: flight.id }).each do |judge|
+
+          @judge_experience[mh[judge.judge_id]][contest.id]['LineJudge'][category_type] += 1
+          @judge_experience[mh[judge.assist_id]][contest.id]['LineAssist'][category_type] += 1 if judge.assist_id
+
         end
+
+        # Tally experience competing in Adv/Unl, per 2.6.1(c)
+        flight.pilot_flights.each do |pf|
+          @judge_experience[mh[pf.pilot_id]][contest.id]['Competitor'][category_type] += 1
+        end
+
       end
+
     end
+
     response = {'Year' => @year, 'Activity' => @judge_experience}
     render json: response
+
   end
 
 end
