@@ -144,12 +144,16 @@ class JudgesController < ApplicationController
   # Report judging activity relevant to implement Rules 2.6.1, 2.6.2, and 2.6.3
   def activity
 
-    # Hash "auto-vivification", see: 
-    # http://stackoverflow.com/questions/170223/hashes-of-hashes-idiom-in-ruby
-    # Result is a quadruple-nested hash which we key via IAC#, Contest #,
-    # Experience Type (ChiefJudge, LineAssist, etc.),
-    # and Category Type (AdvUnl / PrimSptInt)
-    @judge_experience = Hash.new { |h,k| h[k] = Hash.new { |h,k| h[k] = Hash.new { |h,k| h[k] = Hash.new(0) } } }
+    # Hash with one array per IAC number, with each array element being another
+    # array that describes a bit of contest experience relevant to Section 2.6
+    # of the Rule Book:
+    #  - Contest ID (for use in hyperlinks from iac.org to iaccdb.org)
+    #  - Role (Chief Judge, Chief Assistant, Line Judge, etc.)
+    #  - Boolean indicating whether the contest is Nationals or not
+    #  - Category (Prim, Spt, Int, Adv, Unl)
+    #  - Flight (Known, Free, Unknown)
+    #  - Number of pilot flights
+    @experience = Hash.new { |h,k| h[k] = Array.new }
 
     # Create a hash of Member.id => Member.iac_id
     mh = Member.pluck(:id, :iac_id).to_h
@@ -158,48 +162,46 @@ class JudgesController < ApplicationController
     # If not, use the year of the newest Contest.
     @year = params[:year] || Contest.order(:start).last.start.year
 
-    # Get Category.id values for Adv & Unl, Power & Glider
-    adv_unl_ids = Category.where(category: [ 'Advanced', 'Unlimited' ]).pluck(:id)
+    # Create a hash of Category.id => Category.name
+    ch = Category.pluck(:id, :name).to_h
 
     # Get all Contest objects for the year in question
-    contests = Contest.where(['year(start) = ?', @year]).includes(:flights)
+    Contest.where(['year(start) = ?', @year]).includes(:flights).find_each do |contest|
 
-    contests.each do |contest|
+      # Convenience var
+      nats = (contest.region == "National")
 
       # For each flight (e.g., Known/Free/Unknown)
-      contest.flights.each do |flight|
+      contest.flights.find_each do |flight|
 
-        # Count the number of pilot flights
-        pf_count = flight.pilot_flights.all.size
-
-        # Determine whether the flight was Advanced/Unlimited or not
-        category_type = (adv_unl_ids.find_index(flight.category_id) ? 'AdvUnl' : 'PrimSptInt')
+        # Convenience vars
+        category = ch[flight.category_id]
+        pf_count = flight.pilot_flights.all.size # Number of pilot flights
+        fname = flight.name
 
         # Tally Chief Judge experience
-        @judge_experience[mh[flight.chief_id]][contest.id]['ChiefJudge'][category_type] += pf_count unless flight.chief.nil?
+        @experience[mh[flight.chief_id]] << [contest.id, 'Chief Judge', nats, category, fname, pf_count] if flight.chief_id
 
         # Tally Chief Assistant experience
         # TODO: Expand to handle multiple Chief Assistants
-        @judge_experience[mh[flight.assist_id]][contest.id]['ChiefAssist'][category_type] += pf_count unless flight.assist.nil?
+        @experience[mh[flight.assist_id]] << [contest.id, 'Chief Assistant', nats, category, fname, pf_count] if flight.assist_id
 
         # Tally experience for Line Judges and Line Judge Assistants
-        Judge.joins(scores: [:pilot_flight]).where(pilot_flights: { flight_id: flight.id }).each do |judge|
-
-          @judge_experience[mh[judge.judge_id]][contest.id]['LineJudge'][category_type] += 1
-          @judge_experience[mh[judge.assist_id]][contest.id]['LineAssist'][category_type] += 1 if judge.assist_id
-
+        Judge.joins(scores: [:pilot_flight]).where(pilot_flights: { flight_id: flight.id }).distinct.find_each do |judge|
+          @experience[mh[judge.judge_id]] << [contest.id, 'Line Judge', nats, category, fname, pf_count]
+          @experience[mh[judge.assist_id]] << [contest.id, 'Line Assistant', nats, category, fname, pf_count] if judge.assist_id
         end
 
         # Tally experience competing in Adv/Unl, per 2.6.1(c)
-        flight.pilot_flights.each do |pf|
-          @judge_experience[mh[pf.pilot_id]][contest.id]['Competitor'][category_type] += 1
+        flight.pilot_flights.find_each do |pf|
+          @experience[mh[pf.pilot_id]] << [contest.id, 'Competitor', nats, category, fname, pf_count]
         end
 
       end
 
     end
 
-    response = {'Year' => @year, 'Activity' => @judge_experience}
+    response = { 'Year' => @year, 'Activity' => @experience }
     render json: response
 
   end
