@@ -194,7 +194,7 @@ class JudgesController < ApplicationController
 
         # Tally experience competing in Adv/Unl, per 2.6.1(c)
         flight.pilot_flights.find_each do |pf|
-          @experience[mh[pf.pilot_id]] << [contest.id, 'Competitor', nats, category, fname, pf_count]
+          @experience[mh[pf.pilot_id]] << [contest.id, 'Competitor', nats, category, fname, 1]
         end
 
       end
