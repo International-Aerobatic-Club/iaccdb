@@ -11,7 +11,6 @@ module IAC
   class RankComputer
     include Singleton
     include Log::ConfigLogger
-    cattr_accessor :logger
 
     def computeJudgeMetrics(flight, f_result)
       jf_results_by_judge = {}
