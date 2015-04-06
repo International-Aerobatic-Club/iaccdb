@@ -2,9 +2,10 @@
 FactoryGirl.define do
 ### Member
   factory :member do |r|
-    r.sequence(:iac_id) { |i| "4001#{i}" }
-    r.sequence(:family_name) { |i| "JonesMantra#{i}" }
-    r.sequence(:given_name) { |i| "Joseppi#{i}" }
+    r.sequence(:iac_id) { |i| Forgery(:basic).number(
+      at_least: 34, at_most: 440000) }
+    r.sequence(:family_name) { |i| Forgery(:name).last_name }
+    r.sequence(:given_name) { |i| Forgery(:name).first_name }
   end
   factory :tom_adams, :class => Member do |r|
     r.iac_id 1999
@@ -59,11 +60,15 @@ FactoryGirl.define do
     r.director 'Vicky Benzing'
   end
   factory :contest do |r|
-    r.sequence(:name) { |n| "Test contest #{n}" }
-    r.city 'Danbury'
-    r.state 'CT'
-    r.start '2011-09-25'
-    r.director 'Ron Chadwick'
+    r.sequence(:name) { |n| Forgery(:name).company_name + ' Aerobatic Open' }
+    r.sequence(:city) { |n| Forgery(:address).city }
+    r.sequence(:state) { |n| Forgery(:address).state_abbrev }
+    r.sequence(:start) do |n|
+      Forgery(:basic).number(at_least: 2011, at_most: 2020).to_s + '-' +
+      Forgery(:basic).number(at_least: 1, at_most: 12).to_s + '-' +
+      Forgery(:basic).number(at_least: 1, at_most: 28).to_s
+    end
+    r.sequence(:director) { |n| Forgery(:name).full_name }
   end
 ### Category
   factory :category do |c|
