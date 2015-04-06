@@ -219,6 +219,10 @@ FactoryGirl.define do
     r.values [75, 80, 80, 85, 85, 85, 85, 85, 80, 80, 85, 80, 85, 85]
   end
 ### PfjResult
+  factory :pfj_result do |r|
+    r.association :pilot_flight
+    r.association :judge
+  end
   factory :existing_pfj_result, :class => PfjResult do |r|
     r.association :pilot_flight, :factory => :adams_known
     r.association :judge, :factory => :judge_jim
