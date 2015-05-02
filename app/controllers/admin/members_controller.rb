@@ -34,7 +34,6 @@ class Admin::MembersController < ApplicationController
       flash[:alert] = 'select multiple members to merge'
       redirect_to admin_members_url 
     else
-      @target = @members.first.id
       @chief_flights = @members.inject([]) do |flights, member|
         check_dups_join(flights, member.chief) 
       end
@@ -50,6 +49,7 @@ class Admin::MembersController < ApplicationController
       @competitor_flights = @members.inject([]) do |flights, member|
         check_dups_join(flights, member.flights) 
       end
+      @target = @members.first.id
     end
   end
 
@@ -57,24 +57,7 @@ class Admin::MembersController < ApplicationController
     tgt = [params[:target]]
     ids = params[:selected].keys - tgt
     @target = Member.find(tgt).first
-    @members = Member.find(ids)
-    PilotFlight.update_all(['pilot_id = ?', @target.id], 
-      ['pilot_id in (?)', ids.join(',')])
-    Judge.update_all(['judge_id = ?', @target.id], 
-      ['judge_id in (?)', ids.join(',')])
-    Judge.update_all(['assist_id = ?', @target.id], 
-      ['assist_id in (?)', ids.join(',')])
-    Flight.update_all(['chief_id = ?', @target.id], 
-      ['chief_id in (?)', ids.join(',')])
-    Flight.update_all(['assist_id = ?', @target.id], 
-      ['assist_id in (?)', ids.join(',')])
-    PcResult.update_all(['pilot_id = ?', @target.id], 
-      ['pilot_id in (?)', ids.join(',')])
-    JcResult.update_all(['judge_id = ?', @target.id], 
-      ['judge_id in (?)', ids.join(',')])
-    JyResult.update_all(['judge_id = ?', @target.id], 
-      ['judge_id in (?)', ids.join(',')])
-    @members.each { |member| member.destroy }
+    @target.merge_members(ids)
     flash[:notice] = "Members merged into #{@target.name}"
     redirect_to admin_members_path(:anchor => @target.id)
   end
