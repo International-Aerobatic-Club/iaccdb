@@ -56,7 +56,7 @@ describe Admin::JasperController, :type => :controller do
     it 'returns new contest id when no cdbId' do
       post :results, :contest_xml => @valid_xml
       expect(response).to be_success
-      expect(response.body).to match(/\<cdbId\>1\<\/cdbId\>/)
+      expect(response.body).to match(/\<cdbId\>[1-9]+\<\/cdbId\>/)
     end
 
     it 'returns existing contest id when cdbId provided' do
@@ -73,7 +73,7 @@ describe Admin::JasperController, :type => :controller do
     expect(prcd.has_error).to eq false
     expect(prcd.error_description).to be_nil
     expect(prcd.data).not_to be_nil
-    expect(prcd.contest_id).to eq(1)
+    expect(prcd.contest_id).to be >= 1
   end
 
   it 'writes post data with contest id when cdbId provided' do
