@@ -29,8 +29,8 @@ class Admin::MembersController < ApplicationController
   end
 
   def merge_preview
-    @members = Member.find(params[:selected].keys)
-    if @members.length == 1
+    merge = MemberMerge.new(params[:selected].keys)
+    if !merge.has_multiple_members
       flash[:alert] = 'select multiple members to merge'
       redirect_to admin_members_url 
     else
@@ -50,6 +50,10 @@ class Admin::MembersController < ApplicationController
         check_dups_join(flights, member.flights) 
       end
       @target = @members.first.id
+      if (merge.has_collisions)
+        flash[:alert] = 'Data will be lost.  Some of the selected members participated together in the same flight.'
+      end
+      @collisions = merge.collisions
     end
   end
 
