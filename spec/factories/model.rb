@@ -83,6 +83,8 @@ FactoryGirl.define do
     r.association :category
     r.name 'Known'
     r.sequence(:sequence)
+    r.association :chief, :factory => :member
+    r.association :assist, :factory => :member
   end
   factory :nationals_imdt_known, :class => Flight do |r|
     r.association :contest, :factory => :nationals

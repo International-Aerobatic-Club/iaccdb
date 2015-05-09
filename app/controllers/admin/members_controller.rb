@@ -58,12 +58,16 @@ class Admin::MembersController < ApplicationController
   end
 
   def merge
-    tgt = [params[:target]]
-    ids = params[:selected].keys - tgt
-    @target = Member.find(tgt).first
-    @target.merge_members(ids)
-    flash[:notice] = "Members merged into #{@target.name}"
-    redirect_to admin_members_path(:anchor => @target.id)
+    @target = Member.find(params[:target])
+    if @target
+      merge = MemberMerge.new(params[:selected].keys)
+      merge.execute_merge(@target)
+      flash[:notice] = "Members merged into #{@target.name}"
+      redirect_to admin_members_path(:anchor => @target.id)
+    else
+      flash[:alert] = "No target member selected"
+      redirect_to merge_preview_path
+    end
   end
 
   ###
