@@ -6,10 +6,10 @@ describe MemberMerge, :type => :services do
   end
 
   it 'finds existing judge pair on judge' do
-    j1 = FactoryGirl.create :judge, judge: @mr_1
-    j2 = FactoryGirl.create :judge, judge: @mr_2, assist: j1.assist
-    score1 = FactoryGirl.create :score, judge:j1
-    score2 = FactoryGirl.create :score, judge:j2
+    j1 = create :judge, judge: @mr_1
+    j2 = create :judge, judge: @mr_2, assist: j1.assist
+    score1 = create :score, judge:j1
+    score2 = create :score, judge:j2
     
     expect(@merge.has_overlaps).to eq false
     expect(@merge.has_collisions).to eq false
@@ -22,10 +22,10 @@ describe MemberMerge, :type => :services do
   end
 
   it 'finds existing judge pair on assistant' do
-    j1 = FactoryGirl.create :judge, assist: @mr_1
-    j2 = FactoryGirl.create :judge, assist: @mr_2, judge: j1.judge
-    score1 = FactoryGirl.create :score, judge:j1
-    score2 = FactoryGirl.create :score, judge:j2
+    j1 = create :judge, assist: @mr_1
+    j2 = create :judge, assist: @mr_2, judge: j1.judge
+    score1 = create :score, judge:j1
+    score2 = create :score, judge:j2
     
     expect(@merge.has_overlaps).to eq false
     expect(@merge.has_collisions).to eq false
@@ -38,10 +38,10 @@ describe MemberMerge, :type => :services do
   end
 
   it 'creates needed judge pair on judge' do
-    j1 = FactoryGirl.create :judge, judge: @mr_1
-    j2 = FactoryGirl.create :judge, judge: @mr_2
-    score1 = FactoryGirl.create :score, judge:j1
-    score2 = FactoryGirl.create :score, judge:j2
+    j1 = create :judge, judge: @mr_1
+    j2 = create :judge, judge: @mr_2
+    score1 = create :score, judge:j1
+    score2 = create :score, judge:j2
     @merge.execute_merge(@mr_1)
     score1.reload
 
@@ -58,10 +58,10 @@ describe MemberMerge, :type => :services do
   end
 
   it 'creates needed judge pair on assistant' do
-    j1 = FactoryGirl.create :judge, assist: @mr_1
-    j2 = FactoryGirl.create :judge, assist: @mr_2
-    score1 = FactoryGirl.create :score, judge:j1
-    score2 = FactoryGirl.create :score, judge:j2
+    j1 = create :judge, assist: @mr_1
+    j2 = create :judge, assist: @mr_2
+    score1 = create :score, judge:j1
+    score2 = create :score, judge:j2
 
     expect(@merge.has_overlaps).to eq false
     expect(@merge.has_collisions).to eq false
@@ -78,18 +78,18 @@ describe MemberMerge, :type => :services do
   end
 
   it 'substitutes judge pairs for pfj_results' do
-    j1 = FactoryGirl.create :judge, judge: @mr_1
-    j2 = FactoryGirl.create :judge, judge: @mr_2
-    12.times { FactoryGirl.create :pfj_result, judge:j1 }
-    12.times { FactoryGirl.create :pfj_result, judge:j2 }
+    j1 = create :judge, judge: @mr_1
+    j2 = create :judge, judge: @mr_2
+    12.times { create :pfj_result, judge:j1 }
+    12.times { create :pfj_result, judge:j2 }
 
     judge_pairs = PfjResult.all.collect { |r| r.judge }
     expect(judge_pairs.length).to eq 24
     judges = judge_pairs.collect { |jp| jp.judge }
     judges = judges.uniq
     expect(judges.length).to eq 2
-    expect(judges).to include(j1)
-    expect(judges).to include(j2)
+    expect(judges).to include(@mr_1)
+    expect(judges).to include(@mr_2)
 
     expect(@merge.has_overlaps).to eq false
     expect(@merge.has_collisions).to eq false
@@ -100,23 +100,23 @@ describe MemberMerge, :type => :services do
     judges = judge_pairs.collect { |jp| jp.judge }
     judges = judges.uniq
     expect(judges.length).to eq 1
-    expect(judges).to include(j1)
-    expect(judges).to_not include(j2)
+    expect(judges).to include(@mr_1)
+    expect(judges).to_not include(@mr_2)
   end
 
   it 'substitutes judge pairs for jf_results' do
-    j1 = FactoryGirl.create :judge, judge: @mr_1
-    j2 = FactoryGirl.create :judge, judge: @mr_2
-    12.times { FactoryGirl.create :jf_result, judge:j1 }
-    12.times { FactoryGirl.create :jf_result, judge:j2 }
+    j1 = create :judge, judge: @mr_1
+    j2 = create :judge, judge: @mr_2
+    12.times { create :jf_result, judge:j1 }
+    12.times { create :jf_result, judge:j2 }
 
     judge_pairs = JfResult.all.collect { |r| r.judge }
     expect(judge_pairs.length).to eq 24
     judges = judge_pairs.collect { |jp| jp.judge }
     judges = judges.uniq
     expect(judges.length).to eq 2
-    expect(judges).to include(j1)
-    expect(judges).to include(j2)
+    expect(judges).to include(@mr_1)
+    expect(judges).to include(@mr_2)
 
     expect(@merge.has_overlaps).to eq false
     expect(@merge.has_collisions).to eq false
@@ -127,23 +127,23 @@ describe MemberMerge, :type => :services do
     judges = judge_pairs.collect { |jp| jp.judge }
     judges = judges.uniq
     expect(judges.length).to eq 1
-    expect(judges).to include(j1)
-    expect(judges).to_not include(j2)
+    expect(judges).to include(@mr_1)
+    expect(judges).to_not include(@mr_2)
   end
 
   it 'substitutes judge pairs for scores' do
-    j1 = FactoryGirl.create :judge, judge: @mr_1
-    j2 = FactoryGirl.create :judge, judge: @mr_2
-    12.times { FactoryGirl.create :score, judge:j1 }
-    12.times { FactoryGirl.create :score, judge:j2 }
+    j1 = create :judge, judge: @mr_1
+    j2 = create :judge, judge: @mr_2
+    12.times { create :score, judge:j1 }
+    12.times { create :score, judge:j2 }
 
     judge_pairs = Score.all.collect { |s| s.judge }
     expect(judge_pairs.length).to eq 24
     judges = judge_pairs.collect { |jp| jp.judge }
     judges = judges.uniq
     expect(judges.length).to eq 2
-    expect(judges).to include(j1)
-    expect(judges).to include(j2)
+    expect(judges).to include(@mr_1)
+    expect(judges).to include(@mr_2)
 
     expect(@merge.has_overlaps).to eq false
     expect(@merge.has_collisions).to eq false
@@ -154,19 +154,19 @@ describe MemberMerge, :type => :services do
     judges = judge_pairs.collect { |jp| jp.judge }
     judges = judges.uniq
     expect(judges.length).to eq 1
-    expect(judges).to include(j1)
-    expect(judges).to_not include(j2)
+    expect(judges).to include(@mr_1)
+    expect(judges).to_not include(@mr_2)
   end
 
   it 'removes orphaned judge pairs' do
-    j1 = FactoryGirl.create :judge, judge: @mr_1
-    j2 = FactoryGirl.create :judge, judge: @mr_2
-    j3 = FactoryGirl.create :judge, assist: @mr_1
-    j4 = FactoryGirl.create :judge, assist: @mr_2
-    4.times do { FactoryGirl.create :score, judge:j1 }
-    4.times do { FactoryGirl.create :score, judge:j2 }
-    4.times do { FactoryGirl.create :score, judge:j3 }
-    4.times do { FactoryGirl.create :score, judge:j4 }
+    j1 = create :judge, judge: @mr_1
+    j2 = create :judge, judge: @mr_2
+    j3 = create :judge, assist: @mr_1
+    j4 = create :judge, assist: @mr_2
+    4.times { create :score, judge:j1 }
+    4.times { create :score, judge:j2 }
+    4.times { create :score, judge:j3 }
+    4.times { create :score, judge:j4 }
 
     expect(@merge.has_overlaps).to eq false
     expect(@merge.has_collisions).to eq false
@@ -179,9 +179,55 @@ describe MemberMerge, :type => :services do
     expect(judges).to include j3
   end
 
+  it 'substitutes judge for jy_results' do
+    12.times { create :jy_result, judge:@mr_1 }
+    12.times { create :jy_result, judge:@mr_2 }
+
+    jy_results = JyResult.all.collect { |f| f.judge }
+    expect(jy_results.length).to eq 24
+    jy_results = jy_results.uniq
+    expect(jy_results.length).to eq 2
+    expect(jy_results).to include(@mr_1)
+    expect(jy_results).to include(@mr_2)
+
+    expect(@merge.has_overlaps).to eq false
+    expect(@merge.has_collisions).to eq false
+    @merge.execute_merge(@mr_1)
+
+    jy_results = JyResult.all.collect { |f| f.judge }
+    expect(jy_results.length).to eq 24
+    jy_results = jy_results.uniq
+    expect(jy_results.length).to eq 1
+    expect(jy_results).to include(@mr_1)
+    expect(jy_results).to_not include(@mr_2)
+  end
+
+  it 'substitutes judge for jc_results' do
+    12.times { create :jc_result, judge:@mr_1 }
+    12.times { create :jc_result, judge:@mr_2 }
+
+    jc_results = JcResult.all.collect { |f| f.judge }
+    expect(jc_results.length).to eq 24
+    jc_results = jc_results.uniq
+    expect(jc_results.length).to eq 2
+    expect(jc_results).to include(@mr_1)
+    expect(jc_results).to include(@mr_2)
+
+    expect(@merge.has_overlaps).to eq false
+    expect(@merge.has_collisions).to eq false
+    @merge.execute_merge(@mr_1)
+
+    jc_results = JcResult.all.collect { |f| f.judge }
+    expect(jc_results.length).to eq 24
+    jc_results = jc_results.uniq
+    expect(jc_results.length).to eq 1
+    expect(jc_results).to include(@mr_1)
+    expect(jc_results).to_not include(@mr_2)
+  end
+
   it 'substitutes chief judge for flights' do
-    12.times { FactoryGirl.create :flight, chief:@mr_1 }
-    12.times { FactoryGirl.create :flight, chief:@mr_2 }
+    12.times { create :flight, chief:@mr_1 }
+    12.times { create :flight, chief:@mr_2 }
 
     chief_judges = Flight.all.collect { |f| f.chief }
     expect(chief_judges.length).to eq 24
@@ -203,8 +249,8 @@ describe MemberMerge, :type => :services do
   end
 
   it 'substitutes assistant judge for flights' do
-    12.times { FactoryGirl.create :flight, assist:@mr_1 }
-    12.times { FactoryGirl.create :flight, assist:@mr_2 }
+    12.times { create :flight, assist:@mr_1 }
+    12.times { create :flight, assist:@mr_2 }
 
     assist_judges = Flight.all.collect { |f| f.assist }
     expect(assist_judges.length).to eq 24
@@ -226,8 +272,8 @@ describe MemberMerge, :type => :services do
   end
 
   it 'substitutes pilot for pilot_flights' do
-    12.times { FactoryGirl.create :pilot_flight, pilot:@mr_1 }
-    12.times { FactoryGirl.create :pilot_flight, pilot:@mr_2 }
+    12.times { create :pilot_flight, pilot:@mr_1 }
+    12.times { create :pilot_flight, pilot:@mr_2 }
 
     pilots = PilotFlight.all.collect { |f| f.pilot }
     expect(pilots.length).to eq 24
@@ -249,8 +295,8 @@ describe MemberMerge, :type => :services do
   end
 
   it 'substitutes member for result_members' do
-    12.times { FactoryGirl.create :result_member, member:@mr_1 }
-    12.times { FactoryGirl.create :result_member, member:@mr_2 }
+    12.times { create :result_member, member:@mr_1 }
+    12.times { create :result_member, member:@mr_2 }
 
     members = ResultMember.all.collect { |f| f.member }
     expect(members.length).to eq 24
@@ -272,8 +318,8 @@ describe MemberMerge, :type => :services do
   end
 
   it 'substitutes pilot for result' do
-    12.times { FactoryGirl.create :result, pilot:@mr_1 }
-    12.times { FactoryGirl.create :result, pilot:@mr_2 }
+    12.times { create :result, pilot:@mr_1 }
+    12.times { create :result, pilot:@mr_2 }
 
     pilots = Result.all.collect { |f| f.pilot }
     expect(pilots.length).to eq 24
@@ -295,8 +341,8 @@ describe MemberMerge, :type => :services do
   end
 
   it 'substitutes pilot for regional_pilots' do
-    12.times { FactoryGirl.create :regional_pilot, pilot:@mr_1 }
-    12.times { FactoryGirl.create :regional_pilot, pilot:@mr_2 }
+    12.times { create :regional_pilot, pilot:@mr_1 }
+    12.times { create :regional_pilot, pilot:@mr_2 }
 
     pilots = RegionalPilot.all.collect { |f| f.pilot }
     expect(pilots.length).to eq 24
@@ -318,8 +364,8 @@ describe MemberMerge, :type => :services do
   end
 
   it 'substitutes pilot for pc_results' do
-    12.times { FactoryGirl.create :pc_result, pilot:@mr_1 }
-    12.times { FactoryGirl.create :pc_result, pilot:@mr_2 }
+    12.times { create :pc_result, pilot:@mr_1 }
+    12.times { create :pc_result, pilot:@mr_2 }
 
     pilots = PcResult.all.collect { |f| f.pilot }
     expect(pilots.length).to eq 24
@@ -340,56 +386,9 @@ describe MemberMerge, :type => :services do
     expect(pilots).to_not include(@mr_2)
   end
 
-  it 'substitutes judge for jy_results' do
-    12.times { FactoryGirl.create :jy_result, judge:@mr_1 }
-    12.times { FactoryGirl.create :jy_result, judge:@mr_2 }
-
-    judges = JyResult.all.collect { |f| f.judge }
-    expect(judges.length).to eq 24
-    judges = judges.uniq
-    expect(judges.length).to eq 2
-    expect(judges).to include(@mr_1)
-    expect(judges).to include(@mr_2)
-
-    expect(@merge.has_overlaps).to eq false
-    expect(@merge.has_collisions).to eq false
-    @merge.execute_merge(@mr_1)
-
-    judges = JyResult.all.collect { |f| f.judge }
-    expect(judges.length).to eq 24
-    judges = judges.uniq
-    expect(judges.length).to eq 1
-    expect(judges).to include(@mr_1)
-    expect(judges).to_not include(@mr_2)
-  end
-
-  it 'substitutes judge for jf_results' do
-    12.times { FactoryGirl.create :jf_result, judge:@mr_1 }
-    12.times { FactoryGirl.create :jf_result, judge:@mr_2 }
-
-    judges = JfResult.all.collect { |f| f.judge }
-    expect(judges.length).to eq 24
-    judges = judges.uniq
-    expect(judges.length).to eq 2
-    expect(judges).to include(@mr_1)
-    expect(judges).to include(@mr_2)
-
-    expect(@merge.has_overlaps).to eq false
-    expect(@merge.has_collisions).to eq false
-    expect(@merge.has_collisions).to eq false
-    @merge.execute_merge(@mr_1)
-
-    judges = JfResult.all.collect { |f| f.judge }
-    expect(judges.length).to eq 24
-    judges = judges.uniq
-    expect(judges.length).to eq 1
-    expect(judges).to include(@mr_1)
-    expect(judges).to_not include(@mr_2)
-  end
-
   it 'notifies when two members have the same role on the same flight' do
-    pf = FactoryGirl.create :pilot_flight, pilot:@mr_1
-    FactoryGirl.create :pilot_flight, pilot:@mr_2, flight: pf.flight
+    pf = create :pilot_flight, pilot:@mr_1
+    create :pilot_flight, pilot:@mr_2, flight: pf.flight
 
     expect(@merge.has_collisions).to eq true
     flight_collisions = @merge.flight_collisions
@@ -404,9 +403,9 @@ describe MemberMerge, :type => :services do
   end
 
   it 'notifies when two members have different roles on the same flight' do
-    pf = FactoryGirl.create :pilot_flight, pilot:@mr_1
-    jp = FactoryGirl.create :judge, judge:@mr_2
-    score = FactoryGirl.create :score, judge: jp, pilot_flight: pf
+    pf = create :pilot_flight, pilot:@mr_1
+    jp = create :judge, judge:@mr_2
+    score = create :score, judge: jp, pilot_flight: pf
 
     expect(@merge.has_overlaps).to eq true
     flight_overlaps = @merge.flight_overlaps
@@ -420,58 +419,58 @@ describe MemberMerge, :type => :services do
     expect(roles.include?('judge')).to eq true
   end
 
-  context 'well connected members' do
-    before :example do
-      j = FactoryGirl.create :judge, judge: @mr_1
-      FactoryGirl.create :score, judge:j
-      j = FactoryGirl.create :judge, judge: @mr_2
-      FactoryGirl.create :score, judge:j
-      j = FactoryGirl.create :judge, assist: @mr_1
-      FactoryGirl.create :score, judge:j
-      j = FactoryGirl.create :judge, assist: @mr_2
-      FactoryGirl.create :score, judge:j
-      j = FactoryGirl.create :judge, judge: @mr_1
-      FactoryGirl.create(:pfj_result, judge:j)
-      j = FactoryGirl.create :judge, judge: @mr_2
-      FactoryGirl.create(:pfj_result, judge:j)
-      j = FactoryGirl.create :judge, judge: @mr_1
-      FactoryGirl.create(:jf_result, judge:j)
-      j = FactoryGirl.create :judge, judge: @mr_2
-      FactoryGirl.create(:jf_result, judge:j)
-      j = FactoryGirl.create :judge, judge: @mr_1
-      FactoryGirl.create(:score, judge:j)
-      j = FactoryGirl.create :judge, judge: @mr_2
-      FactoryGirl.create(:score, judge:j)
-      FactoryGirl.create :flight, chief:@mr_1
-      FactoryGirl.create :flight, chief:@mr_2
-      FactoryGirl.create :flight, assist:@mr_1
-      FactoryGirl.create :flight, assist:@mr_2
-      FactoryGirl.create :pilot_flight, pilot:@mr_1
-      FactoryGirl.create :pilot_flight, pilot:@mr_2
-      FactoryGirl.create :result_member, member:@mr_1
-      FactoryGirl.create :result_member, member:@mr_2
-      FactoryGirl.create :result, pilot:@mr_1
-      FactoryGirl.create :result, pilot:@mr_2
-      FactoryGirl.create :regional_pilot, pilot:@mr_1
-      FactoryGirl.create :regional_pilot, pilot:@mr_2
-      FactoryGirl.create :pc_result, pilot:@mr_1
-      FactoryGirl.create :pc_result, pilot:@mr_2
-      FactoryGirl.create :jy_result, judge:@mr_1
-      FactoryGirl.create :jy_result, judge:@mr_2
-      FactoryGirl.create :jf_result, judge:@mr_1
-      FactoryGirl.create :jf_result, judge:@mr_2
-      expect(@merge.has_overlaps).to eq false
-      expect(@merge.has_collisions).to eq false
-    end
+  it 'removes the merged members' do
+    j = create :judge, judge: @mr_1
+    create :score, judge:j
+    j = create :judge, judge: @mr_2
+    create :score, judge:j
 
-    it 'orphans the merged members' do
-      @merge.execute_merge(@mr_1)
-    end
+    j = create :judge, assist: @mr_1
+    create :score, judge:j
+    j = create :judge, assist: @mr_2
+    create :score, judge:j
 
-    it 'removes the merged members' do
-      @merge.execute_merge(@mr_1)
-      expect(Member.find(@mr_2.id)).to raise RecordNotFound
-      expect(Member.find(@mr_1.id)).to match_array([@mr_1])
-    end
+    j = create :judge, judge: @mr_1
+    create(:pfj_result, judge:j)
+    j = create :judge, judge: @mr_2
+    create(:pfj_result, judge:j)
+
+    j = create :judge, judge: @mr_1
+    create(:jf_result, judge:j)
+    j = create :judge, judge: @mr_2
+    create(:jf_result, judge:j)
+
+    create :jy_result, judge:@mr_1
+    create :jy_result, judge:@mr_2
+
+    create :jc_result, judge:@mr_1
+    create :jc_result, judge:@mr_2
+
+    create :flight, chief:@mr_1
+    create :flight, chief:@mr_2
+    create :flight, assist:@mr_1
+    create :flight, assist:@mr_2
+
+    create :pilot_flight, pilot:@mr_1
+    create :pilot_flight, pilot:@mr_2
+
+    create :result_member, member:@mr_1
+    create :result_member, member:@mr_2
+
+    create :result, pilot:@mr_1
+    create :result, pilot:@mr_2
+
+    create :regional_pilot, pilot:@mr_1
+    create :regional_pilot, pilot:@mr_2
+
+    create :pc_result, pilot:@mr_1
+    create :pc_result, pilot:@mr_2
+
+    expect(@merge.has_overlaps).to eq false
+    expect(@merge.has_collisions).to eq false
+
+    @merge.execute_merge(@mr_1)
+    expect(Member.find(@mr_2.id)).to raise RecordNotFound
+    expect(Member.find(@mr_1.id)).to match_array([@mr_1])
   end
 end

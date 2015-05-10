@@ -263,6 +263,11 @@ FactoryGirl.define do
     r.association :judge, :factory => :member
     r.association :c_result, :factory => :c_result
   end
+### JyResult
+  factory :jy_result do |r|
+    r.association :judge, :factory => :member
+    r.association :category
+  end
 ### FResult
   factory :f_result do |r|
     r.association :flight
@@ -292,5 +297,17 @@ FactoryGirl.define do
         end
       end
     end
+  end
+### ResultMember
+  factory :result_member do |r|
+    r.association :result
+    r.association :member
+  end
+### RegionalPilot
+  factory :regional_pilot do |r|
+    r.association :pilot, :factory => :member
+    r.association :category
+    r.region 'NorthEast'
+    r.year 2015
   end
 end

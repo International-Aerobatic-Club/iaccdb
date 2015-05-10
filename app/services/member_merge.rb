@@ -54,6 +54,18 @@ class MemberMerge
     @collisions.uniq
   end
 
+  def execute_merge(target)
+    @target = target
+  end
+
+  def has_overlaps
+    true
+  end
+
+  def overlaps
+    []
+  end
+
   ###
   private
   ###
