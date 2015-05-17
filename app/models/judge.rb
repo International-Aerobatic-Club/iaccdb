@@ -44,7 +44,7 @@ class Judge < ActiveRecord::Base
       unless new_judge
         new_judge = Judge.create(:judge_id => j_id, :assist_id => assist_id)
       end
-      replace_with_judge_pair(new_judge)
+      Score.where('judge_id = ?', id).update_all(judge_id: new_judge.id)
     end
   end
 
@@ -58,18 +58,8 @@ class Judge < ActiveRecord::Base
       unless new_judge
         new_judge = Judge.create(:judge_id => judge_id, :assist_id => a_id)
       end
-      replace_with_judge_pair(new_judge)
+      Score.where('judge_id = ?', id).update_all(judge_id: new_judge.id)
     end
-  end
-
-  #######
-  private
-  #######
-  
-  def replace_with_judge_pair(new_judge)
-    Score.where('judge_id = ?', id).update_all(judge_id: new_judge.id)
-    PfjResult.where('judge_id = ?', id).update_all(judge_id: new_judge.id)
-    JfResult.where('judge_id = ?', id).update_all(judge_id: new_judge.id)
   end
 
 end
