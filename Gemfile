@@ -15,6 +15,9 @@ gem 'coffee-rails'
 gem 'uglifier'
 gem 'jbuilder'
 
+# memoization used sparingly where appropriate
+gem 'memoist2'
+
 group :development, :test do
   gem 'rspec-rails'
   gem 'sqlite3'
