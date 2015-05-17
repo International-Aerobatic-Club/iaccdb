@@ -82,37 +82,4 @@ class Member < ActiveRecord::Base
     pc_results.joins(:c_result => :contest).where('year(contests.start) = ?', year).all
   end
 
-  def merge_members(ids)
-    target_ids = ids.join(',')
-    PilotFlight.update_all(['pilot_id = ?', id], 
-      ['pilot_id in (?)', target_ids])
-    Flight.update_all(['chief_id = ?', id], 
-      ['chief_id in (?)', target_ids])
-    Flight.update_all(['assist_id = ?', id], 
-      ['assist_id in (?)', target_ids])
-    PcResult.update_all(['pilot_id = ?', id], 
-      ['pilot_id in (?)', target_ids])
-    JcResult.update_all(['judge_id = ?', id], 
-      ['judge_id in (?)', target_ids])
-    JyResult.update_all(['judge_id = ?', id], 
-      ['judge_id in (?)', target_ids])
-    RegionalPilot.update_all(['pilot_id = ?', id], 
-      ['pilot_id in (?)', target_ids])
-    Result.update_all(['pilot_id = ?', id], 
-      ['pilot_id in (?)', target_ids])
-    ResultMember.update_all(['member_id = ?', id], 
-      ['member_id in (?)', target_ids])
-    judges_j = Judge.where(['judge_id in (?)', target_ids])
-    judges_j.each do |jp|
-      jp.merge_judge(id)
-      jp.destroy
-    end
-    judges_a = Judge.where(['assist_id in (?)', target_ids])
-    judges_a.each do |jp|
-      jp.merge_assist(id)
-      jp.destroy
-    end
-    Member.where(['id in (?)', ids]).destroy
-  end
-
 end
