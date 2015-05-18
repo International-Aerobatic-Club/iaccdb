@@ -32,6 +32,8 @@ group :test do
   gem 'factory_girl_rails'
   gem 'database_cleaner'
   gem 'forgery'
+  gem 'capybara'
+  gem 'launchy'
 end
 
 group :production do
