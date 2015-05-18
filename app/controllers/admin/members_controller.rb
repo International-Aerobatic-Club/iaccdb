@@ -34,26 +34,29 @@ class Admin::MembersController < ApplicationController
       flash[:alert] = 'select multiple members to merge'
       redirect_to admin_members_url 
     else
-      @chief_flights = @members.inject([]) do |flights, member|
-        check_dups_join(flights, member.chief) 
-      end
-      @assist_chief_flights = @members.inject([]) do |flights, member|
-        check_dups_join(flights, member.assistChief) 
-      end
-      @judge_flights = @members.inject([]) do |flights, member|
-        check_dups_join(flights, member.judge_flights) 
-      end
-      @assist_flights = @members.inject([]) do |flights, member|
-        check_dups_join(flights, member.assist_flights) 
-      end
-      @competitor_flights = @members.inject([]) do |flights, member|
-        check_dups_join(flights, member.flights) 
-      end
-      @target = @members.first.id
+      role_flights = merge.role_flights
+      @chief_flights = role_flights[:chief_judge]
+      @assist_chief_flights = role_flights[:assist_chief_judge]
+      @judge_flights = role_flights[:line_judge]
+      @assist_flights = role_flights[:assist_line_judge]
+      @competitor_flights = role_flights[:competitor]
+      @target = merge.default_target
+      @members = merge.members
+
       if (merge.has_collisions)
-        flash[:alert] = 'Data will be lost.  Some of the selected members participated together in the same flight.'
+        flash[:alert] = 
+          'Data will be lost.  ' +
+          'Some of the selected members have the same role in the same flight.'
       end
-      @collisions = merge.collisions
+      @collisions = merge.flight_collisions
+
+      if (merge.has_overlaps)
+        flash[:notice] = 
+          'Some selected members have different roles on the same flight.  ' +
+          'Chief and line judge is probably okay.  ' +
+          'Pilot and judge is probably not okay.'
+      end
+      @overlaps = merge.flight_overlaps
     end
   end
 

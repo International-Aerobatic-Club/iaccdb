@@ -27,6 +27,8 @@ class MemberMerge
     MemberMerge.role_name(role)
   end
 
+  attr_reader :members
+
   # create with an array of member id's
   def initialize(member_ids)
     @members = Member.find(member_ids)
@@ -38,6 +40,10 @@ class MemberMerge
 
   def has_multiple_members
     1 < @members.count
+  end
+
+  def default_target
+    @members.first
   end
 
   def chief_flights
@@ -81,6 +87,7 @@ class MemberMerge
   end
   memoize :flight_collisions
 
+  # two or more included members have the same role on the same flight
   def has_collisions
     !flight_collisions.empty?
   end
@@ -93,10 +100,14 @@ class MemberMerge
   end
   memoize :flight_overlaps
 
+  # two or more included members have some role on a given flight
   def has_overlaps
     !flight_overlaps.empty?
   end
 
+  # returns all flights for all members organized by role
+  # as a hash: { :competitor => [<flight_1>, <flight_2>] }
+  # see ROLES for the list of roles
   def role_flights
     populate
     @role_flights
