@@ -33,25 +33,40 @@ RSpec.describe 'admin member merge', :type => :feature do
     select_members_and_merge
   end
 
-  it 'shows overlaps with a warning' do
+  it 'shows collisions with a warning' do
     pf = create :pilot_flight, pilot: @member_list[0]
     create :pilot_flight, flight: pf.flight, pilot: @member_list[1]
     select_members_and_merge
-    save_and_open_page
     expect(page).to have_css 'p#alert'
-    expect(page).to_not have_css 'p#notice'
     within 'p#alert' do
       expect(page).to have_content 'Data will be lost.'
     end
-    expect(page).to have_css 'p#overlaps'
-    within 'div#overlaps' do
+    expect(page).to_not have_css 'p#notice'
+    expect(page).to have_css 'div#collisions'
+    within 'div#collisions' do
       expect(page).to have_content MemberMerge.role_name(:competitor)
       expect(page).to have_content pf.flight.displayName
+      expect(page).to have_content pf.contest.year_name
     end
   end
 
-  it 'shows collisions with a warning' do
-    fail
+  it 'shows overlaps with a warning' do
+    pf = create :pilot_flight, pilot: @member_list[0]
+    jp = create :judge, judge: @member_list[0]
+    create :score, judge: jp, pilot_flight: pf
+    select_members_and_merge
+    expect(page).to have_css 'p#notice'
+    within 'p#notice' do
+      expect(page).to have_content 'different roles on the same flight'
+    end
+    expect(page).to_not have_css 'p#alert'
+    expect(page).to have_css 'div#overlaps'
+    within 'div#overlaps' do
+      expect(page).to have_content MemberMerge.role_name(:competitor)
+      expect(page).to have_content MemberMerge.role_name(:line_judge)
+      expect(page).to have_content pf.flight.displayName
+      expect(page).to have_content pf.contest.year_name
+    end
   end
 
   it 'shows both overlaps and collisions when both occur' do

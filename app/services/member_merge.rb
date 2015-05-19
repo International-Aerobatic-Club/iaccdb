@@ -81,6 +81,7 @@ class MemberMerge
   end
   memoize :competitor_flights
 
+  # array of hash { :role => <role>, :flight => <flight>, :contest => <contest> }
   def flight_collisions
     populate
     @collisions.to_a
@@ -92,11 +93,17 @@ class MemberMerge
     !flight_collisions.empty?
   end
 
+  # array of hash { flight: <flight>, contest: <contest>, roles: Set of <role> }
   def flight_overlaps
     populate
-    @flight_roles.select do |key, value|
+    overlaps = @flight_roles.select do |key, value|
       1 < value.length
     end
+    flat_overlaps = []
+    overlaps.each_pair do |contest_flight, roles|
+      flat_overlaps << { flight: contest_flight[:flight], contest: contest_flight[:contest], roles: roles }
+    end
+    flat_overlaps
   end
   memoize :flight_overlaps
 
@@ -106,7 +113,10 @@ class MemberMerge
   end
 
   # returns all flights for all members organized by role
-  # as a hash: { :competitor => [<flight_1>, <flight_2>] }
+  # as a hash: { :competitor => [ 
+  #  { :flight => <flight_1>, :contest => <contest_1> }, 
+  #  { :flight => <flight_2>, :contest => <contest_2> }, 
+  # ] }
   # see ROLES for the list of roles
   def role_flights
     populate
@@ -125,7 +135,7 @@ class MemberMerge
     unless (@members.include?(@target))
       raise ArgumentError.new("target must be one of the members in the merge") 
     end
-    contests = all_flights.collect { |role_flight| role_flight[:flight].contest }
+    contests = all_flights.collect { |role_flight| role_flight[:contest] }
     merge_members
     contests.uniq.each do |contest|
       Delayed::Job.enqueue Jobs::ComputeFlightsJob.new(contest)
@@ -148,16 +158,18 @@ class MemberMerge
 
   def check_dups_join(role, flights_accum, flights)
     flights.each do |flight|
-      role_flight = { :role => role, :flight => flight }
+      contest = flight.contest
+      role_flight = { :role => role, :flight => flight, :contest => contest }
       if (@all_flights.include?(role_flight))
         @collisions.add(role_flight)
       else
         @all_flights.add(role_flight)
       end
-      @flight_roles[flight] ||= []
-      @flight_roles[flight] << role
+      contest_flight = { flight: flight, contest: contest }
+      @flight_roles[contest_flight] ||= Set.new
+      @flight_roles[contest_flight] << role
       @role_flights[role] ||= []
-      @role_flights[role] << flight
+      @role_flights[role] << contest_flight
     end
     flights
   end

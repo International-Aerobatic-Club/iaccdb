@@ -15,6 +15,27 @@
       <%= hidden_field_tag "selected[#{member.id}]" %>
     </p>
   <% end %>
+  <% if @collisions %>
+    <div id="collisions">
+      <h3>Collision Warning</h3>
+      <p>The merge will combine two members having the same role on the same flight:</p>
+      <ul id='collision-list'>
+        <%= render partial: 'merge_collision', collection: @collisions %>
+      </ul>
+    </div>
+  <% end %>
+  <% if @overlaps %>
+    <div id="overlaps">
+      <h3>Overlap Warning</h3>
+      <p>The merge will combine two members having different roles on the same flight.
+         Chief and line judge might be okay.
+         Pilot and judge is definitely not okay.
+         It would be unusual for a judge to be recorded also as an assistant.</p>
+      <ul id='overlap-list'>
+        <%= render partial: 'merge_overlap', collection: @overlaps %>
+      </ul>
+    </div>
+  <% end %>
   <%= submit_tag :merge, data: { :confirm => 'Be careful. This cannot be undone.' } %>
   <%= link_to :cancel, admin_members_path(:anchor => @target) %>
   <p>"Merge" will place all of the following with

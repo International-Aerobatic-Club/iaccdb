@@ -34,12 +34,7 @@ class Admin::MembersController < ApplicationController
       flash[:alert] = 'select multiple members to merge'
       redirect_to admin_members_url 
     else
-      role_flights = merge.role_flights
-      @chief_flights = role_flights[:chief_judge]
-      @assist_chief_flights = role_flights[:assist_chief_judge]
-      @judge_flights = role_flights[:line_judge]
-      @assist_flights = role_flights[:assist_line_judge]
-      @competitor_flights = role_flights[:competitor]
+      @role_flights = merge.role_flights
       @target = merge.default_target
       @members = merge.members
 
@@ -47,16 +42,18 @@ class Admin::MembersController < ApplicationController
         flash[:alert] = 
           'Data will be lost.  ' +
           'Some of the selected members have the same role in the same flight.'
+        @collisions = merge.flight_collisions
+      else
+        @collisions = nil
       end
-      @collisions = merge.flight_collisions
 
       if (merge.has_overlaps)
         flash[:notice] = 
-          'Some selected members have different roles on the same flight.  ' +
-          'Chief and line judge is probably okay.  ' +
-          'Pilot and judge is probably not okay.'
+          'Some selected members have different roles on the same flight.'
+        @overlaps = merge.flight_overlaps
+      else
+        @overlaps = nil
       end
-      @overlaps = merge.flight_overlaps
     end
   end
 

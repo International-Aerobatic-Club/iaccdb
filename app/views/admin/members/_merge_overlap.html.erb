@@ -1,0 +1,5 @@
+<li>
+  <%= merge_overlap[:flight].displayName %> at 
+  <%= merge_overlap[:contest].year_name %> as
+  <%= merge_overlap[:roles].collect{ |role| MemberMerge.role_name(role) }.join(', ') %>
+</li>
