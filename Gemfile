@@ -24,7 +24,6 @@ group :development, :test do
 end
 
 group :development do
-  gem 'nokogiri'
   #gem 'debugger'
 end
 
@@ -34,6 +33,7 @@ group :test do
   gem 'forgery'
   gem 'capybara'
   gem 'launchy'
+  gem 'capybara-selenium'
 end
 
 group :production do
