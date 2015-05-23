@@ -33,7 +33,8 @@ group :test do
   gem 'forgery'
   gem 'capybara'
   gem 'launchy'
-  gem 'capybara-selenium'
+  gem 'capybara-webkit'
+  gem 'selenium-webdriver'
 end
 
 group :production do
