@@ -2,7 +2,7 @@ class Admin::MembersController < ApplicationController
   before_filter :authenticate
 
   def index
-    @members = Member.order(:family_name, :given_name)
+    @members = Member.order(:family_name, :given_name).all
   end
 
   def show
@@ -29,31 +29,37 @@ class Admin::MembersController < ApplicationController
   end
 
   def merge_preview
-    merge = MemberMerge.new(params[:selected].keys)
-    if !merge.has_multiple_members
-      flash[:alert] = 'select multiple members to merge'
-      redirect_to admin_members_url 
+    selected = params[:selected]
+    if selected && 1 < selected.count
+      merge = MemberMerge.new(selected.keys)
+      if !merge.has_multiple_members
+        flash[:alert] = 'select multiple members to merge'
+        redirect_to admin_members_url 
+      else
+        @role_flights = merge.role_flights
+        @target = merge.default_target
+        @members = merge.members
+
+        if (merge.has_collisions)
+          flash[:alert] = 
+            'Data will be lost.  ' +
+            'Some of the selected members have the same role in the same flight.'
+          @collisions = merge.flight_collisions
+        else
+          @collisions = nil
+        end
+
+        if (merge.has_overlaps)
+          flash[:notice] = 
+            'Some selected members have different roles on the same flight.'
+          @overlaps = merge.flight_overlaps
+        else
+          @overlaps = nil
+        end
+      end
     else
-      @role_flights = merge.role_flights
-      @target = merge.default_target
-      @members = merge.members
-
-      if (merge.has_collisions)
-        flash[:alert] = 
-          'Data will be lost.  ' +
-          'Some of the selected members have the same role in the same flight.'
-        @collisions = merge.flight_collisions
-      else
-        @collisions = nil
-      end
-
-      if (merge.has_overlaps)
-        flash[:notice] = 
-          'Some selected members have different roles on the same flight.'
-        @overlaps = merge.flight_overlaps
-      else
-        @overlaps = nil
-      end
+      flash[:alert] = 'select two or more members to merge'
+      redirect_to admin_members_url
     end
   end
 

@@ -113,14 +113,21 @@ class MemberMerge
   end
 
   # returns all flights for all members organized by role
-  # as a hash: { :competitor => [ 
+  # as an array of hashes: [ { :role => <role>, :contest_flights => [ 
   #  { :flight => <flight_1>, :contest => <contest_1> }, 
   #  { :flight => <flight_2>, :contest => <contest_2> }, 
-  # ] }
+  # ] }, ... ]
   # see ROLES for the list of roles
   def role_flights
     populate
-    @role_flights
+    participation = []
+    ROLES.each do |role|
+      flights = @role_flights[role]
+      if flights != nil && 0 < flights.length
+        participation << { role: role, contest_flights: flights }
+      end
+    end
+    participation
   end
   memoize :role_flights
 

@@ -10,7 +10,7 @@
 <%= form_tag admin_members_merge_path do %>
   <% @members.each do |member| %>
     <p>
-      <%= radio_button_tag :target, member.id, member.id == @target %>
+      <%= radio_button_tag :target, member.id, member == @target %>
       <%= "#{member.name}, #{member.iac_id}" %>
       <%= hidden_field_tag "selected[#{member.id}]" %>
     </p>
@@ -36,8 +36,11 @@
       </ul>
     </div>
   <% end %>
+
   <%= submit_tag :merge, data: { :confirm => 'Be careful. This cannot be undone.' } %>
   <%= link_to :cancel, admin_members_path(:anchor => @target) %>
+
   <p>"Merge" will place all of the following with
   the selected member and delete the other member(s).</p>
+  <%= render partial: 'role_flights', collection: @role_flights %>
 <% end %>

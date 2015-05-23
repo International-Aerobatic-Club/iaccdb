@@ -6,12 +6,15 @@ module AuthHelper
       @user = creds['user']
       @password = creds['password']
     end
+    def http_auth_basic
+      ActionController::HttpAuthentication::Basic.encode_credentials(user, password)
+    end
   end
 
   module Controller
     def http_auth_login
       creds = Creds.new
-      request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Basic.encode_credentials(creds.user, creds.password)
+      request.env['HTTP_AUTHORIZATION'] = creds.http_auth_basic
     end  
   end
 
@@ -23,22 +26,39 @@ module AuthHelper
     def http_auth_login(env = nil)
       env ||= {}
       creds = Creds.new
-      env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Basic.encode_credentials(creds.user, creds.password)
+      env['HTTP_AUTHORIZATION'] = creds.http_auth_basic
       env
     end
   end
 
   module Feature
+    class DriverAuthException < StandardError ; end
     def http_auth_login
       creds = Creds.new
-      if page.driver.respond_to?(:basic_auth)
-        page.driver.basic_auth(creds.user, creds.password)
-      elsif page.driver.respond_to?(:basic_authorize)
-        page.driver.basic_authorize(creds.user, creds.password)
-      elsif page.driver.respond_to?(:browser) && page.driver.browser.respond_to?(:basic_authorize)
-        page.driver.browser.basic_authorize(creds.user, creds.password)
+      driver = page.driver
+      if driver.respond_to?(:basic_auth)
+        driver.basic_auth(creds.user, creds.password)
+      elsif driver.respond_to?(:basic_authorize)
+        driver.basic_authorize(creds.user, creds.password)
+      elsif driver.respond_to?(:browser) && driver.browser.respond_to?(:basic_authorize)
+        driver.browser.basic_authorize(creds.user, creds.password)
+      elsif driver.respond_to?(:browser) && driver.browser.respond_to?(:authenticate)
+        driver.browser.authenticate(creds.user, creds.password)
+      elsif driver.respond_to?(:header)
+        driver.header('AUTHORIZATION', creds.http_auth_basic)
       else
-        raise "Capybara page driver basic auth unknown"
+        raise DriverAuthException.new "Capybara page driver basic auth unknown method"
+      end
+    end
+    def basic_auth_visit(path)
+      begin
+        http_auth_login
+        visit(path)
+      rescue DriverAuthException
+        creds = Creds.new
+        session = Capybara.current_session
+        cred_path = "http://#{creds.user}:#{creds.password}@#{session.server.host}:#{session.server.port}#{path}"
+        visit(cred_path)
       end
     end
   end
