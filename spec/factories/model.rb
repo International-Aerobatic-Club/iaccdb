@@ -224,6 +224,7 @@ FactoryGirl.define do
   factory :pfj_result do |r|
     r.association :pilot_flight
     r.association :judge
+    r.graded_values [75, 80, 80, 85, 85, 85, 85, 85, 80, 80, 85, 80, 85, 85]
   end
   factory :existing_pfj_result, :class => PfjResult do |r|
     r.association :pilot_flight, :factory => :adams_known

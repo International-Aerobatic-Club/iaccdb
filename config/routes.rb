@@ -93,6 +93,16 @@ IAC::Application.routes.draw do
     :action => :histograms,
     :as => 'judge_histograms'
 
+  get 'judge/activity',
+    :controller => :judges,
+    :action => :activity,
+    :as => 'recent_judge_activity'
+
+  get 'judge/activity/:year',
+    :controller => :judges,
+    :action => :activity,
+    :as => 'judge_activity'
+
   namespace :further do
     get 'participation', :action => :participation
     get 'airplanes', :action => :airplane_make_model
