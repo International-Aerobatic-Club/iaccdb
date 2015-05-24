@@ -8,9 +8,9 @@ class ComputeCollegiateJob < Struct.new(:contest)
   def perform
     @contest = contest
     @year = contest.year
-    @description = "#{year}"
+    @description = "#{@year}"
     say "Computing collegiate standings for #{@description}"
-    cc = IAC::CollegiateComputer.new(year)
+    cc = IAC::CollegiateComputer.new(@year)
     cc.recompute
   end
 
