@@ -10,6 +10,15 @@ class Score < ActiveRecord::Base
 
   serialize :values
 
+  after_find :ensure_judge_record
+  before_validation :ensure_judge_record
+
+  def ensure_judge_record
+    if self.judge == nil
+      self.judge = Judge.missing_judge
+    end
+  end
+
   def to_s
     s = "Scores #{id} #{pilot_flight}, #{judge} (" +
       values.join(', ') + ")"

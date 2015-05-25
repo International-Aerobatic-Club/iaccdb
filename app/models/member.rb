@@ -14,6 +14,14 @@ class Member < ActiveRecord::Base
   has_many :teams, :through => :result_members, :source => :result
   has_many :results, :foreign_key => 'pilot_id'
 
+  def self.missing_member
+    missing_member = Member.where(iac_id: 0, given_name: 'Missing', family_name: 'Member').first
+    if (missing_member == nil)
+      missing_member = Member.create(iac_id: 0, given_name: 'Missing', family_name: 'Member')
+    end
+    missing_member
+  end
+
   def name
     "#{given_name} #{family_name}"
   end

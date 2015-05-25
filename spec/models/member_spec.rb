@@ -64,4 +64,15 @@ describe Member, :type => :model do
     expect(found).to eq mr_4
   end
 
+  it 'returns the same member repeatedly as missing member' do
+    member = Member.missing_member
+    mmid = member.id
+    3.times do
+      member = Member.missing_member
+      expect(member.id).to eq mmid
+    end
+    expect(member.given_name).to eq 'Missing'
+    expect(member.family_name).to eq 'Member'
+  end
+
 end

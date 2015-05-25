@@ -64,4 +64,28 @@ describe Judge, :type => :model do
       check_judge_has_relations(@jr_1)
     end
   end
+  context 'missing judge' do
+    it 'always returns the same judge for missing judge pair' do
+      judge_pair = Judge.missing_judge
+      jpid = judge_pair.id
+      3.times do 
+        judge_pair = Judge.missing_judge
+        expect(judge_pair.id).to eq jpid
+      end
+    end
+    it 'always has the same missing member as missing judge pair judge' do
+      judge_pair = Judge.missing_judge
+      jid = judge_pair.judge.id
+      3.times do 
+        judge_pair = Judge.missing_judge
+        expect(judge_pair.judge.id).to eq jid
+      end
+    end
+    it 'always has nil as missing judge pair assistant' do
+      3.times do 
+        judge_pair = Judge.missing_judge
+        expect(judge_pair.assist).to eq nil
+      end
+    end
+  end
 end
