@@ -125,6 +125,50 @@ describe MemberMerge, :type => :services do
     expect(judges).to include j3
   end
 
+  it 'finds existing result_member for result' do
+    result = create :result
+    rmassoc = create :result_member, result: result, member:@mr_1
+    rma2 = create :result_member, result: result, member:@mr_2
+    rms = result.members.all
+    expect(rms).to include(@mr_1)
+    expect(rms).to include(@mr_2)
+    expect(@mr_1.teams).to include(result)
+    expect(@mr_2.teams).to include(result)
+    @merge.execute_merge(@mr_1)
+    result.reload
+    rms = result.members.all
+    expect(rms).to include(@mr_1)
+    expect(rms).to_not include(@mr_2)
+    @mr_1.reload
+    expect(@mr_1.teams).to include(result)
+  end
+
+  it 'creates needed result_member for result' do
+    rmassoc = create :result_member, member:@mr_2
+    result = rmassoc.result
+    expect(result.members.all).to_not include(@mr_1)
+    expect(result.members.all).to include(@mr_2)
+    expect(@mr_1.teams).to_not include(result)
+    expect(@mr_2.teams).to include(result)
+    @merge.execute_merge(@mr_1)
+    result.reload
+    expect(result.members.all).to include(@mr_1)
+    expect(result.members.all).to_not include(@mr_2)
+    @mr_1.reload
+    expect(@mr_1.teams).to include(result)
+  end
+
+  it 'removes orphaned result_member for result' do
+    rmassoc = create :result_member, member:@mr_1
+    result = rmassoc.result
+    create :result_member, result: result, member:@mr_2
+    expect(result.members.all).to include(@mr_1)
+    expect(result.members.all).to include(@mr_2)
+    @merge.execute_merge(@mr_1)
+    mrs_count = ResultMember.where(member: @mr_2, result: result).count
+    expect(mrs_count).to be 0
+  end
+
   it 'substitutes chief judge for flights' do
     12.times { create :flight, chief:@mr_1 }
     12.times { create :flight, chief:@mr_2 }
@@ -148,7 +192,7 @@ describe MemberMerge, :type => :services do
     expect(chief_judges).to_not include(@mr_2)
   end
 
-  it 'substitutes assistant judge for flights' do
+  it 'substitutes chief assistant for flights' do
     12.times { create :flight, assist:@mr_1 }
     12.times { create :flight, assist:@mr_2 }
 
@@ -215,11 +259,10 @@ describe MemberMerge, :type => :services do
     expect(@merge.has_overlaps).to eq true
     flight_overlaps = @merge.flight_overlaps
 
-    flights = flight_overlaps.keys
-    expect(flights.length).to eq 1
-    flight = flights.first
-    expect(flight).to eq pf.flight
-    roles = flight_overlaps[flight]
+    expect(flight_overlaps.length).to eq 1
+    flight_roles = flight_overlaps.first
+    expect(flight_roles[:flight]).to eq pf.flight
+    roles = flight_roles[:roles]
     expect(roles.include?(:competitor)).to eq true
     expect(roles.include?(:line_judge)).to eq true
   end
@@ -291,9 +334,9 @@ describe MemberMerge, :type => :services do
 
     it 'returns the roles and flights' do
       role_flights = @merge.role_flights
-      expect(role_flights.keys.length).to eq 5
-      @merge.roles.each do |role|
-        expect(role_flights[role].length).to eq 2
+      expect(role_flights.length).to eq 5
+      role_flights.each do |role_flight|
+        expect(role_flight[:contest_flights].length).to eq 2
       end
     end
 

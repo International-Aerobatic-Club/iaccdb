@@ -207,6 +207,8 @@ class MemberMerge
       if !ResultMember.where(member_id: target_id, result_id: rel.result_id).any?
         rel.member_id = target_id
         rel.save
+      else # target member already associated with this result
+        rel.destroy
       end
     end
   end
