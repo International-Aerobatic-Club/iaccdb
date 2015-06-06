@@ -2,12 +2,12 @@ language: ruby
 script: bundle exec rspec spec
 before_script:
   - mysql -e 'create database iaccdb_test;'
-  - /bin/cat <<EOF >config/database.yml
-test:
-  adapter: mysql2
-  database: iaccdb_test
-  username: travis
-  encoding: utf8
-EOF
-
+  - |
+  /bin/cat <<EOF >config/database.yml
+  test:
+    adapter: mysql2
+    database: iaccdb_test
+    username: travis
+    encoding: utf8
+  EOF
 
