@@ -30,7 +30,7 @@ class Member < ActiveRecord::Base
   def self.find_or_create_by_name(iac_id, given_name, family_name)
     dm = Member.where(:family_name => family_name,
       :given_name =>given_name)
-    if dm.count == 1
+    if 0 < dm.count
       dm = dm.first
       Member.logger.info "Found by name member #{dm.to_s}"
     else
@@ -44,14 +44,14 @@ class Member < ActiveRecord::Base
   end
 
   # find or create member with good IAC ID
-  # IAC ID and family name must match exactly, otherwise this falls
+  # IAC ID and family name must match exactly, otherwise this fails
   # back to exact match of family name and given name
   def self.find_or_create_by_iac_number(iac_id, given_name, family_name)
     mmr = nil
     dm = Member.where(:iac_id => iac_id)
     if 0 < dm.count
       mmra = dm.to_a.select { |m| m.family_name.downcase == family_name.downcase }
-      mmr = mmra[0] if (mmra.size == 1)
+      mmr = mmra[0] if (0 < mmra.size)
     end
     mmr ||= Member.find_or_create_by_name(iac_id, given_name, family_name)
   end
