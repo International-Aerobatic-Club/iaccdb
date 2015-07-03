@@ -1,4 +1,6 @@
 class PilotFlightsController < ApplicationController
+  before_action :authenticate, :except => [index, show]
+  
   # GET /pilot_flights
   # GET /pilot_flights.xml
   def index

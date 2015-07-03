@@ -15,19 +15,26 @@ gem 'coffee-rails'
 gem 'uglifier'
 gem 'jbuilder'
 
+# memoization used sparingly where appropriate
+gem 'memoist2'
+
 group :development, :test do
   gem 'rspec-rails'
 #  gem 'sqlite3'
 end
 
 group :development do
-  gem 'nokogiri'
   #gem 'debugger'
 end
 
 group :test do
   gem 'factory_girl_rails'
   gem 'database_cleaner'
+  gem 'forgery'
+  gem 'capybara'
+  gem 'launchy'
+  gem 'capybara-webkit'
+  gem 'selenium-webdriver'
 end
 
 group :production do

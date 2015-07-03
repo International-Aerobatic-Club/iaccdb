@@ -11,7 +11,7 @@ class JudgeRollups
 # Computes or recomputes jy_results for every judge in every category
 def self.compute_jy_results (year)
   # start_list = list all jy_result where year
-  start_list = JyResult.find_all_by_year(year)
+  start_list = JyResult.where(:year => year).all
   # all contests where year(start) == year
   Contest.where(["year(start) = ?", year]).each do |contest|
     # all c_results

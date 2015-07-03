@@ -2,7 +2,7 @@ class Admin::MembersController < ApplicationController
   before_filter :authenticate
 
   def index
-    @members = Member.order(:family_name, :given_name)
+    @members = Member.order(:family_name, :given_name).all
   end
 
   def show
@@ -29,54 +29,51 @@ class Admin::MembersController < ApplicationController
   end
 
   def merge_preview
-    @members = Member.find(params[:selected].keys)
-    if @members.length == 1
-      flash[:alert] = 'select multiple members to merge'
-      redirect_to admin_members_url 
+    selected = params[:selected]
+    if selected && 1 < selected.count
+      merge = MemberMerge.new(selected.keys)
+      if !merge.has_multiple_members
+        flash[:alert] = 'select multiple members to merge'
+        redirect_to admin_members_url 
+      else
+        @role_flights = merge.role_flights
+        @target = merge.default_target
+        @members = merge.members
+
+        if (merge.has_collisions)
+          flash[:alert] = 
+            'Data will be lost.  ' +
+            'Some of the selected members have the same role in the same flight.'
+          @collisions = merge.flight_collisions
+        else
+          @collisions = nil
+        end
+
+        if (merge.has_overlaps)
+          flash[:notice] = 
+            'Some selected members have different roles on the same flight.'
+          @overlaps = merge.flight_overlaps
+        else
+          @overlaps = nil
+        end
+      end
     else
-      @target = @members.first.id
-      @chief_flights = @members.inject([]) do |flights, member|
-        check_dups_join(flights, member.chief) 
-      end
-      @assist_chief_flights = @members.inject([]) do |flights, member|
-        check_dups_join(flights, member.assistChief) 
-      end
-      @judge_flights = @members.inject([]) do |flights, member|
-        check_dups_join(flights, member.judge_flights) 
-      end
-      @assist_flights = @members.inject([]) do |flights, member|
-        check_dups_join(flights, member.assist_flights) 
-      end
-      @competitor_flights = @members.inject([]) do |flights, member|
-        check_dups_join(flights, member.flights) 
-      end
+      flash[:alert] = 'select two or more members to merge'
+      redirect_to admin_members_url
     end
   end
 
   def merge
-    tgt = [params[:target]]
-    ids = params[:selected].keys - tgt
-    @target = Member.find(tgt).first
-    @members = Member.find(ids)
-    PilotFlight.update_all(['pilot_id = ?', @target.id], 
-      ['pilot_id in (?)', ids.join(',')])
-    Judge.update_all(['judge_id = ?', @target.id], 
-      ['judge_id in (?)', ids.join(',')])
-    Judge.update_all(['assist_id = ?', @target.id], 
-      ['assist_id in (?)', ids.join(',')])
-    Flight.update_all(['chief_id = ?', @target.id], 
-      ['chief_id in (?)', ids.join(',')])
-    Flight.update_all(['assist_id = ?', @target.id], 
-      ['assist_id in (?)', ids.join(',')])
-    PcResult.update_all(['pilot_id = ?', @target.id], 
-      ['pilot_id in (?)', ids.join(',')])
-    JcResult.update_all(['judge_id = ?', @target.id], 
-      ['judge_id in (?)', ids.join(',')])
-    JyResult.update_all(['judge_id = ?', @target.id], 
-      ['judge_id in (?)', ids.join(',')])
-    @members.each { |member| member.destroy }
-    flash[:notice] = "Members merged into #{@target.name}"
-    redirect_to admin_members_path(:anchor => @target.id)
+    @target = Member.find(params[:target])
+    if @target
+      merge = MemberMerge.new(params[:selected].keys)
+      merge.execute_merge(@target)
+      flash[:notice] = "Members merged into #{@target.name}"
+      redirect_to admin_members_path(:anchor => @target.id)
+    else
+      flash[:alert] = "No target member selected"
+      redirect_to merge_preview_path
+    end
   end
 
   ###

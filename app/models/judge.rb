@@ -1,3 +1,11 @@
+# It is unfortunate that: 
+#   some models have judge_id referring to a member record with the judge role
+#   other models have judge_id referring to one of these
+# These are judge teams consisting of:
+#   a member referenced as judge in the judge role
+#   a member referenced as assist in the assistant role
+# Someday rename this model to JudgeTeam and update references
+#   to these accordingly.  Ah.  That would be so much better.
 class Judge < ActiveRecord::Base
   attr_protected :id
 
@@ -7,6 +15,15 @@ class Judge < ActiveRecord::Base
   has_many :pilot_flights, :through => :scores
   has_many :pfj_results, :dependent => :destroy
   has_many :jf_results, :dependent => :destroy
+
+  def self.missing_judge
+    missing_member = Member.missing_member
+    missing_judge = Judge.where(judge_id: missing_member.id, assist_id: nil).first
+    if (missing_judge == nil)
+      missing_judge = Judge.create(judge_id: missing_member.id, assist_id: nil)
+    end
+    missing_judge
+  end
   
   def to_s
     "Judge #{id} #{judge.to_s} " +
@@ -24,6 +41,34 @@ class Judge < ActiveRecord::Base
 
   def assistant_name
     assist ? assist.name : 'no assistant'
+  end
+
+  # let all records referencing this judge/assistant pair
+  # reference instead a judge/assistant pair with 
+  #   judge j_id and self.assist_id
+  # does nothing if j_id is the same as self.judge_id
+  def merge_judge(j_id)
+    if (j_id != judge_id)
+      new_judge = Judge.where(:judge_id => j_id, :assist_id => assist_id).first
+      unless new_judge
+        new_judge = Judge.create(:judge_id => j_id, :assist_id => assist_id)
+      end
+      Score.where('judge_id = ?', id).update_all(judge_id: new_judge.id)
+    end
+  end
+
+  # let all records referencing this judge/assistant pair
+  # reference instead a judge/assistant pair with 
+  #   assistant a_id and self.judge_id
+  # does nothing if a_id is the same as self.assist_id
+  def merge_assist(a_id)
+    if (a_id != assist_id)
+      new_judge = Judge.where(:judge_id => judge_id, :assist_id => a_id).first
+      unless new_judge
+        new_judge = Judge.create(:judge_id => judge_id, :assist_id => a_id)
+      end
+      Score.where('judge_id = ?', id).update_all(judge_id: new_judge.id)
+    end
   end
 
 end
