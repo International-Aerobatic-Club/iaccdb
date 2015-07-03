@@ -240,8 +240,8 @@ describe MemberMerge, :type => :services do
 
   it 'substitutes pilot for regional_pilots' do
     category = create :category
-    puts create :regional_pilot, pilot:@mr_1, category:category, year:2012
-    puts create :regional_pilot, pilot:@mr_2, category:category, year:2013
+    create :regional_pilot, pilot:@mr_1, category:category, year:2012
+    create :regional_pilot, pilot:@mr_2, category:category, year:2013
     expect(RegionalPilot.all.count).to eq 2
 
     pilots = RegionalPilot.all.collect { |f| f.pilot }
@@ -255,7 +255,7 @@ describe MemberMerge, :type => :services do
     expect(@merge.has_collisions).to eq false
     @merge.execute_merge(@mr_1)
 
-    pilots = RegionalPilot.all.collect { |f| puts "REGIONAL #{f}"; f.pilot }
+    pilots = RegionalPilot.all.collect(&:pilot)
     expect(pilots.length).to eq 2
     pilots = pilots.uniq
     expect(pilots.length).to eq 1
@@ -264,6 +264,7 @@ describe MemberMerge, :type => :services do
   end
 
   it 'notifies when two members have the same role on the same flight' do
+    pf = create :pilot_flight, pilot:@mr_1
     create :pilot_flight, pilot:@mr_1, flight: pf.flight
     create :pilot_flight, pilot:@mr_2, flight: pf.flight
 
@@ -355,6 +356,24 @@ describe MemberMerge, :type => :services do
       bad_merge = proc { Member.find(@mr_2.id) }
       expect(bad_merge).to raise_exception(ActiveRecord::RecordNotFound)
       expect(Member.find(@mr_1.id)).to match(@mr_1)
+    end
+
+    it 'removes jy_results' do
+      @merge.execute_merge(@mr_1)
+      jy_results = JyResult.where(judge:@mr_1.id).all
+      expect(jy_results.empty?).to be(true)
+    end
+
+    it 'removes jc_results' do
+      @merge.execute_merge(@mr_1)
+      jc_results = JcResult.where(judge:@mr_1.id).all
+      expect(jc_results.empty?).to be(true)
+    end
+
+    it 'removes pc_results' do
+      @merge.execute_merge(@mr_1)
+      pc_results = PcResult.where(pilot:@mr_1.id).all
+      expect(pc_results.empty?).to be(true)
     end
 
     it 'returns the roles and flights' do
