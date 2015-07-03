@@ -2,7 +2,8 @@
 # spec/support/database_cleaner.rb
 RSpec.configure do |config|
   config.before(:suite) do
-    DatabaseCleaner.clean_with :truncation, {:except => %w[categories]}
+    DatabaseCleaner.clean_with :truncation
+    ActiveRecord::Tasks::DatabaseTasks.load_seed
     DatabaseCleaner.strategy = :transaction
   end
 

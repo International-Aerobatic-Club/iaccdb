@@ -71,11 +71,20 @@ FactoryGirl.define do
     r.sequence(:director) { |n| Forgery(:name).full_name }
   end
 ### Category
-  factory :category do |c|
-    c.category 'Intermediate'
-    c.aircat 'P'
-    c.name 'Intermediate Power'
-    c.sequence(:sequence)
+  factory :category do
+    transient do 
+      category 'Intermediate'
+      aircat 'P'
+    end
+    initialize_with do
+      factory_cat = Category.where(:category => category, :aircat => aircat).first
+      unless factory_cat
+        sequence = Category.select('MAX sequence').first.sequence + 1
+        puts "Sequence is #{sequence}"
+        factory_cat = Category.create(:category => cat, :aircat => aircat, :sequence => sequence)
+      end
+      factory_cat
+    end
   end
 ### Flight
   factory :flight do |r|
