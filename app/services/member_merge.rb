@@ -191,10 +191,11 @@ class MemberMerge
       update_all(['chief_id = ?', target_id])
     Flight.where(['assist_id in (?)', merge_ids]).
       update_all(['assist_id = ?', target_id])
+    RegionalPilot.where(['pilot_id in (?)', merge_ids]).
+      update_all(['pilot_id = ?', target_id])
     PcResult.where(['pilot_id in (?)', merge_ids]).destroy_all
     JcResult.where(['judge_id in (?)', merge_ids]).destroy_all
     JyResult.where(['judge_id in (?)', merge_ids]).destroy_all
-    RegionalPilot.where(['pilot_id in (?)', merge_ids]).destroy_all
     merge_result_records(target_id, merge_ids)
     replace_judge_pairs(target_id, merge_ids)
     Member.where(['id in (?)', merge_ids]).destroy_all

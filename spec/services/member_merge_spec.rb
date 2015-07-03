@@ -238,8 +238,33 @@ describe MemberMerge, :type => :services do
     expect(pilots).to_not include(@mr_2)
   end
 
+  it 'substitutes pilot for regional_pilots' do
+    category = create :category
+    puts create :regional_pilot, pilot:@mr_1, category:category, year:2012
+    puts create :regional_pilot, pilot:@mr_2, category:category, year:2013
+    expect(RegionalPilot.all.count).to eq 2
+
+    pilots = RegionalPilot.all.collect { |f| f.pilot }
+    expect(pilots.length).to eq 2
+    pilots = pilots.uniq
+    expect(pilots.length).to eq 2
+    expect(pilots).to include(@mr_1)
+    expect(pilots).to include(@mr_2)
+
+    expect(@merge.has_overlaps).to eq false
+    expect(@merge.has_collisions).to eq false
+    @merge.execute_merge(@mr_1)
+
+    pilots = RegionalPilot.all.collect { |f| puts "REGIONAL #{f}"; f.pilot }
+    expect(pilots.length).to eq 2
+    pilots = pilots.uniq
+    expect(pilots.length).to eq 1
+    expect(pilots).to include(@mr_1)
+    expect(pilots).to_not include(@mr_2)
+  end
+
   it 'notifies when two members have the same role on the same flight' do
-    pf = create :pilot_flight, pilot:@mr_1
+    create :pilot_flight, pilot:@mr_1, flight: pf.flight
     create :pilot_flight, pilot:@mr_2, flight: pf.flight
 
     expect(@merge.has_collisions).to eq true
