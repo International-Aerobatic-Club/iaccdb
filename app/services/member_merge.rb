@@ -140,12 +140,12 @@ class MemberMerge
   def execute_merge(target_member = nil)
     @target = target_member || @members.first
     unless (@members.include?(@target))
-      raise ArgumentError.new("target must be one of the members in the merge") 
+      raise ArgumentError.new("target #{@target} must be one of the members in the merge") 
     end
     contests = all_flights.collect { |role_flight| role_flight[:contest] }
     merge_members
     contests.uniq.each do |contest|
-      Delayed::Job.enqueue Jobs::ComputeFlightsJob.new(contest)
+      Delayed::Job.enqueue Jobs::ComputeContestRollupsJob.new(contest)
     end
   end
 
@@ -185,20 +185,28 @@ class MemberMerge
     target_id = @target.id
     dup_members = @members.reject { |member| member.id == target_id }
     merge_ids = dup_members.collect { |member| member.id }
-    pilot_flights = PilotFlight.where(['pilot_id in (?)', merge_ids])
-    pilot_flights.update_all(['pilot_id = ?', target_id])
+
+    PilotFlight.where(['pilot_id in (?)', merge_ids]).
+      update_all(['pilot_id = ?', target_id])
     Flight.where(['chief_id in (?)', merge_ids]).
       update_all(['chief_id = ?', target_id])
     Flight.where(['assist_id in (?)', merge_ids]).
       update_all(['assist_id = ?', target_id])
     RegionalPilot.where(['pilot_id in (?)', merge_ids]).
       update_all(['pilot_id = ?', target_id])
+
     merge_result_records(target_id, merge_ids)
     replace_judge_pairs(target_id, merge_ids)
+
     all_ids = Array.new(merge_ids) << target_id
-    PcResult.where(['pilot_id in (?)', all_ids]).destroy_all
-    JcResult.where(['judge_id in (?)', all_ids]).destroy_all
+    # the year rollups need recomputation
     JyResult.where(['judge_id in (?)', all_ids]).destroy_all
+    # because it's possible merged members were on different
+    # flights of the same contest
+    JcResult.where(['judge_id in (?)', all_ids]).destroy_all
+    PcResult.where(['pilot_id in (?)', all_ids]).destroy_all
+
+    # And remove the orphaned members
     Member.where(['id in (?)', merge_ids]).destroy_all
   end
 
@@ -218,14 +226,28 @@ class MemberMerge
   def replace_judge_pairs(target_id, merge_ids)
     judges_j = Judge.where(['judge_id in (?)', merge_ids])
     judges_j.each do |jp|
-      jp.merge_judge(target_id)
-      jp.destroy
+      new_judge_pair = jp.find_or_create_with_substitute_judge(target_id)
+      replace_judge(jp, new_judge_pair)
     end
     judges_a = Judge.where(['assist_id in (?)', merge_ids])
     judges_a.each do |jp|
-      jp.merge_assist(target_id)
-      jp.destroy
+      new_judge_pair = jp.find_or_create_with_substitute_assistant(target_id)
+      replace_judge(jp, new_judge_pair)
     end
   end
+
+  # replace all judge_pair instances of target
+  # with new judge pair replacement,
+  # then destroy the target
+  # do nothing if target and replacement are the same pair (same id)
+  def replace_judge(target, replacement)
+    if (target.id != replacement.id)
+      Score.where('judge_id = ?', target.id).update_all(judge_id: replacement.id)
+      PfjResult.where('judge_id = ?', target.id).update_all(judge_id: replacement.id)
+      JfResult.where('judge_id = ?', target.id).update_all(judge_id: replacement.id)
+      target.destroy
+    end
+  end
+
 end
 

@@ -43,32 +43,32 @@ class Judge < ActiveRecord::Base
     assist ? assist.name : 'no assistant'
   end
 
-  # let all records referencing this judge/assistant pair
-  # reference instead a judge/assistant pair with 
+  # find or create a judge/assistant pair with
   #   judge j_id and self.assist_id
-  # does nothing if j_id is the same as self.judge_id
-  def merge_judge(j_id)
+  # returns self if j_id is the same as self.judge_id
+  def find_or_create_with_substitute_judge(j_id)
+    new_judge = self
     if (j_id != judge_id)
       new_judge = Judge.where(:judge_id => j_id, :assist_id => assist_id).first
       unless new_judge
         new_judge = Judge.create(:judge_id => j_id, :assist_id => assist_id)
       end
-      Score.where('judge_id = ?', id).update_all(judge_id: new_judge.id)
     end
+    new_judge
   end
 
-  # let all records referencing this judge/assistant pair
-  # reference instead a judge/assistant pair with 
+  # find or create a judge/assistant pair with 
   #   assistant a_id and self.judge_id
-  # does nothing if a_id is the same as self.assist_id
-  def merge_assist(a_id)
+  # returns self if a_id is the same as self.assist_id
+  def find_or_create_with_substitute_assistant(a_id)
+    new_judge = self
     if (a_id != assist_id)
       new_judge = Judge.where(:judge_id => judge_id, :assist_id => a_id).first
       unless new_judge
         new_judge = Judge.create(:judge_id => judge_id, :assist_id => a_id)
       end
-      Score.where('judge_id = ?', id).update_all(judge_id: new_judge.id)
     end
+    new_judge
   end
 
 end

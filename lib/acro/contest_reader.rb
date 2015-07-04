@@ -4,6 +4,7 @@
 module ACRO
 class ContestReader
 include FlightIdentifier
+include Log::ConfigLogger
 
 attr_reader :contest_record 
 
@@ -28,17 +29,17 @@ def initialize(control_file)
 end
 
 def read_contest
-  puts "Contest reader processing contest, #{@contest_record.year_name}"
+  logger.info "Contest reader processing contest, #{@contest_record.year_name}"
   pcs = []
   @contest_info.pilot_flight_result_files.each do |f|
     begin
-      puts "Contest reader processing file, #{f}"
+      logger.info "Contest reader processing file, #{f}"
       pilot_flight_data = YAML.load_file(f)
       process_pilotFlight(pilot_flight_data)
     rescue Exception => e
-      puts "\nSomething went wrong with #{f}:"
-      puts e.message
-      puts e.backtrace.join("\n")
+      logger.warn "ContestReader unable to read contest file, #{f}"
+      logger.error "ContestReader#read_contest excteption, #{e.message}"
+      logger.debug e.backtrace.join("\n")
       pcs << f
     end
   end

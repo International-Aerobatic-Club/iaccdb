@@ -8,10 +8,10 @@ class Failure < ActiveRecord::Base
   before_validation :normalize_fields
 
   def normalize_fields
-    if step
-      step = step.strip.slice(0,16)
+    if step != nil
+      self.step = step.strip.slice(0,16)
     else
-      step = ''
+      self.step = ''
     end
   end
 end
