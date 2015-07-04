@@ -7,9 +7,9 @@ class Member < ActiveRecord::Base
   has_many :flights, :through => :pilot_flights
   has_many :judge, :foreign_key => 'judge_id', :class_name => 'Judge'
   has_many :assist, :foreign_key => 'assist_id', :class_name => 'Judge'
-  has_many :jc_results, :foreign_key => 'judge_id'
-  has_many :jy_results, :foreign_key => 'judge_id'
-  has_many :pc_results, :foreign_key => 'pilot_id'
+  has_many :jc_results, :foreign_key => 'judge_id', :dependent => :destroy
+  has_many :jy_results, :foreign_key => 'judge_id', :dependent => :destroy
+  has_many :pc_results, :foreign_key => 'pilot_id', :dependent => :destroy
   has_many :result_members
   has_many :teams, :through => :result_members, :source => :result
   has_many :results, :foreign_key => 'pilot_id'
