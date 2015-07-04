@@ -1,13 +1,16 @@
 describe JfResult, :type => :model do
-  before(:context) do
-    manny = Manny::Parse.new
-    IO.foreach('spec/manny/Contest_300.txt') { |line| manny.processLine(line) }
-    m2d = Manny::MannyToDB.new
+  def reparse_contest(m2d, manny)
     m2d.process_contest(manny, true)
-    contest = Contest.first
-    contest.results
+    @contest = Contest.first
     @pri_cat = Category.find_by_category_and_aircat('primary', 'P')
-    @flight2 = contest.flights.where(:category_id => @pri_cat.id, :name => 'Free').first
+    @flight2 = @contest.flights.where(:category_id => @pri_cat.id, :name => 'Free').first
+  end
+  before(:context) do
+    @manny = Manny::Parse.new
+    IO.foreach('spec/manny/Contest_300.txt') { |line| @manny.processLine(line) }
+    @m2d = Manny::MannyToDB.new
+    reparse_contest(@m2d, @manny)
+    @contest.results
     f_result = @flight2.compute_flight_results.first
     lr = Member.where(
       :family_name => 'Ramirez',
@@ -40,40 +43,41 @@ describe JfResult, :type => :model do
     expect(@jf_result1.cc).to eq(54)
     expect(@jf_result2.cc).to eq(77)
   end
-  it 'computes the number of minority zeros from each judge for a flight' do
-    pilot_flight = @flight2.pilot_flights.first
-    scores = pilot_flight.scores.first
-    scores.values[0] = 0
-    scores.save
-    judge = scores.judge
-    contest = Contest.first
-    flight = contest.flights.where(:category_id => @pri_cat.id, :name => 'Free').first
-    f_result = flight.compute_flight_results.first
-    jf_result = f_result.jf_results.where(:judge_id => judge.id).first
-    expect(jf_result.minority_zero_ct).to eq(1)
-  end
-  it 'computes the number of minority grades from each judge for a flight' do
-    pilot_flight = @flight2.pilot_flights.first
-    judge = nil
-    pilot_flight.scores.each_with_index do |scores, i|
-      if i%2 == 0
-        scores.values[1] = 0 
-        scores.save
-      else
-        judge = scores.judge
-      end
-    end
-    expect(judge).not_to be nil
-    contest = Contest.first
-    flight = contest.flights.where(:category_id => @pri_cat.id, :name => 'Free').first
-    f_result = flight.compute_flight_results.first
-    jf_result = f_result.jf_results.where(:judge_id => judge.id).first
-    expect(jf_result.minority_grade_ct).to eq(1)
-  end
   it 'counts the number of grades given by every judge for a flight' do
     expect(@flight2.count_figures_graded).to eq(42)
   end
   it 'counts the number of pilots graded by every judge for a flight' do
     expect(@flight2.count_pilots).to eq(6)
+  end
+  context 'clean contest' do
+    before :each do
+      reparse_contest(@m2d, @manny)
+    end
+    it 'computes the number of minority zeros from each judge for a flight' do
+      pilot_flight = @flight2.pilot_flights.first
+      scores = pilot_flight.scores.first
+      scores.values[0] = 0
+      scores.save
+      judge = scores.judge
+      f_result = @flight2.compute_flight_results.first
+      jf_result = f_result.jf_results.where(:judge_id => judge.id).first
+      expect(jf_result.minority_zero_ct).to eq(1)
+    end
+    it 'computes the number of minority grades from each judge for a flight' do
+      pilot_flight = @flight2.pilot_flights.first
+      judge = nil
+      pilot_flight.scores.each_with_index do |scores, i|
+        if i%2 == 0
+          scores.values[1] = 0 
+          scores.save
+        else
+          judge = scores.judge
+        end
+      end
+      expect(judge).not_to be nil
+      f_result = @flight2.compute_flight_results.first
+      jf_result = f_result.jf_results.where(:judge_id => judge.id).first
+      expect(jf_result.minority_grade_ct).to eq(1)
+    end
   end
 end
