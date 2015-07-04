@@ -31,6 +31,10 @@ class Contest < ActiveRecord::Base
     start.year if start
   end
 
+  def year=(yyyy)
+    self.start = Time.mktime(yyyy)
+  end
+
   def sobriquet
     if name && !name.empty?
       name

@@ -15,10 +15,10 @@ describe JudgesController, :type => :controller do
     j2a3 = create :judge, judge: j2a2.judge
     cj = create :member
     cja = create :member
-    adv_cat = Category.where(category: 'Advanced').first
-    unl_cat = Category.where(category: 'Unlimited').first
-    spn_cat = Category.where(category: 'Sportsman').first
-    imd_cat = Category.where(category: 'Intermediate').first
+    adv_cat = Category.where(category: 'Advanced', aircat: 'P').first
+    unl_cat = Category.where(category: 'Unlimited', aircat: 'P').first
+    spn_cat = Category.where(category: 'Sportsman', aircat: 'P').first
+    imd_cat = Category.where(category: 'Intermediate', aircat: 'P').first
     c1fa = create :flight, category: adv_cat,
       chief: cj, assist: cja
     c1fs = create :flight, category: spn_cat, contest: c1fa.contest, 
@@ -28,19 +28,19 @@ describe JudgesController, :type => :controller do
     c2fs = create :flight, category: spn_cat, contest: c2fa.contest,
       chief: cj, assist: nil
     [c1fa, c1fs, c2fa, c2fs].each do |flt|
-      create :pilot_flight, flight: flt
+      pf = create :pilot_flight, flight: flt
     end
     [c1fa, c1fs].each do |flt|
       flt.pilot_flights.each do |pf|
         [j1a1, j2a2].each do |j|
-          create :score, pilot_flight: pf, judge: j
+          @score = create :score, pilot_flight: pf, judge: j
         end
       end
     end
     [c2fa, c2fs].each do |flt|
       flt.pilot_flights.each do |pf|
         [j3a1, j2a3].each do |j|
-          @score = create :score, pilot_flight: pf, judge: j
+          create :score, pilot_flight: pf, judge: j
         end
       end
     end
@@ -52,6 +52,11 @@ describe JudgesController, :type => :controller do
     @a1 = j1a1.assist.iac_id.to_s
     @a2 = j2a2.assist.iac_id.to_s
     @a3 = j2a3.assist.iac_id.to_s
+    @year = 2011
+    c1fa.contest.year = @year
+    c1fa.contest.save
+    c2fa.contest.year = @year
+    c2fa.contest.save
   end
 
   # This return format was altered.
@@ -67,7 +72,7 @@ describe JudgesController, :type => :controller do
     data = JSON.parse(response.body)
     year = data['Year']
     activity = data['Activity']
-    expect(activity.count).to be 12
+    expect(activity.count).to eq Member.count
     expect(activity[@cj]).to_not be nil
     #expect(activity[@cj]['ChiefJudge']).to_not be nil
     #expect(activity[@cj]['ChiefJudge']['AdvUnl']).to eq 2
@@ -103,20 +108,20 @@ describe JudgesController, :type => :controller do
   end
 
   it 'responds with specific year data' do
-    response = get :activity, parameters: {year:2011}
+    response = get :activity, parameters: {year:@year}
     data = JSON.parse(response.body)
     year = data['Year']
     activity = data['Activity']
-    expect(year).to eq 2011
+    expect(year).to eq @year
     expect(activity[@a3]).to_not be nil
   end
 
   it 'behaves when missing judge for score' do
     @score.judge = nil
     @score.save
-    response = get :activity, parameters: {year:2011}
+    response = get :activity, parameters: {year:@year}
     data = JSON.parse(response.body)
     year = data['Year']
-    expect(year).to eq 2011
+    expect(year).to eq @year
   end
 end
