@@ -1,0 +1,37 @@
+@startuml
+title IACCDB Computational Dependencies
+object pf_result {
+  pilot results for flight
+  grades * k-values aggregated
+  penalties
+}
+object pfj_result {
+  pilot results from judge for flight
+  individual judge grades * k-values
+  judge rankings of figures
+  judge overall score and ranking of flight
+}
+object jf_result {
+  judge metrics for flight
+}
+object jy_result {
+  judge metric rollups for year in category
+}
+object jc_result {
+  judge metric rollups for contest
+}
+object pc_result {
+  pilot results for contest
+}
+object result {
+  soucy
+  collegiate
+}
+pf_result <|-- jf_result
+pfj_result <--o pf_result
+pf_result <--o pc_result
+jf_result <--o jc_result
+jc_result <--o jy_result
+pc_result <--o result
+pc_result <--o regional_pilots
+@enduml
