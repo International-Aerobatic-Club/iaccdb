@@ -18,3 +18,4 @@ posts/
 .sass-cache/
 public/assets
 config/database.yml
+*.dia~
