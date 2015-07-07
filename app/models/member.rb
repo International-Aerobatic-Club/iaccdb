@@ -33,12 +33,13 @@ class Member < ActiveRecord::Base
   # Do not call this if you have an IAC number.
   # Use find_or_create_by_iac_number
   # This will find or create member with bad or mismatched IAC ID
-  # Returns member record with lowest id, where family and given names match by soundex
+  # Returns record where member family and given names match exactly and uniquely, 
   # otherwise this creates a new member record
   def self.find_or_create_by_name(iac_id, given_name, family_name)
-    dm = Member.where(['soundex(family_name) = soundex(?) and soundex(given_name) = soundex(?)', 
-      family_name, given_name]).order(:id).first
-    if dm
+    dm = Member.where(:family_name => family_name,
+      :given_name =>given_name).order(:id)
+    if 0 < dm.count
+      dm = dm.first
       Member.logger.info "Found by name member #{dm.to_s}"
     else
       dm = Member.create(
@@ -54,8 +55,12 @@ class Member < ActiveRecord::Base
   # IAC ID and family name must match exactly, otherwise this fails
   # back to exact match of family name and given name
   def self.find_or_create_by_iac_number(iac_id, given_name, family_name)
-    mmr = Member.where(['iac_id = ? and soundex(family_name) = soundex(?)',
-      iac_id, family_name]).order(:id).first
+    mmr = nil
+    dm = Member.where(:iac_id => iac_id).order(:id)
+    if 0 < dm.count
+      mmra = dm.to_a.select { |m| m.family_name.downcase == family_name.downcase }
+      mmr = mmra[0] if (0 < mmra.size)
+    end
     mmr ||= Member.find_or_create_by_name(iac_id, given_name, family_name)
   end
 
