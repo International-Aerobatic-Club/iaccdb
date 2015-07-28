@@ -11,8 +11,9 @@ class AssistantsController < ApplicationController
     @assistant = Member.find(id)
     assists = Judge.where(:assist_id => id)
     scores = Score.includes(:flight).where(:judge_id => assists)
-    @flights_history = scores.map { |s| s.flight }
-    @flights_history.uniq!.sort!{ |a,b| b.contest.start <=> a.contest.start }
+    flights = scores.map { |s| s.flight }
+    @flights_history = flights.uniq.reject { |f| f == nil || f.contest == nil }
+    @flights_history.sort! { |a,b| b.contest.start <=> a.contest.start }
     cur_year = Time.now.year
     prior_year = cur_year - 1
     flights_recent = @flights_history.select { |flight| prior_year <= flight.contest.year }
