@@ -12,6 +12,12 @@ class JudgesController < ApplicationController
     judges = Judge.where(:judge_id => id)
     @jf_results =
       JfResult.includes(:f_result).where(:judge_id => judges)
+    # this following block because there's a problem with 
+    # removing dependent records TODO
+    @jf_results = @jf_results.reject do |jf|
+      jf.f_result == nil || jf.f_result.flight == nil ||
+      jf.f_result.flight.contest == nil
+    end
     @jf_results = @jf_results.to_a.sort do |a,b|
       b.f_result.flight.contest.start <=> a.f_result.flight.contest.start
     end

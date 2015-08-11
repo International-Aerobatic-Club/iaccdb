@@ -12,6 +12,8 @@ class AssistantsController < ApplicationController
     assists = Judge.where(:assist_id => id)
     scores = Score.includes(:flight).where(:judge_id => assists)
     flights = scores.map { |s| s.flight }
+    # this following block because there's a problem with 
+    # removing dependent records TODO
     @flights_history = flights.uniq.reject { |f| f == nil || f.contest == nil }
     @flights_history.sort! { |a,b| b.contest.start <=> a.contest.start }
     cur_year = Time.now.year
