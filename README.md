@@ -12,6 +12,8 @@ Here are some further development items, beginning with work items definitely in
 - parse the collegiate participation data now coming in from JaSPer in order to set up the collegiate computations (must do soon)
 - enable entry of Nationals Chief Judge assistants (must do).
 - enable multiple Chief Judge assistants.
+- identify for patch participation and eliminate it from series and soucy computations
+- import more Nationals results from prior years
 - vastly simplify the data schema, incrementally, from 
 [as-is](https://github.com/wbreeze/iaccdb/blob/master/doc/iaccdb_schema.pdf) 
 [to-be](https://github.com/wbreeze/iaccdb/blob/master/doc/iaccdb_schema_to_be.pdf)
