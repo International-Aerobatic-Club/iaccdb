@@ -2,6 +2,13 @@ source 'http://rubygems.org'
 
 gem 'rails', "~> 4.1.0"
 
+##
+# Transition to Rails 4.0
+# Migrate away from this
+# Currently, delayed_job still wants it
+gem 'protected_attributes'
+#####
+
 gem 'delayed_job'
 gem 'delayed_job_active_record'
 
@@ -20,11 +27,6 @@ gem 'memoist2'
 
 group :development, :test do
   gem 'rspec-rails'
-#  gem 'sqlite3'
-end
-
-group :development do
-  #gem 'debugger'
 end
 
 group :test do
@@ -43,6 +45,3 @@ group :production do
   # support for execjs asset precompilation
   gem 'therubyracer'
 end
-
-### Transition to Rails 4.0 - Migrate away from these
-gem 'protected_attributes'
