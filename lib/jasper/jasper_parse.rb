@@ -123,6 +123,15 @@ class JasperParse
     jtList
   end
 
+  def collegiate_pilots(jCat)
+    nodes = @document.find("/ContestResults/Pilots/Category[@CategoryID=#{jCat}]/Pilot[contains(./SubCategory/text(), 'CollegiateSeries')]/@PilotID")
+    ids = []
+    nodes.each do |node|
+      ids << node.value if node.node_type == XML::Node::ATTRIBUTE_NODE
+    end
+    ids
+  end
+
   def chief_iac_number(jCat, jFlt)
     nodes = @document.find("/ContestResults/Judges/Category[@CategoryID=#{jCat}]/Flight[@FlightID=#{jFlt}]/Judge[@JudgeID=0]/IACNumber")
     nodes && nodes.first ? nodes.first.inner_xml : ''
@@ -172,7 +181,13 @@ class JasperParse
     nodes = @document.find("/ContestResults/Pilots/Category[@CategoryID=#{jCat}]/Pilot[@PilotID=#{jPilot}]/Chapter")
     nodes && nodes.first ? nodes.first.inner_xml : ''
   end
-  
+
+  # this one returns nil, not the empty string, if no college
+  def pilot_college(jCat, jPilot)
+    nodes = @document.find("/ContestResults/Pilots/Category[@CategoryID=#{jCat}]/Pilot[@PilotID=#{jPilot}]/College")
+    nodes && nodes.first ? nodes.first.inner_xml : nil
+  end
+
   def airplane_make(jCat, jPilot)
     nodes = @document.find("/ContestResults/Pilots/Category[@CategoryID=#{jCat}]/Pilot[@PilotID=#{jPilot}]/Aircraft/Make")
     nodes && nodes.first ? nodes.first.inner_xml : ''

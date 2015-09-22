@@ -89,5 +89,19 @@ module Jasper
       expect(@jasper.k_values_for(3, 2, 1)).to eq('9 10 15 14 11 19 10 13 17 16 11 17 14 14 0 0 0 0 0 0 8 ')
       expect(@jasper.k_values_for(3, 3, 1)).to eq('32 17 10 20 10 17 19 15 20 13 0 0 0 0 0 0 0 0 0 0 8 ')
     end
+    it 'finds collegiate competitors' do
+      cps = @jasper.collegiate_pilots(2)
+      expect(cps.length).to eq 3
+      expect(cps).to include '1'
+      expect(cps).to include '2'
+      expect(cps).to include '4'
+    end
+    it 'finds collegiate competitor colleges' do
+      college = 'University of North Dakota'
+      expect(@jasper.pilot_college(3,1)).to eq college
+      expect(@jasper.pilot_college(3,2)).to eq college
+      expect(@jasper.pilot_college(3,3)).to eq college
+      expect(@jasper.pilot_college(3,5)).to eq nil
+    end
   end
 end

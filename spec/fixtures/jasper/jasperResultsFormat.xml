@@ -957,6 +957,8 @@ in three newscasts with Amazing aerial video supplying videos.
         </Name>
         <Flights>Known Freestyle Unknown1 </Flights>
         <Chapter>3</Chapter>
+        <College></College>
+        <SubCategory>CollegiateSeries FirstTime </SubCategory>
         <Aircraft>
           <Make>Bucker Youngman</Make>
           <Model>131</Model>
@@ -972,6 +974,8 @@ in three newscasts with Amazing aerial video supplying videos.
         <Flights>Known Freestyle Unknown1 </Flights>
         <Chapter>126</Chapter>
         <FreestyleKs>7 14 19 18 10 14 13 16 11 5 0 0 0 0 0 0 0 0 0 0 6 </FreestyleKs>
+        <College></College>
+        <SubCategory>CollegiateSeries FirstTime </SubCategory>
         <Aircraft>
           <Make>Sukoi</Make>
           <Model>29</Model>
@@ -1002,6 +1006,8 @@ in three newscasts with Amazing aerial video supplying videos.
         <Flights>Known Freestyle Unknown1 </Flights>
         <Chapter>35</Chapter>
         <FreestyleKs>7 14 19 18 10 14 13 16 11 5 0 0 0 0 0 0 0 0 0 0 6 </FreestyleKs>
+        <College></College>
+        <SubCategory>CollegiateSeries FirstTime </SubCategory>
         <Aircraft>
           <Make>Christen Eagle</Make>
           <Model>II</Model>
@@ -1018,6 +1024,8 @@ in three newscasts with Amazing aerial video supplying videos.
         </Name>
         <Flights>Known Freestyle Unknown1 </Flights>
         <Chapter>35</Chapter>
+        <College>University of North Dakota</College>
+        <SubCategory>CollegiateSeries FirstTime </SubCategory>
         <FreestyleKs>9 10 15 14 11 19 10 13 17 16 11 17 14 14 0 0 0 0 0 0 8 </FreestyleKs>
         <Aircraft>
           <Make>Pitts</Make>
@@ -1034,6 +1042,8 @@ in three newscasts with Amazing aerial video supplying videos.
         <Flights>Known Freestyle Unknown1 </Flights>
         <Chapter>35</Chapter>
         <FreestyleKs>7 13 33 20 15 31 19 11 12 14 15 0 0 0 0 0 0 0 0 0 8 </FreestyleKs>
+        <College>University of North Dakota</College>
+        <SubCategory>CollegiateSeries FirstTime </SubCategory>
         <Aircraft>
           <Make>Pitts</Make>
           <Model>S-2B</Model>
@@ -1049,6 +1059,8 @@ in three newscasts with Amazing aerial video supplying videos.
         <Flights>Known Freestyle Unknown1 </Flights>
         <Chapter>126</Chapter>
         <FreestyleKs>14 10 13 13 15 11 6 6 18 17 15 17 17 13 5 0 0 0 0 0 8 </FreestyleKs>
+        <College>University of North Dakota</College>
+        <SubCategory>CollegiateSeries FirstTime </SubCategory>
         <Aircraft>
           <Make>Pitts</Make>
           <Model>Special S1T</Model>
@@ -1079,6 +1091,8 @@ in three newscasts with Amazing aerial video supplying videos.
         <Flights>Known Freestyle Unknown1 </Flights>
         <Chapter></Chapter>
         <FreestyleKs>32 17 10 20 10 17 19 15 20 13 0 0 0 0 0 0 0 0 0 0 8 </FreestyleKs>
+        <College></College>
+        <SubCategory>CollegiateSeries FirstTime GrassRoots </SubCategory>
         <Aircraft>
           <Make>Christien Eagl</Make>
           <Model>2</Model>
