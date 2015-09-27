@@ -13,6 +13,14 @@ def pilot_contests
   pilot_contests
 end
 
+def self.find_or_create_team_for_year(team_name, year)
+  team = CollegiateResult.where(:name => team_name, :year => year).first
+  if (team == nil)
+    team = CollegiateResult.create(:name => team_name, :year => year)
+  end
+  team
+end
+
 def self.list_collegiate_for_year(year)
   puts "#{year} Collegiate Teams Composition:"
   teams = CollegiateResult.where(:year => year)

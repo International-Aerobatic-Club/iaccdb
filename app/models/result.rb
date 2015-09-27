@@ -26,4 +26,11 @@ class Result < ActiveRecord::Base
     to_add.each { |pc_result| self.pc_results.push(pc_result) }
     self
   end
+
+  def add_member_if_not_present(member)
+    unless result_members.where(:member => member.id).first
+      members << member
+    end
+  end
+
 end

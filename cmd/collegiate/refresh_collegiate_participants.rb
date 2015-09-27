@@ -1,42 +1,9 @@
 # read data posts and refresh the collegiate competitors and teams
 # for a given year
-# use rails runner cmd/refresh_collegiate_participants.rb
+# use rails runner cmd/collegiate/refresh_collegiate_participants.rb
 require 'xml'
 
 class RefreshCollegiateParticipants
-  class Pilot
-    attr_accessor :iac_id, :first_name, :last_name, :colleges
-    def initialize(iac_id, first_name, last_name)
-      @iac_id = iac_id
-      @first_name = first_name
-      @last_name = last_name
-      @colleges = []
-    end
-    def set_college(college)
-      unless (@colleges.include?(college))
-        colleges << college
-      end
-    end
-    def to_s
-      "#{iac_id}: #{first_name} #{last_name}"
-    end
-  end
-
-  class College
-    attr_accessor :name, :pilots
-    def initialize(name)
-      @name = name
-      @pilots = []
-    end
-    def add_pilot(pilot)
-      unless(@pilots.include?(pilot))
-        @pilots << pilot
-      end
-    end
-    def to_s
-      name
-    end
-  end
 
   attr_accessor :year, :pilots, :colleges
 
@@ -53,7 +20,7 @@ class RefreshCollegiateParticipants
       last_name = last_name.strip
       pilot = pilots[iac_id]
       unless pilot
-        pilot = Pilot.new(iac_id, first_name, last_name)
+        pilot = Member.find_or_create_by_iac_number(iac_id, first_name, last_name)
         pilots[iac_id] = pilot
       end
       pilot
@@ -65,7 +32,7 @@ class RefreshCollegiateParticipants
       name = name.strip
       college = colleges[name]
       unless college
-        college = College.new(name)
+        college = CollegiateResult.find_or_create_team_for_year(name, year)
         colleges[name] = college
       end
       college
@@ -74,8 +41,8 @@ class RefreshCollegiateParticipants
 
   def add_pilot_college(pilot, college)
     puts "#{pilot} into #{college}"
-    college.add_pilot(pilot)
-    pilot.set_college(college)
+    college.add_member_if_not_present(pilot)
+    college.save
   end
 
   def process_post(post)
@@ -103,12 +70,14 @@ class RefreshCollegiateParticipants
     puts "Colleges"
     @colleges.each do |name, c| 
       puts "\t#{c}"
-      c.pilots.each { |p| puts "\t\t#{p}" }
+      c.members.each { |pilot| puts "\t\t#{pilot}" }
     end
     puts "\nPilots"
     @pilots.each do |iac_id, p|
       puts "\t#{p}"
-      p.colleges.each { |c| puts "\t\t#{c}" }
+      teams = Result.joins(:result_members).includes(:result_members).
+        where(:result_members => { :member_id => p.id }, :year => year)
+      teams.each { |team| puts "\t\t#{team}" }
     end
   end
 
