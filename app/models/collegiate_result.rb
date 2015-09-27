@@ -13,4 +13,15 @@ def pilot_contests
   pilot_contests
 end
 
+def self.list_collegiate_for_year(year)
+  puts "#{year} Collegiate Teams Composition:"
+  teams = CollegiateResult.where(:year => year)
+  teams.each do |team|
+    puts team
+    team.members.each do |member|
+      puts "\t#{member}"
+    end
+  end
+end
+
 end
