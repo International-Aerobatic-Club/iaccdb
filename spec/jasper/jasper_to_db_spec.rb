@@ -159,5 +159,25 @@ module Jasper
         [90, 95, 95, 90, 95, 90, 85, 95, 75, 90, 85]
       )
     end
+    it 'captures collegiate teams' do
+      teams = CollegiateResult.where(year: @contest.year)
+      expect(teams.count).to eq 2
+      team_names = teams.all.collect(&:name)
+      expect(team_names).to include 'University of North Dakota'
+      expect(team_names).to include 'United States Air Force Academy'
+    end
+    it 'captures collegiate participants' do
+      usaf = CollegiateResult.where(year: @contest.year,
+        name: 'United States Air Force Academy').first
+      usaf_ids = usaf.members.collect(&:iac_id)
+      expect(usaf_ids).to include 430273
+      und = CollegiateResult.where(year: @contest.year,
+        name: 'University of North Dakota').first
+      und_ids = und.members.collect(&:iac_id)
+      expect(und_ids).to include 10467
+      expect(und_ids).to include 28094
+      expect(und_ids.count).to eq 3
+    end
   end
 end
+

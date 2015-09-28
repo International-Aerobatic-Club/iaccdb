@@ -3,7 +3,7 @@
 # use rails runner cmd/collegiate/refresh_collegiate_participants.rb
 
 def process_data_posts(year)
-  cparts = CollegiateParticipants.new(year)
+  cparts = Jasper::CollegiateParticipants.new(year)
   posts = DataPost.where(['year(created_at) = ? and is_obsolete = false', 
     year]).order('created_at')
   pcs = []

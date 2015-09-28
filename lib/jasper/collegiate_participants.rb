@@ -2,6 +2,7 @@
 
 require 'xml'
 
+module Jasper
 class CollegiateParticipants
   attr_accessor :year, :pilots, :colleges
 
@@ -38,13 +39,11 @@ class CollegiateParticipants
   end
 
   def add_pilot_college(pilot, college)
-    puts "#{pilot} into #{college}"
     college.add_member_if_not_present(pilot)
     college.save
   end
 
   def process_jasper(jasper)
-    puts "COLLPARTS lookin at jasper data"
     categories = jasper.categories_scored
     categories.each do |icat|
       collegiate_pilots = jasper.collegiate_pilots(icat)
@@ -63,7 +62,6 @@ class CollegiateParticipants
   end
 
   def process_post(post)
-    puts "COLLPARTS lookin at post"
     jasper = Jasper::JasperParse.new
     parser = XML::Parser.file(post.filename)
     jasper.do_parse(parser)
@@ -84,5 +82,6 @@ class CollegiateParticipants
       teams.each { |team| puts "\t\t#{team}" }
     end
   end
+end
 end
 

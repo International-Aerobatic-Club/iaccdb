@@ -26,6 +26,7 @@ def process_contest(jasper, contest_id = nil)
   end
   if dContest
     process_scores(dContest, jasper)
+    process_collegiate(dContest, jasper)
   end
   dContest
 end
@@ -55,6 +56,11 @@ def updateOrCreateContest(id, contest_params)
     dContest = Contest.create(contest_params)
   end
   dContest
+end
+
+def process_collegiate(dContest, jasper)
+  cp = CollegiateParticipants.new(dContest.year)
+  cp.process_jasper(jasper)
 end
 
 def process_scores(dContest, jasper)
