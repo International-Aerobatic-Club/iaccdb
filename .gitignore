@@ -12,6 +12,7 @@ vendor/cache
 nationals2011
 nationals2012
 nationals2014
+nationals2015
 .DS_Store
 dbBackup/
 posts/
@@ -19,3 +20,4 @@ posts/
 public/assets
 config/database.yml
 *.dia~
+
