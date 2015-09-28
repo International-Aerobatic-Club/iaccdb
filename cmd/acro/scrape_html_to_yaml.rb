@@ -1,9 +1,5 @@
-# use rails runner cmd/scrapeAcro.rb <file>
-#require "acro/contest_extractor"
-#require "acro/pilotScraper"
+# use rails runner cmd/acro/scrape_html_to_yaml.rb <control_file>
 
-#reload = !ARGV.empty? && ARGV[0] == 'reload'
-#args = reload ? ARGV.drop(1) : ARGV
 args = ARGV
 ctlFile = args[0]
 if (ctlFile)
@@ -16,3 +12,4 @@ if (ctlFile)
 else
   puts 'Supply the name of the contest information file'
 end
+
