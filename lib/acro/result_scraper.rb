@@ -41,6 +41,10 @@ def flights
   hr = the_rows[HEADING_ROW]
   hr.css('td').each do |col|
     header = col.text.strip
+    if header.length == 0
+      value = col.xpath('./input/@value')
+      header = value.text if value
+    end
     if header.length != 0 && /Rank|Pilot|plane|registration|total|all/i !~ header
       flights << header
       @flight_column_offset ||= offset
