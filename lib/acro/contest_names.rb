@@ -9,6 +9,7 @@
 require 'set'
 
 module ACRO
+include PsychYamlWorkaround
 class ContestNames
 
 def initialize(control_file)
