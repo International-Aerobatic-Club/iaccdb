@@ -10,7 +10,7 @@ module FlightIdentifier
       end
     end
     if !cat
-      if /Pri|Begin/i =~ description
+      if /Pri|Begin|Basic/i =~ description
         cat = 'Primary'
       elsif /Sport|Standard/i =~ description || /Spn/i =~ description
         cat = 'Sportsman'
