@@ -105,18 +105,42 @@ for the results.</p>
 <p>The first item in each line of the output shows the title from the ACRO published results.
 The next items show the inferred category, class, and flight.  
 Check these over and, if there's a problem, figure it out.  
-The inference is accomplished with <span class='code'>lib/acro/flight_identifer.rb</span>.
+The inference is accomplished with <span class='code'>lib/acro/flight_identifier.rb</span>.
 Here is a sample of the output:</p>
-<p class='code'>'Unlimited - Power : Known Sequence', Unlimited, P, Known
-'Unlimited - Power : Programme 2: Free Programme', Unlimited, P, Free
-'Unlimited - Power : Free Unknown Sequence', Unlimited, P, Unknown
-'Standard - Power : Known Sequence', Sportsman, P, Known
-'Standard - Power : Programme 2: Free Programme', Sportsman, P, Flight 2
-'Standard - Power : Programme 3: Free Programme', Sportsman, P, Flight 3
-'Sports - Glider : Known Sequence', Sportsman, G, Known
-'Sports - Glider : Programme 2: Free Programme', Sportsman, G, Flight 2
-'Sports - Glider : Programme 3: Free Programme', Sportsman, G, Flight 3</p>
-
+<p class='code'>'Unlimited Power : Programme 1: Known Compulsory', Unlimited, P, Known
+'Unlimited Power : Programme 2: Free Programme', Unlimited, P, Free
+'Unlimited Power : Programme 3: Free Unknown #1', Unlimited, P, Unknown
+'Advanced Power : Programme 1: Known Compulsory', Advanced, P, Known
+'Advanced Power : Programme 2: Free Programme', Advanced, P, Free
+'Advanced Power : Programme 3: Free Unknown #1', Advanced, P, Unknown
+'Advanced Power : Programme 4: Free Unknown #2', Advanced, P, Unknown
+'Intermediate Glider : Programme 1: Known Compulsory', Intermediate, G, Known
+'Intermediate Glider : Programme 2: Free Programme', Intermediate, G, Free
+'Intermediate Glider : Programme 3: Unknown', Intermediate, G, Unknown
+'Sports Glider : Programme 1: Known Compulsory', Sportsman, G, Known
+'Sports Glider : Programme 2: Free Programme', Sportsman, G, Flight 2
+'Sports Glider : Programme 3: Free Programme', Sportsman, G, Flight 3
+'Intermediate Power : Programme 1: Known Compulsory', Intermediate, P, Known
+'Intermediate Power : Programme 2: Free Programme', Intermediate, P, Free
+'Intermediate Power : Programme 3: Unknown', Intermediate, P, Unknown
+'Sports Power : Programme 1: Known Compulsory', Sportsman, P, Known
+'Sports Power : Programme 2: Free Programme', Sportsman, P, Flight 2
+'Sports Power : Programme 3: Free Programme', Sportsman, P, Flight 3
+'Unlimited Glider : Programme 1: Known Compulsory', Unlimited, G, Known
+'Unlimited Glider : Programme 2: Free Programme', Unlimited, G, Free
+'Unlimited Glider : Programme 3: Unknown', Unlimited, G, Unknown
+'Basic : Programme 1: Known Compulsory', , , Known
+'Basic : Programme 2: Known #2', , , Known
+'Basic : Programme 3: Known #3', , , Known
+'Advanced Glider : Programme 1: Known Compulsory', Advanced, G, Known
+'Advanced Glider : Programme 2: Free Programme', Advanced, G, Free
+'Advanced Glider : Programme 3: Free Unknown', Advanced, G, Unknown
+'4 Minute Free : 4-minute Freestyle Sequence Glider', Four Minute, P, Free
+</p>
+<p>Note that there is a problem with 'Basic'.  We update the code to recognize
+that as 'Primary'.</p>
+<p>Also, we're picking-up the team selection flight for Advanced.  That flight
+does not count for the Advanced National Championship.</p>
 <p>
 In 2014 the pilot flights for the Unlimited Power Unknown 
 and Team Unknown both had the
@@ -128,8 +152,13 @@ It was either that or use the sequence identifier in the file name to disambigua
 We would manually produce a file that maps id's to flights.
 Instead we modified the files to disambiguate the description.
 </p>
-<p class='code'>sed -e '2 s/Free Unknown Sequence/Free Unknown Team Sequence/' 
+<p class='code'>(2014) sed -e '2 s/Free Unknown Sequence/Free Unknown Team Sequence/' pilot_p*s28.htm.yml</p>
+<p>We do something similar this year,</p>
 </p>
+<p class='code'>(2015) 
+for f in `ls -1 nationals2015/pilot_p*s25.htm.yml` ; \
+  do sed -i -e '3 s/Free Unknown #2/Free Unknown Team Program/' $f ; \
+done</p>
 
 <h4>Team Unknown</h4>
 <p>
