@@ -116,14 +116,21 @@ end
 
 def find_member(name)
   participant = @participant_list.participant(name)
-  if participant
+  if participant && participant.db_id
     Member.find(participant.db_id)
   else
-    parts = name.split(' ')
-    given = parts[0]
-    parts.shift
-    family = parts.join(' ')
-    Member.find_or_create_by_name(0, given, family)
+    if participant
+      given = participant.given_name
+      family = participant.family_name
+      iac_id = participant.iac_id
+    else
+      parts = name.split(' ')
+      given = parts[0]
+      parts.shift
+      family = parts.join(' ')
+      iac_id = 0
+    end
+    Member.find_or_create_by_name(iac_id, given, family)
   end
 end
 
