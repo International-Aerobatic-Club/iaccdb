@@ -24,6 +24,15 @@ class ContestFlights
 private
 
   def extract_flights
+    ## This line is a workaround.
+    # Without it, the psych YAML parser does not know how to 
+    # find the classs, it emits,
+    # "undefined class/module ACRO::PilotFlightData"
+    pfl = PilotFlightData.new
+    # If you comment it out and the code still works, then
+    # the problem has been fixed and you can delete this long-winded
+    # workaround message.
+    ## End workaround.
     flight_set = Set::new
     @contest_info.pilot_flight_result_files.each do |f|
       begin
