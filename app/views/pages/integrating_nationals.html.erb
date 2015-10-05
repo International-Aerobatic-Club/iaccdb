@@ -142,21 +142,14 @@ that as 'Primary'.</p>
 <p>Also, we're picking-up the team selection flight for Advanced.  That flight
 does not count for the Advanced National Championship.</p>
 <p>
-In 2014 the pilot flights for the Unlimited Power Unknown 
-and Team Unknown both had the
-same name, 'Unlimited - Power : Free Unknown Sequence'.  
-It was necessary to identify
-all of the <span class='code'>pilot_p*s28.htm.yml</span>
+The pilot flights for the Advanced Power Unknown 
+and Team Unknown both resolve to the same Advanced, Power, Unknown program.
+We identify
+all of the <span class='code'>pilot_p*s25.htm.yml</span>
 files and substitute a unique flight title.
-It was either that or use the sequence identifier in the file name to disambiguate.
-We would manually produce a file that maps id's to flights.
-Instead we modified the files to disambiguate the description.
+We modify the files to disambiguate the description.
 </p>
-<p class='code'>(2014) sed -e '2 s/Free Unknown Sequence/Free Unknown Team Sequence/' pilot_p*s28.htm.yml</p>
-<p>We do something similar this year,</p>
-</p>
-<p class='code'>(2015) 
-for f in `ls -1 nationals2015/pilot_p*s25.htm.yml` ; \
+<p class='code'>for f in `ls -1 nationals2015/pilot_p*s25.htm.yml` ; \
   do sed -i -e '3 s/Free Unknown #2/Free Unknown Team Program/' $f ; \
 done</p>
 
@@ -164,10 +157,10 @@ done</p>
 <p>
 Now that said, we need to leave the Team Unknown out of the picture.
 It isn't part of the competition, only a team selection flight.
-So, to be pragmatic, delete those pilot_flight records entirely
-and delete the team result overall posting as well</p>
-<p class='code'>rm nationals2015/pilot_p*s28.htm.yml
-rm nationals2015/multi_R012s08s17s26s28.htm.yml</p>
+So, to be pragmatic, delete those pilot_flight records entirely.
+There is no separate team result overall posting to remove
+this year.</p>
+<p class='code'>rm nationals2015/pilot_p*s25.htm.yml</p>
 
 <h3>Match names to member records</h3>
 
@@ -191,8 +184,27 @@ program.  (The rails runner is non-interactive.)
 This presents a dialog with the found name and suggested name matches for each pilot
 and judge in the ACRO results files.
 We select the correct member record for the name presented.
-The program outputs a name resolution file, <span class='code'>participants.yml</code.
+The program outputs a name resolution file, 
+<span class='code'>participant_list.yml</code.
 that matches ACRO entered names to member records.</p>
+<p>
+The program assumes nothing; so, we must make a selection for every
+name found in the records.  It's a little unforgiving.  If we make a mistake
+we have to either start over, or make a note and do the correction
+with a manual edit.  The program is used once a year; so, there's poor
+payoff in making it too fancy.</p>
+
+<p>Invariably there are names that do not match or miss matches in the
+database.  For these, we do some manual spelunking in the member database
+(assuming we have access) and/or follow-up with queries.
+With resolutions, we manually add entries to 
+<span class='code'>participant_list.yml</span>.
+We do our best.
+Lacking found matches, the names will go into the database as new entries.
+</p>
+
+<p>Fix Elias McGeeney, Basile Sanchez,Kyle Vonnahmen, Mac Engh, Jim Risher,
+Sarah Clark, Daly R. Bales, Jr., Stephen Fiegel, Mallory Lynch.</p>
 
 <h3>Import the pilot-flight grades</h3>
 
