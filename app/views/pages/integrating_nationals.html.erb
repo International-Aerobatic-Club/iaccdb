@@ -85,8 +85,15 @@ contestName: 'U.S. National Aerobatic Championships'
 startDate: '2015-09-20'
 city: 'Sherman and Denison'
 state: 'TX'
-director: 'Gray Brandt'
+director: 'Gary DeBaun'
+region: 'National'
+chapter : 'IAC'
 </p>
+
+<p>It is important to get `region: 'National'` in there, in order for the contest
+to be picked-up for the Regional Series computations.
+The start date is very important. We try to have the rest of
+the entries make sense as well.</p>
 
 <p>Now we're ready to 
 do the screen scraping that generates YAML (.yml) files from the results postings.
@@ -197,14 +204,12 @@ payoff in making it too fancy.</p>
 <p>Invariably there are names that do not match or miss matches in the
 database.  For these, we do some manual spelunking in the member database
 (assuming we have access) and/or follow-up with queries.
+Thank you, Trish!
 With resolutions, we manually add entries to 
 <span class='code'>participant_list.yml</span>.
 We do our best.
 Lacking found matches, the names will go into the database as new entries.
 </p>
-
-<p>Fix Elias McGeeney, Basile Sanchez,Kyle Vonnahmen, Mac Engh, Jim Risher,
-Sarah Clark, Daly R. Bales, Jr., Stephen Fiegel, Mallory Lynch.</p>
 
 <h3>Import the pilot-flight grades</h3>
 
@@ -230,7 +235,7 @@ It takes some time to run.  That is a subject for investigation.
 After adding the grades, we now have member records for the members who
 were not yet present in the database.
 Run <span class='code'>ruby cmd/acro/resolve_names.rb</span> a second time, 
-or edit the <span class='code'>participants.yml</span> file with id's of newly 
+or edit the <span class='code'>participant_list.yml</span> file with id's of newly 
 created members.  Better to edit the file and search for nil, then fill-out the
 entry in the format of the others:
 </p>
@@ -246,7 +251,6 @@ Find the pilot or judge and check their link URL:
 <p>The number after "pilots", 2552 in the example, is the db_id.
 These numbers will be consecutive, newly created id numbers.</p>
 <p>
-
 Edit the contest.yml file with the id of the contest.  Find the id of the contest
 in the URL,</p>
 <p class='code'>https://iaccdb.iac.org/contests/456</p>
@@ -260,6 +264,7 @@ state: 'TX'
 director: 'Gray Brandt'
 contest_id: 456
 </p>
+
 <h4>Match category result files and flight headings to flight records</h4>
 
 <p>We can usually identify the category, and possibly line-up the flight names from
@@ -326,4 +331,6 @@ in the original ACRO posted results.  If they match, all is well.</p>
 With Nationals loaded, we recompute the regionals.</p>
 <p class='code'>rails runner cmd/recompute_regionals.rb 2015</p>
 <p>Take care not to queue a job to recompute the contest, else the patched results
-are overwritten.  We're done.</p>
+are overwritten.</p>
+<p>We are done.</p>
+
