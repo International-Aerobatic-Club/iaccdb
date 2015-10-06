@@ -1,5 +1,4 @@
 # use rails runner cmd/read_extract.rb <file>
-#require "acro/contest_reader"
 
 args = ARGV
 ctlFile = args[0]
@@ -17,3 +16,4 @@ if (ctlFile)
 else
   puts 'Supply the name of the contest information file'
 end
+

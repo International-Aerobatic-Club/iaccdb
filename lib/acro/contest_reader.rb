@@ -2,11 +2,12 @@
 #   extracted PilotFlightData YAML files
 # see contest_extractor.rb
 module ACRO
+include PsychYamlWorkaround
 class ContestReader
 include FlightIdentifier
 include Log::ConfigLogger
 
-attr_reader :contest_record 
+attr_reader :contest_record
 
 def initialize(control_file)
   @contest_info = ControlFile.new(control_file)
@@ -38,7 +39,7 @@ def read_contest
       process_pilotFlight(pilot_flight_data)
     rescue Exception => e
       logger.warn "ContestReader unable to read contest file, #{f}"
-      logger.error "ContestReader#read_contest excteption, #{e.message}"
+      logger.error "ContestReader#read_contest exception, #{e.message}"
       logger.debug e.backtrace.join("\n")
       pcs << f
     end
@@ -87,9 +88,11 @@ def create_or_replace_pilot_flight(pilot_flight_data)
   category = detect_flight_category(pilot_flight_data.flightName)
   name = detect_flight_name(pilot_flight_data.flightName)
   aircat = detect_flight_aircat(pilot_flight_data.flightName)
+  logger.info "Flight program: #{aircat} #{category}, #{name}"
   # create flight record first time id seen, infer category and flight
   if (category && name && aircat)
     cat = Category.find_for_cat_aircat(category, aircat)
+    logger.info "Category is #{cat.inspect}"
     Flight.where(
       :contest_id => @contest_record, 
       :name => name, 
