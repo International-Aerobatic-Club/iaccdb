@@ -39,6 +39,13 @@ module ACRO
       expect(detect_flight_aircat('Primary')).to eq 'P'
     end
 
+    it 'gets "Basic : Programme 2: Known #2"' do
+      description = 'Basic : Programme 2: Known #2'
+      expect(detect_flight_aircat(description)).to eq 'P'
+      expect(detect_flight_name(description)).to eq 'Flight 2'
+      expect(detect_flight_category(description)).to eq 'Primary'
+    end
+
     it 'gets "Beginners : Programme 2: Free Programme"' do
       description = 'Beginners : Programme 2: Free Programme'
       expect(detect_flight_aircat(description)).to eq 'P'
