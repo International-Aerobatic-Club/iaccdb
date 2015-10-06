@@ -1,0 +1,1 @@
+select m.given_name, m.family_name, count(distinct c.id) as ct from members m join pilot_flights p on p.pilot_id = m.id join flights f on f.id = p.flight_id join contests c on c.id = f.contest_id group by m.id order by ct desc;
