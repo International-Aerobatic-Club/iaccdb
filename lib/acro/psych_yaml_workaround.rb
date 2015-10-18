@@ -5,6 +5,7 @@ module PsychYamlWorkaround
   # find the classs, it emits,
   # "undefined class/module ACRO::PilotFlightData"
   pfl = PilotFlightData.new
+  crs = CategoryResult.new
   # If you comment it out and the code still works, then
   # the problem has been fixed and you can delete this long-winded
   # workaround message.
