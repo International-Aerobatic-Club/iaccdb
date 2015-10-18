@@ -46,7 +46,7 @@ class ControlFile
 
   # returns 'National' if not specified
   def region
-    @control_data['region'] | 'National'
+    @control_data['region'] || 'National'
   end
 
   def contest_id
