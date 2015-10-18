@@ -146,11 +146,11 @@ Here is a sample of the output:</p>
 </p>
 <p>Note that there is a problem with 'Basic'.  We update the code to recognize
 that as 'Primary'.</p>
-<p>Also, we're picking-up the team selection flight for Advanced.  That flight
-does not count for the Advanced National Championship.</p>
 <p>
 The pilot flights for the Advanced Power Unknown 
 and Team Unknown both resolve to the same Advanced, Power, Unknown program.
+We check the posting to see which files are for the team flight.
+They are the "s25" files.
 We identify
 all of the <span class='code'>pilot_p*s25.htm.yml</span>
 files and substitute a unique flight title.
@@ -159,15 +159,22 @@ We modify the files to disambiguate the description.
 <p class='code'>for f in `ls -1 nationals2015/pilot_p*s25.htm.yml` ; \
   do sed -i -e '3 s/Free Unknown #2/Free Unknown Team Program/' $f ; \
 done</p>
+<p>(But never mind, we're about to simply delete them.)</p>
 
 <h4>Team Unknown</h4>
 <p>
-Now that said, we need to leave the Team Unknown out of the picture.
+Now that we've fixed them up, 
+we need to leave the Team Unknown out of the picture.
 It isn't part of the competition, only a team selection flight.
-So, to be pragmatic, delete those pilot_flight records entirely.
-There is no separate team result overall posting to remove
-this year.</p>
+To be pragmatic, delete those pilot_flight records entirely.
+</p>
 <p class='code'>rm nationals2015/pilot_p*s25.htm.yml</p>
+
+<p>We also need to delete the team result overall standings file,
+so that we do not process it. We identify it by checking the links
+in the contest result posting.</p>
+
+<p class='code'>rm nationals2015/multi_R018s22s23s24s25.htm.yml</p>
 
 <h3>Match names to member records</h3>
 
@@ -176,6 +183,7 @@ used in the ACRO files will match member names as used in IACCDB.  Without this 
 step, we get duplicate pilots with different name spellings in IACCDB.  Some pilots 
 and judges don't
 get proper credit for the Nationals flights because they have two identities.
+</p><p>
 We can run pilot and judge name resolution, so that names match to the correct 
 members on import.
 </p><p>
@@ -204,12 +212,14 @@ payoff in making it too fancy.</p>
 <p>Invariably there are names that do not match or miss matches in the
 database.  For these, we do some manual spelunking in the member database
 (assuming we have access) and/or follow-up with queries.
-Thank you, Trish!
-With resolutions, we manually add entries to 
+Thank you, Trish!</p>
+<p>With resolutions, we manually add entries to 
 <span class='code'>participant_list.yml</span>.
 We do our best.
 Lacking found matches, the names will go into the database as new entries.
 </p>
+<p>This year the participant_list file had "(USA)" appended to many of the
+names of the Advanced Power pilots.  We had te remove that.</p>
 
 <h3>Import the pilot-flight grades</h3>
 
@@ -243,18 +253,24 @@ entry in the format of the others:
   db_id: '617'
   given_name: Jim
   family_name: Johnson
-  iad_db_id: '0'</p>
-<p>We are not readily able to specify IAC id's, so leave them zero.
-Find the db_id, which is the most important value, by browsing the contest online.
+  iad_id: '24521912'</p>
+<p>Find the db_id, which is the most important value, by browsing the contest online.
 Find the pilot or judge and check their link URL:
 </p><p class='code'>https://iaccdb.iac.org/pilots/2552/scores/456</p>
 <p>The number after "pilots", 2552 in the example, is the db_id.
 These numbers will be consecutive, newly created id numbers.</p>
+<p>It's extremely helpful to have an accurate IAC id in the records.
+Use all legal means necessary to find and provide it.
+</p>
+<p>If you finish and find that a pilot's overall scores don't match the 
+published results, it's very possibly because you mistyped the database 
+id of that pilot. (You know how we know this.)
+</p>
 <p>
 Edit the contest.yml file with the id of the contest.  Find the id of the contest
 in the URL,</p>
 <p class='code'>https://iaccdb.iac.org/contests/456</p>
-<p>The number after contests, 456 in the example, is the contest id.
+<p>The number after "contests," 456 in the example, is the contest id.
 The contest.yml control file should now have an additional line,</p>
 <p class='code'>---
 contestName: 'U.S. National Aerobatic Championships'
@@ -262,6 +278,8 @@ startDate: '2015-09-21'
 city: 'Sherman and Denison'
 state: 'TX'
 director: 'Gray Brandt'
+region: 'National'
+chapter : 'IAC'
 contest_id: 456
 </p>
 
@@ -272,7 +290,7 @@ the overall results postings with the flights in the individual pilot files.  Ra
 take a chance with heuristic matching, however, it's straightforward to manually
 identify the flights in the overall results files with flights now present in the
 iac database.  To generate the list of flights, run</p>
-<p class='code'>rails runner cmd/acro/results_list.rb ~/iaccdb/shared/nationals2015/contest.yml</p>
+<p class='code'>rails runner cmd/acro/results_list.rb nationals2015/contest.yml</p>
 <p>This produces a file, <span class='code'>results_list.yml</span> which we edit.
 Wherever we find 'missing_id' we insert the correct iac database id for the flight result.
 Find the database id's in the url's for the flights, for example:</p>
@@ -299,9 +317,30 @@ The second entry has not.</p>
     flight_id: 6464
     sequence: 3
 - !ruby/object:ACRO::ResultsList::ResultsFile
-  file_name: multi_R002s07s16s25.htm.yml
-  category: Advanced
-  description: Advanced Glider
+  file_name: multi_R016s19s20s21.htm.yml
+  category: Unlimited
+  description: Unlimited Glider
+  flights:
+  - !ruby/object:ACRO::ResultsList::ResultsFlight
+    flight_name: Known
+    flight_id: missing_id
+    sequence: 1
+  - !ruby/object:ACRO::ResultsList::ResultsFlight
+    flight_name: Free
+    flight_id: missing_id
+    sequence: 1
+  - !ruby/object:ACRO::ResultsList::ResultsFlight
+    flight_name: Unkwn
+    flight_id: missing_id
+    sequence: 1</p>
+
+<p>We edit the sequence values to get the correct sequence of columns in the results
+display.</p>
+
+<p class='code'>- !ruby/object:ACRO::ResultsList::ResultsFile
+  file_name: multi_R017s28s29s30.htm.yml
+  category: 
+  description: 
   flights:
   - !ruby/object:ACRO::ResultsList::ResultsFlight
     flight_name: Known P1
@@ -315,8 +354,32 @@ The second entry has not.</p>
     flight_name: Free Unk
     flight_id: missing_id
     sequence: 1</p>
-<p>We edit the sequence values to get the correct sequence of columns in the results
-display.</p>
+
+<p>The entry for the multi_R017s28s29s30.htm.yml file has no category and
+description.  Looking at it, we see that it lacks the
+"Contest Results:" prefix that all of the other files have,
+that the scraper uses to identify the line containing the
+category and class.  Supplying the category and description
+in the results_list.yml file suffices to get it properly
+identified.
+</p>
+<p>Many of the category descriptions end with "US Nationals"
+This is harmless, but we remove it anyway so the descriptions
+are not redundant.
+</p>
+<p>The import missed collecting the Advanced Power
+results and the Four minute free results.
+</p>
+<p>The Advanced Power needed a missing output report from the ACRO program.
+The team flights were posted, but not the National Competition.</p>
+<p>The Four Minute results are posted in a "single" file, not a "multi" file.
+The YAML extractor doesn't touch the single files because they normally
+contain individual flight results already found in the multi files.
+The simplest way to get the Four Minute results is to copy that single
+file to a multi file,</p>
+<p class='code'>cp nationals2015/www.iac.org/files/nationals-results/2015/single_R004s27.htm \
+nationals2015/www.iac.org/files/nationals-results/2015/multi_R004s27.htm
+</p>
 
 <h4>Patch the ACRO computed results</h4>
 
