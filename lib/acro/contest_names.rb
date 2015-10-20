@@ -53,7 +53,7 @@ def select_and_return_member(result)
     puts 'You type a number or a, b, c, d, N, ?'
     input = $stdin.gets
     sel = input ? input.to_i : 0
-    if sel != 0 && sel <= result.count
+    if sel != 0 && result != nil && sel <= result.count
       selected = result[sel-1]
       searching = false
     elsif input != nil
