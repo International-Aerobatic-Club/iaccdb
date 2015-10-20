@@ -25,7 +25,8 @@
     <%= link_to("#{pilot.name}", pilot_score_path(pilot, @contest)) if pilot %>
   </td>
   <td class="chapter">
-    <%= "(#{pilot_flight.chapter})" if pilot_flight.chapter && !pilot_flight.chapter.strip.empty? %>
+    <%= "(#{pilot_flight.chapter})" if pilot_flight &&
+      pilot_flight.chapter && !pilot_flight.chapter.strip.empty? %>
   </td>
   <td class='airplane'><%= airplane.description if airplane %></td>
   <% flight_index = 0 %>
