@@ -103,12 +103,12 @@ From the project directory,</p>
   nationals2015/www.iac.org/files/nationals-results/2015/contest.yml
 mv nationals2015/www.iac.org/files/nationals-results/2015/*.yml nationals2015</p>
 
+<h4>Check the flight names</h4>
 <p>Run the flights list to ensure that the category and flight are correctly identified
 for the results.</p>
 
 <p class='code'>rails runner cmd/acro/show_flights.rb nationals2015/contest.yml</p>
 
-<h4>Check the flight names</h4>
 <p>The first item in each line of the output shows the title from the ACRO published results.
 The next items show the inferred category, class, and flight.  
 Check these over and, if there's a problem, figure it out.  
