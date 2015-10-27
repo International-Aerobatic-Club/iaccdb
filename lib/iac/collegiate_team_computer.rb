@@ -38,7 +38,6 @@ class Result
   end
 
   def <(other)
-    (!self.has_non_primary && other.has_non_primary) ||
     self.value < other.value
   end
 end
@@ -49,6 +48,7 @@ def initialize(pilot_contests)
   @pilots = @pilot_contests.keys
   # disregard pilots with no contest participation
   @pilots.delete_if { |pilot| @pilot_contests[pilot].size == 0 }
+  initialize_counts
 end
 
 # For each pilot participating in Sportsman or above
@@ -67,12 +67,11 @@ end
 #  :total => decimal
 #  :combination => array of pc_result
 def compute_result
-  initialize_counts
   @best_result = Result.new
-  @best_result.qualified = is_qualified?
   pilot_count = @pilots.size
   combination_size = 3 < pilot_count ? 3 : pilot_count
   compute_best_result_p(@pilots, combination_size, @best_result)
+  @best_result.qualified = @is_qualified
   @best_result
 end
 
@@ -80,21 +79,14 @@ end
 private
 ###
 
-# Count of pilots participating is three or more and
-# Three contests with three pilots and
-# Three contests with at least one non-Primary pilot
-def is_qualified?
-    3 <= @non_primary_participant_occurrence_count &&
-    3 <= @three_or_more_pilot_occurrence_count
-end
-
 # find best result combination over pilots not yet used
 # unused_pilots: array of pilot not already incorporated
 # pilots_needed: count of additional pilots needed for a solution
 # cur_result: current accumulated result of pilot flights used so far
 def compute_best_result_p(unused_pilots, pilots_needed, cur_result)
   if (pilots_needed == 0 || unused_pilots.empty?)
-    if @best_result < cur_result
+    if @best_result < cur_result &&
+        (!@is_qualified || cur_result.has_non_primary)
       @best_result = cur_result
     end
   else
@@ -129,6 +121,13 @@ def initialize_counts
     @non_primary_participant_occurrence_count += 1 if contest[:has_non_primary]
     @three_or_more_pilot_occurrence_count += 1 if 3 <= contest[:pilot_count]
   end
+
+  # Count of pilots participating is three or more and
+  # Three contests with three pilots and
+  # Three contests with at least one non-Primary pilot
+  @is_qualified =
+    3 <= @non_primary_participant_occurrence_count &&
+    3 <= @three_or_more_pilot_occurrence_count
 end
 
 # pilot_contests is hash of pilot (member)  => [ array of pc_result ]
