@@ -40,6 +40,14 @@ class Result
   def <(other)
     self.value < other.value
   end
+
+  def to_s
+    s = "#{sprintf('%0.2f', value * 100.0)}\n"
+    combination.each do |c|
+      s << "\t#{c.pilot.iac_id} #{c.contest.name}\n"
+    end
+    s
+  end
 end
 
 # pilot_contests is hash pilot => pc_results
