@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151020053428) do
+ActiveRecord::Schema.define(version: 20151028030441) do
 
   create_table "airplanes", force: true do |t|
     t.string   "make"
@@ -31,6 +31,8 @@ ActiveRecord::Schema.define(version: 20151020053428) do
     t.integer  "category_id"
   end
 
+  add_index "c_results", ["category_id"], name: "index_c_results_on_category_id", using: :btree
+  add_index "c_results", ["contest_id"], name: "index_c_results_on_contest_id", using: :btree
   add_index "c_results", ["id"], name: "index_c_results_on_id", using: :btree
 
   create_table "categories", force: true do |t|
@@ -68,6 +70,7 @@ ActiveRecord::Schema.define(version: 20151020053428) do
     t.datetime "updated_at"
   end
 
+  add_index "data_posts", ["contest_id"], name: "index_data_posts_on_contest_id", using: :btree
   add_index "data_posts", ["id"], name: "index_data_posts_on_id", using: :btree
 
   create_table "delayed_jobs", force: true do |t|
@@ -94,6 +97,8 @@ ActiveRecord::Schema.define(version: 20151020053428) do
     t.integer  "c_result_id"
   end
 
+  add_index "f_results", ["c_result_id"], name: "index_f_results_on_c_result_id", using: :btree
+  add_index "f_results", ["flight_id"], name: "index_f_results_on_flight_id", using: :btree
   add_index "f_results", ["id"], name: "index_f_results_on_id", using: :btree
 
   create_table "failures", force: true do |t|
@@ -106,7 +111,10 @@ ActiveRecord::Schema.define(version: 20151020053428) do
     t.integer  "data_post_id"
   end
 
+  add_index "failures", ["contest_id"], name: "index_failures_on_contest_id", using: :btree
+  add_index "failures", ["data_post_id"], name: "index_failures_on_data_post_id", using: :btree
   add_index "failures", ["id"], name: "index_failures_on_id", using: :btree
+  add_index "failures", ["manny_id"], name: "index_failures_on_manny_id", using: :btree
 
   create_table "flights", force: true do |t|
     t.integer  "contest_id",             null: false
@@ -119,6 +127,10 @@ ActiveRecord::Schema.define(version: 20151020053428) do
     t.integer  "category_id"
   end
 
+  add_index "flights", ["assist_id"], name: "index_flights_on_assist_id", using: :btree
+  add_index "flights", ["category_id"], name: "index_flights_on_category_id", using: :btree
+  add_index "flights", ["chief_id"], name: "index_flights_on_chief_id", using: :btree
+  add_index "flights", ["contest_id"], name: "index_flights_on_contest_id", using: :btree
   add_index "flights", ["id"], name: "index_flights_on_id", using: :btree
 
   create_table "jc_results", force: true do |t|
@@ -143,7 +155,9 @@ ActiveRecord::Schema.define(version: 20151020053428) do
     t.decimal  "ri_total",          precision: 11, scale: 5
   end
 
+  add_index "jc_results", ["c_result_id"], name: "index_jc_results_on_c_result_id", using: :btree
   add_index "jc_results", ["id"], name: "index_jc_results_on_id", using: :btree
+  add_index "jc_results", ["judge_id"], name: "index_jc_results_on_judge_id", using: :btree
 
   create_table "jf_results", force: true do |t|
     t.integer  "f_result_id"
@@ -168,7 +182,10 @@ ActiveRecord::Schema.define(version: 20151020053428) do
     t.decimal  "ri_total",          precision: 10, scale: 5
   end
 
+  add_index "jf_results", ["f_result_id"], name: "index_jf_results_on_f_result_id", using: :btree
   add_index "jf_results", ["id"], name: "index_jf_results_on_id", using: :btree
+  add_index "jf_results", ["jc_result_id"], name: "index_jf_results_on_jc_result_id", using: :btree
+  add_index "jf_results", ["judge_id"], name: "index_jf_results_on_judge_id", using: :btree
 
   create_table "judges", force: true do |t|
     t.integer  "judge_id"
@@ -177,7 +194,9 @@ ActiveRecord::Schema.define(version: 20151020053428) do
     t.datetime "updated_at"
   end
 
+  add_index "judges", ["assist_id"], name: "index_judges_on_assist_id", using: :btree
   add_index "judges", ["id"], name: "index_judges_on_id", using: :btree
+  add_index "judges", ["judge_id"], name: "index_judges_on_judge_id", using: :btree
 
   create_table "jy_results", force: true do |t|
     t.integer  "judge_id"
@@ -202,7 +221,9 @@ ActiveRecord::Schema.define(version: 20151020053428) do
     t.decimal  "ri_total",          precision: 12, scale: 5
   end
 
+  add_index "jy_results", ["category_id"], name: "index_jy_results_on_category_id", using: :btree
   add_index "jy_results", ["id"], name: "index_jy_results_on_id", using: :btree
+  add_index "jy_results", ["judge_id"], name: "index_jy_results_on_judge_id", using: :btree
 
   create_table "manny_synches", force: true do |t|
     t.integer  "contest_id"
@@ -212,6 +233,8 @@ ActiveRecord::Schema.define(version: 20151020053428) do
     t.datetime "updated_at"
   end
 
+  add_index "manny_synches", ["contest_id"], name: "index_manny_synches_on_contest_id", using: :btree
+
   create_table "members", force: true do |t|
     t.integer  "iac_id"
     t.string   "given_name",  limit: 40
@@ -220,6 +243,7 @@ ActiveRecord::Schema.define(version: 20151020053428) do
     t.datetime "updated_at"
   end
 
+  add_index "members", ["iac_id"], name: "index_members_on_iac_id", using: :btree
   add_index "members", ["id"], name: "index_members_on_id", using: :btree
 
   create_table "pc_results", force: true do |t|
@@ -234,7 +258,9 @@ ActiveRecord::Schema.define(version: 20151020053428) do
     t.integer  "total_possible"
   end
 
+  add_index "pc_results", ["c_result_id"], name: "index_pc_results_on_c_result_id", using: :btree
   add_index "pc_results", ["id"], name: "index_pc_results_on_id", using: :btree
+  add_index "pc_results", ["pilot_id"], name: "index_pc_results_on_pilot_id", using: :btree
 
   create_table "pf_results", force: true do |t|
     t.integer  "pilot_flight_id",                                         null: false
@@ -252,7 +278,10 @@ ActiveRecord::Schema.define(version: 20151020053428) do
     t.integer  "total_possible"
   end
 
+  add_index "pf_results", ["f_result_id"], name: "index_pf_results_on_f_result_id", using: :btree
   add_index "pf_results", ["id"], name: "index_pf_results_on_id", using: :btree
+  add_index "pf_results", ["pc_result_id"], name: "index_pf_results_on_pc_result_id", using: :btree
+  add_index "pf_results", ["pilot_flight_id"], name: "index_pf_results_on_pilot_flight_id", using: :btree
 
   create_table "pfj_results", force: true do |t|
     t.integer  "pilot_flight_id",                null: false
@@ -269,6 +298,8 @@ ActiveRecord::Schema.define(version: 20151020053428) do
   end
 
   add_index "pfj_results", ["id"], name: "index_pfj_results_on_id", using: :btree
+  add_index "pfj_results", ["judge_id"], name: "index_pfj_results_on_judge_id", using: :btree
+  add_index "pfj_results", ["pilot_flight_id"], name: "index_pfj_results_on_pilot_flight_id", using: :btree
 
   create_table "pilot_flights", force: true do |t|
     t.integer  "pilot_id"
@@ -281,7 +312,11 @@ ActiveRecord::Schema.define(version: 20151020053428) do
     t.integer  "penalty_total",           default: 0
   end
 
+  add_index "pilot_flights", ["airplane_id"], name: "index_pilot_flights_on_airplane_id", using: :btree
+  add_index "pilot_flights", ["flight_id"], name: "index_pilot_flights_on_flight_id", using: :btree
   add_index "pilot_flights", ["id"], name: "index_pilot_flights_on_id", using: :btree
+  add_index "pilot_flights", ["pilot_id"], name: "index_pilot_flights_on_pilot_id", using: :btree
+  add_index "pilot_flights", ["sequence_id"], name: "index_pilot_flights_on_sequence_id", using: :btree
 
   create_table "region_contests", force: true do |t|
     t.integer  "pc_result_id"
@@ -291,6 +326,8 @@ ActiveRecord::Schema.define(version: 20151020053428) do
   end
 
   add_index "region_contests", ["id"], name: "index_region_contests_on_id", using: :btree
+  add_index "region_contests", ["pc_result_id"], name: "index_region_contests_on_pc_result_id", using: :btree
+  add_index "region_contests", ["regional_pilot_id"], name: "index_region_contests_on_regional_pilot_id", using: :btree
 
   create_table "regional_pilots", force: true do |t|
     t.integer  "pilot_id"
@@ -304,7 +341,9 @@ ActiveRecord::Schema.define(version: 20151020053428) do
     t.integer  "category_id"
   end
 
+  add_index "regional_pilots", ["category_id"], name: "index_regional_pilots_on_category_id", using: :btree
   add_index "regional_pilots", ["id"], name: "index_regional_pilots_on_id", using: :btree
+  add_index "regional_pilots", ["pilot_id"], name: "index_regional_pilots_on_pilot_id", using: :btree
 
   create_table "result_accums", force: true do |t|
     t.integer  "result_id"
@@ -343,7 +382,9 @@ ActiveRecord::Schema.define(version: 20151020053428) do
     t.datetime "updated_at",                              null: false
   end
 
+  add_index "results", ["category_id"], name: "index_results_on_category_id", using: :btree
   add_index "results", ["id"], name: "index_results_on_id", using: :btree
+  add_index "results", ["pilot_id"], name: "index_results_on_pilot_id", using: :btree
 
   create_table "scores", force: true do |t|
     t.integer  "pilot_flight_id"
@@ -354,6 +395,8 @@ ActiveRecord::Schema.define(version: 20151020053428) do
   end
 
   add_index "scores", ["id"], name: "index_scores_on_id", using: :btree
+  add_index "scores", ["judge_id"], name: "index_scores_on_judge_id", using: :btree
+  add_index "scores", ["pilot_flight_id"], name: "index_scores_on_pilot_flight_id", using: :btree
 
   create_table "sequences", force: true do |t|
     t.integer  "figure_count"
