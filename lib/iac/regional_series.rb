@@ -44,15 +44,22 @@ def compute_results (year, region)
     accumulate_contest year, region, contest
   end
   RegionalPilot.where(:year => year, :region => region).each do |rp|
-    apc = rp.pc_results.collect { |pc| pc.pct_possible }
-    apc.sort!.reverse!
+    best_pct = 0;
+    best_combo = [];
+    apc = rp.pc_results.all
     pc_ct = apc.count
     pc_req = required_contest_count(region)
     pc_use = pc_ct < pc_req ? pc_ct : pc_req
-    apc = apc.slice(0, pc_use)
-    avg_pct = apc.inject(0.0) { |ttl, pct| ttl += pct }
-    avg_pct /= pc_use
-    rp.update_attributes(:percentage => avg_pct, :qualified => (pc_use == pc_req))
+    apc.combination(pc_use) do |c|
+      pts_earned = c.inject(0) { |pts, pcr| pts + pcr.category_value }
+      pts_possible = c.inject(0) { |pts, pcr| pts + pcr.total_possible }
+      pct = pts_earned * 100.0 / pts_possible
+      if best_pct < pct
+        best_pct = pct
+        best_combo = c
+      end
+    end
+    rp.update_attributes(:percentage => best_pct, :qualified => (pc_use == pc_req))
   end
 end
 
