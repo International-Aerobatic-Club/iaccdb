@@ -14,7 +14,8 @@
     <th>start</th>
     <th>name</th>
     <th>place</th>
-    <th>calcs</th>
+    <th colspan='2'>calcs</th>
+    <th colspan='3'>actions</th>
   </tr>
 </thead>
 <tbody>
@@ -26,9 +27,15 @@
     <td><%= contest.start %></td>
     <td><%= link_to contest.sobriquet, contest %></td>
     <td><%= contest.place %></td>
-    <% results = contest.c_results %>
-    <% if results %>
-      <td><%= link_to 'results', admin_contest_c_results_path(contest) %></td>
+    <% pc_results = contest.pc_results %>
+    <% if pc_results %>
+      <td><%= link_to 'pilot', admin_contest_pc_results_path(contest) %></td>
+    <% else %>
+      <td/>
+    <% end %>
+    <% jc_results = contest.jc_results %>
+    <% if jc_results %>
+      <td><%= link_to 'judge', admin_contest_jc_results_path(contest) %></td>
     <% else %>
       <td/>
     <% end %>
