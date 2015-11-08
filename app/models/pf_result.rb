@@ -24,8 +24,6 @@ class PfResult < ActiveRecord::Base
   attr_protected :id
 
   belongs_to :pilot_flight
-  belongs_to :pc_result
-  belongs_to :f_result
 
   serialize :figure_results
   serialize :figure_ranks

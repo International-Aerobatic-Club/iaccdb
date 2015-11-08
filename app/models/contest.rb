@@ -8,6 +8,8 @@ class Contest < ActiveRecord::Base
   has_one :manny_synch, :dependent => :nullify
   has_many :failures, :dependent => :destroy
   has_many :data_posts, :dependent => :nullify
+  has_many :jc_results, :dependent => :destroy
+  has_many :pc_results, :dependent => :destroy
 
   validates :name, :length => { :in => 4..48 }
   validates :city, :length => { :maximum => 24 }

@@ -4,6 +4,8 @@ class JcResult < ActiveRecord::Base
   belongs_to :judge, :class_name => 'Member'
   belongs_to :c_result
   has_many :jf_results
+  belongs_to :contest
+  belongs_to :category
 
   include JudgeMetrics
 

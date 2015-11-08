@@ -8,6 +8,7 @@ class Flight < ActiveRecord::Base
   has_many :pilot_flights, :dependent => :destroy
   has_many :pilots, :through => :pilot_flights, :class_name => 'Member'
   has_many :f_results, :dependent => :destroy
+  has_many :jf_results, :dependent => :destroy
   
   def to_s
     "Flight #{id} #{contest.name} #{displayName}"
