@@ -5,7 +5,5 @@
 <p class="contest_director">Directed by <%= @contest.director %>, 
    Chapter <%= @contest.chapter %></p>
 
-<% @c_results.each do |c_result| %>
-  <%= render :template => 'c_results/category',
-    :locals => { :c_result => c_result } %>
-<% end %>
+<%= render :partial => 'contests/category', collection: @categories %>
+

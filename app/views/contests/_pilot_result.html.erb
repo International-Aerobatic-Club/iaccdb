@@ -1,0 +1,46 @@
+<tr>
+  <% pilot = pilot_result[:member] %>
+  <% pc_result = pilot_result[:overall] %>
+  <%
+    pf_results = pilot_result[:flight_results].values
+    if pf_results
+      pilot_flight = pf_results.first.first.pilot_flight
+      airplane = pilot_flight.airplane
+    else
+      airplane = ""
+    end
+  %>
+  <td class='star'>
+    <%= pc_result.star_qualifying ? '★' : ' ' %>
+  </td>
+  <td class="pilot">
+    <%= link_to("#{pilot.name}", pilot_score_path(pilot, @contest)) if pilot %>
+  </td>
+  <td class="chapter">
+    <%= "(#{pilot_flight.chapter})" if pilot_flight &&
+      pilot_flight.chapter && !pilot_flight.chapter.strip.empty? %>
+  </td>
+  <td class='airplane'><%= airplane.description if airplane %></td>
+  <% flights.each do |flight| %>
+    <% pf_result = pilot_result[:flight_results][flight] %>
+    <% unless pf_result %>
+      <td colspan='3'/>
+    <% else %>
+      <% pf_result = pf_result.first %>
+      <td class='total_average'>
+        <%= decimal_two(pf_result.adj_flight_value) %>
+      </td>
+      <td class='percentage'>
+        <%= score_pct_two(pf_result.adj_flight_value, pf_result.total_possible) %>%
+      </td>
+      <td class='rank'>(<%= pf_result.adj_flight_rank %>)</td>
+    <% end %>
+  <% end %>
+  <td class='total_average'>
+    <%= decimal_two(pc_result.category_value) %>
+  </td>
+  <td class='percentage'>
+    <%= score_pct_two(pc_result.category_value, pc_result.total_possible) %>%
+  </td>
+  <td class='rank'>(<%= pc_result.category_rank %>)</td>
+</tr>
