@@ -1,15 +1,8 @@
 <tr>
   <% pilot = pilot_result[:member] %>
   <% pc_result = pilot_result[:overall] %>
-  <%
-    pf_results = pilot_result[:flight_results].values
-    if pf_results
-      pilot_flight = pf_results.first.first.pilot_flight
-      airplane = pilot_flight.airplane
-    else
-      airplane = ""
-    end
-  %>
+  <% airplane = pilot_result[:airplane] %>
+  <% chapter = pilot_result[:chapter] %>
   <td class='star'>
     <%= pc_result.star_qualifying ? '★' : ' ' %>
   </td>
@@ -17,10 +10,11 @@
     <%= link_to("#{pilot.name}", pilot_score_path(pilot, @contest)) if pilot %>
   </td>
   <td class="chapter">
-    <%= "(#{pilot_flight.chapter})" if pilot_flight &&
-      pilot_flight.chapter && !pilot_flight.chapter.strip.empty? %>
+    <%= "(#{chapter})" if chapter && !chapter.strip.empty?  %>
   </td>
-  <td class='airplane'><%= airplane.description if airplane %></td>
+  <td class='airplane'>
+    <%= airplane.description if airplane %>
+  </td>
   <% flights.each do |flight| %>
     <% pf_result = pilot_result[:flight_results][flight] %>
     <% unless pf_result %>

@@ -20,6 +20,8 @@ class ContestsController < ApplicationController
   #         pilot_result {}
   #           member: Member record for the pilot
   #           overall: PcResult for pilot in contest and category
+  #           airplane: description of airplane from one pilot_flight
+  #           chapter: chapter number from one pilot_flight
   #           flight_results: hash of flight results for pilot
   #             key is Flight, value is array of PfResult (with one element)
   def show
@@ -50,6 +52,15 @@ class ContestsController < ApplicationController
                 :flights => {contest_id: @contest, category_id: cat}})
             pilot_result[:flight_results] = pf_results.all.group_by do |pf|
               pf.flight
+            end
+            pfr = pf_results.first
+            pf = pfr.pilot_flight if pfr
+            if (pf)
+              pilot_result[:airplane] = pf.airplane
+              pilot_result[:chapter] = pf.chapter
+            else
+              pilot_result[:airplane] = null
+              pilot_result[:chapter] = ''
             end
             category_data[:pilot_results] << pilot_result
           end
