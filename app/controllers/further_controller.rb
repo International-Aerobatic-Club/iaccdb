@@ -1,4 +1,5 @@
 class FurtherController < ApplicationController
+
   def participation
     judge_counts = JyResult.joins(:category).select(
         'count(distinct(judge_id)) as count, categories.id as category_id, year'
@@ -30,14 +31,19 @@ class FurtherController < ApplicationController
   end
 
   def airplane_make_model
+    @years = Contest.joins(:flights => {:pilot_flights => :airplane}).select(
+      "distinct year(start) as anum"
+      ).order('anum desc'
+      ).all.collect { |contest| contest.anum }
+    @year = params[:year] || @years.first
     airplanes_with_cat = Airplane.joins(
-      :pilot_flights => :category
+      :pilot_flights => {:flight => [:category, :contest]}
       ).select(
-        'count(pilot_flights.id) as flight_count, make, model, categories.name as category'
-      ).group('make, model, categories.id'
-      )
+        'count(pilot_flights.id) as flight_count, make, model, ' +
+        'categories.name as category'
+      ).where(['year(contests.start) = ?', @year]
+      ).group('make, model, categories.id')
    @airplanes = airplanes_with_cat.inject({}) do |m,a| 
-     puts "m is #{m}, a.category is #{a.category}, m[a.category] is #{m[a.category]}"
      m[a.category] ||= []
      m[a.category] << a
      m
