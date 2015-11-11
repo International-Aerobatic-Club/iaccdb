@@ -105,6 +105,7 @@ IAC::Application.routes.draw do
 
   namespace :further do
     get 'participation', :action => :participation
+    get 'airplanes/:year', :action => :airplane_make_model
     get 'airplanes', :action => :airplane_make_model
   end
 

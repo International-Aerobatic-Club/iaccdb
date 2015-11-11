@@ -1,3 +1,8 @@
 <h1>Airplane Makes and Models Flown</h1>
+<p>
+<% @years.each do |year| %>
+  <%= link_to year, further_airplanes_path(year: year) %>
+<% end %>
+</p>
 <%= render partial: 'further/airplane_categories', collection: @airplanes.keys,
   locals: { airplanes: @airplanes } %>
