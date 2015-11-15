@@ -62,38 +62,40 @@ module Model
         create(:denton_free_lynne, 
           :pilot_flight => denton_flight,
           :judge => judge_lynne)
-        @c_results = @contest.results
+        @contest.results
       end
 
       it 'finds two pilots in category results' do
-        c_result = @c_results.where(:category_id => @imdt_cat.id).first
-        expect(c_result).not_to be nil
-        expect(c_result.pc_results.size).to eq(2)
+        pc_results = PcResult.where(
+          :contest => @contest,
+          :category => @imdt_cat)
+        expect(pc_results).not_to be nil
+        expect(pc_results.size).to eq(2)
       end
 
       it 'computes category total for pilot' do
-        c_result = @c_results.where(:category_id => @imdt_cat.id).first
-        expect(c_result).not_to be nil
-        pc_result = c_result.pc_results.where(:pilot_id => @adams).first
+        pc_results = PcResult.where(contest: @contest, category: @imdt_cat)
+        expect(pc_results).not_to be nil
+        pc_result = pc_results.where(:pilot_id => @adams).first
         expect(pc_result).not_to be nil
         expect(pc_result.category_value.round(2)).to eq(3474.83)
-        pc_result = c_result.pc_results.where(:pilot_id => @denton).first
+        pc_result = pc_results.where(:pilot_id => @denton).first
         expect(pc_result).not_to be nil
         expect(pc_result.category_value.round(2)).to eq(3459.33)
       end
 
       it 'computes category rank for pilot' do
-        c_result = @c_results.where(:category_id => @imdt_cat.id).first
-        expect(c_result).not_to be nil
-        pc_result = c_result.pc_results.where(:pilot_id => @adams).first
+        pc_results = PcResult.where(contest: @contest, category: @imdt_cat)
+        expect(pc_results).not_to be nil
+        pc_result = pc_results.where(:pilot_id => @adams).first
         expect(pc_result).not_to be nil
         expect(pc_result.category_rank).to eq(1)
-        pc_result = c_result.pc_results.where(:pilot_id => @denton).first
+        pc_result = pc_results.where(:pilot_id => @denton).first
         expect(pc_result).not_to be nil
         expect(pc_result.category_rank).to eq(2)
       end
     end
-   
+
     it 'behaves on empty sequence' do
       @pf = create(:pilot_flight)
       create(:score,

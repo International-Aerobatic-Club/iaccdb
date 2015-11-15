@@ -2,7 +2,6 @@ class PcResult < ActiveRecord::Base
   attr_protected :id
 
   belongs_to :pilot, :class_name => 'Member'
-  belongs_to :c_result
   belongs_to :contest
   belongs_to :category
   has_many :region_contests
@@ -14,20 +13,12 @@ class PcResult < ActiveRecord::Base
     a = "pc_result for pilot #{pilot} value #{category_value}"
   end
 
-  def category
-    c_result.category
-  end
-
   def year
-    c_result.year
+    contest.year
   end
 
   def region
-    c_result.region
-  end
-
-  def contest
-    c_result.contest
+    contest.region
   end
 
   def pct_possible

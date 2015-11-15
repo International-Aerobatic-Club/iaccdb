@@ -151,4 +151,16 @@ describe Member, :type => :model do
     expect(member.family_name).to eq 'Member'
   end
 
+  it 'returns contests participated as pilot' do
+    member = create :member
+    category = Category.last
+    4.times do
+      contest = create(:contest, start: '2015-07-30')
+      pcr = PcResult.new(pilot: member, category: category, contest: contest)
+      pcr.save
+    end
+    contests = member.contests(2015)
+    expect(contests.count).to eq 4
+  end
+
 end
