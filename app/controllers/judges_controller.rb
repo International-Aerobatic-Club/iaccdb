@@ -14,12 +14,8 @@ class JudgesController < ApplicationController
       JfResult.includes(:f_result).where(:judge_id => judges)
     # this following block because there's a problem with 
     # removing dependent records TODO
-    @jf_results = @jf_results.reject do |jf|
-      jf.f_result == nil || jf.f_result.flight == nil ||
-      jf.f_result.flight.contest == nil
-    end
     @jf_results = @jf_results.to_a.sort do |a,b|
-      b.f_result.flight.contest.start <=> a.f_result.flight.contest.start
+      b.flight.contest.start <=> a.flight.contest.start
     end
     # year/category rollups stats report
     cur_year = Time.now.year
@@ -48,8 +44,8 @@ class JudgesController < ApplicationController
     jy_results_query = JyResult.includes(:category).order(
        "year DESC").where(:judge_id => id)
     jy_by_year = jy_results_query.group_by { |r| r.year }
-    jc_results_query = JcResult.includes(:c_result).where(:judge_id => id)
-    jc_by_year = jc_results_query.group_by { |r| r.c_result.contest.start.year }
+    jc_results_query = JcResult.includes([:category, :contest]).where(:judge_id => id)
+    jc_by_year = jc_results_query.group_by { |r| r.contest.start.year }
     career_category_results = {} # hash by category
     career_rollup = JyResult.new :judge => @judge
     career_rollup.zero_reset
@@ -63,12 +59,11 @@ class JudgesController < ApplicationController
       jys.each do |jy_result|
         j_cat_results = []
         jc_cat = jc_by_year[year].select do |jc_result| 
-          c_result = jc_result.c_result
-          c_result.category == jy_result.category
+          jc_result.category == jy_result.category
         end
         jc_cat.each do |jc_result|
           j_cat_results << {
-            :label => jc_result.c_result.contest.name, 
+            :label => jc_result.contest.name, 
             :values => jc_result
           }
         end
@@ -122,12 +117,12 @@ class JudgesController < ApplicationController
   def histograms
     @judge_team = Judge.find(params[:judge_id])
     @judge = Member.find(@judge_team.judge_id)
-    @f_result = FResult.find(params[:flight_id])
-    @flight = Flight.find(@f_result.flight_id)
+    @flight = Flight.find(params[:flight_id])
     @pilot_flights = @flight.pilot_flights
     @figure_scores = []
     @pilot_flights.each do |pf|
-      scores = Score.find_by_judge_id_and_pilot_flight_id(@judge_team.id, pf.id)
+      scores = pf.scores.where(:judge => @judge_team.id).first
+        puts "Scores #{scores}"
       scores.values.each_with_index do |v, f|
         @figure_scores[f] ||= []
         @figure_scores[f] << v
