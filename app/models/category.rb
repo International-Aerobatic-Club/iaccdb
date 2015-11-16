@@ -1,7 +1,6 @@
 class Category < ActiveRecord::Base
   has_many :jy_results
   has_many :flights
-  has_many :c_results
   has_many :region_pilots
   has_many :jc_results, :dependent => :destroy
   has_many :pc_results, :dependent => :destroy

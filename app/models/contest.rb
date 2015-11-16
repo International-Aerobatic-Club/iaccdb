@@ -4,12 +4,12 @@ class Contest < ActiveRecord::Base
   attr_accessible :name, :city, :state, :start, :chapter, :director, :region
 
   has_many :flights, :dependent => :destroy
-  has_many :c_results, :dependent => :destroy
-  has_one :manny_synch, :dependent => :nullify
-  has_many :failures, :dependent => :destroy
-  has_many :data_posts, :dependent => :nullify
   has_many :jc_results, :dependent => :destroy
   has_many :pc_results, :dependent => :destroy
+
+  has_one :manny_synch, :dependent => :nullify
+  has_many :data_posts, :dependent => :nullify
+  has_many :failures, :dependent => :destroy
 
   validates :name, :length => { :in => 4..48 }
   validates :city, :length => { :maximum => 24 }
@@ -63,11 +63,9 @@ class Contest < ActiveRecord::Base
   def compute_contest_rollups
     cur_results = Set.new
     cats = flights.collect { |f| f.category }
-    cats.uniq.each do |cat|
-      cur_results.add find_or_create_c_result(cat)
-    end
+    cats = cats.uniq
     # all cur_results are now either present or added to c_results
-    c_results.each do |c_result|
+    cats.each do |cat|
       if (cur_results.include?(c_result))
         c_result.compute_category_totals_and_rankings
       else
@@ -85,20 +83,6 @@ class Contest < ActiveRecord::Base
     flights.clear
     c_results.clear
     failures.clear
-  end
-
-###
-private
-###
-  # creates c_result for category of flight if it doesn't exist
-  # returns the c_result
-  def find_or_create_c_result(cat)
-    c_result = c_results.where(:category_id => cat.id).first
-    if !c_result
-      c_result = c_results.build(:category_id => cat.id)
-      save
-    end
-    c_result
   end
 
 end
