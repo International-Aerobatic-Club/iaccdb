@@ -8,7 +8,8 @@ def index
 end
 
 def show
-  @jc_results = JcResult.find(params[:id])
+  @jc_result = JcResult.find(params[:id])
+  @contest = @jc_result.contest
 end
 
 end

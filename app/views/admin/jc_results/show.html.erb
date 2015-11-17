@@ -1,19 +1,11 @@
-<h1><%= Results for @c_result.contest.name %></h1>
+<h1><%= Results for @contest.name %></h1>
 <p class="contest_place">Held in <%= @contest.place %>, <%= @contest.start %></p>
 <p class="contest_director">Directed by <%= @contest.director %>, 
    Chapter <%= @contest.chapter %></p>
 
-<% @c_results.each do |c_result| %>
-  <%= render :template => 'c_results/category',
-    :locals => { :c_result => c_result } %>
-<% end %>
-
-<h1><%= link_to @pilot.name, pilot_path(@pilot) %></h1>
+<h1><%= link_to @jc_result.judge.name, pilot_path(@jc_result.judge) %></h1>
 <h2><%= link_to (@contest) do "#{@contest.name} #{@contest.start}" end %></h2>
 
-<% @c_results.each_with_index do |c_result,i| %>
-  <div class="flightScores">
-  <%= render :template => 'pilot_flights/flight', 
-    :locals => { :pilot_flight => pf } %>
-  </div>
-<% end %>
+<table><tbody>
+<%= render @jc_result %>
+</tbody></table>
