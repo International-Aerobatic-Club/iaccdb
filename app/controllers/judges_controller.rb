@@ -9,11 +9,8 @@ class JudgesController < ApplicationController
   def show
     id = params[:id]
     @judge = Member.find(id)
-    judges = Judge.where(:judge_id => id)
-    @jf_results =
-      JfResult.includes(:f_result).where(:judge_id => judges)
-    # this following block because there's a problem with 
-    # removing dependent records TODO
+    judges = Judge.where(judge: @judge)
+    @jf_results = JfResult.where(judge: judges)
     @jf_results = @jf_results.to_a.sort do |a,b|
       b.flight.contest.start <=> a.flight.contest.start
     end
