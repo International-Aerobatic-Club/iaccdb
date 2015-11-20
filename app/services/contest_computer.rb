@@ -12,8 +12,11 @@ class ContestComputer
 
   # compute results for all flights of the contest
   def compute_flights
+    flights = @contest.flights
+    flight_computer = FlightComputer.new(flights.first)
     flights.each do |flight|
-      flight.compute_flight_results(2014 <= year)
+      flight_computer.flight = flight
+      flight_computer.compute_flight_results(2014 <= year)
     end
   end
 
