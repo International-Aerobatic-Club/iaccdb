@@ -17,22 +17,15 @@ class JcResult < ActiveRecord::Base
     a = "jc_result for judge #{judge}"
   end
 
-  def compute_category_totals(f_results)
+  def compute_category_totals
     zero_reset
-    cur_jf_results = []
-    f_results.each do |f_result|
-      f_result.jf_results.each do |jf_result|
-        cur_jf_results << jf_result if jf_result.judge.judge == self.judge
+    flights = contest.flights.where(category: category)
+    flights.each do |flight|
+      flight.jf_results.each do |jf_result|
+        accumulate(jf_result) if jf_result.judge.judge == self.judge
       end
-    end
-    cur_jf_results.each do |jf_result|
-      accumulate(jf_result)
-      jf_results << jf_result if !jf_results.include?(jf_result)
-    end
-    jf_results.each do |jf_result|
-      jf_results.delete(jf_result) if !cur_jf_results.include?(jf_result)
     end
     save
   end
-
 end
+

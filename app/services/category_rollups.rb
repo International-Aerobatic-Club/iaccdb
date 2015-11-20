@@ -57,11 +57,12 @@ class CategoryRollups
       cur_jc_results |= jc_results_for_flight(flight)
     end
     jc_results.each do |jc_result|
-      if cur_jc_results.include?(jc_result)
-        jc_result.compute_category_totals(jc_results, f_results)
-      else
+      unless cur_jc_results.include?(jc_result)
         jc_results.delete(jc_result)
       end
+    end
+    cur_jc_results.each do |jc_result|
+      jc_result.compute_category_totals
     end
     cur_jc_results
   end
@@ -78,15 +79,16 @@ class CategoryRollups
     Rails.logger
   end
 
-  # finds or creates pc_result for every pilot on the flight
+  # find or creates pc_result for every pilot on the flight
   # pc_results: existing result set
-  def pc_results_for_flight(pc_results, flight)
+  def pc_results_for_flight(flight)
     rpc_results = []
     flight.pilot_flights.each do |pilot_flight|
       pilot = pilot_flight.pilot
-      pc_result = pc_results.where(:pilot => pilot).first
+      pc_result = @contest.pc_results.where(
+        pilot: pilot, category: @category).first
       if !pc_result
-        pc_result = PcResult.create(contest: @contest,
+        pc_result = @contest.pc_results.create(
           category: @category, pilot: pilot)
       end
       rpc_results << pc_result
@@ -94,14 +96,15 @@ class CategoryRollups
     rpc_results.to_set
   end
 
-  def jc_results_for_flight(f_result)
+  def jc_results_for_flight(flight)
     rjc_results = []
-    f_result.jf_results.each do |jf_result|
+    flight.jf_results.each do |jf_result|
       judge = jf_result.judge.judge
-      jc_result = jc_results.where(:judge_id => judge.id).first
+      jc_result = @contest.jc_results.where(
+        category: @category, judge: judge).first
       if !jc_result
-        jc_result = jc_results.build(:judge => judge)
-        save # so next round finds the new result
+        jc_result = @contest.jc_results.create(
+          category: @category, judge: judge)
       end
       rjc_results << jc_result
     end
