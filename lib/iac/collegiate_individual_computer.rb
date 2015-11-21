@@ -23,7 +23,7 @@ private
 
 def collegiates_for_pilots
   pilots = Member.joins(:result_members => :result, 
-             :pc_results => {:c_result => :contest}).where(
+             :pc_results => :contest).where(
    "year(contests.start) = ? and results.year = ? and results.type='CollegiateResult'", 
     @year, @year).group('members.id')
   collegiates = pilots.all.collect { |pilot| engage_student_for_pilot(pilot) }
@@ -35,8 +35,9 @@ end
 # links pc_results for @year
 # returns the student record
 def engage_student_for_pilot(pilot)
-  student = CollegiateIndividualResult.where(:pilot_id => pilot.id, :year => @year).first_or_create
-  to_be_results = PcResult.joins(:c_result => :contest).where(
+  student = CollegiateIndividualResult.where(:pilot_id => pilot.id,
+    :year => @year).first_or_create
+  to_be_results = PcResult.joins(:contest).where(
     "pilot_id = ? and year(contests.start) = ?", pilot.id, @year).all
   student.update_results(to_be_results)
 end
