@@ -12,7 +12,7 @@ module IAC
     include Singleton
     include Log::ConfigLogger
 
-    def computeJudgeMetrics(flight, f_result)
+    def computeJudgeMetrics(flight)
       jf_results_by_judge = {}
       p_ranks = []
       j_rank_for_jf = {}
@@ -29,8 +29,8 @@ module IAC
             jf_result = jf_results_by_judge[judge]
             if !jf_result
               jf_result = 
-                f_result.jf_results.where(:judge_id => judge.id).first ||
-                f_result.jf_results.create(:judge => judge)
+                flight.jf_results.where(:judge_id => judge.id).first ||
+                flight.jf_results.create(:judge => judge)
               jf_result.zero_reset
               j_rank_for_jf[jf_result] = []
               jf_results_by_judge[judge] = jf_result
