@@ -254,10 +254,14 @@ FactoryGirl.define do
 ### PcResult
   factory :pc_result do |r|
     r.association :c_result
+    r.association :contest
+    r.association :category, :category => 'Advanced'
     r.association :pilot, :factory => :member
   end
   factory :existing_pc_result, :class => PcResult do |r|
     r.association :c_result, :factory => :existing_c_result
+    r.association :contest, :factory => :nationals
+    r.association :category, :category => 'Intermediate'
     r.association :pilot, :factory => :tom_adams
     r.category_value 4992.14
     r.category_rank 1
@@ -266,12 +270,15 @@ FactoryGirl.define do
   factory :jf_result do |r|
     r.association :judge, :factory => :judge
     r.association :f_result, :factory => :f_result
+    r.association :flight, :factory => :flight
     r.association :jc_result, :factory => :jc_result
   end
 ### JcResult
   factory :jc_result do |r|
     r.association :judge, :factory => :member
     r.association :c_result, :factory => :c_result
+    r.association :contest
+    r.association :category, :category => 'Advanced'
   end
 ### JyResult
   factory :jy_result do |r|
