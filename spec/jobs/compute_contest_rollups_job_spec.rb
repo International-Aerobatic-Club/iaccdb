@@ -6,7 +6,7 @@ describe ComputeContestRollupsJob do
   end
 
   it 'creates and invokes the contest rollups' do
-    expect(@contest).to receive(:compute_contest_rollups).at_least(:once).and_call_original
+    expect(ContestComputer).to receive(:new).once.with(@contest).and_call_original
     @job.perform
   end
 

@@ -23,7 +23,7 @@ class ContestComputer
   # ensure contest rollup computations for this contest are complete
   # return array of category results
   def compute_contest_rollups
-    cats = flights.collect { |f| f.category }
+    cats = @contest.flights.collect { |f| f.category }
     cats = cats.uniq
     cats.each do |cat|
       roller = ContestRollups(@contest, cat)

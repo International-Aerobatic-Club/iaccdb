@@ -2,12 +2,13 @@
 # The job computes flight results for a contest
 module Jobs
 class ComputeContestRollupsJob < Struct.new(:contest)
-  
+
   include JobsSay
 
   def perform
     say "Computing rollups for #{contest.year_name}"
-    contest.compute_contest_rollups
+    computer = ContestComputer.new(contest)
+    computer.compute_contest_rollups
   end
 
   def error(job, exception)
