@@ -16,8 +16,9 @@ class ContestComputer
     flight_computer = FlightComputer.new(flights.first)
     flights.each do |flight|
       flight_computer.flight = flight
-      flight_computer.compute_flight_results(2014 <= year)
+      flight_computer.flight_results(2014 <= @contest.year)
     end
+    @contest.save
   end
 
   # ensure contest rollup computations for this contest are complete
@@ -29,6 +30,7 @@ class ContestComputer
       roller = ContestRollups(@contest, cat)
       roller.compute_category_totals_and_rankings
     end
+    @contest.save
   end
 
 end

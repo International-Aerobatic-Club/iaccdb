@@ -5,20 +5,21 @@ module Manny
       IO.foreach('spec/manny/Contest_36.txt') { |line| manny.processLine(line) }
       m2d = Manny::MannyToDB.new
       @contest = m2d.process_contest(manny, true)
+      @computer = ContestComputer.new(@contest)
     end
-    it 'Parses' do
+    it 'parses' do
       expect(@contest).not_to be nil
       expect(@contest.start.year).to eq(2005)
       expect(@contest.name).to eq('2005 Gulf Coast Regional')
     end
     describe 'flights' do
       it 'computes' do
-        @contest.compute_flights
+        @computer.compute_flights
       end
-      describe 'contest' do
-        it 'computes' do
-          @contest.compute_contest_rollups
-        end
+    end
+    describe 'contest' do
+      it 'computes' do
+        @computer.compute_contest_rollups
       end
     end
   end
