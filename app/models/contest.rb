@@ -4,6 +4,7 @@ class Contest < ActiveRecord::Base
   has_many :flights, :dependent => :destroy
   has_many :jc_results, :dependent => :destroy
   has_many :pc_results, :dependent => :destroy
+  has_many :c_results, :dependent => :destroy
 
   has_one :manny_synch, :dependent => :nullify
   has_many :data_posts, :dependent => :nullify
@@ -49,6 +50,7 @@ class Contest < ActiveRecord::Base
     flights.clear
     pc_results.clear
     jc_results.clear
+    failures.clear
   end
 
 end
