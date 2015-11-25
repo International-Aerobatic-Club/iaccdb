@@ -14,7 +14,7 @@ class JcResult < ActiveRecord::Base
   end
 
   def to_s 
-    a = "jc_result for judge #{judge}"
+    "jc_result for #{judge}, #{contest}, #{category}"
   end
 
   def compute_category_totals

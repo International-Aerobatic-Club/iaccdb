@@ -27,7 +27,7 @@ class ContestComputer
     cats = @contest.flights.collect { |f| f.category }
     cats = cats.uniq
     cats.each do |cat|
-      roller = ContestRollups(@contest, cat)
+      roller = CategoryRollups.new(@contest, cat)
       roller.compute_category_totals_and_rankings
     end
     @contest.save

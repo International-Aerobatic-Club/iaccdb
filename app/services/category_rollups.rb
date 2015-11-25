@@ -34,14 +34,15 @@ class CategoryRollups
     cur_pc_results = Set.new
     pc_results = @contest.pc_results.where(:category => @category)
     cat_flights.each do |flight|
-      cur_pc_results |= pc_results_for_flight(pc_results, flight)
+      cur_pc_results |= pc_results_for_flight(flight)
     end
     pc_results.each do |pc_result|
-      if cur_pc_results.include?(pc_result)
-        pc_result.compute_category_totals(cat_flights)
-      else
+      unless cur_pc_results.include?(pc_result)
         pc_result.delete
       end
+    end
+    cur_pc_results.each do |pc_result|
+      pc_result.compute_category_totals
     end
     cur_pc_results
   end

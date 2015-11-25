@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151108054956) do
+ActiveRecord::Schema.define(version: 20151125042523) do
 
   create_table "airplanes", force: true do |t|
     t.string   "make"
@@ -134,7 +134,7 @@ ActiveRecord::Schema.define(version: 20151108054956) do
   add_index "flights", ["id"], name: "index_flights_on_id", using: :btree
 
   create_table "jc_results", force: true do |t|
-    t.integer  "c_result_id",                                null: false
+    t.integer  "c_result_id"
     t.integer  "judge_id",                                   null: false
     t.integer  "pilot_count"
     t.decimal  "sigma_ri_delta",    precision: 11, scale: 5
