@@ -46,6 +46,6 @@ class PfResult < ActiveRecord::Base
   # Return the judge_teams for a flight
   # (each an instance from table :judges)
   def judge_teams
-    pilot_flight.pfj_results.collect { |pfj_result| pfj_result.judge }
+    pilot_flight.scores.collect { |score| score.judge }
   end
 end
