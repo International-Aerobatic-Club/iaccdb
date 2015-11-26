@@ -27,15 +27,15 @@ class PcResult < ActiveRecord::Base
   end
 
   def compute_category_totals
-    category_value = 0.0
-    total_possible = 0
+    self.category_value = 0.0
+    self.total_possible = 0
     flights = contest.flights.where(category: category)
     flights.each do |flight|
       pf_results = PfResult.joins(:pilot_flight).where(
         { pilot_flights: {pilot_id: pilot, flight_id: flight}})
       pf_results.each do |pf_result|
-        category_value += pf_result.adj_flight_value
-        total_possible += pf_result.total_possible
+        self.category_value += pf_result.adj_flight_value
+        self.total_possible += pf_result.total_possible
       end
     end
     save

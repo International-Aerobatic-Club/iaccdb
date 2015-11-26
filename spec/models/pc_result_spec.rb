@@ -6,7 +6,7 @@ module Model
       expect(pc_result.category_rank).to eq(1)
     end
     context 'real_scores' do
-      before(:each) do
+      before(:context) do
         @contest = create(:nationals)
         @adams = create(:tom_adams)
         @denton = create(:bill_denton)
@@ -62,35 +62,32 @@ module Model
         create(:denton_free_lynne, 
           :pilot_flight => denton_flight,
           :judge => judge_lynne)
-        @contest.results
+        computer = ContestComputer.new(@contest)
+        computer.compute_results
+        @pc_results = PcResult.where(contest: @contest, category: @imdt_cat)
       end
 
       it 'finds two pilots in category results' do
-        pc_results = PcResult.where(
-          :contest => @contest,
-          :category => @imdt_cat)
-        expect(pc_results).not_to be nil
-        expect(pc_results.size).to eq(2)
+        expect(@pc_results).not_to be nil
+        expect(@pc_results.size).to eq(2)
       end
 
       it 'computes category total for pilot' do
-        pc_results = PcResult.where(contest: @contest, category: @imdt_cat)
-        expect(pc_results).not_to be nil
-        pc_result = pc_results.where(:pilot_id => @adams).first
+        expect(@pc_results).not_to be nil
+        pc_result = @pc_results.where(:pilot_id => @adams).first
         expect(pc_result).not_to be nil
         expect(pc_result.category_value.round(2)).to eq(3474.83)
-        pc_result = pc_results.where(:pilot_id => @denton).first
+        pc_result = @pc_results.where(:pilot_id => @denton).first
         expect(pc_result).not_to be nil
         expect(pc_result.category_value.round(2)).to eq(3459.33)
       end
 
       it 'computes category rank for pilot' do
-        pc_results = PcResult.where(contest: @contest, category: @imdt_cat)
-        expect(pc_results).not_to be nil
-        pc_result = pc_results.where(:pilot_id => @adams).first
+        expect(@pc_results).not_to be nil
+        pc_result = @pc_results.where(:pilot_id => @adams).first
         expect(pc_result).not_to be nil
         expect(pc_result.category_rank).to eq(1)
-        pc_result = pc_results.where(:pilot_id => @denton).first
+        pc_result = @pc_results.where(:pilot_id => @denton).first
         expect(pc_result).not_to be nil
         expect(pc_result.category_rank).to eq(2)
       end
@@ -105,8 +102,8 @@ module Model
         :pilot_flight => @pf,
         :values => [-1, 0, 0, 0, 0])
       flight = @pf.flight
-      contest = flight.contest
-      contest.results
+      computer = FlightComputer.new(flight)
+      computer.flight_results(false)
     end
   end
 end
