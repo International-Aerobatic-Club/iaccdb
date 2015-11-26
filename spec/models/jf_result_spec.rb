@@ -10,8 +10,9 @@ describe JfResult, :type => :model do
     IO.foreach('spec/manny/Contest_300.txt') { |line| @manny.processLine(line) }
     @m2d = Manny::MannyToDB.new
     reparse_contest(@m2d, @manny)
-    @contest.results
-    f_result = @flight2.compute_flight_results.first
+    computer = ContestComputer.new(@contest)
+    computer.compute_results
+    expect(Failure.all).to be_empty
     lr = Member.where(
       :family_name => 'Ramirez',
       :given_name => 'Laurie').first
@@ -20,8 +21,8 @@ describe JfResult, :type => :model do
       :given_name => 'Martin').first
     j1 = Judge.where(:judge_id => lr.id).first
     j2 = Judge.where(:judge_id => mf.id).first
-    @jf_result1 = f_result.jf_results.where(:judge_id => j1.id).first
-    @jf_result2 = f_result.jf_results.where(:judge_id => j2.id).first
+    @jf_result1 = JfResult.where(judge: j1, flight: @flight2).first
+    @jf_result2 = JfResult.where(judge: j2, flight: @flight2).first
   end
   it 'computes the Spearman rank coefficient for each judge of a flight' do
     expect(@jf_result1.rho).to eq(54)
@@ -59,8 +60,9 @@ describe JfResult, :type => :model do
       scores.values[0] = 0
       scores.save
       judge = scores.judge
-      f_result = @flight2.compute_flight_results.first
-      jf_result = f_result.jf_results.where(:judge_id => judge.id).first
+      computer = FlightComputer.new(@flight2)
+      computer.flight_results(false)
+      jf_result = JfResult.where(flight: @flight2, judge: judge).first
       expect(jf_result.minority_zero_ct).to eq(1)
     end
     it 'computes the number of minority grades from each judge for a flight' do
@@ -75,8 +77,9 @@ describe JfResult, :type => :model do
         end
       end
       expect(judge).not_to be nil
-      f_result = @flight2.compute_flight_results.first
-      jf_result = f_result.jf_results.where(:judge_id => judge.id).first
+      computer = FlightComputer.new(@flight2)
+      computer.flight_results(false)
+      jf_result = JfResult.where(flight: @flight2, judge: judge).first
       expect(jf_result.minority_grade_ct).to eq(1)
     end
   end
