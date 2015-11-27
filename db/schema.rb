@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151125042523) do
+ActiveRecord::Schema.define(version: 20151127182017) do
 
   create_table "airplanes", force: true do |t|
     t.string   "make"
@@ -22,18 +22,6 @@ ActiveRecord::Schema.define(version: 20151125042523) do
   end
 
   add_index "airplanes", ["id"], name: "index_airplanes_on_id", using: :btree
-
-  create_table "c_results", force: true do |t|
-    t.integer  "contest_id"
-    t.boolean  "need_compute", default: true
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "category_id"
-  end
-
-  add_index "c_results", ["category_id"], name: "index_c_results_on_category_id", using: :btree
-  add_index "c_results", ["contest_id"], name: "index_c_results_on_contest_id", using: :btree
-  add_index "c_results", ["id"], name: "index_c_results_on_id", using: :btree
 
   create_table "categories", force: true do |t|
     t.integer  "sequence",              null: false
@@ -88,18 +76,6 @@ ActiveRecord::Schema.define(version: 20151125042523) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
-
-  create_table "f_results", force: true do |t|
-    t.integer  "flight_id"
-    t.boolean  "need_compute", default: true
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "c_result_id"
-  end
-
-  add_index "f_results", ["c_result_id"], name: "index_f_results_on_c_result_id", using: :btree
-  add_index "f_results", ["flight_id"], name: "index_f_results_on_flight_id", using: :btree
-  add_index "f_results", ["id"], name: "index_f_results_on_id", using: :btree
 
   create_table "failures", force: true do |t|
     t.string   "step",         limit: 16
