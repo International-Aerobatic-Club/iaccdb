@@ -47,7 +47,7 @@ class PilotFlight < ActiveRecord::Base
    fjs
  end
 
-  # compute or retrieve cached results
+  # compute results
   # returns PfResult ActiveRecord instance for this pilot for this flight
   def results(has_soft_zero = false)
     sac = IAC::SaComputer.new(self)
