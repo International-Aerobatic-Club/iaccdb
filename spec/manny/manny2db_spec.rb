@@ -4,8 +4,7 @@ module Manny
       manny = Manny::Parse.new
       IO.foreach('spec/manny/Contest_300.txt') { |line| manny.processLine(line) }
       m2d = Manny::MannyToDB.new
-      m2d.process_contest(manny, true)
-      @contest = Contest.first
+      @contest = m2d.process_contest(manny, true)
     end
     it 'captures a contest' do
       expect(@contest).not_to be nil

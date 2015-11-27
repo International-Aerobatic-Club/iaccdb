@@ -242,24 +242,13 @@ FactoryGirl.define do
       1400, 900, 1440, 1105, 510, 360, 760]
     r.flight_value 18365
   end
-### CResult
-  factory :c_result do |r|
-    r.association :contest
-    r.association :category, :category => 'Advanced'
-  end
-  factory :existing_c_result, :class => CResult do |r|
-    r.association :contest, :factory => :nationals
-    r.association :category, :category => 'Intermediate'
-  end
 ### PcResult
   factory :pc_result do |r|
-    r.association :c_result
     r.association :contest
     r.association :category, :category => 'Advanced'
     r.association :pilot, :factory => :member
   end
   factory :existing_pc_result, :class => PcResult do |r|
-    r.association :c_result, :factory => :existing_c_result
     r.association :contest, :factory => :nationals
     r.association :category, :category => 'Intermediate'
     r.association :pilot, :factory => :tom_adams
@@ -269,14 +258,12 @@ FactoryGirl.define do
 ### JfResult
   factory :jf_result do |r|
     r.association :judge, :factory => :judge
-    r.association :f_result, :factory => :f_result
     r.association :flight, :factory => :flight
     r.association :jc_result, :factory => :jc_result
   end
 ### JcResult
   factory :jc_result do |r|
     r.association :judge, :factory => :member
-    r.association :c_result, :factory => :c_result
     r.association :contest
     r.association :category, :category => 'Advanced'
   end
@@ -284,11 +271,6 @@ FactoryGirl.define do
   factory :jy_result do |r|
     r.association :judge, :factory => :member
     r.association :category
-  end
-### FResult
-  factory :f_result do |r|
-    r.association :flight
-    r.association :c_result
   end
 ### DataPost
   factory :data_post do |r|
