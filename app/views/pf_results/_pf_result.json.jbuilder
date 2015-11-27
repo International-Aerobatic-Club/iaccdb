@@ -1,5 +1,5 @@
 json.flight do
-  json.partial! pf_result.f_result.flight
+  json.partial! pf_result.flight
 end
 json.airplane do
   json.partial! pf_result.pilot_flight.airplane

@@ -87,7 +87,7 @@ class Member < ActiveRecord::Base
   # returns array of pc_result is contest results for given year
   # returns empty if no contest results
   def contests(year)
-    pc_results.joins(:c_result => :contest).where('year(contests.start) = ?', year).all
+    pc_results.joins(:contest).where('year(contests.start) = ?', year).all
   end
 
 end

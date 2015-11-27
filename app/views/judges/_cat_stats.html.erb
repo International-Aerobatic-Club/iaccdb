@@ -4,7 +4,7 @@
   <td class='label'>
   <% if j_result.kind_of? JcResult %>
     <%= link_to cat_stats[:label],
-      contest_path(j_result.c_result.contest) %>
+      contest_path(j_result.contest) %>
   <% else %>
     <%= cat_stats[:label] %>
   <% end %>

@@ -91,7 +91,8 @@ def updateContest(mContest, dMannySynch)
     else
       Contest.logger.info "Updating contest #{dContest.to_s}"
       dContest.flights.destroy_all
-      dContest.c_results.destroy_all
+      dContest.pc_results.destroy_all
+      dContest.jc_results.destroy_all
     end
   elsif dContest
     Contest.logger.info "Removing contest #{dContest.to_s}"

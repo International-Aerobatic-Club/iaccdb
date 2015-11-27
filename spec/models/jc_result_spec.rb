@@ -7,16 +7,20 @@ module Model
         @c_result = create(:c_result,
           :contest => @contest)
         @flight = create(:flight,
-          :contest => @contest)
+          :contest => @contest,
+          :category => @c_result.category)
         @judge_team = create(:judge)
-        @jc_result = create(:jc_result, 
-          :c_result => @c_result, 
+        @jc_result = create(:jc_result,
+          :contest => @contest,
+          :category => @c_result.category,
+          :c_result => @c_result,
           :judge => @judge_team.judge)
         @f_result = create(:f_result, 
           :flight => @flight, 
           :c_result => @c_result)
         @jf_result_1 = create(:jf_result,
           :f_result => @f_result,
+          :flight => @flight,
           :jc_result => @jc_result,
           :judge => @judge_team,
           :pilot_count => 6,
@@ -34,6 +38,7 @@ module Model
           :minority_grade_ct => 2)
         @jf_result_2 = create(:jf_result,
           :f_result => @f_result,
+          :flight => @flight,
           :jc_result => @jc_result,
           :judge => @judge_team,
           :pilot_count => 4,
@@ -49,7 +54,7 @@ module Model
           :dis => 1,
           :minority_zero_ct => 3,
           :minority_grade_ct => 1)
-        @jc_result.compute_category_totals(@flight.f_results)
+        @jc_result.compute_category_totals
       end
       after(:context) do
         DatabaseCleaner.clean
@@ -86,16 +91,10 @@ module Model
         expect(contest).not_to be nil
         expect(contest.flights).not_to be_nil
         expect(contest.flights.count).to eq 12
-        c_results = contest.results
-        expect(c_results).not_to be nil
-        expect(c_results.count).to eq 4
-        c_result = c_results.first
-        expect(c_result).not_to be nil
-        expect(c_result.f_results).not_to be nil
-        f_result = c_result.f_results.first
-        expect(f_result).not_to be nil
-        flight = f_result.flight
-        expect(flight).not_to be nil 
+        computer = ContestComputer.new(contest)
+        computer.compute_results
+        expect(contest.pc_results.count).to eq 30
+        expect(contest.jc_results.count).to eq 30
       end
     end
   end #JcResult
