@@ -2,7 +2,6 @@ class JcResult < ActiveRecord::Base
   attr_protected :id
 
   belongs_to :judge, :class_name => 'Member'
-  has_many :jf_results
   belongs_to :contest
   belongs_to :category
 

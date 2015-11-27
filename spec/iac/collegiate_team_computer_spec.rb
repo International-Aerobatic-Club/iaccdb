@@ -13,18 +13,6 @@ module IAC
         name: 'Sportsman Power', sequence: 2)
       adv = Category.create(category: 'advanced', aircat: 'P',
         name: 'Advanced Power', sequence: 3)
-      pri_ntnls = CResult.create(contest_id: c_ntnls.id, category_id: pri.id)
-      pri_mac80 = CResult.create(contest_id: c_mac80.id, category_id: pri.id)
-      pri_youst = CResult.create(contest_id: c_youst.id, category_id: pri.id)
-      spn_ntnls = CResult.create(contest_id: c_ntnls.id, category_id: spn.id)
-      spn_mac80 = CResult.create(contest_id: c_mac80.id, category_id: spn.id)
-      spn_youst = CResult.create(contest_id: c_youst.id, category_id: spn.id)
-      spn_canam = CResult.create(contest_id: c_canam.id, category_id: spn.id)
-      adv_ntnls = CResult.create(contest_id: c_ntnls.id, category_id: adv.id)
-      adv_mac80 = CResult.create(contest_id: c_mac80.id, category_id: adv.id)
-      adv_youst = CResult.create(contest_id: c_youst.id, category_id: adv.id)
-      adv_canam = CResult.create(contest_id: c_canam.id, category_id: adv.id)
-      adv_michg = CResult.create(contest_id: c_michg.id, category_id: adv.id)
 
       p = Member.create(
         iac_id: 877212, given_name: 'Patrick', 
