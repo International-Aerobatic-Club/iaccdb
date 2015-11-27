@@ -24,8 +24,7 @@ class PfResult < ActiveRecord::Base
   attr_protected :id
 
   belongs_to :pilot_flight
-  belongs_to :pc_result
-  belongs_to :f_result
+  has_one :flight, :through => :pilot_flight
 
   serialize :figure_results
   serialize :figure_ranks
@@ -47,6 +46,6 @@ class PfResult < ActiveRecord::Base
   # Return the judge_teams for a flight
   # (each an instance from table :judges)
   def judge_teams
-    pilot_flight.pfj_results.collect { |pfj_result| pfj_result.judge }
+    pilot_flight.scores.collect { |score| score.judge }
   end
 end

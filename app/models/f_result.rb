@@ -38,7 +38,7 @@ class FResult < ActiveRecord::Base
   end
 
   def compute_jf_results
-    cur_jf_results = rank_computer.computeJudgeMetrics(flight, self)
+    cur_jf_results = rank_computer.computeJudgeMetrics(flight)
     self.jf_results.each do |jf_result|
       self.jf_results.delete(jf_result) if !cur_jf_results.include?(jf_result)
     end

@@ -1,5 +1,8 @@
 @startuml
 title IACCDB Computational Dependencies
+object score {
+  actually grades from judges
+}
 object pf_result {
   pilot results for flight
   grades * k-values aggregated
@@ -23,10 +26,13 @@ object jc_result {
 object pc_result {
   pilot results for contest
 }
+object c_result {
+}
 object result {
   soucy
   collegiate
 }
+
 pf_result <|-- jf_result
 pfj_result <--o pf_result
 pf_result <--o pc_result
@@ -34,4 +40,54 @@ jf_result <--o jc_result
 jc_result <--o jy_result
 pc_result <--o result
 pc_result <--o regional_pilots
+
+object collegiate_computer {
+  compute_collegiate_job
+  year
+  recompute()
+  recompute_team()
+  recompute_individual()
+}
+pc_result ..> collegiate_computer
+collegiate_computer ..> result
+
+object find_stars {
+  find_stars(contest)
+}
+pf_result ..> find_stars
+find_stars ..> pc_result
+
+object judge_rollups {
+  compute_jy_results(year)
+}
+jc_result ..> judge_rollups
+judge_rollups ..> jy_result
+
+object regional_series {
+  compute_regional(year, region)
+}
+pc_result ..> regional_series
+regional_series ..> regional_pilots
+
+object sa_computer {
+  compute_pilot_flight()
+}
+score ..> sa_computer
+sa_computer ..> pfj_result
+sa_computer ..> pf_result
+
+object soucy_computer {
+  year
+  recompute()
+}
+pc_result ..> soucy_computer
+soucy_computer ..> result
+
+object contest {
+  compute_contest_rollups_job
+}
+
+
+
 @enduml
+

@@ -35,18 +35,18 @@ end
 def process_category(rfr, category_results)
   cat_flights = category_results.flight_names
   puts "category is #{category_results.description}"
-  d_category_id = nil
+  d_category = nil
   rfr.flights.each do |flight|
     puts "flight is #{flight.flight_name} id #{flight.flight_id}"
     f = cat_flights.index(flight.flight_name)
     id = flight.flight_id.to_i
     if f && id != 0
       d_flight = Flight.find(id)
-      if d_category_id && d_flight.category_id != d_category_id
+      if d_category && d_flight.category.id != d_category.id
         # this is a safety check to constrain flight id mistake
         raise "Flight #{d_flight.displayName} is not same category as the others"
       else
-        d_category_id ||= d_flight.category_id
+        d_category ||= d_flight.category
       end
       if d_flight.contest_id == @d_contest.id
           patch_pilot_results_for_category_flight(category_results, f, d_flight)
@@ -61,8 +61,8 @@ def process_category(rfr, category_results)
         "Missing ID or flight match for #{category_results.description} #{flight.flight_name}"
     end
   end
-  if d_category_id
-    patch_pilot_results_for_category(category_results, d_category_id)
+  if d_category
+    patch_pilot_results_for_category(category_results, d_category)
   else
     raise "Cannot determine category for #{category_results.description}"
   end
@@ -93,16 +93,17 @@ def patch_pilot_results_for_category_flight(category_results, f, d_flight)
   @rank_computer.compute_flight_rankings(d_flight)
 end
 
-def patch_pilot_results_for_category(category_results, d_category_id)
-  d_cat_result = @d_contest.c_results.where(category_id: d_category_id).first
+def patch_pilot_results_for_category(category_results, d_category)
   category_results.pilots.each_with_index do |pilot, p|
     d_pilot = find_member(pilot)
-    d_pcr = d_cat_result.pc_results.where(pilot_id: d_pilot.id).first
+    d_pcr = @d_contest.pc_results.where(category: d_category, 
+      pilot_id: d_pilot.id).first
     d_pcr.category_value = category_results.category_results[p]
     d_pcr.save
     puts "#{pilot} in #{category_results.category_name} scored #{d_pcr.category_value}"
   end
-  @rank_computer.compute_category_ranks(d_cat_result)
+  cat_rollups = CategoryRollups.new(@d_contest, d_category)
+  cat_rollups.compute_pilot_rankings
 end
 
 def find_member(name)

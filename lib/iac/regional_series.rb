@@ -15,15 +15,10 @@ end
 # Accumulate pc_results for contest onto regional_pilots
 def accumulate_contest (year, region, contest)
   puts "..Including #{contest.year_name} #{contest.place}"
-  contest.c_results.each do |c_result|
-    c_result.pc_results.each do |pc_result|
-      #puts "...finding regional pilot for #{pc_result.pilot}"
-      regional_pilot = RegionalPilot.find_or_create_given_result(
-         year, region, pc_result.category.id, pc_result.pilot.id)
-      #puts "....regional pilot is #{regional_pilot}"
-      regional_pilot.pc_results << pc_result
-      #puts "....regional pilot contest count is #{regional_pilot.pc_results.count}"
-    end
+  contest.pc_results.each do |pc_result|
+    regional_pilot = RegionalPilot.find_or_create_given_result(
+       year, region, pc_result.category.id, pc_result.pilot.id)
+    regional_pilot.pc_results << pc_result
   end
 end
 

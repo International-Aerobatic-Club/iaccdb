@@ -1,13 +1,14 @@
-require 'iac/rank_computer.rb'
-
 class Contest < ActiveRecord::Base
   attr_accessible :name, :city, :state, :start, :chapter, :director, :region
 
   has_many :flights, :dependent => :destroy
+  has_many :jc_results, :dependent => :destroy
+  has_many :pc_results, :dependent => :destroy
   has_many :c_results, :dependent => :destroy
+
   has_one :manny_synch, :dependent => :nullify
-  has_many :failures, :dependent => :destroy
   has_many :data_posts, :dependent => :nullify
+  has_many :failures, :dependent => :destroy
 
   validates :name, :length => { :in => 4..48 }
   validates :city, :length => { :maximum => 24 }
@@ -43,60 +44,13 @@ class Contest < ActiveRecord::Base
     end
   end
 
-  # compute all of the flights and the contest rollups
-  def results
-    compute_flights
-    compute_contest_rollups
-  end
-
-  # compute results for all flights of the contest
-  def compute_flights
-    flights.each do |flight|
-      flight.compute_flight_results(2014 <= year)
-    end
-  end
-
-  # ensure contest rollup computations for this contest are complete
-  # return array of category results
-  def compute_contest_rollups
-    cur_results = Set.new
-    cats = flights.collect { |f| f.category }
-    cats.uniq.each do |cat|
-      cur_results.add find_or_create_c_result(cat)
-    end
-    # all cur_results are now either present or added to c_results
-    c_results.each do |c_result|
-      if (cur_results.include?(c_result))
-        c_result.compute_category_totals_and_rankings
-      else
-        # flights for this category no longer present
-        c_results.delete(c_result)
-      end
-    end
-    save
-    c_results
-  end
-
   # remove all contest associated data except the base 
   # attributes.  Keep association with manny_synch
   def reset_to_base_attributes
     flights.clear
-    c_results.clear
+    pc_results.clear
+    jc_results.clear
     failures.clear
-  end
-
-###
-private
-###
-  # creates c_result for category of flight if it doesn't exist
-  # returns the c_result
-  def find_or_create_c_result(cat)
-    c_result = c_results.where(:category_id => cat.id).first
-    if !c_result
-      c_result = c_results.build(:category_id => cat.id)
-      save
-    end
-    c_result
   end
 
 end

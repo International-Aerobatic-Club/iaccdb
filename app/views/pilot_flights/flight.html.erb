@@ -1,6 +1,7 @@
   <% pf_result = pilot_flight.pf_results.first %>
+  <% flight = pilot_flight.flight %>
 
-  <h3><%= link_to pilot_flight.flight.displayName, flight_path(pilot_flight.flight.id) %>
+  <h3><%= link_to flight.displayName, flight_path(flight.id) %>
   <%= pilot_flight.airplane.description if pilot_flight.airplane %></h3>
 
   <% sequence = pilot_flight.sequence %>
@@ -110,10 +111,7 @@
     <% end # if sequence %>
     </tbody>
     </table>
-    <% f_result = pf_result ? pf_result.f_result : nil %>
-    <% if f_result %>
-      <% jf_results = f_result.jf_results.order(:judge_id) %>
-      <%= render :template => 'judges/results',
-        :locals => { :j_results => jf_results } %>
-    <% end %>
+    <% jf_results = flight.jf_results.order(:judge_id) %>
+    <%= render :template => 'judges/results',
+      :locals => { :j_results => jf_results } %>
   <% end #if ctJudge %>

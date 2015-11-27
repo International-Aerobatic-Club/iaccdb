@@ -1,0 +1,19 @@
+<h1>Admin Judge Results for
+<%= "#{@contest.sobriquet} (#{@contest.id})" %>
+</h1>
+
+<%= link_to 'Admin Contests', admin_contests_path %>
+
+<table>
+  <thead>
+    <tr>
+      <th>id</th><th>judge</th><th>category</th>
+      <th>pilot count</th>
+      <th>rho</th><th>gamma</th>
+    </tr>
+  </thead>
+  <tbody>
+  <%= render @jc_results %>
+  </tbody>
+</table>
+

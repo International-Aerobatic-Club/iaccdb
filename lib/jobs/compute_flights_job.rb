@@ -8,7 +8,8 @@ class ComputeFlightsJob < Struct.new(:contest)
   def perform
     @contest = contest
     say "Computing flights for #{@contest.year_name}"
-    @contest.compute_flights
+    computer = ContestComputer.new(@contest)
+    computer.compute_flights
   end
 
   def error(job, exception)

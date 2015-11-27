@@ -1,0 +1,15 @@
+<h1>Admin Pilot Results for
+<%= "#{@contest.sobriquet} (#{@contest.id})" %>
+</h1>
+
+<%= link_to 'Admin Contests', admin_contests_path %>
+
+<table>
+  <thead>
+    <tr><th>id</th><th>pilot</th><th>category</th><th>result</th></tr>
+  </thead>
+  <tbody>
+  <%= render @pc_results %>
+  </tbody>
+</table>
+

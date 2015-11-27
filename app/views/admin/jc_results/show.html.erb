@@ -1,0 +1,11 @@
+<h1><%= Results for @contest.name %></h1>
+<p class="contest_place">Held in <%= @contest.place %>, <%= @contest.start %></p>
+<p class="contest_director">Directed by <%= @contest.director %>, 
+   Chapter <%= @contest.chapter %></p>
+
+<h1><%= link_to @jc_result.judge.name, pilot_path(@jc_result.judge) %></h1>
+<h2><%= link_to (@contest) do "#{@contest.name} #{@contest.start}" end %></h2>
+
+<table><tbody>
+<%= render @jc_result %>
+</tbody></table>

@@ -14,7 +14,8 @@ IAC::Application.routes.draw do
   namespace :admin do
     root :to => "contests#index"
     resources :contests, :except => [:new, :create] do
-      resources :c_results, :only => [:index, :show]
+      resources :jc_results, :only => [:index]
+      resources :pc_results, :only => [:index]
     end
     resources :contests do
       member do 

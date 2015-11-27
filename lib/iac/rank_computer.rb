@@ -12,7 +12,7 @@ module IAC
     include Singleton
     include Log::ConfigLogger
 
-    def computeJudgeMetrics(flight, f_result)
+    def computeJudgeMetrics(flight)
       jf_results_by_judge = {}
       p_ranks = []
       j_rank_for_jf = {}
@@ -29,8 +29,8 @@ module IAC
             jf_result = jf_results_by_judge[judge]
             if !jf_result
               jf_result = 
-                f_result.jf_results.where(:judge_id => judge.id).first ||
-                f_result.jf_results.create(:judge => judge)
+                flight.jf_results.where(:judge_id => judge.id).first ||
+                flight.jf_results.create(:judge => judge)
               jf_result.zero_reset
               j_rank_for_jf[jf_result] = []
               jf_results_by_judge[judge] = jf_result
@@ -96,34 +96,6 @@ module IAC
         logger.debug "Computed jf_result ranks #{jf_result}"
       end
       jf_results_by_judge.values
-    end
-
-    # Compute rank for each pilot in a contest category
-    def compute_category_ranks(c_result)
-      logger.info "Computing ranks for #{c_result}"
-      category_values = []
-      c_result.pc_results.each do |pc_result|
-        category_values << pc_result.category_value
-      end
-      begin
-        category_ranks = Ranking::Computer.ranks_for(category_values)
-        c_result.pc_results.each_with_index do |pc_result, i|
-          pc_result.category_rank = category_ranks[i]
-          pc_result.save
-        end
-      rescue Exception => exception
-        logger.error exception.message
-        contest = c_result.contest
-        Failure.create(
-          :step => "category",
-          :contest_id => contest.id,
-          :manny_id => contest.manny_synch ? contest.manny_synch.manny_number : nil,
-          :description => 
-            ":: category #{c_result} contest id #{c_result.contest.id}" +
-            "\n:: category_values " + category_values.to_yaml +
-            "\n:: #{exception.message} ::\n" + exception.backtrace.join("\n"))
-      end
-      c_result
     end
 
     # Compute result values for one flight of the contest

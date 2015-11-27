@@ -25,7 +25,7 @@ private
 ###
 
 def soucies_for_pilots
-  pilots = Member.joins(:pc_results => {:c_result => :contest}).where(
+  pilots = Member.joins(:pc_results => :contest).where(
     "year(contests.start) = ? and contests.region != 'National'", @year).group(
     'members.id').having('1 < count(distinct(pc_results.id))')
   soucies = pilots.all.collect { |pilot| engage_soucy_for_pilot(pilot) }
@@ -38,7 +38,7 @@ end
 # returns the soucy record
 def engage_soucy_for_pilot(pilot)
   soucy = SoucyResult.where(:pilot_id => pilot.id, :year => @year).first_or_create
-  to_be_results = PcResult.joins(:c_result => :contest).where(
+  to_be_results = PcResult.joins(:contest).where(
     "pilot_id = ? and contests.region != 'National' and year(contests.start) = ?",
     pilot.id, @year).all
   soucy.update_results(to_be_results)
