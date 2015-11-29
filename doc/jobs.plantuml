@@ -34,18 +34,24 @@
   group "Compute Flights Job"
     Jobs -> CC : compute_flights
     loop "each flight"
-      CC -> FC : flight_results
-      FC -> FC : compute_pf_results
+      CC -> FC : compute_pf_results
       activate FC
         FC -> PF : create/update
         FC -> PFJ : create/update
       deactivate FC
-      FC -> FC : compute_jf_results
+    end
+    Jobs -> Jobs : compute_judge_flight_metrics_job
+    Jobs -> Jobs : compute_contest_pilot_rollups_job
+  end
+
+  group "Compute Judge Flight Metrics Job"
+    Jobs -> CC : compute_judge_metrics
+    loop "each flight"
+      CC -> FC : compute_jf_results
       activate FC
         FC -> JF : create/update
       deactivate FC
     end
-    Jobs -> Jobs : compute_contest_pilot_rollups_job
     Jobs -> Jobs : compute_contest_judge_rollups_job
   end
 
