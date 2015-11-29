@@ -158,57 +158,5 @@ module IAC
         end
       end
     end
-    context 'missing sequence' do
-      before(:context) do
-        @contest = create(:contest)
-        @flight = create(:flight, :contest => @contest)
-        pilot_flights = []
-        2.times do
-          pilot_flights << create(
-            :pilot_flight,
-            :flight => @flight,
-            :sequence => nil,
-            :penalty_total => 0)
-        end
-        @judges = []
-        3.times { @judges << create(:judge) }
-        # pilot_flights[0]
-        create(:score,
-          :pilot_flight => pilot_flights[0],
-          :judge => @judges[0],
-          :values => [90, 80, 85, 75, 80])
-        create(:score,
-          :pilot_flight => pilot_flights[0],
-          :judge => @judges[1],
-          :values => [95, 80, 85, 90, 75])
-        create(:score,
-          :pilot_flight => pilot_flights[0],
-          :judge => @judges[2],
-          :values => [80, 75, 80, 75, 55])
-        # pilot_flights[1]
-        create(:score,
-          :pilot_flight => pilot_flights[1],
-          :judge => @judges[0],
-          :values => [70, 80, 85, 80, 70])
-        create(:score,
-          :pilot_flight => pilot_flights[1],
-          :judge => @judges[1],
-          :values => [80, 85, 90, 80, 70])
-        create(:score,
-          :pilot_flight => pilot_flights[1],
-          :judge => @judges[2],
-          :values => [65, 80, 60, 75, 50])
-      end
-      it 'behaves when there is no sequence for result computations' do
-        @flight.pilot_flights.each do |pilot_flight|
-          pf_result = pilot_flight.results
-          expect(pf_result.flight_rank).to eq(nil)
-          @judges.each do |judge|
-            pfj_result = pf_result.for_judge(judge)
-            expect(pfj_result).to eq(nil)
-          end
-        end
-      end
-    end
   end
 end

@@ -19,7 +19,8 @@ class ComputeFlightsJob < Struct.new(:contest)
 
   def success(job)
     say "Success computing flights for #{@contest.year_name}"
-    Delayed::Job.enqueue ComputeContestRollupsJob.new(@contest)
+    Delayed::Job.enqueue ComputeContestPilotRollupsJob.new(@contest)
+    Delayed::Job.enqueue ComputeContestJudgeRollupsJob.new(@contest)
   end
 
 end

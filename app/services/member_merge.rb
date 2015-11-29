@@ -145,7 +145,8 @@ class MemberMerge
     contests = all_flights.collect { |role_flight| role_flight[:contest] }
     merge_members
     contests.uniq.each do |contest|
-      Delayed::Job.enqueue Jobs::ComputeContestRollupsJob.new(contest)
+      Delayed::Job.enqueue Jobs::ComputeContestPilotRollupsJob.new(contest)
+      Delayed::Job.enqueue Jobs::ComputeContestJudgeRollupsJob.new(contest)
     end
   end
 

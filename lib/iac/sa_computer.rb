@@ -18,6 +18,7 @@ end
 # Does no computation if pf_result entry is more recent than scores
 # Returns the PfResult ActiveRecord instance
 def computePilotFlight(has_soft_zero)
+  @pilot_flight.reload
   @pf = @pilot_flight.pf_results.first || @pilot_flight.pf_results.build
   @seq = @pilot_flight.sequence
   @kays = @seq ? @seq.k_values : nil
@@ -100,12 +101,12 @@ end
 
 def storeGradedValues
   @judges.each_with_index do |judge, j|
-    pfj = @pilot_flight.pfj_results.where(:judge_id => judge).first
-    if !pfj 
-      pfj = @pilot_flight.pfj_results.build(:judge => judge)
+    pfj_result = @pilot_flight.pfj_results.where(:judge_id => judge).first
+    if !pfj_result
+      pfj_result = @pilot_flight.pfj_results.build(:judge => judge)
     end
-    pfj.graded_values = make_judge_values(j)
-    pfj.save
+    pfj_result.graded_values = make_judge_values(j)
+    pfj_result.save
   end
 end
 
@@ -161,13 +162,13 @@ end
 def storeResults
   flight_total = 0.0
   @judges.each_with_index do |judge, j|
-    pfj = @pilot_flight.pfj_results.where(:judge_id => judge).first
-    if !pfj 
-      pfj = @pilot_flight.pfj_results.build(:judge => judge)
+    pfj_result = @pilot_flight.pfj_results.where(:judge_id => judge).first
+    if !pfj_result
+      pfj_result = @pilot_flight.pfj_results.build(:judge => judge)
     end
-    pfj.computed_values = make_judge_values(j)
-    pfj.flight_value = @j_totals[j]
-    pfj.save
+    pfj_result.computed_values = make_judge_values(j)
+    pfj_result.flight_value = @j_totals[j]
+    pfj_result.save
     flight_total += @j_totals[j]
   end
   @kays.length.times do |f|

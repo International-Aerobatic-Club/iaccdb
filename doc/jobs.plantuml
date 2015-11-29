@@ -12,6 +12,7 @@
   participant SoucyComputer as Soucy
   database Contest
   database PfResult as PF
+  database PfjResult as PFJ
   database JfResult as JF
   database PcResult as PC
   database JcResult as JC
@@ -37,35 +38,44 @@
       FC -> FC : compute_pf_results
       activate FC
         FC -> PF : create/update
+        FC -> PFJ : create/update
       deactivate FC
       FC -> FC : compute_jf_results
       activate FC
         FC -> JF : create/update
       deactivate FC
     end
-    Jobs -> Jobs : compute_contest_rollups_job
+    Jobs -> Jobs : compute_contest_pilot_rollups_job
+    Jobs -> Jobs : compute_contest_judge_rollups_job
   end
 
-  group "Compute Contest Rollups Job"
-    Jobs -> CC : compute_contest_rollups
+  group "Compute Contest Pilot Rollups Job"
+    Jobs -> CC : compute_contest_pilot_rollups
     loop "each category"
-      CC -> CR : compute_category_totals_and_rankings
+      CC -> CR : compute_pilot_category_results
       activate CR
-        CR -> CR : compute_pilot_category_results
-        activate CR
-          CR -> PC : create/update
-        deactivate CR
-        CR -> CR : compute_judge_category_results
-        activate CR
-          CR -> JC : create/update
-        deactivate CR
+        CR -> PC : create/update
+      deactivate CR
+      CC -> CR : compute_category_ranks
+      activate CR
+        CR -> PC : update
       deactivate CR
     end
     Jobs -> Jobs : find_stars_job(contest)
-    Jobs -> Jobs : compute_year_rollups_job(year)
     Jobs -> Jobs : compute_regional_job(contest)
     Jobs -> Jobs : compute_soucy_job(year)
     Jobs -> Jobs : compute_collegiate_job(year)
+  end
+
+  group "Compute Contest Judge Rollups Job"
+    Jobs -> CC : compute_contest_judge_rollups
+    loop "each category"
+      CC -> CR : compute_judge_category_results
+      activate CR
+        CR -> JC : create/update
+      deactivate CR
+    end
+    Jobs -> Jobs : compute_year_rollups_job(year)
   end
 
   group "Find Stars Job"
