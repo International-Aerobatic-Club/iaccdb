@@ -113,7 +113,8 @@ module IAC
       end
       if seq
         flight.pilot_flights.each do |pilot_flight|
-          pf_result = pilot_flight.results(has_soft_zero)
+          sac = SaComputer.new(pilot_flight)
+          sac.computePilotFlight(has_soft_zero)
         end
         pf_results = computeFlightOverallRankings(flight)
         computeFlightFigureRankings(flight, pf_results) if same

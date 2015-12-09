@@ -9,28 +9,10 @@ class CategoryRollups
     @contest.flights.where(:category => @category)
   end
 
-  # compute all pilot and judge category rollups
-  # compute pilot rankings
-  # for this category of this contest
-  def compute_category_totals_and_rankings
-    cat_flights = flights
-    pc_results = compute_pilot_category_results(cat_flights)
-    jc_results = compute_judge_category_results(cat_flights)
-    compute_category_ranks(pc_results)
-  end
-
-  # compute pilot rankings
-  # for this category of this contest
-  def compute_pilot_rankings
-    pc_results = @contest.pc_results.where(:category => @category)
-    compute_category_ranks(pc_results)
-  end
-
-  # compute pilot results
-  # for this category of this contest
-  # cat_flights: flights in category
+  # compute pilot results for this category of this contest
   # returns set of pc_result
-  def compute_pilot_category_results(cat_flights)
+  def compute_pilot_category_results
+    cat_flights = flights
     cur_pc_results = Set.new
     pc_results = @contest.pc_results.where(:category => @category)
     cat_flights.each do |flight|
@@ -44,14 +26,14 @@ class CategoryRollups
     cur_pc_results.each do |pc_result|
       pc_result.compute_category_totals
     end
+    compute_category_ranks(cur_pc_results)
     cur_pc_results
   end
 
-  # compute judge results
-  # for this category of this contest
-  # cat_flights: flights in category
+  # compute judge results for this category of this contest
   # returns set of jc_result
-  def compute_judge_category_results(cat_flights)
+  def compute_judge_category_results
+    cat_flights = flights
     cur_jc_results = Set.new
     jc_results = @contest.jc_results.where(:category => @category)
     cat_flights.each do |flight|

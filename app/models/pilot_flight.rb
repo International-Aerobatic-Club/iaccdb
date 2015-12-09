@@ -46,11 +46,4 @@ class PilotFlight < ActiveRecord::Base
    # fjs[f][j] has score for figure f from judge j
    fjs
  end
-
-  # compute results
-  # returns PfResult ActiveRecord instance for this pilot for this flight
-  def results(has_soft_zero = false)
-    sac = IAC::SaComputer.new(self)
-    sac.computePilotFlight(has_soft_zero)
-  end
 end

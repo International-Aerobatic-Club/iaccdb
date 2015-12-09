@@ -2,7 +2,7 @@
 # The job computes flight results for a contest
 module Jobs
 class ComputeFlightsJob < Struct.new(:contest)
-  
+
   include JobsSay
 
   def perform
@@ -13,13 +13,14 @@ class ComputeFlightsJob < Struct.new(:contest)
   end
 
   def error(job, exception)
-    say "Error computing flights for #{@contest.year_name}"
+    say "Error computing flight results for #{@contest.year_name}"
     record_contest_failure('compute_flights', @contest, exception)
   end
 
   def success(job)
-    say "Success computing flights for #{@contest.year_name}"
-    Delayed::Job.enqueue ComputeContestRollupsJob.new(@contest)
+    say "Success computing flight results for #{@contest.year_name}"
+    Delayed::Job.enqueue ComputeJudgeFlightMetricsJob.new(@contest)
+    Delayed::Job.enqueue ComputeContestPilotRollupsJob.new(@contest)
   end
 
 end
