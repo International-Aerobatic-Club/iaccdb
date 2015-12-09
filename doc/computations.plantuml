@@ -1,7 +1,9 @@
 @startuml
 title IACCDB Computational Dependencies
+skinparam noteBackgroundColor #CEFEFE
+
 object score {
-  actually grades from judges
+  raw grades from judges
 }
 object pf_result {
   pilot results for flight
@@ -26,68 +28,57 @@ object jc_result {
 object pc_result {
   pilot results for contest
 }
-object c_result {
-}
 object result {
   soucy
   collegiate
 }
 
-pf_result <|-- jf_result
+score <--o pfj_result
 pfj_result <--o pf_result
 pf_result <--o pc_result
 jf_result <--o jc_result
+pf_result <|-- jf_result
 jc_result <--o jy_result
 pc_result <--o result
 pc_result <--o regional_pilots
 
-object collegiate_computer {
-  compute_collegiate_job
-  year
-  recompute()
-  recompute_team()
-  recompute_individual()
-}
-pc_result ..> collegiate_computer
-collegiate_computer ..> result
+note "CollegiateComputer" as Coll
+pc_result ..> Coll
+Coll ..> result
 
-object find_stars {
-  find_stars(contest)
-}
-pf_result ..> find_stars
-find_stars ..> pc_result
+note "find_stars" as Stars
+pf_result ..> Stars
+Stars ..> pc_result
 
-object judge_rollups {
-  compute_jy_results(year)
-}
-jc_result ..> judge_rollups
-judge_rollups ..> jy_result
+note "JudgeRollups.compute_jy_results(year)" as JRoll
+jc_result ..> JRoll
+JRoll ..> jy_result
 
-object regional_series {
-  compute_regional(year, region)
-}
-pc_result ..> regional_series
-regional_series ..> regional_pilots
+note "RegionalSeries" as Regional
+pc_result ..> Regional
+Regional ..> regional_pilots
 
-object sa_computer {
-  compute_pilot_flight()
-}
-score ..> sa_computer
-sa_computer ..> pfj_result
-sa_computer ..> pf_result
+note "SoucyComputer" as Soucy
+pc_result ..> Soucy
+Soucy ..> result
 
-object soucy_computer {
-  year
-  recompute()
-}
-pc_result ..> soucy_computer
-soucy_computer ..> result
+note "CategoryRollups.compute_pilot_category_results" as PCR
+pf_result ..> PCR
+PCR ..> pc_result
 
-object contest {
-  compute_contest_rollups_job
-}
+note "CategoryRollups.compute_judge_category_results" as PJR
+jf_result ..> PJR
+PJR ..> jc_result
 
+note "FlightComputer.compute_pf_results" as FCCPF
+score ..> FCCPF
+FCCPF ..> pf_result
+FCCPF ..> pfj_result
 
+note "FlightComputer.compute_jf_results" as FCCJF
+pf_result ..> FCCJF
+pfj_result ..> FCCJF
+FCCJF ..> jf_result
 
 @enduml
 

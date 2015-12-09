@@ -1,6 +1,6 @@
 module Manny
   describe MannyToDB do
-    before(:each) do 
+    before(:context) do 
       manny = Manny::Parse.new
       IO.foreach('spec/manny/Contest_36.txt') { |line| manny.processLine(line) }
       m2d = Manny::MannyToDB.new
@@ -18,8 +18,11 @@ module Manny
       end
     end
     describe 'contest' do
-      it 'computes' do
-        @computer.compute_contest_rollups
+      it 'computes pilots' do
+        @computer.compute_contest_pilot_rollups
+      end
+      it 'computes judges' do
+        @computer.compute_contest_judge_rollups
       end
     end
   end

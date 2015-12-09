@@ -2,24 +2,17 @@ module Model
   describe JcResult, :type => :model do
     context 'factory data' do
       before(:context) do
-        DatabaseCleaner.start
         @contest = create(:contest)
-        @c_result = create(:c_result,
-          :contest => @contest)
+        @category = Category.where(category: 'Unlimited', aircat: 'P').first
         @flight = create(:flight,
           :contest => @contest,
-          :category => @c_result.category)
+          :category => @category)
         @judge_team = create(:judge)
         @jc_result = create(:jc_result,
           :contest => @contest,
-          :category => @c_result.category,
-          :c_result => @c_result,
+          :category => @category,
           :judge => @judge_team.judge)
-        @f_result = create(:f_result, 
-          :flight => @flight, 
-          :c_result => @c_result)
         @jf_result_1 = create(:jf_result,
-          :f_result => @f_result,
           :flight => @flight,
           :jc_result => @jc_result,
           :judge => @judge_team,
@@ -37,7 +30,6 @@ module Model
           :minority_zero_ct => 1,
           :minority_grade_ct => 2)
         @jf_result_2 = create(:jf_result,
-          :f_result => @f_result,
           :flight => @flight,
           :jc_result => @jc_result,
           :judge => @judge_team,
@@ -55,9 +47,6 @@ module Model
           :minority_zero_ct => 3,
           :minority_grade_ct => 1)
         @jc_result.compute_category_totals
-      end
-      after(:context) do
-        DatabaseCleaner.clean
       end
       it 'computes the Spearman rank coefficient' do
         expect(@jc_result.rho).to eq(94)
@@ -86,8 +75,7 @@ module Model
         manny = Manny::Parse.new
         IO.foreach('spec/manny/Contest_300.txt') { |line| manny.processLine(line) }
         m2d = Manny::MannyToDB.new
-        m2d.process_contest(manny, true)
-        contest = Contest.first
+        contest = m2d.process_contest(manny, true)
         expect(contest).not_to be nil
         expect(contest.flights).not_to be_nil
         expect(contest.flights.count).to eq 12

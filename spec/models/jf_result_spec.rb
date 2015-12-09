@@ -1,7 +1,6 @@
 describe JfResult, :type => :model do
   def reparse_contest(m2d, manny)
-    m2d.process_contest(manny, true)
-    @contest = Contest.first
+    @contest = m2d.process_contest(manny, true)
     @pri_cat = Category.find_by_category_and_aircat('primary', 'P')
     @flight2 = @contest.flights.where(:category_id => @pri_cat.id, :name => 'Free').first
   end

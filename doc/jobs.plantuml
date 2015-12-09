@@ -1,0 +1,130 @@
+@startuml
+  control Jobs
+  participant JasperToDB
+  participant MannyToDB
+  participant ContestComputer as CC
+  participant FlightComputer as FC
+  participant CategoryRollups as CR
+  participant JudgeRollups as JR
+  participant FindStars as Stars
+  participant CollegiateComputer as Coll
+  participant RegionalSeries as Regional
+  participant SoucyComputer as Soucy
+  database Contest
+  database PfResult as PF
+  database PfjResult as PFJ
+  database JfResult as JF
+  database PcResult as PC
+  database JcResult as JC
+  database JyResult as JY
+  database Result
+
+  group "Process JaSPer Job"
+    Jobs -> JasperToDB : process_contest
+    JasperToDB -> Contest : create/update
+    Jobs -> Jobs : compute_flights_job
+  end
+
+  group "Retrieve Manny Job"
+    Jobs -> MannyToDB : process_contest
+    MannyToDB -> Contest : create/update
+    Jobs -> Jobs : compute_flights_job
+  end
+
+  group "Compute Flights Job"
+    Jobs -> CC : compute_flights
+    loop "each flight"
+      CC -> FC : compute_pf_results
+      activate FC
+        FC -> PF : create/update
+        FC -> PFJ : create/update
+      deactivate FC
+    end
+    Jobs -> Jobs : compute_judge_flight_metrics_job
+    Jobs -> Jobs : compute_contest_pilot_rollups_job
+  end
+
+  group "Compute Judge Flight Metrics Job"
+    Jobs -> CC : compute_judge_metrics
+    loop "each flight"
+      CC -> FC : compute_jf_results
+      activate FC
+        FC -> JF : create/update
+      deactivate FC
+    end
+    Jobs -> Jobs : compute_contest_judge_rollups_job
+  end
+
+  group "Compute Contest Pilot Rollups Job"
+    Jobs -> CC : compute_contest_pilot_rollups
+    loop "each category"
+      CC -> CR : compute_pilot_category_results
+      activate CR
+        CR -> PC : create/update
+      deactivate CR
+      CC -> CR : compute_category_ranks
+      activate CR
+        CR -> PC : update
+      deactivate CR
+    end
+    Jobs -> Jobs : find_stars_job(contest)
+    Jobs -> Jobs : compute_regional_job(contest)
+    Jobs -> Jobs : compute_soucy_job(year)
+    Jobs -> Jobs : compute_collegiate_job(year)
+  end
+
+  group "Compute Contest Judge Rollups Job"
+    Jobs -> CC : compute_contest_judge_rollups
+    loop "each category"
+      CC -> CR : compute_judge_category_results
+      activate CR
+        CR -> JC : create/update
+      deactivate CR
+    end
+    Jobs -> Jobs : compute_year_rollups_job(year)
+  end
+
+  group "Find Stars Job"
+    Jobs -> Stars : find_stars(contest)
+    loop "categories"
+      loop "pilots"
+        Stars -> PC : star_qualifying
+      end
+    end
+  end
+
+  group "Compute Year Rollups Job"
+    Jobs -> JR : compute_jy_results(year)
+    loop "contest"
+      loop "jc_result"
+        JR -> JY : create/update
+      end
+    end
+  end
+
+  group "Compute Regional Job"
+    Jobs -> Regional : compute_regional_for_contest(contest)
+    Regional -> Regional : compute_regional(year, region)
+    Regional -> Result : create/update
+  end
+
+  group "Compute Soucy Job"
+    Jobs -> Soucy : recompute(year)
+    loop "pilots"
+      Soucy -> Result : create/update
+    end
+  end
+
+  group "Compute Collegiate Job"
+    Jobs -> Coll : recompute(year)
+    Coll -> Coll : recompute_team
+    activate Coll
+      Coll -> Result : create/update
+    deactivate Coll
+    Coll -> Coll : recompute_individual
+    activate Coll
+      Coll -> Result : create/update
+    deactivate Coll
+  end
+
+@enduml

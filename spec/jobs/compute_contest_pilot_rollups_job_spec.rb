@@ -1,8 +1,8 @@
 module Jobs
-  describe ComputeContestRollupsJob do
+  describe ComputeContestPilotRollupsJob do
     before(:example) do
       @contest = create(:contest)
-      @job = ComputeContestRollupsJob.new(@contest)
+      @job = ComputeContestPilotRollupsJob.new(@contest)
     end
 
     it 'creates and invokes the contest rollups' do
@@ -12,7 +12,7 @@ module Jobs
 
     it 'places an entry in the failure table on failure' do
       allow_any_instance_of(ContestComputer).to receive(
-        :compute_contest_rollups).and_raise Exception.new('failure')
+        :compute_contest_pilot_rollups).and_raise Exception.new('failure')
       begin
         @job.perform
       rescue Exception => e

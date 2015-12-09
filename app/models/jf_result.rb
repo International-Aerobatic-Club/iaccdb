@@ -2,8 +2,6 @@ class JfResult < ActiveRecord::Base
   attr_protected :id
 
   belongs_to :judge
-  belongs_to :f_result
-  belongs_to :jc_result
   belongs_to :flight
 
   include JudgeMetrics
@@ -28,7 +26,6 @@ class JfResult < ActiveRecord::Base
     "dis #{dis}\n"\
     "minority_zero_ct #{minority_zero_ct}\n"\
     "minority_grade_ct #{minority_grade_ct}\n"\
-    "jc_result_id #{jc_result_id}\n"\
     "ftsdx2 #{ftsdx2}\n"\
     "ftsdxdy #{ftsdxdy}\n"\
     "ftsdy2 #{ftsdy2}\n"\
