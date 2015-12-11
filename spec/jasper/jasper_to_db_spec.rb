@@ -2,7 +2,7 @@ require 'xml'
 
 module Jasper
   describe JasperToDB do
-    before(:each) do 
+    before(:context) do 
       testFile = 'spec/fixtures/jasper/jasperResultsFormat.xml'
       jasper = Jasper::JasperParse.new
       parser = XML::Parser.file(testFile)
@@ -140,6 +140,26 @@ module Jasper
       expect(sequence.total_k).to eq(198)
       expect(sequence.k_values).to eq([10, 13, 10, 13, 4, 19, 18, 14, 19, 3, 17, 10, 19, 9, 12, 8])
     end
+    it 'captures four minute free sequences' do
+      cat = Category.find_for_cat_aircat('Four Minute', 'P')
+      flight = @contest.flights.where(category_id: cat.id).first
+      expect(flight).not_to be_nil
+      pilot = Member.where(iac_id: 13721).first
+      expect(pilot).not_to be_nil
+      pilot_flight = flight.pilot_flights.where(:pilot_id => pilot).first
+      expect(pilot_flight).not_to be_nil
+      sequence = pilot_flight.sequence
+      expect(sequence).not_to be_nil
+      expect(sequence.figure_count).to eq(10)
+      expect(sequence.total_k).to eq(400)
+      expect(sequence.k_values).to eq([40, 40, 40, 40, 40, 40, 40, 40, 40, 40])
+      pilot = Member.where(iac_id: 27381).first
+      expect(pilot).not_to be_nil
+      pilot_flight = flight.pilot_flights.where(:pilot_id => pilot).first
+      expect(pilot_flight).not_to be_nil
+      sequence2 = pilot_flight.sequence
+      expect(sequence2.id).to eq(sequence.id)
+    end
     it 'captures scores' do
       cat = Category.find_for_cat_aircat('Sportsman', 'P')
       flight = @contest.flights.where( :name => 'Free', :category_id => cat.id).first
@@ -157,6 +177,25 @@ module Jasper
       expect(scores).not_to be_nil
       expect(scores.values).to eq( 
         [90, 95, 95, 90, 95, 90, 85, 95, 75, 90, 85]
+      )
+    end
+    it 'captures four minute free scores' do
+      cat = Category.find_for_cat_aircat('Four Minute', 'P')
+      flight = @contest.flights.where(category_id: cat.id).first
+      expect(flight).not_to be_nil
+      pilot = Member.where(iac_id: 13721).first
+      expect(pilot).not_to be_nil
+      pilot_flight = flight.pilot_flights.where(:pilot_id => pilot).first
+      expect(pilot_flight).not_to be_nil
+      judge = Member.where(iac_id: 434884)
+      expect(judge).not_to be_nil
+      assist = Member.where(iac_id: 434247)
+      expect(assist).not_to be_nil
+      judge_team = Judge.where(:judge_id => judge, :assist_id => assist)
+      scores = pilot_flight.scores.where(:judge_id => judge_team).first
+      expect(scores).not_to be_nil
+      expect(scores.values).to eq( 
+        [80, 85, 75, 70, 50, 80, 100, 70, 65, 90]
       )
     end
     it 'captures collegiate teams' do
