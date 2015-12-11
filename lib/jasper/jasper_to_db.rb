@@ -185,17 +185,21 @@ def process_grades(dJudgeTeam, dPilotFlight, dSequence, jasper, jCat, jFlt, jPil
   if !grades_string.empty?
     grades = grades_string.split
     grades = grades.map { |g| (g.to_f * 10.0).round }
-    grades = remove_extraneous_grades(grades, dSequence.figure_count)
+    grades = remove_extraneous_grades(grades, jCat, dSequence.figure_count)
     dPilotFlight.scores.create(
       :judge_id => dJudgeTeam.id,
       :values => grades)
   end
 end
 
-def remove_extraneous_grades(grades, ctFigures)
+def remove_extraneous_grades(grades, jCat, ctFigures)
   if 0 < ctFigures
-    abbrev = grades[0, ctFigures - 1]
-    abbrev << grades.last
+    if (jCat == 6) # four minute
+      abbrev = grades[0, ctFigures]
+    else
+      abbrev = grades[0, ctFigures - 1]
+      abbrev << grades.last
+    end
   else
     grades
   end
