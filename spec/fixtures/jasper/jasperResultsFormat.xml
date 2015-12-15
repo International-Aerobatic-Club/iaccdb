@@ -946,6 +946,78 @@ in three newscasts with Amazing aerial video supplying videos.
         </Judge>
       </Flight>
     </Category>
+    <Category CategoryID="6">
+      <Flight FlightID="1">
+        <Judge JudgeID="0">
+          <Name>
+            <First>Carole</First>
+            <Last>Holyk</Last>
+          </Name>
+          <IACNumber>2383</IACNumber>
+          <Assistant>
+            <Name>
+              <First>David</First>
+              <Last>Heinsohn</Last>
+            </Name>
+            <IACNumber>18515</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+          <Assistant>
+            <Name>
+              <First>Patrick</First>
+              <Last>Rebbetoy</Last>
+            </Name>
+            <IACNumber>16174</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+        <Judge JudgeID="1">
+          <Name>
+            <First>Sanford</First>
+            <Last>Langworthy</Last>
+          </Name>
+          <IACNumber>431885</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Sheri</First>
+              <Last>Davis</Last>
+            </Name>
+            <IACNumber>24185</IACNumber>
+            <Modifier>-4</Modifier>
+          </Assistant>
+        </Judge>
+        <Judge JudgeID="2">
+          <Name>
+            <First>Chris</First>
+            <Last>Pulley</Last>
+          </Name>
+          <IACNumber>8476</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Larry</First>
+              <Last>Ernewein</Last>
+            </Name>
+            <IACNumber>12058</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+        <Judge JudgeID="3">
+          <Name>
+            <First>Francesco</First>
+            <Last>Pallozzi</Last>
+          </Name>
+          <IACNumber>434884</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Brian</First>
+              <Last>Roodvoets</Last>
+            </Name>
+            <IACNumber>434247</IACNumber>
+            <Modifier>-4</Modifier>
+          </Assistant>
+        </Judge>
+      </Flight>
+    </Category>
   </Judges>
   <Pilots>
     <Category CategoryID="2">
@@ -1133,6 +1205,38 @@ in three newscasts with Amazing aerial video supplying videos.
       </Pilot>
     </Category>
     <Category CategoryID="5">
+      <Pilot PilotID="1">
+        <IACNumber>13721</IACNumber>
+        <Name>
+          <First>Steven</First>
+          <Last>Grohsmeyer</Last>
+        </Name>
+        <Flights>Known Freestyle Unknown1 </Flights>
+        <Chapter></Chapter>
+        <FreestyleKs>56 39 56 49 25 38 47 57 53 0 0 0 0 0 0 0 0 0 0 0 26 </FreestyleKs>
+        <Aircraft>
+          <Make>eigenhawk solution</Make>
+          <Model></Model>
+          <NNumber>n7296</NNumber>
+        </Aircraft>
+      </Pilot>
+      <Pilot PilotID="2">
+        <IACNumber>27381</IACNumber>
+        <Name>
+          <First>Dennis</First>
+          <Last>Thompson</Last>
+        </Name>
+        <Flights>Known Freestyle Unknown1 </Flights>
+        <Chapter>52</Chapter>
+        <FreestyleKs>36 31 36 33 41 42 31 26 24 20 38 25 17 0 0 0 0 0 0 0 26 </FreestyleKs>
+        <Aircraft>
+          <Make>Edge </Make>
+          <Model>540</Model>
+          <NNumber>N5400T</NNumber>
+        </Aircraft>
+      </Pilot>
+    </Category>
+    <Category CategoryID="6">
       <Pilot PilotID="1">
         <IACNumber>13721</IACNumber>
         <Name>
@@ -1744,6 +1848,34 @@ in three newscasts with Amazing aerial video supplying videos.
           </Judge>
           <Judge JudgeID="3">
             <Figures>8.0 10.0 7.5 6.5 7.0 8.0 -1.0 0.0 7.5 6.0 6.0 7.0 7.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 7.5 </Figures>
+          </Judge>
+          <Penalty>0.0</Penalty>
+        </Pilot>
+      </Flight>
+    </Category>
+    <Category CategoryID="6">
+      <Flight FlightID="1">
+        <Pilot PilotID="1">
+          <Judge JudgeID="1">
+            <Figures>9.0 9.0 8.5 8.5 8.0 9.0 8.0 8.5 8.5 9.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 </Figures>
+          </Judge>
+          <Judge JudgeID="2">
+            <Figures>8.5 8.5 8.5 8.0 8.5 9.0 9.0 8.5 7.5 9.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 </Figures>
+          </Judge>
+          <Judge JudgeID="3">
+            <Figures>8.0 8.5 7.5 7.0 5.0 8.0 10.0 7.0 6.5 9.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 </Figures>
+          </Judge>
+          <Penalty>0.0</Penalty>
+        </Pilot>
+        <Pilot PilotID="2">
+          <Judge JudgeID="1">
+            <Figures>9.5 8.0 9.0 8.5 9.0 9.0 7.0 8.5 7.5 9.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 </Figures>
+          </Judge>
+          <Judge JudgeID="2">
+            <Figures>6.5 8.5 8.0 8.0 9.0 8.5 6.5 7.5 8.0 8.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 </Figures>
+          </Judge>
+          <Judge JudgeID="3">
+            <Figures>9.0 8.0 7.5 7.0 7.0 9.0 8.0 9.0 8.5 10.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 </Figures>
           </Judge>
           <Penalty>0.0</Penalty>
         </Pilot>
