@@ -25,6 +25,10 @@ gem 'jbuilder'
 # memoization used sparingly where appropriate
 gem 'memoist2'
 
+# maintenance mode as rack middleware
+# prefer server config; but this will work
+gem 'turnout'
+
 group :development, :test do
   gem 'rspec-rails'
 end
