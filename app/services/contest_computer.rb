@@ -2,6 +2,7 @@ class ContestComputer
 
   def initialize(contest)
     @contest = contest
+    @flight_computer = FlightComputer.new(nil)
   end
 
   # compute all of the flights and the contest rollups
@@ -12,26 +13,36 @@ class ContestComputer
     compute_contest_judge_rollups
   end
 
+  def has_soft_zero
+    2014 <= @contest.year
+  end
+
   # compute pilot results for all flights of the contest
   def compute_flights
     flights = @contest.flights
-    flight_computer = FlightComputer.new(flights.first)
     flights.each do |flight|
-      flight_computer.flight = flight
-      flight_computer.compute_pf_results(2014 <= @contest.year)
+      compute_flight_results(flight)
     end
     @contest.save
+  end
+
+  def compute_flight_results(flight)
+    @flight_computer.flight = flight
+    @flight_computer.compute_pf_results(has_soft_zero)
   end
 
   # compute judge metrics for all flights of the contest
   def compute_judge_metrics
     flights = @contest.flights
-    flight_computer = FlightComputer.new(flights.first)
     flights.each do |flight|
-      flight_computer.flight = flight
-      flight_computer.compute_jf_results
+      compute_flight_judge_metrics(flight)
     end
     @contest.save
+  end
+
+  def compute_flight_judge_metrics(flight)
+    @flight_computer.flight = flight
+    @flight_computer.compute_jf_results
   end
 
   # ensure contest pilot rollup computations for this contest are complete
@@ -39,10 +50,14 @@ class ContestComputer
     cats = @contest.flights.collect { |f| f.category }
     cats = cats.uniq
     cats.each do |cat|
-      roller = CategoryRollups.new(@contest, cat)
-      roller.compute_pilot_category_results
+      compute_category_rollups(cat)
     end
     @contest.save
+  end
+
+  def compute_category_rollups(cat)
+    roller = CategoryRollups.new(@contest, cat)
+    roller.compute_pilot_category_results
   end
 
   # ensure contest judge rollup computations for this contest are complete
