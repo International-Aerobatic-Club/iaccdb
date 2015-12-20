@@ -7,7 +7,7 @@
 # 'd' prefixes variables that reference the database madel
 module Jasper
 class JasperToDB
-attr_reader :dContest
+attr_accessor :d_contest
 
 # accept parsed XML JaSPer contest data
 # appropriately update or create records in the contest database
@@ -17,18 +17,17 @@ attr_reader :dContest
 # returns the contest
 def process_contest(jasper, contest_id = nil)
   contest_id = jasper.contest_id if contest_id == nil
-  dContest = nil
   contest_params = extract_contest_params_hash(jasper)
   if (contest_id)
-    dContest = updateOrCreateContest(contest_id, contest_params)
+    d_contest = updateOrCreateContest(contest_id, contest_params)
   else
-    dContest = Contest.create(contest_params)
+    d_contest = Contest.create(contest_params)
   end
-  if dContest
-    process_scores(dContest, jasper)
-    process_collegiate(dContest, jasper)
+  if d_contest
+    process_scores(d_contest, jasper)
+    process_collegiate(d_contest, jasper)
   end
-  dContest
+  d_contest
 end
 
 def extract_contest_params_hash(jasper)
@@ -43,43 +42,43 @@ def extract_contest_params_hash(jasper)
   contest_params
 end
 
-###
-private
-###
-
 def updateOrCreateContest(id, contest_params)
   begin
-    dContest = Contest.find(id)
-    dContest.reset_to_base_attributes
-    dContest.update_attributes(contest_params)
+    d_contest = Contest.find(id)
+    d_contest.reset_to_base_attributes
+    d_contest.update_attributes(contest_params)
   rescue ActiveRecord::RecordNotFound
-    dContest = Contest.create(contest_params)
+    d_contest = Contest.create(contest_params)
   end
-  dContest
+  d_contest
 end
 
-def process_collegiate(dContest, jasper)
-  cp = CollegiateParticipants.new(dContest.year)
+def process_collegiate(d_contest, jasper)
+  cp = CollegiateParticipants.new(d_contest.year)
   cp.process_jasper(jasper)
 end
 
-def process_scores(dContest, jasper)
+def process_scores(d_contest, jasper)
   aircat = jasper.aircat
   jasper.categories_scored.each do |jCat|
     dCategory = category_for(jasper, aircat, jCat)
-    jasper.flights_scored(jCat).each do |jFlt|
-      dFlight = flight_for(dContest, dCategory, jasper, jCat, jFlt)
-      jasper.pilots_scored(jCat, jFlt).each do |jPilot|
-        dPilot = pilot_for(jasper, jCat, jPilot)
-        dAirplane = airplane_for(jasper, jCat, jPilot)
-        dSequence = sequence_for(jasper, jCat, jFlt, jPilot)
-        dPilotFlight = pilot_flight_for(dFlight, dPilot, dSequence, dAirplane, jasper, jCat, jFlt, jPilot)
-        jasper.judge_teams(jCat, jFlt).each do |jJudgeTeam|
-          dJudge = judge_for(jasper, jCat, jFlt, jJudgeTeam)
-          dAssist = judge_assist_for(jasper, jCat, jFlt, jJudgeTeam)
-          dJudgeTeam = judge_team_for(dJudge, dAssist)
-          process_grades(dJudgeTeam, dPilotFlight, dSequence, jasper, jCat, jFlt, jPilot, jJudgeTeam)
-        end
+    process_category(jasper, dCategory, jCat)
+  end
+end
+
+def process_category(jasper, dCategory, jCat)
+  jasper.flights_scored(jCat).each do |jFlt|
+    dFlight = flight_for(d_contest, dCategory, jasper, jCat, jFlt)
+    jasper.pilots_scored(jCat, jFlt).each do |jPilot|
+      dPilot = pilot_for(jasper, jCat, jPilot)
+      dAirplane = airplane_for(jasper, jCat, jPilot)
+      dSequence = sequence_for(jasper, jCat, jFlt, jPilot)
+      dPilotFlight = pilot_flight_for(dFlight, dPilot, dSequence, dAirplane, jasper, jCat, jFlt, jPilot)
+      jasper.judge_teams(jCat, jFlt).each do |jJudgeTeam|
+        dJudge = judge_for(jasper, jCat, jFlt, jJudgeTeam)
+        dAssist = judge_assist_for(jasper, jCat, jFlt, jJudgeTeam)
+        dJudgeTeam = judge_team_for(dJudge, dAssist)
+        process_grades(dJudgeTeam, dPilotFlight, dSequence, jasper, jCat, jFlt, jPilot, jJudgeTeam)
       end
     end
   end
@@ -96,10 +95,10 @@ def category_for(jasper, aircat, jCat)
   cat
 end
 
-def flight_for(dContest, dCategory, jasper, jCat, jFlt)
+def flight_for(d_contest, dCategory, jasper, jCat, jFlt)
   chief = chief_for(jasper, jCat, jFlt)
   assist = chief_assist_for(jasper, jCat, jFlt)
-  dContest.flights.create(
+  d_contest.flights.create(
     :category_id => dCategory.id,
     :name => jasper.flight_name(jFlt),
     :sequence => jFlt,

@@ -22,6 +22,5 @@ class IndexIdColumns < ActiveRecord::Migration
     add_index :results, :id
     add_index :scores, :id
     add_index :sequences, :id
-    add_index :writers, :id
   end
 end
