@@ -28,7 +28,7 @@ class ReprocessFourMinute
   def process_scores(jasper)
     j2db = Jasper::JasperToDB.new
     j2db.d_contest = @contest
-    computer = ContestComputer(@contest)
+    computer = ContestComputer.new(@contest)
     four_minute = Category.where(category: 'four minute').first
     aircat = jasper.aircat
     jasper.categories_scored.each do |jCat|
@@ -36,11 +36,29 @@ class ReprocessFourMinute
       if dCategory == four_minute
         puts "Processing four minute data."
         j2db.process_category(jasper, dCategory, jCat)
-        dFlight = j2db.
-        computer.compute_flight_results(dFlight)
-        computer.compute_flight_judge_metrics(dFlight)
-        @dFlight.save
-        @contest.save
+        fm_flights = @contest.flights.where(
+          category: four_minute).order('created_at desc')
+        latest = true
+        dFlight = nil
+        fm_flights.find_each do |flight|
+          # it makes sense to delete the old flight data after
+          # writing the new flight data, because some of the old
+          # data associations will be used by the new data
+          if latest
+            dFlight = flight
+          else
+            flight.destroy
+          end
+          latest = false
+        end
+        if dFlight == nil
+          puts "Missing flight for processed four minute data"
+        else
+          computer.compute_flight_results(dFlight)
+          computer.compute_flight_judge_metrics(dFlight)
+          dFlight.save
+          @contest.save
+        end
       end
     end
   end
@@ -49,7 +67,7 @@ end
 pcs = []
 contests = Contest.joins(:flights => :category).where(
   "categories.category = 'four minute' and 2014 <= year(contests.start)")
-contests.find_each do |c|
+contests.all.each do |c|
   begin
     post = c.data_posts.where(
         has_error: false, is_obsolete: false
