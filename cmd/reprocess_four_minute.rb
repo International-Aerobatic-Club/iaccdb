@@ -69,35 +69,55 @@ class ReprocessFourMinute
   end
 end
 
-pcs = []
-contests = Contest.joins(:flights => :category).where(
-  "categories.category = 'four minute' and 2014 <= year(contests.start)")
-contests.all.each do |c|
-  begin
-    post = c.data_posts.where(
-        has_error: false, is_obsolete: false
-      ).order('created_at desc').first
-    if (post == nil)
-      puts "No valid data post for #{c}"
-      pcs << c
-    else
-      puts "Processing #{post} #{c}"
-      rfm = ReprocessFourMinute.new(c, post)
-      rfm.reprocess
-    end
-  rescue Exception => e
-    puts "\nSomething went wrong with contest #{c}"
-    puts e.message
-    e.backtrace.each { |l| puts l }
-    pcs << c
+def process_contest(c)
+  success = true
+  post = c.data_posts.where(
+      has_error: false, is_obsolete: false
+    ).order('created_at desc').first
+  if (post == nil)
+    puts "No valid data post for #{c}"
+    success = false
+  else
+    puts "Processing #{post} #{c}"
+    rfm = ReprocessFourMinute.new(c, post)
+    rfm.reprocess
   end
-  puts "Process the judge rollups"
-end
-IAC::JudgeRollups.compute_jy_results(2014)
-IAC::JudgeRollups.compute_jy_results(2015)
-unless pcs.empty?
-  puts "There were problems with these:"
-  pcs.each { |contest| puts contest }
+  success
 end
 
+def process_all_contests
+  pcs = []
+  contests = Contest.joins(:flights => :category).where(
+    "categories.category = 'four minute' and 2014 <= year(contests.start)")
+  contests.all.each do |c|
+    begin
+      if !process_contest(c)
+        pcs << c
+      end
+    rescue Exception => e
+      puts "\nSomething went wrong with contest #{c}"
+      puts e.message
+      e.backtrace.each { |l| puts l }
+      pcs << c
+    end
+    puts "Process the judge rollups"
+  end
+  IAC::JudgeRollups.compute_jy_results(2014)
+  IAC::JudgeRollups.compute_jy_results(2015)
+  unless pcs.empty?
+    puts "There were problems with these:"
+    pcs.each { |contest| puts contest }
+  end
+end
 
+if ARGV.empty?
+  process_all_contests
+else
+  cid = ARGV[0].to_i
+  c = cid == 0 ? nil : Contest.find(cid)
+  if c && process_contest(c)
+    IAC::JudgeRollups.compute_jy_results(c.year)
+  else
+    puts "Unable to process #{ARGV[0]}"
+  end
+end
