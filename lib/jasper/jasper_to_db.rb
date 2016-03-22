@@ -19,9 +19,9 @@ def process_contest(jasper, contest_id = nil)
   contest_id = jasper.contest_id if contest_id == nil
   contest_params = extract_contest_params_hash(jasper)
   if (contest_id)
-    d_contest = updateOrCreateContest(contest_id, contest_params)
+    @d_contest = updateOrCreateContest(contest_id, contest_params)
   else
-    d_contest = Contest.create(contest_params)
+    @d_contest = Contest.create(contest_params)
   end
   if d_contest
     process_scores(d_contest, jasper)
