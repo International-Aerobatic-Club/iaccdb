@@ -1,4 +1,5 @@
 language: ruby
+install: bundle install --jobs=3 --retry=3 --without=production development
 script: bundle exec rspec spec
 before_script:
   - cmd/travis_ci_test_db.sh
