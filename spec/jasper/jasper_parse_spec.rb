@@ -2,7 +2,7 @@ require 'xml'
 
 module Jasper
   describe JasperParse do
-    before(:all) do
+    before(:context) do
       @jasper = Jasper::JasperParse.new
       parser = XML::Parser.file('spec/fixtures/jasper/jasperResultsFormat.xml')
       @jasper.do_parse(parser)
@@ -30,7 +30,7 @@ module Jasper
       expect(@jasper.category_name(6)).to eq('Four Minute')
     end
     it 'gives categories scored' do
-      expect(@jasper.categories_scored).to eq([2,3,4,5])
+      expect(@jasper.categories_scored).to eq([2,3,4,5,6])
     end
     it 'gives flights scored' do
       expect(@jasper.flights_scored(2)).to eq([1,2,3])
