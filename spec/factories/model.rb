@@ -259,7 +259,6 @@ FactoryGirl.define do
   factory :jf_result do |r|
     r.association :judge, :factory => :judge
     r.association :flight, :factory => :flight
-    r.association :jc_result, :factory => :jc_result
   end
 ### JcResult
   factory :jc_result do |r|

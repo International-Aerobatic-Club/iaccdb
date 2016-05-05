@@ -14,7 +14,6 @@ module Model
           :judge => @judge_team.judge)
         @jf_result_1 = create(:jf_result,
           :flight => @flight,
-          :jc_result => @jc_result,
           :judge => @judge_team,
           :pilot_count => 6,
           :pair_count => 15,
@@ -31,7 +30,6 @@ module Model
           :minority_grade_ct => 2)
         @jf_result_2 = create(:jf_result,
           :flight => @flight,
-          :jc_result => @jc_result,
           :judge => @judge_team,
           :pilot_count => 4,
           :pair_count => 6,
