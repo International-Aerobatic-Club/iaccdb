@@ -48,4 +48,8 @@ class PfResult < ActiveRecord::Base
   def judge_teams
     pilot_flight.scores.collect { |score| score.judge }
   end
+
+  def hors_concours
+    pilot_flight.hors_concours
+  end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151127195344) do
+ActiveRecord::Schema.define(version: 20160507033137) do
 
   create_table "airplanes", force: true do |t|
     t.string   "make"
@@ -233,6 +233,7 @@ ActiveRecord::Schema.define(version: 20151127195344) do
     t.integer  "total_possible"
     t.integer  "contest_id"
     t.integer  "category_id"
+    t.boolean  "hors_concours",                           default: false, null: false
   end
 
   add_index "pc_results", ["category_id"], name: "index_pc_results_on_category_id", using: :btree
@@ -284,6 +285,7 @@ ActiveRecord::Schema.define(version: 20151127195344) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "penalty_total",           default: 0
+    t.boolean  "hors_concours",           default: false, null: false
   end
 
   add_index "pilot_flights", ["airplane_id"], name: "index_pilot_flights_on_airplane_id", using: :btree

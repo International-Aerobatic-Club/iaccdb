@@ -106,4 +106,43 @@ module Model
       computer.flight_results(false)
     end
   end
+  context 'hors concours pilots' do
+    before(:context) do
+      @known_flight = create(:flight)
+      @contest = @known_flight.contest
+      known_flights = create_list(:pilot_flight, 7, flight: @known_flight)
+
+      free_flight = create(:flight,
+        contest: @contest, category: @known_flight.category)
+      free_flights = {}
+      known_flights.each do |kpf|
+        free_flights[kpf.pilot] = create(
+          :pilot_flight, pilot: kpf.pilot, flight: free_flight)
+      end
+
+      @hc_pilot = known_flights[0].pilot
+      known_flights[0].hors_concours = true
+      known_flights[0].save!
+      computer = ContestComputer.new(@contest)
+      computer.compute_results
+    end
+    it 'carries hors concours on pilot_flight into pf_results' do
+      pf_results = PfResult.joins(:flight => :contest).where(
+        ['flights.contest_id = ? and pilot_flights.pilot_id = ?', 
+          @contest.id, @hc_pilot.id])
+      expect(pf_results.count).to eq 2
+      pf_results.each do |pf|
+        if pf.flight == @known_flight
+          expect(pf.hors_concours).to be true
+        else
+          expect(pf.hors_concours).to be false
+        end
+      end
+    end
+    it 'carries hors concours on any pilot_flight into the pc_results' do
+      pc_results = PcResult.where(contest: @contest, pilot: @hc_pilot)
+      expect(pc_results.count).to eq 1
+      expect(pc_results.first.hors_concours).to be true
+    end
+  end
 end
