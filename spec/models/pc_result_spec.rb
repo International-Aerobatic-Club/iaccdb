@@ -123,6 +123,7 @@ module Model
       @hc_pilot = known_flights[0].pilot
       known_flights[0].hors_concours = true
       known_flights[0].save!
+      @non_hc_pilot = known_flights[1].pilot
       computer = ContestComputer.new(@contest)
       computer.compute_results
     end
@@ -143,6 +144,11 @@ module Model
       pc_results = PcResult.where(contest: @contest, pilot: @hc_pilot)
       expect(pc_results.count).to eq 1
       expect(pc_results.first.hors_concours).to be true
+    end
+    it 'does not set hors_concours on pc_result if none of the flights is hc' do
+      pc_results = PcResult.where(contest: @contest, pilot: @non_hc_pilot)
+      expect(pc_results.count).to eq 1
+      expect(pc_results.first.hors_concours).to be false
     end
   end
 end
