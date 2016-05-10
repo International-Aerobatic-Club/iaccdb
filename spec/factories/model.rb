@@ -1,9 +1,19 @@
 # factories for the acro tests
 FactoryGirl.define do
+### Airplane
+  factory :airplane do |r|
+    r.sequence(:make) { Forgery(:name).company_name }
+    r.sequence(:model) { Forgery(:name).company_name }
+    r.sequence(:reg) do
+      Forgery(:basic).number(:at_least => 100, :at_most => 999).to_s +
+      Forgery(:basic).text(at_least: 2, at_most: 2, allow_lower: false,
+        allow_numeric: false)
+    end
+  end
 ### Member
   factory :member do |r|
-    r.sequence(:iac_id) { |i| Forgery(:basic).number(
-      at_least: 34, at_most: 440000) }
+    r.sequence(:iac_id) { |i| 10 ** Forgery(:basic).number(
+      at_least: 2, at_most: 6) + i }
     r.sequence(:family_name) { |i| Forgery(:name).last_name }
     r.sequence(:given_name) { |i| Forgery(:name).first_name }
   end
@@ -137,6 +147,7 @@ FactoryGirl.define do
     r.association :pilot, :factory => :member
     r.association :flight
     r.association :sequence
+    r.association :airplane
     r.penalty_total 0
   end
   factory :adams_known, :class => PilotFlight do |r|

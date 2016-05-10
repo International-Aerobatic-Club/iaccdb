@@ -107,26 +107,8 @@ module Model
     end
   end
   context 'hors concours pilots' do
-    before(:context) do
-      @known_flight = create(:flight)
-      @contest = @known_flight.contest
-      known_flights = create_list(:pilot_flight, 7, flight: @known_flight)
-
-      free_flight = create(:flight,
-        contest: @contest, category: @known_flight.category)
-      free_flights = {}
-      known_flights.each do |kpf|
-        free_flights[kpf.pilot] = create(
-          :pilot_flight, pilot: kpf.pilot, flight: free_flight)
-      end
-
-      @hc_pilot = known_flights[0].pilot
-      known_flights[0].hors_concours = true
-      known_flights[0].save!
-      @non_hc_pilot = known_flights[1].pilot
-      computer = ContestComputer.new(@contest)
-      computer.compute_results
-    end
+    require 'shared/hors_concours_context'
+    include_context 'hors_concours flight'
     it 'carries hors concours on pilot_flight into pf_results' do
       pf_results = PfResult.joins(:flight => :contest).where(
         ['flights.contest_id = ? and pilot_flights.pilot_id = ?', 
