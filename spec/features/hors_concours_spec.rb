@@ -5,16 +5,22 @@ RSpec.feature "HorsConcours", type: :feature, viz: true do
   include_context 'hors_concours flight'
   context 'category results' do
     before :each do
-      visit contest_path(@contest.id)
+      visit contest_path(@contest)
+      @hc_pilot_cell = find(:xpath,
+        "//table[@class='pilot_results']//tr/td[@class='pilot'][1]/a[contains(@href, '/pilots/#{@hc_pilot.id}')]")
+      @hc_row = @hc_pilot_cell.find(:xpath, "./ancestor::tr[1]")
+    end
+    it 'show "(patch)" for pilots flying HC' do
+      expect(@hc_pilot_cell.text).to match /(patch)/
     end
     it 'show HC for ranking of pilot contest result where pc_result has hors_concours' do
-      save_and_open_page
-      find(:xpath, '//th/a[contains(@text, "Known")]')
-      sleep 30
-      fail
+      hc_rank = @hc_row.find(:xpath, "./td[@class='rank'][last()]")
+      expect(hc_rank.text).to eq "(HC)"
     end
     it 'show ranking of pilots after HC pilot as if HC pilot had not flown' do
-      fail
+      next_row = @hc_row.find(:xpath, 'following-sibling::tr[1]')
+      next_rank = next_row.find(:xpath, "./td[@class='rank'][last()]")
+      expect(next_rank.text).to eq "(4)"
     end
   end
   context 'flight results' do
