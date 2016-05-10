@@ -29,6 +29,8 @@ gem 'memoist2'
 # prefer server config; but this will work
 gem 'turnout'
 
+gem 'mysql2'
+
 group :development, :test do
   gem 'rspec-rails'
 end
@@ -44,7 +46,6 @@ group :test do
 end
 
 group :production do
-  gem 'mysql2'
   gem 'daemons'
   # support for execjs asset precompilation
   gem 'therubyracer'
