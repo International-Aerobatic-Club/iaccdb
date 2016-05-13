@@ -6,12 +6,13 @@ RSpec.feature "HorsConcours", type: :feature, viz: true do
   context 'category results' do
     before :each do
       visit contest_path(@contest)
-      @hc_pilot_cell = find(:xpath,
+      hc_pilot_link = find(:xpath,
         "//table[@class='pilot_results']//tr/td[@class='pilot'][1]/a[contains(@href, '/pilots/#{@hc_pilot.id}')]")
-      @hc_row = @hc_pilot_cell.find(:xpath, "./ancestor::tr[1]")
+      @hc_pilot_cell = hc_pilot_link.find(:xpath, "./ancestor::td[1]")
+      @hc_row = hc_pilot_link.find(:xpath, "./ancestor::tr[1]")
     end
     it 'show "(patch)" for pilots flying HC' do
-      expect(@hc_pilot_cell.text).to match /(patch)/
+      expect(@hc_pilot_cell.text).to match /\(patch\)/
     end
     it 'show HC for ranking of pilot contest result where pc_result has hors_concours' do
       hc_rank = @hc_row.find(:xpath, "./td[@class='rank'][last()]")
