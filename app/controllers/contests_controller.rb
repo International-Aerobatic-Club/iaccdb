@@ -42,7 +42,9 @@ class ContestsController < ApplicationController
         pc_results = PcResult.where(contest: @contest, category:cat).includes(
           :pilot).order(:category_rank)
         if !pc_results.empty?
-          pc_results.all.each do |p|
+          pc_results =
+            PcResultM::HcRanked.computed_display_ranks(pc_results.all)
+          pc_results.each do |p|
             pilot_result = {}
             pilot_result[:member] = p.pilot
             pilot_result[:overall] = p
