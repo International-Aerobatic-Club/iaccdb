@@ -150,6 +150,28 @@ module IAC
       end
     end
 
+    # set the value of ranked[i].display_rank based on
+    # the value of ranked[i].hors_concours and ranked[i].rank
+    # ranked is an array
+    def compute_rankings_with_hc(ranked)
+      r = Array.new(ranked.length, 1)
+      (0 ... ranked.length).each do |i|
+        (i + 1 ... ranked.length).each do |j|
+          if (ranked[i] && ranked[j])
+            r[i] += 1 if ranked[i].rank > ranked[j].rank && !ranked[j].hors_concours
+            r[j] += 1 if ranked[j].rank > ranked[i].rank && !ranked[i].hors_concours
+          end
+        end
+      end
+      ranked.each_with_index do |t,i|
+        if t.hors_concours
+          t.display_rank = 'HC'
+        else
+          t.display_rank = r[i].to_s
+        end
+      end
+    end
+
   ###
   private
   ###
