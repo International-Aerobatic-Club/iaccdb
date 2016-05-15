@@ -24,7 +24,7 @@ RSpec.feature "HorsConcours", :type => :feature do
       expect(next_rank.text).to eq "(4)"
     end
   end
-  context 'flight results', viz: true do
+  context 'flight results' do
     before :each do
       visit flight_path(@known_flight)
       hc_pilot_link = find(:xpath,
