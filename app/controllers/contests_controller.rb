@@ -59,14 +59,19 @@ class ContestsController < ApplicationController
             pilot_result[:overall] = p
             pilot_result[:flight_results] = {}
             fr = {}
+            pf_results = []
             pfr_by_flight.each_key do |flight|
               fr[flight] = pfr_by_flight[flight].select do |f|
                 f.pilot_flight.pilot == p.pilot
               end
-              fr[flight] = nil if fr[flight].empty?
+              if (fr[flight].empty?)
+                fr[flight] = nil
+              else
+                pf_results << fr[flight]
+              end
             end
             pilot_result[:flight_results] = fr
-            pfr = pf_results.first
+            pfr = pf_results.flatten.first
             pf = pfr.pilot_flight if pfr
             if (pf)
               pilot_result[:airplane] = pf.airplane
