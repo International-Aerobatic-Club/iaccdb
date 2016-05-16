@@ -19,5 +19,5 @@ Category.create([
    :name => 'Advanced Glider' },
   {:sequence => 9, :aircat => 'G', :category => 'unlimited', 
    :name => 'Unlimited Glider' },
-  {:sequence => 10, :aircat => 'P', :category => 'four minute', 
+  {:sequence => 10, :aircat => 'F', :category => 'four minute', 
    :name => 'Four Minute Free' }])
