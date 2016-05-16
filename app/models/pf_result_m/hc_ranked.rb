@@ -14,8 +14,8 @@ module PfResultM
     end
 
     # accepts an array of PfResults
-    # returns array of HcRanked results with display_rank computed from
-    # based on rank and hors_concours attributes
+    # returns array of HcRanked results with display_rank computed
+    # based on adj_flight_rank and hors_concours attributes
     def self.computed_display_ranks(results)
       hc_ranked = []
       results.each do |result|
