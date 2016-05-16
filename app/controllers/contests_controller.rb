@@ -42,6 +42,15 @@ class ContestsController < ApplicationController
         pc_results = PcResult.where(contest: @contest, category:cat).includes(
           :pilot).order(:category_rank)
         if !pc_results.empty?
+          pf_results = PfResult.joins({:pilot_flight => :flight}).where(
+             {:flights => {contest_id: @contest, category_id: cat}})
+          pfr_by_flight = pf_results.all.group_by do |pf|
+            pf.flight
+          end
+          pfr_by_flight.each_key do |flight|
+            pfr_by_flight[flight] = PfResultM::HcRanked.computed_display_ranks(
+              pfr_by_flight[flight])
+          end
           pc_results =
             PcResultM::HcRanked.computed_display_ranks(pc_results.all)
           pc_results.each do |p|
@@ -49,12 +58,14 @@ class ContestsController < ApplicationController
             pilot_result[:member] = p.pilot
             pilot_result[:overall] = p
             pilot_result[:flight_results] = {}
-            pf_results = PfResult.joins({:pilot_flight => :flight}).where(
-               {:pilot_flights => {pilot_id: p.pilot}, 
-                :flights => {contest_id: @contest, category_id: cat}})
-            pilot_result[:flight_results] = pf_results.all.group_by do |pf|
-              pf.flight
+            fr = {}
+            pfr_by_flight.each_key do |flight|
+              fr[flight] = pfr_by_flight[flight].select do |f|
+                f.pilot_flight.pilot == p.pilot
+              end
+              fr[flight] = nil if fr[flight].empty?
             end
+            pilot_result[:flight_results] = fr
             pfr = pf_results.first
             pf = pfr.pilot_flight if pfr
             if (pf)
