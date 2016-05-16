@@ -18,10 +18,23 @@ RSpec.feature "HorsConcours", :type => :feature do
       hc_rank = @hc_row.find(:xpath, "./td[@class='rank'][last()]")
       expect(hc_rank.text).to eq "(HC)"
     end
-    it 'show ranking of pilots after HC pilot as if HC pilot had not flown' do
+    it 'show contest ranking of pilots after HC pilot as if HC pilot had not flown' do
       next_row = @hc_row.find(:xpath, 'following-sibling::tr[1]')
       next_rank = next_row.find(:xpath, "./td[@class='rank'][last()]")
       expect(next_rank.text).to eq "(4)"
+    end
+    it 'show HC in ranking of individual flights where pf_result has hors_concours' do
+      known_rank = @hc_row.find(:xpath, "./td[@class='rank'][1]")
+      expect(known_rank.text).to eq "(HC)"
+      free_rank = @hc_row.find(:xpath, "./td[@class='rank'][2]")
+      expect(free_rank.text).to eq "(HC)"
+    end
+    it 'show flight ranking of pilots after HC pilot as if HC pilot had not flown' do
+      next_row = @hc_row.find(:xpath, 'following-sibling::tr[1]')
+      known_rank = next_row.find(:xpath, "./td[@class='rank'][1]")
+      expect(known_rank.text).to eq "(4)"
+      free_rank = next_row.find(:xpath, "./td[@class='rank'][2]")
+      expect(free_rank.text).to eq "(4)"
     end
   end
   context 'flight results' do
