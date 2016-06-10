@@ -9,6 +9,8 @@ class PcResult < ActiveRecord::Base
   has_many :result_accums
   has_many :results, :through => :result_accums
 
+  scope :competitive, -> { where(hors_concours: false) }
+
   def to_s 
     a = "pc_result for pilot #{pilot} value #{category_value}"
   end

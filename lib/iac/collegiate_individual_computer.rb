@@ -37,7 +37,7 @@ end
 def engage_student_for_pilot(pilot)
   student = CollegiateIndividualResult.where(:pilot_id => pilot.id,
     :year => @year).first_or_create
-  to_be_results = PcResult.joins(:contest).where(
+  to_be_results = PcResult.competitive.joins(:contest).where(
     "pilot_id = ? and year(contests.start) = ?", pilot.id, @year).all
   student.update_results(to_be_results)
 end

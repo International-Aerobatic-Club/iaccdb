@@ -90,4 +90,11 @@ class Member < ActiveRecord::Base
     pc_results.joins(:contest).where('year(contests.start) = ?', year).all
   end
 
+  # returns array of pc_result is contest results for given year
+  # that are NOT hors concours.
+  # returns empty if no contest results
+  def competitions(year)
+    pc_results.competitive.joins(:contest).where('year(contests.start) = ?', year).all
+  end
+
 end

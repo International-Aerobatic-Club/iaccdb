@@ -8,7 +8,7 @@ def pilot_contests
   pilots = self.members.all # array of pilot members
   pilot_contests = {}
   pilots.each do |pilot|
-    pilot_contests[pilot] = pilot.contests(self.year)
+    pilot_contests[pilot] = pilot.competitions(self.year)
   end
   pilot_contests
 end
