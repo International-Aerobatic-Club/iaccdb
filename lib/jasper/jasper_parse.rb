@@ -50,7 +50,7 @@ class JasperParse
 
   def contest_chapter
     nodes = @document.find('/ContestResults/ContestInfo/HostChapter')
-    nodes && nodes.first ? nodes.first.inner_xml : ''
+    clean_chapter(nodes && nodes.first ? nodes.first.inner_xml : '')
   end
 
   def aircat
@@ -179,7 +179,11 @@ class JasperParse
 
   def pilot_chapter(jCat, jPilot)
     nodes = @document.find("/ContestResults/Pilots/Category[@CategoryID=#{jCat}]/Pilot[@PilotID=#{jPilot}]/Chapter")
-    nodes && nodes.first ? nodes.first.inner_xml : ''
+    chapter = (nodes && nodes.first ? nodes.first.inner_xml : '') || ''
+    chapter = chapter.gsub(/[^0-9]/, ' ')
+    chapter = chapter.split(/ +/)
+    chapter = chapter.select { |c| c != nil && !c.empty? }
+    chapter.join('/')[0,8]
   end
 
   # this one returns nil, not the empty string, if no college
@@ -277,6 +281,15 @@ class JasperParse
       nodes = @document.find("/ContestResults/KnownKFactors/Category[@CategoryID=#{jCat}]")
     end
     nodes && nodes.first ? nodes.first.inner_xml : ''
+  end
+
+  def clean_chapter(chapter)
+    if (chapter)
+      chapter = chapter.gsub(/[^0-9]/,' ')
+      chapter.to_i
+    else
+      ''
+    end
   end
 
 end #class

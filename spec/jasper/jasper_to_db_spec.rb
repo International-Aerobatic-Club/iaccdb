@@ -217,6 +217,22 @@ module Jasper
       expect(und_ids).to include 28094
       expect(und_ids.count).to eq 3
     end
+    it 'filters pilot chapter number' do
+      cat = Category.find_for_cat_aircat('Sportsman', 'P')
+      flight = @contest.flights.where(category_id: cat.id, name: 'Known').first
+      pilot = Member.find_by_iac_id(12058)
+      pilot_flight = PilotFlight.find_by_flight_id_and_pilot_id(flight.id, pilot.id)
+      expect(pilot_flight.chapter).to eq '3/52'
+      pilot = Member.find_by_iac_id(430273)
+      pilot_flight = PilotFlight.find_by_flight_id_and_pilot_id(flight.id, pilot.id)
+      expect(pilot_flight.chapter).to eq '126/12'
+      pilot = Member.find_by_iac_id(434969)
+      pilot_flight = PilotFlight.find_by_flight_id_and_pilot_id(flight.id, pilot.id)
+      expect(pilot_flight.chapter).to eq '3/126/12'
+      pilot = Member.find_by_iac_id(434884)
+      pilot_flight = PilotFlight.find_by_flight_id_and_pilot_id(flight.id, pilot.id)
+      expect(pilot_flight.chapter).to eq '35/52'
+    end
   end
 end
 
