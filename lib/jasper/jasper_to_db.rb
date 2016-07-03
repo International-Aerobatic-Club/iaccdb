@@ -16,6 +16,7 @@ attr_accessor :d_contest
 #   when the data was posted
 # returns the contest
 def process_contest(jasper, contest_id = nil)
+  @member_map = MemberMap.new
   contest_id = jasper.contest_id if contest_id == nil
   contest_params = extract_contest_params_hash(jasper)
   if (contest_id)
@@ -107,11 +108,22 @@ def flight_for(d_contest, dCategory, jasper, jCat, jFlt)
 end
 
 def member_for(iac_id, given_name, family_name)
-  if (0 < iac_id.to_i)
-    Member.find_or_create_by_iac_number(iac_id, given_name, family_name)
-  else
-    Member.find_or_create_by_name(iac_id, given_name, family_name)
+  # we assume a member with the same given_name and family_name
+  # is the same person at any given contest
+  # somewhat safe assumption that there aren't two "Tom Jones"
+  # the find_or_create_by_name method correctly assumes that if there
+  # are two "Tom Jones", they might be two different people.
+  # we return the same "Tom Jones" member on every lookup
+  member = @member_map.lookup(iac_id, given_name, family_name)
+  if (member == nil)
+    if (0 < iac_id.to_i)
+      member = Member.find_or_create_by_iac_number(iac_id, given_name, family_name)
+    else
+      member = Member.find_or_create_by_name(iac_id, given_name, family_name)
+    end
+    @member_map.insert(iac_id, given_name, family_name, member)
   end
+  member
 end
 
 def chief_for(jasper, jCat, jFlt)
