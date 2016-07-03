@@ -8,6 +8,9 @@ module Jasper
       parser = XML::Parser.file(testFile)
       jasper.do_parse(parser)
       j2d = Jasper::JasperToDB.new
+      2.times do
+        Member.create!(iac_id: 0, given_name: 'David', family_name: 'Crescenzo')
+      end
       @contest = j2d.process_contest(jasper)
     end
     it 'captures a contest' do
@@ -35,6 +38,16 @@ module Jasper
       expect(pilot).not_to be_nil
       expect(pilot.given_name).to eq('Desmond')
       expect(pilot.family_name).to eq('Lightbody')
+    end
+    it 'maps member name to a single member record' do
+      boks = Member.where(given_name: 'Hans', family_name: 'Bok')
+      expect(boks.count).to eq 1
+    end
+    it 'maps ambiguous member name to a single member record' do
+      crecs = Member.where(given_name: 'David', family_name: 'Crescenzo')
+      # the context set-up two existing records that duplicate this name.
+      # the db mapper should create exactly one more.
+      expect(crecs.count).to eq 3
     end
     it 'captures judge teams' do
       judge = Member.where(:iac_id => 431885).first
