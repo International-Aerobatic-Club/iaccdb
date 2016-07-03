@@ -233,6 +233,16 @@ module Jasper
       pilot_flight = PilotFlight.find_by_flight_id_and_pilot_id(flight.id, pilot.id)
       expect(pilot_flight.chapter).to eq '35/52'
     end
+    it 'identifies pilots with (patch) on their names' do
+      patch_pilots = Member.where(family_name: 'Thompson (patch)')
+      expect(patch_pilots.count).to eq 0
+      patch_pilots = Member.where(family_name: 'Thompson')
+      expect(patch_pilots.count).to eq 1
+      patch_flights = PilotFlight.where(pilot_id: patch_pilots.first.id)
+      patch_flights.each do |flight|
+        expect(flight.hors_concours).to be true
+      end
+    end
   end
 end
 
