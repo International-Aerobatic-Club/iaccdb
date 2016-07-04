@@ -96,6 +96,7 @@ def category_for(jasper, aircat, jCat)
   cat
 end
 
+# this is not idempotent.  yuck.
 def flight_for(d_contest, dCategory, jasper, jCat, jFlt)
   chief = chief_for(jasper, jCat, jFlt)
   assist = chief_assist_for(jasper, jCat, jFlt)
@@ -114,7 +115,7 @@ def member_for(iac_id, given_name, family_name)
   # the find_or_create_by_name method correctly assumes that if there
   # are two "Tom Jones", they might be two different people.
   # we return the same "Tom Jones" member on every lookup
-  family_name = family_name.gsub(/(patch)/,'').strip
+  family_name = family_name.gsub(/\(patch\)/i,'').strip
   given_name = given_name.strip
   member = @member_map.lookup(iac_id, given_name, family_name)
   if (member == nil)
@@ -145,6 +146,10 @@ def pilot_for(jasper, jCat, jPilot)
   member_for(jasper.pilot_iac_number(jCat, jPilot),
     jasper.pilot_first_name(jCat, jPilot),
     jasper.pilot_last_name(jCat, jPilot))
+end
+
+def pilot_is_hc(jasper, jCat, jPilot)
+  jasper.pilot_last_name(jCat, jPilot) =~ /\(patch\)/i
 end
 
 def airplane_for(jasper, jCat, jPilot)
@@ -183,13 +188,20 @@ def sequence_for(jasper, jCat, jFlt, jPilot)
 end
 
 def pilot_flight_for(dFlight, dPilot, dSequence, dAirplane, jasper, jCat, jFlt, jPilot)
-  PilotFlight.create(
+  PilotFlight.create!(
     :flight_id => dFlight.id,
     :pilot_id => dPilot.id,
     :sequence_id => dSequence.id,
     :airplane_id => dAirplane.id,
     :chapter => jasper.pilot_chapter(jCat, jPilot),
-    :penalty_total => jasper.penalty(jCat, jFlt, jPilot))
+    :penalty_total => jasper.penalty(jCat, jFlt, jPilot),
+    :hors_concours => jasper.pilot_is_hc(jCat, jPilot)
+  ) do |pf|
+    # I don't understand why this is necessary, but it works.
+    # Otherwise, hors_concours always comes back false
+    pf.hors_concours = jasper.pilot_is_hc(jCat, jPilot)
+    pf.save!
+  end
 end
 
 def process_grades(dJudgeTeam, dPilotFlight, dSequence, jasper, jCat, jFlt, jPilot, jJudgeTeam)

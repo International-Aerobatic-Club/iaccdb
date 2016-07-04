@@ -252,8 +252,10 @@ module Jasper
       patch_pilots = Member.where(family_name: 'Thompson')
       expect(patch_pilots.count).to eq 1
       patch_flights = PilotFlight.where(pilot_id: patch_pilots.first.id)
-      patch_flights.each do |flight|
-        expect(flight.hors_concours).to be true
+      patch_flights.each do |pf|
+        if pf.category.category == 'unlimited'
+          expect(pf.hors_concours).to be true
+        end
       end
     end
   end
