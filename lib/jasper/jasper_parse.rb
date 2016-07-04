@@ -169,12 +169,25 @@ class JasperParse
 
   def pilot_first_name(jCat, jPilot)
     nodes = @document.find("/ContestResults/Pilots/Category[@CategoryID=#{jCat}]/Pilot[@PilotID=#{jPilot}]/Name/First")
+    name = nodes && nodes.first ? nodes.first.inner_xml : ''
+    name.strip
+  end
+
+  def pilot_raw_last_name(jCat, jPilot)
+    nodes = @document.find("/ContestResults/Pilots/Category[@CategoryID=#{jCat}]/Pilot[@PilotID=#{jPilot}]/Name/Last")
     nodes && nodes.first ? nodes.first.inner_xml : ''
   end
 
+  PATCH_REGEX = /\(patch\)/i
+
   def pilot_last_name(jCat, jPilot)
-    nodes = @document.find("/ContestResults/Pilots/Category[@CategoryID=#{jCat}]/Pilot[@PilotID=#{jPilot}]/Name/Last")
-    nodes && nodes.first ? nodes.first.inner_xml : ''
+    pilot_raw_last_name(jCat, jPilot).gsub(PATCH_REGEX,'').strip
+  end
+
+  def pilot_is_hc(jCat, jPilot)
+    name = pilot_raw_last_name(jCat, jPilot)
+    match = PATCH_REGEX.match(name)
+    match != nil
   end
 
   def pilot_chapter(jCat, jPilot)

@@ -11,7 +11,7 @@ module Jasper
       expect(@jasper.contest_name).to eq('Test Contest US Candian Challenge')
       expect(@jasper.contest_city).to eq('Olean')
       expect(@jasper.contest_state).to eq('NY')
-      expect(@jasper.contest_chapter).to eq('126')
+      expect(@jasper.contest_chapter).to eq(126)
       expect(@jasper.contest_region).to eq('NorthEast')
       expect(@jasper.contest_director).to eq('Pat Barrett')
       cDate = @jasper.contest_date
@@ -55,7 +55,14 @@ module Jasper
       expect(@jasper.pilot_iac_number(2,3)).to eq('434969')
       expect(@jasper.pilot_first_name(2,3)).to eq('Desmond')
       expect(@jasper.pilot_last_name(2,3)).to eq('Lightbody')
-      expect(@jasper.pilot_chapter(2,3)).to eq('3')
+      expect(@jasper.pilot_chapter(2,3)).to eq('3/126/12')
+    end
+    it 'strips patch from family name' do
+      expect(@jasper.pilot_last_name(5,2)).to eq('Thompson')
+    end
+    it 'returns hors_concours for name with "(Patch)"' do
+      expect(@jasper.pilot_is_hc(5,2)).to be true
+      expect(@jasper.pilot_is_hc(2,3)).to be false
     end
     it 'gives airplane' do
       expect(@jasper.airplane_make(4,1)).to eq('Sukoi')
