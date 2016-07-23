@@ -1,8 +1,14 @@
 # RSpec
 # spec/support/database_cleaner.rb
+
+def truncate_database
+  DatabaseCleaner.clean_with :truncation
+  Rails.application.load_seed
+end
+
 RSpec.configure do |config|
   config.before(:suite) do
-    DatabaseCleaner.clean_with :truncation, { except: %w[ categories ] }
+    truncate_database
   end
 
   config.before(:each) do
@@ -11,7 +17,7 @@ RSpec.configure do |config|
 
   # selenium driver as separate process breaks transaction strategy
   config.before(:each, viz: true) do
-    DatabaseCleaner.strategy = :truncation, { except: %w[ categories ] }
+    truncate_database
   end
 
   config.before(:each) do

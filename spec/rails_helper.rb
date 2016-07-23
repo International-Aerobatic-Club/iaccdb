@@ -24,13 +24,7 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 # autoload_paths failing to work for some reason
 Dir[Rails.root.join("lib/**/*.rb")].each { |f| require f }
 
-# new way to load seeds in test
-Rails.application.load_seed
-
 RSpec.configure do |config|
-  # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
-  config.fixture_path = "#{::Rails.root}/spec/fixtures"
-
   # Manage transactions with database_cleaner, not RSpec
   config.use_transactional_fixtures = false
 
