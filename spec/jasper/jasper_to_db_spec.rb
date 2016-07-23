@@ -267,9 +267,25 @@ module Jasper
           end
         end
       end
+    end
+    context 'hors concours identification' do
+      before(:context) do
+        jasper = jasperParseFromTestDataFile('jasperResultsTestHC.xml')
+        j2d = Jasper::JasperToDB.new
+        @contest = j2d.process_contest(jasper)
+      end
       it 'identifies solo performance in category' do
-        pending 'solo performance data'
-        fail
+        spn = Category.find_for_cat_aircat('sportsman', 'P')
+        flights = @contest.flights.where(category_id: spn.id)
+        expect(flights.count).to eq 3
+        pfs = PilotFlight.where(flight_id: flights.collect(&:id))
+        expect(pfs.count).to eq 3
+        pilots = pfs.all.collect(&:pilot).uniq
+        expect(pilots.count).to eq 1
+        expect(pilots.first.family_name).to eq "Eggen"
+        pfs.each do |pf|
+          expect(pf.hors_concours).to be true
+        end
       end
       it 'identifies performances in lower categories' do
         pending 'lower category performance data'
