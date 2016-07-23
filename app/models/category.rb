@@ -9,8 +9,9 @@ class Category < ActiveRecord::Base
   attr_accessible :sequence, :category, :aircat, :name
 
   def self.find_for_cat_aircat(cat, aircat)
-    aircat = aircat && aircat =~ /g/i ? 'G' : 'P'
-    mycat = Category.find_by_category_and_aircat(cat.downcase, aircat)
+    cat = cat.downcase.strip
+    aircat = aircat.strip[0].upcase
+    mycat = Category.where(category: cat, aircat: aircat).first
     if !mycat
       if /Pri|Bas/i =~ cat
         mycat = Category.find_by_category_and_aircat('primary', aircat)
@@ -23,7 +24,7 @@ class Category < ActiveRecord::Base
       elsif /Unl/i =~ cat
         mycat = Category.find_by_category_and_aircat('unlimited', aircat)
       elsif /Minute|Four/i =~ cat
-        mycat = Category.find_by_category_and_aircat('four minute', 'P')
+        mycat = Category.find_by_category_and_aircat('four minute', 'F')
       end
     end
     mycat

@@ -89,9 +89,7 @@ def category_for(jasper, aircat, jCat)
   category_name = jasper.category_name(jCat)
   cat = Category.find_for_cat_aircat(category_name, aircat)
   if !cat
-    aircat_name = aircat == 'G' ? 'Glider' : 'Power'
-    cat = Category.create(:sequence => jCat, :category => category_name,
-      :aircat => aircat, :name => category_name + ' ' + aircat_name)
+    raise "JaSPer data invents a new category #{category_name}, #{aircat}"
   end
   cat
 end
