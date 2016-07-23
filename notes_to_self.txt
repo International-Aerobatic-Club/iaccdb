@@ -1,3 +1,7 @@
+Working pending tests in 
+spec/jasper/jasper_to_db_spec.rb
+
+
 Have judge.rb replace_with_judge_pair method
 Validated with rspec test
 spec/models/judge_spec.rb
@@ -8,20 +12,7 @@ spec/models/member_spec.rb
 app/models/member.rb
 app/controllers/admin/member_controller.rb
 
-'rspec spec' runs all of the tests.  
-End test file names in spec directory with _spec.rb
-
 cmd/recompute_flights does all of the flight calculations
 cmd/recompute_metrics does the judge metric calculations by flight and contest
 cmd/recompute_judge_rollups does the judge metric rollups for a given year
-
-Include assistants, chiefs, assist_chiefs in judges list
-Show all in judge view
-c_result admin view show flights for contest; jf_result, f_result for c_result
-
-Do not process manny contest with code column value nine
-
-Show first flight, second flight, third flight as names for Primary and
-Sportsman flights. Modify mannyModel Contest.category that calls
-Category.new
 

@@ -1,9 +1,0 @@
-Have judge.rb replace_with_judge_pair method
-Validated with rspec test
-spec/models/judge_spec.rb
-app/models/judge.rb
-
-Working to validate merge of one member with another.
-spec/models/member_spec.rb
-app/models/member.rb
-app/controllers/admin/member_controller.rb
