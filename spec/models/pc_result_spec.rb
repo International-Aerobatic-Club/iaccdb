@@ -115,11 +115,7 @@ module Model
           @contest.id, @hc_pilot.id])
       expect(pf_results.count).to eq 2
       pf_results.each do |pf|
-        if pf.flight == @known_flight
-          expect(pf.hors_concours).to be true
-        else
-          expect(pf.hors_concours).to be false
-        end
+        expect(pf.hors_concours).to be true
       end
     end
     it 'carries hors concours on any pilot_flight into the pc_results' do
