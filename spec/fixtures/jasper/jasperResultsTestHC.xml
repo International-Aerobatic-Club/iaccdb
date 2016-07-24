@@ -1022,18 +1022,18 @@
           <NNumber>N24AL</NNumber>
         </Aircraft>      </Pilot>
       <Pilot PilotID="3">
-        <IACNumber>437359</IACNumber>
+        <IACNumber>432890</IACNumber>
         <Name>
-          <First>Simon</First>
-          <Last>Lampard</Last>
+          <First>Layne</First>
+          <Last>Lisser</Last>
         </Name>
         <Flights>Known Freestyle Unknown1 </Flights>
-        <Chapter>49</Chapter>
+        <Chapter>38, 36</Chapter>
         <College></College>
         <Aircraft>
-          <Make>Yakovlev</Make>
-          <Model>55-m</Model>
-          <NNumber>N7090L</NNumber>
+          <Make>Christen Eagle</Make>
+          <Model>Custom</Model>
+          <NNumber>N229LL</NNumber>
         </Aircraft>      </Pilot>
     </Category>
     <Category CategoryID="2">
@@ -1055,20 +1055,21 @@
     </Category>
     <Category CategoryID="3">
       <Pilot PilotID="2">
-        <IACNumber>432116</IACNumber>
+        <IACNumber>431051</IACNumber>
         <Name>
-          <First>Barrett</First>
-          <Last>Hines</Last>
+          <First>Hiroyasu</First>
+          <Last>Endo</Last>
         </Name>
         <Flights>Known Freestyle Unknown1 </Flights>
-        <Chapter>49</Chapter>
+        <Chapter>120</Chapter>
         <College></College>
-        <FreestyleKs>10 13 6 19 4 17 14 14 10 9 6 16 19 18 15 0 0 0 0 0 8 </FreestyleKs>
+        <FreestyleKs>42 44 65 57 55 41 43 43 30 0 0 0 0 0 0 0 0 0 0 0 26 </FreestyleKs>
         <Aircraft>
           <Make>Extra</Make>
-          <Model>300</Model>
-          <NNumber>N410WB</NNumber>
+          <Model>EA300</Model>
+          <NNumber>N300UY</NNumber>
         </Aircraft>      </Pilot>
+
       <Pilot PilotID="3">
         <IACNumber>432322</IACNumber>
         <Name>
@@ -1327,18 +1328,19 @@
           <NNumber>N59AC</NNumber>
         </Aircraft>      </Pilot>
       <Pilot PilotID="5">
-        <IACNumber>431712</IACNumber>
+        <IACNumber>433052</IACNumber>
         <Name>
-          <First>Yuichi</First>
-          <Last>Takagi</Last>
+          <First>Martin</First>
+          <Last>Price</Last>
         </Name>
         <Flights>Known Freestyle Unknown1 </Flights>
         <Chapter>38</Chapter>
         <College></College>
+        <FreestyleKs>28 34 23 36 34 24 21 18 14 15 24 29 0 0 0 0 0 0 0 0 12 </FreestyleKs>
         <Aircraft>
           <Make>Pitts</Make>
-          <Model>S-2S</Model>
-          <NNumber>N8061J</NNumber>
+          <Model>S-2B</Model>
+          <NNumber>N77TW</NNumber>
         </Aircraft>      </Pilot>
     </Category>
   </Pilots>

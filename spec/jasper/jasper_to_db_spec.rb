@@ -287,9 +287,75 @@ module Jasper
           expect(pf.hors_concours).to be true
         end
       end
-      it 'identifies performances in lower categories' do
-        pending 'lower category performance data'
-        fail
+      context 'pilots in multiple categories' do
+        before :context do
+          @pri_cat = Category.find_for_cat_aircat('primary', 'P')
+          @int_cat = Category.find_for_cat_aircat('intermediate', 'P')
+          @unl_cat = Category.find_for_cat_aircat('unlimited', 'P')
+          @pri_hc_pilot = Member.where(iac_id: 432890).first
+          @int_hc_pilot = Member.where(iac_id: 431051).first
+          @pri_flights = @contest.flights.where(category_id: @pri_cat.id)
+          @int_flights = @contest.flights.where(category_id: @int_cat.id)
+          @unl_flights = @contest.flights.where(category_id: @unl_cat.id)
+        end
+        it 'finds the right pilot' do
+          expect(@pri_hc_pilot.family_name).to eq "Lisser"
+          expect(@int_hc_pilot.family_name).to eq "Endo"
+        end
+        it 'finds the right number of flights' do
+          expect(@int_flights.count).to eq 3
+          expect(@pri_flights.count).to eq 3
+        end
+        it 'identifies hc of primary also in intermediate' do
+          pfs = PilotFlight.where(flight_id: @pri_flights.collect(&:id), 
+            pilot_id: @pri_hc_pilot)
+          expect(pfs.count).to eq 3
+          pfs.each do |pf|
+            expect(pf.hors_concours).to be true
+          end
+        end
+        it 'identifies non-hc of intermediate also in primary' do
+          pfs = PilotFlight.where(flight_id: @int_flights.collect(&:id), 
+            pilot_id: @pri_hc_pilot)
+          expect(pfs.count).to eq 3
+          pfs.each do |pf|
+            expect(pf.hors_concours).to be false
+          end
+        end
+        it 'identifies hc of intermediate also in unlimited' do
+          pfs = PilotFlight.where(flight_id: @int_flights.collect(&:id), 
+            pilot_id: @int_hc_pilot)
+          expect(pfs.count).to eq 3
+          pfs.each do |pf|
+            expect(pf.hors_concours).to be true
+          end
+        end
+        it 'identifies non-hc of unlimited also in intermediate' do
+          pfs = PilotFlight.where(flight_id: @unl_flights.collect(&:id), 
+            pilot_id: @int_hc_pilot)
+          expect(pfs.count).to eq 3
+          pfs.each do |pf|
+            expect(pf.hors_concours).to be false
+          end
+        end
+        it 'does not mix adv power and 4min aircat' do
+          adv_4m_pilot = Member.where(iac_id: 433052).first
+          pfs = PilotFlight.where(flight_id: @contest.flights.collect(&:id),
+            pilot_id: adv_4m_pilot.id)
+          expect(pfs.count).to eq 4
+          pfs.each do |pf|
+            expect(pf.hors_concours).to be false
+          end
+        end
+        it 'does not mix unl power and 4min aircat' do
+          unl_4m_pilot = Member.where(iac_id: 8532).first
+          pfs = PilotFlight.where(flight_id: @contest.flights.collect(&:id),
+            pilot_id: unl_4m_pilot.id)
+          expect(pfs.count).to eq 4
+          pfs.each do |pf|
+            expect(pf.hors_concours).to be false
+          end
+        end
       end
     end
     context 'before and after' do

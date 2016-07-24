@@ -26,7 +26,8 @@ def process_contest(jasper, contest_id = nil)
   end
   if d_contest
     process_scores(d_contest, jasper)
-    process_collegiate(d_contest, jasper)
+    identify_collegiate_pilots(d_contest, jasper)
+    mark_hc_participants(d_contest)
   end
   d_contest
 end
@@ -54,7 +55,13 @@ def updateOrCreateContest(id, contest_params)
   d_contest
 end
 
-def process_collegiate(d_contest, jasper)
+def mark_hc_participants(d_contest)
+  hc = HorsConcoursParticipants.new(d_contest)
+  hc.mark_solo_participants_as_hc
+  hc.mark_lower_category_participants_as_hc
+end
+
+def identify_collegiate_pilots(d_contest, jasper)
   cp = CollegiateParticipants.new(d_contest.year)
   cp.process_jasper(jasper)
 end
@@ -94,16 +101,17 @@ def category_for(jasper, aircat, jCat)
   cat
 end
 
-# this is not idempotent.  yuck.
 def flight_for(d_contest, dCategory, jasper, jCat, jFlt)
   chief = chief_for(jasper, jCat, jFlt)
   assist = chief_assist_for(jasper, jCat, jFlt)
-  d_contest.flights.create(
-    :category_id => dCategory.id,
-    :name => jasper.flight_name(jFlt),
-    :sequence => jFlt,
-    :chief_id => chief.id,
-    :assist_id => assist.id)
+  category_id = dCategory.id
+  d_contest.flights.where(category_id: category_id, sequence: jFlt).first ||
+    d_contest.flights.create!(
+      :category_id => category_id,
+      :name => jasper.flight_name(jFlt),
+      :sequence => jFlt,
+      :chief_id => chief.id,
+      :assist_id => assist.id)
 end
 
 def member_for(iac_id, given_name, family_name)
@@ -186,19 +194,22 @@ def sequence_for(jasper, jCat, jFlt, jPilot)
 end
 
 def pilot_flight_for(dFlight, dPilot, dSequence, dAirplane, jasper, jCat, jFlt, jPilot)
-  PilotFlight.create!(
-    :flight_id => dFlight.id,
-    :pilot_id => dPilot.id,
-    :sequence_id => dSequence.id,
-    :airplane_id => dAirplane.id,
-    :chapter => jasper.pilot_chapter(jCat, jPilot),
-    :penalty_total => jasper.penalty(jCat, jFlt, jPilot),
-    :hors_concours => jasper.pilot_is_hc(jCat, jPilot)
-  ) do |pf|
-    # I don't understand why this is necessary, but it works.
-    # Otherwise, hors_concours always comes back false
-    pf.hors_concours = jasper.pilot_is_hc(jCat, jPilot)
-    pf.save!
+  pf = PilotFlight.where(flight_id: dFlight.id, pilot_id: dPilot.id).first
+  if pf.blank?
+    pf = PilotFlight.create!(
+      :flight_id => dFlight.id,
+      :pilot_id => dPilot.id,
+      :sequence_id => dSequence.id,
+      :airplane_id => dAirplane.id,
+      :chapter => jasper.pilot_chapter(jCat, jPilot),
+      :penalty_total => jasper.penalty(jCat, jFlt, jPilot),
+      :hors_concours => jasper.pilot_is_hc(jCat, jPilot)
+    ) do |pf|
+      # I don't understand why this is necessary, but it works.
+      # Otherwise, hors_concours always comes back false
+      pf.hors_concours = jasper.pilot_is_hc(jCat, jPilot)
+      pf.save!
+    end
   end
 end
 
