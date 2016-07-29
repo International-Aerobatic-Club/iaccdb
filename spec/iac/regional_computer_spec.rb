@@ -22,7 +22,7 @@ module IAC
       c_kjc = create(:contest, start: start,
         region: @region,
         name: 'Kathy Jaffe Challenge')
-      c_blue = create(:contest, start: start,
+      @c_blue = create(:contest, start: start,
         region: @region,
         name: 'Blue Ridge Hammerfest')
       @spn = Category.find_for_cat_aircat('sportsman', 'P')
@@ -65,7 +65,7 @@ module IAC
         category_value: 2237.83, total_possible: 2720)
       PcResult.create(pilot: @pilot_schreck,
         category: @spn,
-        contest: c_blue,
+        contest: @c_blue,
         category_value: 3322.33, total_possible: 4080)
 
       @pilot_smith = Member.create(
@@ -81,8 +81,8 @@ module IAC
         contest: c_kjc,
         category_value: 2829.13, total_possible: 4080)
 
-      computer = RegionalSeries.new
-      computer.compute_results(@year, @region)
+      @computer = RegionalSeries.new
+      @computer.compute_results(@year, @region)
     end
 
     it 'computes region result in category' do
@@ -106,10 +106,22 @@ module IAC
           contest: @c_blue,
           hors_concours: true,
           category_value: 4080.00, total_possible: 4080)
+        @computer.compute_results(@year, @region)
       end
       it 'omits HC computing pilot' do
-        pending 'compute with hc result'
-        fail
+        expect(@pilot_smith.pc_results.count).to eq 3
+        rs = RegionalPilot.where(
+          pilot: @pilot_smith,
+          region: @region,
+          year: @year)
+        expect(rs).to_not be nil
+        expect(rs.count).to eq 1
+        rs = rs.first
+        expect(rs).to_not be nil
+        expect(rs.pc_results.count).to eq 2
+        expect(rs.percentage).to eq 70.33
+        expect(rs.qualified).to be false
+        expect(rs.category).to eq @spn
       end
     end
   end

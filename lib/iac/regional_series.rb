@@ -14,8 +14,7 @@ end
 
 # Accumulate pc_results for contest onto regional_pilots
 def accumulate_contest (year, region, contest)
-  puts "..Including #{contest.year_name} #{contest.place}"
-  contest.pc_results.each do |pc_result|
+  contest.pc_results.competitive.each do |pc_result|
     regional_pilot = RegionalPilot.find_or_create_given_result(
        year, region, pc_result.category.id, pc_result.pilot.id)
     regional_pilot.pc_results << pc_result
@@ -89,7 +88,6 @@ end
 
 # Compute regional series results given year and region
 def compute_regional (year, region)
-  puts "Computing regional series results for region #{region}, contest year #{year}"
   compute_results year, region
   compute_eligibility year, region
   compute_ranking year, region
