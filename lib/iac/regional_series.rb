@@ -15,9 +15,11 @@ end
 # Accumulate pc_results for contest onto regional_pilots
 def accumulate_contest (year, region, contest)
   contest.pc_results.competitive.each do |pc_result|
-    regional_pilot = RegionalPilot.find_or_create_given_result(
-       year, region, pc_result.category.id, pc_result.pilot.id)
-    regional_pilot.pc_results << pc_result
+    if pc_result.is_five_cat
+      regional_pilot = RegionalPilot.find_or_create_given_result(
+         year, region, pc_result.category.id, pc_result.pilot.id)
+      regional_pilot.pc_results << pc_result
+    end
   end
 end
 

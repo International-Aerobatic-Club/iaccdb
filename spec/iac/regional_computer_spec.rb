@@ -13,13 +13,13 @@ module IAC
       c_east = create(:contest, start: start,
         region: @region,
         name: 'East Coast Aerobatic Contest')
-      c_green = create(:contest, start: start,
+      @c_green = create(:contest, start: start,
         region: @region,
         name: 'Green Mountain Aerobatic Contest')
       c_carolina = create(:contest, start: start,
         region: @region,
         name: 'Carolina Boogie')
-      c_kjc = create(:contest, start: start,
+      @c_kjc = create(:contest, start: start,
         region: @region,
         name: 'Kathy Jaffe Challenge')
       @c_blue = create(:contest, start: start,
@@ -32,7 +32,7 @@ module IAC
         family_name: 'Taylor')
       PcResult.create(pilot: @pilot_taylor,
         category: @spn,
-        contest: c_green,
+        contest: @c_green,
         category_value: 2123.36, total_possible: 2720)
       PcResult.create(pilot: @pilot_taylor,
         category: @spn,
@@ -74,11 +74,11 @@ module IAC
         family_name: 'Smith')
       PcResult.create(pilot: @pilot_smith,
         category: @spn,
-        contest: c_green,
+        contest: @c_green,
         category_value: 1953.10, total_possible: 2720)
       PcResult.create(pilot: @pilot_smith,
         category: @spn,
-        contest: c_kjc,
+        contest: @c_kjc,
         category_value: 2829.13, total_possible: 4080)
 
       @computer = RegionalSeries.new
@@ -122,6 +122,38 @@ module IAC
         expect(rs.percentage).to eq 70.33
         expect(rs.qualified).to be false
         expect(rs.category).to eq @spn
+      end
+    end
+
+    context 'four minute' do
+      before :context do
+        four = Category.find_for_cat_aircat('four minute', 'F')
+        @pilot_dumovic = Member.create(
+          iac_id: 21224,
+          given_name: 'Robert', 
+          family_name: 'Dumovic')
+        PcResult.create(pilot: @pilot_dumovic,
+          category: four,
+          contest: @c_blue,
+          category_value: 3500.00, total_possible: 4000)
+        PcResult.create(pilot: @pilot_dumovic,
+          category: four,
+          contest: @c_green,
+          category_value: 2500.00, total_possible: 4000)
+        PcResult.create(pilot: @pilot_dumovic,
+          category: four,
+          contest: @c_kjc,
+          category_value: 3000.00, total_possible: 4000)
+        @computer.compute_results(@year, @region)
+      end
+      it 'omits four minute free category' do
+        expect(@pilot_dumovic.pc_results.count).to eq 3
+        rs = RegionalPilot.where(
+          pilot: @pilot_dumovic,
+          region: @region,
+          year: @year)
+        expect(rs).to_not be nil
+        expect(rs.count).to eq 0
       end
     end
   end

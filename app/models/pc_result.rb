@@ -27,6 +27,10 @@ class PcResult < ActiveRecord::Base
     category_value * 100.0 / total_possible
   end
 
+  def is_five_cat
+    ['P','G'].include? category.aircat
+  end
+
   def compute_category_totals
     self.category_value = 0.0
     self.total_possible = 0
