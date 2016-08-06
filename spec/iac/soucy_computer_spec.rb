@@ -1,6 +1,6 @@
 module IAC
   describe SoucyComputer do
-    before :context do
+    before :each do
       @year = 2015
       start = Time.mktime(@year)
       @region = 'SouthCentral'
@@ -22,6 +22,9 @@ module IAC
       @c_ntnls = create(:contest, start: start,
         region: 'National',
         name: 'U.S. National Aerobatic Championships')
+      @c_mac = create(:contest, start: @start,
+        region: 'SouthCentral',
+        name: 'MAC80 West')
 
       @spn = Category.find_for_cat_aircat('sportsman', 'P')
 
@@ -70,13 +73,10 @@ module IAC
     end
 
     context 'hc results' do
-      before :context do
-        c_mac = create(:contest, start: @start,
-          region: @region,
-          name: 'MAC80 West')
+      before :each do
         PcResult.create(pilot: @pilot_elizondo,
           category: @spn,
-          contest: c_mac,
+          contest: @c_mac,
           hors_concours: true,
           category_value: 4080.00, total_possible: 4080)
         @computer.recompute
@@ -96,15 +96,11 @@ module IAC
     end
 
     context 'four minute' do
-      before :context do
+      before :each do
         four = Category.find_for_cat_aircat('four minute', 'F')
-        c_mac = create(:contest, start: @start,
-          region: @region,
-          name: 'MAC80 West')
         PcResult.create(pilot: @pilot_elizondo,
           category: four,
-          contest: c_mac,
-          hors_concours: true,
+          contest: @c_mac,
           category_value: 4000.00, total_possible: 4000)
         @computer.recompute
       end

@@ -11,16 +11,13 @@ RSpec.configure do |config|
     truncate_database
   end
 
-  config.before(:each) do
-    DatabaseCleaner.strategy = :transaction
-  end
-
   # selenium driver as separate process breaks transaction strategy
   config.before(:each, viz: true) do
     truncate_database
   end
 
   config.before(:each) do
+    DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.start
   end
 

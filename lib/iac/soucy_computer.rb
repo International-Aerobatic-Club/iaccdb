@@ -25,8 +25,10 @@ private
 ###
 
 def soucies_for_pilots
+  categories = Category.where("aircat in ('P','G')").pluck(:id)
   pilots = Member.joins(:pc_results => :contest).where(
-    "year(contests.start) = ? and contests.region != 'National'", @year).group(
+    "year(contests.start) = ? and contests.region != ? and pc_results.category_id in (?)",
+    @year, 'National', categories).group(
     'members.id').having('1 < count(distinct(pc_results.id))')
   soucies = pilots.all.collect { |pilot| engage_soucy_for_pilot(pilot) }
   trim_soucies(soucies)
