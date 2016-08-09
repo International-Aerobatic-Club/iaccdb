@@ -19,7 +19,7 @@ def compute_best_pair
 end
 
 def integrate_national_result(nationals)
-  nationals_result = PcResult.where(pilot: pilot, contest: nationals).first
+  nationals_result = PcResult.competitive.where(pilot: pilot, contest: nationals).first
   if nationals_result
     self.points += nationals_result.category_value
     self.points_possible += nationals_result.total_possible

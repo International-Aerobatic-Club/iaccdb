@@ -17,13 +17,18 @@ class Result < ActiveRecord::Base
   # by keeping those that already are, deleting those that are no longer,
   # and adding those that are not
   # to_be_results is an array of pc_result
+  # do not save
   # return self
   def update_results(to_be_results)
-    existing_results = self.pc_results.all
+    existing_results = self.pc_results.to_a
     to_remove = existing_results - to_be_results
     to_add = to_be_results - existing_results
-    to_remove.each { |pc_result| self.pc_results.delete(pc_result) }
-    to_add.each { |pc_result| self.pc_results.push(pc_result) }
+    if (0 < to_remove.count)
+      self.pc_results.delete(to_remove)
+    end
+    if (0 < to_add.count)
+      self.pc_results.push(to_add)
+    end
     self
   end
 

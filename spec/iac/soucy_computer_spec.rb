@@ -44,7 +44,7 @@ module IAC
         category: @spn,
         contest: @c_coal,
         category_value: 3544.06, total_possible: 4080)
-      PcResult.create(pilot: @pilot_elizondo,
+      @high_result = PcResult.create(pilot: @pilot_elizondo,
         category: @spn,
         contest: @c_delano,
         category_value: 3583.38, total_possible: 4080)
@@ -70,6 +70,27 @@ module IAC
       rt = rt.first
       expect(rt).to_not be nil
       expect(rt.result_percent.round(2)).to eq 86.09
+    end
+
+    it 'computes correctly when pc_result destroyed' do
+      @high_result.destroy
+      @computer.recompute
+      rt = SoucyResult.where(
+        pilot: @pilot_elizondo,
+        year: @year).first
+      expect(rt.result_percent.round(2)).not_to eq 86.09
+      expect(rt.result_percent.round(2)).to eq 85.55
+    end
+
+    it 'computes correctly when pc_result changes to hc' do
+      @high_result.hors_concours = true;
+      @high_result.save
+      @computer.recompute
+      rt = SoucyResult.where(
+        pilot: @pilot_elizondo,
+        year: @year).first
+      expect(rt.result_percent.round(2)).not_to eq 86.09
+      expect(rt.result_percent.round(2)).to eq 85.55
     end
 
     context 'hc results' do
