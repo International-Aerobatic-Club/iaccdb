@@ -14,10 +14,7 @@ files.each do |f|
     parser = XML::Parser.file(f)
     jasper.do_parse(parser)
     contest = j2d.process_contest(jasper)
-    if contest
-      puts "Computing results, ranks, and metrics for #{contest.name}"
-      contest.results
-    else
+    unless contest
       puts "Skipped contest, \"#{jasper.contest_name}\" from #{f}"
       pcs << f
     end
