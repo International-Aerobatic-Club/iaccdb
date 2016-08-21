@@ -211,6 +211,7 @@ def pilot_flight_for(dFlight, dPilot, dSequence, dAirplane, jasper, jCat, jFlt, 
       pf.save!
     end
   end
+  return pf
 end
 
 def process_grades(dJudgeTeam, dPilotFlight, dSequence, jasper, jCat, jFlt, jPilot, jJudgeTeam)
