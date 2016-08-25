@@ -13,6 +13,10 @@ class ComputeCollegiateJob < Struct.new(:contest)
     cc.recompute
   end
 
+  def computer
+    IAC::CollegiateComputer.new(@year)
+  end
+
   def error(job, exception)
     say "Error collegiate computation #{@description}"
     record_contest_failure(@description, contest, exception)

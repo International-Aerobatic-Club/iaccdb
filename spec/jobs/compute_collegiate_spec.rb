@@ -4,7 +4,7 @@ describe ComputeCollegiateJob do
     @contest = create(:contest)
     @job = ComputeCollegiateJob.new(@contest)
     @cc_double = double(IAC::CollegiateComputer)
-    allow(IAC::CollegiateComputer).to receive(:new).and_return(@cc_double)
+    allow(@job).to receive(:computer).and_return(@cc_double)
   end
 
   it 'creates and invokes the collegiate computer' do
