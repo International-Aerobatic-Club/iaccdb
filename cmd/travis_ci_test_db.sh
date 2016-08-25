@@ -6,5 +6,10 @@ test:
   username: travis
   encoding: utf8
 EOF
+/bin/cat <<EOF >config/admin.yml
+test:
+  user: test_user
+  password: test_password
+EOF
 RAILS_ENV='test' bundle exec rake db:setup
 
