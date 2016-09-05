@@ -118,14 +118,14 @@ module IAC
 
     context 'four minute' do
       before :each do
-        four = Category.find_for_cat_aircat('four minute', 'F')
+        @four_minute_cat = Category.find_for_cat_aircat('four minute', 'F')
+      end
+      it 'omits four minute free at regional' do
         PcResult.create(pilot: @pilot_elizondo,
-          category: four,
+          category: @four_minute_cat,
           contest: @c_mac,
           category_value: 4000.00, total_possible: 4000)
         @computer.recompute
-      end
-      it 'omits four minute free category' do
         expect(@pilot_elizondo.pc_results.count).to eq 7
         rs = SoucyResult.where(
           pilot: @pilot_elizondo,
@@ -136,6 +136,41 @@ module IAC
         expect(rs).to_not be nil
         expect(rs.pc_results.count).to eq 6
         expect(rs.result_percent.round(2)).to eq 86.09
+      end
+      it 'omits four minute free at Nationals' do
+        PcResult.create(pilot: @pilot_elizondo,
+          category: @four_minute_cat,
+          contest: @c_ntnls,
+          category_value: 4000.00, total_possible: 4000)
+        @computer.recompute
+        expect(@pilot_elizondo.pc_results.count).to eq 7
+        rs = SoucyResult.where(
+          pilot: @pilot_elizondo,
+          year: @year)
+        expect(rs).to_not be nil
+        expect(rs.count).to eq 1
+        rs = rs.first
+        expect(rs).to_not be nil
+        expect(rs.pc_results.count).to eq 6
+        expect(rs.result_percent.round(2)).to eq 86.09
+      end
+      it 'removes existing soucy four minute relationship' do
+        # it recovers from the former error
+        # fake this by changing category on a contest
+        # already included on the current computation
+        @high_result.category = @four_minute_cat
+        @high_result.save
+        @computer.recompute
+        expect(@pilot_elizondo.pc_results.count).to eq 6
+        rs = SoucyResult.where(
+          pilot: @pilot_elizondo,
+          year: @year)
+        expect(rs).to_not be nil
+        expect(rs.count).to eq 1
+        rs = rs.first
+        expect(rs).to_not be nil
+        expect(rs.pc_results.count).to eq 5
+        expect(rs.result_percent.round(2)).to_not eq 86.09
       end
     end
   end
