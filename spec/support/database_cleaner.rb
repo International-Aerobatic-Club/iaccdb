@@ -6,6 +6,15 @@ def truncate_database
   Rails.application.load_seed
 end
 
+def start_transaction
+  DatabaseCleaner.strategy = :transaction
+  DatabaseCleaner.start
+end
+
+def end_transaction
+  DatabaseCleaner.clean
+end
+
 RSpec.configure do |config|
   config.before(:suite) do
     truncate_database
@@ -16,12 +25,19 @@ RSpec.configure do |config|
     truncate_database
   end
 
+  config.before(:context) do
+    start_transaction
+  end
+
+  config.after(:context) do
+    end_transaction
+  end
+
   config.before(:each) do
-    DatabaseCleaner.strategy = :transaction
-    DatabaseCleaner.start
+    start_transaction
   end
 
   config.after(:each) do
-    DatabaseCleaner.clean
+    end_transaction
   end
 end
