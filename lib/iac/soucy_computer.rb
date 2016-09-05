@@ -57,6 +57,7 @@ def integrate_nationals
   nationals = Contest.where("year(start) = ? and region = 'National'", @year).all
   if (1 < nationals.size)
     puts "MORE THAN ONE NATIONALS in #{@year}"
+    nationals.each { |n| puts n.inspect }
   end
   nationals = nationals.first
   if nationals
