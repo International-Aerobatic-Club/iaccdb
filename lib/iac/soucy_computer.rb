@@ -27,8 +27,10 @@ private
 def soucies_for_pilots
   categories = Category.where("aircat in ('P','G')").pluck(:id)
   pilots = Member.joins(:pc_results => :contest).where(
-    "year(contests.start) = ? and contests.region != ? and pc_results.category_id in (?)",
-    @year, 'National', categories).group(
+    "year(contests.start) = ? and \
+     contests.region != 'National' and \
+     pc_results.category_id in (?)",
+    @year, SoucyResult.valid_category_ids).group(
     'members.id').having('1 < count(distinct(pc_results.id))')
   soucies = pilots.all.collect { |pilot| engage_soucy_for_pilot(pilot) }
   trim_soucies(soucies)
@@ -40,10 +42,7 @@ end
 # returns the soucy record
 def engage_soucy_for_pilot(pilot)
   soucy = SoucyResult.where(:pilot_id => pilot.id, :year => @year).first_or_create
-  to_be_results = PcResult.competitive.joins(:contest).where(
-    "pilot_id = ? and contests.region != 'National' and year(contests.start) = ?",
-    pilot.id, @year).all
-  soucy.update_results(to_be_results)
+  soucy.collect_valid_non_nationals_results
 end
 
 # remove any soucies for year not in the list
