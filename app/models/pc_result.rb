@@ -11,7 +11,7 @@ class PcResult < ActiveRecord::Base
 
   scope :competitive, -> { where(hors_concours: false) }
 
-  def to_s 
+  def to_s
     a = "pc_result for pilot #{pilot} value #{category_value}"
   end
 
