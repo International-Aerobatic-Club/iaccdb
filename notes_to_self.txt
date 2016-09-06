@@ -1,18 +1,15 @@
-Working pending tests in 
-spec/jasper/jasper_to_db_spec.rb
-
-
-Have judge.rb replace_with_judge_pair method
-Validated with rspec test
-spec/models/judge_spec.rb
-app/models/judge.rb
-
 Working to validate merge of one member with another.
 spec/models/member_spec.rb
 app/models/member.rb
 app/controllers/admin/member_controller.rb
 
-cmd/recompute_flights does all of the flight calculations
-cmd/recompute_metrics does the judge metric calculations by flight and contest
-cmd/recompute_judge_rollups does the judge metric rollups for a given year
+- use the data for some statistical analysis projects and research
+
+For interactive editing:
+- add a system of authorizations/keys for specific roles on specific contests/flights
+- add an AJAXy interface for selecting and adding airplanes
+- add an AJAXy interface for selecting and editing sequences
+- add authorized edit screens for scoring director, chief judge table, boundary judge, and line judge roles
+- add SVG capability for representing and displaying figures
+- extend the sequence models with catalog numbers and figure representations
 
