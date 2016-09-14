@@ -10,7 +10,11 @@ class Category < ActiveRecord::Base
 
   def self.find_for_cat_aircat(cat, aircat)
     cat = cat.downcase.strip
-    aircat = aircat.strip[0].upcase
+    if /Minute|Four/i =~ cat
+      aircat = 'F'
+    else
+      aircat = aircat.strip[0].upcase
+    end
     mycat = Category.where(category: cat, aircat: aircat).first
     if !mycat
       if /Pri|Bas/i =~ cat
