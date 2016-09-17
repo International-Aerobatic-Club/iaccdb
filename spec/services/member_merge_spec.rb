@@ -14,11 +14,11 @@ describe MemberMerge, :type => :services do
     j2 = create :judge, judge: @replace_mr, assist: j1.assist
     score1 = create :score, judge:j1
     score2 = create :score, judge:j2
-    
+
     expect(@merge.has_overlaps).to eq false
     expect(@merge.has_collisions).to eq false
     @merge.execute_merge(@target_mr)
-    
+
     score1.reload
     expect(score1.judge).to eq j1
     score2.reload
@@ -30,11 +30,11 @@ describe MemberMerge, :type => :services do
     j2 = create :judge, assist: @replace_mr, judge: j1.judge
     score1 = create :score, judge:j1
     score2 = create :score, judge:j2
-    
+
     expect(@merge.has_overlaps).to eq false
     expect(@merge.has_collisions).to eq false
     @merge.execute_merge(@target_mr)
-    
+
     score1.reload
     expect(score1.judge).to eq j1
     score2.reload
@@ -162,25 +162,44 @@ describe MemberMerge, :type => :services do
     expect(judges).to_not include(@replace_mr)
   end
 
-  it 'removes orphaned judge pairs' do
-    j1 = create :judge, judge: @target_mr
-    j2 = create :judge, judge: @replace_mr
-    j3 = create :judge, assist: @target_mr
-    j4 = create :judge, assist: @replace_mr
-    4.times { create :score, judge:j1 }
-    4.times { create :score, judge:j2 }
-    4.times { create :score, judge:j3 }
-    4.times { create :score, judge:j4 }
+  context 'multiple judge pairs, scores, and jf_results' do
+    before :each do
+      @j1 = create :judge, judge: @target_mr
+      @j2 = create :judge, judge: @replace_mr
+      @j3 = create :judge, assist: @target_mr
+      @j4 = create :judge, assist: @replace_mr
+      4.times do
+        [@j1,@j2,@j3,@j4].each do |j|
+          create :score, judge:j
+          create :jf_result, judge:j
+        end
+      end
+    end
+    it 'removes orphaned judge pairs' do
+      expect(@merge.has_overlaps).to eq false
+      expect(@merge.has_collisions).to eq false
+      @merge.execute_merge(@target_mr)
 
-    expect(@merge.has_overlaps).to eq false
-    expect(@merge.has_collisions).to eq false
-    @merge.execute_merge(@target_mr)
-
-    judges = Judge.all
-    expect(judges).not_to include j2
-    expect(judges).not_to include j4
-    expect(judges).to include j1
-    expect(judges).to include j3
+      judges = Judge.all
+      expect(judges).not_to include @j2
+      expect(judges).not_to include @j4
+      expect(judges).to include @j1
+      expect(judges).to include @j3
+    end
+    it 'preserves scores' do
+      scores = Score.where(judge: [@j1,@j2,@j3,@j4])
+      expect(scores.count).to eq 16
+      @merge.execute_merge(@target_mr)
+      scores = Score.where(judge: [@j1,@j3])
+      expect(scores.count).to eq 16
+    end
+    it 'preserves jf_results' do
+      jfrs = JfResult.where(judge: [@j1,@j2,@j3,@j4])
+      expect(jfrs.count).to eq 16
+      @merge.execute_merge(@target_mr)
+      jfrs = JfResult.where(judge: [@j1,@j3])
+      expect(jfrs.count).to eq 16
+    end
   end
 
   it 'finds existing result_member for result' do
