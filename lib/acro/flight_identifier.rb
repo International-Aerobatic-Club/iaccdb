@@ -29,20 +29,64 @@ module FlightIdentifier
 
   def detect_flight_name(description)
     name = nil
+    flight_category = detect_flight_category(description)
     if /Team/i =~ description
       name = 'Team Unknown' 
-    elsif /Primary|Sportsman/ =~ detect_flight_category(description)
-      if /#1|1st/ =~ description
-        name = 'Flight 1'
-      elsif /#2|2nd|Programme 2/ =~ description
+    elsif /Four|Minute/ =~ description
+      name = 'Four Minute Free'
+    elsif /Primary|Sportsman/ =~ flight_category
+      if /#2|2nd|Programme 2/ =~ description
         name = 'Flight 2'
       elsif /#3|3rd|Programme 3/ =~ description
         name = 'Flight 3'
+      elsif /#1|1st|Programme 1|Known/ =~ description
+        if /Primary/ =~ flight_category
+          name = 'Flight 1'
+        else
+          name = 'Known'
+        end
       end
-    end
-    if !name
-      IAC::Constants::FLIGHT_NAMES.each do |fltName|
-        name = fltName if Regexp.new(fltName, 'i') =~ description
+    elsif /Intermediate/ =~ flight_category
+      if /#2|2nd|Programme 2|Free/ =~ description
+        name = 'Free'
+      elsif /#3|3rd|Programme 3|Unknown/ =~ description
+        name = 'Unknown'
+      elsif /#1|1st|Programme 1|Known/ =~ description
+        name = 'Known'
+      end
+    else
+      if /Free/ =~ description
+        if /Unknown/ =~ description
+          if /1/ =~ description
+            name = 'Free Unknown 1'
+          elsif /2/ =~ description
+            name = 'Free Unknown 2'
+          else
+            name = 'Free Unknown'
+          end
+        elsif /Known/ =~ description
+          name = 'Free Known'
+        else
+          name = 'Free'
+        end
+      elsif /Unknown/ =~ description
+        # but not "Free"
+        if /1/ =~ description
+          name = 'Free Unknown 1'
+        elsif /2/ =~ description
+          name = 'Free Unknown 2'
+        else
+          name = 'Unknown'
+        end
+      elsif /Known/ =~ description
+        # but not "Free"
+        name = "Known"
+      elsif /#2|2nd|Programme 2/ =~ description
+        name = 'Free'
+      elsif /#3|3rd|Programme 3/ =~ description
+        name = 'Unknown'
+      elsif /#1|1st|Programme 1/ =~ description
+        name = 'Known'
       end
     end
     name
@@ -56,7 +100,7 @@ module FlightIdentifier
       aircat = IAC::Constants::POWER_CATEGORY
     elsif /Glider/i =~ description
       aircat = IAC::Constants::GLIDER_CATEGORY
-    end 
+    end
     aircat
   end
 end
