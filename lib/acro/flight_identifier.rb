@@ -50,7 +50,9 @@ module FlightIdentifier
 
   def detect_flight_aircat(description)
     aircat = nil
-    if /Power|Four|Minute|Primary|Beginners|Basic/i =~ description
+    if /Four|Minute/i =~ description
+      aircat = IAC::Constants::FOUR_MINUTE_CATEGORY
+    elsif /Power|Primary|Beginners|Basic/i =~ description
       aircat = IAC::Constants::POWER_CATEGORY
     elsif /Glider/i =~ description
       aircat = IAC::Constants::GLIDER_CATEGORY
