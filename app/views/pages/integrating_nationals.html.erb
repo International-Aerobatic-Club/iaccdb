@@ -226,7 +226,7 @@ found in the nationals2016 (zipped) directory.
 
 <p>Before we import this data into IACCDB, we have to ensure that the pilot names
 used in the ACRO files will match member names as used in IACCDB.  Without this important
-step, we get duplicate pilots with different name spellings in IACCDB.  Some pilots 
+step, we get duplicate pilots with different name spellings in IACCDB.  Some pilots
 and judges don't
 get proper credit for the Nationals flights because they have two identities.
 </p><p>
@@ -246,8 +246,16 @@ This presents a dialog with the found name and suggested name matches for each p
 and judge in the ACRO results files.
 We select the correct member record for the name presented.
 The program outputs a name resolution file, 
-<span class='code'>participant_list.yml</code.
+<span class='code'>participant_list.yml</span>.
 that matches ACRO entered names to member records.</p>
+<p>Here is an example entry for a name not in the IACCDB database:</p>
+<p class='code'>Frank Borman (USA): !ruby/object:ACRO::ParticipantList::Participant
+  db_id:
+  given_name: Frank
+  family_name: Borman
+  iac_id: '939393'
+</p>
+
 <p>
 The program assumes nothing; so, we must make a selection for every
 name found in the records.  It's a little unforgiving.  If we make a mistake
@@ -259,6 +267,7 @@ payoff in making it too fancy.</p>
 database.  For these, we do some manual spelunking in the member database
 (assuming we have access) and/or follow-up with queries.
 Thank you, Trish!</p>
+
 <p>With resolutions, we manually add entries to 
 <span class='code'>participant_list.yml</span>.
 We do our best.
