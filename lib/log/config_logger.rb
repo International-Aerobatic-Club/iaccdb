@@ -3,8 +3,8 @@ require 'logger'
 # defines local methods 'logger' and 'logger=' wherever included
 # logger method will return globally configured logger
 # globally configured logger initialized to:
-#   DelayedJob::Logger if Delayed job environment available
-#   otherwise Rails.logger if Rails environment available
+#   Rails.logger if Rails environment available
+#   otherwise Delayed::Worker.logger if Delayed job environment available
 #   otherwise File 'default.log'
 # use in any class or module with,
 #   include Log::ConfigLogger
