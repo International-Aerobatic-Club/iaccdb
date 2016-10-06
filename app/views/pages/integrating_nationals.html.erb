@@ -261,7 +261,9 @@ The program assumes nothing; so, we must make a selection for every
 name found in the records.  It's a little unforgiving.  If we make a mistake
 we have to either start over, or make a note and do the correction
 with a manual edit.  The program is used once a year; so, there's poor
-payoff in making it too fancy.</p>
+payoff in making it too fancy.  It does show the prior selection,
+as the first choice, with a star ('*') next to it, if there was
+a prior selection.</p>
 
 <p>Invariably there are names that do not match or miss matches in the
 database.  For these, we do some manual spelunking in the member database
@@ -273,8 +275,6 @@ Thank you, Trish!</p>
 We do our best.
 Lacking found matches, the names will go into the database as new entries.
 </p>
-<p>This year the participant_list file had "(USA)" appended to many of the
-names of the Advanced Power pilots.  We had te remove that.</p>
 
 <h3>Import the pilot-flight grades</h3>
 
@@ -290,7 +290,6 @@ If the jobs worker is not already running on the server, Run
 <span class='code'>rake jobs:workoff</span>.  
 The job computes results from the imported data.  
 We run this to create the result records and judge metrics.
-It takes some time to run.  That is a subject for investigation.
 </p>
 
 <h3>Import the ACRO computed results</h3>
@@ -392,6 +391,11 @@ The second entry has not.</p>
 <p>We edit the sequence values to get the correct sequence of columns in the results
 display.</p>
 
+<p>The Unlimited Glider and Power files are missing values and show an extra
+flight.  This is because these two published results included team identifiers.
+The extra columns have thrown-off the scraper.  We edit the scraper to account
+for the extra columns when they are present and re-run the data extraction.</p>
+
 <p class='code'>- !ruby/object:ACRO::ResultsList::ResultsFile
   file_name: multi_R017s28s29s30.htm.yml
   category: 
@@ -410,7 +414,9 @@ display.</p>
     flight_id: missing_id
     sequence: 1</p>
 
-<p>The entry for the multi_R017s28s29s30.htm.yml file has no category and
+
+<p>The entry for the multi_R017s28s29s30.htm.yml example file 
+shown above has no category and
 description.  Looking at it, we see that it lacks the
 "Contest Results:" prefix that all of the other files have,
 that the scraper uses to identify the line containing the
@@ -418,15 +424,9 @@ category and class.  Supplying the category and description
 in the results_list.yml file suffices to get it properly
 identified.
 </p>
-<p>Many of the category descriptions end with "US Nationals"
-This is harmless, but we remove it anyway so the descriptions
-are not redundant.
+<p>The import missed collecting 
+Four minute free results.
 </p>
-<p>The import missed collecting the Advanced Power
-results and the Four minute free results.
-</p>
-<p>The Advanced Power needed a missing output report from the ACRO program.
-The team flights were posted, but not the National Competition.</p>
 <p>The Four Minute results are posted in a "single" file, not a "multi" file.
 The YAML extractor doesn't touch the single files because they normally
 contain individual flight results already found in the multi files.
