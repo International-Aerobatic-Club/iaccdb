@@ -73,6 +73,13 @@ module ACRO
         expect(@rs.description).to eq 'Unlimted Power'
         expect(@rs.category_name).to eq 'Unlimited'
       end
+      it 'finds the list of pilots' do
+        expect(@rs.pilots).to_not be_nil
+        expect(@rs.pilots.count).to eq 13
+        expect(@rs.pilots[0]).to eq 'Rob Holland'
+        expect(@rs.pilots[4]).to eq 'Jim Bourke'
+        expect(@rs.pilots[12]).to eq 'Robbie Gibbs'
+      end
       it 'finds the flights' do
         flights = @rs.flights
         expect(flights.count).to eq 3
