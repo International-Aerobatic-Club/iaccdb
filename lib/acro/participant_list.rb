@@ -17,10 +17,20 @@ class ParticipantList
       @family_name = member['family_name']
       @iac_id = member['iac_id']
     end
+
+    def as_member
+      member = {}
+      member['id'] = db_id
+      member['given_name'] = given_name
+      member['family_name'] = family_name
+      member['iac_id'] = iac_id
+      return member
+    end
   end
 
-  def initialize
-    @list = {}
+  def initialize(data_directory)
+    @data_directory = data_directory
+    read
   end
 
   def add(name, member)
@@ -32,14 +42,14 @@ class ParticipantList
     @list[name] = part
   end
 
-  def write(data_directory)
-    File.open(File.join(data_directory, LIST_NAME), 'w') do |f|
+  def write
+    File.open(participant_file_name, 'w') do |f|
       f << @list.to_yaml
     end
   end
 
-  def read(data_directory)
-    @list = YAML.load_file(File.join(data_directory, LIST_NAME))
+  def read
+    @list = YAML.load_file(participant_file_name)
   end
 
   def participant(name)
@@ -48,6 +58,14 @@ class ParticipantList
       part = nil
     end
     part
+  end
+
+  #######
+  private
+  #######
+
+  def participant_file_name
+    File.join(@data_directory, LIST_NAME)
   end
 
 end

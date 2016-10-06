@@ -20,35 +20,37 @@ end
 def match_names_to_records
   puts "Match names to member records for #{@contest_info.name}"
   name_set = extract_names
-  participant_list = ParticipantList.new()
+  participant_list = ParticipantList.new(@contest_info.data_directory)
   name_set.each do |name|
-    participant_list.add(name,  match_name_to_record(name))
+    prior_selection = participant_list.participant(name)
+    participant_list.add(name,  match_name_to_record(name, prior_selection))
   end
-  participant_list.write(@contest_info.data_directory)
+  participant_list.write
 end
 
 ###
 private
 ###
 
-def match_name_to_record(name)
+def match_name_to_record(name, prior)
   parts = name.split(' ')
   @given = parts.shift
   @family = parts.join(' ')
-  select_and_return_member initials_strategy
+  select_and_return_member(initials_strategy, prior)
 end
 
 def display_name
   "#{@given} #{@family}"
 end
 
-def select_and_return_member(result)
+def select_and_return_member(result, prior)
   selected = nil
   searching = true
   while searching
     puts "#{display_name}"
     result.sort! { |a,b| a['family_name'] <=> b['family_name'] } if result
-    write_candidates(result)
+    result.unshift(prior.as_member) if prior
+    write_candidates(result, prior)
     puts "Select record to match '#{display_name}'"
     puts 'You type a number or a, b, c, d, N, ?'
     input = $stdin.gets
@@ -83,10 +85,11 @@ def select_and_return_member(result)
   selected
 end
 
-def write_candidates(result)
+def write_candidates(result, prior)
   if (result && !result.empty?)
     i = 1;
-    result.each do |r| 
+    result.each do |r|
+      printf (prior && i == 1) ? '*' : ' '
       puts "#{i}: #{r['given_name']} #{r['family_name']} #{r['iac_id']}"
       i += 1
     end
