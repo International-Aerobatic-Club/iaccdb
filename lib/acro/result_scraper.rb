@@ -45,7 +45,7 @@ def flights
       value = col.xpath('./input/@value')
       header = value.text if value
     end
-    if header.length != 0 && /Rank|Pilot|plane|registration|total|all/i !~ header
+    if header.length != 0 && /Rank|Pilot|Team|plane|registration|total|all/i !~ header
       flights << header
       @flight_column_offset ||= offset
     end
