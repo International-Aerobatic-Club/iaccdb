@@ -5,7 +5,8 @@ class ResultsPatch
 
 def initialize(control_file)
   @contest_info = ControlFile.new(control_file)
-  @participant_list = ParticipantList.new(@contest_info.data_directory)
+  @participant_list = ParticipantList.new
+  @participant_list.read(@contest_info.data_directory)
   @results_list = ResultsList.new(control_file)
   @results_list.read_from_file
   @rank_computer = IAC::RankComputer.instance
