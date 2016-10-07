@@ -11,7 +11,8 @@ attr_reader :contest_record
 
 def initialize(control_file)
   @contest_info = ControlFile.new(control_file)
-  @participant_list = ParticipantList.new(@contest_info.data_directory)
+  @participant_list = ParticipantList.new
+  @participant_list.read(@contest_info.data_directory)
   @contest_record = Contest.where(:name => @contest_info.name, 
     :start => @contest_info.start_date).first
   if !@contest_record then
