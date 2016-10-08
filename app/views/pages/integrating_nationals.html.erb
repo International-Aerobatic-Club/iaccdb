@@ -261,9 +261,9 @@ The program assumes nothing; so, we must make a selection for every
 name found in the records.  It's a little unforgiving.  If we make a mistake
 we have to either start over, or make a note and do the correction
 with a manual edit.  The program is used once a year; so, there's poor
-payoff in making it too fancy.  It does show the prior selection,
-as the first choice, with a star ('*') next to it, if there was
-a prior selection.</p>
+payoff in making it too fancy.  It does show any prior selection
+as the first choice, with a star ('*') next to it.
+</p>
 
 <p>Invariably there are names that do not match or miss matches in the
 database.  For these, we do some manual spelunking in the member database
@@ -287,8 +287,8 @@ rails runner cmd/acro/import_yml_extracts.rb nationals2016/contest.yml
 <p>The command creates the contest and all of the grades in the database.
 It leaves an asynchronous task to make the IAC results computations.
 If the jobs worker is not already running on the server, Run 
-<span class='code'>rake jobs:workoff</span>.  
-The job computes results from the imported data.  
+<span class='code'>rake jobs:workoff</span>.
+The job computes results from the imported data.
 We run this to create the result records and judge metrics.
 </p>
 
@@ -336,6 +336,8 @@ region: 'National'
 chapter : 'IAC'
 contest_id: 456
 </p>
+<p>Once you have added the contest ID, any subsequent imports will overwrite
+the earlier ones, rather than creating a new contest.</p>
 
 <h4>Match category result files and flight headings to flight records</h4>
 
