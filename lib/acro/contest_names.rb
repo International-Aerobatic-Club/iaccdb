@@ -20,12 +20,14 @@ end
 def match_names_to_records
   puts "Match names to member records for #{@contest_info.name}"
   name_set = extract_names
-  participant_list = ParticipantList.new(@contest_info.data_directory)
+  participant_list = ParticipantList.new
+  participant_list.read(@contest_info.data_directory)
   name_set.each do |name|
     prior_selection = participant_list.participant(name)
-    participant_list.add(name,  match_name_to_record(name, prior_selection))
+    member_record = match_name_to_record(name, prior_selection)
+    participant_list.add(name, member_record)
   end
-  participant_list.write
+  participant_list.write(@contest_info.data_directory)
 end
 
 ###

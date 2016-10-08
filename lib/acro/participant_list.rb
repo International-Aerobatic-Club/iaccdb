@@ -28,9 +28,8 @@ class ParticipantList
     end
   end
 
-  def initialize(data_directory)
-    @data_directory = data_directory
-    read
+  def initialize
+    @list = {}
   end
 
   def add(name, member)
@@ -42,14 +41,15 @@ class ParticipantList
     @list[name] = part
   end
 
-  def write
-    File.open(participant_file_name, 'w') do |f|
+  def write(data_directory)
+    filename = part_fn(data_directory)
+    File.open(part_fn(data_directory), 'w') do |f|
       f << @list.to_yaml
     end
   end
 
-  def read
-    @list = YAML.load_file(participant_file_name)
+  def read(data_directory)
+    @list = YAML.load_file(part_fn(data_directory))
   end
 
   def participant(name)
@@ -60,12 +60,16 @@ class ParticipantList
     part
   end
 
+  def self.participant_file_name(data_directory)
+    File.join(data_directory, LIST_NAME)
+  end
+
   #######
   private
   #######
 
-  def participant_file_name
-    File.join(@data_directory, LIST_NAME)
+  def part_fn(data_dir)
+    self.class.participant_file_name(data_dir)
   end
 
 end
