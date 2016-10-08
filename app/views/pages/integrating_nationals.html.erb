@@ -416,7 +416,6 @@ for the extra columns when they are present and re-run the data extraction.</p>
     flight_id: missing_id
     sequence: 1</p>
 
-
 <p>The entry for the multi_R017s28s29s30.htm.yml example file 
 shown above has no category and
 description.  Looking at it, we see that it lacks the
@@ -440,8 +439,9 @@ nationals2016/www.iac.org/files/nationals-results/2016/multi_R004s27.htm
 
 <h4>Patch the ACRO computed results</h4>
 
-<p>Now patch the IAC computed results with the results computed by ACRO.  They are different.
-</p><p class='code'>rails runner cmd/acro/patch_results.rb nationals2016/contest.yml</p>
+<p>Now patch the IAC computed results with the results computed by ACRO.
+They are different.</p>
+<p class='code'>rails runner cmd/acro/patch_results.rb nationals2016/contest.yml</p>
 <p>Compare the posted overall category and flight result scores with those
 in the original ACRO posted results.  If they match, all is well.</p>
 
