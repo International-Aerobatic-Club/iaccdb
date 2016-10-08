@@ -27,9 +27,9 @@ def parsePilotAircraft(pilotLine)
   if aHyph.length == 1
     first = aStr.shift
     last = aStr.shift
-    @pilotName = first + ' ' + last
+    @pilotName = strip_country(first + ' ' + last)
   else
-    @pilotName = aHyph.shift.strip
+    @pilotName = strip_country(aHyph.shift.strip)
     rmdr = aHyph.join('-')
     aStr = rmdr.strip.split(' ')
   end
@@ -111,6 +111,12 @@ end
 
 def penaltyRow
   @doc.xpath('id("table7")/tr[td[contains(.,"penalties")]]');
+end
+
+def strip_country(name)
+  last_lp = name.rindex('(')
+  name = name[0,last_lp] if last_lp
+  name.strip
 end
 
 end #class
