@@ -37,7 +37,7 @@ class ContestsController < ApplicationController
         category_data[:judge_results] = JcResult.where(
           contest: @contest, category: cat).includes(:judge)
         category_data[:flights] = Flight.where(contest: @contest,
-          category: cat).all
+          category: cat).all.sort { |a,b| a.sequence <=> b.sequence }
         category_data[:pilot_results] = []
         pc_results = PcResult.where(contest: @contest, category:cat).includes(
           :pilot).order(:category_rank)
