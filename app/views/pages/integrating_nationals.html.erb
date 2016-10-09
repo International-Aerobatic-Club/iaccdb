@@ -71,6 +71,18 @@ cat www.iac.org/files/nationals-results/2016/multi_*.htm |\
 cd ..
 </p>
 
+<h4>Four Minute Free results</h4>
+<p>The import will miss collecting Four Minute Free results.</p>
+<p>The Four Minute results are posted in a "single" file, not a "multi" file.
+The YAML extractor doesn't touch the single files because they normally
+contain individual flight results already found in the multi files.
+The simplest way to get the Four Minute results is to copy that single
+file to a multi file,</p>
+<p class='code'>cp nationals2016/www.iac.org/files/nationals-results/2016/single_R011s27.htm \
+nationals2016/www.iac.org/files/nationals-results/2016/multi_R011s27.htm
+</p>
+
+
 <h3>Scrape the results</h3>
 
 <p>Create the contest control file in the directory that contains the
@@ -425,17 +437,13 @@ category and class.  Supplying the category and description
 in the results_list.yml file suffices to get it properly
 identified.
 </p>
-<p>The import missed collecting 
-Four minute free results.
+<p>Check and double-check the flight_id entries in
+<span class='code'>results_list.yml</span>.
+It is essential that these be accurate.
+One sanity check you can use is to see that the id's used are sequential
+and unique:
 </p>
-<p>The Four Minute results are posted in a "single" file, not a "multi" file.
-The YAML extractor doesn't touch the single files because they normally
-contain individual flight results already found in the multi files.
-The simplest way to get the Four Minute results is to copy that single
-file to a multi file,</p>
-<p class='code'>cp nationals2016/www.iac.org/files/nationals-results/2016/single_R004s27.htm \
-nationals2016/www.iac.org/files/nationals-results/2016/multi_R004s27.htm
-</p>
+<p class='code'>grep flight_id nationals2016/results_list.yml | sort</p>
 
 <h4>Patch the ACRO computed results</h4>
 
@@ -444,6 +452,22 @@ They are different.</p>
 <p class='code'>rails runner cmd/acro/patch_results.rb nationals2016/contest.yml</p>
 <p>Compare the posted overall category and flight result scores with those
 in the original ACRO posted results.  If they match, all is well.</p>
+
+<h4>Final check</h4>
+
+<p>As a final check, compare the results shown on the contest page
+<a href="/contests/545">from IACCDB</a>
+with the
+<a href="https://www.iac.org/files/nationals-results/2016/indexpage.htm">results
+posted from the ACRO program</a>.
+The easiest way is to overlay them side by side. For each category,</p>
+<ul>
+<li>Compare the order of the pilots.</li>
+<li>Compare the category total points and percentages.</li>
+<li>Spot check the flight total points and percentages.</li>
+<li>See that the number of judges matches.</li>
+<li>See that the judge names match.</li>
+</ul>
 
 <h3>Recompute Regionals</h4>
 
