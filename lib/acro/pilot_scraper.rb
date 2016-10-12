@@ -18,6 +18,8 @@ def initialize(file)
   @flightID = flds[2].to_i
   @hasFPSLines = /FairPlay/.match(@doc.xpath('id("table7")/tr[1]').text) != nil
   @has2014SpreaderRow = @doc.xpath('id("table7")/tr[7]/td').count == 1
+  @has2016Styling = !@hasFPSLines &&
+    @doc.xpath('id("table7")/tr[1]/td[1]/@bgcolor').first.value == '#FFFFFF'
   parsePilotAircraft(@doc.xpath('id("table7")/tr[2]').text)
 end
 
@@ -27,9 +29,9 @@ def parsePilotAircraft(pilotLine)
   if aHyph.length == 1
     first = aStr.shift
     last = aStr.shift
-    @pilotName = first + ' ' + last
+    @pilotName = strip_country(first + ' ' + last)
   else
-    @pilotName = aHyph.shift.strip
+    @pilotName = strip_country(aHyph.shift.strip)
     rmdr = aHyph.join('-')
     aStr = rmdr.strip.split(' ')
   end
@@ -60,6 +62,10 @@ def k_factors
     startOffset += 1
     endOffset += 1
   end
+  if @has2016Styling
+    startOffset -= 1
+    endOffset -= 1
+  end
   (startOffset .. ar.size-endOffset).each do |itr|
     nStr = ar[itr].css('td')[1].text.strip
     ks << nStr.to_i
@@ -70,6 +76,7 @@ end
 def score(iFig, iJudge)
   startOffset = @hasFPSLines ? 4 : 5
   startOffset += 1 if @has2014SpreaderRow
+  startOffset -= 1 if @has2016Styling
   s = 0
   ar = rawRows
   nTD = ar[iFig + startOffset].css('td')[iJudge + 1]
@@ -111,6 +118,12 @@ end
 
 def penaltyRow
   @doc.xpath('id("table7")/tr[td[contains(.,"penalties")]]');
+end
+
+def strip_country(name)
+  last_lp = name.rindex('(')
+  name = name[0,last_lp] if last_lp
+  name.strip
 end
 
 end #class

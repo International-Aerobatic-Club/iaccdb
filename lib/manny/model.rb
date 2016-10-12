@@ -64,8 +64,9 @@ class Flight
   end
 end
 
-CATEGORY_NAMES = [ nil ] + IAC::Constants::CATEGORY_NAMES
-FLIGHT_NAMES = [ nil ] + IAC::Constants::FLIGHT_NAMES
+CATEGORY_NAMES = %w{ Primary Sportsman Intermediate Advanced Unlimited 
+  Four\ Minute\ Free }
+FLIGHT_NAMES = %w{ Known Free Unknown }
 
 class Category
   attr_accessor :flights, :pilots, :name, :cid

@@ -50,6 +50,11 @@ class CategoryRollups
     cur_jc_results
   end
 
+  def compute_pilot_rankings
+    pc_results = @contest.pc_results.where(:category => @category)
+    compute_category_ranks(pc_results)
+  end
+
   def to_s
     "CategoryRollups for #{@contest}, #{@category}"
   end

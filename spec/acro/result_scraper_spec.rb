@@ -44,7 +44,7 @@ module ACRO
         expect(@rs.result_percentage(11)).to eq 54.329
       end
     end
-    context 'results posts 2015' do
+    context 'results post 2015' do
       before(:all) do
         @rs = ResultScraper.new(data_sample_file('multi_R001s22s23s24s25.htm'))
       end
@@ -63,6 +63,44 @@ module ACRO
         expect(@rs.flight_total(8,1)).to eq 2395.60
         expect(@rs.flight_total(8,2)).to eq 2228.93
         expect(@rs.flight_total(8,3)).to eq 2586.13
+      end
+    end
+    context 'results with team columns' do
+      before(:all) do
+        @rs = ResultScraper.new(data_sample_file('multi_R005s13s14s15.htm'))
+      end
+      it 'finds the category and title' do
+        expect(@rs.description).to eq 'Unlimted Power'
+        expect(@rs.category_name).to eq 'Unlimited'
+      end
+      it 'finds the list of pilots' do
+        expect(@rs.pilots).to_not be_nil
+        expect(@rs.pilots.count).to eq 13
+        expect(@rs.pilots[0]).to eq 'Rob Holland'
+        expect(@rs.pilots[4]).to eq 'Jim Bourke'
+        expect(@rs.pilots[12]).to eq 'Robbie Gibbs'
+      end
+      it 'finds the flights' do
+        flights = @rs.flights
+        expect(flights.count).to eq 3
+        expect(flights[0]).to eq 'Fr/Known'
+        expect(flights[1]).to eq 'F/Unk #1'
+        expect(flights[2]).to eq 'F/Unk #2'
+      end
+      it 'finds first pilot program results' do
+        expect(@rs.flight_total(0,0)).to eq 4092.94
+        expect(@rs.flight_total(0,1)).to eq 3759.65
+        expect(@rs.flight_total(0,2)).to eq 4310.17
+      end
+      it 'finds the second pilot program results' do
+        expect(@rs.flight_total(1,0)).to eq 4085.97
+        expect(@rs.flight_total(1,1)).to eq 3849.34
+        expect(@rs.flight_total(1,2)).to eq 4200.71
+      end
+      it 'finds the thirteenth pilot program results' do
+        expect(@rs.flight_total(12,0)).to eq 2982.14
+        expect(@rs.flight_total(12,1)).to eq 2595.09
+        expect(@rs.flight_total(12,2)).to eq 2577.13
       end
     end
   end

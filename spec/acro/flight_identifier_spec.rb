@@ -34,8 +34,8 @@ module ACRO
     it 'gets the basic class' do
       expect(detect_flight_aircat('Power')).to eq 'P'
       expect(detect_flight_aircat('Glider')).to eq 'G'
-      expect(detect_flight_aircat('Four')).to eq 'P'
-      expect(detect_flight_aircat('Minute')).to eq 'P'
+      expect(detect_flight_aircat('Four')).to eq 'F'
+      expect(detect_flight_aircat('Minute')).to eq 'F'
       expect(detect_flight_aircat('Primary')).to eq 'P'
     end
 
@@ -80,6 +80,112 @@ module ACRO
       expect(detect_flight_name(description)).to eq 'Flight 3'
       expect(detect_flight_category(description)).to eq 'Sportsman'
     end
+
+    it 'gets "Unlimited - Power : Programme 1: Free Known"' do
+      description = 'Unlimited - Power : Programme 1: Free Known'
+      expect(detect_flight_aircat(description)).to eq 'P'
+      expect(detect_flight_name(description)).to eq 'Free Known'
+      expect(detect_flight_category(description)).to eq 'Unlimited'
+    end
+
+    it 'gets "Unlimited - Power : Programme 2: Free Unknown #1"' do
+      description = 'Unlimited - Power : Programme 2: Free Unknown #1'
+      expect(detect_flight_aircat(description)).to eq 'P'
+      expect(detect_flight_name(description)).to eq 'Free Unknown 1'
+      expect(detect_flight_category(description)).to eq 'Unlimited'
+    end
+
+    it 'gets "Unlimited - Power: Programme 3: Free Unknown #2"' do
+      description = 'Unlimited - Power: Programme 3: Free Unknown #2'
+      expect(detect_flight_aircat(description)).to eq 'P'
+      expect(detect_flight_name(description)).to eq 'Free Unknown 2'
+      expect(detect_flight_category(description)).to eq 'Unlimited'
+    end
+
+    it 'gets "Unlimited - Glider : Programme 1: Free Known"' do
+      description = 'Unlimited - Glider : Programme 1: Free Known'
+      expect(detect_flight_aircat(description)).to eq 'G'
+      expect(detect_flight_name(description)).to eq 'Free Known'
+      expect(detect_flight_category(description)).to eq 'Unlimited'
+    end
+
+    it 'gets "Unlimited - Glider : 1st Unknown Sequence"' do
+      description = 'Unlimited - Glider : 1st Unknown Sequence'
+      expect(detect_flight_aircat(description)).to eq 'G'
+      expect(detect_flight_name(description)).to eq 'Free Unknown 1'
+      expect(detect_flight_category(description)).to eq 'Unlimited'
+    end
+
+    it 'gets "Unlimited - Glider : 2nd Unknown Sequence"' do
+      description = 'Unlimited - Glider : 2nd Unknown Sequence'
+      expect(detect_flight_aircat(description)).to eq 'G'
+      expect(detect_flight_name(description)).to eq 'Free Unknown 2'
+      expect(detect_flight_category(description)).to eq 'Unlimited'
+    end
+
+    it 'gets "Advanced - Glider : Free Known Sequence"' do
+      description = 'Advanced - Glider : Free Known Sequence'
+      expect(detect_flight_aircat(description)).to eq 'G'
+      expect(detect_flight_name(description)).to eq 'Free Known'
+      expect(detect_flight_category(description)).to eq 'Advanced'
+    end
+
+    it 'gets "Advanced - Glider : 1st Unknown Sequence"' do
+      description = 'Advanced - Glider : 1st Unknown Sequence'
+      expect(detect_flight_aircat(description)).to eq 'G'
+      expect(detect_flight_name(description)).to eq 'Free Unknown 1'
+      expect(detect_flight_category(description)).to eq 'Advanced'
+    end
+
+    it 'gets "Advanced - Glider : 2nd Unknown Sequence"' do
+      description = 'Advanced - Glider : 2nd Unknown Sequence'
+      expect(detect_flight_aircat(description)).to eq 'G'
+      expect(detect_flight_name(description)).to eq 'Free Unknown 2'
+      expect(detect_flight_category(description)).to eq 'Advanced'
+    end
+
+    it 'gets "Advanced - Power : Free Unknown Sequence"' do
+      description = 'Advanced - Power : Free Unknown Sequence'
+      expect(detect_flight_aircat(description)).to eq 'P'
+      expect(detect_flight_name(description)).to eq 'Free Unknown'
+      expect(detect_flight_category(description)).to eq 'Advanced'
+    end
+
+    it 'gets "Primary : Programme 1: Free Known"' do
+      description = 'Primary : Programme 1: Free Known'
+      expect(detect_flight_aircat(description)).to eq 'P'
+      expect(detect_flight_name(description)).to eq 'Flight 1'
+      expect(detect_flight_category(description)).to eq 'Primary'
+    end
+
+    it 'gets "Sportsman Power : Programme 1: Known"' do
+      description = 'Sportsman Power : Programme 1: Known'
+      expect(detect_flight_aircat(description)).to eq 'P'
+      expect(detect_flight_name(description)).to eq 'Known'
+      expect(detect_flight_category(description)).to eq 'Sportsman'
+    end
+
+    it 'gets "Intermediate - Glider : Known Sequence"' do
+      description = 'Intermediate - Glider : Known Sequence'
+      expect(detect_flight_aircat(description)).to eq 'G'
+      expect(detect_flight_name(description)).to eq 'Known'
+      expect(detect_flight_category(description)).to eq 'Intermediate'
+    end
+
+    it 'gets "Sportsman - Power : Known Sequence"' do
+      description = 'Sportsman - Power : Known Sequence'
+      expect(detect_flight_aircat(description)).to eq 'P'
+      expect(detect_flight_name(description)).to eq 'Known'
+      expect(detect_flight_category(description)).to eq 'Sportsman'
+    end
+
+    it 'gets "Primary - Power : Known Sequence"' do
+      description = 'Primary - Power : Known Sequence'
+      expect(detect_flight_aircat(description)).to eq 'P'
+      expect(detect_flight_name(description)).to eq 'Flight 1'
+      expect(detect_flight_category(description)).to eq 'Primary'
+    end
+
 
   end
 end

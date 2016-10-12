@@ -44,6 +44,40 @@ module ACRO
         expect(@ps.penalty).to eq(20)
       end
     end
+    describe '2016 no FPS' do
+      before(:context) do
+        @ps = PilotScraper.new(data_sample_file('pilot_p054s21.htm'))
+      end
+      it 'finds the pilot name' do
+        expect(@ps.pilotName).to eq('Khorn Soonthonnitikul')
+      end
+      it 'finds the sequence name' do
+        expect(@ps.flightName).to eq('Intermediate - Glider : Unknown Sequence')
+      end
+      it 'finds the judges' do
+        aj = @ps.judges
+        expect(aj.length).to eq(5)
+        expect(aj[4]).to eq('Doug Lovell')
+        expect(aj[0]).to eq('Jerry Riedinger')
+      end
+      it 'finds the K factors' do
+        ak = @ps.k_factors
+        expect(ak.length).to eq(9)
+        expect(ak[0]).to eq(16)
+        expect(ak[8]).to eq(15)
+        expect(ak[4]).to eq(16)
+      end
+      it 'finds scores for figures' do
+        expect(@ps.score(1,1)).to eq(75)
+        expect(@ps.score(9,1)).to eq(85)
+        expect(@ps.score(5,3)).to eq(85)
+        expect(@ps.score(6,5)).to eq(100)
+        expect(@ps.score(8,5)).to eq(20)
+      end
+      it 'finds penalty amount for flight' do
+        expect(@ps.penalty).to eq(20)
+      end
+    end
     it 'finds the no penalty amount for the flight' do
       @ps = PilotScraper.new(contest_data_file('pilot_p002s17.htm'))
       expect(@ps.penalty).to eq(0)
@@ -169,6 +203,12 @@ module ACRO
         expect(@ps.aircraft).to eq 'XtremeAir'
         expect(@ps.pilotName).to eq 'Debby Rihn-Harvey'
         expect(@ps.registration).to eq 'DEFXA'
+      end
+      it 'parses "Aaron McCartan (USA) - S-330P N-330LS"' do
+        @ps.parsePilotAircraft('Aaron McCartan (USA) - S-330P N-330LS')
+        expect(@ps.aircraft).to eq 'S-330P'
+        expect(@ps.pilotName).to eq 'Aaron McCartan'
+        expect(@ps.registration).to eq 'N-330LS'
       end
     end
   end

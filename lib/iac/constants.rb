@@ -2,10 +2,16 @@ module IAC
 module Constants
   CONTEST_CATEGORIES = %w{ Primary Sportsman Intermediate Advanced Unlimited }
   CATEGORY_NAMES = CONTEST_CATEGORIES + %w{ Four\ Minute\ Free }
-  FLIGHT_NAMES = %w{ Known Free Unknown Unknown\ 2 }
+  FLIGHT_NAMES = %w{
+    Known
+    Free
+    Unknown
+    Unknown\ 2
+  }
   AIRPLANE_CATEGORIES = %w{ P G }
   POWER_CATEGORY = 'P'
   GLIDER_CATEGORY = 'G'
+  FOUR_MINUTE_CATEGORY = 'F'
 
   AVERAGE = -10
   CONFERENCE_AVERAGE = -20
