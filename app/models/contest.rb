@@ -46,10 +46,10 @@ class Contest < ActiveRecord::Base
   # remove all contest associated data except the base 
   # attributes.  Keep association with manny_synch
   def reset_to_base_attributes
-    flights.clear
-    pc_results.clear
-    jc_results.clear
-    failures.clear
+    flights.destroy_all
+    pc_results.destroy_all
+    jc_results.destroy_all
+    failures.destroy_all
   end
 
 end
