@@ -24,7 +24,7 @@ class Judge < ActiveRecord::Base
     end
     missing_judge
   end
-  
+
   def to_s
     "Judge #{id} #{judge.to_s} " +
     (assist ? "assisted by #{assist.to_s}" : '')
@@ -41,34 +41,6 @@ class Judge < ActiveRecord::Base
 
   def assistant_name
     assist ? assist.name : 'no assistant'
-  end
-
-  # find or create a judge/assistant pair with
-  #   judge j_id and self.assist_id
-  # returns self if j_id is the same as self.judge_id
-  def find_or_create_with_substitute_judge(j_id)
-    new_judge = self
-    if (j_id != judge_id)
-      new_judge = Judge.where(:judge_id => j_id, :assist_id => assist_id).first
-      unless new_judge
-        new_judge = Judge.create(:judge_id => j_id, :assist_id => assist_id)
-      end
-    end
-    new_judge
-  end
-
-  # find or create a judge/assistant pair with 
-  #   assistant a_id and self.judge_id
-  # returns self if a_id is the same as self.assist_id
-  def find_or_create_with_substitute_assistant(a_id)
-    new_judge = self
-    if (a_id != assist_id)
-      new_judge = Judge.where(:judge_id => judge_id, :assist_id => a_id).first
-      unless new_judge
-        new_judge = Judge.create(:judge_id => judge_id, :assist_id => a_id)
-      end
-    end
-    new_judge
   end
 
 end

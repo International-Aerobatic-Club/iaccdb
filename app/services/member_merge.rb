@@ -227,26 +227,30 @@ class MemberMerge
   def replace_judge_pairs(target_id, merge_ids)
     judges_j = Judge.where(['judge_id in (?)', merge_ids])
     judges_j.each do |jp|
-      new_judge_pair = jp.find_or_create_with_substitute_judge(target_id)
+      new_judge_pair = Judge.find_or_create_by(
+        judge_id: target_id,
+        assist: jp.assist)
       replace_judge(jp, new_judge_pair)
     end
     judges_a = Judge.where(['assist_id in (?)', merge_ids])
     judges_a.each do |jp|
-      new_judge_pair = jp.find_or_create_with_substitute_assistant(target_id)
+      new_judge_pair = Judge.find_or_create_by(
+        judge: jp.judge,
+        assist_id: target_id)
       replace_judge(jp, new_judge_pair)
     end
   end
 
-  # replace all judge_pair instances of target
+  # replace all judge_pair instances of outgoing
   # with new judge pair replacement,
-  # then destroy the target
-  # do nothing if target and replacement are the same pair (same id)
-  def replace_judge(target, replacement)
-    if (target.id != replacement.id)
-      Score.where('judge_id = ?', target.id).update_all(judge_id: replacement.id)
-      PfjResult.where('judge_id = ?', target.id).update_all(judge_id: replacement.id)
-      JfResult.where('judge_id = ?', target.id).update_all(judge_id: replacement.id)
-      target.destroy
+  # then destroy the outgoing
+  # do nothing if outgoing and replacement are the same pair (same id)
+  def replace_judge(outgoing, replacement)
+    if (outgoing.id != replacement.id)
+      Score.where('judge_id = ?', outgoing.id).update_all(judge_id: replacement.id)
+      PfjResult.where('judge_id = ?', outgoing.id).update_all(judge_id: replacement.id)
+      JfResult.where('judge_id = ?', outgoing.id).update_all(judge_id: replacement.id)
+      outgoing.destroy
     end
   end
 

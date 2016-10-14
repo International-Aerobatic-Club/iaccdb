@@ -165,9 +165,9 @@ describe MemberMerge, :type => :services do
   context 'multiple judge pairs, scores, and jf_results' do
     before :each do
       @j1 = create :judge, judge: @target_mr
-      @j2 = create :judge, judge: @replace_mr
+      @j2 = create :judge, judge: @replace_mr, assist: @j1.assist
       @j3 = create :judge, assist: @target_mr
-      @j4 = create :judge, assist: @replace_mr
+      @j4 = create :judge, assist: @replace_mr, judge: @j3.judge
       4.times do
         [@j1,@j2,@j3,@j4].each do |j|
           create :score, judge:j
