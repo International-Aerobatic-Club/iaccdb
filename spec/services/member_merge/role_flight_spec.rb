@@ -55,5 +55,19 @@ describe RoleFlight do
     expect(RoleFlight.new(:assist_chief_judge, @flight_record).role_name).to eq(
       'Chief Judge Assistant')
   end
+  context 'attributes' do
+    before :context do
+      @rf = RoleFlight.new(:competitor, @flight_record)
+    end
+    it 'instance references contest' do
+      expect(@rf.contest).to eq @flight_record.contest
+    end
+    it 'instance references flight' do
+      expect(@rf.flight).to eq @flight_record
+    end
+    it 'instance references role' do
+      expect(@rf.role).to eq :competitor
+    end
+  end
 end
 end

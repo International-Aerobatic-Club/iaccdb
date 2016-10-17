@@ -1,4 +1,5 @@
-describe MemberMerge, :type => :services do
+module MemberMerge
+describe Merge, :type => :services do
   before :example do
     # mr = member record
     @mra = create_list(:member, 4)
@@ -6,7 +7,6 @@ describe MemberMerge, :type => :services do
     @target_mr = @mra[0]
     @replace_mr = @mra[1]
     @replaced_mra = Array.new(@mra).delete(@target_mr)
-    @merge = MemberMerge.new(@mr_ids)
   end
 
   it 'finds existing judge pair on judge' do
@@ -14,10 +14,11 @@ describe MemberMerge, :type => :services do
     j2 = create :judge, judge: @replace_mr, assist: j1.assist
     score1 = create :score, judge:j1
     score2 = create :score, judge:j2
+    merge = MemberMerge::Merge.new(@mr_ids)
 
-    expect(@merge.has_overlaps).to eq false
-    expect(@merge.has_collisions).to eq false
-    @merge.execute_merge(@target_mr)
+    expect(merge.has_overlaps).to eq false
+    expect(merge.has_collisions).to eq false
+    merge.execute_merge(@target_mr)
 
     score1.reload
     expect(score1.judge).to eq j1
@@ -30,10 +31,11 @@ describe MemberMerge, :type => :services do
     j2 = create :judge, assist: @replace_mr, judge: j1.judge
     score1 = create :score, judge:j1
     score2 = create :score, judge:j2
+    merge = MemberMerge::Merge.new(@mr_ids)
 
-    expect(@merge.has_overlaps).to eq false
-    expect(@merge.has_collisions).to eq false
-    @merge.execute_merge(@target_mr)
+    expect(merge.has_overlaps).to eq false
+    expect(merge.has_collisions).to eq false
+    merge.execute_merge(@target_mr)
 
     score1.reload
     expect(score1.judge).to eq j1
@@ -46,11 +48,12 @@ describe MemberMerge, :type => :services do
     j2 = create :judge, judge: @replace_mr
     score1 = create :score, judge:j1
     score2 = create :score, judge:j2
-    @merge.execute_merge(@target_mr)
+    merge = MemberMerge::Merge.new(@mr_ids)
+    merge.execute_merge(@target_mr)
     score1.reload
 
-    expect(@merge.has_overlaps).to eq false
-    expect(@merge.has_collisions).to eq false
+    expect(merge.has_overlaps).to eq false
+    expect(merge.has_collisions).to eq false
     expect(score1.judge).to eq j1
 
     score2.reload
@@ -67,9 +70,10 @@ describe MemberMerge, :type => :services do
     score1 = create :score, judge:j1
     score2 = create :score, judge:j2
 
-    expect(@merge.has_overlaps).to eq false
-    expect(@merge.has_collisions).to eq false
-    @merge.execute_merge(@target_mr)
+    merge = MemberMerge::Merge.new(@mr_ids)
+    expect(merge.has_overlaps).to eq false
+    expect(merge.has_collisions).to eq false
+    merge.execute_merge(@target_mr)
 
     score1.reload
     expect(score1.judge).to eq j1
@@ -95,9 +99,10 @@ describe MemberMerge, :type => :services do
     expect(judges).to include(@target_mr)
     expect(judges).to include(@replace_mr)
 
-    expect(@merge.has_overlaps).to eq false
-    expect(@merge.has_collisions).to eq false
-    @merge.execute_merge(@target_mr)
+    merge = MemberMerge::Merge.new(@mr_ids)
+    expect(merge.has_overlaps).to eq false
+    expect(merge.has_collisions).to eq false
+    merge.execute_merge(@target_mr)
 
     judge_pairs = Score.all.collect { |s| s.judge }
     expect(judge_pairs.length).to eq 24
@@ -122,9 +127,10 @@ describe MemberMerge, :type => :services do
     expect(judges).to include(@target_mr)
     expect(judges).to include(@replace_mr)
 
-    expect(@merge.has_overlaps).to eq false
-    expect(@merge.has_collisions).to eq false
-    @merge.execute_merge(@target_mr)
+    merge = MemberMerge::Merge.new(@mr_ids)
+    expect(merge.has_overlaps).to eq false
+    expect(merge.has_collisions).to eq false
+    merge.execute_merge(@target_mr)
 
     judge_pairs = JfResult.all.collect { |s| s.judge }
     expect(judge_pairs.length).to eq 24
@@ -149,9 +155,10 @@ describe MemberMerge, :type => :services do
     expect(judges).to include(@target_mr)
     expect(judges).to include(@replace_mr)
 
-    expect(@merge.has_overlaps).to eq false
-    expect(@merge.has_collisions).to eq false
-    @merge.execute_merge(@target_mr)
+    merge = MemberMerge::Merge.new(@mr_ids)
+    expect(merge.has_overlaps).to eq false
+    expect(merge.has_collisions).to eq false
+    merge.execute_merge(@target_mr)
 
     judge_pairs = PfjResult.all.collect { |s| s.judge }
     expect(judge_pairs.length).to eq 24
@@ -174,6 +181,7 @@ describe MemberMerge, :type => :services do
           create :jf_result, judge:j
         end
       end
+      @merge = MemberMerge::Merge.new(@mr_ids)
     end
     it 'removes orphaned judge pairs' do
       expect(@merge.has_overlaps).to eq false
@@ -211,7 +219,8 @@ describe MemberMerge, :type => :services do
     expect(rms).to include(@replace_mr)
     expect(@target_mr.teams).to include(result)
     expect(@replace_mr.teams).to include(result)
-    @merge.execute_merge(@target_mr)
+    merge = MemberMerge::Merge.new(@mr_ids)
+    merge.execute_merge(@target_mr)
     result.reload
     rms = result.members.all
     expect(rms).to include(@target_mr)
@@ -227,7 +236,8 @@ describe MemberMerge, :type => :services do
     expect(result.members.all).to include(@replace_mr)
     expect(@target_mr.teams).to_not include(result)
     expect(@replace_mr.teams).to include(result)
-    @merge.execute_merge(@target_mr)
+    merge = MemberMerge::Merge.new(@mr_ids)
+    merge.execute_merge(@target_mr)
     result.reload
     expect(result.members.all).to include(@target_mr)
     expect(result.members.all).to_not include(@replace_mr)
@@ -241,7 +251,8 @@ describe MemberMerge, :type => :services do
     create :result_member, result: result, member:@replace_mr
     expect(result.members.all).to include(@target_mr)
     expect(result.members.all).to include(@replace_mr)
-    @merge.execute_merge(@target_mr)
+    merge = MemberMerge::Merge.new(@mr_ids)
+    merge.execute_merge(@target_mr)
     mrs_count = ResultMember.where(member: @replace_mr, result: result).count
     expect(mrs_count).to be 0
   end
@@ -257,9 +268,10 @@ describe MemberMerge, :type => :services do
     expect(chief_judges).to include(@target_mr)
     expect(chief_judges).to include(@replace_mr)
 
-    expect(@merge.has_overlaps).to eq false
-    expect(@merge.has_collisions).to eq false
-    @merge.execute_merge(@target_mr)
+    merge = MemberMerge::Merge.new(@mr_ids)
+    expect(merge.has_overlaps).to eq false
+    expect(merge.has_collisions).to eq false
+    merge.execute_merge(@target_mr)
 
     chief_judges = Flight.all.collect { |f| f.chief }
     expect(chief_judges.length).to eq 24
@@ -280,9 +292,10 @@ describe MemberMerge, :type => :services do
     expect(assist_judges).to include(@target_mr)
     expect(assist_judges).to include(@replace_mr)
 
-    expect(@merge.has_overlaps).to eq false
-    expect(@merge.has_collisions).to eq false
-    @merge.execute_merge(@target_mr)
+    merge = MemberMerge::Merge.new(@mr_ids)
+    expect(merge.has_overlaps).to eq false
+    expect(merge.has_collisions).to eq false
+    merge.execute_merge(@target_mr)
 
     assist_judges = Flight.all.collect { |f| f.assist }
     expect(assist_judges.length).to eq 24
@@ -303,9 +316,10 @@ describe MemberMerge, :type => :services do
     expect(pilots).to include(@target_mr)
     expect(pilots).to include(@replace_mr)
 
-    expect(@merge.has_overlaps).to eq false
-    expect(@merge.has_collisions).to eq false
-    @merge.execute_merge(@target_mr)
+    merge = MemberMerge::Merge.new(@mr_ids)
+    expect(merge.has_overlaps).to eq false
+    expect(merge.has_collisions).to eq false
+    merge.execute_merge(@target_mr)
 
     pilots = PilotFlight.all.collect { |f| f.pilot }
     expect(pilots.length).to eq 24
@@ -328,9 +342,10 @@ describe MemberMerge, :type => :services do
     expect(pilots).to include(@target_mr)
     expect(pilots).to include(@replace_mr)
 
-    expect(@merge.has_overlaps).to eq false
-    expect(@merge.has_collisions).to eq false
-    @merge.execute_merge(@target_mr)
+    merge = MemberMerge::Merge.new(@mr_ids)
+    expect(merge.has_overlaps).to eq false
+    expect(merge.has_collisions).to eq false
+    merge.execute_merge(@target_mr)
 
     pilots = RegionalPilot.all.collect(&:pilot)
     expect(pilots.length).to eq 2
@@ -353,9 +368,10 @@ describe MemberMerge, :type => :services do
     expect(pilots).to include(@target_mr)
     expect(pilots).to include(@replace_mr)
 
-    expect(@merge.has_overlaps).to eq false
-    expect(@merge.has_collisions).to eq false
-    @merge.execute_merge(@target_mr)
+    merge = MemberMerge::Merge.new(@mr_ids)
+    expect(merge.has_overlaps).to eq false
+    expect(merge.has_collisions).to eq false
+    merge.execute_merge(@target_mr)
 
     pilots = Result.all.collect(&:pilot)
     expect(pilots.length).to eq 2
@@ -370,13 +386,14 @@ describe MemberMerge, :type => :services do
     create :pilot_flight, pilot:@target_mr, flight: pf.flight
     create :pilot_flight, pilot:@replace_mr, flight: pf.flight
 
-    expect(@merge.has_collisions).to eq true
-    flight_collisions = @merge.flight_collisions
+    merge = MemberMerge::Merge.new(@mr_ids)
+    expect(merge.has_collisions).to eq true
+    flight_collisions = merge.flight_collisions
 
     expect(flight_collisions.length).to eq 1
     rf = flight_collisions.first
-    expect(rf[:role]).to eq :competitor
-    expect(rf[:flight]).to eq pf.flight
+    expect(rf[:roles]).to eq 'Competitor'
+    expect(rf[:flight]).to eq pf.flight.displayName
   end
 
   it 'notifies when two members have different roles on the same flight' do
@@ -384,20 +401,22 @@ describe MemberMerge, :type => :services do
     jp = create :judge, judge:@replace_mr
     score = create :score, judge: jp, pilot_flight: pf
 
-    expect(@merge.has_overlaps).to eq true
-    flight_overlaps = @merge.flight_overlaps
+    merge = MemberMerge::Merge.new(@mr_ids)
+    expect(merge.has_overlaps).to eq true
+    flight_overlaps = merge.flight_overlaps
 
-    expect(flight_overlaps.length).to eq 1
-    flight_roles = flight_overlaps.first
-    expect(flight_roles[:flight]).to eq pf.flight
-    roles = flight_roles[:roles]
-    expect(roles.include?(:competitor)).to eq true
-    expect(roles.include?(:line_judge)).to eq true
+    expect(flight_overlaps.keys.length).to eq 1
+    flight = flight_overlaps.keys.first
+    expect(flight).to eq pf.flight
+    roles = flight_overlaps[flight]
+    expect(roles.include?(RoleFlight.new(:competitor, flight))).to eq true
+    expect(roles.include?(RoleFlight.new(:line_judge, flight))).to eq true
   end
 
   it 'raises an exception if the target member id is not one of the members to merge' do
     mr_3 = create(:member)
-    bad_merge = proc { @merge.execute_merge(mr_3) }
+    merge = MemberMerge::Merge.new(@mr_ids)
+    bad_merge = proc { merge.execute_merge(mr_3) }
     expect(bad_merge).to raise_exception
   end
 
@@ -448,6 +467,7 @@ describe MemberMerge, :type => :services do
 
       create :pc_result, pilot:@target_mr
       create :pc_result, pilot:@replace_mr
+      @merge = MemberMerge::Merge.new(@mr_ids)
     end
 
     it 'removes the merged members' do
@@ -504,4 +524,5 @@ describe MemberMerge, :type => :services do
       expect(PilotFlight.all.count).to eq pilot_flight_count
     end
   end
+end
 end

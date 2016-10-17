@@ -14,7 +14,7 @@ class RoleFlight
     end
     @role = role
     @flight = flight
-    @contest = contest
+    @contest = flight.contest
   end
 
   def hash
