@@ -68,8 +68,27 @@ class Merge
   end
 
   # hash keyed on flight, value: Set of <role>
+  # list of hash {
+  #   flight: Flight description
+  #   contest: Contest description
+  #   roles: Role descriptions
+  # }
   def flight_overlaps
-    @merge_summary.flight_overlaps
+    fos = []
+    overlaps = @merge_summary.flight_overlaps
+    overlaps.each_key do |flight|
+      flight_description = flight.displayName
+      contest_description = flight.contest.year_name
+      role_names = overlaps[flight].collect do |role_flight|
+        role_flight.role_name
+      end
+      fos << {
+        flight: flight_description,
+        contest: contest_description,
+        roles: role_names.join(', ')
+      }
+    end
+    fos
   end
 
   # two or more included members have some role on a given flight

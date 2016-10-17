@@ -49,7 +49,7 @@ RSpec.describe 'admin member merge', :type => :feature do
     expect(page).to_not have_css 'p#notice'
     expect(page).to have_css 'div#collisions'
     within 'div#collisions' do
-      expect(page).to have_content MemberMerge.role_name(:competitor)
+      expect(page).to have_content MemberMerge::RoleFlight.role_name(:competitor)
       expect(page).to have_content pf.flight.displayName
       expect(page).to have_content pf.contest.year_name
     end
@@ -67,8 +67,8 @@ RSpec.describe 'admin member merge', :type => :feature do
     expect(page).to_not have_css 'p#alert'
     expect(page).to have_css 'div#overlaps'
     within 'div#overlaps' do
-      expect(page).to have_content MemberMerge.role_name(:competitor)
-      expect(page).to have_content MemberMerge.role_name(:line_judge)
+      expect(page).to have_content MemberMerge::RoleFlight.role_name(:competitor)
+      expect(page).to have_content MemberMerge::RoleFlight.role_name(:line_judge)
       expect(page).to have_content pf.flight.displayName
       expect(page).to have_content pf.contest.year_name
     end
@@ -92,7 +92,7 @@ RSpec.describe 'admin member merge', :type => :feature do
       create :score, judge: jp
     end
     select_members_and_merge
-    expect(page).to have_content MemberMerge.role_name(:line_judge)
+    expect(page).to have_content MemberMerge::RoleFlight.role_name(:line_judge)
     expect(page).to have_css '#contest_role_line_judge'
     within '#contest_role_line_judge' do
       expect(all('li').count).to eq 4
@@ -105,7 +105,7 @@ RSpec.describe 'admin member merge', :type => :feature do
       create :score, judge: jp
     end
     select_members_and_merge
-    expect(page).to have_content MemberMerge.role_name(:assist_line_judge)
+    expect(page).to have_content MemberMerge::RoleFlight.role_name(:assist_line_judge)
     expect(page).to have_css '#contest_role_assist_line_judge'
     within '#contest_role_assist_line_judge' do
       expect(all('li').count).to eq 4
@@ -117,7 +117,7 @@ RSpec.describe 'admin member merge', :type => :feature do
       create :flight, chief: @member_list[m]
     end
     select_members_and_merge
-    expect(page).to have_content MemberMerge.role_name(:chief_judge)
+    expect(page).to have_content MemberMerge::RoleFlight.role_name(:chief_judge)
     expect(page).to have_css '#contest_role_chief_judge'
     within '#contest_role_chief_judge' do
       expect(all('li').count).to eq 4
@@ -129,7 +129,7 @@ RSpec.describe 'admin member merge', :type => :feature do
       create :flight, assist: @member_list[m]
     end
     select_members_and_merge
-    expect(page).to have_content MemberMerge.role_name(:assist_chief_judge)
+    expect(page).to have_content MemberMerge::RoleFlight.role_name(:assist_chief_judge)
     expect(page).to have_css '#contest_role_assist_chief_judge'
     within '#contest_role_assist_chief_judge' do
       expect(all('li').count).to eq 4
@@ -141,7 +141,7 @@ RSpec.describe 'admin member merge', :type => :feature do
       create :pilot_flight, pilot: @member_list[m]
     end
     select_members_and_merge
-    expect(page).to have_content MemberMerge.role_name(:competitor)
+    expect(page).to have_content MemberMerge::RoleFlight.role_name(:competitor)
     expect(page).to have_css '#contest_role_competitor'
     within '#contest_role_competitor' do
       expect(all('li').count).to eq 4
@@ -173,7 +173,6 @@ RSpec.describe 'admin member merge', :type => :feature do
     accept_alert 'Be careful' do
       click_on('merge')
     end
-    save_and_open_page
     fail
     visit admin_members_path
   end

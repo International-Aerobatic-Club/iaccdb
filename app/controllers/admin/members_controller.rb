@@ -31,7 +31,7 @@ class Admin::MembersController < ApplicationController
   def merge_preview
     selected = params[:selected]
     if selected && 1 < selected.count
-      merge = MemberMerge.new(selected.keys)
+      merge = MemberMerge::Merge.new(selected.keys)
       if !merge.has_multiple_members
         flash[:alert] = 'select multiple members to merge'
         redirect_to admin_members_url 
@@ -66,7 +66,7 @@ class Admin::MembersController < ApplicationController
   def merge
     @target = Member.find(params[:target])
     if @target
-      merge = MemberMerge.new(params[:selected].keys)
+      merge = MemberMerge::Merge.new(params[:selected].keys)
       merge.execute_merge(@target)
       flash[:notice] = "Members merged into #{@target.name}"
       redirect_to admin_members_path(:anchor => @target.id)

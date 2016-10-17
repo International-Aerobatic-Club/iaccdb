@@ -1,5 +1,5 @@
 <!-- { role: <role>, contest_flights: [ { contest: <contest>, flight: <flight> } ] } -->
-<h3><%= MemberMerge.role_name(role_flights[:role]) %></h3>
+<h3><%= MemberMerge::RoleFlight.role_name(role_flights[:role]) %></h3>
 <ul id='contest_role_<%= role_flights[:role] %>'>
   <%= render partial: 'contest_flight', collection: role_flights[:contest_flights] %>
 </ul>
