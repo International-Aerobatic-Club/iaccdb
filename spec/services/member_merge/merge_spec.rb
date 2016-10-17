@@ -405,12 +405,11 @@ describe Merge, :type => :services do
     expect(merge.has_overlaps).to eq true
     flight_overlaps = merge.flight_overlaps
 
-    expect(flight_overlaps.keys.length).to eq 1
-    flight = flight_overlaps.keys.first
-    expect(flight).to eq pf.flight
-    roles = flight_overlaps[flight]
-    expect(roles.include?(RoleFlight.new(:competitor, flight))).to eq true
-    expect(roles.include?(RoleFlight.new(:line_judge, flight))).to eq true
+    expect(flight_overlaps.length).to eq 1
+    overlap = flight_overlaps.first
+    roles = overlap[:roles]
+    expect(roles).to match /Competitor/
+    expect(roles).to match /Line Judge/
   end
 
   it 'raises an exception if the target member id is not one of the members to merge' do
