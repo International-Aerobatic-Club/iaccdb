@@ -121,12 +121,7 @@ class Merge
     end
     dup_members = members.reject { |member| member.id == target_id }
     merge_members(target_id, dup_members)
-    contests = merge_flights.collect { |role_flight| role_flight[:contest] }
-    contests.uniq.each do |contest|
-      # TODO TOO TOO MANY JOBS
-      Delayed::Job.enqueue Jobs::ComputeContestPilotRollupsJob.new(contest)
-      Delayed::Job.enqueue Jobs::ComputeContestJudgeRollupsJob.new(contest)
-    end
+    recompute_changed_contests(dup_members)
   end
 
   #######
@@ -143,10 +138,27 @@ class Merge
     end
   end
 
-  # flights that will require recomputation
-  def merge_flights
-    #@merge_summary.merge_flights
-    []
+  def recompute_changed_contests(dup_members)
+    judge_contests = []
+    pilot_contests = []
+    dup_members.each do |member|
+      judge_contests << member.judge_flights.collect{ |f| f.contest }
+      pilot_contests << member.flights.collect{ |f| f.contest }
+    end
+    judge_contests.flatten.uniq.each do |contest|
+      recompute_judge_rollups(contest)
+    end
+    pilot_contests.flatten.uniq.each do |contest|
+      recompute_pilot_rollups(contest)
+    end
+  end
+
+  def recompute_judge_rollups(contest)
+    Delayed::Job.enqueue Jobs::ComputeContestJudgeRollupsJob.new(contest)
+  end
+
+  def recompute_pilot_rollups(contest)
+    Delayed::Job.enqueue Jobs::ComputeContestPilotRollupsJob.new(contest)
   end
 
   def merge_members(target_id, dup_members)
