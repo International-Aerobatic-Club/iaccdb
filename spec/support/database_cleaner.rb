@@ -21,7 +21,7 @@ RSpec.configure do |config|
   end
 
   # selenium driver as separate process breaks transaction strategy
-  config.before(:each, viz: true) do
+  config.before(:example, viz: true) do
     truncate_database
   end
 
@@ -33,11 +33,11 @@ RSpec.configure do |config|
     end_transaction
   end
 
-  config.before(:each) do
+  config.before(:example) do
     start_transaction
   end
 
-  config.after(:each) do
+  config.after(:example) do
     end_transaction
   end
 end
