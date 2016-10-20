@@ -2,15 +2,22 @@
 # The job computes collegiate results for the contest year
 module Jobs
 class ComputeCollegiateJob < Struct.new(:contest)
-  
+
   include JobsSay
 
   def perform
     @year = contest.year
     @description = "#{@year}"
+    if (contest.year == Time.now.year)
+      make_computation
+    else
+      say "Skipping collegiate computation for year, #{@year}"
+    end
+  end
+
+  def make_computation
     say "Computing collegiate standings for #{@description}"
-    cc = IAC::CollegiateComputer.new(@year)
-    cc.recompute
+    computer.recompute
   end
 
   def computer
