@@ -2,12 +2,20 @@
 # The job computes regional series results for a given region and year
 module Jobs
 class ComputeRegionalJob < Struct.new(:contest)
-  
+
   include JobsSay
 
   def perform
     @contest = contest
     @description = "Region #{contest.region}, year #{contest.year}"
+    if (contest.year == Time.now.year)
+      make_computation
+    else
+      say "Skipping regional for #{@description} not current year"
+    end
+  end
+
+  def make_computation
     say "Computing regional series standings for #{@description}"
     series = IAC::RegionalSeries.new
     series.compute_regional_for_contest(contest) 
