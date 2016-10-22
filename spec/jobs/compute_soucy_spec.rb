@@ -7,7 +7,7 @@ describe ComputeSoucyJob do
     end
 
     it 'creates and invokes the soucy computer' do
-      expect(@job).to receive(:make_computation)
+      expect(@job).to receive(:make_computation).and_call_original
       @job.perform
     end
 

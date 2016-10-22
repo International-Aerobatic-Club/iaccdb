@@ -9,13 +9,13 @@ class ComputeSoucyJob < Struct.new(:contest)
     year = contest.year
     @description = "#{year}"
     if (year == Time.now.year)
-      make_computation
+      make_computation(year)
     else
       say "Skipping Soucy for #{@description} not current year"
     end
   end
 
-  def make_computation
+  def make_computation(year)
     say "Computing L. Paul Soucy standings for #{@description}"
     soucy = IAC::SoucyComputer.new(year)
     soucy.recompute
