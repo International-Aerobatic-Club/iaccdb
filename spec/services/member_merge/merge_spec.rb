@@ -481,19 +481,19 @@ describe Merge, :type => :services do
 
     it 'removes jy_results' do
       @merge.execute_merge(@target_mr)
-      jy_results = JyResult.where(judge:@target_mr.id).all
+      jy_results = JyResult.where(judge:@mr_ids).all
       expect(jy_results.empty?).to be(true)
     end
 
     it 'removes jc_results' do
       @merge.execute_merge(@target_mr)
-      jc_results = JcResult.where(judge:@target_mr.id).all
+      jc_results = JcResult.where(judge:@mr_ids).all
       expect(jc_results.empty?).to be(true)
     end
 
     it 'removes pc_results' do
       @merge.execute_merge(@target_mr)
-      pc_results = PcResult.where(pilot:@target_mr.id).all
+      pc_results = PcResult.where(pilot:@mr_ids).all
       expect(pc_results.empty?).to be(true)
     end
 
