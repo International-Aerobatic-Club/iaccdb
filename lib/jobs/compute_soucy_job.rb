@@ -2,13 +2,20 @@
 # The job computes L. Paul Soucy results for a given year
 module Jobs
 class ComputeSoucyJob < Struct.new(:contest)
-  
   include JobsSay
 
   def perform
     @contest = contest
     year = contest.year
     @description = "#{year}"
+    if (year == Time.now.year)
+      make_computation
+    else
+      say "Skipping Soucy for #{@description} not current year"
+    end
+  end
+
+  def make_computation
     say "Computing L. Paul Soucy standings for #{@description}"
     soucy = IAC::SoucyComputer.new(year)
     soucy.recompute
