@@ -16,6 +16,16 @@ class Judge < ActiveRecord::Base
   has_many :pfj_results, :dependent => :destroy
   has_many :jf_results, :dependent => :destroy
 
+  # supply a standard place-holder instance when needed
+  def self.missing_judge
+    missing_member = Member.missing_member
+    missing_judge = Judge.where(judge_id: missing_member.id, assist_id: nil).first
+    if (missing_judge == nil)
+      missing_judge = Judge.create(judge_id: missing_member.id, assist_id: nil)
+    end
+    missing_judge
+  end
+
   def to_s
     "Judge #{id} #{judge.to_s} " +
     (assist ? "assisted by #{assist.to_s}" : '')
