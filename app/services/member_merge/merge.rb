@@ -119,7 +119,7 @@ class Merge
     unless (members.include?(@target))
       raise ArgumentError.new("target #{@target} must be one of the members in the merge") 
     end
-    dup_members = members.reject { |member| member.id == target_id }
+    dup_members = members.reject { |member| member == @target }
     merge_members(target_id, dup_members)
     recompute_changed_contests(dup_members)
   end
@@ -146,19 +146,11 @@ class Merge
       pilot_contests << member.flights.collect{ |f| f.contest }
     end
     judge_contests.flatten.uniq.each do |contest|
-      recompute_judge_rollups(contest)
+      Delayed::Job.enqueue Jobs::ComputeContestJudgeRollupsJob.new(contest)
     end
     pilot_contests.flatten.uniq.each do |contest|
-      recompute_pilot_rollups(contest)
+      Delayed::Job.enqueue Jobs::ComputeContestPilotRollupsJob.new(contest)
     end
-  end
-
-  def recompute_judge_rollups(contest)
-    Delayed::Job.enqueue Jobs::ComputeContestJudgeRollupsJob.new(contest)
-  end
-
-  def recompute_pilot_rollups(contest)
-    Delayed::Job.enqueue Jobs::ComputeContestPilotRollupsJob.new(contest)
   end
 
   def merge_members(target_id, dup_members)
@@ -176,15 +168,14 @@ class Merge
     merge_result_records(target_id, merge_ids)
     replace_judge_pairs(target_id, merge_ids)
 
-    all_ids = Array.new(merge_ids) << target_id
-    # the year rollups need recomputation
-    JyResult.where(['judge_id in (?)', all_ids]).destroy_all
-    # because it's possible merged members were on different
-    # flights of the same contest
-    JcResult.where(['judge_id in (?)', all_ids]).destroy_all
-    PcResult.where(['pilot_id in (?)', all_ids]).destroy_all
+    # will recompute for affected contests
+    PcResult.where(pilot: dup_members).destroy_all
+    JcResult.where(judge: dup_members).destroy_all
 
-    # And remove the orphaned members
+    # will recompute for affected years
+    JyResult.where(judge: dup_members).destroy_all
+
+    # finally, remove the orphaned members
     Member.where(['id in (?)', merge_ids]).destroy_all
   end
 

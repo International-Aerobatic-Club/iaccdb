@@ -479,24 +479,6 @@ describe Merge, :type => :services do
       expect(Member.find(@target_mr.id)).to match(@target_mr)
     end
 
-    it 'removes jy_results' do
-      @merge.execute_merge(@target_mr)
-      jy_results = JyResult.where(judge:@mr_ids).all
-      expect(jy_results.empty?).to be(true)
-    end
-
-    it 'removes jc_results' do
-      @merge.execute_merge(@target_mr)
-      jc_results = JcResult.where(judge:@mr_ids).all
-      expect(jc_results.empty?).to be(true)
-    end
-
-    it 'removes pc_results' do
-      @merge.execute_merge(@target_mr)
-      pc_results = PcResult.where(pilot:@mr_ids).all
-      expect(pc_results.empty?).to be(true)
-    end
-
     it 'returns the roles and flights' do
       role_flights = @merge.role_flights
       expect(role_flights.length).to eq 5
