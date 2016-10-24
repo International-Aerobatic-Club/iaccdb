@@ -12,29 +12,16 @@ class JudgeRollups
 def self.compute_jy_results (year)
   # start_list = list all jy_result where year
   start_list = JyResult.where(:year => year).all
-  # all contests where year(start) == year
   Contest.where(["year(start) = ?", year]).each do |contest|
     puts "add #{contest.year_name} to judge rollups"
     contest.jc_results.each do |jc_result|
-      # get category
       category = jc_result.category
       if category
-        # find or create jy_result for year, category, judge
-        jy_result = JyResult.find_by_judge_id_and_category_id_and_year(
-          jc_result.judge.id, category.id, year)
-        if !jy_result
-          # can't use the "or_initialize" find because we need zero_reset
-          jy_result = JyResult.new({
-            :judge_id => jc_result.judge.id,
-            :category_id => category.id,
-            :year => year});
-          jy_result.zero_reset
-        elsif (start_list.include?(jy_result))
-          # if in start_list, reset & remove from start_list
+        jy_result = find_or_create_jy_result(jc_result.judge, category, year)
+        if (start_list.include?(jy_result))
           jy_result.zero_reset
           start_list.delete(jy_result)
         end
-        # combine jc_result
         jy_result.accumulate(jc_result)
         jy_result.save
       else
@@ -46,6 +33,22 @@ def self.compute_jy_results (year)
   start_list.each do |jy_result|
     jy_result.destroy
   end
+end
+
+#######
+private
+#######
+
+def self.find_or_create_jy_result(judge, category, year)
+  jy_result = JyResult.where(judge: judge, category: category, year: year).first
+  if !jy_result
+    jy_result = JyResult.new({
+      :judge => judge,
+      :category => category,
+      :year => year});
+    jy_result.zero_reset
+  end
+  jy_result
 end
 
 end #class
