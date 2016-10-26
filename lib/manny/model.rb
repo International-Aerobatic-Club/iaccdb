@@ -66,7 +66,7 @@ end
 
 CATEGORY_NAMES = %w{ Primary Sportsman Intermediate Advanced Unlimited 
   Four\ Minute\ Free }
-FLIGHT_NAMES = %w{ Known Free Unknown }
+FLIGHT_NAMES = %w{ Known Free Unknown Unknown }
 
 class Category
   attr_accessor :flights, :pilots, :name, :cid
@@ -77,9 +77,9 @@ class Category
     @flights = [] # Flight indexed by flightID
     @pilots = [] # Pilot indexed by part
   end
-  
+
   def flight flt
-    flights[flt] ||= Flight.new(flt, FLIGHT_NAMES[flt])
+    flights[flt] ||= Flight.new(flt, FLIGHT_NAMES[flt-1])
   end
 
   def pilot pid
@@ -131,7 +131,7 @@ class Contest
   end
 
   def category cat
-    categories[cat] ||= Category.new(cat, CATEGORY_NAMES[cat])
+    categories[cat] ||= Category.new(cat, CATEGORY_NAMES[cat-1])
   end
 
   def flight(cat, flt)
