@@ -1,8 +1,15 @@
 module ACRO
+  require 'fileutils'
   describe ContestExtractor do
-    before :all do
+    before :context do
       cs = ContestExtractor.new(contest_data_file('newContest.yml'))
       cs.scrape_contest
+    end
+    after :context do
+      yml_pattern = contest_data_file('*.htm.yml')
+      Dir.glob(yml_pattern) do |file|
+        FileUtils.rm(file)
+      end
     end
     it 'creates pilot flight yml files' do
       expect(File.exists?(contest_data_file('pilot_p001s16.htm.yml'))).to eq true
@@ -29,8 +36,9 @@ module ACRO
       expect(pfd.scores[6][13]).to eq 95
     end
     it 'creates category yml files' do
-      expect(File.exists?(data_sample_file('multi_R011s08s17s26.htm.yml'))).to eq true
-      cr = YAML.load_file(data_sample_file('multi_R011s08s17s26.htm.yml'))
+      multi_yml = data_sample_file('multi_R011s08s17s26.htm.yml')
+      expect(File.exists?(multi_yml)).to eq true
+      cr = YAML.load_file(multi_yml)
       expect(cr).to_not be_nil
       expect(cr.category_name).to eq 'Unlimited'
       expect(cr.description).to eq 'US National Champion - Unlimited'
