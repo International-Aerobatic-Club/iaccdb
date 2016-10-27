@@ -17,7 +17,7 @@ module ACRO
     end
 
     it 'filters ^M characters' do
-      expect(// !~ @filtered).to eq true
+      expect(/\r/ !~ @filtered).to eq true
     end
 
     it 'converts non-breaking space entity to plain space' do
