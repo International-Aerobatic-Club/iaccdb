@@ -1,0 +1,83 @@
+--- !ruby/object:ACRO::CategoryResult
+category_name: Unlimited
+description: US National Champion - Unlimited
+pilots:
+- Rob Holland
+- Jeff Boerboon
+- Goody Thomas
+- Nikkolay Timofeev
+- Brett Hunter
+- Melissa Pemberton
+- Benjamin Freelove
+- Mark Nowosielski
+- Tim Just
+- Michael Gallaway
+- Mike Ciliberti
+- Joe Brinker
+flight_names:
+- Known P1
+- ! 'Free #1'
+- FreeUnk1
+flight_results:
+- - 3570.85
+  - 3631.86
+  - 3890.08
+- - 3516.92
+  - 3719.54
+  - 3798.13
+- - 3459.53
+  - 3719.12
+  - 3777.04
+- - 3481.42
+  - 3665.03
+  - 3401.1
+- - 3369.02
+  - 3541.78
+  - 3424.44
+- - 3194.43
+  - 3416.88
+  - 3561.75
+- - 3219.05
+  - 3302.99
+  - 3336.01
+- - 3220.23
+  - 3405.89
+  - 3030.01
+- - 3146.97
+  - 3369.03
+  - 3125.44
+- - 3211.43
+  - 3386.36
+  - 2970.82
+- - 3120.25
+  - 3363.59
+  - 2926.67
+- - 2392.27
+  - 3418.82
+  - 1545.11
+category_results:
+- 11092.78
+- 11034.59
+- 10955.69
+- 10547.55
+- 10335.24
+- 10173.06
+- 9858.06
+- 9656.13
+- 9641.45
+- 9568.61
+- 9410.51
+- 7356.2
+category_percentages:
+- 81.926
+- 81.496
+- 80.914
+- 77.899
+- 76.331
+- 75.133
+- 72.807
+- 71.316
+- 71.207
+- 70.669
+- 69.502
+- 54.329
