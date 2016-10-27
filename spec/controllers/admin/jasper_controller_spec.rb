@@ -13,7 +13,7 @@ describe Admin::JasperController, :type => :controller do
 
   it 'writes post data record on post data inline' do
     post :results, :contest_xml => @valid_xml
-    prcd = DataPost.all.first 
+    prcd = DataPost.all.first
     expect(prcd).not_to be_nil
     expect(prcd.data).not_to be_nil
     expect(prcd.has_error).to eq false
@@ -21,20 +21,19 @@ describe Admin::JasperController, :type => :controller do
   end
 
   it 'writes post data record on post data upload' do
-    @file = fixture_file_upload('/jasper/jasperResultsFormat.xml', 'text/xml')
-    post :results, :contest_xml => @file
-    prcd = DataPost.all.first 
+    post :results, :contest_xml => @valid_xml
+    prcd = DataPost.all.first
     expect(prcd).not_to be_nil
     expect(prcd.data).not_to be_nil
     expect(prcd.has_error).to eq false
     expect(response).to be_success
   end
-  
+
   it 'responds with a 400 error on missing post data' do
     post :results
     expect(response).not_to be_success
     expect(response.status).to eq(400)
-    prcd = DataPost.all.first 
+    prcd = DataPost.all.first
     expect(prcd).not_to be_nil
     expect(prcd.has_error).to eq true
     expect(prcd.error_description).not_to be_nil
@@ -44,7 +43,7 @@ describe Admin::JasperController, :type => :controller do
   it 'writes post data failure record on failure' do
     post :results, :contest_xml => @invalid_xml
     expect(response).not_to be_success
-    prcd = DataPost.all.first 
+    prcd = DataPost.all.first
     expect(prcd).not_to be_nil
     expect(prcd.has_error).to eq true
     expect(prcd.error_description).not_to be_nil
@@ -68,7 +67,7 @@ describe Admin::JasperController, :type => :controller do
 
   it 'writes post data with contest id when no cdbId' do
     post :results, :contest_xml => @valid_xml
-    prcd = DataPost.all.first 
+    prcd = DataPost.all.first
     expect(prcd).not_to be_nil
     expect(prcd.has_error).to eq false
     expect(prcd.error_description).to be_nil
@@ -78,7 +77,7 @@ describe Admin::JasperController, :type => :controller do
 
   it 'writes post data with contest id when cdbId provided' do
     post :results, :contest_xml => @update_xml
-    prcd = DataPost.all.first 
+    prcd = DataPost.all.first
     expect(prcd).not_to be_nil
     expect(prcd.has_error).to eq false
     expect(prcd.error_description).to be_nil
