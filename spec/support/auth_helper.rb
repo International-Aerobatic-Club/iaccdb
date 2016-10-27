@@ -15,11 +15,11 @@ module AuthHelper
     def http_auth_login
       creds = Creds.new
       request.env['HTTP_AUTHORIZATION'] = creds.http_auth_basic
-    end  
+    end
   end
 
   module Request
-    # env = environment hash for use in the reuest
+    # env = environment hash for use in the request
     # returns same with HTTP_AUTHORIZATION header added
     # e.g. `get path, {}, http_auth_login` or
     # `get path, {}, http_auth_login({ header_var: 'header_value' })`
