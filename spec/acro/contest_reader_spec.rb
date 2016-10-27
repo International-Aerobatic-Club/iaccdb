@@ -1,6 +1,14 @@
 module ACRO
 
   describe ContestReader do
+    before :context do
+      setup_contest_extracted_data
+    end
+
+    after :context do
+      cleanup_contest_extracted_data
+    end
+
     it 'creates a new contest' do
       ct = Contest.where(:start => '2011-09-25')
       expect(ct.empty?).to eq(true)

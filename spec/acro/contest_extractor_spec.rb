@@ -2,14 +2,10 @@ module ACRO
   require 'fileutils'
   describe ContestExtractor do
     before :context do
-      cs = ContestExtractor.new(contest_data_file('newContest.yml'))
-      cs.scrape_contest
+      setup_contest_extracted_data
     end
     after :context do
-      yml_pattern = contest_data_file('*.htm.yml')
-      Dir.glob(yml_pattern) do |file|
-        FileUtils.rm(file)
-      end
+      cleanup_contest_extracted_data
     end
     it 'creates pilot flight yml files' do
       expect(File.exists?(contest_data_file('pilot_p001s16.htm.yml'))).to eq true

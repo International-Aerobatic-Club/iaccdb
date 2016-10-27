@@ -1,5 +1,5 @@
 module ACRO
-  module ParticipantListTest
+  module AcroDataSetup
     CONTEST_DATA_FILE_PATH = 'spec/acro/contest_data'
     DATA_SAMPLE_FILE_PATH = 'spec/acro/sample_data'
 
@@ -35,12 +35,24 @@ module ACRO
       end
       part_list
     end
+
+    def setup_contest_extracted_data
+      cs = ContestExtractor.new(contest_data_file('newContest.yml'))
+      cs.scrape_contest
+    end
+
+    def cleanup_contest_extracted_data
+      yml_pattern = contest_data_file('*.htm.yml')
+      Dir.glob(yml_pattern) do |file|
+        FileUtils.rm(file)
+      end
+    end
   end
 end
 
 RSpec.configure do |config|
-  include ACRO::ParticipantListTest
-  config.include ACRO::ParticipantListTest
+  include ACRO::AcroDataSetup
+  config.include ACRO::AcroDataSetup
   rel_cd_path = File.join('../../..', CONTEST_DATA_FILE_PATH)
   acro_test_path = File.expand_path(rel_cd_path, __FILE__)
 
