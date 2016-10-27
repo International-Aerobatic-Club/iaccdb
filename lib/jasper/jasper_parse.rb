@@ -3,6 +3,7 @@ class JasperParse
   attr_reader :document
 
   def do_parse(parser)
+    XML::Error.set_handler(&XML::Error::QUIET_HANDLER)
     @document = parser.parse
   end
 
