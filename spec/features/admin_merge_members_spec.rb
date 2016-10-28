@@ -158,7 +158,7 @@ RSpec.describe 'admin member merge', :type => :feature do
     expect(page).to have_xpath('//table/tbody/tr[4]/td[1]')
   end
 
-  it 'invokes merge on selected members', :js => true do
+  it 'invokes merge on selected members' do
     pending 'resolution of alert'
     (0..3).each do |m|
       create :pilot_flight, pilot: @member_list[m]
