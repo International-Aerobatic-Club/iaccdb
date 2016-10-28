@@ -7,8 +7,15 @@ class ComputeContestPilotRollupsJob < Struct.new(:contest)
 
   def perform
     say "Computing pilot rollups for #{contest.year_name}"
-    computer = ContestComputer.new(contest)
+    make_computation
+  end
+
+  def make_computation
     computer.compute_contest_pilot_rollups
+  end
+
+  def computer
+    ContestComputer.new(contest)
   end
 
   def error(job, exception)
