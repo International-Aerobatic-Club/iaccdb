@@ -1,3 +1,4 @@
+# http://stackoverflow.com/questions/3768718/rails-rspec-make-tests-pass-with-http-basic-authentication
 module AuthHelper
   class Creds
     attr_reader :user, :password
@@ -40,12 +41,12 @@ module AuthHelper
         driver.basic_auth(creds.user, creds.password)
       elsif driver.respond_to?(:basic_authorize)
         driver.basic_authorize(creds.user, creds.password)
+      elsif driver.respond_to?(:header)
+        driver.header('AUTHORIZATION', creds.http_auth_basic)
       elsif driver.respond_to?(:browser) && driver.browser.respond_to?(:basic_authorize)
         driver.browser.basic_authorize(creds.user, creds.password)
       elsif driver.respond_to?(:browser) && driver.browser.respond_to?(:authenticate)
         driver.browser.authenticate(creds.user, creds.password)
-      elsif driver.respond_to?(:header)
-        driver.header('AUTHORIZATION', creds.http_auth_basic)
       else
         raise DriverAuthException.new "Capybara page driver basic auth unknown method"
       end
