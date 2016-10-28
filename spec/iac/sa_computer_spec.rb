@@ -90,8 +90,7 @@ module IAC
           :pilot_id => pilot.id, 
           :flight_id => flight.id).first
         expect(@pilot_flight).not_to be nil
-        logger = double()
-        Rails.logger = logger
+        logger = Rails.logger
         expect(logger).to receive(:error).exactly(3).times
         pf = @sa_computer.computePilotFlight(false)
       end
