@@ -1,5 +1,5 @@
 describe JudgesController, :type => :controller do
-  before(:all) do
+  before :context do
     # two contests
     #   with two flights, one advanced/unlimited, 
     #     one sportsman/intermediate
