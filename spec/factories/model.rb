@@ -70,15 +70,17 @@ FactoryGirl.define do
     r.director 'Vicky Benzing'
   end
   factory :contest do |r|
-    r.sequence(:name) { |n| Forgery(:name).company_name + ' Aerobatic Open' }
-    r.sequence(:city) { |n| Forgery(:address).city }
-    r.sequence(:state) { |n| Forgery(:address).state_abbrev }
-    r.sequence(:start) do |n|
-      Forgery(:basic).number(at_least: 2011, at_most: 2020).to_s + '-' +
-      Forgery(:basic).number(at_least: 1, at_most: 12).to_s + '-' +
-      Forgery(:basic).number(at_least: 1, at_most: 28).to_s
-    end
-    r.sequence(:director) { |n| Forgery(:name).full_name }
+    r.name { Forgery(:name).company_name + ' Aerobatic Open' }
+    r.city Forgery(:address).city
+    r.region 'SouthEast'
+    r.chapter '52'
+    r.state Forgery(:address).state_abbrev
+    r.start Time.mktime(
+      Forgery(:basic).number(at_least: 2011, at_most: 2020),
+      Forgery(:basic).number(at_least: 1, at_most: 12),
+      Forgery(:basic).number(at_least: 1, at_most: 28)
+    )
+    r.director Forgery(:name).full_name
   end
 ### Category
   factory :category do
@@ -149,6 +151,7 @@ FactoryGirl.define do
     r.association :sequence
     r.association :airplane
     r.penalty_total 0
+    r.chapter '52'
   end
   factory :adams_known, :class => PilotFlight do |r|
     r.association :pilot, :factory => :tom_adams

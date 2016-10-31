@@ -1,1 +1,1 @@
-json.(flight, :id, :sequence, :name)
+json.(flight, :sequence, :name)
