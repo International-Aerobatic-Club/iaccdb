@@ -150,6 +150,7 @@ describe ContestsController, :type => :controller do
       d_f = d_fdls.first
       expect(d_f['url']).to_not be nil
       expect(d_f['url']).to match /^http/
+      expect(d_f['url']).to match /\.json$/
     end
   end
 end
