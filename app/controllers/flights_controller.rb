@@ -12,11 +12,6 @@ class FlightsController < ApplicationController
       @judge_results[pf_result] = pf_result.pilot_flight.pfj_results.order(:judge_id)
     end
     @jf_results = @flight.jf_results.order(:judge_id)
-
-    respond_to do |format|
-      format.html { render :show }
-      format.xml  { render :xml => @flight }
-    end
   end
 
 end

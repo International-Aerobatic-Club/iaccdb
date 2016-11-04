@@ -1,0 +1,115 @@
+describe FlightsController, :type => :controller do
+  before :context do
+    @year = Time.now.year
+    @contest = create :contest, year: @year
+    @ctf = 3
+    @category = Category.first
+    @flights = create_list :flight, @ctf, contest: @contest, category: @category
+    @flight = @flights.first
+    @pilots = create_list :member, 3
+    @airplanes = create_list :airplane, 3
+    judge_pairs = create_list :judge, 3
+    @flights.each do |flight|
+      @pilots.each_with_index do |p, i|
+        pf = create :pilot_flight, flight: flight, pilot: p,
+          airplane: @airplanes[i]
+        judge_pairs.each do |j|
+          s = create :score, pilot_flight: pf, judge: j
+        end
+      end
+    end
+    @judges = judge_pairs.collect { |jp| jp.judge }
+    cc = ContestComputer.new(@contest)
+    cc.compute_results
+  end
+  it 'responds with basic flight information' do
+    get :show, id: @flight.id, :format => :json
+    expect(response.status).to eq(200)
+    expect(response.content_type).to eq "application/json"
+    data = JSON.parse(response.body)
+    puts "DATA #{JSON.pretty_generate(data)}"
+    d_fl = data['flight']
+    expect(d_fl).to_not be nil
+    expect(d_fl['id']).to eq @flight.id
+    expect(d_fl['name']).to eq @flight.name
+    expect(d_fl['sequence']).to eq @flight.sequence
+  end
+  it 'includes contest url for flight' do
+    get :show, id: @flight.id, :format => :json
+    data = JSON.parse(response.body)
+    d_fl = data['flight']
+    expect(d_fl['contest']).to eq contest_url(@flight.contest)
+  end
+  it 'includes category information' do
+    get :show, id: @flight.id, :format => :json
+    data = JSON.parse(response.body)
+    d_fl = data['flight']
+    d_cat = d_fl['category']
+    expect(d_cat).to_not be nil
+    cat = @flight.category
+    expect(d_cat['sequence']).to eq cat.sequence
+    expect(d_cat['aircat']).to eq cat.aircat
+    expect(d_cat['name']).to eq cat.name
+    expect(d_cat['level']).to eq cat.category
+  end
+  it 'includes pilot flights' do
+    get :show, id: @flight.id, :format => :json
+    data = JSON.parse(response.body)
+    d_fl = data['flight']
+    d_pfs = d_fl['pilot_results']
+    expect(d_pfs).to_not be nil
+    expect(d_pfs.count).to eq @flight.pilot_flights.count
+  end
+  it 'includes pilot flight pilot information' do
+    get :show, id: @flight.id, :format => :json
+    data = JSON.parse(response.body)
+    d_fl = data['flight']
+    d_pfs = d_fl['pilot_results']
+    d_pf = d_pfs.first
+    expect(d_pf).to_not be nil
+    d_pilot = d_pf['pilot']
+    expect(d_pilot).to_not be nil
+    d_pf_id = d_pf['id'].to_int
+    pf = @flight.pilot_flights.where(id: d_pf_id)
+    expect(pf).to_not be_nil
+    pf = pf.first
+    pilot = pf.pilot
+    expect(d_pilot['id']).to eq pilot.id
+    expect(d_pilot['name']).to eq pilot.name
+    expect(d_pilot['url']).to eq pilot_url(pilot, :format => :json)
+  end
+  it 'includes pilot flight urls' do
+    get :show, id: @flight.id, :format => :json
+    data = JSON.parse(response.body)
+    d_fl = data['flight']
+    d_pfs = d_fl['pilot_results']
+    d_pf = d_pfs.first
+    expect(d_pf).to_not be nil
+    d_pf_id = d_pf['id'].to_int
+    pf = @flight.pilot_flights.where(id: d_pf_id)
+    expect(pf).to_not be_nil
+    pf = pf.first
+    expect(d_pf['url']).to eq pilot_flight_url(pf, :format => :json)
+  end
+  it 'includes pilot flight result information' do
+    get :show, id: @flight.id, :format => :json
+    data = JSON.parse(response.body)
+    d_fl = data['flight']
+    d_pfs = d_fl['pilot_results']
+    d_pf = d_pfs.first
+    expect(d_pf).to_not be nil
+    d_pf_id = d_pf['id'].to_int
+    pf = @flight.pilot_flights.where(id: d_pf_id)
+    pf = pf.first
+    expect(pf).to_not be_nil
+    pfr = pf.pf_results.first
+    expect(pfr).to_not be nil
+    expect(d_pf['penalty_total']).to eq pf.penalty_total
+    expect(d_pf['score_before_penalties']).to eq pfr.flight_value.to_s
+    expect(d_pf['score']).to eq pfr.adj_flight_value.to_s
+    expect(d_pf['rank_before_penalties']).to eq pfr.flight_rank
+    expect(d_pf['rank']).to eq pfr.adj_flight_rank
+    expect(d_pf['total_possible']).to eq pfr.total_possible
+  end
+end
+
