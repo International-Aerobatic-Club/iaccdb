@@ -53,7 +53,6 @@ describe ContestsController, :type => :controller do
       expect(response.status).to eq(200)
       expect(response.content_type).to eq "application/json"
       data = JSON.parse(response.body)
-      puts "DATA #{JSON.pretty_generate(data)}"
       expect(data['region']).to eq @contest.region
       expect(data['city']).to eq @contest.city
       expect(data['start']).to eq @contest.start.to_s
@@ -150,6 +149,7 @@ describe ContestsController, :type => :controller do
       expect(d_fdls.count).to eq 3
       d_f = d_fdls.first
       expect(d_f['url']).to_not be nil
+      expect(d_f['url']).to match /^http/
     end
   end
 end

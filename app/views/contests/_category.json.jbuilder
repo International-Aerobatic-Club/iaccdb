@@ -3,7 +3,7 @@ json.category do
   json.flights do
     json.array! category[:flights] do |flight|
       json.partial! 'flights/flight', flight: flight
-      json.url flight_path(flight, :format => :json)
+      json.url flight_url(flight, :format => :json)
     end
   end
   json.pilot_results do
