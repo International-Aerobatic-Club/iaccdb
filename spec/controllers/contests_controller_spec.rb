@@ -126,10 +126,30 @@ describe ContestsController, :type => :controller do
     it 'contains judge performance summaries in category' do
       get :show, id: @contest.id, :format => :json
       data = JSON.parse(response.body)
+      d_crs = data['category_results']
+      d_cr = d_crs.first['category']
+      d_jrs = d_cr['judge_results']
+      expect(d_jrs).to_not be nil
+      expect(d_jrs.count).to eq 3
+      d_jr = d_jrs.first
+      j_result = d_jr['result']
+      expect(j_result).to_not be nil
+      expect(j_result['gamma']).to_not be nil
+      expect(j_result['rho']).to_not be nil
+      expect(j_result['flight_count']).to_not be nil
+      expect(j_result['minority_zero_ct']).to_not be nil
+      expect(j_result['minority_grade_ct']).to_not be nil
     end
     it 'contains flight detail links in category' do
       get :show, id: @contest.id, :format => :json
       data = JSON.parse(response.body)
+      d_crs = data['category_results']
+      d_cr = d_crs.first['category']
+      d_fdls = d_cr['flights']
+      expect(d_fdls).to_not be nil
+      expect(d_fdls.count).to eq 3
+      d_f = d_fdls.first
+      expect(d_f['url']).to_not be nil
     end
   end
 end
