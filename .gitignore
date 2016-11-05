@@ -6,18 +6,13 @@
 db/*.sqlite3*
 log/*.log
 tmp/**/*
-IACContestData
-AppleCup2012
 vendor/cache
-nationals2011
-nationals2012
-nationals2014
-nationals2015
-.DS_Store
-dbBackup/
+bin/
 posts/
 .sass-cache/
+dbBackup/
 public/assets
+.DS_Store
 config/database.yml
 *.dia~
 
