@@ -15,11 +15,11 @@ class JfResult::JudgeGrades
   end
 
   # all of the judge's grades for the flight
-  # an AR result list of Score records
+  # an array of scores
   def grades
     pilot_flights = PilotFlight.where(flight: @jf_result.flight)
-    all_scores = Scores.where(
+    Score.where(
       judge: @jf_result.judge,
-      pilot_flight: flights)
+      pilot_flight: pilot_flights).to_a
   end
 end
