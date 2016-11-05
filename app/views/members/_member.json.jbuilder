@@ -1,1 +1,1 @@
-json.(member, :iac_id, :given_name, :family_name)
+json.(member, :id, :iac_id, :given_name, :family_name)

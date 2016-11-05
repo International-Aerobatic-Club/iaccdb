@@ -34,11 +34,16 @@ describe FlightsController, :type => :controller do
     expect(d_fl['name']).to eq @flight.name
     expect(d_fl['sequence']).to eq @flight.sequence
   end
-  it 'includes contest url for flight' do
+  it 'includes contest information' do
     get :show, id: @flight.id, :format => :json
     data = JSON.parse(response.body)
     d_fl = data['flight']
-    expect(d_fl['contest']).to eq contest_url(@flight.contest)
+    d_c = d_fl['contest']
+    expect(d_c['url']).to eq contest_url(@flight.contest)
+    expect(d_c['director']).to eq @flight.contest.director
+    expect(d_c['name']).to eq @flight.contest.name
+    expect(d_c['year']).to eq @flight.contest.year
+    expect(d_c['start']).to eq @flight.contest.start.to_s
   end
   it 'includes category information' do
     get :show, id: @flight.id, :format => :json
@@ -110,6 +115,63 @@ describe FlightsController, :type => :controller do
     expect(d_pf['rank_before_penalties']).to eq pfr.flight_rank
     expect(d_pf['rank']).to eq pfr.adj_flight_rank
     expect(d_pf['total_possible']).to eq pfr.total_possible
+  end
+  it 'includes airplane information in pilot flight result' do
+    get :show, id: @flight.id, :format => :json
+    data = JSON.parse(response.body)
+    d_fl = data['flight']
+    d_pfs = d_fl['pilot_results']
+    d_pf = d_pfs.first
+    expect(d_pf).to_not be nil
+    d_pf_id = d_pf['id'].to_int
+    pf = @flight.pilot_flights.where(id: d_pf_id)
+    pf = pf.first
+    expect(pf).to_not be_nil
+    pfr = pf.pf_results.first
+    expect(pfr).to_not be nil
+    airplane = pf.airplane
+    d_a = d_pf['airplane']
+    expect(d_a).to_not be nil
+    expect(d_a['make']).to eq airplane.make
+    expect(d_a['model']).to eq airplane.model
+    expect(d_a['reg']).to eq airplane.reg
+    expect(d_a['id']).to eq airplane.id
+  end
+  it 'includes judge results' do
+    get :show, id: @flight.id, :format => :json
+    data = JSON.parse(response.body)
+    d_fl = data['flight']
+    d_jfs = d_fl['line_judges']
+    expect(d_jfs).to_not be nil
+    d_jf = d_jfs.first
+    expect(d_jf).to_not be nil
+    d_jf_id = d_jf['id'].to_int
+    jf_result = JfResult.find(d_jf_id)
+    expect(jf_result).to_not be nil
+    judge_pair = jf_result.judge
+    expect(judge_pair).to_not be nil
+    d_j = d_jf['judge']
+    expect(d_j).to_not be nil
+    expect(d_j['id']).to eq judge_pair.judge.id
+    expect(d_j['name']).to eq judge_pair.judge.name
+    expect(d_j['url']).to eq judge_url(judge_pair.judge)
+    d_a = d_jf['assistant']
+    expect(d_a).to_not be nil
+    expect(d_a['id']).to eq judge_pair.assist.id
+    expect(d_a['name']).to eq judge_pair.assist.name
+    expect(d_jf['rho']).to eq jf_result.rho
+    expect(d_jf['gamma']).to eq jf_result.gamma
+    expect(d_jf['tau']).to eq jf_result.tau
+    expect(d_jf['cc']).to eq jf_result.cc
+    expect(d_jf['ri']).to eq jf_result.ri.to_s
+    expect(d_jf['pilot_count']).to eq jf_result.pilot_count
+    expect(d_jf['pair_count']).to eq jf_result.pair_count
+    expect(d_jf['flight_count']).to eq jf_result.flight_count
+    expect(d_jf['average_flight_size']).to eq jf_result.avgFlightSize
+    expect(d_jf['figure_count']).to eq jf_result.figure_count
+    expect(d_jf['average_k']).to eq jf_result.avgK
+    expect(d_jf['minority_zeros']).to eq jf_result.minority_zero_ct
+    expect(d_jf['minority_grades']).to eq jf_result.minority_grade_ct
   end
 end
 
