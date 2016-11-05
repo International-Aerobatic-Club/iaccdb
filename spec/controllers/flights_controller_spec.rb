@@ -27,7 +27,6 @@ describe FlightsController, :type => :controller do
     expect(response.status).to eq(200)
     expect(response.content_type).to eq "application/json"
     data = JSON.parse(response.body)
-    puts "DATA #{JSON.pretty_generate(data)}"
     d_fl = data['flight']
     expect(d_fl).to_not be nil
     expect(d_fl['id']).to eq @flight.id
@@ -39,7 +38,7 @@ describe FlightsController, :type => :controller do
     data = JSON.parse(response.body)
     d_fl = data['flight']
     d_c = d_fl['contest']
-    expect(d_c['url']).to eq contest_url(@flight.contest)
+    expect(d_c['url']).to eq contest_url(@flight.contest, :format => :json)
     expect(d_c['director']).to eq @flight.contest.director
     expect(d_c['name']).to eq @flight.contest.name
     expect(d_c['year']).to eq @flight.contest.year
@@ -154,7 +153,7 @@ describe FlightsController, :type => :controller do
     expect(d_j).to_not be nil
     expect(d_j['id']).to eq judge_pair.judge.id
     expect(d_j['name']).to eq judge_pair.judge.name
-    expect(d_j['url']).to eq judge_url(judge_pair.judge)
+    expect(d_j['url']).to eq judge_url(judge_pair.judge, :format => :json)
     d_a = d_jf['assistant']
     expect(d_a).to_not be nil
     expect(d_a['id']).to eq judge_pair.assist.id
@@ -172,6 +171,7 @@ describe FlightsController, :type => :controller do
     expect(d_jf['average_k']).to eq jf_result.avgK
     expect(d_jf['minority_zeros']).to eq jf_result.minority_zero_ct
     expect(d_jf['minority_grades']).to eq jf_result.minority_grade_ct
+    expect(d_jf['url']).to eq jf_result_url(jf_result, :format => :json)
   end
 end
 

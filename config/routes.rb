@@ -84,6 +84,8 @@ IAC::Application.routes.draw do
 
   resources :pilot_flights, :only => [:show]
 
+  resources :jf_results, :only => [:show]
+
   get 'judge/:id/cv', 
     :controller => :judges, 
     :action => :cv, 
