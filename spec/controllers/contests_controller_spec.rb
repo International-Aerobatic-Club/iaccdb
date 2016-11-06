@@ -3,8 +3,9 @@ describe ContestsController, :type => :controller do
     @ctc = 4
     @year = Time.now.year
     @contests = create_list :contest, @ctc, year: @year
-    create_list :contest, 3, year: @year - 1
-    create_list :contest, 5, year: @year - 2
+    cl2 = create_list :contest, 3, year: @year - 1
+    cl3 = create_list :contest, 5, year: @year - 2
+    @years = [@year, @year - 1, @year - 2]
   end
   context 'index' do
     it 'responds with list of contests' do
@@ -17,8 +18,11 @@ describe ContestsController, :type => :controller do
     it 'responds with list of years' do
       get :index, year: @year, :format => :json
       data = JSON.parse(response.body)
-      expect(data['years'].count).to eq 3
-      expect(data['years']).to contain_exactly(@year, @year-1, @year-2)
+      expect(data['years'].count).to eq @years.count
+      expected = @years.collect do |y|
+        contests_url(year: y, :format => :json)
+      end
+      expect(data['years']).to match_array(expected)
     end
     it 'contests have REST urls' do
       get :index, year: @year, :format => :json
