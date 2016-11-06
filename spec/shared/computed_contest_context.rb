@@ -23,5 +23,6 @@ shared_context 'computed contest' do
     cc.compute_results
     @judge = @judge_pairs.first
     @jf_result = JfResult.where(flight: @flight, judge: @judge).first
+    @pilot_flight = @flight.pilot_flights.first
   end
 end
