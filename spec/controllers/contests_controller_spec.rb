@@ -71,18 +71,17 @@ describe ContestsController, :type => :controller do
       data = JSON.parse(response.body)
       e_cats = @contest.flights.collect { |f| f.category }
       e_cats = e_cats.uniq
-      d_crs = data['category_results']
-      expect(d_crs.length).to eq e_cats.length
+      d_cats = data['category_results']
+      expect(d_cats.length).to eq e_cats.length
       e_cat_names = e_cats.collect { |c| c.name }
-      d_cats = d_crs.collect { |cr| cr['category'] }
       d_cat_names = d_cats.collect { |c| c['name'] }
       expect(d_cat_names).to match_array(e_cat_names)
     end
     it 'contains competitors in category' do
       get :show, id: @contest.id, :format => :json
       data = JSON.parse(response.body)
-      d_crs = data['category_results']
-      d_cr = d_crs.first['category']
+      d_cats = data['category_results']
+      d_cr = d_cats.first
       d_prs = d_cr['pilot_results']
       expect(d_prs.length).to eq @pilots.length
       d_pilots = d_prs.collect { |pr| pr['pilot'] }
@@ -100,7 +99,7 @@ describe ContestsController, :type => :controller do
       get :show, id: @contest.id, :format => :json
       data = JSON.parse(response.body)
       d_crs = data['category_results']
-      d_cr = d_crs.first['category']
+      d_cr = d_crs.first
       d_prs = d_cr['pilot_results']
       d_pr = d_prs.first
       d_airplane = d_pr['airplane']
@@ -115,7 +114,7 @@ describe ContestsController, :type => :controller do
       get :show, id: @contest.id, :format => :json
       data = JSON.parse(response.body)
       d_crs = data['category_results']
-      d_cr = d_crs.first['category']
+      d_cr = d_crs.first
       d_prs = d_cr['pilot_results']
       d_pr = d_prs.first
       d_result = d_pr['result']
@@ -130,7 +129,7 @@ describe ContestsController, :type => :controller do
       get :show, id: @contest.id, :format => :json
       data = JSON.parse(response.body)
       d_crs = data['category_results']
-      d_cr = d_crs.first['category']
+      d_cr = d_crs.first
       d_jrs = d_cr['judge_results']
       expect(d_jrs).to_not be nil
       expect(d_jrs.count).to eq 3
@@ -147,7 +146,7 @@ describe ContestsController, :type => :controller do
       get :show, id: @contest.id, :format => :json
       data = JSON.parse(response.body)
       d_crs = data['category_results']
-      d_cr = d_crs.first['category']
+      d_cr = d_crs.first
       d_fdls = d_cr['flights']
       expect(d_fdls).to_not be nil
       expect(d_fdls.count).to eq 3
