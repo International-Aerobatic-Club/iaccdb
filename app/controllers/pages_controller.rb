@@ -3,11 +3,12 @@ class PagesController < ApplicationController
     requested_page = params[:title]
     available_pages_pattern = File.join(Rails.root, 'app', 'views', 'pages', '*')
     available_page_names = Dir.glob(available_pages_pattern).collect do |fn|
-      name = File.basename(fn)
-      dot_pos = name.index('.')
+      page_name = File.basename(fn)
+      dot_pos = page_name.index('.')
       if dot_pos
-        name = name[0,dot_pos]
+        page_name = page_name[0,dot_pos]
       end
+      page_name
     end
     if available_page_names.include? requested_page
       render requested_page
