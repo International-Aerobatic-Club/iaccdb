@@ -5,7 +5,7 @@ require 'libxml'
 # parses the record into the contest database
 module Jobs
 class ProcessJasperJob < Struct.new(:data_post_id)
-  
+
   include JobsSay
 
   def perform
@@ -20,7 +20,7 @@ class ProcessJasperJob < Struct.new(:data_post_id)
     j2d = Jasper::JasperToDB.new
     @contest = j2d.process_contest(jasper, @contest_id)
     post_record.is_integrated = true
-    post_record.save
+    post_record.save!
   end
 
   def error(job, exception)

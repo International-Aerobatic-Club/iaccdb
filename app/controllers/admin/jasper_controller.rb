@@ -23,7 +23,7 @@ def results
       post_record.error_description = @exception
       post_record.store('<ContestResults/>')
     end
-    post_record.save
+    post_record.save!
     if (@exception == nil)
       parser = LibXML::XML::Parser.string(post_record.data)
       jasper = Jasper::JasperParse.new
@@ -35,7 +35,7 @@ def results
         @contest_id = contest.id
       end
       post_record.contest_id = @contest_id
-      post_record.save
+      post_record.save!
     end
   rescue Exception => ex
     @exception = ex.message

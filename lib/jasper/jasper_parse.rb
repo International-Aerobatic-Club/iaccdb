@@ -1,9 +1,11 @@
+require 'libxml'
+
 module Jasper
 class JasperParse
   attr_reader :document
 
   def do_parse(parser)
-    XML::Error.set_handler(&XML::Error::QUIET_HANDLER)
+    LibXML::XML::Error.set_handler(&LibXML::XML::Error::QUIET_HANDLER)
     @document = parser.parse
   end
 
@@ -128,7 +130,7 @@ class JasperParse
     nodes = @document.find("/ContestResults/Pilots/Category[@CategoryID=#{jCat}]/Pilot[contains(./SubCategory/text(), 'CollegiateSeries')]/@PilotID")
     ids = []
     nodes.each do |node|
-      ids << node.value if node.node_type == XML::Node::ATTRIBUTE_NODE
+      ids << node.value if node.node_type == LibXML::XML::Node::ATTRIBUTE_NODE
     end
     ids
   end
