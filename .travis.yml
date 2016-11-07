@@ -2,7 +2,12 @@ language: ruby
 script: bundle exec rspec spec
 before_script:
   - cmd/travis_ci_test_db.sh
+after_script:
+  - cmd/code_coverage_report.sh
 env:
   global:
   - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
+addons:
+  code_climate:
+    repo_token: fd2fd65eb03d8d46106cead7c743cfb40f9a2de88b16d6b19e386be95e0a8e82
 
