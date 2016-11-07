@@ -1,6 +1,6 @@
 # process JaSPer post data for collegiate series participants
 
-require 'xml'
+require 'libxml'
 
 module Jasper
 class CollegiateParticipants
@@ -63,7 +63,7 @@ class CollegiateParticipants
 
   def process_post(post)
     jasper = Jasper::JasperParse.new
-    parser = XML::Parser.file(post.filename)
+    parser = LibXML::XML::Parser.file(post.filename)
     jasper.do_parse(parser)
     process_jasper(jasper)
   end

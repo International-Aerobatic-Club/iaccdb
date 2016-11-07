@@ -1,4 +1,4 @@
-source 'http://rubygems.org'
+source 'https://rubygems.org'
 
 gem 'rails', "~> 4.1.0"
 
@@ -43,6 +43,8 @@ group :test do
   gem 'launchy'
   gem 'capybara-webkit'
   gem 'selenium-webdriver'
+  gem 'simplecov'
+  gem 'codeclimate-test-reporter', '~> 1.0.0'
 end
 
 group :production do
