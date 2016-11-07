@@ -45,3 +45,4 @@ exclude_paths:
 - db/
 - script/
 - spec/
+- app/assets/javascripts/flot/
