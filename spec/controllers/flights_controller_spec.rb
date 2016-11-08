@@ -152,5 +152,33 @@ describe FlightsController, :type => :controller do
     expect(d_jf['minority_grades']).to eq jf_result.minority_grade_ct
     expect(d_jf['url']).to eq jf_result_url(jf_result, :format => :json)
   end
+  it 'retrieves judge pair with nil assistant' do
+    judge = @jf_result.judge
+    judge.assist = nil
+    judge.save!
+    expect(judge.assist).to be nil
+    flight = @jf_result.flight
+    begin
+      get :show, id: flight.id, :format => :json
+    rescue => e
+      fail "Get flight not expected to raise #{e.message}"
+    end
+    expect(response.status).to eq(200)
+    expect(response.content_type).to eq "application/json"
+    data = JSON.parse(response.body)
+    d_fl = data['flight']
+    d_jfs = d_fl['line_judges']
+    judge_ct = flight.jf_results.length
+    expect(d_jfs.length).to eq judge_ct
+    assist_ids = d_jfs.collect do |d_jf|
+      assistant = d_jf['assistant']
+      if assistant != nil
+        assistant['id']
+      else
+        nil
+      end
+    end
+    expect(assist_ids.compact.count).to eq(judge_ct - 1)
+  end
 end
 
