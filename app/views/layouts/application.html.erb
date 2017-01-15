@@ -62,9 +62,6 @@
 <div id="content">
   <p>Contact <a href="mailto:doug@wbreeze.com">Douglas Lovell</a> with questions and
      notice of any errors.
-     These pages brought to you by
-     <a href="http://www.telegraphyinteractive.com/">Telegraphy Interactive</a>, and
-     <a href="http://myflttime.com/">myFltTime.com</a>.
   </p>
   <div id='notice'><%= notice %></div>
   <div id='alert'><%= alert %></div>
@@ -72,10 +69,8 @@
   <div id="footer">
     <p>Contact <a href="mailto:doug@wbreeze.com">Douglas Lovell</a> with questions and
      notice of any errors.</p>
-    <p>As of the 2014 contest year, these are official results.  
-    Results prior to 2014 are computed by this system for study only, with
-    official results published at 
-    <a href="http://www.usnationalaerobatics.org/IAC/IAC_Scores.asp">www.usnationalaerobatics.org</a>.</p>
+    <p>As of the 2014 contest year, these are official results.
+    Results prior to 2014 are computed by this system for study only.
     <p>See the 
     <%= link_to 'Notes page', pages_path(:notes) %>
     for explanations of the numbers.</p>
@@ -85,14 +80,9 @@
       <li>"JaSPer," the contest scoring and data management system
       built by 'Bwana' Bob Buckley;</li>
       <li>Our contest scorekeepers who key-in the data; and</li>
-      <li>Web wizardry by <a href="mailto:doug@wbreeze.com">Douglas Lovell</a> and
-      <a href="http://www.telegraphyinteractive.com/">Telegraphy Interactive</a></li>
+      <li>Web wizardry by <a href="mailto:doug@wbreeze.com">Douglas Lovell</a></li>
     </ul>
-    <p>Sponsored by
-      <a href="http://myflttime.com/">myFltTime.com</a>.
-      Quick logging pilot flight time.
-    </p>
-    <p>Copyright &#169;2012-2016 Douglas Lovell</p>
+    <p>Copyright &#169;2012-<%=Time.now.year%> Douglas Lovell</p>
     <p>Licensed under the
       <a href="http://www.apache.org/licenses/LICENSE-2.0">
       Apache License, Version 2.0</a>
