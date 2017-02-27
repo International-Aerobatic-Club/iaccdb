@@ -3,20 +3,23 @@
 <table class='pilot_results'><thead><tr>
   <th colspan='3'>Pilot</th>
   <th>Airplane</th>
-<% flight_order = [] %>
-<% category[:flights].each do |flight| %>
-  <th colspan='3'>
-  <%= link_to(flight.name, flight_path(flight)) %>
-  </th>
-<% end %>
-<th colspan='3'>Total</th>
+  <% flight_order = [] %>
+  <% category[:flights].each do |flight| %>
+    <th colspan='3'>
+    <%= link_to(flight.name, flight_path(flight)) %>
+    </th>
+  <% end %>
+  <th colspan='3'>Total</th>
 </tr></thead><tbody>
 <%= render partial: 'contests/pilot_result',
     collection: category[:pilot_results], 
     locals: {flights: category[:flights]} %>
 </tbody></table>
 
-<table>
+<% if category[:chiefs] %>
+  <p class="category-chief">Chief Judge(s): <%= category[:chiefs].join(', ') %></p>
+<% end %>
+
 <table class='judge_results'><thead>
 <tr>
 <th colspan='2'>Judge</th>

@@ -34,5 +34,20 @@ describe 'show contest' do
       expect(page).to have_content(@cji.name)
     end
   end
+  it 'shows chief judge rollup for category' do
+    cj2 = create(:member)
+    fspn = @spn_flights.first
+    fspn.chief = cj2
+    fspn.save!
+    visit contest_path(@contest)
+    spnh = find(:xpath, "//div[@id='content']/h3[text()='#{fspn.category.name}']")
+    ptbl = spnh.first(:xpath, "following-sibling::table[@class='pilot_results']")
+    expect(ptbl).to_not be nil
+    pfcj = ptbl.first(:xpath, "following-sibling::p[@class='category-chief']")
+    expect(pfcj).to_not be nil
+    expect(pfcj).to have_content('Chief Judge(s)')
+    expect(pfcj).to have_content(@cjs.name)
+    expect(pfcj).to have_content(cj2.name)
+  end
 end
 
