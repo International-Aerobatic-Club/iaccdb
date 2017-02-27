@@ -2,8 +2,9 @@
 
 <h1><%= @contest.name %></h1>
 <p class="contest_place">Held in <%= @contest.place %>, <%= @contest.start %></p>
-<p class="contest_director">Directed by <%= @contest.director %>, 
+<p class="contest_director">Directed by <%= @contest.director %>,
    Chapter <%= @contest.chapter %></p>
+<p class="contest_chief">Chief Judge(s): <%= @contest.chief_names.join(', ') %></p>
 
 <%= render :partial => 'contests/category', collection: @categories %>
 

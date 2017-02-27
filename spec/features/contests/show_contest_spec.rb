@@ -22,7 +22,7 @@ describe 'show contest' do
     @cjs = create(:member)
     @cji = create(:member)
     @spn_flights = build_contest_category_flights(@contest, spn, @cjs)
-    @imdt_flights = build_contest_category_flights(@contest, imdt, @cjs)
+    @imdt_flights = build_contest_category_flights(@contest, imdt, @cji)
     computer = ContestComputer.new(@contest)
     computer.compute_results
   end

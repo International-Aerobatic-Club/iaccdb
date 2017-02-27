@@ -26,6 +26,7 @@ class ContestsController < ApplicationController
   #             key is Flight, value is array of PfResult (with one element)
   def show
     @contest = Contest.find(params[:id])
+    @contest.extend(Contest::ShowResults)
     flights = @contest.flights
     @categories = []
     if !flights.empty?
