@@ -1,11 +1,11 @@
 # assume loaded with rails ActiveRecord
 # environment for IAC contest data application
-
 module IAC
 
 # this class contains methods to compute jy_results entries for
 # all judges and categories in any given year
 class JudgeRollups
+include Log::ConfigLogger
 
 # Accepts the year
 # Computes or recomputes jy_results for every judge in every category
@@ -13,7 +13,7 @@ def self.compute_jy_results (year)
   # start_list = list all jy_result where year
   start_list = JyResult.where(:year => year).all
   Contest.where(["year(start) = ?", year]).each do |contest|
-    puts "add #{contest.year_name} to judge rollups"
+    logger.info "add #{contest.year_name} to judge rollups"
     contest.jc_results.each do |jc_result|
       category = jc_result.category
       if category
@@ -25,7 +25,7 @@ def self.compute_jy_results (year)
         jy_result.accumulate(jc_result)
         jy_result.save
       else
-        puts("failed category #{jc_result.category.name} for contest #{contest.year_name}")
+        logger.error("failed category #{jc_result.category.name} for contest #{contest.year_name}")
       end
     end
   end
