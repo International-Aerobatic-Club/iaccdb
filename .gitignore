@@ -7,7 +7,6 @@ db/*.sqlite3*
 log/*.log
 tmp/**/*
 vendor/cache
-bin/
 posts/
 .sass-cache/
 dbBackup/
