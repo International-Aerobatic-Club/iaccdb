@@ -25,19 +25,19 @@ RSpec.configure do |config|
     truncate_database
   end
 
-  config.before(:context) do
+  config.before(:context, viz: false) do
     start_transaction
   end
 
-  config.after(:context) do
+  config.after(:context, viz: false) do
     end_transaction
   end
 
-  config.before(:example) do
+  config.before(:example, viz: false) do
     start_transaction
   end
 
-  config.after(:example) do
+  config.after(:example, viz: false) do
     end_transaction
   end
 end
