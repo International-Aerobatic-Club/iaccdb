@@ -3,7 +3,6 @@ module Contest::ShowResults
   # given array of flight records,
   # return possibly empty array of unique chief judge names
   def flights_chiefs(cfs)
-    puts "FLIGHTS_CHIEFS #{cfs.inspect}"
     chiefs = []
     unless cfs.empty?
       cjs = cfs.collect do |flight|
@@ -14,7 +13,6 @@ module Contest::ShowResults
       end
       chiefs = cjs.collect(&:name)
     end
-    puts "CHIEFS #{chiefs.inspect}"
     chiefs
   end
 
