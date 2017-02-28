@@ -16,7 +16,7 @@
     locals: {flights: category[:flights]} %>
 </tbody></table>
 
-<% unless category[:chiefs].empty? %>
+<% unless no_category_chiefs %>
   <p class="category-chief">Chief Judge(s): <%= category[:chiefs].join(', ') %></p>
 <% end %>
 
