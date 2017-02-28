@@ -49,5 +49,21 @@ describe 'show contest' do
     expect(pfcj).to have_content(@cjs.name)
     expect(pfcj).to have_content(cj2.name)
   end
+  context 'no chiefs' do
+    before :context do
+      [@spn_flights, @imdt_flights].flatten.each do |f|
+        f.chief = nil
+        f.save!
+      end
+    end
+    it 'does not show contest chiefs stem' do
+      visit contest_path(@contest)
+      expect(page).to_not have_css('p.contest_chief');
+    end
+    it 'does not show category chiefs stem' do
+      visit contest_path(@contest)
+      expect(page).to_not have_css('p.category-chief');
+    end
+  end
 end
 
