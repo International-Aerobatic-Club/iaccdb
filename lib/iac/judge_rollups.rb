@@ -5,7 +5,9 @@ module IAC
 # this class contains methods to compute jy_results entries for
 # all judges and categories in any given year
 class JudgeRollups
-include Log::ConfigLogger
+class << self
+  include Log::ConfigLogger
+end
 
 # Accepts the year
 # Computes or recomputes jy_results for every judge in every category
