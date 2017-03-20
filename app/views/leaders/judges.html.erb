@@ -1,3 +1,8 @@
+<%=
+  content_for(:headers) do
+    javascript_include_tag('judge_leaders')
+  end
+%>
 <h1>Top Judges <%= @year %></h1>
 
 <p>Judges in each category who have judged the most flights, 
