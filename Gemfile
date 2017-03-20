@@ -1,5 +1,10 @@
 source 'https://rubygems.org'
 
+#####
+# to remove, holding rake back from 12.0.0
+gem 'rake', "~> 11.0"
+#####
+
 gem 'rails', "~> 4.0"
 
 ##
