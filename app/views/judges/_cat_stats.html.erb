@@ -1,7 +1,7 @@
 <% j_result = cat_stats[:values] %>
 <tr>
   <td colspan='2'/>
-  <td class='label'>
+  <td class='category-label'>
   <% if j_result.kind_of? JcResult %>
     <%= link_to cat_stats[:label],
       contest_path(j_result.contest) %>
