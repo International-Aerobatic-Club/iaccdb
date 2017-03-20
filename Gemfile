@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', "~> 4.1.0"
+gem 'rails', "~> 4.0"
 
 ##
 # Transition to Rails 4.0
@@ -15,7 +15,7 @@ gem 'delayed_job_active_record'
 gem 'libxml-ruby'
 gem 'jquery-rails'
 gem 'chronic'
-gem 'zurb-foundation'
+gem 'foundation-rails'
 
 gem 'sass-rails'
 gem 'coffee-rails'

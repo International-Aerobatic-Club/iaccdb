@@ -6,5 +6,3 @@
 //= require_self
 //= require nested_forms
 
-
-$(function(){ $(document).foundation(); });
