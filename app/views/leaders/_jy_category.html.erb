@@ -1,0 +1,12 @@
+<li class='judge-leaders-category'>
+  <% cat_id = "judge-leaders-category-#{category.id}" %>
+  <a href="#<%= cat_id %>"><%= category.name %></a>
+  <div id="<%= cat_id %>" class='judge-leaders-category'>
+    <table class='judge_leaders'>
+      <tbody>
+        <%= render :partial => 'judges/stats_header', :object => 'Judge' %>
+        <%= render :partial => 'jy_result', :collection => jy_results %>
+      </tbody>
+    </table>
+  </div>
+</li>
