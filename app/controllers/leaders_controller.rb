@@ -1,5 +1,6 @@
 class LeadersController < ApplicationController
   def judges
+    max_displayed = 50
     @years = JyResult.select("distinct year").all.collect { |jy_result| jy_result.year }
     @years.sort!{|a,b| b <=> a}
     @year = params[:year] || @years.first
@@ -17,8 +18,8 @@ class LeadersController < ApplicationController
       else
         jy_results.sort! { |b,a| (a.con - a.dis) <=> (b.con - b.dis) }
       end
-      crop_results[cat] = jy_results.first(10)
-    end    
+      crop_results[cat] = jy_results.first(max_displayed)
+    end
     @results = crop_results.sort_by { |cat, jy_results| cat.sequence }
   end
 

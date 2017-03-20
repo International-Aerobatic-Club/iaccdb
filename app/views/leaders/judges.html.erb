@@ -3,19 +3,27 @@
     javascript_include_tag('judge_leaders')
   end
 %>
-<h1>Top Judges <%= @year %></h1>
+<h1>Judge Experience <%= @year %></h1>
 
 <p>Judges in each category who have judged the most flights, 
 with the most pilots, most in accordance with the results.</p>
 
 <p>
-<% @years.each do |year| %>
-  <%= link_to year, leaders_judges_path(year) %>
-<% end %>
+  <% @years.each do |year| %>
+    <%= link_to year, leaders_judges_path(year) %>
+  <% end %>
 </p>
-<ul class='judge-leaders-category-list'>
+<ul id='judge-leaders' class='judge-leaders-category-list'>
+  <% @results.each do |cat, jy_results| %>
+    <li class='judge-leaders-category'>
+      <a href="#<%= judge_leaders_cat_id(cat) %>"><%= cat.name %></a>
+    </li>
+  <% end %>
+</ul>
+<div class='judge-leaders-category-collection'>
   <% @results.each do |cat, jy_results| %>
     <%= render :partial => 'jy_category',
       :locals => { category: cat, jy_results: jy_results } %>
   <% end %>
-</ul>
+</div>
+
