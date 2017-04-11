@@ -121,7 +121,9 @@ def member_for(iac_id, given_name, family_name)
   # the find_or_create_by_name method correctly assumes that if there
   # are two "Tom Jones", they might be two different people.
   # we return the same "Tom Jones" member on every lookup
-  family_name = family_name.gsub(/\(patch\)/i,'').strip
+  family_name = '' if family_name.blank?
+  family_name.gsub(/\(patch\)/i,'').strip
+  given_name = '' if given_name.blank?
   given_name = given_name.strip
   member = @member_map.lookup(iac_id, given_name, family_name)
   if (member == nil)
@@ -155,7 +157,7 @@ def pilot_for(jasper, jCat, jPilot)
 end
 
 def pilot_is_hc(jasper, jCat, jPilot)
-  jasper.pilot_last_name(jCat, jPilot) =~ /\(patch\)/i
+  jasper.pilot_is_hc(jCat, jPilot)
 end
 
 def airplane_for(jasper, jCat, jPilot)

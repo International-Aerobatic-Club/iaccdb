@@ -369,6 +369,69 @@ module Jasper
         expect(Category.count).to eq catCt
       end
     end
+    context 'JaSPer_post_IACCDB_301 data test' do
+      before(:context) do
+        jasper = jasperParseFromTestDataFile('JaSPer_post_IACCDB_301.xml')
+        j2d = Jasper::JasperToDB.new
+        @contest = j2d.process_contest(jasper)
+      end
+      context 'blank names in judge data' do
+        it 'judge family name' do
+          judges = Member.where(iac_id: 435337).collect(&:family_name)
+          expect(judges.length).to eq 2
+          expect(judges).to include('')
+        end
+        it 'judge given name' do
+          judges = Member.where(iac_id: 433702).collect(&:given_name)
+          expect(judges.length).to eq 1
+          # we match a member on family name and IAC number
+          # first name does not come into play
+          # if we created a record, the value of first name that was
+          # in play at creation will win.
+        end
+        it 'assistant given name' do
+          assistants = Member.where(iac_id: 434137).collect(&:given_name)
+          expect(assistants.length).to eq 1
+        end
+        it 'assistant family name' do
+          assistants = Member.where(iac_id: 23687).collect(&:family_name)
+          expect(assistants.length).to eq 2
+          expect(assistants).to include('')
+        end
+        it 'pilot given name' do
+          pilots = Member.where(iac_id: 439211).collect(&:given_name)
+          expect(pilots.length).to eq 1
+        end
+        it 'pilot family name' do
+          pilots = Member.where(iac_id: 437520).collect(&:family_name)
+          expect(pilots.length).to eq 1
+          expect(pilots).to include('')
+        end
+        it 'assistant with no last name and no IAC number' do
+          judge = Member.where(iac_id: 430392).first
+          teams = Judge.where(judge_id: judge.id)
+          assistants = teams.collect(&:assist)
+          family_names = assistants.collect(&:family_name)
+          expect(family_names).to include('')
+        end
+      end
+      it 'captures JaSPer identified HC competitor' do
+        pilot = Member.where(iac_id: 24702).first
+        expect(pilot.given_name).to eq 'Kevin'
+        expect(pilot.family_name).to eq 'Campbell'
+        pfs = PilotFlight.where(pilot_id: pilot.id)
+        expect(pfs.length).to eq 3
+        expect(pfs.collect(&:hors_concours)).to_not include(FALSE)
+      end
+      it 'captures JaSPer identified real competitor' do
+        pilot = Member.where(iac_id: 437050).first
+        expect(pilot.given_name).to eq 'Mark'
+        expect(pilot.family_name).to eq 'Budd'
+        pfs = PilotFlight.where(pilot_id: pilot.id)
+        expect(pfs.length).to eq 3
+        expect(pfs.collect(&:hors_concours)).to_not include(TRUE)
+      end
+    end
   end
 end
 
