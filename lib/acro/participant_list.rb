@@ -49,7 +49,10 @@ class ParticipantList
   end
 
   def read(data_directory)
-    @list = YAML.load_file(part_fn(data_directory))
+    filename = part_fn(data_directory)
+    if File.exist?(filename)
+      @list = YAML.load_file(filename)
+    end
   end
 
   def participant(name)
