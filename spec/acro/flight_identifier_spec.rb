@@ -186,6 +186,33 @@ module ACRO
       expect(detect_flight_category(description)).to eq 'Primary'
     end
 
+    it 'gets "Sportsman Power Free #1"' do
+      description = 'Sports - Power : Free #1 Sequence'
+      expect(detect_flight_aircat(description)).to eq 'P'
+      expect(detect_flight_name(description)).to eq 'Flight 2'
+      expect(detect_flight_category(description)).to eq 'Sportsman'
+    end
+
+    it 'gets "Sportsman Power Free #2"' do
+      description = 'Sports - Power : Free #2 Sequence'
+      expect(detect_flight_aircat(description)).to eq 'P'
+      expect(detect_flight_name(description)).to eq 'Flight 3'
+      expect(detect_flight_category(description)).to eq 'Sportsman'
+    end
+
+    it 'gets "Sportsman Glider Free #1"' do
+      description = 'Sports - Glider : Free #1 Sequence'
+      expect(detect_flight_aircat(description)).to eq 'G'
+      expect(detect_flight_name(description)).to eq 'Flight 2'
+      expect(detect_flight_category(description)).to eq 'Sportsman'
+    end
+
+    it 'gets "Sportsman Glider Free #2"' do
+      description = 'Sports - Glider : Free #2 Sequence'
+      expect(detect_flight_aircat(description)).to eq 'G'
+      expect(detect_flight_name(description)).to eq 'Flight 3'
+      expect(detect_flight_category(description)).to eq 'Sportsman'
+    end
 
   end
 end

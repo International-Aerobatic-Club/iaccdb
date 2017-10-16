@@ -12,7 +12,7 @@ module FlightIdentifier
     if !cat
       if /Pri|Begin|Basic/i =~ description
         cat = 'Primary'
-      elsif /Sport|Standard/i =~ description || /Spn/i =~ description
+      elsif /Spn|Sport|Standard/i =~ description
         cat = 'Sportsman'
       elsif /Adv/i =~ description
         cat = 'Advanced'
@@ -34,17 +34,25 @@ module FlightIdentifier
       name = 'Team Unknown' 
     elsif /Four|Minute/ =~ description
       name = 'Four Minute Free'
-    elsif /Primary|Sportsman/ =~ flight_category
+    elsif /Primary/ =~ flight_category
       if /#2|2nd|Programme 2/ =~ description
         name = 'Flight 2'
       elsif /#3|3rd|Programme 3/ =~ description
         name = 'Flight 3'
       elsif /#1|1st|Programme 1|Known/ =~ description
-        if /Primary/ =~ flight_category
-          name = 'Flight 1'
-        else
-          name = 'Known'
-        end
+        name = 'Flight 1'
+      end
+    elsif /Sportsman/ =~ flight_category
+      if /Free\s+#1/i =~ description
+          name = 'Flight 2'
+      elsif /Free\s+#2/ =~ description
+          name = 'Flight 3'
+      elsif /#2|2nd|Programme 2/ =~ description
+        name = 'Flight 2'
+      elsif /#3|3rd|Programme 3/ =~ description
+        name = 'Flight 3'
+      elsif /#1|1st|Programme 1|Known/ =~ description
+        name = 'Known'
       end
     elsif /Intermediate/ =~ flight_category
       if /#2|2nd|Programme 2|Free/ =~ description
