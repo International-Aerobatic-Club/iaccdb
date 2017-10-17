@@ -53,23 +53,16 @@ The second utility that touches the contest database is patch_results.rb.
 This overwrites the IAC computed flight and category results for each pilot 
 with the ACRO computed results.
 </p>
-<h2>Using the utilities for 2016</h2>
-<p>Following are detailed steps used to integrate Nationals 2016 results into IACCDB.
+<h2>Using the utilities for 2017</h2>
+<p>Following are detailed steps used to integrate Nationals 2017 results into IACCDB.
 </p>
 <h3>Retrieve the results</h3>
 <p>Pull the results postings from the web.  We make a directory for these and change to it
 before pulling them.  This keeps them separate from other years, where they would otherwise
 overlap.</p>
-<p class='code'>mkdir nationals2016
-cd nationals2016
-wget --mirror --convert-links https://www.iac.org/files/nationals-results/2016/indexpage.htm
-
-<p>Unfortunately, this does not pull the individual pilot files that contain the grades from the judges.  This is because the links to those are encoded as javascript actions rather than as links.  In order to get them, we run a python script over the downloaded result files:</p>
-<p class='code'>
-cat www.iac.org/files/nationals-results/2016/multi_*.htm |\
-  python ../cmd/acro/stripPilotsAt.py https://www.iac.org/files/nationals-results/2016/
-cd ..
-</p>
+<p class='code'>mkdir nationals2017
+cd nationals2017
+wget --mirror --convert-links https://www.iac.org/files/nationals-results/2017/indexpage.htm
 
 <h4>Four Minute Free results</h4>
 <p>The import will miss collecting Four Minute Free results.</p>
@@ -78,10 +71,20 @@ The YAML extractor doesn't touch the single files because they normally
 contain individual flight results already found in the multi files.
 The simplest way to get the Four Minute results is to copy that single
 file to a multi file,</p>
-<p class='code'>cp nationals2016/www.iac.org/files/nationals-results/2016/single_R011s27.htm \
-nationals2016/www.iac.org/files/nationals-results/2016/multi_R011s27.htm
+<p class='code'>cp nationals2017/www.iac.org/files/nationals-results/2017/single_R042s30.htm \
+nationals2017/www.iac.org/files/nationals-results/2017/multi_R042s30.htm
 </p>
 
+<h4>Pilot Grades</h4>
+<p>Unfortunately, the <span class='code'>wget</span> program does not pull the
+individual pilot files that contain the grades from the judges.  This is because
+the links to those are encoded as javascript actions rather than as links.
+In order to get them, we run a python script over the downloaded result files:</p>
+<p class='code'>
+cat www.iac.org/files/nationals-results/2017/multi_*.htm |\
+  python ../cmd/acro/stripPilotsAt.py https://www.iac.org/files/nationals-results/2017/
+cd ..
+</p>
 
 <h3>Scrape the results</h3>
 
@@ -94,9 +97,9 @@ We called this file <span class='code'>contest.yml</span> and its
 initial content is as follows:</p>
 <p class='code'>---
 contestName: 'U.S. National Aerobatic Championships'
-startDate: '2016-09-20'
-city: 'Sherman and Denison'
-state: 'TX'
+startDate: '2017-09-24'
+city: 'Oshkosh'
+state: 'WI'
 director: 'Gary DeBaun'
 region: 'National'
 chapter : 'IAC'
@@ -112,22 +115,24 @@ do the screen scraping that generates YAML (.yml) files from the results posting
 For convenience, we move these files up to the nationals subdirectory. 
 From the project directory,</p>
 <p class='code'>rails runner cmd/acro/scrape_html_to_yaml.rb \
-  nationals2016/www.iac.org/files/nationals-results/2016/contest.yml
-mv nationals2016/www.iac.org/files/nationals-results/2016/*.yml nationals2016</p>
+  nationals2017/www.iac.org/files/nationals-results/2017/contest.yml
+mv nationals2017/www.iac.org/files/nationals-results/2017/*.yml nationals2017</p>
 
 <h4>Check the flight names</h4>
 <p>Run the flights list to ensure that the category and flight are correctly identified
 for the results.</p>
 
-<p class='code'>rails runner cmd/acro/show_flights.rb nationals2016/contest.yml</p>
+<p class='code'>rails runner cmd/acro/show_flights.rb nationals2017/contest.yml</p>
 
 <p>The first item in each line of the output shows the title from the ACRO published results.
 The next items show the inferred category, class, and flight.  
 Check these over and, if there's a problem, figure it out.  
 The inference is accomplished with <span class='code'>lib/acro/flight_identifier.rb</span>.
-Here is a sample of the output:</p>
-<p class='code'>
-'Unlimited - Power : Programme 1: Free Known', Unlimited, P, Free
+</p>
+<h4>2016</h4>
+<p>
+Here is a complete sample output from 2016:</p>
+<p class='code'>'Unlimited - Power : Programme 1: Free Known', Unlimited, P, Free
 'Unlimited - Power : Programme 2: Free Unknown #1', Unlimited, P, Unknown
 'Unlimited - Power : Free Unknown Sequence', Unlimited, P, Unknown
 'Unlimited - Glider : Programme 1: Free Known', Unlimited, G, Free
@@ -184,9 +189,9 @@ and correctly identifies the class (P = Power, G = Glider, F = Four Minute Free)
 program, and second Free Unknown for Unlimited Power.  We have to fix the files.</p>
 <p>First we determine that ACRO identifies the program as "s15".
 We do that by simply looking for the description in the files:</p>
-<p class='code'>grep -rH 'Unlimited - Power : Free Unknown Sequence' nationals2016</p>
+<p class='code'>grep -rH 'Unlimited - Power : Free Unknown Sequence' nationals2017</p>
 <p>Next we run the stream editor to make the correction in those files:</p>
-<p class='code'>for f in `ls -1 nationals2016/pilot_p*s15.htm.yml` ; \
+<p class='code'>for f in `ls -1 nationals2017/pilot_p*s15.htm.yml` ; \
   do sed -i -e '3 s/Free Unknown Sequence/Programme 3: Free Unknown #2/' $f ; \
 done</p>
 <p>For safety, that command edits only that specific text, and only on the third
@@ -198,49 +203,74 @@ line of the file.</p>
 that are both the second Free Unknown.
 We follow a similar procedure.
 </p>
-<p class='code'>grep -rH 'Free Unknown Sequence' nationals2016</p>
-<p class='code'>for f in `ls -1 nationals2016/pilot_p*s12.htm.yml` ; \
+<p class='code'>grep -rH 'Free Unknown Sequence' nationals2017</p>
+<p class='code'>for f in `ls -1 nationals2017/pilot_p*s12.htm.yml` ; \
   do sed -i -e '3 s/Free Unknown Sequence/2nd Unknown Sequence/' $f ; \
 done</p>
-<p class='code'>for f in `ls -1 nationals2016/pilot_p*s24.htm.yml` ; \
+<p class='code'>for f in `ls -1 nationals2017/pilot_p*s24.htm.yml` ; \
   do sed -i -e '3 s/Free Unknown Sequence/2nd Unknown Sequence/' $f ; \
 done</p>
 <p>Both Sportsman Glider and Power have the same name on both their second and
 third flight programs.  The program doesn't have a chance with this, either.
 We similarly edit some of those files:</p>
-<p class='code'>grep -rH 'Sportsman' nationals2016 | grep 'Free Sequence'</p>
-<p class='code'>for f in `ls -1 nationals2016/pilot_p*s17.htm.yml` ; \
+<p class='code'>grep -rH 'Sportsman' nationals2017 | grep 'Free Sequence'</p>
+<p class='code'>for f in `ls -1 nationals2017/pilot_p*s17.htm.yml` ; \
   do sed -i -e '3 s/Free Sequence/Programme 2/' $f ; \
 done</p>
-<p class='code'>for f in `ls -1 nationals2016/pilot_p*s18.htm.yml` ; \
+<p class='code'>for f in `ls -1 nationals2017/pilot_p*s18.htm.yml` ; \
   do sed -i -e '3 s/Free Sequence/Programme 3/' $f ; \
 done</p>
-<p class='code'>for f in `ls -1 nationals2016/pilot_p*s05.htm.yml` ; \
+<p class='code'>for f in `ls -1 nationals2017/pilot_p*s05.htm.yml` ; \
   do sed -i -e '3 s/Free Sequence/Programme 2/' $f ; \
 done</p>
-<p class='code'>for f in `ls -1 nationals2016/pilot_p*s06.htm.yml` ; \
+<p class='code'>for f in `ls -1 nationals2017/pilot_p*s06.htm.yml` ; \
   do sed -i -e '3 s/Free Sequence/Programme 3/' $f ; \
 done</p>
 <p>Similarly for Primary</p>
-<p class='code'>grep -rH 'Primary' nationals2016</p>
-<p class='code'>for f in `ls -1 nationals2016/pilot_p*s02.htm.yml` ; \
+<p class='code'>grep -rH 'Primary' nationals2017</p>
+<p class='code'>for f in `ls -1 nationals2017/pilot_p*s02.htm.yml` ; \
   do sed -i -e '3 s/1st Known Sequence/Programme 2/' $f ; \
 done</p>
-<p class='code'>for f in `ls -1 nationals2016/pilot_p*s03.htm.yml` ; \
+<p class='code'>for f in `ls -1 nationals2017/pilot_p*s03.htm.yml` ; \
   do sed -i -e '3 s/2nd Known Sequence/Programme 3/' $f ; \
 done</p>
 <p>All of these changes are contained in the shell script,
 <span class='code'>fix_cat_names.sh</span>
 found in the nationals2016 (zipped) directory.
 </p>
+<h4>2017</h4>
+<p>In 2017, we have some trouble with Sportsman.  And in Advanced Power we're
+picking-up the team flight, which isn't part of the Nationals results.
+The other categories are cruising along flawlessly:</p>
+
+<p class='code'>'Advanced - Power : Known Sequence', Advanced, P, Known
+'Advanced - Power : Known Sequence', Advanced, P, Known
+'Advanced - Power : Free Sequence', Advanced, P, Free
+'Advanced - Power : Free Unknown #1', Advanced, P, Free Unknown 1
+'Advanced - Power : Free Unknown #2', Advanced, P, Free Unknown 2
+'Sports - Power : Known Sequence', Sportsman, P, Known
+'Sports - Power : Free #1 Sequence', Sportsman, P, Known
+'Sports - Power : Free #2 Sequence', Sportsman, P, Flight 2
+'Sports - Glider : Known Sequence', Sportsman, G, Known
+'Sports - Glider : Free #1 Sequence', Sportsman, G, Known
+'Sports - Glider : Free #2 Sequence', Sportsman, G, Flight 2
+</p>
+
+We handled the Sportsman difficulty by making updates to
+<span class='code'>lib/acro/flight_identifier.rb</span>,
+adding tests, and (always) making the prior and existing tests pass.
+
+We handled the Advanced category difficulty, as always, by removing the screen
+scrapes for the team flight.  In this year we removed all of the files that
+ended with 's19.htm.yml'.
 
 <h3>Match names to member records</h3>
 
 <p>Before we import this data into IACCDB, we have to ensure that the pilot names
 used in the ACRO files will match member names as used in IACCDB.  Without this important
 step, we get duplicate pilots with different name spellings in IACCDB.  Some pilots
-and judges don't
-get proper credit for the Nationals flights because they have two identities.
+and judges don't get proper credit for the Nationals flights because they
+have two identities.
 </p><p>
 We can run pilot and judge name resolution, so that names match to the correct 
 members on import.
@@ -248,11 +278,11 @@ members on import.
 First, generate the member file. We didn't write a program for this, rather, we simply
 run a SQL query against the database.
 </p>
-<p class='code'>mysql --defaults-extra-file=./.my.cnf iaccdb &lt;cmd/acro/memberlist.sql &gt;nationals2016/memberlist.txt</p>
+<p class='code'>mysql --defaults-extra-file=./.my.cnf iaccdb &lt;cmd/acro/memberlist.sql &gt;nationals2017/memberlist.txt</p>
 <p>Now we run the member name matching program.  Because it is interacive, we run it as a ruby
 program.  (The rails runner is non-interactive.)
 </p>
-<p class='code'>ruby cmd/acro/resolve_names.rb nationals2016/contest.yml</p>
+<p class='code'>ruby cmd/acro/resolve_names.rb nationals2017/contest.yml</p>
 <p>
 This presents a dialog with the found name and suggested name matches for each pilot
 and judge in the ACRO results files.
@@ -280,7 +310,7 @@ as the first choice, with a star ('*') next to it.
 <p>Invariably there are names that do not match or miss matches in the
 database.  For these, we do some manual spelunking in the member database
 (assuming we have access) and/or follow-up with queries.
-Thank you, Trish!</p>
+Thank you, Trish! Thank you, Lorrie!</p>
 
 <p>With resolutions, we manually add entries to 
 <span class='code'>participant_list.yml</span>.
@@ -293,20 +323,20 @@ Lacking found matches, the names will go into the database as new entries.
 <p>With the name resolution done, we can import the pilot flight data-- all of the grades.
 This is the first command that writes to the database, so we first make a back-up.
 </p>
-<p class='code'>mysqldump --defaults-extra-file=./.my.cnf iaccdb &gt;20161030pre-nats.sql
-rails runner cmd/acro/import_yml_extracts.rb nationals2016/contest.yml
+<p class='code'>mysqldump --defaults-extra-file=./.my.cnf iaccdb &gt;20171030pre-nats.sql
+rails runner cmd/acro/import_yml_extracts.rb nationals2017/contest.yml
 </p>
 <p>The command creates the contest and all of the grades in the database.
 It leaves an asynchronous task to make the IAC results computations.
-If the jobs worker is not already running on the server, Run 
-<span class='code'>rake jobs:workoff</span>.
-The job computes results from the imported data.
+</p><p>If the jobs worker is not already running on the server, Run
+</p><p class='code'>rake jobs:workoff</p>
+<p>The job computes results from the imported data.
 We run this to create the result records and judge metrics.
 </p>
 
 <h3>Import the ACRO computed results</h3>
 
-<h4>Match new participant names and identify the contest</h4>
+<h4>Match new participant names</h4>
 <p>
 After adding the grades, we now have member records for the members who
 were not yet present in the database.
@@ -328,10 +358,12 @@ These numbers will be consecutive, newly created id numbers.</p>
 <p>It's extremely helpful to have an accurate IAC id in the records.
 Use all legal means necessary to find and provide it.
 </p>
-<p>If you finish and find that a pilot's overall scores don't match the 
-published results, it's very possibly because you mistyped the database 
+<p>If you get to the end of this process
+and find that a pilot's overall scores don't match the 
+published results, it's very possibly because you mistyped the database
 id of that pilot. (You know how we know this.)
 </p>
+<h4>Identify the contest</h4>
 <p>
 Edit the contest.yml file with the id of the contest.  Find the id of the contest
 in the URL,</p>
@@ -340,7 +372,7 @@ in the URL,</p>
 The contest.yml control file should now have an additional line,</p>
 <p class='code'>---
 contestName: 'U.S. National Aerobatic Championships'
-startDate: '2016-09-21'
+startDate: '2017-09-21'
 city: 'Sherman and Denison'
 state: 'TX'
 director: 'Gray Brandt'
@@ -358,12 +390,18 @@ the overall results postings with the flights in the individual pilot files.  Ra
 take a chance with heuristic matching, however, it's straightforward to manually
 identify the flights in the overall results files with flights now present in the
 iac database.  To generate the list of flights, run</p>
-<p class='code'>rails runner cmd/acro/results_list.rb nationals2016/contest.yml</p>
+<p class='code'>rails runner cmd/acro/results_list.rb nationals2017/contest.yml</p>
 <p>This produces a file, <span class='code'>results_list.yml</span> that we edit.
 Wherever we find 'missing_id' we insert the correct iac database id for the flight result.
 Find the database id's in the url's for the flights, for example:</p>
 <p class='code'>https://iaccdb.iac.org/flights/6653</p>
-<p>has database id 6653. Take care because the flights for a category do not
+<p>has database id 6653.</p>
+<p>You can also open the rails console and run a query, as follows:</p>
+<p class='code'>puts JSON.pretty_generate(Flight.where(contest_id:588).includes(\
+  :contest, :category).to_a)
+</p>
+<p>Either way, editing <span class='code'>results_list.yml</span>,
+take care because the flights for a category do not
 necessarily display in the same order in the file as on the results display.
 Here is a portion of the file.  The first entry has been edited.
 The second entry has not.</p>
@@ -405,10 +443,10 @@ The second entry has not.</p>
 <p>We edit the sequence values to get the correct sequence of columns in the results
 display.</p>
 
-<p>The Unlimited Glider and Power files are missing values and show an extra
-flight.  This is because these two published results included team identifiers.
-The extra columns have thrown-off the scraper.  We edit the scraper to account
-for the extra columns when they are present and re-run the data extraction.</p>
+<p>In 2016, the Unlimited Glider and Power files were missing values and showed
+an extra flight.  This was because these two published results included team identifiers.
+The extra columns had thrown-off the scraper.  We edited the scraper to account
+for the extra columns when they are present and re-ran the data extraction.</p>
 
 <p class='code'>- !ruby/object:ACRO::ResultsList::ResultsFile
   file_name: multi_R017s28s29s30.htm.yml
@@ -428,13 +466,13 @@ for the extra columns when they are present and re-run the data extraction.</p>
     flight_id: missing_id
     sequence: 1</p>
 
-<p>The entry for the multi_R017s28s29s30.htm.yml example file 
-shown above has no category and
-description.  Looking at it, we see that it lacks the
+<p>In 2016, the entry for the multi_R017s28s29s30.htm.yml example file
+shown above had no category and
+description.  Looking at it, we saw that it lacked the
 "Contest Results:" prefix that all of the other files have,
 that the scraper uses to identify the line containing the
 category and class.  Supplying the category and description
-in the results_list.yml file suffices to get it properly
+in the results_list.yml file sufficed to get it properly
 identified.
 </p>
 <p>Check and double-check the flight_id entries in
@@ -443,13 +481,13 @@ It is essential that these be accurate.
 One sanity check you can use is to see that the id's used are sequential
 and unique:
 </p>
-<p class='code'>grep flight_id nationals2016/results_list.yml | sort</p>
+<p class='code'>grep flight_id nationals2017/results_list.yml | sort</p>
 
 <h4>Patch the ACRO computed results</h4>
 
 <p>Now patch the IAC computed results with the results computed by ACRO.
 They are different.</p>
-<p class='code'>rails runner cmd/acro/patch_results.rb nationals2016/contest.yml</p>
+<p class='code'>rails runner cmd/acro/patch_results.rb nationals2017/contest.yml</p>
 <p>Compare the posted overall category and flight result scores with those
 in the original ACRO posted results.  If they match, all is well.</p>
 
@@ -458,7 +496,7 @@ in the original ACRO posted results.  If they match, all is well.</p>
 <p>As a final check, compare the results shown on the contest page
 <a href="/contests/545">from IACCDB</a>
 with the
-<a href="https://www.iac.org/files/nationals-results/2016/indexpage.htm">results
+<a href="https://www.iac.org/files/nationals-results/2017/indexpage.htm">results
 posted from the ACRO program</a>.
 The easiest way is to overlay them side by side. For each category,</p>
 <ul>
@@ -473,8 +511,22 @@ The easiest way is to overlay them side by side. For each category,</p>
 
 <p>
 With Nationals loaded, we recompute the regionals.</p>
-<p class='code'>rails runner cmd/recompute_regionals.rb 2016</p>
+<p class='code'>rails runner cmd/recompute_regionals.rb 2017</p>
 <p>Take care not to queue a job to recompute the contest, else the patched results
 are overwritten.</p>
 <p>We are done.</p>
+
+<h3>After note</h3>
+<p>I go through this process on a development machine, with
+a copy of the database, as a dry run, before doing this on the IAC server
+against the live database.</p>
+<p>After that,
+<ul>
+<li>copy the yml files to the IAC server</li>
+<li>carefully remove the contest_id from contest.yml because it might change</li>
+<li>keep and use a version of participant_list.yml prior to adding the new
+member database id's, because they might be different.</li>
+<li>know that the database id's in results_list.yml might be different</li>
+<li>restart the process at "Import the pilot-flight grades"
+</p>
 
