@@ -279,8 +279,8 @@ First, generate the member file. We didn't write a program for this, rather, we 
 run a SQL query against the database.
 </p>
 <p class='code'>mysql --defaults-extra-file=./.my.cnf iaccdb &lt;cmd/acro/memberlist.sql &gt;nationals2017/memberlist.txt</p>
-<p>Now we run the member name matching program.  Because it is interacive, we run it as a ruby
-program.  (The rails runner is non-interactive.)
+<p>Now we run the member name matching program.  Because it is interactive,
+we run it as a ruby program.  (The rails runner is non-interactive.)
 </p>
 <p class='code'>ruby cmd/acro/resolve_names.rb nationals2017/contest.yml</p>
 <p>
@@ -359,7 +359,7 @@ These numbers will be consecutive, newly created id numbers.</p>
 Use all legal means necessary to find and provide it.
 </p>
 <p>If you get to the end of this process
-and find that a pilot's overall scores don't match the 
+and find that a pilot's overall scores don't match the
 published results, it's very possibly because you mistyped the database
 id of that pilot. (You know how we know this.)
 </p>
