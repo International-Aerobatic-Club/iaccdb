@@ -20,6 +20,13 @@ module Contest::ShowResults
     flights_chiefs(flights.all)
   end
 
+  def organizers
+    orgs = []
+    orgs << "Directed by #{director}" if director
+    orgs << "Chapter #{chapter}" if chapter != nil && 0 < chapter
+    orgs.join(', ')
+  end
+
   #   category_results: array of category_data in category sort order
   #     category_data {}
   #       cat: Category record

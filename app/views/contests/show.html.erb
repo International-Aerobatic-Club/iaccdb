@@ -2,8 +2,9 @@
 
 <h1><%= @contest.name %></h1>
 <p class="contest_place">Held in <%= @contest.place %>, <%= @contest.start %></p>
-<p class="contest_director">Directed by <%= @contest.director %>,
-   Chapter <%= @contest.chapter %></p>
+<% unless @contest.organizers.empty? %>
+  <p class="contest_director"><%= @contest.organizers %></p>
+<% end %>
 <% unless @contest.chief_names.empty? %>
   <p class="contest_chief">Chief Judge(s): <%= @contest.chief_names.join(', ') %></p>
 <% end %>
