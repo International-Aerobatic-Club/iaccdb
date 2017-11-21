@@ -18,22 +18,35 @@ describe RoleFlight do
   it 'matches instances with same role and flight' do
     rf1 = RoleFlight.new(:competitor, @flight_record)
     rf2 = RoleFlight.new(:competitor, @flight_record)
-    expect(rf1.eql? rf2).to be true
+    expect(rf1 == rf2).to be true
   end
   it 'does not match instances with same role, different flight' do
     rf1 = RoleFlight.new(:competitor, @flight_record)
     rf2 = RoleFlight.new(:competitor, create(:flight))
-    expect(rf1.eql? rf2).to be false
+    expect(rf1 == rf2).to be false
   end
   it 'does not match instances with different role, same flight' do
     rf1 = RoleFlight.new(:competitor, @flight_record)
     rf2 = RoleFlight.new(:line_judge, @flight_record)
-    expect(rf1.eql? rf2).to be false
+    expect(rf1 == rf2).to be false
   end
   it 'does not match instances with different role, different flight' do
     rf1 = RoleFlight.new(:competitor, @flight_record)
     rf2 = RoleFlight.new(:line_judge, create(:flight))
-    expect(rf1.eql? rf2).to be false
+    expect(rf1 == rf2).to be false
+  end
+  it 'does not collide 4438 assist and 8876 line' do
+    flight_4438 = Flight.new
+    flight_4438.id = 4438
+    flight_8876 = Flight.new
+    flight_8876.id = 8876
+    role_flight_4438 = RoleFlight.new(:assist_line_judge, flight_4438)
+    role_flight_8876 = RoleFlight.new(:line_judge, flight_8876)
+    expect(role_flight_4438.hash).to_not eq role_flight_8876.hash
+    set = Set.new
+    set.add(role_flight_4438)
+    expect(set.include?(role_flight_4438)).to be true
+    expect(set.include?(role_flight_8876)).to be false
   end
   it 'class provides list of valid roles' do
     roles = RoleFlight.roles

@@ -18,11 +18,13 @@ class RoleFlight
   end
 
   def hash
-    flight.id << 3 + ROLES.index(role)
+    { id: flight.id, role: role }.hash
   end
 
-  def eql?(o)
-    o.instance_of?(self.class) && (o == self || o.hash == hash)
+  def ==(other)
+    other.is_a?(RoleFlight) &&
+      other.flight.id == self.flight.id &&
+      other.role == self.role
   end
 
   def self.roles
