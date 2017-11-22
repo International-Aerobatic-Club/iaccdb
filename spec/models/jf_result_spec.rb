@@ -70,7 +70,7 @@ describe JfResult, :type => :model do
         judge = nil
         pilot_flight.scores.each_with_index do |scores, i|
           if i%2 == 0
-            scores.values[1] = 0 
+            scores.values[1] = 0
             scores.save
           else
             judge = scores.judge
@@ -82,6 +82,43 @@ describe JfResult, :type => :model do
         jf_result = JfResult.where(flight: @flight2, judge: judge).first
         expect(jf_result.minority_grade_ct).to eq(1)
       end
+    end
+  end
+  context 'one pilot' do
+    before :context do
+      require 'xml'
+      @jasper = Jasper::JasperParse.new
+      parser = XML::Parser.file('spec/fixtures/jasper/jasper_post_579.xml')
+      @jasper.do_parse(parser)
+      j2db = Jasper::JasperToDB.new
+      contest = j2db.process_contest(@jasper)
+      pri_cat = Category.find_by_category_and_aircat('primary', 'P')
+      @pri_flight = contest.flights.where(:category_id => pri_cat.id, :name => 'Known').first
+      computer = FlightComputer.new(@pri_flight)
+      computer.flight_results(false)
+      spn_cat = Category.find_by_category_and_aircat('sportsman', 'P')
+      @spn_flight = contest.flights.where(:category_id => spn_cat.id, :name => 'Known').first
+      computer = FlightComputer.new(@spn_flight)
+      computer.flight_results(false)
+    end
+    it 'parses' do
+      expect(@jasper.contest_name).to_not be nil
+    end
+    it 'maintains gamma zero' do
+      gammas = @spn_flight.jf_results.collect(&:gamma)
+      expect(gammas).to match_array([100, 100, 100, 0])
+    end
+    it 'gives rho zero' do
+      rho = @spn_flight.jf_results.collect(&:rho)
+      expect(rho).to match_array([100, 100, 100, 0])
+    end
+    it 'gives gamma 100 with one pilot' do
+      gammas = @pri_flight.jf_results.collect(&:gamma)
+      expect(gammas).to match_array([100, 100, 100, 100])
+    end
+    it 'gives rho 100 with one pilot' do
+      rho = @pri_flight.jf_results.collect(&:rho)
+      expect(rho).to match_array([100, 100, 100, 100])
     end
   end
 end

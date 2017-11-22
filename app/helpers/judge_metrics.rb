@@ -58,7 +58,7 @@ module JudgeMetrics
       g = (con - dis).fdiv(con + dis)
       (g * 100).round
     else
-      0
+      100
     end
   end
 
