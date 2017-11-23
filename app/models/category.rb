@@ -6,8 +6,6 @@ class Category < ActiveRecord::Base
   has_many :pc_results, :dependent => :destroy
   has_many :jy_results, :dependent => :destroy
 
-  attr_accessible :sequence, :category, :aircat, :name
-
   def self.find_for_cat_aircat(cat, aircat)
     cat = cat.downcase.strip
     if /Minute|Four/i =~ cat

@@ -1,6 +1,4 @@
 class Contest < ActiveRecord::Base
-  attr_accessible :name, :city, :state, :start, :chapter, :director, :region
-
   has_many :flights, :dependent => :destroy
   has_many :jc_results, :dependent => :destroy
   has_many :pc_results, :dependent => :destroy

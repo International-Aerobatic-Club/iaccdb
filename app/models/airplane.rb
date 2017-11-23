@@ -1,6 +1,4 @@
 class Airplane < ActiveRecord::Base
-  attr_accessible :make, :model, :reg
-
   has_many :pilot_flights, :dependent => :nullify
 
   # find or create airplane with given make, model, reg number

@@ -1,6 +1,4 @@
 class Flight < ActiveRecord::Base
-  attr_accessible :name, :sequence, :category_id, :chief_id, :assist_id
-
   belongs_to :contest
   belongs_to :category
   belongs_to :chief, :foreign_key => "chief_id", :class_name => 'Member'

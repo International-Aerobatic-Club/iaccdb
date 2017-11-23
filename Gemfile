@@ -7,13 +7,6 @@ gem 'rake', "~> 11.0"
 
 gem 'rails', "~> 4.0"
 
-##
-# Transition to Rails 4.0
-# Migrate away from this
-# Currently, delayed_job still wants it
-gem 'protected_attributes'
-#####
-
 gem 'delayed_job'
 gem 'delayed_job_active_record'
 

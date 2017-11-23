@@ -1,5 +1,4 @@
 class Result < ActiveRecord::Base
-  attr_accessible :category_id, :name, :pilot_id, :points, :points_possible, :qualified, :rank, :region, :type, :year, :members_attributes
   has_many :result_members
   has_many :members, :through => :result_members
   has_many :result_accums
