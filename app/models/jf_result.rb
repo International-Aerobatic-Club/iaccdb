@@ -1,6 +1,4 @@
 class JfResult < ActiveRecord::Base
-  attr_protected :id
-
   belongs_to :judge
   belongs_to :flight
 

@@ -1,6 +1,4 @@
 class MannySynch < ActiveRecord::Base
-  attr_protected :id
-
   belongs_to :contest
 
   # pass an IAC::Contest

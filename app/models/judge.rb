@@ -7,8 +7,6 @@
 # Someday rename this model to JudgeTeam and update references
 #   to these accordingly.  Ah.  That would be so much better.
 class Judge < ActiveRecord::Base
-  attr_protected :id
-
   belongs_to :judge, :class_name => 'Member'
   belongs_to :assist, :class_name => 'Member'
   has_many :scores, :dependent => :nullify

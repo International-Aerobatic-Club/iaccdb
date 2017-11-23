@@ -24,8 +24,6 @@
 #   for the flight, based on flight_value
 #
 class PfjResult < ActiveRecord::Base
-  attr_protected :id
-
   belongs_to :pilot_flight
   belongs_to :judge
 

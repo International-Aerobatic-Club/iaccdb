@@ -21,8 +21,6 @@
 #   Values are stored as integer number of tenths (scaled * 10)
 #
 class PfResult < ActiveRecord::Base
-  attr_protected :id
-
   belongs_to :pilot_flight
   has_one :flight, :through => :pilot_flight
 

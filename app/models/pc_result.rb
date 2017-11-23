@@ -1,6 +1,4 @@
 class PcResult < ActiveRecord::Base
-  attr_protected :id
-
   belongs_to :pilot, :class_name => 'Member'
   belongs_to :contest
   belongs_to :category

@@ -1,6 +1,4 @@
 class Score < ActiveRecord::Base
-  attr_protected :id
-
   belongs_to :pilot_flight
   belongs_to :judge
   has_one :pilot, :through => :pilot_flight
