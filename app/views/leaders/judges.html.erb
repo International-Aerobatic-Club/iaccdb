@@ -6,7 +6,8 @@
 <h1>Judge Experience <%= @year %></h1>
 
 <p>Judges in each category who have judged the most flights, 
-with the most pilots, most in accordance with the results.</p>
+with the most pilots, most in accordance with the results.
+We show only the first <%= @max_displayed %> in any category.</p>
 
 <p>
   <% @years.each do |year| %>
