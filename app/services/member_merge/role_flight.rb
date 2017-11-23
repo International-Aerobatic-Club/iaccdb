@@ -27,6 +27,11 @@ class RoleFlight
       other.role == self.role
   end
 
+  # implementation of eql? in terms of == for Set#include?
+  def eql?(other)
+    self == other
+  end
+
   def self.roles
     ROLES
   end
@@ -41,6 +46,10 @@ class RoleFlight
 
   def role_name
     self.class.role_name(role)
+  end
+
+  def to_s
+    "#{flight} role #{role_name}"
   end
 
   #######
