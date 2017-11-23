@@ -18,7 +18,7 @@ class JudgesController < ApplicationController
     cur_year = Time.now.year
     prior_year = cur_year - 1
     jy_results_query = JyResult.includes(:category).order(
-       'year DESC').where("#{prior_year} <= year").where(:judge_id => id)
+       'year DESC').where(['? <= year', prior_year]).where(:judge_id => id)
     jy_by_year = jy_results_query.group_by { |r| r.year }
     @j_results = [] # array of hash {year label, array of string count for category}
     @totals = {} # hash indexed by year label, value is total pilots for year

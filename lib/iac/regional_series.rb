@@ -31,11 +31,11 @@ end
 def compute_results (year, region)
   RegionalPilot.destroy_all(:year => year, :region => region)
   #first find the contests in the region 
-  contests = Contest.where("year(start) = #{year} and region = '#{region}'")
+  contests = Contest.where(['year(start) = ? and region = ?', year, region])
   contests.each do |contest|
     accumulate_contest year, region, contest
   end
-  nationals = Contest.where("year(start) = #{year} and region = 'National'")
+  nationals = Contest.where(['year(start) = ? and region = "National"', year])
   nationals.each do |contest|
     accumulate_contest year, region, contest
   end
