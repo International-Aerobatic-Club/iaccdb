@@ -12,17 +12,19 @@ end
 # Accepts the year
 # Computes or recomputes jy_results for every judge in every category
 def self.compute_jy_results (year)
-  # start_list = list all jy_result where year
-  start_list = JyResult.where(:year => year).all
+  # tracking_list = list all jy_result where year
+  # the "to_a" is important because we remove from it all
+  # of the records we reuse. We don't want to remove the actual records
+  tracking_list = JyResult.where(:year => year).all.to_a
   Contest.where(["year(start) = ?", year]).each do |contest|
     logger.info "add #{contest.year_name} to judge rollups"
     contest.jc_results.each do |jc_result|
       category = jc_result.category
       if category
         jy_result = find_or_create_jy_result(jc_result.judge, category, year)
-        if (start_list.include?(jy_result))
+        if (tracking_list.include?(jy_result))
           jy_result.zero_reset
-          start_list.delete(jy_result)
+          tracking_list.delete(jy_result)
         end
         jy_result.accumulate(jc_result)
         jy_result.save
@@ -31,8 +33,8 @@ def self.compute_jy_results (year)
       end
     end
   end
-  # destroy any jy_result still in start_list
-  start_list.each do |jy_result|
+  # destroy any jy_result still in tracking_list
+  tracking_list.each do |jy_result|
     jy_result.destroy
   end
 end
