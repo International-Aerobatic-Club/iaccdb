@@ -421,7 +421,7 @@ module Jasper
         expect(pilot.family_name).to eq 'Campbell'
         pfs = PilotFlight.where(pilot_id: pilot.id)
         expect(pfs.length).to eq 3
-        expect(pfs.collect(&:hors_concours)).to_not include(FALSE)
+        expect(pfs.collect(&:hors_concours)).to_not include(false)
       end
       it 'captures JaSPer identified real competitor' do
         pilot = Member.where(iac_id: 437050).first
@@ -429,7 +429,7 @@ module Jasper
         expect(pilot.family_name).to eq 'Budd'
         pfs = PilotFlight.where(pilot_id: pilot.id)
         expect(pfs.length).to eq 3
-        expect(pfs.collect(&:hors_concours)).to_not include(TRUE)
+        expect(pfs.collect(&:hors_concours)).to_not include(true)
       end
     end
   end
