@@ -2,19 +2,26 @@
 module AuthHelper
   class Creds
     attr_reader :user, :password
-    def initialize
+
+    def initialize(role)
       creds = YAML.load_file('config/admin.yml')
-      @user = creds['user']
-      @password = creds['password']
+      creds_role = creds[role]
+      admin = Rails.application.secrets[role]
+      @user = admin ? admin[:user] :
+        (creds_role ? creds_role['user'] : creds[:user])
+      @password = admin ? admin[:password] :
+        (creds_role ? creds_role['password'] : creds[:password])
     end
+
     def http_auth_basic
-      ActionController::HttpAuthentication::Basic.encode_credentials(user, password)
+      ActionController::HttpAuthentication::Basic.encode_credentials(
+        user, password)
     end
   end
 
   module Controller
-    def http_auth_login
-      creds = Creds.new
+    def http_auth_login(role = 'admin')
+      creds = Creds.new(role)
       request.env['HTTP_AUTHORIZATION'] = creds.http_auth_basic
     end
   end
@@ -24,9 +31,9 @@ module AuthHelper
     # returns same with HTTP_AUTHORIZATION header added
     # e.g. `get path, {}, http_auth_login` or
     # `get path, {}, http_auth_login({ header_var: 'header_value' })`
-    def http_auth_login(env = nil)
+    def http_auth_login(role = 'admin', env = nil)
       env ||= {}
-      creds = Creds.new
+      creds = Creds.new(role)
       env['HTTP_AUTHORIZATION'] = creds.http_auth_basic
       env
     end
@@ -34,8 +41,8 @@ module AuthHelper
 
   module Feature
     class DriverAuthException < StandardError ; end
-    def http_auth_login
-      creds = Creds.new
+    def http_auth_login(role = 'admin')
+      creds = Creds.new(role)
       driver = page.driver
       if driver.respond_to?(:basic_auth)
         driver.basic_auth(creds.user, creds.password)

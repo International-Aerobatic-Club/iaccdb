@@ -72,7 +72,7 @@ IAC::Application.routes.draw do
   get "pages/:title" => 'pages#page_view', :as => 'pages'
   get '/robots.:format' => 'pages#robots'
 
-  resources :contests, :only => [:index, :show]
+  resources :contests, except: [:new, :edit]
 
   resources :pilots, :only => [:index, :show] do
     resources :scores, :only => [:show]

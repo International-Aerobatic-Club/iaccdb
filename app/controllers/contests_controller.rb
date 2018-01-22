@@ -1,4 +1,7 @@
 class ContestsController < ApplicationController
+  before_action :require_contest_admin, except: [:index, :show]
+  skip_before_action :verify_authenticity_token,
+    only: [:create, :update, :destroy]
 
   # GET /contests
   def index
@@ -16,4 +19,42 @@ class ContestsController < ApplicationController
     render :show
   end
 
+  # POST /contests
+  def create
+    contest = Contest.create(contest_params)
+    if (contest)
+      render json: contest
+    else
+      head :bad_request
+    end
+  end
+
+  # PUT /contests/1
+  def update
+    contest = fetch_contest
+    contest.update_attributes(contest_params)
+    render json: contest
+  end
+
+  # DELETE /contests/1
+  def destroy
+    contest = fetch_contest
+    contest.destroy
+    head :ok
+  end
+
+  private
+
+  def require_contest_admin
+    check_credentials('contest_admin')
+  end
+
+  def contest_params
+    @contest_params ||= params.require(:contest).permit(
+      :name, :start, :city, :state, :chapter, :director, :region)
+  end
+
+  def fetch_contest
+    Contest.find(params[:id])
+  end
 end
