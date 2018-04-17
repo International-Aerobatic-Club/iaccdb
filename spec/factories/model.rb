@@ -1,5 +1,5 @@
 # factories for the acro tests
-FactoryGirl.define do
+FactoryBot.define do
 ### Airplane
   factory :airplane do |r|
     r.sequence(:make) { Forgery(:name).company_name }

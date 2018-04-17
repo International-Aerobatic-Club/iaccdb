@@ -14,4 +14,4 @@ ENV["BUNDLE_GEMFILE"] ||= File.expand_path("../../Gemfile",
 require "rubygems"
 require "bundler/setup"
 
-load Gem.bin_path("factory_girl_rails", "setup")
+load Gem.bin_path("factory_bot_rails", "setup")
