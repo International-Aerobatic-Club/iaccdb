@@ -3,6 +3,7 @@ cache: bundler
 script: bundle exec rspec spec
 before_script:
   - cmd/travis_ci_test_db.sh
+  - cat Gemfile.lock
   - RAILS_ENV='test' bundle exec rake db:setup
 after_script:
   - cmd/code_coverage_report.sh
