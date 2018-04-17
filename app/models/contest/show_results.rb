@@ -83,11 +83,11 @@ module Contest::ShowResults
               if (fr[flight].empty?)
                 fr[flight] = nil
               else
-                pf_results << fr[flight]
+                pf_results << fr[flight].first
               end
             end
             pilot_result[:flight_results] = fr
-            pfr = pf_results.flatten.first
+            pfr = pf_results.first
             pf = pfr.pilot_flight if pfr
             if (pf)
               pilot_result[:airplane] = pf.airplane
