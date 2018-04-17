@@ -1,4 +1,5 @@
 language: ruby
+cache: bundler
 script: bundle exec rspec spec
 before_script:
   - cmd/travis_ci_test_db.sh
