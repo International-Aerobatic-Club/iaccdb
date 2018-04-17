@@ -115,7 +115,7 @@ GEM
     mini_portile2 (2.3.0)
     minitest (5.11.3)
     multi_json (1.13.1)
-    mysql2 (0.5.1)
+    mysql2 (0.4.10)
     nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
     public_suffix (3.0.2)
@@ -233,7 +233,7 @@ DEPENDENCIES
   launchy
   libxml-ruby
   memoist2
-  mysql2
+  mysql2 (< 0.5)
   rails (~> 4.0)
   rake (~> 11.0)
   rspec-rails

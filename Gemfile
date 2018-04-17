@@ -27,7 +27,7 @@ gem 'memoist2'
 # prefer server config; but this will work
 gem 'turnout'
 
-gem 'mysql2'
+gem 'mysql2', '< 0.5'
 
 group :development, :test do
   gem 'rspec-rails'
