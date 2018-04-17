@@ -10,5 +10,5 @@ EOF
 user: test_user
 password: test_password
 EOF
-RAILS_ENV='test' bundle exec rake db:setup
+#RAILS_ENV='test' bundle exec rake db:setup
 
