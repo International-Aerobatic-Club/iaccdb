@@ -26,9 +26,6 @@ module Manny
       sequence = pilot_flight.sequence
       expect(sequence).not_to be nil
       expect(sequence.k_values).to eq([7, 15, 14, 10, 4, 10, 3])
-      #puts "flight is #{flight}"
-      #puts "pilot is #{pilot_flight.pilot}"
-      #puts "sequence is #{sequence}"
     end
     it 'captures a sportsman submitted free for a second flight' do
       category = Category.find_for_cat_aircat('Sportsman', 'P')
