@@ -5,8 +5,8 @@ module AuthHelper
 
     def initialize(role)
       creds = YAML.load_file('config/admin.yml')
-      creds_role = creds[role]
-      admin = Rails.application.secrets[role]
+      creds_role = role ? creds[role] : creds
+      admin = role ? Rails.application.secrets[role] : nil
       @user = admin ? admin[:user] :
         (creds_role ? creds_role['user'] : creds[:user])
       @password = admin ? admin[:password] :
@@ -20,7 +20,7 @@ module AuthHelper
   end
 
   module Controller
-    def http_auth_login(role = 'admin')
+    def http_auth_login(role = nil)
       creds = Creds.new(role)
       request.env['HTTP_AUTHORIZATION'] = creds.http_auth_basic
     end
@@ -31,7 +31,7 @@ module AuthHelper
     # returns same with HTTP_AUTHORIZATION header added
     # e.g. `get path, {}, http_auth_login` or
     # `get path, {}, http_auth_login({ header_var: 'header_value' })`
-    def http_auth_login(role = 'admin', env = nil)
+    def http_auth_login(role = nil, env = nil)
       env ||= {}
       creds = Creds.new(role)
       env['HTTP_AUTHORIZATION'] = creds.http_auth_basic
@@ -41,7 +41,7 @@ module AuthHelper
 
   module Feature
     class DriverAuthException < StandardError ; end
-    def http_auth_login(role = 'admin')
+    def http_auth_login(role = nil)
       creds = Creds.new(role)
       driver = page.driver
       if driver.respond_to?(:basic_auth)
@@ -62,7 +62,7 @@ module AuthHelper
       begin
         http_auth_login
         visit(path)
-      rescue DriverAuthException
+      rescue DriverAuthException => e
         creds = Creds.new
         session = Capybara.current_session
         cred_path = "http://#{creds.user}:#{creds.password}@#{session.server.host}:#{session.server.port}#{path}"

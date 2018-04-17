@@ -9,6 +9,9 @@ EOF
 /bin/cat <<EOF >config/admin.yml
 user: test_user
 password: test_password
+contest_admin:
+  user: iac
+  password: rock_and_roll
 EOF
 #RAILS_ENV='test' bundle exec rake db:setup
 

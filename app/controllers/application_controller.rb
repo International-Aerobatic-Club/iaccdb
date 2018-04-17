@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def check_credentials(role = 'admin')
+  def check_credentials(role = 'contest_admin')
     has_auth = authenticate_with_http_basic do |user_name, password|
       creds = Rails.application.secrets[role] ||
         YAML.load_file('config/admin.yml')[role]
