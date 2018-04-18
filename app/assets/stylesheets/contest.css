@@ -4,3 +4,9 @@ p.category-chief,
 p.contest_place {
   margin-bottom: 0pt;
 }
+p.message {
+  margin-left: 3em;
+  margin-top: 2ex;
+  font-weight: bold;
+  font-size: larger;
+}
