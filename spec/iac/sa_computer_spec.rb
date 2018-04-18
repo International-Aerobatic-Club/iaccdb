@@ -149,15 +149,18 @@ module IAC
       end
     end
     it 'behaves on empty sequence' do
-      @pf = create(:pilot_flight)
+      pf = create(:pilot_flight)
       create(:score,
-        :pilot_flight => @pf,
+        :pilot_flight => pf,
         :values => [60, 0, 0, 0, 0])
       create(:score,
-        :pilot_flight => @pf,
+        :pilot_flight => pf,
         :values => [-10, 0, 0, 0, 0])
-      @sa_computer = SaComputer.new(@pf)
-      expect{@sa_computer.computePilotFlight(false)}.to_not raise_error
+      sa_computer = SaComputer.new(pf)
+      expect(sa_computer).to_not be nil
+      res = sa_computer.computePilotFlight(false)
+      expect(res).to_not be nil
+      expect(res.pilot_flight.id).to eq pf.id
     end
     context 'mixed grades, averages, and zeros' do
       before(:context) do

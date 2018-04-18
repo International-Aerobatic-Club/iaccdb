@@ -1,5 +1,5 @@
 # factories for the acro tests
-FactoryGirl.define do
+FactoryBot.define do
 ### Airplane
   factory :airplane do |r|
     r.sequence(:make) { Forgery(:name).company_name }
@@ -92,7 +92,6 @@ FactoryGirl.define do
       factory_cat = Category.where(:category => category, :aircat => aircat).first
       unless factory_cat
         sequence = Category.select('MAX sequence').first.sequence + 1
-        puts "Sequence is #{sequence}"
         factory_cat = Category.create(:category => cat, :aircat => aircat, :sequence => sequence)
       end
       factory_cat

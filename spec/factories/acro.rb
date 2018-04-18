@@ -1,5 +1,5 @@
 # factories for the acro tests
-FactoryGirl.define do
+FactoryBot.define do
   factory :existing_contest, :class => Contest do |c|
     c.name 'existingContest.yml'
     c.start '2010-09-21'

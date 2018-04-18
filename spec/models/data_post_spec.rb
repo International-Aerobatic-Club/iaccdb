@@ -7,7 +7,6 @@ module Model
 
       it 'ensures a directory for posts' do
         file_name = @data_post.filename
-        puts file_name
         expect(Dir.exists?(File.dirname(file_name))).to be true
       end
 
