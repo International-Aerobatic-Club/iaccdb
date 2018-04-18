@@ -416,7 +416,9 @@ describe Merge, :type => :services do
     mr_3 = create(:member)
     merge = MemberMerge::Merge.new(@mr_ids)
     bad_merge = proc { merge.execute_merge(mr_3) }
-    expect(bad_merge).to raise_exception
+    expect(bad_merge).to raise_exception(ArgumentError) do |ex|
+      expect(ex.message).to contain('must be one of the members in the merge')
+    end
   end
 
   context 'many flights and roles' do
