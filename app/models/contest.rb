@@ -12,6 +12,7 @@ class Contest < ActiveRecord::Base
   validates :state, :length => { :maximum => 2 }
   validates :director, :length => { :maximum => 48 }
   validates :region, :length => { :maximum => 16 }
+  validates_presence_of :start
 
   def to_s
     "#{name} on #{start.strftime('%b %d, %Y')}"
