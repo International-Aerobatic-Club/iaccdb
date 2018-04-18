@@ -48,6 +48,12 @@ RSpec.describe 'Contest management API' do
       director: 'Cherry Garcia',
       region: 'Southwest'
     }
+    @invalid_contest_params = {
+      start: Date.today - 760.days,
+      city: 'Fort Morgan',
+      director: 'Cherry Garcia',
+      region: 'Southwest'
+    }
   end
 
   context 'POST' do
@@ -83,6 +89,23 @@ RSpec.describe 'Contest management API' do
         json_body({ contest: @valid_contest_params }),
         json_headers
       expect(response).to have_http_status(:unauthorized)
+    end
+
+    it 'returns bad request for invalid data' do
+      post '/contests',
+        json_body({ contest: @invalid_contest_params }),
+        auth_headers
+      expect(response).to have_http_status(:bad_request)
+    end
+
+    it 'error response contains validation information' do
+      post '/contests',
+        json_body({ contest: @invalid_contest_params }),
+        auth_headers
+      expect(response.body).to_not be_empty
+      data = JSON.parse(response.body)
+      expect(data).to_not be nil
+      expect(data["errors"]).to_not be nil
     end
   end
 

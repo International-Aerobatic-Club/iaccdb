@@ -22,10 +22,11 @@ class ContestsController < ApplicationController
   # POST /contests
   def create
     contest = Contest.create(contest_params)
-    if (contest)
+    if (contest.valid?)
       render json: contest
     else
-      head :bad_request
+      render json: { errors: contest.errors.full_messages },
+        :status => :bad_request
     end
   end
 
