@@ -2,20 +2,31 @@
 FactoryBot.define do
 ### Airplane
   factory :airplane do |r|
-    r.sequence(:make) { Forgery(:name).company_name }
-    r.sequence(:model) { Forgery(:name).company_name }
-    r.sequence(:reg) do
+    make { Forgery(:name).company_name }
+    model { Forgery(:name).company_name }
+    reg do
       Forgery(:basic).number(:at_least => 100, :at_most => 999).to_s +
       Forgery(:basic).text(at_least: 2, at_most: 2, allow_lower: false,
         allow_numeric: false)
     end
   end
+### AirplaneModel
+  factory :airplane_model do
+    make { Forgery(:name).company_name }
+    model { Forgery(:name).company_name }
+    empty_weight_lbs { Forgery(:basic).number(at_least: 600, at_most: 1600) }
+    max_weight_lbs { Forgery(:basic).number(
+      at_least: 300, at_most: 800) + empty_weight_lbs }
+    horsepower { Forgery(:basic).number(at_least: 40, at_most: 600) }
+    seats { Forgery(:basic).number(at_least: 1, at_most: 4) }
+    wings { Forgery(:basic).number(at_least: 1, at_most: 2) }
+  end
 ### Member
   factory :member do |r|
     r.sequence(:iac_id) { |i| 10 ** Forgery(:basic).number(
       at_least: 2, at_most: 6) + i }
-    r.sequence(:family_name) { |i| Forgery(:name).last_name }
-    r.sequence(:given_name) { |i| Forgery(:name).first_name }
+    family_name { Forgery(:name).last_name }
+    given_name { Forgery(:name).first_name }
   end
   factory :tom_adams, :class => Member do |r|
     r.iac_id 1999
@@ -70,17 +81,19 @@ FactoryBot.define do
     r.director 'Vicky Benzing'
   end
   factory :contest do |r|
-    r.name { Forgery(:name).company_name + ' Aerobatic Open' }
-    r.city Forgery(:address).city
-    r.region 'SouthEast'
-    r.chapter '52'
-    r.state Forgery(:address).state_abbrev
-    r.start Time.mktime(
-      Forgery(:basic).number(at_least: 2011, at_most: 2020),
-      Forgery(:basic).number(at_least: 1, at_most: 12),
-      Forgery(:basic).number(at_least: 1, at_most: 28)
-    )
-    r.director Forgery(:name).full_name
+    name { Forgery(:name).company_name + ' Aerobatic Open' }
+    city { Forgery(:address).city }
+    region { %w[
+        SouthEast SouthWest MidAmerica SouthCentral Northeast Southeast
+      ].sample }
+    r.chapter { %w[52 35 38 58 19 1 12].sample }
+    r.state { Forgery(:address).state_abbrev }
+    r.start { Time.mktime(
+        Forgery(:basic).number(at_least: 2011, at_most: 2020),
+        Forgery(:basic).number(at_least: 1, at_most: 12),
+        Forgery(:basic).number(at_least: 1, at_most: 28)
+      ) }
+    r.director { Forgery(:name).full_name }
   end
 ### Category
   factory :category do
