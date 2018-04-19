@@ -5,6 +5,16 @@
 <% end %>
 </p>
 
-<ul class="no-bullets">
-<%= render @contests %>
-</ul>
+<% unless @contests.empty? %>
+  <ul class="no-bullets">
+    <%= render @contests %>
+  </ul>
+<% end %>
+
+<% unless @future_contests.empty? %>
+  <h3>Future contests</h3>
+  <ul class="no-bullets future-contests">
+    <%= render @future_contests %>
+  </ul>
+<% end %>
+

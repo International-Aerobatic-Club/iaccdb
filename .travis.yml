@@ -1,11 +1,13 @@
 language: ruby
 cache: bundler
-script: bundle exec rspec spec
 git:
   depth: 3
 before_script:
   - cmd/travis_ci_test_db.sh
   - RAILS_ENV='test' bundle exec rake db:setup
+script:
+  - bundle exec rspec spec
+  - bundle exec rake test
 after_script:
   - cmd/code_coverage_report.sh
 env:

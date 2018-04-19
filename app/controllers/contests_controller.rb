@@ -8,7 +8,12 @@ class ContestsController < ApplicationController
     @years = Contest.select("distinct year(start) as anum").all.collect { |contest| contest.anum }
     @years.sort!{|a,b| b <=> a}
     @year = params[:year] || @years.first
-    @contests = Contest.where('year(start) = ?', @year).order("start DESC")
+    @contests = Contest.where(
+      'year(start) = ? and start <= now()', @year
+    ).order("start DESC")
+    @future_contests = Contest.where(
+      'year(start) = ? and now() < start', @year
+    ).order("start ASC")
   end
 
   # GET /contests/1
