@@ -11,15 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180124140421) do
+ActiveRecord::Schema.define(version: 20180419185514) do
+
+  create_table "airplane_models", force: :cascade do |t|
+    t.string  "make",             limit: 255
+    t.string  "model",            limit: 255
+    t.integer "empty_weight_lbs", limit: 2
+    t.integer "max_weight_lbs",   limit: 2
+    t.integer "horsepower",       limit: 2
+    t.integer "seats",            limit: 1
+    t.integer "wings",            limit: 1
+  end
+
+  add_index "airplane_models", ["id"], name: "index_airplane_models_on_id", using: :btree
+  add_index "airplane_models", ["make", "model"], name: "index_airplane_models_on_make_and_model", unique: true, using: :btree
+  add_index "airplane_models", ["make"], name: "index_airplane_models_on_make", using: :btree
+  add_index "airplane_models", ["model"], name: "index_airplane_models_on_model", using: :btree
 
   create_table "airplanes", force: :cascade do |t|
-    t.string   "make",       limit: 255
-    t.string   "model",      limit: 255
-    t.string   "reg",        limit: 255
+    t.string   "make",              limit: 255
+    t.string   "model",             limit: 255
+    t.string   "reg",               limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "model_id",   limit: 4
+    t.integer  "airplane_model_id", limit: 4
   end
 
   add_index "airplanes", ["id"], name: "index_airplanes_on_id", using: :btree
@@ -222,16 +237,6 @@ ActiveRecord::Schema.define(version: 20180124140421) do
 
   add_index "members", ["iac_id"], name: "index_members_on_iac_id", using: :btree
   add_index "members", ["id"], name: "index_members_on_id", using: :btree
-
-  create_table "models", force: :cascade do |t|
-    t.string  "make",             limit: 255
-    t.string  "model",            limit: 255
-    t.integer "empty_weight_lbs", limit: 2
-    t.integer "max_weight_lbs",   limit: 2
-    t.integer "horsepower",       limit: 2
-    t.integer "seats",            limit: 1
-    t.integer "wings",            limit: 1
-  end
 
   create_table "pc_results", force: :cascade do |t|
     t.integer  "pilot_id",        limit: 4,                                         null: false
