@@ -2,20 +2,18 @@
 FactoryBot.define do
 ### Airplane
   factory :airplane do |r|
-    r.sequence(:make) { Forgery(:name).company_name }
-    r.sequence(:model) { Forgery(:name).company_name }
+    r.sequence(:make) { Faker::Company.unique.name }
+    r.sequence(:model) { Faker::Company.unique.name }
     r.sequence(:reg) do
-      Forgery(:basic).number(:at_least => 100, :at_most => 999).to_s +
-      Forgery(:basic).text(at_least: 2, at_most: 2, allow_lower: false,
-        allow_numeric: false)
+      Faker::Number.between(100, 999).to_s +
+      Faker::Name.initials(2)
     end
   end
 ### Member
   factory :member do |r|
-    r.sequence(:iac_id) { |i| 10 ** Forgery(:basic).number(
-      at_least: 2, at_most: 6) + i }
-    r.sequence(:family_name) { |i| Forgery(:name).last_name }
-    r.sequence(:given_name) { |i| Forgery(:name).first_name }
+    r.sequence(:iac_id) { |i| 10 ** Faker::Number.between(2, 6) + i }
+    family_name { Faker::Name.last_name }
+    given_name { Faker::Name.first_name }
   end
   factory :tom_adams, :class => Member do |r|
     r.iac_id 1999
@@ -70,17 +68,19 @@ FactoryBot.define do
     r.director 'Vicky Benzing'
   end
   factory :contest do |r|
-    r.name { Forgery(:name).company_name + ' Aerobatic Open' }
-    r.city Forgery(:address).city
+    r.name {
+      [
+        Faker::Superhero.descriptor,
+        'Aerobatic',
+        Faker::LeagueOfLegends.summoner_spell
+      ].join(' ')
+    }
+    r.city Faker::Address.city
     r.region 'SouthEast'
     r.chapter '52'
-    r.state Forgery(:address).state_abbrev
-    r.start Time.mktime(
-      Forgery(:basic).number(at_least: 2011, at_most: 2020),
-      Forgery(:basic).number(at_least: 1, at_most: 12),
-      Forgery(:basic).number(at_least: 1, at_most: 28)
-    )
-    r.director Forgery(:name).full_name
+    r.state Faker::Address.state_abbr
+    r.start Faker::Date.between(6.years.ago, 3.years.from_now)
+    r.director Faker::Name.name
   end
 ### Category
   factory :category do
