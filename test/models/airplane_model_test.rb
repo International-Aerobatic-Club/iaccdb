@@ -16,4 +16,11 @@ class AirplaneModelTest < ActiveSupport::TestCase
       assert(m.include?("has already been taken"))
     end
   end
+
+  test "nullifies airplane references on destroy" do
+    airplane = create(:airplane)
+    mnm = airplane.airplane_model
+    mnm.destroy
+    assert_nil(airplane.reload.airplane_model_id)
+  end
 end

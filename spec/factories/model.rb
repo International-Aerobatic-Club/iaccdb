@@ -9,6 +9,7 @@ FactoryBot.define do
       Forgery(:basic).text(at_least: 2, at_most: 2, allow_lower: false,
         allow_numeric: false)
     end
+    airplane_model
   end
 ### AirplaneModel
   factory :airplane_model do
