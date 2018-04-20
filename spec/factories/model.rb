@@ -2,7 +2,7 @@
 FactoryBot.define do
 ### Airplane
   factory :airplane do |r|
-    make { Faker::Company.unique.name }
+    make { Faker::Company.name }
     model { Faker::Company.unique.name }
     reg do
       Faker::Number.between(100, 999).to_s +
@@ -12,14 +12,13 @@ FactoryBot.define do
   end
 ### MakeModel
   factory :make_model do
-    make { Forgery(:name).company_name }
-    model { Forgery(:name).company_name }
-    empty_weight_lbs { Forgery(:basic).number(at_least: 600, at_most: 1600) }
-    max_weight_lbs { Forgery(:basic).number(
-      at_least: 300, at_most: 800) + empty_weight_lbs }
-    horsepower { Forgery(:basic).number(at_least: 40, at_most: 600) }
-    seats { Forgery(:basic).number(at_least: 1, at_most: 4) }
-    wings { Forgery(:basic).number(at_least: 1, at_most: 2) }
+    make { Faker::Company.name }
+    model { Faker::Company.unique.name }
+    empty_weight_lbs { Faker::Number.between(600, 1600) }
+    max_weight_lbs { Faker::Number.between(300, 800) + empty_weight_lbs }
+    horsepower { Faker::Number.between(40, 600) }
+    seats { Faker::Number.between(1, 4) }
+    wings { Faker::Number.between(1, 2) }
   end
 ### Member
   factory :member do |r|
