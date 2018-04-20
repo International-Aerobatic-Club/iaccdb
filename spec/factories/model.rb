@@ -80,21 +80,23 @@ FactoryBot.define do
     r.director 'Vicky Benzing'
   end
   factory :contest do
-    name {
+    name do
       [
         Faker::Superhero.descriptor,
         'Aerobatic',
         Faker::LeagueOfLegends.summoner_spell
       ].join(' ')
-    }
-    city Faker::Address.city
-    region { %w[
+    end
+    city { Faker::Address.city }
+    region do
+      %w[
         SouthEast SouthWest MidAmerica SouthCentral Northeast Southeast
-      ].sample }
+      ].sample
+    end
     chapter { %w[52 35 38 58 19 1 12].sample }
-    state Faker::Address.state_abbr
-    start Faker::Date.between(6.years.ago, 3.years.from_now)
-    director Faker::Name.name
+    state { Faker::Address.state_abbr }
+    start { Faker::Date.between(6.years.ago, 3.years.from_now) }
+    director { Faker::Name.name }
   end
 ### Category
   factory :category do
