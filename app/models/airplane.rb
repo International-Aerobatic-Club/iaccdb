@@ -1,6 +1,6 @@
 class Airplane < ActiveRecord::Base
   has_many :pilot_flights, :dependent => :nullify
-  belongs_to :airplane_model
+  belongs_to :make_model
 
   # find or create airplane with given make, model, reg number
   def self.find_or_create_by_make_model_reg(make, model, reg)

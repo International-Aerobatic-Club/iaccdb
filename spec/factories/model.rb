@@ -9,10 +9,10 @@ FactoryBot.define do
       Forgery(:basic).text(at_least: 2, at_most: 2, allow_lower: false,
         allow_numeric: false)
     end
-    airplane_model
+    make_model
   end
-### AirplaneModel
-  factory :airplane_model do
+### MakeModel
+  factory :make_model do
     make { Forgery(:name).company_name }
     model { Forgery(:name).company_name }
     empty_weight_lbs { Forgery(:basic).number(at_least: 600, at_most: 1600) }

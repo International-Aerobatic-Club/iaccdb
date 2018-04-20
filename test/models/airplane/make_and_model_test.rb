@@ -10,7 +10,7 @@ class AirplaneMakeAndModelTest < ActiveSupport::TestCase
     assert_equal(make, airplane.make)
     assert_equal(model, airplane.model)
     assert_equal(reg, airplane.reg)
-    mnm = airplane.airplane_model
+    mnm = airplane.make_model
     refute_nil(mnm)
     assert_equal(make, mnm.make)
     assert_equal(model, mnm.model)
