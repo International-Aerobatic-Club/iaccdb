@@ -2,12 +2,24 @@
 FactoryBot.define do
 ### Airplane
   factory :airplane do |r|
-    r.sequence(:make) { Faker::Company.unique.name }
-    r.sequence(:model) { Faker::Company.unique.name }
-    r.sequence(:reg) do
+    make { Faker::Company.unique.name }
+    model { Faker::Company.unique.name }
+    reg do
       Faker::Number.between(100, 999).to_s +
       Faker::Name.initials(2)
     end
+    make_model
+  end
+### MakeModel
+  factory :make_model do
+    make { Forgery(:name).company_name }
+    model { Forgery(:name).company_name }
+    empty_weight_lbs { Forgery(:basic).number(at_least: 600, at_most: 1600) }
+    max_weight_lbs { Forgery(:basic).number(
+      at_least: 300, at_most: 800) + empty_weight_lbs }
+    horsepower { Forgery(:basic).number(at_least: 40, at_most: 600) }
+    seats { Forgery(:basic).number(at_least: 1, at_most: 4) }
+    wings { Forgery(:basic).number(at_least: 1, at_most: 2) }
   end
 ### Member
   factory :member do |r|
@@ -67,20 +79,22 @@ FactoryBot.define do
     r.start '2011-09-25'
     r.director 'Vicky Benzing'
   end
-  factory :contest do |r|
-    r.name {
+  factory :contest do
+    name {
       [
         Faker::Superhero.descriptor,
         'Aerobatic',
         Faker::LeagueOfLegends.summoner_spell
       ].join(' ')
     }
-    r.city Faker::Address.city
-    r.region 'SouthEast'
-    r.chapter '52'
-    r.state Faker::Address.state_abbr
-    r.start Faker::Date.between(6.years.ago, 3.years.from_now)
-    r.director Faker::Name.name
+    city Faker::Address.city
+    region { %w[
+        SouthEast SouthWest MidAmerica SouthCentral Northeast Southeast
+      ].sample }
+    chapter { %w[52 35 38 58 19 1 12].sample }
+    state Faker::Address.state_abbr
+    start Faker::Date.between(6.years.ago, 3.years.from_now)
+    director Faker::Name.name
   end
 ### Category
   factory :category do
