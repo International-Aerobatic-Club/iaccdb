@@ -1,6 +1,7 @@
 class Airplane < ActiveRecord::Base
   has_many :pilot_flights, :dependent => :nullify
   belongs_to :make_model
+  before_save :check_make_and_model_relation
 
   # find or create airplane with given make, model, reg number
   def self.find_or_create_by_make_model_reg(make, model, reg)
@@ -40,5 +41,19 @@ class Airplane < ActiveRecord::Base
 
   def to_s
     description
+  end
+
+  #######
+  private
+  #######
+
+  def check_make_and_model_relation
+    if make or model
+      begin
+        self.make_model = MakeModel.find_or_create_by(make: make, model: model)
+      rescue ActiveRecord::RecordNotUnique
+        retry
+      end
+    end
   end
 end
