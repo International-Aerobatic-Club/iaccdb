@@ -14,6 +14,11 @@ class ActiveSupport::TestCase
   include FactoryBot::Syntax::Methods
 end
 
+# Faker Unique
+Minitest.after_run do
+  Faker::UniqueGenerator.clear
+end
+
 # Capybara
 require "capybara/rails"
 require "capybara/minitest"

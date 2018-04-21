@@ -36,7 +36,7 @@ end
 group :test do
   gem 'factory_bot_rails'
   gem 'database_cleaner'
-  gem 'forgery'
+  gem 'faker'
   gem 'timecop'
   gem 'capybara'
   gem 'launchy'
