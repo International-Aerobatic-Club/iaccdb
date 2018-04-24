@@ -1,16 +1,18 @@
-# http://stackoverflow.com/questions/3768718/rails-rspec-make-tests-pass-with-http-basic-authentication
 module AuthHelper
   class Creds
     attr_reader :user, :password
 
+    def self.read_users
+      Rails.application.secrets['users'] ||
+        YAML.load_file('config/admin.yml')['users']
+    end
+
     def initialize(role)
-      creds = YAML.load_file('config/admin.yml')
-      creds_role = role ? creds[role] : creds
-      admin = role ? Rails.application.secrets[role] : nil
-      @user = admin ? admin[:user] :
-        (creds_role ? creds_role['user'] : creds[:user])
-      @password = admin ? admin[:password] :
-        (creds_role ? creds_role['password'] : creds[:password])
+      role = role.to_sym
+      users = self.class.read_users
+      role_user = users ? users.find { |u| u['role'].to_sym == role } : nil
+      @user = role_user ? role_user['name'] : nil
+      @password = role_user ? role_user['password'] : nil
     end
 
     def http_auth_basic
@@ -19,6 +21,7 @@ module AuthHelper
     end
   end
 
+  # http://stackoverflow.com/questions/3768718/rails-rspec-make-tests-pass-with-http-basic-authentication
   module Controller
     def http_auth_login(role = nil)
       creds = Creds.new(role)
@@ -70,11 +73,5 @@ module AuthHelper
       end
     end
   end
-end
-
-RSpec.configure do |config|
-  config.include AuthHelper::Controller, :type => :controller
-  config.include AuthHelper::Request, :type => :request
-  config.include AuthHelper::Feature, :type => :feature
 end
 
