@@ -8,7 +8,7 @@ module AuthHelper
     end
 
     def initialize(role)
-      role = role.to_sym
+      role = role ? role.to_sym : :admin
       users = self.class.read_users
       role_user = users ? users.find { |u| u['role'].to_sym == role } : nil
       @user = role_user ? role_user['name'] : nil
@@ -23,7 +23,7 @@ module AuthHelper
 
   # http://stackoverflow.com/questions/3768718/rails-rspec-make-tests-pass-with-http-basic-authentication
   module Controller
-    def http_auth_login(role = nil)
+    def http_auth_login(role = :admin)
       creds = Creds.new(role)
       request.env['HTTP_AUTHORIZATION'] = creds.http_auth_basic
     end
@@ -34,7 +34,7 @@ module AuthHelper
     # returns same with HTTP_AUTHORIZATION header added
     # e.g. `get path, {}, http_auth_login` or
     # `get path, {}, http_auth_login({ header_var: 'header_value' })`
-    def http_auth_login(role = nil, env = nil)
+    def http_auth_login(role = :admin, env = nil)
       env ||= {}
       creds = Creds.new(role)
       env['HTTP_AUTHORIZATION'] = creds.http_auth_basic
@@ -44,7 +44,7 @@ module AuthHelper
 
   module Feature
     class DriverAuthException < StandardError ; end
-    def http_auth_login(role = nil)
+    def http_auth_login(role = :admin)
       creds = Creds.new(role)
       driver = page.driver
       if driver.respond_to?(:basic_auth)
