@@ -35,6 +35,7 @@ end
 class ActionDispatch::IntegrationTest
   include Capybara::DSL
   include Capybara::Minitest::Assertions
+  include AuthHelper::Request
 
   def teardown
     Capybara.reset_sessions!
