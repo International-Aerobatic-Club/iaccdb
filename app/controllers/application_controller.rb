@@ -1,19 +1,37 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery :with => :exception
 
+  def current_role
+    @current_role || :visitor
+  end
+
+  def current_ability
+    @current_ability ||= Ability.new(current_role)
+  end
+
+  # authenticate interactively with browser credentials query
   def authenticate
     authenticate_or_request_with_http_basic do |user_name, password|
-      creds = YAML.load_file('config/admin.yml')
-      user_name == creds['user'] && password == creds['password']
+      do_auth(user_name, password)
     end
   end
 
-  def check_credentials(role = 'contest_admin')
-    has_auth = authenticate_with_http_basic do |user_name, password|
-      creds = Rails.application.secrets[role] ||
-        YAML.load_file('config/admin.yml')[role]
-      creds && user_name == creds['user'] && password == creds['password']
+  # authenticate non-interactively
+  def api_authenticate
+    authenticate_with_http_basic do |user_name, password|
+      do_auth(user_name, password)
     end
-    head :unauthorized unless has_auth
+  end
+
+  #######
+  private
+  #######
+
+  def do_auth(user_name, password)
+    users = AuthHelper::Creds.read_users
+    user = users ? users.find { |u| u['name'] == user_name } : nil
+    have_auth = user && user['password'] == password
+    @current_role = have_auth ? user['role'].to_sym : nil
+    have_auth
   end
 end
