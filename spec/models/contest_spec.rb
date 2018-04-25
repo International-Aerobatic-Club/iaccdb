@@ -25,4 +25,55 @@ describe Contest, :type => :model do
     expect(contest.flights).to be_empty
     expect(contest.failures).to be_empty
   end
+
+  context 'validations' do
+    before :each do
+      @valid_params = {
+        'name' => 'Aéreo dust devil',
+        'start' => Date.today.to_s,
+        'city' => 'Daytona',
+        'state' => 'CA',
+        'director' => 'Cherry Garcia',
+        'region' => 'SouthWest'
+      }
+      @long_value = 'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz'
+    end
+    it 'validates presence of contest name' do
+      @valid_params.delete('name')
+      contest = Contest.create(@valid_params)
+      expect(contest.valid?).to be false
+      expect(contest.errors['name']).to_not be_empty
+    end
+    it 'validates max length of contest name' do
+      contest = Contest.create(@valid_params.merge({name: @long_value}))
+      expect(contest.valid?).to be false
+      expect(contest.errors['name']).to_not be_empty
+    end
+    it 'validates max length of contest city' do
+      contest = Contest.create(@valid_params.merge({city: @long_value}))
+      expect(contest.valid?).to be false
+      expect(contest.errors['city']).to_not be_empty
+    end
+    it 'validates max length of contest state' do
+      contest = Contest.create(@valid_params.merge({state: 'USA'}))
+      expect(contest.valid?).to be false
+      expect(contest.errors['state']).to_not be_empty
+    end
+    it 'validates max length of contest director' do
+      contest = Contest.create(@valid_params.merge({director: @long_value}))
+      expect(contest.valid?).to be false
+      expect(contest.errors['director']).to_not be_empty
+    end
+    it 'validates max length of contest region' do
+      contest = Contest.create(@valid_params.merge({region: @long_value}))
+      expect(contest.valid?).to be false
+      expect(contest.errors['region']).to_not be_empty
+    end
+    it 'validates presence of contest start date' do
+      @valid_params.delete('start')
+      contest = Contest.create(@valid_params)
+      expect(contest.valid?).to be false
+      expect(contest.errors['start']).to_not be_empty
+    end
+  end
 end

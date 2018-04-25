@@ -22,7 +22,7 @@ module IAC
       @c_ntnls = create(:contest, start: start,
         region: 'National',
         name: 'U.S. National Aerobatic Championships')
-      @c_mac = create(:contest, start: @start,
+      @c_mac = create(:contest, start: start,
         region: 'SouthCentral',
         name: 'MAC80 West')
 

@@ -18,7 +18,7 @@ IAC::Application.routes.draw do
       resources :pc_results, :only => [:index]
     end
     resources :contests do
-      member do 
+      member do
         get 'recompute'
       end
     end
@@ -29,26 +29,26 @@ IAC::Application.routes.draw do
     resources :queues, :only => [:index, :show]
     post "members/merge_preview"
     post "members/merge"
-    get 'manny_list', 
-      :controller => :contests, 
+    get 'manny_list',
+      :controller => :contests,
       :action => "manny_list"
-    get 'manny_synchs/:manny_number/retrieve', 
-      :controller => :manny_synchs, 
-      :action => "retrieve", 
+    get 'manny_synchs/:manny_number/retrieve',
+      :controller => :manny_synchs,
+      :action => "retrieve",
       :as => 'manny_retrieve'
-    get 'manny_synchs/:manny_number/show', 
-      :controller => :manny_synchs, 
-      :action => "show", 
+    get 'manny_synchs/:manny_number/show',
+      :controller => :manny_synchs,
+      :action => "show",
       :as => 'manny_show'
-    post 'jasper', 
-      :controller => 'jasper', 
+    post 'jasper',
+      :controller => 'jasper',
       :action => 'results'
-    get 'data_post/:id/download', 
-      :controller => :data_posts, 
+    get 'data_post/:id/download',
+      :controller => :data_posts,
       :action => 'download',
       :as => 'data_post_download'
-    get 'data_post/:id/resubmit', 
-      :controller => :data_posts, 
+    get 'data_post/:id/resubmit',
+      :controller => :data_posts,
       :action => 'resubmit',
       :as => 'data_post_resubmit'
   end
@@ -86,9 +86,9 @@ IAC::Application.routes.draw do
 
   resources :jf_results, :only => [:show]
 
-  get 'judge/:id/cv', 
-    :controller => :judges, 
-    :action => :cv, 
+  get 'judge/:id/cv',
+    :controller => :judges,
+    :action => :cv,
     :as => 'judge_cv'
 
   resources :flights, :only => [:show]
