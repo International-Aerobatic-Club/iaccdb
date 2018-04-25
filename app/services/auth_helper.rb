@@ -1,16 +1,44 @@
 module AuthHelper
+
+  def current_role
+    @current_role ||= :visitor
+  end
+
+  def check_auth(user_name, password, role = :admin)
+    user = UserList.find_by_name(user_name)
+    have_auth = user && user['password'] == password
+    @current_role = have_auth ? user['role'].to_sym : :visitor
+    roles = [:admin] + [role].flatten.compact.map(&:to_sym)
+    have_auth && roles.member?(current_role)
+  end
+
+  class UserList
+    class << self
+      attr_accessor :users
+
+      def users
+        @users ||=
+          Rails.application.secrets['users'] ||
+          YAML.load_file('config/admin.yml')['users'] ||
+          []
+      end
+
+      def find_by_name(user_name)
+        users.find { |u| u['name'] == user_name }
+      end
+
+      def first_with_role(role)
+        role = role ? role.to_sym : :admin
+        users.find { |u| u['role'].to_sym == role }
+      end
+    end
+  end
+
   class Creds
     attr_reader :user, :password
 
-    def self.read_users
-      Rails.application.secrets['users'] ||
-        YAML.load_file('config/admin.yml')['users']
-    end
-
     def initialize(role)
-      role = role.to_sym
-      users = self.class.read_users
-      role_user = users ? users.find { |u| u['role'].to_sym == role } : nil
+      role_user = UserList.first_with_role(role)
       @user = role_user ? role_user['name'] : nil
       @password = role_user ? role_user['password'] : nil
     end
@@ -23,7 +51,7 @@ module AuthHelper
 
   # http://stackoverflow.com/questions/3768718/rails-rspec-make-tests-pass-with-http-basic-authentication
   module Controller
-    def http_auth_login(role = nil)
+    def http_auth_login(role = :admin)
       creds = Creds.new(role)
       request.env['HTTP_AUTHORIZATION'] = creds.http_auth_basic
     end
@@ -34,7 +62,7 @@ module AuthHelper
     # returns same with HTTP_AUTHORIZATION header added
     # e.g. `get path, {}, http_auth_login` or
     # `get path, {}, http_auth_login({ header_var: 'header_value' })`
-    def http_auth_login(role = nil, env = nil)
+    def http_auth_login(role = :admin, env = nil)
       env ||= {}
       creds = Creds.new(role)
       env['HTTP_AUTHORIZATION'] = creds.http_auth_basic
@@ -44,7 +72,7 @@ module AuthHelper
 
   module Feature
     class DriverAuthException < StandardError ; end
-    def http_auth_login(role = nil)
+    def http_auth_login(role = :admin)
       creds = Creds.new(role)
       driver = page.driver
       if driver.respond_to?(:basic_auth)

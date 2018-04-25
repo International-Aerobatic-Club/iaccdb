@@ -7,11 +7,17 @@ test:
   encoding: utf8
 EOF
 /bin/cat <<EOF >config/admin.yml
-user: test_user
-password: test_password
-contest_admin:
-  user: iac
-  password: rock_and_roll
+---
+# users with passwords, and roles for http auth
+users:
+  - name: dclo
+    password: fly4fun2win
+    role: admin
+  - name: drew
+    password: can_draw
+    role: contest_admin
+  - name: airplane
+    password: curator
+    role: curator
 EOF
-#RAILS_ENV='test' bundle exec rake db:setup
 
