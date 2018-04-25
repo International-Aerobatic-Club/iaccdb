@@ -46,3 +46,7 @@ end
 class ActionController::TestCase
   include AuthHelper::Controller
 end
+
+class ApplicationSystemTestCase < ActionDispatch::IntegrationTest
+  include AuthHelper::Feature
+end

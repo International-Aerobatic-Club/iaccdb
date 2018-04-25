@@ -89,9 +89,9 @@ module AuthHelper
         raise DriverAuthException.new "Capybara page driver basic auth unknown method"
       end
     end
-    def basic_auth_visit(path)
+    def basic_auth_visit(path, role = :admin)
       begin
-        http_auth_login
+        http_auth_login(role)
         visit(path)
       rescue DriverAuthException => e
         creds = Creds.new
