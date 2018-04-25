@@ -20,7 +20,7 @@ class Admin::MembersController < ApplicationController
 
   def update
     @member = Member.find(params[:id])
-    if @member.update_attributes(params[:member])
+    if @member.update_attributes(member_params)
       redirect_to admin_members_path(:anchor => @member.id),
         :notice => "Member updated"
     else
@@ -79,6 +79,10 @@ class Admin::MembersController < ApplicationController
   ###
   private
   ###
+
+  def member_params
+    params.require('member').permit(['iac_id', 'given_name', 'family_name'])
+  end
 
   def check_dups_join(accum, list)
     if !(accum & list).empty?

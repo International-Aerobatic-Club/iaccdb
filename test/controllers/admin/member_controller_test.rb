@@ -25,21 +25,25 @@ module Admin
       assert_response :unauthorized
     end
 
-    test "admin get index" do
+    test "admin can get index" do
       http_auth_login(:admin)
-      puts "REQUEST #{request.inspect}"
       get :index
       assert_response :success
     end
 
-    test "should get show" do
-      get :show
+    test "admin can get show" do
+      http_auth_login(:admin)
+      get :show, id: @member_list.first.id
       assert_response :success
     end
 
     test "admin can patch update" do
+      http_auth_login(:admin)
       patch :update, id: @after_attrs['id'], member: @after_attrs
-      assert_response :success
+      assert_response :redirect
+      member = Member.find(@after_attrs['id'])
+      assert_not_nil(member)
+      assert_equal(@after_attrs['family_name'], member.family_name)
     end
 
   end
