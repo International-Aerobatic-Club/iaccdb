@@ -20,9 +20,18 @@ module Contest::ShowResults
     flights_chiefs(flights.all)
   end
 
+  def is_future
+    Time.now() < (start + 2.days)
+  end
+
+  def place_and_time
+    base = is_future ? "Scheduled" : "Held"
+    "#{base} in #{place}, #{start}"
+  end
+
   def organizers
     orgs = []
-    orgs << "Directed by #{director}" if director
+    orgs << "Director: #{director}" if director
     orgs << "Chapter #{chapter}" if chapter != nil && 0 < chapter
     orgs.join(', ')
   end
