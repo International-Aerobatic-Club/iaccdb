@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
-<h1><%= @contest.name %></h1>
-<p class="contest_place">Held in <%= @contest.place %>, <%= @contest.start %></p>
+<h1><%= @contest.name %></h1
+<p class="contest_place"><%= @contest.place_and_time %></p>
 <% unless @contest.organizers.empty? %>
   <p class="contest_director"><%= @contest.organizers %></p>
 <% end %>
@@ -9,6 +9,11 @@
   <p class="contest_chief">Chief Judge(s): <%= @contest.chief_names.join(', ') %></p>
 <% end %>
 
+<% if @categories.empty? %>
+  <p class='message'>This contest has not posted any results.</p>
+<% end %>
+
 <%= render :partial => 'contests/category', collection: @categories,
-  :locals => { no_category_chiefs: (@contest.chief_names.length < 2) } %>
+  :locals => { no_category_chiefs: (@contest.chief_names.length < 2) }
+%>
 
