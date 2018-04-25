@@ -1,15 +1,16 @@
-class Admin::FailuresController < Admin::AdminController
+class Admin::FailuresController < ApplicationController
   before_filter :authenticate
-  load_and_authorize_resource
 
   def index
-    @failures = @failures.includes(:contest).order("created_at DESC")
+    @failures = Failure.includes(:contest).order("created_at DESC")
   end
 
   def show
+    @failure = Failure.includes(:contest).find(params[:id])
   end
 
   def destroy
+    @failure = Failure.find(params[:id])
     @failure.destroy
     redirect_to(admin_failures_url)
   end

@@ -1,22 +1,22 @@
-class Admin::ContestsController < Admin::AdminController
-  include Manny::Connect
+class Admin::ContestsController < ApplicationController
   before_filter :authenticate
-  load_and_authorize_resource
+
+  include Manny::Connect
 
   # GET /contests
   # GET /contests.xml
   def index
-    @contests = @contests.includes(:manny_synch).order("start DESC")
+    @contests = Contest.includes(:manny_synch).order("start DESC")
   end
 
   # GET /contests/1/edit
   def edit
-    #@contest = Contest.find(params[:id])
+    @contest = Contest.find(params[:id])
   end
 
   # PUT /contests/1
   def update
-    #@contest = Contest.find(params[:id])
+    @contest = Contest.find(params[:id])
 
     if @contest.update_attributes(params[:contest])
       redirect_to :action => "index"
@@ -26,7 +26,7 @@ class Admin::ContestsController < Admin::AdminController
   end
 
   def destroy
-    #@contest = Contest.find(params[:id])
+    @contest = Contest.find(params[:id])
     @contest.destroy
 
     redirect_to(admin_contests_url)
@@ -35,14 +35,21 @@ class Admin::ContestsController < Admin::AdminController
   # GET /contests/1
   # GET /contests/1.xml
   def show
-    #@contest = Contest.find(params[:id])
+    @contest = Contest.find(params[:id])
+    # admin/show.html.erb
+  end
+
+  # GET /contests/1
+  # GET /contests/1.xml
+  def show
+    @contest = Contest.find(params[:id])
     # admin/show.html.erb
   end
 
   # GET /contests/1/recompute
   # GET /contests/
   def recompute
-    #@contest = Contest.find(params[:id])
+    @contest = Contest.find(params[:id])
     Delayed::Job.enqueue Jobs::ComputeFlightsJob.new(@contest)
     flash[:notice] = "#{@contest.year_name} queued for computation"
     redirect_to :action => 'index' 

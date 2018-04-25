@@ -51,8 +51,7 @@ class ContestsController < ApplicationController
   private
 
   def require_contest_admin
-    api_authenticate
-    head :unauthorized unless can? :post_contests
+    check_credentials('contest_admin')
   end
 
   def contest_params

@@ -10,8 +10,6 @@ gem 'rails', "~> 4.0"
 gem 'delayed_job'
 gem 'delayed_job_active_record'
 
-gem 'cancancan'
-
 gem 'libxml-ruby'
 gem 'jquery-rails'
 gem 'chronic'
