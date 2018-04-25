@@ -336,4 +336,10 @@ FactoryBot.define do
     r.region 'NorthEast'
     r.year 2015
   end
+### Failure
+  factory :failure do |r|
+    step { Faker::Food.dish }
+    description { Faker::Hacker.say_something_smart }
+    contest
+  end
 end
