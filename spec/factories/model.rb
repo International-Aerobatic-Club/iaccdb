@@ -13,7 +13,7 @@ FactoryBot.define do
 ### MakeModel
   factory :make_model do
     make { Faker::Company.name }
-    model { Faker::Company.unique.name }
+    model { Faker::Space.unique.meteorite }
     empty_weight_lbs { Faker::Number.between(600, 1600) }
     max_weight_lbs { Faker::Number.between(300, 800) + empty_weight_lbs }
     horsepower { Faker::Number.between(40, 600) }
