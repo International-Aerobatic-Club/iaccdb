@@ -43,3 +43,6 @@ class ActionDispatch::IntegrationTest
   end
 end
 
+class ActionController::TestCase
+  include AuthHelper::Controller
+end

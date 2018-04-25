@@ -26,7 +26,9 @@ module Admin
     end
 
     test "admin get index" do
-      get :index, parameters: {}
+      http_auth_login(:admin)
+      puts "REQUEST #{request.inspect}"
+      get :index
       assert_response :success
     end
 
