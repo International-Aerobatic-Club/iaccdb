@@ -1,6 +1,7 @@
 class ContestsController < ApplicationController
   before_action :require_contest_admin
-  skip_before_action :require_contest_admin, only: [:index, :show]
+  skip_before_action :require_contest_admin,
+    only: [:index, :show]
   skip_before_action :verify_authenticity_token,
     only: [:create, :update, :destroy]
 
@@ -52,7 +53,7 @@ class ContestsController < ApplicationController
   private
 
   def require_contest_admin
-    api_authenticate(:contest_admin)
+    authenticate(:contest_admin)
   end
 
   def contest_params
