@@ -29,7 +29,7 @@ end
 # Competitors will have a result in each category they have competed
 # Does not currently ignore H/C (for patch) results
 def compute_results (year, region)
-  RegionalPilot.destroy_all(:year => year, :region => region)
+  RegionalPilot.where(:year => year, :region => region).destroy_all
   #first find the contests in the region 
   contests = Contest.where(['year(start) = ? and region = ?', year, region])
   contests.each do |contest|
@@ -46,7 +46,7 @@ def compute_results (year, region)
     pc_ct = apc.count
     pc_req = required_contest_count(region)
     pc_use = pc_ct < pc_req ? pc_ct : pc_req
-    apc.combination(pc_use) do |c|
+    apc.to_a.combination(pc_use) do |c|
       pts_earned = c.inject(0) { |pts, pcr| pts + pcr.category_value }
       pts_possible = c.inject(0) { |pts, pcr| pts + pcr.total_possible }
       pct = pts_earned * 100.0 / pts_possible

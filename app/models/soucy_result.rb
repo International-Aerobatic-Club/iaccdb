@@ -8,7 +8,7 @@ def compute_best_pair
   best_total = 0.0
   best_possible = 1
   best_ratio = 0.0
-  pc_results.all.combination(2) do |pair|
+  pc_results.all.to_a.combination(2) do |pair|
     total = pair[0].category_value + pair[1].category_value
     possible = pair[0].total_possible + pair[1].total_possible
     ratio = 0 < possible ? total / possible : 0.0

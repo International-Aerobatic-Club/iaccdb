@@ -13,7 +13,7 @@ def compute_result
     csz = 3
     self.qualified = true
   end
-  results.combination(csz) do |triple|
+  results.to_a.combination(csz) do |triple|
     total = triple.inject(0.0) { |t,r| t + r.category_value }
     possible = triple.inject(0) { |t,r| t + r.total_possible }
     non_primary = triple.inject(false) { |t,r| t || !r.category.is_primary }
