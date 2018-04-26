@@ -9,14 +9,14 @@ describe ContestsController, :type => :controller do
   end
   context 'index' do
     it 'responds with list of contests' do
-      get :index, year: @year, :format => :json
+      get :index, params: { year: @year }, :format => :json
       expect(response.status).to eq(200)
       expect(response.content_type).to eq "application/json"
       data = JSON.parse(response.body)
       expect(data['contests'].count).to eq @ctc
     end
     it 'responds with list of years' do
-      get :index, year: @year, :format => :json
+      get :index, params: { year: @year }, :format => :json
       data = JSON.parse(response.body)
       expect(data['years'].count).to eq @years.count
       expected = @years.collect do |y|
@@ -25,7 +25,7 @@ describe ContestsController, :type => :controller do
       expect(data['years']).to match_array(expected)
     end
     it 'contests have REST urls' do
-      get :index, year: @year, :format => :json
+      get :index, params: { year: @year }, :format => :json
       data = JSON.parse(response.body)
       expected = @contests.collect { |c| contest_url(c, :format => :json) }
       found = data['contests'].collect { |c| c['url'] }
@@ -53,7 +53,7 @@ describe ContestsController, :type => :controller do
       cc.compute_results
     end
     it 'responds with basic contest information' do
-      get :show, id: @contest.id, :format => :json
+      get :show, params: { id: @contest.id }, :format => :json
       expect(response.status).to eq(200)
       expect(response.content_type).to eq "application/json"
       data = JSON.parse(response.body)
@@ -67,7 +67,7 @@ describe ContestsController, :type => :controller do
       expect(data['state']).to eq @contest.state
     end
     it 'contains categories flown' do
-      get :show, id: @contest.id, :format => :json
+      get :show, params: { id: @contest.id }, :format => :json
       data = JSON.parse(response.body)
       e_cats = @contest.flights.collect { |f| f.category }
       e_cats = e_cats.uniq
@@ -78,7 +78,7 @@ describe ContestsController, :type => :controller do
       expect(d_cat_names).to match_array(e_cat_names)
     end
     it 'contains competitors in category' do
-      get :show, id: @contest.id, :format => :json
+      get :show, params: { id: @contest.id }, :format => :json
       data = JSON.parse(response.body)
       d_cats = data['category_results']
       d_cr = d_cats.first
@@ -96,7 +96,7 @@ describe ContestsController, :type => :controller do
       expect(d_pilot_iac_ids).to match_array(e_pilot_iac_ids)
     end
     it 'contains competitor airplanes in category' do
-      get :show, id: @contest.id, :format => :json
+      get :show, params: { id: @contest.id }, :format => :json
       data = JSON.parse(response.body)
       d_crs = data['category_results']
       d_cr = d_crs.first
@@ -111,7 +111,7 @@ describe ContestsController, :type => :controller do
       expect(airplane_regs).to include(d_airplane['reg'])
     end
     it 'contains competitor performance summaries in category' do
-      get :show, id: @contest.id, :format => :json
+      get :show, params: { id: @contest.id }, :format => :json
       data = JSON.parse(response.body)
       d_crs = data['category_results']
       d_cr = d_crs.first
@@ -126,7 +126,7 @@ describe ContestsController, :type => :controller do
       expect(d_result['hors_concours']).to_not be nil
     end
     it 'contains judge performance summaries in category' do
-      get :show, id: @contest.id, :format => :json
+      get :show, params: { id: @contest.id }, :format => :json
       data = JSON.parse(response.body)
       d_crs = data['category_results']
       d_cr = d_crs.first
@@ -143,7 +143,7 @@ describe ContestsController, :type => :controller do
       expect(j_result['minority_grade_ct']).to_not be nil
     end
     it 'contains flight detail links in category' do
-      get :show, id: @contest.id, :format => :json
+      get :show, params: { id: @contest.id }, :format => :json
       data = JSON.parse(response.body)
       d_crs = data['category_results']
       d_cr = d_crs.first

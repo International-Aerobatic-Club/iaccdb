@@ -108,7 +108,7 @@ describe JudgesController, :type => :controller do
   end
 
   it 'responds with specific year data' do
-    response = get :activity, parameters: {year:@year}
+    response = get :activity, params: { parameters: {year:@year} }
     data = JSON.parse(response.body)
     year = data['Year']
     activity = data['Activity']
@@ -119,7 +119,7 @@ describe JudgesController, :type => :controller do
   it 'behaves when missing judge for score' do
     @score.judge = nil
     @score.save
-    response = get :activity, parameters: {year:@year}
+    response = get :activity, params: { parameters: {year:@year} }
     data = JSON.parse(response.body)
     year = data['Year']
     expect(year).to eq @year
