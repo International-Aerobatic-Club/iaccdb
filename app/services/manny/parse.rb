@@ -38,7 +38,7 @@ end
 
 PROCESS_CONTEST = lambda do |m, line|
   case line
-  when /<\/Contest>/ 
+  when /<\/Contest>/
     SEEK_SECTION
   else
     m.process_contest(line)
@@ -101,7 +101,7 @@ def process_judge(line)
   logger.debug "parsed manny line '#{line}' to judge #{pid} for flight model #{flight}"
 end
 
-PROCESS_JUDGE = lambda do |m, line| 
+PROCESS_JUDGE = lambda do |m, line|
   case line
   when /<\/ContestJudgesLine>/
     SEEK_SECTION
@@ -134,7 +134,7 @@ def process_k(line)
   logger.debug "parsed manny line '#{line}' to sequence #{seq} for flight model #{flight}"
 end
 
-PROCESS_K = lambda do |m, line| 
+PROCESS_K = lambda do |m, line|
   case line
   when /<\/ContestKs>/
     SEEK_SECTION
@@ -149,7 +149,7 @@ end
 # 1 = PersID
 # 2 = Chapter
 # 3 .. 6 = names of flights flown
-# 7 = aircraft make 
+# 7 = aircraft make
 # 8 = aircraft model
 # 9 = aircraft registration
 def process_pilot(line)
@@ -169,7 +169,7 @@ def process_pilot(line)
   logger.debug "parsed manny line '#{line}' to pilot model #{pilot}"
 end
 
-PROCESS_PILOT = lambda do |m, line| 
+PROCESS_PILOT = lambda do |m, line|
   case line
   when /<\/ContestPilots>/
     SEEK_SECTION
@@ -203,7 +203,7 @@ def process_scores(line)
   logger.debug "parsed manny line '#{line}' to scores model #{score} for flight #{flight}, pilot #{pid}, judge #{jid}"
 end
 
-PROCESS_SCORES = lambda do |m, line| 
+PROCESS_SCORES = lambda do |m, line|
   case line
   when /<\/ContestScores>/
     SEEK_SECTION
@@ -238,7 +238,7 @@ PROCESS_PENALTY = lambda do |m, line|
   end
 end
 
-SEEK_SECTION = lambda do |m, line| 
+SEEK_SECTION = lambda do |m, line|
   case line
   when /<Contest>/
     logger.debug 'Manny parse contest'
@@ -268,7 +268,7 @@ end
 
 def initialize
   @state = SEEK_SECTION
-  @contest = Model::Contest.new
+  @contest = Manny::Model::Contest.new
   self.logger = Rails.logger
 end
 
