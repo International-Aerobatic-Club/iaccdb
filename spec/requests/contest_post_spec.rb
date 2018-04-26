@@ -59,8 +59,8 @@ RSpec.describe 'Contest management API' do
   context 'POST' do
     it 'can post a new contest' do
       post '/contests',
-        json_body({ contest: @valid_contest_params }),
-        auth_headers
+        params: json_body({ contest: @valid_contest_params }),
+        headers: auth_headers
       expect(response).to have_http_status(:success)
       expect(Contest.count).to eq 1
       contest = Contest.first
@@ -76,8 +76,8 @@ RSpec.describe 'Contest management API' do
         id: contest.id
       })
       post '/contests',
-        json_body({ contest: contest_params }),
-        auth_headers
+        params: json_body({ contest: contest_params }),
+        headers: auth_headers
       expect(response).to have_http_status(:success)
       data = JSON.parse(response.body)
       expect(data['id']).to_not be nil
@@ -86,22 +86,22 @@ RSpec.describe 'Contest management API' do
 
     it 'cannot post without authorization' do
       post '/contests',
-        json_body({ contest: @valid_contest_params }),
-        json_headers
+        params: json_body({ contest: @valid_contest_params }),
+        headers: json_headers
       expect(response).to have_http_status(:unauthorized)
     end
 
     it 'returns bad request for invalid data' do
       post '/contests',
-        json_body({ contest: @invalid_contest_params }),
-        auth_headers
+        params: json_body({ contest: @invalid_contest_params }),
+        headers: auth_headers
       expect(response).to have_http_status(:bad_request)
     end
 
     it 'error response contains validation information' do
       post '/contests',
-        json_body({ contest: @invalid_contest_params }),
-        auth_headers
+        params: json_body({ contest: @invalid_contest_params }),
+        headers: auth_headers
       expect(response.body).to_not be_empty
       data = JSON.parse(response.body)
       expect(data).to_not be nil
@@ -121,8 +121,8 @@ RSpec.describe 'Contest management API' do
 
     it 'can update a contest' do
       put "/contests/#{@contest.id}",
-        json_body({ contest: @valid_update_params }),
-        auth_headers
+        params: json_body({ contest: @valid_update_params }),
+        headers: auth_headers
       expect(response).to have_http_status(:success)
       check_contest(@contest.reload, @valid_update_params)
       check_response(response, @valid_update_params)
@@ -130,8 +130,8 @@ RSpec.describe 'Contest management API' do
 
     it 'cannot update a non_existing contest' do
       put "/contests/#{@contest.id + 42}",
-        json_body({ contest: @valid_update_params }),
-        auth_headers
+        params: json_body({ contest: @valid_update_params }),
+        headers: auth_headers
       expect(response).to have_http_status(:not_found)
       check_contest(@contest.reload, @valid_contest_params)
     end
@@ -144,8 +144,8 @@ RSpec.describe 'Contest management API' do
         name: 'Ben Lowell Aerobatic Championship'
       })
       put "/contests/#{original_id}",
-        json_body({ contest: overwrite_attempt_params }),
-        auth_headers
+        params: json_body({ contest: overwrite_attempt_params }),
+        headers: auth_headers
       expect(response).to have_http_status(:success)
       expect(@contest.reload.id).to eq original_id
       data = JSON.parse(response.body)
@@ -156,8 +156,8 @@ RSpec.describe 'Contest management API' do
 
     it 'cannot put without authorization' do
       put "/contests/#{@contest.id}",
-        json_body({ contest: @valid_update_params }),
-        json_headers
+        params: json_body({ contest: @valid_update_params }),
+        headers: json_headers
       expect(response).to have_http_status(:unauthorized)
     end
   end
@@ -169,7 +169,7 @@ RSpec.describe 'Contest management API' do
 
     it 'can delete a contest' do
       original_id = @contest.id
-      delete "/contests/#{original_id}", nil, auth_headers
+      delete "/contests/#{original_id}", headers: auth_headers
       expect(response).to have_http_status(:success)
       expect(Contest.count).to eq 0
       expect{
@@ -179,14 +179,14 @@ RSpec.describe 'Contest management API' do
 
     it 'cannot delete a non-existing contest' do
       original_id = @contest.id
-      delete "/contests/#{original_id+42}", nil, auth_headers
+      delete "/contests/#{original_id+42}", headers: auth_headers
       expect(response).to have_http_status(:not_found)
       expect(Contest.count).to eq 1
       expect(Contest.find(original_id)).to_not be nil
     end
 
     it 'cannot delete without authorization' do
-      delete "/contests/#{@contest.id}", nil, json_headers
+      delete "/contests/#{@contest.id}", headers: json_headers
       expect(response).to have_http_status(:unauthorized)
     end
   end
