@@ -1,4 +1,4 @@
-class PcResult < ActiveRecord::Base
+class PcResult < ApplicationRecord
   belongs_to :pilot, :class_name => 'Member'
   belongs_to :contest
   belongs_to :category

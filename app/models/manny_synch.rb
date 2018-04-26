@@ -1,4 +1,4 @@
-class MannySynch < ActiveRecord::Base
+class MannySynch < ApplicationRecord
   belongs_to :contest
 
   # pass an IAC::Contest

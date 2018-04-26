@@ -1,4 +1,4 @@
-class Sequence < ActiveRecord::Base
+class Sequence < ApplicationRecord
   has_many :pilot_flight
 
   serialize :k_values

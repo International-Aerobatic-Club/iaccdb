@@ -23,7 +23,7 @@
 # flight rank is the rank given the pilot by the judge
 #   for the flight, based on flight_value
 #
-class PfjResult < ActiveRecord::Base
+class PfjResult < ApplicationRecord
   belongs_to :pilot_flight
   belongs_to :judge
 

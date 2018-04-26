@@ -1,4 +1,4 @@
-class RegionalPilot < ActiveRecord::Base
+class RegionalPilot < ApplicationRecord
   has_many :region_contest
   has_many :pc_results, :through => :region_contest
   belongs_to :pilot, :class_name => 'Member'

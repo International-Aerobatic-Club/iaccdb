@@ -1,4 +1,4 @@
-class DataPost < ActiveRecord::Base
+class DataPost < ApplicationRecord
   belongs_to :contest
 
   def self.post_dir

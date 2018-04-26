@@ -1,4 +1,4 @@
-class Result < ActiveRecord::Base
+class Result < ApplicationRecord
   has_many :result_members
   has_many :members, :through => :result_members
   has_many :result_accums

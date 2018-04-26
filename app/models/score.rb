@@ -1,4 +1,4 @@
-class Score < ActiveRecord::Base
+class Score < ApplicationRecord
   belongs_to :pilot_flight
   belongs_to :judge
   has_one :pilot, :through => :pilot_flight

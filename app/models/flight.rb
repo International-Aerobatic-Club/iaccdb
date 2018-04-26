@@ -1,4 +1,4 @@
-class Flight < ActiveRecord::Base
+class Flight < ApplicationRecord
   belongs_to :contest
   belongs_to :category
   belongs_to :chief, :foreign_key => "chief_id", :class_name => 'Member'
