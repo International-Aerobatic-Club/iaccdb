@@ -1,11 +1,6 @@
 source 'https://rubygems.org'
 
-#####
-# to remove, holding rake back from 12.0.0
-gem 'rake', "~> 11.0"
-#####
-
-gem 'rails', "~> 4.0"
+gem 'rails', "~> 5.0.0"
 
 gem 'delayed_job'
 gem 'delayed_job_active_record'
@@ -27,7 +22,7 @@ gem 'memoist2'
 # prefer server config; but this will work
 gem 'turnout'
 
-gem 'mysql2', '< 0.5'
+gem 'mysql2'
 
 group :development, :test do
   gem 'rspec-rails'
