@@ -1,5 +1,5 @@
 class Admin::FailuresController < ApplicationController
-  before_filter :authenticate
+  before_action :authenticate
 
   def index
     @failures = Failure.includes(:contest).order("created_at DESC")

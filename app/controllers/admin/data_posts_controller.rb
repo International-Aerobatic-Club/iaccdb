@@ -1,5 +1,5 @@
 class Admin::DataPostsController < ApplicationController
-  before_filter :authenticate
+  before_action :authenticate
 
   def index
     @data_posts = DataPost.order('created_at desc').all

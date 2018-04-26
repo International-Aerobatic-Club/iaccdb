@@ -1,5 +1,5 @@
 class Admin::QueuesController < ApplicationController
-  before_filter :authenticate
+  before_action :authenticate
 
   def index
     @jobs = Delayed::Job.order('created_at DESC')

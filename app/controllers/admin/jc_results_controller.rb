@@ -1,6 +1,6 @@
 class Admin::JcResultsController < ApplicationController
 
-before_filter :authenticate
+before_action :authenticate
 
 def index
   @contest = Contest.find(params[:contest_id])

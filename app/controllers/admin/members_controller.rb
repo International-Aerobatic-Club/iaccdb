@@ -1,5 +1,5 @@
 class Admin::MembersController < ApplicationController
-  before_filter :authenticate
+  before_action :authenticate
 
   def index
     @members = Member.order(:family_name, :given_name).all
