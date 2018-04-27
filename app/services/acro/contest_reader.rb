@@ -2,7 +2,6 @@
 #   extracted PilotFlightData YAML files
 # see contest_extractor.rb
 module ACRO
-include PsychYamlWorkaround
 class ContestReader
 include FlightIdentifier
 include Log::ConfigLogger
