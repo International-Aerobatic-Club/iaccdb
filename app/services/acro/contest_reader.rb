@@ -76,7 +76,7 @@ def process_pilotFlight(pilot_flight_data)
   make_model = Airplane.split_make_model(pilot_flight_data.aircraft)
   pilot_flight.airplane = Airplane.find_or_create_by_make_model_reg(
     make_model[0], make_model[1], pilot_flight_data.registration)
-  pilot_flight.save
+  pilot_flight.save!
 end
 
 ###
@@ -100,7 +100,7 @@ def create_or_replace_pilot_flight(pilot_flight_data)
      :name => name,
      :category_id => cat.id,
      :sequence => 0)
-    flight.save
+    flight.save!
     @flights[pilot_flight_data.flightID] = flight
   else
     throw ArgumentError.new(
@@ -111,8 +111,8 @@ end
 
 def make_judge_team(judge)
   judge_team = Judge.new(:judge_id => judge.id)
+  judge_team.save!
   @judge_teams[judge] = judge_team
-  judge_team.save
   judge_team
 end
 
