@@ -28,6 +28,10 @@ group :development, :test do
   gem 'rspec-rails'
 end
 
+group :development do
+  gem 'listen'
+end
+
 group :test do
   gem 'factory_bot_rails'
   gem 'database_cleaner'
