@@ -1,11 +1,11 @@
 #require 'iac/saComputer'
 
-class PilotFlight < ActiveRecord::Base
+class PilotFlight < ApplicationRecord
   belongs_to :flight
   belongs_to :pilot, :class_name => 'Member'
   has_many :scores, :dependent => :destroy
-  belongs_to :sequence
-  belongs_to :airplane
+  belongs_to :sequence, optional: true
+  belongs_to :airplane, optional: true
   has_many :pf_results, :dependent => :destroy
   has_many :pfj_results, :dependent => :destroy
   has_one :contest, :through => :flight

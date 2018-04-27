@@ -1,5 +1,5 @@
-class MannySynch < ActiveRecord::Base
-  belongs_to :contest
+class MannySynch < ApplicationRecord
+  belongs_to :contest, optional: true
 
   # pass an IAC::Contest
   # returns an array containing MannySynch and string action:

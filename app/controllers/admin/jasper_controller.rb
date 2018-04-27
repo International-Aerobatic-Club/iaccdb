@@ -2,7 +2,7 @@ require 'libxml'
 
 class Admin::JasperController < ApplicationController
 
-skip_before_filter :verify_authenticity_token
+skip_before_action :verify_authenticity_token
 
 def results
   @exception = nil
@@ -44,7 +44,7 @@ def results
     logger.error ex.backtrace.join('\n')
     post_record.has_error = true
     post_record.error_description = @exception
-    post_record.save
+    post_record.save!
   end
   self.formats = [:xml]
   if (@exception == nil)

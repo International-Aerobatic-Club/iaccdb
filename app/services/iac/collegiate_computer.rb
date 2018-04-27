@@ -26,7 +26,7 @@ def recompute_team
     team.points = result.total
     team.points_possible = result.total_possible
     team.update_results(result.combination)
-    team.save
+    team.save!
   end
   RankComputer.compute_result_rankings(teams)
 end

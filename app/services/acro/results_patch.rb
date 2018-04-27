@@ -51,7 +51,7 @@ def process_category(rfr, category_results)
       if d_flight.contest_id == @d_contest.id
           patch_pilot_results_for_category_flight(category_results, f, d_flight)
           d_flight.sequence = flight.sequence
-          d_flight.save
+          d_flight.save!
       else
         # this is a safety check to constrain flight id mistake to a single contest
         raise "Flight #{d_flight.displayName} is not a flight of #{@d_contest.name}"
@@ -80,7 +80,7 @@ def patch_pilot_results_for_category_flight(category_results, f, d_flight)
       d_pfr = d_pf.pf_results.first
       if d_pfr
         d_pfr.adj_flight_value = category_results.flight_results[p][f]
-        d_pfr.save
+        d_pfr.save!
         puts "#{pilot} in #{d_flight.displayName} scored #{d_pfr.adj_flight_value}"
       else
         raise "Failed to find result for pilot #{pilot} in flight #{d_flight.displayName}"
@@ -99,7 +99,7 @@ def patch_pilot_results_for_category(category_results, d_category)
     d_pcr = @d_contest.pc_results.where(category: d_category, 
       pilot_id: d_pilot.id).first
     d_pcr.category_value = category_results.category_results[p]
-    d_pcr.save
+    d_pcr.save!
     puts "#{pilot} in #{category_results.category_name} scored #{d_pcr.category_value}"
   end
   cat_rollups = CategoryRollups.new(@d_contest, d_category)

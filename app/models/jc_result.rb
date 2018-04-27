@@ -1,4 +1,4 @@
-class JcResult < ActiveRecord::Base
+class JcResult < ApplicationRecord
   belongs_to :judge, :class_name => 'Member'
   belongs_to :contest
   belongs_to :category
@@ -21,7 +21,7 @@ class JcResult < ActiveRecord::Base
         accumulate(jf_result) if jf_result.judge.judge == self.judge
       end
     end
-    save
+    save!
   end
 end
 

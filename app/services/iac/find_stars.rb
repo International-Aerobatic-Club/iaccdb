@@ -35,7 +35,7 @@ def self.findStars (contest)
   stars = []
   PcResult.where(:contest_id => contest).each do |pc_result|
     pc_result.star_qualifying = false
-    pc_result.save
+    pc_result.save!
   end
   Category.all.each do |cat|
     catch (:category) do
@@ -67,7 +67,7 @@ def self.findStars (contest)
             PcResult.where({ :contest_id => contest, 
                 :category_id => cat.id, :pilot_id => pilot }).each do |pc_result|
               pc_result.star_qualifying = true
-              pc_result.save
+              pc_result.save!
             end
           end # catch pilot
         end # each pilot

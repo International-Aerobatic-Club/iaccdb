@@ -1,5 +1,5 @@
 class Admin::ContestsController < ApplicationController
-  before_filter :authenticate
+  before_action :authenticate
 
   include Manny::Connect
 

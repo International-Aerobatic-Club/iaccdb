@@ -40,7 +40,7 @@ class CollegiateParticipants
 
   def add_pilot_college(pilot, college)
     college.add_member_if_not_present(pilot)
-    college.save
+    college.save!
   end
 
   def process_jasper(jasper)

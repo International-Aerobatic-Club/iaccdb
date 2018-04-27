@@ -1,7 +1,7 @@
 class Admin::MannySynchsController < ApplicationController
   include Manny::Connect
 
-  before_filter :authenticate
+  before_action :authenticate
 
   def index
     @manny_synchs = MannySynch.includes(:contest).order("manny_number DESC")

@@ -1,4 +1,4 @@
-class ResultMember < ActiveRecord::Base
+class ResultMember < ApplicationRecord
   belongs_to :member
   belongs_to :result
 

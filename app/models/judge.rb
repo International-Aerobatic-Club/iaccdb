@@ -6,9 +6,9 @@
 #   a member referenced as assist in the assistant role
 # Someday rename this model to JudgeTeam and update references
 #   to these accordingly.  Ah.  That would be so much better.
-class Judge < ActiveRecord::Base
+class Judge < ApplicationRecord
   belongs_to :judge, :class_name => 'Member'
-  belongs_to :assist, :class_name => 'Member'
+  belongs_to :assist, :class_name => 'Member', optional: true
   has_many :scores, :dependent => :nullify
   has_many :pilot_flights, :through => :scores
   has_many :pfj_results, :dependent => :destroy

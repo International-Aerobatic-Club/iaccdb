@@ -110,7 +110,7 @@ class CategoryRollups
       category_ranks = Ranking::Computer.ranks_for(category_values)
       pc_results.each_with_index do |pc_result, i|
         pc_result.category_rank = category_ranks[i]
-        pc_result.save
+        pc_result.save!
       end
     rescue Exception => exception
       logger.error exception.message

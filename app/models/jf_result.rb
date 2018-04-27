@@ -1,4 +1,4 @@
-class JfResult < ActiveRecord::Base
+class JfResult < ApplicationRecord
   belongs_to :judge
   belongs_to :flight
 

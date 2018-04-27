@@ -16,12 +16,12 @@ module Admin
     end
 
     test 'non-admin cannot show member' do
-      get :show, id: @member_list.first.id
+      get :show, params: { id: @member_list.first.id }
       assert_response :unauthorized
     end
 
     test 'non-admin cannot patch update' do
-      patch :update, id: @after_attrs['id'], member: @after_attrs
+      patch :update, params: { id: @after_attrs['id'], member: @after_attrs }
       assert_response :unauthorized
     end
 
@@ -33,13 +33,13 @@ module Admin
 
     test "admin can get show" do
       http_auth_login(:admin)
-      get :show, id: @member_list.first.id
+      get :show, params: { id: @member_list.first.id }
       assert_response :success
     end
 
     test "admin can patch update" do
       http_auth_login(:admin)
-      patch :update, id: @after_attrs['id'], member: @after_attrs
+      patch :update, params: { id: @after_attrs['id'], member: @after_attrs }
       assert_response :redirect
       member = Member.find(@after_attrs['id'])
       assert_not_nil(member)

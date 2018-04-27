@@ -1,4 +1,4 @@
-class PcResult < ActiveRecord::Base
+class PcResult < ApplicationRecord
   belongs_to :pilot, :class_name => 'Member'
   belongs_to :contest
   belongs_to :category
@@ -42,6 +42,6 @@ class PcResult < ActiveRecord::Base
         self.hors_concours = true if pf_result.hors_concours
       end
     end
-    save
+    save!
   end
 end

@@ -1,4 +1,4 @@
-class Contest < ActiveRecord::Base
+class Contest < ApplicationRecord
   has_many :flights, :dependent => :destroy
   has_many :jc_results, :dependent => :destroy
   has_many :pc_results, :dependent => :destroy

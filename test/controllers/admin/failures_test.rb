@@ -21,17 +21,17 @@ class Admin::FailuresTest < ActionDispatch::IntegrationTest
   end
 
   test 'authorized can list' do
-    get admin_failures_path, nil, http_auth_login(:admin)
+    get admin_failures_path, headers: http_auth_login(:admin)
     assert_response(:success)
   end
 
   test 'authorized can show' do
-    get admin_failure_path(@fail_list.first), nil, http_auth_login(:admin)
+    get admin_failure_path(@fail_list.first), headers: http_auth_login(:admin)
     assert_response(:success)
   end
 
   test 'authorized can delete' do
-    delete admin_failure_path(@fail_list.first), nil, http_auth_login(:admin)
+    delete admin_failure_path(@fail_list.first), headers: http_auth_login(:admin)
     assert_response(:redirect)
     assert_empty(Failure.where(id: @fail_list.first))
   end

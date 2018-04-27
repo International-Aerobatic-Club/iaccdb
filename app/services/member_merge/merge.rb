@@ -185,7 +185,7 @@ class Merge
     ResultMember.where(['member_id in (?)', merge_ids]).each do |rel|
       if !ResultMember.where(member_id: target_id, result_id: rel.result_id).any?
         rel.member_id = target_id
-        rel.save
+        rel.save!
       else # target member already associated with this result
         rel.destroy
       end

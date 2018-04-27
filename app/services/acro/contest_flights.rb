@@ -6,7 +6,6 @@
 require 'set'
 
 module ACRO
-include PsychYamlWorkaround
 class ContestFlights
   include FlightIdentifier
   def initialize(control_file)

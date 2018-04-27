@@ -1,5 +1,5 @@
 class Admin::MembersController < ApplicationController
-  before_filter :authenticate
+  before_action :authenticate
 
   def index
     @members = Member.order(:family_name, :given_name).all
@@ -29,9 +29,9 @@ class Admin::MembersController < ApplicationController
   end
 
   def merge_preview
-    selected = params[:selected]
-    if selected && 1 < selected.count
-      merge = MemberMerge::Merge.new(selected.keys)
+    selected = merge_params.fetch('selected', {}).keys
+    if 1 < selected.count
+      merge = MemberMerge::Merge.new(selected)
       if !merge.has_multiple_members
         flash[:alert] = 'select multiple members to merge'
         redirect_to admin_members_url 
@@ -82,6 +82,11 @@ class Admin::MembersController < ApplicationController
 
   def member_params
     params.require('member').permit(['iac_id', 'given_name', 'family_name'])
+  end
+
+  def merge_params
+    nested_keys = params.fetch(:selected, {}).keys
+    params.permit(:selected => nested_keys)
   end
 
   def check_dups_join(accum, list)

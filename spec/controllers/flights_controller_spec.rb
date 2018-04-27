@@ -2,7 +2,7 @@ describe FlightsController, :type => :controller do
   require 'shared/computed_contest_context'
   include_context 'computed contest'
   it 'responds with basic flight information' do
-    get :show, id: @flight.id, :format => :json
+    get :show, params: { id: @flight.id }, :format => :json
     expect(response.status).to eq(200)
     expect(response.content_type).to eq "application/json"
     data = JSON.parse(response.body)
@@ -13,7 +13,7 @@ describe FlightsController, :type => :controller do
     expect(d_fl['sequence']).to eq @flight.sequence
   end
   it 'includes contest information' do
-    get :show, id: @flight.id, :format => :json
+    get :show, params: { id: @flight.id }, :format => :json
     data = JSON.parse(response.body)
     d_fl = data['flight']
     d_c = d_fl['contest']
@@ -24,7 +24,7 @@ describe FlightsController, :type => :controller do
     expect(d_c['start']).to eq @flight.contest.start.to_s
   end
   it 'includes category information' do
-    get :show, id: @flight.id, :format => :json
+    get :show, params: { id: @flight.id }, :format => :json
     data = JSON.parse(response.body)
     d_fl = data['flight']
     d_cat = d_fl['category']
@@ -36,7 +36,7 @@ describe FlightsController, :type => :controller do
     expect(d_cat['level']).to eq cat.category
   end
   it 'includes pilot flights' do
-    get :show, id: @flight.id, :format => :json
+    get :show, params: { id: @flight.id }, :format => :json
     data = JSON.parse(response.body)
     d_fl = data['flight']
     d_pfs = d_fl['pilot_results']
@@ -44,7 +44,7 @@ describe FlightsController, :type => :controller do
     expect(d_pfs.count).to eq @flight.pilot_flights.count
   end
   it 'includes pilot flight pilot information' do
-    get :show, id: @flight.id, :format => :json
+    get :show, params: { id: @flight.id }, :format => :json
     data = JSON.parse(response.body)
     d_fl = data['flight']
     d_pfs = d_fl['pilot_results']
@@ -62,7 +62,7 @@ describe FlightsController, :type => :controller do
     expect(d_pilot['url']).to eq pilot_url(pilot, :format => :json)
   end
   it 'includes pilot flight urls' do
-    get :show, id: @flight.id, :format => :json
+    get :show, params: { id: @flight.id }, :format => :json
     data = JSON.parse(response.body)
     d_fl = data['flight']
     d_pfs = d_fl['pilot_results']
@@ -75,7 +75,7 @@ describe FlightsController, :type => :controller do
     expect(d_pf['url']).to eq pilot_flight_url(pf, :format => :json)
   end
   it 'includes pilot flight result information' do
-    get :show, id: @flight.id, :format => :json
+    get :show, params: { id: @flight.id }, :format => :json
     data = JSON.parse(response.body)
     d_fl = data['flight']
     d_pfs = d_fl['pilot_results']
@@ -95,7 +95,7 @@ describe FlightsController, :type => :controller do
     expect(d_pf['total_possible']).to eq pfr.total_possible
   end
   it 'includes airplane information in pilot flight result' do
-    get :show, id: @flight.id, :format => :json
+    get :show, params: { id: @flight.id }, :format => :json
     data = JSON.parse(response.body)
     d_fl = data['flight']
     d_pfs = d_fl['pilot_results']
@@ -116,7 +116,7 @@ describe FlightsController, :type => :controller do
     expect(d_a['id']).to eq airplane.id
   end
   it 'includes judge results' do
-    get :show, id: @flight.id, :format => :json
+    get :show, params: { id: @flight.id }, :format => :json
     data = JSON.parse(response.body)
     d_fl = data['flight']
     d_jfs = d_fl['line_judges']
@@ -159,7 +159,7 @@ describe FlightsController, :type => :controller do
     expect(judge.assist).to be nil
     flight = @jf_result.flight
     begin
-      get :show, id: flight.id, :format => :json
+      get :show, params: { id: flight.id }, :format => :json
     rescue => e
       fail "Get flight not expected to raise #{e.message}"
     end

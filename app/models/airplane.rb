@@ -1,6 +1,6 @@
-class Airplane < ActiveRecord::Base
+class Airplane < ApplicationRecord
   has_many :pilot_flights, :dependent => :nullify
-  belongs_to :make_model
+  belongs_to :make_model, optional: true
   before_save :check_make_and_model_relation
 
   # find or create airplane with given make, model, reg number
