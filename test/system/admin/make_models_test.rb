@@ -1,6 +1,6 @@
-require 'test_helper'
+require "application_system_test_case"
 
-class ContestsIndexTest < ApplicationSystemTestCase
+class Admin::MakeModelsTest < ApplicationSystemTestCase
   setup do
     @make_models = create_list(:make_model, 12)
     @make_models.each do |mm|
