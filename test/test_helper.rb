@@ -22,19 +22,19 @@ end
 # Capybara
 require "capybara/rails"
 require "capybara/minitest"
-require "capybara/webkit"
+#require "capybara/webkit"
 
-Capybara.configure do |config|
-  config.javascript_driver = :webkit
-end
+#Capybara.configure do |config|
+#  config.javascript_driver = :webkit
+#end
 
-Capybara::Webkit.configure do |config|
-  config.block_unknown_urls
-end
+#Capybara::Webkit.configure do |config|
+#  config.block_unknown_urls
+#end
 
 class ActionDispatch::IntegrationTest
-  include Capybara::DSL
-  include Capybara::Minitest::Assertions
+  #include Capybara::DSL
+  #include Capybara::Minitest::Assertions
   include AuthHelper::Request
 
   def teardown
@@ -45,8 +45,4 @@ end
 
 class ActionController::TestCase
   include AuthHelper::Controller
-end
-
-class ApplicationSystemTestCase < ActionDispatch::IntegrationTest
-  include AuthHelper::Feature
 end

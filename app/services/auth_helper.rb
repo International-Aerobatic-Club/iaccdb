@@ -94,7 +94,7 @@ module AuthHelper
         http_auth_login(role)
         visit(path)
       rescue DriverAuthException => e
-        creds = Creds.new
+        creds = Creds.new(role)
         session = Capybara.current_session
         cred_path = "http://#{creds.user}:#{creds.password}@#{session.server.host}:#{session.server.port}#{path}"
         visit(cred_path)
