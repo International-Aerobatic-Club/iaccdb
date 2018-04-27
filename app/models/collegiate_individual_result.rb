@@ -26,7 +26,7 @@ def compute_result
   self.qualified &&= have_non_primary
   self.points = best_total
   self.points_possible = best_possible
-  save
+  save!
 end
 
 end

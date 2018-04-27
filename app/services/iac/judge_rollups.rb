@@ -27,7 +27,7 @@ def self.compute_jy_results (year)
           tracking_list.delete(jy_result)
         end
         jy_result.accumulate(jc_result)
-        jy_result.save
+        jy_result.save!
       else
         logger.error("failed category #{jc_result.category.name} for contest #{contest.year_name}")
       end

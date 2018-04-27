@@ -19,7 +19,7 @@ def compute_best_pair
   self.points = best_total
   self.points_possible = best_possible
   self.qualified = false
-  save
+  save!
 end
 
 def collect_valid_non_nationals_results
@@ -47,7 +47,7 @@ def integrate_national_result(nationals)
   else
     self.qualified = false
   end
-  save
+  save!
 end
 
 end

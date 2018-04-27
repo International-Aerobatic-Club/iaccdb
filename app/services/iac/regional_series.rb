@@ -83,7 +83,7 @@ def compute_ranking (year, region)
       next_rank += 1
       prev_qual = rp.qualified
       prev_pct = rp.percentage
-      rp.save
+      rp.save!
     end
   end
 end

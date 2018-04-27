@@ -23,7 +23,7 @@ class FlightComputer
     cur_pf_results.each do |pf_result|
       @flight.pf_results << pf_result if !pf_results.include?(pf_result)
     end
-    @flight.save
+    @flight.save!
   end
 
   def compute_jf_results
@@ -35,6 +35,6 @@ class FlightComputer
     cur_jf_results.each do |jf_result|
       @flight.jf_results << jf_result if !jf_results.include?(jf_result)
     end
-    @flight.save
+    @flight.save!
   end
 end

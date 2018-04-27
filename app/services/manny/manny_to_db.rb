@@ -60,13 +60,13 @@ def createContest(mContest, dMannySynch)
       :director => mContest.director,
       :region => mContest.region)
     Contest.logger.info "New contest #{dContest.to_s}"
-    dContest.save
+    dContest.save!
     dMannySynch.contest = dContest
   else
     dContest = nil
   end
   dMannySynch.synch_date = Time.now
-  dMannySynch.save
+  dMannySynch.save!
   dContest
 end
 
@@ -100,7 +100,7 @@ def updateContest(mContest, dMannySynch)
     dContest = nil
   end
   dMannySynch.synch_date = Time.now
-  dMannySynch.save
+  dMannySynch.save!
   dContest
 end
 
@@ -152,7 +152,7 @@ def process_flight(mContest, mCat, mFlight, seq)
     dFlight.chief = @parts[mFlight.chief] if mFlight.chief
     dFlight.contest = @dContest
     dFlight.category = dCategory
-    dFlight.save
+    dFlight.save!
     process_flight_judges(dFlight, mFlight)
     process_flight_scores(dFlight, mContest, mCat, mFlight)
   end
@@ -202,7 +202,7 @@ def process_flight_scores(dFlight, mContest, mCat, mFlight)
       dSequence = Sequence.find_or_create(kays)
       dPilotFlight.sequence = dSequence
     end
-    dPilotFlight.save
+    dPilotFlight.save!
     mJi = mScore.judge
     dJudge = @judges[mJi] # get the judge team
     Contest.logger.debug "index #{mJi} mScore #{mScore}" if dJudge == nil
@@ -213,7 +213,7 @@ def process_flight_scores(dFlight, mContest, mCat, mFlight)
     ctF = mSeq.ctFigs
     dScore.values = mScore.seq.figs.slice(1..ctF)
     dScore.values << mScore.seq.pres
-    dScore.save
+    dScore.save!
   end
 end
 

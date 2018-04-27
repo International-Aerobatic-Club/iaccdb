@@ -106,7 +106,7 @@ def storeGradedValues
       pfj_result = @pilot_flight.pfj_results.build(:judge => judge)
     end
     pfj_result.graded_values = make_judge_values(j)
-    pfj_result.save
+    pfj_result.save!
   end
 end
 
@@ -168,7 +168,7 @@ def storeResults
     end
     pfj_result.computed_values = make_judge_values(j)
     pfj_result.flight_value = @j_totals[j]
-    pfj_result.save
+    pfj_result.save!
     flight_total += @j_totals[j]
   end
   @kays.length.times do |f|
@@ -188,7 +188,7 @@ def storeResults
   flight_avg -= @pilot_flight.penalty_total
   @pf.adj_flight_value = flight_avg < 0 ? 0 : flight_avg
   @pf.total_possible = @seq.total_k * 10
-  @pf.save
+  @pf.save!
 end
 
 end #class

@@ -42,6 +42,6 @@ class PcResult < ApplicationRecord
         self.hors_concours = true if pf_result.hors_concours
       end
     end
-    save
+    save!
   end
 end

@@ -92,7 +92,7 @@ module IAC
         jf_result.flight_count += 1
         jf_result.pair_count = pilot_count * (pilot_count - 1) / 2
         jf_result.ri_total = calc_ri(jf_result.sigma_ri_delta, pilot_count)
-        jf_result.save
+        jf_result.save!
         logger.debug "Computed jf_result ranks #{jf_result}"
       end
       jf_results_by_judge.values
@@ -250,11 +250,11 @@ module IAC
         pf_results.each_with_index do |pf_result, i|
           pf_result.flight_rank = flight_ranks[i]
           pf_result.adj_flight_rank = adjusted_flight_ranks[i]
-          pf_result.save
+          pf_result.save!
           pf_result.judge_teams.each do |judge|
             pfj_result = pf_result.for_judge(judge)
             pfj_result.flight_rank = judge_pilot_flight_ranks[judge][i]
-            pfj_result.save
+            pfj_result.save!
           end
         end
       rescue Exception => exception
@@ -320,10 +320,10 @@ module IAC
             pfj_result = pf_result.for_judge(judge)
             pfj_result.computed_ranks = judge_pilot_figure_computed_ranks[judge][i]
             pfj_result.graded_ranks = judge_pilot_figure_graded_ranks[judge][i]
-            pfj_result.save
+            pfj_result.save!
           end
           pf_result.figure_ranks = pilot_figure_ranks[i]
-          pf_result.save
+          pf_result.save!
         end
       rescue Exception => exception
         logger.error exception.message

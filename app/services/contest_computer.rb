@@ -23,7 +23,7 @@ class ContestComputer
     flights.each do |flight|
       compute_flight_results(flight)
     end
-    @contest.save
+    @contest.save!
   end
 
   def compute_flight_results(flight)
@@ -37,7 +37,7 @@ class ContestComputer
     flights.each do |flight|
       compute_flight_judge_metrics(flight)
     end
-    @contest.save
+    @contest.save!
   end
 
   def compute_flight_judge_metrics(flight)
@@ -52,7 +52,7 @@ class ContestComputer
     cats.each do |cat|
       compute_category_rollups(cat)
     end
-    @contest.save
+    @contest.save!
   end
 
   def compute_category_rollups(cat)
@@ -68,7 +68,7 @@ class ContestComputer
       roller = CategoryRollups.new(@contest, cat)
       roller.compute_judge_category_results
     end
-    @contest.save
+    @contest.save!
   end
 
 end

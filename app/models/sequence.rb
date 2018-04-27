@@ -14,7 +14,7 @@ class Sequence < ApplicationRecord
     if !seq
       attrs.merge!(:k_values => k_values)
       seq = Sequence.new(attrs)
-      seq.save
+      seq.save!
     end
     seq
   end

@@ -21,7 +21,7 @@ class JcResult < ApplicationRecord
         accumulate(jf_result) if jf_result.judge.judge == self.judge
       end
     end
-    save
+    save!
   end
 end
 
