@@ -1,8 +1,10 @@
 class Flight < ApplicationRecord
   belongs_to :contest
   belongs_to :category
-  belongs_to :chief, :foreign_key => "chief_id", :class_name => 'Member'
-  belongs_to :assist, :foreign_key => "assist_id", :class_name => 'Member'
+  belongs_to :chief,
+    :foreign_key => "chief_id", :class_name => 'Member', optional: true
+  belongs_to :assist,
+    :foreign_key => "assist_id", :class_name => 'Member', optional: true
   has_many :pilot_flights, :dependent => :destroy
   has_many :pilots, :through => :pilot_flights, :class_name => 'Member'
   has_many :pf_results, :through => :pilot_flights

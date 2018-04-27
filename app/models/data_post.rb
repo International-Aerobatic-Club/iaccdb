@@ -1,5 +1,5 @@
 class DataPost < ApplicationRecord
-  belongs_to :contest
+  belongs_to :contest, optional: true
 
   def self.post_dir
     File.join(::Rails.root.to_s, 'posts')

@@ -8,7 +8,7 @@
 #   to these accordingly.  Ah.  That would be so much better.
 class Judge < ApplicationRecord
   belongs_to :judge, :class_name => 'Member'
-  belongs_to :assist, :class_name => 'Member'
+  belongs_to :assist, :class_name => 'Member', optional: true
   has_many :scores, :dependent => :nullify
   has_many :pilot_flights, :through => :scores
   has_many :pfj_results, :dependent => :destroy
