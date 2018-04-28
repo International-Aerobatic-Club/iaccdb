@@ -1,5 +1,5 @@
 class Admin::MakeModelsController < ApplicationController
-  before_filter :authorize_curator
+  before_action :authorize_curator
 
   def index
     @make_models = MakeModel.all.order(:make, :model)
