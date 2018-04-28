@@ -36,8 +36,10 @@ end
 
 group :test do
   gem 'capybara', '~>2.13'
-  #gem 'selenium-webdriver'
   gem 'poltergeist'
+  gem 'capybara-webkit'
+  gem 'selenium-webdriver'
+  gem 'database_cleaner'
 
   gem 'factory_bot_rails'
   gem 'faker'
