@@ -22,7 +22,7 @@ def process_contest(jasper, contest_id = nil)
   if (contest_id)
     @d_contest = updateOrCreateContest(contest_id, contest_params)
   else
-    @d_contest = Contest.create(contest_params)
+    @d_contest = Contest.create!(contest_params)
   end
   if d_contest
     process_scores(d_contest, jasper)
@@ -34,8 +34,9 @@ end
 
 def extract_contest_params_hash(jasper)
   contest_params = {};
-  contest_params['name'] = jasper.contest_name.strip.slice(0,48) || 'missing contest name'
-  contest_params['start'] = jasper.contest_date
+  name = jasper.contest_name.strip.slice(0,48)
+  contest_params['name'] = name.blank? ? 'missing contest name' : name
+  contest_params['start'] = jasper.contest_date || Date.today
   contest_params['region'] = jasper.contest_region.strip.slice(0,16)
   contest_params['director'] = jasper.contest_director.strip.slice(0,48)
   contest_params['city'] = jasper.contest_city.strip.slice(0,24)
@@ -50,7 +51,7 @@ def updateOrCreateContest(id, contest_params)
     d_contest.reset_to_base_attributes
     d_contest.update_attributes(contest_params)
   rescue ActiveRecord::RecordNotFound
-    d_contest = Contest.create(contest_params)
+    d_contest = Contest.create!(contest_params)
   end
   d_contest
 end
