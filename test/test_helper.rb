@@ -19,6 +19,9 @@ Minitest.after_run do
   Faker::UniqueGenerator.clear
 end
 
+# Thoughtbot context in tests
+require 'shoulda/context'
+
 # Capybara
 require "capybara/rails"
 require "capybara/minitest"

@@ -43,6 +43,7 @@ group :test do
   gem 'selenium-webdriver'
   gem 'simplecov'
   gem 'codeclimate-test-reporter', '~> 1.0.0'
+  gem 'shoulda-context'
 end
 
 group :production do
