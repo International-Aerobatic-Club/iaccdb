@@ -11,14 +11,14 @@ class Admin::ContestsController < ApplicationController
 
   # GET /contests/1/edit
   def edit
-    @contest = Contest.find(params[:id])
+    load_contest
   end
 
   # PUT /contests/1
   def update
-    @contest = Contest.find(params[:id])
+    load_contest
 
-    if @contest.update_attributes(params[:contest])
+    if @contest.update_attributes(contest_params)
       redirect_to :action => "index"
     else
       render :action => "edit"
@@ -26,30 +26,16 @@ class Admin::ContestsController < ApplicationController
   end
 
   def destroy
-    @contest = Contest.find(params[:id])
+    load_contest
     @contest.destroy
 
     redirect_to(admin_contests_url)
   end
 
-  # GET /contests/1
-  # GET /contests/1.xml
-  def show
-    @contest = Contest.find(params[:id])
-    # admin/show.html.erb
-  end
-
-  # GET /contests/1
-  # GET /contests/1.xml
-  def show
-    @contest = Contest.find(params[:id])
-    # admin/show.html.erb
-  end
-
   # GET /contests/1/recompute
   # GET /contests/
   def recompute
-    @contest = Contest.find(params[:id])
+    load_contest
     Delayed::Job.enqueue Jobs::ComputeFlightsJob.new(@contest)
     flash[:notice] = "#{@contest.year_name} queued for computation"
     redirect_to :action => 'index' 
@@ -67,5 +53,14 @@ class Admin::ContestsController < ApplicationController
       end
     end)
     @records.sort! {|a,b| b[0].to_i <=> a[0].to_i }
+  end
+
+  def contest_params
+    params.require(:contest).permit(:name, :city, :state, :start, :chapter,
+      :director, :region)
+  end
+
+  def load_contest
+    @contest = Contest.find(params[:id])
   end
 end
