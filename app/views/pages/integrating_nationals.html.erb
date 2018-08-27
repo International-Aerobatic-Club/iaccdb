@@ -7,7 +7,7 @@ The approach taken here is to screen scrape the ACRO web outputs.
 (<a href="#scrape">see note</a>).
 With the data in hand, there's lots of work to do to match-up names
 and categories, and otherwise groom it.
-Having groomed the data, we can import it.
+Having groomed the data, we can import it (<a href="#process">process note</a>).
 </p>
 
 <h2>Overview</h2>
@@ -517,18 +517,19 @@ With Nationals loaded, we recompute the regionals.</p>
 are overwritten.</p>
 <p>We are done.</p>
 
-<h3>After note</h3>
+<h3>Process note</h3><a name="process"></a>
 
 <p>I go through this process on a development machine, with
 a copy of the database, as a dry run, before doing this on the IAC server
 against the live database.</p>
 <p>After that,
 <ul>
-<li>copy the yml files to the IAC server</li>
-<li>carefully remove the contest_id from contest.yml because it might change</li>
 <li>keep and use a version of participant_list.yml prior to adding the new
 member database id's, because they might be different.</li>
+<li>copy the yml files to the IAC server</li>
+<li>carefully remove the contest_id from contest.yml because it might change</li>
 <li>know that the database id's in results_list.yml might be different</li>
+<li>make a fresh backup of the database
 <li>restart the process at "Import the pilot-flight grades"
 </ul>
 </p>
