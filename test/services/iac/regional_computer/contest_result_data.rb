@@ -7,9 +7,9 @@ module IAC
       :c_green, :c_kjc, :c_blue,
       :pilot_taylor, :pilot_schreck, :pilot_smith
 
-    def setup_contest_results
-      @year = 2015
-      @region = 'NorthEast'
+    def setup_contest_results(year = 2015, region = 'NorthEast')
+      @year = year
+      @region = region
       start = Time.mktime(@year)
       c_ntnls = create(:contest, start: start,
         region: 'National',
