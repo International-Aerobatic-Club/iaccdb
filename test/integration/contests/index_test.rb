@@ -6,8 +6,8 @@ class ContestsIndexTest < ActionDispatch::IntegrationTest
     @refdate = Date.today
     @contests = (-8 .. 8).map do |wct|
       date = @refdate + wct.weeks
-      create(:contest, start: date)
-    end
+      create(:contest, start: date) if date.year == @refdate.year
+    end.compact
   end
 
   teardown do
@@ -33,5 +33,14 @@ class ContestsIndexTest < ActionDispatch::IntegrationTest
         end
       end
     end
+  end
+
+  test "contests shown for current year" do
+    future_season_contest = create :contest, year: @refdate.year + 1
+    visit contests_path
+    refute(page.has_xpath?(
+      "//li//a[@href='#{contest_path(future_season_contest.id)}']"))
+    assert(page.has_xpath?(
+      "//li//a[@href='#{contest_path(@contests.first.id)}']"))
   end
 end

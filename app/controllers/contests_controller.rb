@@ -7,9 +7,10 @@ class ContestsController < ApplicationController
 
   # GET /contests
   def index
-    @years = Contest.select("distinct year(start) as anum").all.collect { |contest| contest.anum }
+    @years = Contest.select("distinct year(start) as anum").all
+      .collect { |contest| contest.anum }
     @years.sort!{|a,b| b <=> a}
-    @year = params[:year] || @years.first
+    @year = params[:year] || default_year(@years.first)
     @contests = Contest.where(
       'year(start) = ? and start <= now()', @year
     ).order("start DESC")
@@ -64,5 +65,10 @@ class ContestsController < ApplicationController
 
   def fetch_contest
     Contest.find(params[:id])
+  end
+
+  def default_year(latest_contest_year)
+    current_year = Time.now.year
+    current_year < latest_contest_year ? current_year : latest_contest_year
   end
 end

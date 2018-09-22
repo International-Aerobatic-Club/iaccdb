@@ -38,4 +38,14 @@ class ContestsController::IndexTest < ActionController::TestCase
     found = data['contests'].collect { |c| c['url'] }
     assert_equal_contents(expected, found)
   end
+
+  test 'defaults to lesser of current year or latest contest year' do
+    create :contest, year: @year + 1
+    get :index, :format => :json
+    data = JSON.parse(response.body)
+    contest_starts = data['contests'].collect { |c| Date.parse(c['start']) }
+    years = contest_starts.collect { |sdate| sdate.year }
+    assert_equal(1, years.uniq.count)
+    assert_equal(@year, years.first)
+  end
 end
