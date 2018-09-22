@@ -58,10 +58,10 @@ class ContestsController::ShowTest < ActionController::TestCase
     d_pilots = d_prs.collect { |pr| pr['pilot'] }
     d_pilot = d_pilots.first
     assert(d_pilot)
-    assert(d_pilot['iac_id'])
-    assert(d_pilot['given_name'])
-    assert(d_pilot['family_name'])
-    assert(d_pilot['chapter'])
+    assert(d_pilot.has_key?('iac_id'))
+    assert(d_pilot.has_key?('given_name'))
+    assert(d_pilot.has_key?('family_name'))
+    assert(d_pilot.has_key?('chapter'))
     d_pilot_iac_ids = d_pilots.collect { |p| p['iac_id'] }
     e_pilot_iac_ids = @pilots.collect { |p| p.iac_id }
     assert_equal_contents(e_pilot_iac_ids, d_pilot_iac_ids)
@@ -76,9 +76,9 @@ class ContestsController::ShowTest < ActionController::TestCase
     d_pr = d_prs.first
     d_airplane = d_pr['airplane']
     assert(d_airplane)
-    assert(d_airplane['make'])
-    assert(d_airplane['model'])
-    assert(d_airplane['reg'])
+    assert(d_airplane.has_key?('make'))
+    assert(d_airplane.has_key?('model'))
+    assert(d_airplane.has_key?('reg'))
     airplane_regs = @airplanes.collect { |a| a.reg }
     assert(airplane_regs.include?(d_airplane['reg']))
   end
@@ -92,11 +92,11 @@ class ContestsController::ShowTest < ActionController::TestCase
     d_pr = d_prs.first
     d_result = d_pr['result']
     assert(d_result)
-    assert(d_result['category_rank'])
-    assert(d_result['category_value'])
-    assert(d_result['total_possible'])
-    assert(d_result['star_qualifying'])
-    assert(d_result['hors_concours'])
+    assert(d_result.has_key?('category_rank'))
+    assert(d_result.has_key?('category_value'))
+    assert(d_result.has_key?('total_possible'))
+    assert(d_result.has_key?('star_qualifying'))
+    assert(d_result.has_key?('hors_concours'))
   end
 
   test 'contains judge performance summaries in category' do
@@ -110,11 +110,11 @@ class ContestsController::ShowTest < ActionController::TestCase
     d_jr = d_jrs.first
     j_result = d_jr['result']
     assert(j_result)
-    assert(j_result['gamma'])
-    assert(j_result['rho'])
-    assert(j_result['flight_count'])
-    assert(j_result['minority_zero_ct'])
-    assert(j_result['minority_grade_ct'])
+    assert(j_result.has_key?('gamma'))
+    assert(j_result.has_key?('rho'))
+    assert(j_result.has_key?('flight_count'))
+    assert(j_result.has_key?('minority_zero_ct'))
+    assert(j_result.has_key?('minority_grade_ct'))
   end
 
   test 'contains flight detail links in category' do
@@ -126,7 +126,7 @@ class ContestsController::ShowTest < ActionController::TestCase
     assert(d_fdls)
     assert_equal(3, d_fdls.count)
     d_f = d_fdls.first
-    assert(d_f['url'])
+    assert(d_f.has_key?('url'))
     assert_match(/^http/, d_f['url'])
     assert_match(/\.json$/, d_f['url'])
   end
