@@ -44,6 +44,7 @@ group :test do
   gem 'simplecov'
   gem 'codeclimate-test-reporter', '~> 1.0.0'
   gem 'shoulda-context'
+  gem 'minitest-great_expectations'
 end
 
 group :production do

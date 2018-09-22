@@ -123,6 +123,7 @@ GEM
     mini_mime (1.0.0)
     mini_portile2 (2.3.0)
     minitest (5.11.3)
+    minitest-great_expectations (0.0.5)
     multi_json (1.13.1)
     mysql2 (0.5.1)
     nio4r (2.3.0)
@@ -252,6 +253,7 @@ DEPENDENCIES
   libxml-ruby
   listen
   memoist2
+  minitest-great_expectations
   mysql2
   rails (~> 5.1.0)
   rspec-rails
