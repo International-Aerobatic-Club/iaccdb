@@ -69,6 +69,10 @@ class ContestsController < ApplicationController
 
   def default_year(latest_contest_year)
     current_year = Time.now.year
-    current_year < latest_contest_year ? current_year : latest_contest_year
+    if latest_contest_year
+      current_year < latest_contest_year ? current_year : latest_contest_year
+    else
+      current_year
+    end
   end
 end
