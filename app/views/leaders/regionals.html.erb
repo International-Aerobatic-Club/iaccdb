@@ -10,30 +10,35 @@
 <a href="https://www.iac.org/legacy/regional-championship-series-information">
 IAC Regional Series</a> 
 provisional results.
-These will be official when verified and this notice removed.  
+IAC HQ consults these, verifies them, and announces official results each year.
 Please notify
-<a href="mailto:doug@wbreeze.com">Doug Lovell</a> of any
-errors or anamolies.  
+<a href="mailto:doug@wbreeze.com">Douglas Lovell</a> of any
+errors or anamolies.
 </p>
 
-<p>A check mark <%= "\u2713" %> and rank number appear
-to the left of pilots who have qualified for the Regional Series
-in any given region and category.  Pilots shown without a check
-mark and rank number have flown more than one contest in the region.
-Only regions and categories where pilots have competed in 
-multiple contests will appear in this report.
-</p>
+<ul>
+  <li>A check mark <%= "\u2713" %> and rank number appear
+    to the left of pilots who have qualified for the Regional Series
+    in any given region and category.</li>
+  <li>Pilots shown without a check
+    mark and rank number have flown more than one contest in the region.</li>
+  <li>Only regions and categories where pilots have competed in
+    multiple contests will appear in this report.</li>
+  <li>See <a href='#chapters'>note at bottom</a> about the chapter membership
+    requirement.</li>
+</ul>
 
-<p>The 
+<%= render :partial => 'regional_series_result', :collection => @results %>
+
+<h3 id='chapters'>Chapter membership requirement</h3>
+<p>The
 <a href="https://www.iac.org/legacy/regional-championship-series-information">
 IAC Regional Series</a> 
-procedures require pilots competing in a region to be a member of at least
-one IAC Chapter in that region to be eligible for a Regional Series
+procedures require (226.2.3.6) pilots competing in a region to be a member of
+at least one IAC Chapter in that region to be eligible for a Regional Series
 title there.  A pilot competing in more than one
 region will be a member of more than one IAC Chapter.
 We currently have no method for verifying this; however, be on notice,
 we might use chapter number declarations from pilot registration paperwork
 to verify the chapter membership requirement.  For now, you are on the honor
 system.</p>
-
-<%= render :partial => 'regional_series_result', :collection => @results %>
