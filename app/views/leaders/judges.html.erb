@@ -1,8 +1,3 @@
-<%=
-  content_for(:headers) do
-    javascript_include_tag('judge_leaders')
-  end
-%>
 <h1>Judge Experience <%= @year %></h1>
 
 <p>Judges in each category who have judged the most flights, 
@@ -14,17 +9,35 @@ We show only the first <%= @max_displayed %> in any category.</p>
     <%= link_to year, leaders_judges_path(year) %>
   <% end %>
 </p>
-<ul id='judge-leaders' class='judge-leaders-category-list'>
-  <% @results.each do |cat, jy_results| %>
-    <li class='judge-leaders-category'>
-      <a href="#<%= judge_leaders_cat_id(cat) %>"><%= cat.name %></a>
+<ul
+  id='judge-leaders-tabs'
+  class='tabs judge-leaders-category-list'
+  data-tabs
+>
+  <% @results.each_with_index do |cat_jy, index| %>
+    <li class=
+      "tabs-title <%= 'is-active' if index == 0 %> judge-leaders-category"
+    >
+      <a
+        href="#<%= judge_leaders_cat_id(cat_jy[0]) %>"
+        <%= 'aria-selected="true"' if index == 0 %>
+      >
+        <%= cat_jy[0].name %>
+      </a>
     </li>
   <% end %>
 </ul>
-<div class='judge-leaders-category-collection'>
-  <% @results.each do |cat, jy_results| %>
+<div
+  class='tabs-content judge-leaders-category-collection'
+  data-tabs-content="judge-leaders-tabs"
+>
+  <% @results.each_with_index do |cat_jy, index| %>
     <%= render :partial => 'jy_category',
-      :locals => { category: cat, jy_results: jy_results } %>
+      :locals => {
+      category: cat_jy[0],
+      jy_results: cat_jy[1],
+      is_first: index == 0
+    } %>
   <% end %>
 </div>
 
