@@ -7,6 +7,7 @@
 <li><a href='#flight'>Flight Results</li>
 <li><a href='#grades'>Grades</li>
 <li><a href='#metrics'>Judge Metrics</li>
+<li><a href='#judge-leaders'>Judge Leaders</li>
 <li><a href='#refs'>References</li>
 </ul>
 
@@ -141,14 +142,14 @@ further notes about these numbers.</li>
 </div>
 
 <div class='report_notes'>
-<a name="metrics"></a><h2>Judge metrics</h2>
+<h2 id='metrics'>Judge metrics</h2>
 <p>The judge metrics include three measures of how closely each judge ranked pilots
 relative to the overall ranking of pilots.  The measures use pilot
 scores and rankings before penalties.  Judges do not apply
 penalties.  Penalties sometimes alter the final rankings of the pilots.</p>
 <dl>
 <dt>rho (ρ)</dt>
-<dd>is the full computation of the Spearman Rank Corellation Coefficent
+<dd>is the full computation of the Spearman Rank Corelation Coefficent
 formulated as follows, multiplied by 100.
 <p>
 <%= image_tag 'rhoform.png',
@@ -189,7 +190,7 @@ fifty or sixty pilots.<p>
 <dt>gamma (γ)</dt>
 <dd>
 is the Goodman and Kruskal gamma correlation coefficient
-multiplied by 100.  
+multiplied by 100.
 The formula is:
 <p>
 <%= image_tag 'gammaform.png', :class => "inline-formula",
@@ -205,7 +206,7 @@ that is a "concordant pair."  A "discordant pair" arises when the overall
 ranking places pilot B before while the judge places pilot A before, or
 vice-versa.</p>
 <p>Gamma ranges from -100 to 100.  
-100 is a perfect corellation.
+100 is a perfect correlation.
 Zero means the judge's rankings are more or less random.
 Negative values mean the judge ranked the pilots more or
 less opposite the overall ranking.  More if the value is more negative.
@@ -224,6 +225,25 @@ A flight with six pilots has Np(Np - 1)/2 = 15 pairs.</dd>
 <dt>Mz</dt><dd>The number of minority zero grades</dd>
 <dt>Mg</dt><dd>The number of minority grades</dd>
 </dl>
+</div>
+
+<div class='report_notes'>
+  <h2 id='judge-leaders'>Judge experience</h2>
+  <p>To rank judges in the
+  <%= link_to('judge experience pages', leaders_recent_judges_path) %>
+  we use a non-normalized variant of the
+  Goodman and Kruskal gamma correlation coefficient (γ).
+  That is the top half of the gamma formula, N_c - N_d:
+  the number of pilot pairs ranked in accordance with the result ranking minus
+  the number of pilot pairs ranked opposite the result ranking.
+  </p>
+  <p>Because judges who judge a lot get more or less the same proportion
+  of pilot pairs ranked in accordance with the results, you'll see a
+  strong correlation with the number of pilot pairs (Npp).
+  </p>
+  <p>Given normal gamma, the ranking places judges first who have
+  judged more and larger flights. That is, judges with more experience.
+  </p>
 </div>
 
 <div class='report_notes'>

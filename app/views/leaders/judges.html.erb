@@ -1,8 +1,15 @@
 <h1>Judge Experience <%= @year %></h1>
 
-<p>Judges in each category who have judged the most flights, 
-with the most pilots, most in accordance with the results.
-We show only the first <%= @max_displayed %> in any category.</p>
+<p>The first,
+by decreasing {N_c - N_d}
+(see <%= link_to 'notes', "#{pages_path(:notes)}#judge-leaders" %>),
+up to <%= @max_displayed %> judges in each category who have
+<ul>
+  <li>judged the most flights</li>
+  <li>with the most pilots</li>
+  <li>most in accordance with the results</li>
+</ul>
+</p>
 
 <p>
   <% @years.each do |year| %>
