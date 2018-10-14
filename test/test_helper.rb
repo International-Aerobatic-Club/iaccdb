@@ -26,14 +26,9 @@ require 'shoulda/context'
 # Capybara
 require "capybara/rails"
 require "capybara/minitest"
-require "capybara/webkit"
 
 Capybara.configure do |config|
-  config.javascript_driver = :webkit
-end
-
-Capybara::Webkit.configure do |config|
-  config.block_unknown_urls
+  config.javascript_driver = :selenium
 end
 
 class ActionDispatch::IntegrationTest

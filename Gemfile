@@ -39,7 +39,6 @@ group :test do
   gem 'timecop'
   gem 'capybara'
   gem 'launchy'
-  gem 'capybara-webkit'
   gem 'selenium-webdriver'
   gem 'simplecov'
   gem 'codeclimate-test-reporter', '~> 1.0.0'
