@@ -28,6 +28,7 @@ To make this work locally:
    rbenv install `cat .ruby-version`
    gem install bundler
    ```
+ - Copy the `config/admin.yml.sample` to `config/admin.yml`
  - Copy the `config/database.yml.sample` to `config/database.yml`
  - In the mysql client (`> mysql -u root`):
      - create the `cdb_dev` and `cdb_test` databases
