@@ -79,10 +79,10 @@ FactoryBot.define do
     r.director 'Vicky Benzing'
   end
   factory :contest do
-    name contest_name
+    name { contest_name }
     city { Faker::Address.city }
-    region region_name
-    chapter chapter_number
+    region { region_name }
+    chapter { chapter_number }
     state { Faker::Address.state_abbr }
     start { Faker::Date.between(6.years.ago, 3.years.from_now) }
     director { Faker::Name.name }

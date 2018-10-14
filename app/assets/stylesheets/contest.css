@@ -10,3 +10,6 @@ p.message {
   font-weight: bold;
   font-size: larger;
 }
+span.missing-results {
+  font-weight: bold;
+}
