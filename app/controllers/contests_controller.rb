@@ -13,7 +13,7 @@ class ContestsController < ApplicationController
     @year = params[:year] || default_year(@years.first)
     @contests = Contest.where(
       'year(start) = ? and start <= now()', @year
-    ).order("start DESC")
+    ).order("start DESC").includes(:flights)
     @future_contests = Contest.where(
       'year(start) = ? and now() < start', @year
     ).order("start ASC")
