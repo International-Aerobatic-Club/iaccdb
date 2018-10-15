@@ -1,4 +1,4 @@
-# factories for the acro tests
+include ContestFactory
 FactoryBot.define do
 ### Airplane
   factory :airplane do |r|
@@ -79,20 +79,10 @@ FactoryBot.define do
     r.director 'Vicky Benzing'
   end
   factory :contest do
-    name do
-      [
-        Faker::Superhero.descriptor,
-        'Aerobatic',
-        Faker::LeagueOfLegends.summoner_spell
-      ].join(' ')
-    end
+    name { contest_name }
     city { Faker::Address.city }
-    region do
-      %w[
-        SouthEast SouthWest MidAmerica SouthCentral Northeast Southeast
-      ].sample
-    end
-    chapter { %w[52 35 38 58 19 1 12].sample }
+    region { region_name }
+    chapter { chapter_number }
     state { Faker::Address.state_abbr }
     start { Faker::Date.between(6.years.ago, 3.years.from_now) }
     director { Faker::Name.name }

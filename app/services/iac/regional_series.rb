@@ -8,8 +8,12 @@ module IAC
 class RegionalSeries
 include IAC::Region
 
-def required_contest_count(region)
-  (/NorthWest/i =~ region) ? 2 : 3;
+def required_contest_count(region, year)
+  if (year < 2018)
+    (/NorthWest/i =~ region) ? 2 : 3;
+  else
+    3
+  end
 end
 
 # Accumulate pc_results for contest onto regional_pilots
@@ -44,7 +48,7 @@ def compute_results (year, region)
     best_combo = [];
     apc = rp.pc_results.all
     pc_ct = apc.count
-    pc_req = required_contest_count(region)
+    pc_req = required_contest_count(region, year)
     pc_use = pc_ct < pc_req ? pc_ct : pc_req
     apc.to_a.combination(pc_use) do |c|
       pts_earned = c.inject(0) { |pts, pcr| pts + pcr.category_value }

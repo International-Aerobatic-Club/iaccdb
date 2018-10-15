@@ -13,11 +13,7 @@ class LeadersController < ApplicationController
     cat_results = jy_results.group_by { |jy_result| jy_result.category }
     crop_results = {}
     cat_results.each do |cat, jy_results|
-      if (@year.to_i < 2013) then
-        jy_results.sort! { |b,a| a.con <=> b.con }
-      else
-        jy_results.sort! { |b,a| (a.con - a.dis) <=> (b.con - b.dis) }
-      end
+      jy_results.sort! { |b,a| (a.con - a.dis) <=> (b.con - b.dis) }
       crop_results[cat] = jy_results.first(@max_displayed)
     end
     @results = crop_results.sort_by { |cat, jy_results| cat.sequence }

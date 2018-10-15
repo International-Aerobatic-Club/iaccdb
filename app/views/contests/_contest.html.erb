@@ -1,5 +1,13 @@
-    <li><%= contest.start %>
-    <%= link_to contest.sobriquet, contest %>
-    <%= contest.place %>.
-    Directed by <%= contest.director %>,
-    Chapter <%= contest.chapter %></li>
+<li><%= contest.start %>
+  <%= link_to contest.sobriquet, contest %>
+  <%= contest.place %>.
+  <%= "Directed by #{contest.director}" unless contest.director.blank? %><%=
+    ", Chapter #{contest.chapter}" unless contest.chapter.blank?
+  %><% if post_date
+    flight = contest.flights.first
+    if flight %><%= ", computed #{flight.created_at}"
+    %><% else %><%= ',' %>
+      <span class='missing-results'>no results</span>
+    <% end
+  end %>
+</li>

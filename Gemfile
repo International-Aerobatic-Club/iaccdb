@@ -36,8 +36,6 @@ end
 
 group :test do
   gem 'capybara', '~>2.13'
-  gem 'poltergeist'
-  gem 'capybara-webkit'
   gem 'selenium-webdriver'
   gem 'database_cleaner'
 
@@ -47,6 +45,7 @@ group :test do
   gem 'launchy'
   gem 'simplecov'
   gem 'codeclimate-test-reporter', '~> 1.0.0'
+  gem 'minitest-great_expectations'
 end
 
 group :production do

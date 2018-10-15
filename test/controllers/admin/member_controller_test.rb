@@ -10,41 +10,45 @@ module Admin
       )
     end
 
-    test 'non-admin cannot view index' do
-      get :index
-      assert_response :unauthorized
+    context 'deny non-admin' do
+      should 'view index' do
+        get :index
+        assert_response :unauthorized
+      end
+
+      should 'show member' do
+        get :show, params: { id: @member_list.first.id }
+        assert_response :unauthorized
+      end
+
+      should 'patch update' do
+        patch :update, params: { id: @after_attrs['id'], member: @after_attrs }
+        assert_response :unauthorized
+      end
     end
 
-    test 'non-admin cannot show member' do
-      get :show, params: { id: @member_list.first.id }
-      assert_response :unauthorized
-    end
+    context 'allow admin' do
+      setup do
+        http_auth_login(:admin)
+      end
 
-    test 'non-admin cannot patch update' do
-      patch :update, params: { id: @after_attrs['id'], member: @after_attrs }
-      assert_response :unauthorized
-    end
+      should "get index" do
+        get :index
+        assert_response :success
+      end
 
-    test "admin can get index" do
-      http_auth_login(:admin)
-      get :index
-      assert_response :success
-    end
+      should "get show" do
+        get :show, params: { id: @member_list.first.id }
+        assert_response :success
+      end
 
-    test "admin can get show" do
-      http_auth_login(:admin)
-      get :show, params: { id: @member_list.first.id }
-      assert_response :success
+      should "patch update" do
+        patch :update, params: { id: @after_attrs['id'], member: @after_attrs }
+        assert_response :redirect
+        member = Member.find(@after_attrs['id'])
+        assert_not_nil(member)
+        assert_equal(@after_attrs['family_name'], member.family_name)
+      end
     end
-
-    test "admin can patch update" do
-      http_auth_login(:admin)
-      patch :update, params: { id: @after_attrs['id'], member: @after_attrs }
-      assert_response :redirect
-      member = Member.find(@after_attrs['id'])
-      assert_not_nil(member)
-      assert_equal(@after_attrs['family_name'], member.family_name)
-    end
-
   end
 end

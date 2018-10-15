@@ -1,0 +1,9 @@
+---
+# users with passwords, and roles for http auth
+users:
+  - name: contest_admin
+    password: antOehiRl,c.ygkw0vmb
+    role: admin
+  - name: calendar_admin
+    password: lPcigwVm;xbq056alr34ocugf
+    role: contest_admin

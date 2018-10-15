@@ -102,7 +102,7 @@ module Contest::ShowResults
               pilot_result[:airplane] = pf.airplane
               pilot_result[:chapter] = pf.chapter
             else
-              pilot_result[:airplane] = null
+              pilot_result[:airplane] = nil
               pilot_result[:chapter] = ''
             end
             category_data[:pilot_results] << pilot_result

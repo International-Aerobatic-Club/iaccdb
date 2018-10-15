@@ -106,7 +106,10 @@ module ACRO
       ct = Contest.where(:start => '2011-09-25').first
       fla = ct.flights
       expect(fla.size).to eq(4)
-      expect(fla.first.pilot_flights.size).to eq(2)
+      fps = fla.collect do |f|
+        f.pilot_flights.size
+      end
+      expect(fps).to match_array([1, 2, 2, 2])
     end
 
     it 'stores the penalty' do

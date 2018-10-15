@@ -17,38 +17,41 @@ class JasperParse
   end
 
   def contest_name
-    nodes = @document.find('/ContestResults/ContestInfo/Contest')
-    nodes && nodes.first ? nodes.first.inner_xml : ''
+    clean_text(@document.find('/ContestResults/ContestInfo/Contest'))
   end
 
   def contest_date
     nodes = @document.find('/ContestResults/ContestInfo/Date')
     text = nodes && nodes.first ? nodes.first.inner_xml : nil
+    start = nil
     if text
-      Date.strptime(text, '%m/%d/%y')
-    else
-      nil
+      begin
+        start = Date.strptime(text, '%m/%d/%y')
+      rescue ArgumentError
+        begin
+          start = Date.strptime(text, '%Y-%m-%d')
+        rescue ArgumentError
+          start = nil
+        end
+      end
     end
+    start
   end
 
   def contest_region
-    nodes = @document.find('/ContestResults/ContestInfo/Region')
-    nodes && nodes.first ? nodes.first.inner_xml : ''
+    clean_text(@document.find('/ContestResults/ContestInfo/Region'))
   end
 
   def contest_director
-    nodes = @document.find('/ContestResults/ContestInfo/Director')
-    nodes && nodes.first ? nodes.first.inner_xml : ''
+    clean_text(@document.find('/ContestResults/ContestInfo/Director'))
   end
 
   def contest_city
-    nodes = @document.find('/ContestResults/ContestInfo/City')
-    nodes && nodes.first ? nodes.first.inner_xml : ''
+    clean_text(@document.find('/ContestResults/ContestInfo/City'))
   end
 
   def contest_state
-    nodes = @document.find('/ContestResults/ContestInfo/State')
-    nodes && nodes.first ? nodes.first.inner_xml : ''
+    clean_text(@document.find('/ContestResults/ContestInfo/State'))
   end
 
   def contest_chapter
@@ -57,8 +60,8 @@ class JasperParse
   end
 
   def aircat
-    nodes = @document.find('/ContestResults/ContestInfo/Type')
-    type = nodes && nodes.first ? nodes.first.inner_xml : 'Powered'
+    type = clean_text(@document.find('/ContestResults/ContestInfo/Type'))
+    type = 'Powered' if type.empty?
     type[0,1]
   end
 
@@ -312,6 +315,11 @@ class JasperParse
     else
       ''
     end
+  end
+
+  def clean_text(nodes)
+    text = nodes && nodes.first ? nodes.first.inner_xml : nil
+    text.nil? ? '' : text
   end
 
 end #class

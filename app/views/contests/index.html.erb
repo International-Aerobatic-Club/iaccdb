@@ -6,15 +6,23 @@
 </p>
 
 <% unless @contests.empty? %>
-  <ul class="no-bullets">
-    <%= render @contests %>
+  <ul class="contests no-bullets">
+    <%= render(
+      partial: 'contest',
+      collection: @contests,
+      locals: { post_date: true }
+    ) %>
   </ul>
 <% end %>
 
 <% unless @future_contests.empty? %>
   <h3>Future contests</h3>
   <ul class="no-bullets future-contests">
-    <%= render @future_contests %>
+    <%= render(
+      partial: 'contest',
+      collection: @future_contests,
+      locals: { post_date: false }
+    )%>
   </ul>
 <% end %>
 

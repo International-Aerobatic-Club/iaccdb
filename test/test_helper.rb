@@ -1,6 +1,7 @@
 ENV["RAILS_ENV"] ||= "test"
 require File.expand_path("../../config/environment", __FILE__)
 require "rails/test_help"
+require 'minitest/great_expectations'
 
 # Improved Minitest output (color and progress bar)
 #require "minitest/reporters"
@@ -22,19 +23,10 @@ end
 # Capybara
 require "capybara/rails"
 require "capybara/minitest"
-#require "capybara/webkit"
-
-#Capybara.configure do |config|
-#  config.javascript_driver = :webkit
-#end
-
-#Capybara::Webkit.configure do |config|
-#  config.block_unknown_urls
-#end
 
 class ActionDispatch::IntegrationTest
-  #include Capybara::DSL
-  #include Capybara::Minitest::Assertions
+  include Capybara::DSL
+  include Capybara::Minitest::Assertions
   include AuthHelper::Request
 
   def teardown
