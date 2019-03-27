@@ -5,6 +5,7 @@
 module IAC
 class FindStars
 include IAC::Constants
+
 # Examines the pilots at a contest to find any that qualify for
 # stars awards.  
 # Accepts the database Contest instance for examination
@@ -81,11 +82,39 @@ end
 private
 ###
 
+# arrange an array of scores for this flight
+# the array contains one entry for each figure
+# each entry is an array of scores in order of judge
+# given score (f,j) where f is figure and j is judge
+# the result array has:
+# [[(1,1),(1,2),(1,3),...,(1,nj)],
+#  [(2,1),(2,2),(2,3),...,(2,nj)],
+#  ...
+#  [(nf,1),(nf,2),(nf,3),...(nf,nj)]
+# ]
+# The zero indices are all nil, reference the returned matrix
+# using indices (1 .. size-1) 
+# Count of figures is fjs.size - 1
+# Count of judges is fjs[1].size - 1
+def self.gatherScores(pilot_flight)
+  jfs = pilot_flight.scores.collect { |s| s.values }
+  # jfs[j][f] has score from judge j for figure f
+  fjs = []
+  jfs.each_with_index do |afs,j|
+    afs.each_with_index do |s,f|
+      fjs[f+1] ||= []
+      fjs[f+1][j+1] = s
+    end
+  end
+  # fjs[f][j] has score for figure f from judge j
+  fjs
+end
+
 # check score from each judge for each figure 
 # throws :pilot if number of scores below five on a figure exceeds maxBlw5
 # adds a Hash to Array stars if all figures pass
 def self.test_pilot_flight(stars, pilotFlight, max_below_five)
-  pfScores = pilotFlight.gatherScores
+  pfScores = gatherScores(pilotFlight)
   (1 ... pfScores.length).each do |f|
     figure = pfScores[f]
     count_below_five = 0
