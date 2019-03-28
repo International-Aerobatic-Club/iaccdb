@@ -50,10 +50,11 @@ module IAC
           :pilot_id => pilot.id, 
           :flight_id => flight.id).first
         expect(@pilot_flight).not_to be nil
+        @sa_computer = SaComputer.new(@pilot_flight)
         pf = @sa_computer.computePilotFlight(false)
         pfj = pf.for_judge(@judge_jim)
         expect(pfj).not_to be nil
-        expect(pfj.computed_values).to eq( 
+        expect(pfj.computed_values).to eq(
           [2090, 1000, 1400, 1360, 1620, 2125, 2125,
            1400, 900, 1440, 1105, 510, 400, 760]
         )

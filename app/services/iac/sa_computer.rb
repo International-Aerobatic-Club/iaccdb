@@ -8,8 +8,12 @@
 module IAC
 class SaComputer
 
+attr_reader :pilot_flight, :seq, :kays
+
 def initialize(pilot_flight)
   @pilot_flight = pilot_flight
+  @seq = @pilot_flight.sequence
+  @kays = @seq ? @seq.k_values : []
 end
 
 # Compute result values for one pilot, one flight
@@ -19,15 +23,11 @@ end
 # has_soft_zero should be false for contest year prior to 2014
 # Returns the PfResult ActiveRecord instance
 def computePilotFlight(has_soft_zero)
-  @pilot_flight.reload
-  @pf = @pilot_flight.pf_results.first || @pilot_flight.pf_results.build
-  @seq = @pilot_flight.sequence
-  @kays = @seq ? @seq.k_values : nil
-  @kays = nil if @kays && @kays.length == 0
+  @pf = pilot_flight.pf_results.first || pilot_flight.pf_results.build
   @pf.flight_value = 0
   @pf.adj_flight_value = 0
   @pf.total_possible = 0
-  if @kays
+  if 0 < kays.length
     gather_grades(has_soft_zero)
     computeNonZeroValues
     resolveAverages
@@ -65,15 +65,15 @@ end
 #   for the average computation
 def gather_grades(has_soft_zero)
   @fjsx = []
-  @kays.length.times { @fjsx << [] }
+  kays.length.times { @fjsx << [] }
   @judges = []
-  @zero_ct = Array.new(@kays.length, 0)
-  @grade_ct = Array.new(@kays.length, 0)
-  @score_ct = Array.new(@kays.length, 0)
-  @pilot_flight.scores.each do |score|
+  @zero_ct = Array.new(kays.length, 0)
+  @grade_ct = Array.new(kays.length, 0)
+  @score_ct = Array.new(kays.length, 0)
+  pilot_flight.scores.each do |score|
     @judges << score.judge
     score.values.each_with_index do |v, f|
-      if f < @kays.length
+      if f < kays.length
         if 0 < v
           @fjsx[f] << v
         else
@@ -90,7 +90,7 @@ def gather_grades(has_soft_zero)
           judge: #{score.judge}
           flight: #{score.pilot_flight}
           scores: #{score}
-          kays: #{@kays.join(', ')}
+          kays: #{kays.join(', ')}
         EOM
       end
     end
@@ -105,12 +105,12 @@ private
 # @fjsx: Matrix of scaled scores indexed [figure][judge]
 # @score_total: total of scaled scores for figure [f]
 def computeNonZeroValues
-  @score_total = Array.new(@kays.length, 0)
-  @kays.length.times do |f|
+  @score_total = Array.new(kays.length, 0)
+  kays.length.times do |f|
     @fjsx[f].length.times do |j|
       v = @fjsx[f][j]
       if 0 < v
-        x = v * @kays[f]
+        x = v * kays[f]
         @score_total[f] += x
         @fjsx[f][j] = x
       end
@@ -119,7 +119,7 @@ def computeNonZeroValues
 end
 
 def resolveAverages
-  @kays.length.times do |f|
+  kays.length.times do |f|
     if @grade_ct[f] < @judges.length
       avg = average_score(f)
       @fjsx[f].length.times do |j|
@@ -134,9 +134,9 @@ end
 
 def storeGradedValues
   @judges.each_with_index do |judge, j|
-    pfj_result = @pilot_flight.pfj_results.where(:judge_id => judge).first
+    pfj_result = pilot_flight.pfj_results.where(:judge_id => judge).first
     if !pfj_result
-      pfj_result = @pilot_flight.pfj_results.build(:judge => judge)
+      pfj_result = pilot_flight.pfj_results.build(:judge => judge)
     end
     pfj_result.graded_values = make_judge_values(j)
     pfj_result.save!
@@ -145,7 +145,7 @@ end
 
 def make_judge_values(j)
   jsa = []
-  @kays.length.times do |f|
+  kays.length.times do |f|
     jsa << @fjsx[f][j]
   end
   jsa
@@ -155,7 +155,7 @@ end
 # Replace all figure grades with zero when HARD_ZERO is in majority
 # Otherwise, leave figure grades unchanged
 def resolve_hard_zeros
-  @kays.length.times do |f|
+  kays.length.times do |f|
     if 0 < @zero_ct[f]
       if (@score_ct[f] - @zero_ct[f] < @zero_ct[f])
         # majority zero
@@ -185,9 +185,9 @@ end
 
 def computeTotals
   @j_totals = Array.new(@judges.length, 0)
-  @f_totals = Array.new(@kays.length, 0)
+  @f_totals = Array.new(kays.length, 0)
   @judges.length.times do |j|
-    @kays.length.times do |f|
+    kays.length.times do |f|
       @j_totals[j] += @fjsx[f][j]
       @f_totals[f] += @fjsx[f][j]
     end
@@ -197,16 +197,16 @@ end
 def storeResults
   flight_total = 0.0
   @judges.each_with_index do |judge, j|
-    pfj_result = @pilot_flight.pfj_results.where(:judge_id => judge).first
+    pfj_result = pilot_flight.pfj_results.where(:judge_id => judge).first
     if !pfj_result
-      pfj_result = @pilot_flight.pfj_results.build(:judge => judge)
+      pfj_result = pilot_flight.pfj_results.build(:judge => judge)
     end
     pfj_result.computed_values = make_judge_values(j)
     pfj_result.flight_value = @j_totals[j]
     pfj_result.save!
     flight_total += @j_totals[j]
   end
-  @kays.length.times do |f|
+  kays.length.times do |f|
     if (0 < @judges.length)
       @f_totals[f] = (@f_totals[f] / @judges.length.to_f).round.to_i
     else
@@ -220,9 +220,9 @@ def storeResults
     flight_avg = 0
   end
   @pf.flight_value = flight_avg
-  flight_avg -= @pilot_flight.penalty_total
+  flight_avg -= pilot_flight.penalty_total
   @pf.adj_flight_value = flight_avg < 0 ? 0 : flight_avg
-  @pf.total_possible = @seq.total_k * 10
+  @pf.total_possible = seq.total_k * 10
   @pf.save!
 end
 
