@@ -6,6 +6,14 @@ module IAC
 class FindStars
 include IAC::Constants
 
+attr_reader :contest, :has_soft_zero, :stars_strict_hz
+
+def initialize(contest_record)
+  @contest = contest_record
+  @has_soft_zero = @contest.has_soft_zero
+  @stars_strict_hz = @contest.year < 2019
+end
+
 # Examines the pilots at a contest to find any that qualify for
 # stars awards.  
 # Accepts the database Contest instance for examination
@@ -32,7 +40,12 @@ include IAC::Constants
 #        for each figure
 #          count judges scoring below five, break pilot if max exceeded
 #        if you get here, the pilot qualified
-def self.findStars (contest)
+def self.findStars(contest_record)
+  star_finder = FindStars.new(contest_record)
+  star_finder.process_for_stars
+end
+
+def process_for_stars
   stars = []
   PcResult.where(:contest_id => contest).each do |pc_result|
     pc_result.star_qualifying = false
@@ -55,7 +68,7 @@ def self.findStars (contest)
               maxBlw5 = (ctJ == 3) ? 0 : 1
               pilotFlight = flight.pilot_flights.find_by_pilot_id(pilot)
               throw :pilot if !pilotFlight
-              test_pilot_flight stars, pilotFlight, maxBlw5
+              test_pilot_flight(stars, pilotFlight, maxBlw5)
             end # each flight
             stars << { :given_name => pilot.given_name,
                        :family_name => pilot.family_name,
@@ -96,7 +109,7 @@ private
 # using indices (1 .. size-1) 
 # Count of figures is fjs.size - 1
 # Count of judges is fjs[1].size - 1
-def self.gatherScores(pilot_flight)
+def gatherScores(pilot_flight)
   jfs = pilot_flight.scores.collect { |s| s.values }
   # jfs[j][f] has score from judge j for figure f
   fjs = []
@@ -113,7 +126,7 @@ end
 # check score from each judge for each figure 
 # throws :pilot if number of scores below five on a figure exceeds maxBlw5
 # adds a Hash to Array stars if all figures pass
-def self.test_pilot_flight(stars, pilotFlight, max_below_five)
+def test_pilot_flight(stars, pilotFlight, max_below_five)
   pfScores = gatherScores(pilotFlight)
   (1 ... pfScores.length).each do |f|
     figure = pfScores[f]
@@ -131,7 +144,7 @@ end
 # create a URL for the scores
 # we don't have ActiveRouting path helpers, so we punt on this
 # and build it with extrinsic knowledge of the resource path
-def self.make_scores_url(pilot, contest)
+def make_scores_url(pilot, contest)
   "http://www.iaccdb.org/pilots/#{pilot.id}/scores/#{contest.id}"
 end
 
