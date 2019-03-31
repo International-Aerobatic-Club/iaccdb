@@ -1,4 +1,6 @@
 class PilotFlight < ApplicationRecord
+  include HorsConcours
+
   belongs_to :flight
   belongs_to :pilot, :class_name => 'Member'
   has_many :scores, :dependent => :destroy

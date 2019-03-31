@@ -1,4 +1,6 @@
 class PcResult < ApplicationRecord
+  include HorsConcours
+
   belongs_to :pilot, :class_name => 'Member'
   belongs_to :contest
   belongs_to :category
@@ -6,8 +8,6 @@ class PcResult < ApplicationRecord
   has_many :regional_pilots, :through => :region_contests
   has_many :result_accums
   has_many :results, :through => :result_accums
-
-  scope :competitive, -> { where(hors_concours: false) }
 
   def to_s
     a = "pc_result for pilot #{pilot} value #{category_value}"
