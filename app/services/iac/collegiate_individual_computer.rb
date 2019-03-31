@@ -6,6 +6,8 @@
 module IAC
 class CollegiateIndividualComputer
 
+attr_reader :year
+
 def initialize (year)
   @year = year
 end
@@ -25,26 +27,25 @@ def collegiates_for_pilots
   pilots = Member.joins(:result_members => :result, 
              :pc_results => :contest).where(
    "year(contests.start) = ? and results.year = ? and results.type='CollegiateResult'", 
-    @year, @year).group('members.id')
+    year, year).group('members.id')
   collegiates = pilots.all.collect { |pilot| engage_student_for_pilot(pilot) }
   trim_collegiates(collegiates)
   collegiates
 end
 
 # finds or creates student record for pilot
-# links pc_results for @year
+# links pc_results for year
 # returns the student record
 def engage_student_for_pilot(pilot)
   student = CollegiateIndividualResult.where(:pilot_id => pilot.id,
-    :year => @year).first_or_create
-  to_be_results = PcResult.competitive.joins(:contest).where(
-    "pilot_id = ? and year(contests.start) = ?", pilot.id, @year).all
+    :year => year).first_or_create
+  to_be_results = CollegiateComputer.pilot_results(pilot, year)
   student.update_results(to_be_results)
 end
 
 # remove any collegiates for year not in the list
 def trim_collegiates(to_be_collegiates)
-  existing_collegiates = CollegiateIndividualResult.where(:year => @year).all
+  existing_collegiates = CollegiateIndividualResult.where(:year => year).all
   to_remove = existing_collegiates - to_be_collegiates
   to_remove.each { |student| student.destroy }
 end
