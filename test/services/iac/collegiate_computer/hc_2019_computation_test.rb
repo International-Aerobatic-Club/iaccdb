@@ -14,22 +14,22 @@ module IAC
         category_value: 3500.00, total_possible: 4080)
     end
 
-    test 'includes HC computing team' do
+    test 'omits HC lower category computing team' do
       @team.pc_results << @mills_hcr
       @team.save
       computer = CollegiateComputer.new(@year)
       computer.recompute_team
       @team.reload
-      assert_equal(6453.51, @team.points)
+      assert_equal(6298.77, @team.points)
     end
 
-    test 'includes HC computing individual' do
+    test 'omits HC lower category computing individual' do
       @mills.pc_results << @mills_hcr
       @mills.save
       computer = CollegiateIndividualComputer.new(@year)
       computer.recompute
       @mills.reload
-      assert_equal(10160.56, @mills.points)
+      assert_equal(9971.66, @mills.points)
       assert_equal(12240, @mills.points_possible)
     end
   end

@@ -39,15 +39,15 @@ def recompute_individual
   RankComputer.compute_result_rankings(results)
 end
 
-def self.hc_allowed?(year)
+def self.non_comp_allowed?(year)
   2018 < year
 end
 
 # find PcResult records for given pilot and year
 # filter or do not filter according to HC (competitive)
 def self.pilot_results(pilot, year)
-  results = if (hc_allowed?(year))
-    PcResult
+  results = if (non_comp_allowed?(year))
+    PcResult.non_comp_allowed
   else
     PcResult.competitive
   end
