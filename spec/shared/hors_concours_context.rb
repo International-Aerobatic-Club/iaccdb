@@ -29,11 +29,9 @@ shared_context 'hors_concours flight' do
       end
     end
 
-    known_flights[3].hors_concours = true
-    known_flights[3].save!
+    known_flights[3].hc_no_reason.save!
     @hc_pilot = known_flights[3].pilot
-    unknown_flights[@hc_pilot].hors_concours = true
-    unknown_flights[@hc_pilot].save!
+    unknown_flights[@hc_pilot].hc_no_reason.save!
     @non_hc_pilot = known_flights[1].pilot
     computer = ContestComputer.new(@contest)
     computer.compute_results
