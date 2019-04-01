@@ -13,7 +13,7 @@ class PilotFlight < ApplicationRecord
 
   def to_s
     a = "Pilot_flight #{id} #{flight} for pilot #{pilot}"
-    a += " hors concours" if hors_concours
+    a += " hors concours" if hors_concours?
     a += "\npf_results [#{pf_results.join("\n\t")}]" if pf_results
     a += "\npfj_results [#{pfj_results.join("\n\t")}]" if pfj_results
   end

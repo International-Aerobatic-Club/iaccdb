@@ -39,7 +39,7 @@ class PcResult < ApplicationRecord
       pf_results.each do |pf_result|
         self.category_value += pf_result.adj_flight_value
         self.total_possible += pf_result.total_possible
-        self.hors_concours = true if pf_result.hors_concours
+        self.hors_concours |= pf_result.hors_concours
       end
     end
     save!
