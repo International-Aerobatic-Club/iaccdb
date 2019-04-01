@@ -22,7 +22,7 @@
   <td class='pilot'>
     <% pilot = pilot_flight.pilot %>
     <%= link_to pilot.name, pilot_score_path(pilot, @flight.contest) %>
-    <%= " (patch)" if pilot_flight.hors_concours %>
+    <%= " (patch)" if pilot_flight.hors_concours? %>
   </td>
   <td class='chapter'>
     <%= "(#{pilot_flight.chapter})" if pilot_flight.chapter && !pilot_flight.chapter.strip.empty? %>
