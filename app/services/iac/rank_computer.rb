@@ -41,11 +41,13 @@ module IAC
             j = pfj_result.flight_rank || 0
             j_rank_for_jf[jf_result] << j
             jf_result.sigma_ri_delta += (j - p).abs *
-              (pfj_result.flight_value.fdiv(10) - pf_result.flight_value).abs / 
+              (pfj_result.flight_value.fdiv(10) - pf_result.flight_value).abs /
               pf_result.flight_value if 0 < pf_result.flight_value
             pfj_result.computed_values.each_with_index do |computed, i|
               graded = pfj_result.graded_values[i]
-              jf_result.minority_zero_ct += 1 if graded == Constants::HARD_ZERO && 0 < computed 
+              if graded == Constants::HARD_ZERO && 0 < computed
+                jf_result.minority_zero_ct += 1
+              end
               jf_result.minority_grade_ct += 1 if computed < graded
             end
             logger.debug "Updated jf_result #{jf_result}"
@@ -160,13 +162,15 @@ module IAC
       (0 ... ranked.length).each do |i|
         (i + 1 ... ranked.length).each do |j|
           if (ranked[i] && ranked[j])
-            r[i] += 1 if ranked[i].rank > ranked[j].rank && !ranked[j].hors_concours
-            r[j] += 1 if ranked[j].rank > ranked[i].rank && !ranked[i].hors_concours
+            r[i] += 1 if (ranked[i].rank > ranked[j].rank &&
+              !ranked[j].hors_concours?)
+            r[j] += 1 if (ranked[j].rank > ranked[i].rank &&
+              !ranked[i].hors_concours?)
           end
         end
       end
       ranked.each_with_index do |t,i|
-        if t.hors_concours
+        if t.hors_concours?
           t.display_rank = 'HC'
         else
           t.display_rank = r[i].to_s
