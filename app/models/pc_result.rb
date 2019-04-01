@@ -10,7 +10,8 @@ class PcResult < ApplicationRecord
   has_many :results, :through => :result_accums
 
   def to_s
-    a = "pc_result for pilot #{pilot} value #{category_value}"
+    a = "pc_result #{id} for pilot #{pilot} value #{category_value}"
+    a += " (HC #{hors_concours})" if hors_concours?
   end
 
   def year
