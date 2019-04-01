@@ -29,11 +29,32 @@ module HorsConcours
     }
   end
 
-  def set_hc_because(reason)
-    hors_concours |= reason # bitwise or
+  def clear_hc
+    self.hors_concours = HC_FALSE
+    self
   end
 
-  def clear_hc
-    hors_concours = HC_FALSE
+  def hc_no_reason
+    self.hors_concours |= HC_NO_REASON
+    self
+  end
+
+  def hc_no_competiton
+    self.hors_concours |= HC_NO_COMPETITION
+    self
+  end
+
+  def hc_higher_category
+    self.hors_concours |= HC_HIGHER_CATEGORY
+    self
+  end
+
+  def hc_not_qualified
+    self.hors_concours |= HC_NOT_QUALIFIED
+    self
+  end
+
+  def hors_concours?
+    self.hors_concours != 0
   end
 end
