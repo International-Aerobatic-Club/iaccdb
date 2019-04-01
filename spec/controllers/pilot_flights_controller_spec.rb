@@ -26,7 +26,7 @@ describe PilotFlightsController, :type => :controller do
     data = JSON.parse(response.body)
     d_pf = data['pilot_flight_data']
     expect(d_pf['chapter']).to eq @pilot_flight.chapter
-    expect(d_pf['hors_concours']).to eq @pilot_flight.hors_concours
+    expect(d_pf['hors_concours']).to eq @pilot_flight.hors_concours?
     expect(d_pf['penalty_total']).to eq @pilot_flight.penalty_total
   end
   it 'responds with the airplane flown' do
