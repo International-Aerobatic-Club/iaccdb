@@ -39,7 +39,7 @@ module HorsConcours
     self
   end
 
-  def hc_no_competiton
+  def hc_no_competition
     self.hors_concours |= HC_NO_COMPETITION
     self
   end
