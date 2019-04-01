@@ -115,18 +115,18 @@ module Model
           @contest.id, @hc_pilot.id])
       expect(pf_results.count).to eq 2
       pf_results.each do |pf|
-        expect(pf.hors_concours).to be true
+        expect(pf.hors_concours?).to be true
       end
     end
     it 'carries hors concours on any pilot_flight into the pc_results' do
       pc_results = PcResult.where(contest: @contest, pilot: @hc_pilot)
       expect(pc_results.count).to eq 1
-      expect(pc_results.first.hors_concours).to be true
+      expect(pc_results.first.hors_concours?).to be true
     end
     it 'does not set hors_concours on pc_result if none of the flights is hc' do
       pc_results = PcResult.where(contest: @contest, pilot: @non_hc_pilot)
       expect(pc_results.count).to eq 1
-      expect(pc_results.first.hors_concours).to be false
+      expect(pc_results.first.hors_concours?).to be false
     end
   end
 end

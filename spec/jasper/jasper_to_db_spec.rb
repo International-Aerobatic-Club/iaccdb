@@ -263,7 +263,7 @@ module Jasper
         patch_flights = PilotFlight.where(pilot_id: patch_pilots.first.id)
         patch_flights.each do |pf|
           if pf.category.category == 'unlimited'
-            expect(pf.hors_concours).to be true
+            expect(pf.hors_concours?).to be true
           end
         end
       end
@@ -284,7 +284,7 @@ module Jasper
         expect(pilots.count).to eq 1
         expect(pilots.first.family_name).to eq "Eggen"
         pfs.each do |pf|
-          expect(pf.hors_concours).to be true
+          expect(pf.hors_concours?).to be true
         end
       end
       context 'pilots in multiple categories' do
@@ -311,7 +311,7 @@ module Jasper
             pilot_id: @pri_hc_pilot)
           expect(pfs.count).to eq 3
           pfs.each do |pf|
-            expect(pf.hors_concours).to be true
+            expect(pf.hors_concours?).to be true
           end
         end
         it 'identifies non-hc of intermediate also in primary' do
@@ -319,7 +319,7 @@ module Jasper
             pilot_id: @pri_hc_pilot)
           expect(pfs.count).to eq 3
           pfs.each do |pf|
-            expect(pf.hors_concours).to be false
+            expect(pf.hors_concours?).to be false
           end
         end
         it 'identifies hc of intermediate also in unlimited' do
@@ -327,7 +327,7 @@ module Jasper
             pilot_id: @int_hc_pilot)
           expect(pfs.count).to eq 3
           pfs.each do |pf|
-            expect(pf.hors_concours).to be true
+            expect(pf.hors_concours?).to be true
           end
         end
         it 'identifies non-hc of unlimited also in intermediate' do
@@ -335,7 +335,7 @@ module Jasper
             pilot_id: @int_hc_pilot)
           expect(pfs.count).to eq 3
           pfs.each do |pf|
-            expect(pf.hors_concours).to be false
+            expect(pf.hors_concours?).to be false
           end
         end
         it 'does not mix adv power and 4min aircat' do
@@ -344,7 +344,7 @@ module Jasper
             pilot_id: adv_4m_pilot.id)
           expect(pfs.count).to eq 4
           pfs.each do |pf|
-            expect(pf.hors_concours).to be false
+            expect(pf.hors_concours?).to be false
           end
         end
         it 'does not mix unl power and 4min aircat' do
@@ -353,7 +353,7 @@ module Jasper
             pilot_id: unl_4m_pilot.id)
           expect(pfs.count).to eq 4
           pfs.each do |pf|
-            expect(pf.hors_concours).to be false
+            expect(pf.hors_concours?).to be false
           end
         end
       end
@@ -421,7 +421,7 @@ module Jasper
         expect(pilot.family_name).to eq 'Campbell'
         pfs = PilotFlight.where(pilot_id: pilot.id)
         expect(pfs.length).to eq 3
-        expect(pfs.collect(&:hors_concours)).to_not include(false)
+        expect(pfs.collect(&:hors_concours?)).to_not include(false)
       end
       it 'captures JaSPer identified real competitor' do
         pilot = Member.where(iac_id: 437050).first
@@ -429,7 +429,7 @@ module Jasper
         expect(pilot.family_name).to eq 'Budd'
         pfs = PilotFlight.where(pilot_id: pilot.id)
         expect(pfs.length).to eq 3
-        expect(pfs.collect(&:hors_concours)).to_not include(true)
+        expect(pfs.collect(&:hors_concours?)).to_not include(true)
       end
     end
   end
