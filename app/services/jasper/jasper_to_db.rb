@@ -206,12 +206,10 @@ def pilot_flight_for(dFlight, dPilot, dSequence, dAirplane, jasper, jCat, jFlt, 
       :airplane_id => dAirplane.id,
       :chapter => jasper.pilot_chapter(jCat, jPilot),
       :penalty_total => jasper.penalty(jCat, jFlt, jPilot),
-      :hors_concours => jasper.pilot_is_hc(jCat, jPilot)
     ) do |pf|
-      # I don't understand why this is necessary, but it works.
-      # Otherwise, hors_concours always comes back false
-      pf.hors_concours = jasper.pilot_is_hc(jCat, jPilot)
-      pf.save!
+      if jasper.pilot_is_hc(jCat, jPilot)
+        pf.hc_higher_category.save!
+      end
     end
   end
   return pf
