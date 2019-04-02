@@ -1,5 +1,7 @@
-shared_context 'hors_concours flight' do
-  before do
+require 'test_helper'
+
+module HorsConcoursData
+  def setup_hors_concours_data
     judges = create_list(:judge, 3)
 
     @known_flight = create(:flight)
