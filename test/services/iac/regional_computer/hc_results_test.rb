@@ -7,11 +7,11 @@ module IAC
 
     setup do
       setup_contest_results
-      PcResult.create(pilot: pilot_smith,
+      pcr = PcResult.create(pilot: pilot_smith,
         category: category,
         contest: c_blue,
-        hors_concours: true,
         category_value: 4080.00, total_possible: 4080)
+      pcr.hc_no_reason.save!
       computer = RegionalSeries.new
       computer.compute_results(year, region)
     end

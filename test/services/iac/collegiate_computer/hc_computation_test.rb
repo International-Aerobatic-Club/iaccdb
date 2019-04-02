@@ -10,8 +10,8 @@ module IAC
       @mills_hcr = PcResult.create(pilot: @pilot_mills,
         category: @spn,
         contest: @c_michg,
-        hors_concours: true,
         category_value: 3500.00, total_possible: 4080)
+      @mills_hcr.hc_no_reason.save!
     end
 
     test 'omits HC computing team' do
