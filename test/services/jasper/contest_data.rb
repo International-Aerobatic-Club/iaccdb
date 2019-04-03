@@ -1,11 +1,21 @@
 require 'libxml'
 
 module ContestData
-  def parse_contest_data(data)
-    parser = LibXML::XML::Parser.string(data)
+  def jasper_from_parser(parser)
     jasper = Jasper::JasperParse.new
     jasper.do_parse(parser)
     jasper
+  end
+
+  def parse_contest_data(data)
+    jasper_from_parser(LibXML::XML::Parser.string(data))
+  end
+
+  # provide only the file name and place the file in SAMPLE_FILE_DIR
+  SAMPLE_FILE_DIR = 'spec/fixtures/jasper'
+  def jasper_parse_from_test_data_file(filename)
+    testFile = File.join(SAMPLE_FILE_DIR, filename)
+    jasper_from_parser(LibXML::XML::Parser.file(testFile))
   end
 
   def blank_empty_contest(params = {})
