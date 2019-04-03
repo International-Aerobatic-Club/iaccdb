@@ -16,9 +16,19 @@ def required_contest_count(region, year)
   end
 end
 
+# Before 2019, only non-hc results qualify
+# From 2019, results marked HC for solo in category do qualify
+def hc_qualified_results(contest)
+  if (contest.year < 2019)
+    contest.pc_results.competitive
+  else
+    contest.pc_results.non_comp_allowed
+  end
+end
+
 # Accumulate pc_results for contest onto regional_pilots
 def accumulate_contest (year, region, contest)
-  contest.pc_results.competitive.each do |pc_result|
+  hc_qualified_results(contest).each do |pc_result|
     if pc_result.is_five_cat
       regional_pilot = RegionalPilot.find_or_create_given_result(
          year, region, pc_result.category.id, pc_result.pilot.id)
@@ -63,13 +73,6 @@ def compute_results (year, region)
   end
 end
 
-# Compute every competitor's eligibility in region.
-# Does not currently account for chapter membership.
-def compute_eligibility (year, region)
-  #RegionalPilot.where(:year => year, :region => region).update_all(:qualified => true)
-  # already accomplished by compute_results
-end
-
 # Compute ranking for every competitor X category in region
 def compute_ranking (year, region)
   #RegionalPilot.where(:year => year, :region => region).update_all(:rank => 1)
@@ -95,7 +98,6 @@ end
 # Compute regional series results given year and region
 def compute_regional (year, region)
   compute_results year, region
-  compute_eligibility year, region
   compute_ranking year, region
 end
 
