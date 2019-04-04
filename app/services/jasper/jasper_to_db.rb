@@ -72,20 +72,44 @@ module Jasper
       end
     end
 
+    def process_pilot_flight(dFlight, jasper, jCat, jFlt, jPilot)
+      dPilot = pilot_for(jasper, jCat, jPilot)
+      dAirplane = airplane_for(jasper, jCat, jPilot)
+      dSequence = sequence_for(jasper, jCat, jFlt, jPilot)
+      dPilotFlight = pilot_flight_for(dFlight, dPilot, dSequence, dAirplane,
+        jasper, jCat, jFlt, jPilot)
+      scores_found = false
+      jasper.judge_teams(jCat, jFlt).each do |jJudgeTeam|
+        dJudge = judge_for(jasper, jCat, jFlt, jJudgeTeam)
+        dAssist = judge_assist_for(jasper, jCat, jFlt, jJudgeTeam)
+        dJudgeTeam = judge_team_for(dJudge, dAssist)
+        if process_grades(
+            dJudgeTeam, dPilotFlight, dSequence,
+            jasper, jCat, jFlt, jPilot, jJudgeTeam)
+          scores_found = true
+        end
+      end
+      dPilotFlight.destroy! unless scores_found
+      scores_found
+    end
+
+    def process_flight(jasper, flight_pilots, dCategory, jCat, jFlt)
+      scores_found = false
+      dFlight = flight_for(d_contest, dCategory, jasper, jCat, jFlt)
+      flight_pilots.each do |jPilot|
+        if process_pilot_flight(dFlight,
+            jasper, jCat, jFlt, jPilot)
+          scores_found = true
+        end
+      end
+      dFlight.destroy! unless scores_found
+    end
+
     def process_category(jasper, dCategory, jCat)
       jasper.flights_scored(jCat).each do |jFlt|
-        dFlight = flight_for(d_contest, dCategory, jasper, jCat, jFlt)
-        jasper.pilots_scored(jCat, jFlt).each do |jPilot|
-          dPilot = pilot_for(jasper, jCat, jPilot)
-          dAirplane = airplane_for(jasper, jCat, jPilot)
-          dSequence = sequence_for(jasper, jCat, jFlt, jPilot)
-          dPilotFlight = pilot_flight_for(dFlight, dPilot, dSequence, dAirplane, jasper, jCat, jFlt, jPilot)
-          jasper.judge_teams(jCat, jFlt).each do |jJudgeTeam|
-            dJudge = judge_for(jasper, jCat, jFlt, jJudgeTeam)
-            dAssist = judge_assist_for(jasper, jCat, jFlt, jJudgeTeam)
-            dJudgeTeam = judge_team_for(dJudge, dAssist)
-            process_grades(dJudgeTeam, dPilotFlight, dSequence, jasper, jCat, jFlt, jPilot, jJudgeTeam)
-          end
+        flight_pilots = jasper.pilots_scored(jCat, jFlt)
+        if 0 < flight_pilots.length
+          process_flight(jasper, flight_pilots, dCategory, jCat, jFlt)
         end
       end
     end
@@ -181,7 +205,7 @@ module Jasper
     def judge_team_for(dJudge, dAssist)
       dJudgeTeam = Judge.find_by_judge_id_and_assist_id(dJudge.id, dAssist.id)
       if (dJudgeTeam == nil)
-        dJudgeTeam = Judge.create(:judge_id => dJudge.id, :assist_id => dAssist.id)
+        dJudgeTeam = Judge.create!(judge_id: dJudge.id, assist_id: dAssist.id)
       end
       dJudgeTeam
     end
@@ -212,17 +236,19 @@ module Jasper
       return pf
     end
 
-    def process_grades(dJudgeTeam, dPilotFlight, dSequence, jasper, jCat, jFlt, jPilot, jJudgeTeam)
+    def process_grades(dJudgeTeam, dPilotFlight, dSequence,
+        jasper, jCat, jFlt, jPilot, jJudgeTeam)
       grades_string = jasper.grades_for(jCat, jFlt, jPilot, jJudgeTeam)
-      # can get empty grades on non-scoring chief
+      # can get empty grades
       if !grades_string.empty?
         grades = grades_string.split
         grades = grades.map { |g| (g.to_f * 10.0).round }
         grades = remove_extraneous_grades(grades, jCat, dSequence.figure_count)
-        dPilotFlight.scores.create(
+        dPilotFlight.scores.create!(
           :judge_id => dJudgeTeam.id,
           :values => grades)
       end
+      !grades_string.empty?
     end
 
     def remove_extraneous_grades(grades, jCat, ctFigures)
