@@ -6,7 +6,7 @@ module Jasper
     include ContestData
 
     setup do
-      jasper = jasper_parse_from_test_data_file('JaSPer_post_IACCDB_301.xml')
+      jasper = jasper_parse_from_test_data_file('jasper_post_301.xml')
       j2d = Jasper::JasperToDB.new
       @contest = j2d.process_contest(jasper)
     end
