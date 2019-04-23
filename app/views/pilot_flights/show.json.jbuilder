@@ -1,5 +1,6 @@
 json.pilot_flight_data do
-  json.(@pilot_flight, :id, :penalty_total, :hors_concours, :chapter)
+  json.(@pilot_flight, :id, :penalty_total, :chapter)
+  json.hors_concours @pilot_flight.hors_concours?
   json.pilot do
     json.(@pilot_flight.pilot, :id, :name, :iac_id)
   end

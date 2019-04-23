@@ -8,7 +8,7 @@
   </td>
   <td class="pilot">
     <%= link_to("#{pilot.name}", pilot_score_path(pilot, @contest)) if pilot %>
-    <%= " (patch)" if pc_result.hors_concours %>
+    <%= " (patch)" if pc_result.hors_concours? %>
   </td>
   <td class="chapter">
     <%= "(#{chapter})" if chapter && !chapter.strip.empty?  %>

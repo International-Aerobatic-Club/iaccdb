@@ -12,7 +12,7 @@ describe 'hc_ranked', :type => :model do
     end
   end
   it 'ranks with one hc pilot' do
-    @pc_results[4].hors_concours = true
+    @pc_results[4].hc_no_reason.save!
     hc_results = PcResultM::HcRanked.computed_display_ranks(@pc_results)
     expect(hc_results.count).to eq COUNT
     expect(hc_results[0].display_rank).to eq '1'
@@ -21,7 +21,7 @@ describe 'hc_ranked', :type => :model do
     expect(hc_results[5].display_rank).to eq '5'
   end
   it 'ranks with one hc pilot tied' do
-    @pc_results[4].hors_concours = true
+    @pc_results[4].hc_no_reason.save!
     @pc_results[5].category_rank = @pc_results[4].category_rank
     hc_results = PcResultM::HcRanked.computed_display_ranks(@pc_results)
     expect(hc_results.count).to eq COUNT
@@ -29,7 +29,7 @@ describe 'hc_ranked', :type => :model do
     expect(hc_results[5].display_rank).to eq '5'
   end
   it 'ranks with one hc pilot, two after tied' do
-    @pc_results[4].hors_concours = true
+    @pc_results[4].hc_no_reason.save!
     @pc_results[5].category_rank = @pc_results[6].category_rank
     hc_results = PcResultM::HcRanked.computed_display_ranks(@pc_results)
     expect(hc_results.count).to eq COUNT
@@ -38,8 +38,8 @@ describe 'hc_ranked', :type => :model do
     expect(hc_results[6].display_rank).to eq '5'
   end
   it 'ranks with two hc_pilots' do
-    @pc_results[4].hors_concours = true
-    @pc_results[6].hors_concours = true
+    @pc_results[4].hc_no_reason.save!
+    @pc_results[6].hc_no_reason.save!
     hc_results = PcResultM::HcRanked.computed_display_ranks(@pc_results)
     expect(hc_results.count).to eq COUNT
     expect(hc_results[4].display_rank).to eq 'HC'
@@ -48,7 +48,7 @@ describe 'hc_ranked', :type => :model do
     expect(hc_results[7].display_rank).to eq '6'
   end
   it 'ranks with hc_pilot first' do
-    @pc_results[0].hors_concours = true
+    @pc_results[0].hc_no_reason.save!
     hc_results = PcResultM::HcRanked.computed_display_ranks(@pc_results)
     expect(hc_results.count).to eq COUNT
     expect(hc_results[0].display_rank).to eq 'HC'
@@ -58,7 +58,7 @@ describe 'hc_ranked', :type => :model do
   end
   it 'ranks with hc_pilot last' do
     last = COUNT-1
-    @pc_results[last].hors_concours = true
+    @pc_results[last].hc_no_reason.save!
     hc_results = PcResultM::HcRanked.computed_display_ranks(@pc_results)
     expect(hc_results.count).to eq COUNT
     expect(hc_results[0].display_rank).to eq '1'

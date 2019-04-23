@@ -5,8 +5,17 @@
 module IAC
 class FindStars
 include IAC::Constants
+
+attr_reader :contest, :has_soft_zero, :stars_strict_hz
+
+def initialize(contest_record)
+  @contest = contest_record
+  @has_soft_zero = @contest.has_soft_zero
+  @stars_strict_hz = @contest.year < 2019
+end
+
 # Examines the pilots at a contest to find any that qualify for
-# stars awards.  
+# stars awards.
 # Accepts the database Contest instance for examination
 # Returns an Array of Hash, one per stars qualified pilot.
 # Each Hash contains:
@@ -31,7 +40,12 @@ include IAC::Constants
 #        for each figure
 #          count judges scoring below five, break pilot if max exceeded
 #        if you get here, the pilot qualified
-def self.findStars (contest)
+def self.findStars(contest_record)
+  star_finder = FindStars.new(contest_record)
+  star_finder.process_for_stars
+end
+
+def process_for_stars
   stars = []
   PcResult.where(:contest_id => contest).each do |pc_result|
     pc_result.star_qualifying = false
@@ -54,7 +68,7 @@ def self.findStars (contest)
               maxBlw5 = (ctJ == 3) ? 0 : 1
               pilotFlight = flight.pilot_flights.find_by_pilot_id(pilot)
               throw :pilot if !pilotFlight
-              test_pilot_flight stars, pilotFlight, maxBlw5
+              test_pilot_flight(stars, pilotFlight, maxBlw5)
             end # each flight
             stars << { :given_name => pilot.given_name,
                        :family_name => pilot.family_name,
@@ -83,13 +97,17 @@ private
 
 # check score from each judge for each figure 
 # throws :pilot if number of scores below five on a figure exceeds maxBlw5
-# adds a Hash to Array stars if all figures pass
-def self.test_pilot_flight(stars, pilotFlight, max_below_five)
-  pfScores = pilotFlight.gatherScores
-  (1 ... pfScores.length).each do |f|
+def test_pilot_flight(stars, pilotFlight, max_below_five)
+  sa_computer = SaComputer.new(pilotFlight)
+  pfScores = if (stars_strict_hz)
+    sa_computer.gather_grades(has_soft_zero)
+  else
+    sa_computer.gather_HZ_adjusted_grades(has_soft_zero)
+  end
+  pfScores.length.times do |f|
     figure = pfScores[f]
     count_below_five = 0
-    (1 ... figure.length).each do |j|
+    figure.length.times do |j|
       grade = figure[j]
       if (0 <= grade && grade < 50) || grade == Constants::HARD_ZERO
         count_below_five += 1 
@@ -102,7 +120,7 @@ end
 # create a URL for the scores
 # we don't have ActiveRouting path helpers, so we punt on this
 # and build it with extrinsic knowledge of the resource path
-def self.make_scores_url(pilot, contest)
+def make_scores_url(pilot, contest)
   "http://www.iaccdb.org/pilots/#{pilot.id}/scores/#{contest.id}"
 end
 

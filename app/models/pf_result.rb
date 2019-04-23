@@ -50,4 +50,8 @@ class PfResult < ApplicationRecord
   def hors_concours
     pilot_flight.hors_concours
   end
+
+  def hors_concours?
+    hors_concours != 0
+  end
 end

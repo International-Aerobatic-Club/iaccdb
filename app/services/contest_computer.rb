@@ -13,10 +13,6 @@ class ContestComputer
     compute_contest_judge_rollups
   end
 
-  def has_soft_zero
-    2014 <= @contest.year
-  end
-
   # compute pilot results for all flights of the contest
   def compute_flights
     flights = @contest.flights
@@ -28,7 +24,7 @@ class ContestComputer
 
   def compute_flight_results(flight)
     @flight_computer.flight = flight
-    @flight_computer.compute_pf_results(has_soft_zero)
+    @flight_computer.compute_pf_results(@contest.has_soft_zero)
   end
 
   # compute judge metrics for all flights of the contest

@@ -1,4 +1,6 @@
 class PcResult < ApplicationRecord
+  include HorsConcours
+
   belongs_to :pilot, :class_name => 'Member'
   belongs_to :contest
   belongs_to :category
@@ -7,10 +9,9 @@ class PcResult < ApplicationRecord
   has_many :result_accums
   has_many :results, :through => :result_accums
 
-  scope :competitive, -> { where(hors_concours: false) }
-
   def to_s
-    a = "pc_result for pilot #{pilot} value #{category_value}"
+    a = "pc_result #{id} for pilot #{pilot} value #{category_value}"
+    a += " (HC #{hors_concours})" if hors_concours?
   end
 
   def year
@@ -39,7 +40,7 @@ class PcResult < ApplicationRecord
       pf_results.each do |pf_result|
         self.category_value += pf_result.adj_flight_value
         self.total_possible += pf_result.total_possible
-        self.hors_concours = true if pf_result.hors_concours
+        self.hors_concours |= pf_result.hors_concours
       end
     end
     save!

@@ -4,11 +4,9 @@
 pilots = Member.where('family_name like "%(patch)%"')
 pilots.each do |pilot|
   pilot.pilot_flights.each do |flight|
-    flight.hors_concours = true
-    flight.save!
+    flight.hc_no_reason.save!
   end
   pilot.pc_results.each do |result|
-    result.hors_concours = true
-    result.save
+    result.hc_no_reason.save!
   end
 end

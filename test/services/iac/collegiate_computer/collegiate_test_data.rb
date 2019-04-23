@@ -1,8 +1,10 @@
+require 'test_helper'
+
 module IAC
-  describe CollegiateComputer do
-    before :context do
+  module CollegiateTestData
+    def setup_collegiate_participation(year = 2016)
       pcrs = []
-      @year = 2016
+      @year = year
       start = Time.mktime(@year)
       c_ntnls = create(:contest, start: start,
         name: 'U.S. National Aerobatic Championships')
@@ -184,49 +186,6 @@ module IAC
       @pilot_contests = pcrs.group_by { |pcr| pcr.pilot }
       @team.pc_results << pcrs
       @team.save
-    end
-
-    it 'computes team result' do
-      ctr = CollegiateTeamComputer.new(@pilot_contests)
-      r = ctr.compute_result
-      expect(r.qualified).to be true
-      expect(r.total).to eq 6298.77
-      expect(r.total_possible).to eq 7440
-      trio = r.combination.group_by { |pcr| pcr.pilot.iac_id }
-      expect(trio.keys).to match [877212, 614888, 201845]
-      expect(trio[877212][0].category_value).to eq 3345.26
-      expect(trio[877212][0].total_possible).to eq 4080
-      expect(trio[614888][0].category_value).to eq 1496.34
-      expect(trio[614888][0].total_possible).to eq 1680
-      expect(trio[201845][0].category_value).to eq 1457.17
-      expect(trio[201845][0].total_possible).to eq 1680
-    end
-
-    context 'hc results' do
-      before :context do
-        @mills_hcr = PcResult.create(pilot: @pilot_mills,
-          category: @spn,
-          contest: @c_michg,
-          hors_concours: true,
-          category_value: 3500.00, total_possible: 4080)
-      end
-      it 'omits HC computing team' do
-        @team.pc_results << @mills_hcr
-        @team.save
-        computer = CollegiateComputer.new(@year)
-        computer.recompute_team
-        @team.reload
-        expect(@team.points).to eq 6298.77
-      end
-      it 'omits HC computing individual' do
-        @mills.pc_results << @mills_hcr
-        @mills.save
-        computer = CollegiateIndividualComputer.new(@year)
-        computer.recompute
-        @mills.reload
-        expect(@mills.points).to eq 9971.66
-        expect(@mills.points_possible).to eq 12240
-      end
     end
   end
 end

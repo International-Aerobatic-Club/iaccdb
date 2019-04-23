@@ -34,6 +34,10 @@ class Contest < ApplicationRecord
     self.start = Time.mktime(yyyy)
   end
 
+  def has_soft_zero
+    2014 <= year
+  end
+
   def sobriquet
     if name && !name.empty?
       name
