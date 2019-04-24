@@ -19,7 +19,14 @@ class ContestComputer
     flights.each do |flight|
       compute_flight_results(flight)
     end
+    mark_hc_participants
     @contest.save!
+  end
+
+  def mark_hc_participants
+    hc = IAC::HorsConcoursParticipants.new(@contest)
+    hc.mark_solo_participants_as_hc
+    hc.mark_lower_category_participants_as_hc
   end
 
   def compute_flight_results(flight)
