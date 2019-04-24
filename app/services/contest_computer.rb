@@ -11,6 +11,7 @@ class ContestComputer
     compute_judge_metrics
     compute_contest_pilot_rollups
     compute_contest_judge_rollups
+    mark_hc_participants
   end
 
   # compute pilot results for all flights of the contest
@@ -19,7 +20,6 @@ class ContestComputer
     flights.each do |flight|
       compute_flight_results(flight)
     end
-    mark_hc_participants
     @contest.save!
   end
 
@@ -27,6 +27,7 @@ class ContestComputer
     hc = IAC::HorsConcoursParticipants.new(@contest)
     hc.mark_solo_participants_as_hc
     hc.mark_lower_category_participants_as_hc
+    hc.mark_pc_results_based_on_flights
   end
 
   def compute_flight_results(flight)
