@@ -3,6 +3,7 @@ class ContestComputer
   def initialize(contest)
     @contest = contest
     @flight_computer = FlightComputer.new(nil)
+    @hc_computer = IAC::HorsConcoursParticipants.new(@contest)
   end
 
   # compute all of the flights and the contest rollups
@@ -11,7 +12,6 @@ class ContestComputer
     compute_judge_metrics
     compute_contest_pilot_rollups
     compute_contest_judge_rollups
-    mark_hc_participants
   end
 
   # compute pilot results for all flights of the contest
@@ -20,14 +20,13 @@ class ContestComputer
     flights.each do |flight|
       compute_flight_results(flight)
     end
+    mark_hc_flight_participants
     @contest.save!
   end
 
-  def mark_hc_participants
-    hc = IAC::HorsConcoursParticipants.new(@contest)
-    hc.mark_solo_participants_as_hc
-    hc.mark_lower_category_participants_as_hc
-    hc.mark_pc_results_based_on_flights
+  def mark_hc_flight_participants
+    @hc_computer.mark_solo_participants_as_hc
+    @hc_computer.mark_lower_category_participants_as_hc
   end
 
   def compute_flight_results(flight)
@@ -56,6 +55,7 @@ class ContestComputer
     cats.each do |cat|
       compute_category_rollups(cat)
     end
+    @hc_computer.mark_pc_results_based_on_flights
     @contest.save!
   end
 
