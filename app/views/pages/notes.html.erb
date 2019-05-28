@@ -11,6 +11,21 @@
 <li><a href='#refs'>References</li>
 </ul>
 
+<h3>A note about terms</h3>
+- A "pilot flight" is a single performance by one pilot.
+- A "flight program" is a group of performances from multiple pilots of the same
+category, one each, under the same set of rules.
+
+Sometimes we just say "flight", and that can refer to either a pilot flight
+or a flight program. To be clear, in the following, we've tried to use the
+two word designator unless it's crystal clear from context which we mean.
+
+A "category" is a group of flight programs flown by a group of pilots.
+It is the largest unit of competition for a contest. Pilots compete in
+individual flight programs and in categories. There are multiple categories
+at a contest. The categories generally differ by difficulty and have
+category-specific rules or limitations.
+
 <div class='report_notes'>
 <a name="articles"></a><h2>Scoring Related Articles</h2>
 <dl>
@@ -42,29 +57,30 @@ outputs from the Exploit Design ACRO scoring program used there.</dd>
 <p>The contest pages display results for each category
 flown in the contest.  The results show each pilot in rank
 order of overall standing and each judge who graded one or
-more flights of the category.</p>
+more flight programs of the category.</p>
 <p>The pilot results columns show scores and rankings 
 for each flight flown in the category, and the overall
-score and rank.  Each row lists 
-flight and overall results for a single pilot.  
+score and rank.  Each row lists
+flight program and overall results for a single pilot.
 </p><p>
 A star ★  to the left of the pilot name means that the performance
 qualifies for an IAC stars achievement award.
 </p>
-<p>The judge results metrics show rollups for all flights judged in the category.
-<p>
+<p>The judge results metrics show rollups for all flights
+judged in the category.
+</p>
 <%= image_tag 'Category.png', :class=>'notes_image' %>
 <p class='notes_text'>
 <ol>
-<li>Each link at the top of the flight column
+<li>Each link at the top of the flight program column
 leads to a report detailing scores from each judge for each pilot on the
-flight.</li>
+flight program.</li>
 <li>Each link in the pilot column leads to the scoring detail for all
-flights flown by the pilot at the contest.</li>
+flight programs flown by the pilot at the contest.</li>
 <li>Percentage numbers show the percent of possible points earned by
-the pilot for the flight after penalties.</li>
-<li>Rank numbers show the pilot rank for the flight after penalties.  The
-rank is the count of pilots who did better, plus one.  (A rank value of one
+the pilot for the flight, after penalties.</li>
+<li>Rank numbers show the pilot rank for the flight after penalties.
+The rank is the count of pilots who did better, plus one.  (A rank value of one
 is the best rank, meaning no-one else did better.)</li>
 <li>The Total column shows the total points, percent of total possible
 points, and rank for each pilot in the category.</li>
@@ -76,7 +92,7 @@ further notes about the numbers in the columns next to the judge names.</li>
 
 <div class='report_notes'>
 <a name="flight"></a><h2>Flight results</h2>
-<p>The flight results show how pilots of one flight
+<p>The flight results show how pilots of one flight program
 at one contest measured-up in front of one judging line.
 It shows rankings given the pilots by each judge, penalties,
 and points before and after penalties.</p>
@@ -133,8 +149,8 @@ after subtracting penalties from the average score given by the
 judges.</li>
 <li>Shows the maximum number of points possible for the flight, and the
 percentage of maximum possible points earned by the pilot.</li>
-<li>These are the same numbers shown for the flight overall based
-on the results for all pilots on the same flight.
+<li>These are the same numbers shown for the flight program overall based
+on the results for all pilots on the same flight program.
 The numbers shown match the numbers shown in the flight report.
 See the <a href='#metrics'>judge metrics</a> explanations for
 further notes about these numbers.</li>
@@ -168,7 +184,7 @@ Negative 100 means the judge ranked the pilots exactly opposite the result
 ranking.  This sometimes happens when there are only two pilots.
 </p><p>
 Contest values, category rollups, and career rollups
-track the three separate sums from all flights.
+track the three separate sums from all flights judged.
 </p>
 </dd>
 <dt>ri</dt>
@@ -181,9 +197,9 @@ overall score by the difference in rank.  The formula is:
 are worse.  Find more information about RI in the FAI Sporting Code, Section 6:
 Aerobatics, referenced below.  The RI discussion begins at paragraph 8.8.1.</p>
 <p>Contest values, category rollups, and career rollups
-use the average RI value from all flights.  This procedure differs
+use the average RI value from all flight programs.  This procedure differs
 from that used for rho and gamma because RI contains a scaling 
-adjustment for the number of pilots in the flight.  The scaling
+adjustment for the number of pilots in the flight program.  The scaling
 starts to dominate the value when there are more than
 fifty or sixty pilots.<p>
 </dd>
@@ -213,13 +229,14 @@ less opposite the overall ranking.  More if the value is more negative.
 </p>
 <p>Contest values, category rollups, and career rollups
 track the total of concordant and discordant
-pairs from all flights.</p>
+pairs from all flight programs.</p>
 </dd>
-<dt>Np</dt><dd>The number of pilots</dd>
-<dt>Npp</dt><dd>The number of pilot pairs.  
+<dt>Np</dt><dd>The number of pilot flights, counts one for every pilot
+every time they fly a flight program</dd>
+<dt>Npp</dt><dd>The number of pilot pairs.
 A flight with six pilots has Np(Np - 1)/2 = 15 pairs.</dd>
-<dt>Nf</dt><dd>The number of flights</dd>
-<dt>Fza</dt><dd>The average number of pilots in a flight</dd>
+<dt>Nf</dt><dd>The number of flight programs</dd>
+<dt>Fza</dt><dd>The average number of pilots in a flight program</dd>
 <dt>Ng</dt><dd>The number of grades given</dd>
 <dt>Ka</dt><dd>The average K for a figure graded</dd>
 <dt>Mz</dt><dd>The number of minority zero grades</dd>
@@ -242,7 +259,7 @@ A flight with six pilots has Np(Np - 1)/2 = 15 pairs.</dd>
   strong correlation with the number of pilot pairs (Npp).
   </p>
   <p>Given normal gamma, the ranking places judges first who have
-  judged more and larger flights. That is, judges with more experience.
+  judged more and larger flight programs. That is, judges with more experience.
   </p>
 </div>
 
