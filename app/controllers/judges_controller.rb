@@ -1,6 +1,6 @@
 class JudgesController < ApplicationController
   def index
-    @judges = Member.find_by_sql("select 
+    @judges = Member.find_by_sql("select
       m.given_name, m.family_name, m.id
       from members m where m.id in (select distinct judge_id from judges)
       order by  m.family_name, m.given_name")
@@ -22,7 +22,7 @@ class JudgesController < ApplicationController
     jy_by_year = jy_results_query.group_by { |r| r.year }
     @j_results = [] # array of hash {year label, array of string count for category}
     @totals = {} # hash indexed by year label, value is total pilots for year
-    jy_by_year.each do |year, jy_results| 
+    jy_by_year.each do |year, jy_results|
       j_year_results = [] # array of hash {category label, values}
       jys = jy_results.sort_by { |jy_result| jy_result.category.sequence }
       total_count = 0
@@ -47,7 +47,7 @@ class JudgesController < ApplicationController
     career_rollup = JyResult.new :judge => @judge
     career_rollup.zero_reset
     j_results = {} # hash by year
-    jy_by_year.each do |year, jy_results| 
+    jy_by_year.each do |year, jy_results|
       j_results[year] = []
       year_rollup = JyResult.new :year => year, :judge => @judge
       year_rollup.zero_reset
@@ -55,28 +55,28 @@ class JudgesController < ApplicationController
       jys = jy_results.sort_by { |jy_result| jy_result.category.sequence }
       jys.each do |jy_result|
         j_cat_results = []
-        jc_cat = jc_by_year[year].select do |jc_result| 
+        jc_cat = jc_by_year[year].select do |jc_result|
           jc_result.category == jy_result.category
         end
         jc_cat.each do |jc_result|
           j_cat_results << {
-            :label => jc_result.contest.name, 
+            :label => jc_result.contest.name,
             :values => jc_result
           }
         end
         j_cat_results << {
-          :label => 'Category rollup', 
+          :label => 'Category rollup',
           :values => jy_result
         } if 1 < jc_cat.length
         j_results[year] << {
-          :label => jy_result.category.name, 
+          :label => jy_result.category.name,
           :values => j_cat_results
         }
         year_rollup.accumulate(jy_result)
         if !career_category_results[jy_result.category]
           career_category_results[jy_result.category] =
-            JyResult.new(:year => year, 
-              :category => jy_result.category, 
+            JyResult.new(:year => year,
+              :category => jy_result.category,
               :judge => @judge)
           career_category_results[jy_result.category].zero_reset
         end
@@ -104,10 +104,6 @@ class JudgesController < ApplicationController
       :label => 'All categories',
       :values => career_rollup
     }
-    #@career_results.each do |career_line|
-      #puts career_line[:label]
-      #puts career_line[:values]
-    #end
     @sj_results = j_results.sort { |a,b| b <=> a }
   end
 
