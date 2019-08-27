@@ -24,7 +24,6 @@ module Jasper
       if d_contest
         process_scores(d_contest, jasper)
         identify_collegiate_pilots(d_contest, jasper)
-        mark_hc_participants(d_contest)
       end
       d_contest
     end
@@ -51,12 +50,6 @@ module Jasper
         d_contest = Contest.create!(contest_params)
       end
       d_contest
-    end
-
-    def mark_hc_participants(d_contest)
-      hc = IAC::HorsConcoursParticipants.new(d_contest)
-      hc.mark_solo_participants_as_hc
-      hc.mark_lower_category_participants_as_hc
     end
 
     def identify_collegiate_pilots(d_contest, jasper)
