@@ -5,7 +5,7 @@ FactoryBot.define do
     make { Faker::Company.name }
     model { Faker::Company.unique.name }
     reg do
-      Faker::Number.between(100, 999).to_s +
+      Faker::Number.between(from: 100, to: 999).to_s +
       Faker::Name.initials(2)
     end
     make_model
@@ -14,15 +14,15 @@ FactoryBot.define do
   factory :make_model do
     make { Faker::Company.name }
     model { Faker::Company.unique.name }
-    empty_weight_lbs { Faker::Number.between(600, 1600) }
-    max_weight_lbs { Faker::Number.between(300, 800) + empty_weight_lbs }
-    horsepower { Faker::Number.between(40, 600) }
-    seats { Faker::Number.between(1, 4) }
-    wings { Faker::Number.between(1, 2) }
+    empty_weight_lbs { Faker::Number.between(from: 600, to: 1600) }
+    max_weight_lbs { Faker::Number.between(from: 300, to: 800) + empty_weight_lbs }
+    horsepower { Faker::Number.between(from: 40, to: 600) }
+    seats { Faker::Number.between(from: 1, to: 4) }
+    wings { Faker::Number.between(from: 1, to:2) }
   end
 ### Member
   factory :member do |r|
-    r.sequence(:iac_id) { |i| 10 ** Faker::Number.between(2, 6) + i }
+    r.sequence(:iac_id) { |i| 10 ** Faker::Number.between(from: 2, to: 6) + i }
     family_name { Faker::Name.last_name }
     given_name { Faker::Name.first_name }
   end
@@ -84,7 +84,7 @@ FactoryBot.define do
     region { region_name }
     chapter { chapter_number }
     state { Faker::Address.state_abbr }
-    start { Faker::Date.between(6.years.ago, 3.years.from_now) }
+    start { Faker::Date.between(from: 6.years.ago, to: 3.years.from_now) }
     director { Faker::Name.name }
   end
 ### Category
