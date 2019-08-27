@@ -26,6 +26,7 @@ gem 'mysql2'
 
 group :development, :test do
   gem 'rspec-rails'
+  gem 'factory_bot_rails'
 end
 
 group :development do
@@ -34,7 +35,6 @@ group :development do
 end
 
 group :test do
-  gem 'factory_bot_rails'
   gem 'database_cleaner'
   gem 'faker'
   gem 'timecop'
