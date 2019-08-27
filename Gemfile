@@ -30,6 +30,7 @@ end
 
 group :development do
   gem 'listen'
+  gem 'minitest-rails', '~> 3.0'
 end
 
 group :test do
