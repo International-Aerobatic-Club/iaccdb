@@ -23,6 +23,8 @@ end
 # Thoughtbot context in tests
 require 'shoulda/context'
 
+# TODO Remove this when integration tests have been purged of Capybara
+# Use only Nokogiri in integration tests
 # Capybara
 require "capybara/rails"
 require "capybara/minitest"
@@ -31,6 +33,9 @@ Capybara.configure do |config|
   config.javascript_driver = :selenium
 end
 
+# TODO get rid of this. Use Capybara in system tests, only
+# STOP using it in integration tests
+# Use only Nokogiri in integration tests
 class ActionDispatch::IntegrationTest
   include Capybara::DSL
   include Capybara::Minitest::Assertions
