@@ -28,6 +28,10 @@ class Minitest::Test
   include FakerUniqueReset
 end
 
+class ActionDispatch::IntegrationTest
+  include AuthHelper::Request
+end
+
 class ActionController::TestCase
   include AuthHelper::Controller
 end
