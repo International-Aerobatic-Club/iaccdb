@@ -1,12 +1,12 @@
 include ContestFactory
 FactoryBot.define do
 ### Airplane
-  factory :airplane do |r|
+  factory :airplane do
     make { Faker::Company.name }
     model { Faker::Company.unique.name }
     reg do
       Faker::Number.between(from: 100, to: 999).to_s +
-      Faker::Name.initials(2)
+        Faker::Name.initials(number: 2)
     end
     make_model
   end
@@ -103,19 +103,19 @@ FactoryBot.define do
     end
   end
 ### Flight
-  factory :flight do |r|
-    r.association :contest
-    r.association :category
-    r.name { 'Known' }
-    r.sequence(:sequence)
-    r.association :chief, :factory => :member
-    r.association :assist, :factory => :member
+  factory :flight do
+    association :contest
+    association :category
+    association :chief, :factory => :member
+    association :assist, :factory => :member
+    name { 'Known' }
+    sequence(:sequence)
   end
-  factory :nationals_imdt_known, :class => Flight do |r|
-    r.association :contest, :factory => :nationals
-    r.association :category
-    r.name { 'Known' }
-    r.sequence(:sequence) { |n| n }
+  factory :nationals_imdt_known, :class => Flight do
+    association :contest, :factory => :nationals
+    association :category
+    name { 'Known' }
+    sequence(:sequence) { |n| n }
   end
   factory :nationals_imdt_free, :class => Flight do |r|
     r.association :contest, :factory => :nationals
@@ -124,11 +124,11 @@ FactoryBot.define do
     r.sequence(:sequence) { |n| n }
   end
 ### Sequence
-  factory :sequence do |r|
-    r.figure_count { 5 }
-    r.total_k { 61 }
-    r.mod_3_total { 8 }
-    r.k_values { [22,10,14,17,8] }
+  factory :sequence, class: Sequence do
+    figure_count { 5 }
+    total_k { 61 }
+    mod_3_total { 8 }
+    k_values { [22,10,14,17,8] }
   end
   factory :imdt_known_seq, :class => Sequence do |r|
     r.figure_count { 14 }
@@ -149,13 +149,13 @@ FactoryBot.define do
     r.k_values { [10, 13, 9, 9, 18, 10, 19, 19, 18, 14, 18, 13, 10, 6, 4, 8] }
   end
 ### PilotFlight
-  factory :pilot_flight, :class => PilotFlight do |r|
-    r.association :pilot, :factory => :member
-    r.association :flight
-    r.association :sequence
-    r.association :airplane
-    r.penalty_total { 0 }
-    r.chapter { '52' }
+  factory :pilot_flight do
+    association :pilot, :factory => :member
+    association :flight
+    association :sequence
+    association :airplane
+    penalty_total { 0 }
+    chapter { '52' }
   end
   factory :adams_known, :class => PilotFlight do |r|
     r.association :pilot, :factory => :tom_adams
