@@ -17,8 +17,15 @@ class ActiveSupport::TestCase
 end
 
 # Faker Unique
-Minitest.after_run do
-  Faker::UniqueGenerator.clear
+module FakerUniqueReset
+  def after_teardown
+    super
+    Faker::UniqueGenerator.clear
+  end
+end
+
+class Minitest::Test
+  include FakerUniqueReset
 end
 
 class ActionController::TestCase
