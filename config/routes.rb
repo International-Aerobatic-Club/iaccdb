@@ -1,5 +1,9 @@
 IAC::Application.routes.draw do
 
+  get 'make_models/index'
+
+  get 'make_models/show'
+
   ### HQ Namespace
   namespace :hq do
     resources :collegiate, :controller => :collegiate_results, :except => [:index, :new]
