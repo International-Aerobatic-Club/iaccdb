@@ -12,13 +12,27 @@ FactoryBot.define do
   end
 ### MakeModel
   factory :make_model do
-    make { Faker::Space.nasa_space_craft }
-    model { Faker::Space.unique.meteorite }
-    empty_weight_lbs { Faker::Number.between(from: 600, to: 1600) }
-    max_weight_lbs { Faker::Number.between(from: 300, to: 800) + empty_weight_lbs }
-    horsepower { Faker::Number.between(from: 40, to: 600) }
-    seats { Faker::Number.between(from: 1, to: 4) }
-    wings { Faker::Number.between(from: 1, to:2) }
+    transient do
+      make { Faker::Space.nasa_space_craft }
+      model { Faker::Space.unique.meteorite }
+    end
+    initialize_with do
+      make_model = MakeModel.find_by(make: make, model: model)
+      unless make_model
+        empty_weight_lbs = Faker::Number.between(from: 600, to: 1600)
+        make_model = MakeModel.create({
+          make: make,
+          model: model,
+          empty_weight_lbs: empty_weight_lbs,
+          max_weight_lbs: Faker::Number.between(from: 300, to: 800) +
+            empty_weight_lbs,
+          horsepower: Faker::Number.between(from: 40, to: 600),
+          seats: Faker::Number.between(from: 1, to: 4),
+          wings: Faker::Number.between(from: 1, to:2)
+        })
+      end
+      make_model
+    end
   end
 ### Member
   factory :member do |r|
