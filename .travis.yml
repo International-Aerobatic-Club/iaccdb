@@ -2,6 +2,10 @@ language: ruby
 cache: bundler
 git:
   depth: 3
+services:
+  - mysql
+before_install:
+  - mysql -e "CREATE DATABASE iaccdb_test CHARACTER SET 'utf8';"
 before_script:
   - cmd/travis_ci_test_db.sh
   - RAILS_ENV='test' bundle exec rake db:setup

@@ -4,7 +4,8 @@ class MakeModelServiceTest < ActiveSupport::TestCase
   class OldAirplane < ActiveRecord::Base
     self.table_name = 'airplanes'
     def self.fake_reg
-      Faker::Number.between(100, 999).to_s + Faker::Name.initials(2)
+      Faker::Number.within(range: 100..999).to_s +
+        Faker::Name.initials(number: 2)
     end
   end
 
