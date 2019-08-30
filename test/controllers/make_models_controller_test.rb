@@ -35,6 +35,21 @@ class MakeModelsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test 'blank make in index' do
+    mm = create(:make_model, make: "")
+    get make_models_url
+    assert_select('dl.make-models dt.make', "{no make specified}")
+    assert_select('dl.make-models dd.make ul.models li.model', mm.model)
+  end
+
+  test 'blank model in index' do
+    mm = create(:make_model, model: "")
+    get make_models_url
+    assert_select('dl.make-models dt.make', mm.make)
+    assert_select('dl.make-models dd.make ul.models li.model',
+      "{no model specified}")
+  end
+
   # <h1>S1T</h1>
   # <dl class="make-model">
   #   <dt>Make</dt><dd>Pitts</dd>

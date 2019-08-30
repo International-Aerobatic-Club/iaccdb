@@ -1,7 +1,7 @@
 <h1>Makes and Models</h1>
 <dl class='make-models'>
   <% @make_models.each_key do |make| %>
-    <dt class="make"><%= make %></dt>
+    <dt class="make"><%= make_or_unspecified(make) %></dt>
     <dd class="make">
       <ul class="models">
         <%= render @make_models[make] %>
