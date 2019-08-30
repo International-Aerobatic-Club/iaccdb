@@ -28,18 +28,18 @@ gem 'turnout'
 
 group :development, :test do
   gem 'rspec-rails'
+  gem 'factory_bot_rails'
 end
 
 group :development do
   gem 'listen'
+  gem 'minitest-rails', '~> 3.0'
 end
 
 group :test do
   gem 'capybara', '~>2.13'
   gem 'selenium-webdriver'
   gem 'database_cleaner'
-
-  gem 'factory_bot_rails'
   gem 'faker'
   gem 'timecop'
   gem 'launchy'

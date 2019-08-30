@@ -2,6 +2,7 @@ ENV["RAILS_ENV"] ||= "test"
 require File.expand_path("../../config/environment", __FILE__)
 require "rails/test_help"
 require 'minitest/great_expectations'
+require 'shoulda/context' # Thoughtbot context in tests
 
 # Improved Minitest output (color and progress bar)
 #require "minitest/reporters"
@@ -16,23 +17,19 @@ class ActiveSupport::TestCase
 end
 
 # Faker Unique
-Minitest.after_run do
-  Faker::UniqueGenerator.clear
+module FakerUniqueReset
+  def after_teardown
+    super
+    Faker::UniqueGenerator.clear
+  end
 end
 
-# Capybara
-require "capybara/rails"
-require "capybara/minitest"
+class Minitest::Test
+  include FakerUniqueReset
+end
 
 class ActionDispatch::IntegrationTest
-  include Capybara::DSL
-  include Capybara::Minitest::Assertions
   include AuthHelper::Request
-
-  def teardown
-    Capybara.reset_sessions!
-    Capybara.use_default_driver
-  end
 end
 
 class ActionController::TestCase

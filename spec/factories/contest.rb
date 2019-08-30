@@ -3,7 +3,7 @@ module ContestFactory
     [
       Faker::Superhero.descriptor,
       'Aerobatic',
-      Faker::LeagueOfLegends.summoner_spell
+      Faker::Games::LeagueOfLegends.summoner_spell
     ].join(' ')
   end
 

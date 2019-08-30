@@ -87,6 +87,8 @@ IAC::Application.routes.draw do
 
   resources :jf_results, :only => [:show]
 
+  resources :make_models, :only => [:index, :show]
+
   get 'judge/:id/cv',
     :controller => :judges,
     :action => :cv,
