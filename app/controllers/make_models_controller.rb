@@ -4,5 +4,6 @@ class MakeModelsController < ApplicationController
   end
 
   def show
+    @make_model = MakeModel.find(params[:id])
   end
 end
