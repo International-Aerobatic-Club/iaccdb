@@ -20,7 +20,7 @@ FactoryBot.define do
       make_model = MakeModel.find_by(make: make, model: model)
       unless make_model
         empty_weight_lbs = Faker::Number.between(from: 600, to: 1600)
-        make_model = MakeModel.create({
+        make_model = MakeModel.new({
           make: make,
           model: model,
           empty_weight_lbs: empty_weight_lbs,
