@@ -2,20 +2,22 @@ require 'test_helper'
 require 'shared/make_models_data'
 
 # markup like this:
-# <ul class="make_models">
-#   <li class="make">Pitts
+# <dl class="make-models">
+#   <dt class="make">Pitts</dt>
+#   <dd class="make">
 #     <ul class="models">
 #       <li class="model">S1T</li>
 #       <li class="model">S1S</li>
 #     </ul>
-#   </li>
-#   <li class="make">Extra
+#   </dd>
+#   <dt class="make">Extra</dt>
+#   <dd class="make">
 #     <ul class="models">
 #       <li class="model">300L</li>
 #       <li class="model">300SC</li>
 #     </ul>
-#   </li>
-# </ul>
+#   </dd>
+# </dl>
 class MakeModelsControllerTest < ActionDispatch::IntegrationTest
   include MakeModelsData
 
@@ -23,13 +25,12 @@ class MakeModelsControllerTest < ActionDispatch::IntegrationTest
     mmods = setup_make_models_data
     get make_models_url
     assert_response :success
-    assert_select('ul.make_models', 1)
-    assert_select('ul.make_models li.make', mmods.keys.length)
+    assert_select('dl.make-models', 1)
+    assert_select('dl.make-models dt.make', mmods.keys.length)
     mmods.each_key do |make|
-      assert_select('ul.make_models li.make', /#{make}/)
+      assert_select('dl.make-models dt.make', make)
       mmods[make].each do |mr|
-        assert_select('ul.make_models li.make ul.models li.model',
-          /#{mr.model}/)
+        assert_select('dl.make-models dd.make ul.models li.model', mr.model)
       end
     end
   end
