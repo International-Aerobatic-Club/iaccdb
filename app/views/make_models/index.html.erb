@@ -1,4 +1,10 @@
 <h1>Makes and Models</h1>
 <ul class='make_models'>
-  <%= render @make_models %>
+  <% @make_models.each_key do |make| %>
+    <li class="make"><%= make %>
+      <ul class="models">
+        <%= render @make_models[make] %>
+      </ul>
+    <li>
+  <% end %>
 </ul>

@@ -1,27 +1,35 @@
-require "test_helper"
+require 'test_helper'
+require 'shared/make_models_data'
 
+# markup like this:
+# <ul class="make_models">
+#   <li class="make">Pitts
+#     <ul class="models">
+#       <li class="model">S1T</li>
+#       <li class="model">S1S</li>
+#     </ul>
+#   </li>
+#   <li class="make">Extra
+#     <ul class="models">
+#       <li class="model">300L</li>
+#       <li class="model">300SC</li>
+#     </ul>
+#   </li>
+# </ul>
 class MakeModelsControllerTest < ActionDispatch::IntegrationTest
+  include MakeModelsData
+
   def test_index
-    mmods = build_list :make_model, 4
-    hmods = mmods.collect(&:make).uniq.inject([]) do |h, make|
-      h << {
-        make: make,
-        models: create_list(:make_model, 4, make: make)
-      }
-    end
+    mmods = setup_make_models_data
     get make_models_index_url
     assert_response :success
-    puts "PAGE: #{@response.body}"
-    puts "HMODS: #{hmods.collect(&:inspect).join("\n")}"
-    assert_select('ul.make_models')
-    hmods.each do |make|
-      assert_select(:xpath,
-        '//ul[@class=make_models]/li[@class=make]')
-      assert_select(:xpath,
-        '//ul[@class=make_models]/li[@class=make]/ul[@class=models]')
-      make[:models].each do |mm|
-        assert_select(:xpath,
-        '//ul[@class=make_models]/li[@class=make]/ul[@class=models]')
+    assert_select('ul.make_models', 1)
+    assert_select('ul.make_models li.make', mmods.keys.length)
+    mmods.each_key do |make|
+      assert_select('ul.make_models li.make', /#{make}/)
+      mmods[make].each do |mr|
+        assert_select('ul.make_models li.make ul.models li.model',
+          /#{mr.model}/)
       end
     end
   end
@@ -30,5 +38,4 @@ class MakeModelsControllerTest < ActionDispatch::IntegrationTest
     get make_models_show_url
     assert_response :success
   end
-
 end
