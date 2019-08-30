@@ -1,9 +1,5 @@
 IAC::Application.routes.draw do
 
-  get 'make_models/index'
-
-  get 'make_models/show'
-
   ### HQ Namespace
   namespace :hq do
     resources :collegiate, :controller => :collegiate_results, :except => [:index, :new]
@@ -89,6 +85,8 @@ IAC::Application.routes.draw do
   resources :pilot_flights, :only => [:show]
 
   resources :jf_results, :only => [:show]
+
+  resources :make_models, :only => [:index, :show]
 
   get 'judge/:id/cv',
     :controller => :judges,
