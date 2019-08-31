@@ -10,7 +10,7 @@ class AllByMakeTest < ActiveSupport::TestCase
   end
 
   test 'groups by make' do
-    assert_equal(@make_models_data.keys.sort, @mmods.keys)
+    assert_equal(@make_models_data.keys.sort, @mmods.keys.sort)
   end
 
   test 'includes MakeModel records for each make' do
@@ -19,7 +19,7 @@ class AllByMakeTest < ActiveSupport::TestCase
       refute_nil(models)
       expected_models = @make_models_data[make]
       expected_model_names = expected_models.collect(&:model).sort
-      model_names = models.collect(&:model)
+      model_names = models.collect(&:model).sort
       assert_equal(expected_model_names, model_names)
       expected_model_empty_weights =
         expected_models.collect(&:empty_weight_lbs).sort
