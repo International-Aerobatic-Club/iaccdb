@@ -37,7 +37,7 @@ group :development do
 end
 
 group :test do
-  gem 'capybara', '~>2.13'
+  gem 'capybara'
   gem 'selenium-webdriver'
   gem 'database_cleaner'
   gem 'faker'
@@ -45,6 +45,7 @@ group :test do
   gem 'launchy'
   gem 'simplecov'
   gem 'codeclimate-test-reporter', '~> 1.0.0'
+  gem 'shoulda-context'
   gem 'minitest-great_expectations'
 end
 
