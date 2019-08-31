@@ -1,6 +1,7 @@
-RSpec.configure do |config|
-  config.include AuthHelper::Controller, :type => :controller
-  config.include AuthHelper::Request, :type => :request
-  config.include AuthHelper::Feature, :type => :feature
-end
+require_relative '../../test/auth_for_test'
 
+RSpec.configure do |config|
+  config.include AuthForTest::Controller, :type => :controller
+  config.include AuthForTest::Request, :type => :request
+  config.include AuthForTest::Feature, :type => :feature
+end
