@@ -1,4 +1,27 @@
 <h1>Makes and Models</h1>
-<ul>
-  <%= render partial: 'make_model', collection: @make_models %>
-</ul>
+
+<%= form_tag admin_make_models_merge_preview_path do %>
+  <table>
+  <thead>
+    <tr>
+      <th>select</th>
+      <th>make</th>
+      <th>model</th>
+      <th>horsepower</th>
+      <th colspan='2'>action</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @make_models.each do |mm| %>
+    <tr>
+      <td><%= check_box_tag "selected[#{mm.id}]" %></td>
+      <td><%= mm.make %></td>
+      <td><%= mm.model %></td>
+      <td><%= mm.horsepower %></td>
+      <td><%= link_to :edit, edit_admin_make_model_path(mm) %></td>
+      <td><%= submit_tag :merge %></td>
+    </tr>
+  <% end %>
+  </tbody>
+  </table>
+<% end %>
