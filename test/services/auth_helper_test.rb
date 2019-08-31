@@ -12,6 +12,10 @@ class AuthHelperTest < ActiveSupport::TestCase
     ]
   end
 
+  teardown do
+    UserList.users = nil
+  end
+
   test 'never allows unidentified' do
     refute(check_auth('missing', 'missing'))
     refute(check_auth('missing', 'missing', nil))

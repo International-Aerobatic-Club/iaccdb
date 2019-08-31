@@ -7,3 +7,6 @@ users:
   - name: calendar_admin
     password: lPcigwVm;xbq056alr34ocugf
     role: contest_admin
+  - name: curator_admin
+    password: a973599e29d7217734c8e32a921ca
+    role: curator

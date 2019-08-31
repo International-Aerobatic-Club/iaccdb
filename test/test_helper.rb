@@ -1,8 +1,9 @@
-ENV["RAILS_ENV"] ||= "test"
-require File.expand_path("../../config/environment", __FILE__)
-require "rails/test_help"
+ENV["RAILS_ENV"] ||= 'test'
+require File.expand_path('../../config/environment', __FILE__)
+require 'rails/test_help'
 require 'minitest/great_expectations'
 require 'shoulda/context' # Thoughtbot context in tests
+require 'auth_for_test'
 
 # Improved Minitest output (color and progress bar)
 #require "minitest/reporters"
@@ -29,9 +30,9 @@ class Minitest::Test
 end
 
 class ActionDispatch::IntegrationTest
-  include AuthHelper::Request
+  include AuthForTest::Request
 end
 
 class ActionController::TestCase
-  include AuthHelper::Controller
+  include AuthForTest::Controller
 end
