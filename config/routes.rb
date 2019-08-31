@@ -30,6 +30,8 @@ IAC::Application.routes.draw do
     post "members/merge_preview"
     post "members/merge"
     resources :make_models, :only => [:index, :show, :edit, :update]
+    post "make_models/merge_preview"
+    post "make_models/merge"
     get 'manny_list',
       :controller => :contests,
       :action => "manny_list"
