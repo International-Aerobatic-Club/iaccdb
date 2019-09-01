@@ -10,6 +10,11 @@ class Admin::MakeModelControllerTest < ActionDispatch::IntegrationTest
     assert_response :unauthorized
   end
 
+  test 'unauthorized cannot preview merge' do
+    post admin_make_models_merge_preview_path
+    assert_response :unauthorized
+  end
+
   test 'unauthorized cannot show' do
     get admin_make_model_path(@models.first)
     assert_response :unauthorized
@@ -32,6 +37,26 @@ class Admin::MakeModelControllerTest < ActionDispatch::IntegrationTest
         assert_select('tr td input[@type="submit"]')
       end
     end
+  end
+
+  test 'authorized can preview merge' do
+    select_models = create_list(:make_model, 3)
+    select_hash = select_models.inject(Hash.new) do |hash, mm|
+      hash[mm.id.to_s] = "1"
+      hash
+    end
+    post admin_make_models_merge_preview_path,
+      headers: http_auth_login(:curator),
+      params: { "selected"=> select_hash }
+    # TODO check preview form
+    #assert_response :success
+    assert_response :missing
+  end
+
+  test 'authorized preview merge without any selected redirects' do
+    post admin_make_models_merge_preview_path,
+      headers: http_auth_login(:curator)
+    assert_redirected_to admin_make_models_path
   end
 
   test 'authorized can show' do
