@@ -29,6 +29,10 @@ class Admin::MakeModelIndexTest < ActionDispatch::IntegrationTest
         assert_select('tr td', m.model)
         assert_select("tr td a[href=\"#{edit_admin_make_model_path(m)}\"]")
         assert_select('tr td input[@type="submit"]')
+        input = tbody.xpath(
+          "./tr/td/input[@type=\"submit\" and @name=\"#{m.id}\"]"
+        )
+        assert_equal(1, input.length, "Submit named with make_model #{m.id}")
       end
     end
   end

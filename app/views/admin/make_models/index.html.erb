@@ -19,7 +19,7 @@
       <td><%= mm.model %></td>
       <td><%= mm.horsepower %></td>
       <td><%= link_to :edit, edit_admin_make_model_path(mm) %></td>
-      <td><%= submit_tag :merge %></td>
+      <td><%= submit_tag :merge, name: mm.id %></td>
     </tr>
   <% end %>
   </tbody>
