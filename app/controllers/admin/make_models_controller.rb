@@ -20,8 +20,9 @@ class Admin::MakeModelsController < ApplicationController
   def merge_preview
     selected = merge_params.fetch('selected', {}).keys
     if 1 < selected.count
-      # TODO render preview
-      return head :not_found
+      @merge_models = selected.collect do |mmid|
+        MakeModel.find(mmid)
+      end
     else
       flash[:alert] = 'select two or more make and model to merge'
       redirect_to admin_make_models_url

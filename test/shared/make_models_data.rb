@@ -8,4 +8,20 @@ module MakeModelsData
       memo
     end
   end
+
+  def setup_make_models_with_airplanes
+    create_list(:airplane, Random.rand(7) + 4)
+    MakeModel.all.each do |mm|
+      create_list(:airplane, Random.rand(7) + 2, make_model: mm)
+    end
+  end
+
+  def admin_make_models_select_params(select_models)
+    {
+      "selected" => select_models.inject(Hash.new) do |hash, mm|
+        hash[mm.id.to_s] = "1"
+        hash
+      end
+    }
+  end
 end

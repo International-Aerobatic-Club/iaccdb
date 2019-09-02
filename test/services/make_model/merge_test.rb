@@ -1,11 +1,11 @@
 require 'test_helper'
+require 'shared/make_models_data'
 
 class MakeModel::MergeTest < ActiveSupport::TestCase
+  include MakeModelsData
+
   setup do
-    create_list(:airplane, Random.rand(7) + 4)
-    MakeModel.all.each do |mm|
-      create_list(:airplane, Random.rand(7) + 2, make_model: mm)
-    end
+    setup_make_models_with_airplanes
     mms = MakeModel.limit(2).all
     @svc = MakeModelService.new(mms[1], mms[0])
   end

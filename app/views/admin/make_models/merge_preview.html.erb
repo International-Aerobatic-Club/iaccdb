@@ -1,0 +1,21 @@
+<h1>Admin Make Model Merge</h1>
+
+<%= form_tag admin_make_models_merge_path do %>
+  <ul class="make_model_targets">
+    <% @merge_models.each do |make_model| %>
+      <li>
+        <%= radio_button_tag :target, make_model.id, make_model == @target %>
+        <%= "#{make_model.make} #{make_model.model}" %>
+        <%= hidden_field_tag "selected[#{make_model.id}]" %>
+      </li>
+    <% end %>
+  </ul>
+
+  <%= submit_tag :merge,
+    data: { :confirm => 'Be careful. This cannot be readily reversed.' } %>
+  <%= link_to :cancel, admin_make_models_path(:anchor => @target) %>
+<% end %>
+
+<p>"Merge" will place all of the following airplanes with
+the selected make and model. It will delete the other make(s) and model(s).
+</p>

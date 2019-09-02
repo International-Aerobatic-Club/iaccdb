@@ -1,8 +1,16 @@
 require 'test_helper'
+require 'shared/make_models_data'
 
 class Admin::MakeModelControllerTest < ActionDispatch::IntegrationTest
+  include MakeModelsData
+
   setup do
-    @models = create_list(:make_model, 4)
+    @models = setup_make_models_with_airplanes
+    select = []
+    4.times do
+      select << @models[Random.rand(@models.length)]
+    end
+    @select_models = select.uniq
   end
 
   test 'unauthorized cannot view index' do
@@ -40,20 +48,40 @@ class Admin::MakeModelControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'authorized can preview merge' do
-    select_models = create_list(:make_model, 3)
-    select_hash = select_models.inject(Hash.new) do |hash, mm|
-      hash[mm.id.to_s] = "1"
-      hash
-    end
     post admin_make_models_merge_preview_path,
       headers: http_auth_login(:curator),
-      params: { "selected"=> select_hash }
-    # TODO check preview form
-    #assert_response :success
-    assert_response :missing
+      params: admin_make_models_select_params(@select_models)
+    assert_response :success
   end
 
-  test 'authorized preview merge without any selected redirects' do
+  test 'merge preview has radio selector for target' do
+    post admin_make_models_merge_preview_path,
+      headers: http_auth_login(:curator),
+      params: admin_make_models_select_params(@select_models)
+    assert_select('ul.make_model_targets') do |ul|
+      assert_equal(1, ul.length)
+      ul = ul.first
+      @select_models.each do |mm|
+        assert_equal(1,
+          ul.xpath(
+            './li/input[' +
+            "@type=\"radio\" and @name=\"target\" and @value=\"#{mm.id}\"" +
+            ']'
+          ).length,
+          "Radio button input \"target\" with value, \"#{mm.id}\""
+        )
+        assert_equal(1,
+          ul.xpath(
+            "./li/input[@type=\"hidden\" and @name=\"selected[#{mm.id}]\"]"
+          ).length,
+          "Hidden select input with name, \"selected[#{mm.id}]\""
+        )
+        assert_select(ul, 'li', /#{mm.make} #{mm.model}/)
+      end
+    end
+  end
+
+  test 'authorized preview merge with none selected will redirect' do
     post admin_make_models_merge_preview_path,
       headers: http_auth_login(:curator)
     assert_redirected_to admin_make_models_path
