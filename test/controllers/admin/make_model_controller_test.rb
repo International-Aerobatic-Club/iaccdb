@@ -58,7 +58,7 @@ class Admin::MakeModelControllerTest < ActionDispatch::IntegrationTest
     post admin_make_models_merge_preview_path,
       headers: http_auth_login(:curator),
       params: admin_make_models_select_params(@select_models)
-    assert_select('ul.make_model_targets') do |ul|
+    assert_select('ul.make-model-targets') do |ul|
       assert_equal(1, ul.length)
       ul = ul.first
       @select_models.each do |mm|
@@ -76,7 +76,21 @@ class Admin::MakeModelControllerTest < ActionDispatch::IntegrationTest
           ).length,
           "Hidden select input with name, \"selected[#{mm.id}]\""
         )
-        assert_select(ul, 'li', /#{mm.make} #{mm.model}/)
+        assert_select(ul, 'li', /#{mm.make}, #{mm.model}/)
+      end
+    end
+  end
+
+  test 'merge preview lists affected airplanes' do
+    post admin_make_models_merge_preview_path,
+      headers: http_auth_login(:curator),
+      params: admin_make_models_select_params(@select_models)
+    @select_models.each do |mm|
+      assert_select('ul.make-model-airplanes-list li',
+          /#{mm.make}, #{mm.model}/) do
+        mm.airplanes.each do |airplane|
+          assert_select('ul li', /#{airplane.id}: #{airplane.reg}/)
+        end
       end
     end
   end

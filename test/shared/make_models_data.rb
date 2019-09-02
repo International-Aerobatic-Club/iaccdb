@@ -14,6 +14,7 @@ module MakeModelsData
     MakeModel.all.each do |mm|
       create_list(:airplane, Random.rand(7) + 2, make_model: mm)
     end
+    MakeModel.all.to_a
   end
 
   def admin_make_models_select_params(select_models)
