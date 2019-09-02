@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class MakeModelServiceTest < ActiveSupport::TestCase
+class MakeModel::AirplaneMigrateTest < ActiveSupport::TestCase
   class OldAirplane < ActiveRecord::Base
     self.table_name = 'airplanes'
     def self.fake_reg
