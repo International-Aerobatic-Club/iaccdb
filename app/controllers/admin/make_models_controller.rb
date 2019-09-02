@@ -18,11 +18,16 @@ class Admin::MakeModelsController < ApplicationController
   end
 
   def merge_preview
-    selected = merge_params.fetch('selected', {}).keys
+    selected = params.fetch('selected', {}).keys
     if 1 < selected.count
       @merge_models = selected.collect do |mmid|
         MakeModel.find(mmid)
       end
+      iparms = params.select do |key, value|
+        key.to_i != 0 && value == "merge"
+      end
+      targets = selected & iparms.keys
+      @target_id = targets.empty? ? selected[0].to_i : targets[0].to_i
     else
       flash[:alert] = 'select two or more make and model to merge'
       redirect_to admin_make_models_url
@@ -43,11 +48,6 @@ class Admin::MakeModelsController < ApplicationController
       :empty_weight_lbs, :max_weight_lbs,
       :horsepower, :seats, :wings
     )
-  end
-
-  def merge_params
-    nested_keys = params.fetch(:selected, {}).keys
-    params.permit(:selected => nested_keys)
   end
 
   def authorize_curator

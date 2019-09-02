@@ -17,12 +17,14 @@ module MakeModelsData
     MakeModel.all.to_a
   end
 
-  def admin_make_models_select_params(select_models)
-    {
+  def admin_make_models_select_params(select_models, target = nil)
+    params = {
       "selected" => select_models.inject(Hash.new) do |hash, mm|
         hash[mm.id.to_s] = "1"
         hash
       end
     }
+    params = params.merge({ target.id.to_s => 'merge' }) if target
+    params
   end
 end

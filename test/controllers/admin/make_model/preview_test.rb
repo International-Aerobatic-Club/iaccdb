@@ -71,4 +71,40 @@ class Admin::MakeModelPreviewTest < ActionDispatch::IntegrationTest
       headers: http_auth_login(:curator)
     assert_redirected_to admin_make_models_path
   end
+
+  test 'default selects target make and model' do
+    target = @select_models.first
+    post admin_make_models_merge_preview_path,
+      headers: http_auth_login(:curator),
+      params: admin_make_models_select_params(@select_models, target)
+    assert_select('ul.make-model-targets') do |ul|
+      assert_equal(1, ul.length)
+      ul = ul.first
+      assert_equal(1,
+        ul.xpath(
+          './li/input[@checked and ' +
+          '@type="radio" and @name="target" and ' +
+          "@value=\"#{target.id}\"]"
+        ).length,
+        "Radio button with value, \"#{target.id}\" default selected")
+    end
+  end
+
+  test 'selects first make and model when target not among selected' do
+    target = (@models - @select_models).first
+    post admin_make_models_merge_preview_path,
+      headers: http_auth_login(:curator),
+      params: admin_make_models_select_params(@select_models, target)
+    assert_select('ul.make-model-targets') do |ul|
+      assert_equal(1, ul.length)
+      ul = ul.first
+      assert_equal(1,
+        ul.xpath(
+          './li/input[@checked and ' +
+          '@type="radio" and @name="target" and ' +
+          "@value=\"#{@select_models.first.id}\"]"
+        ).length,
+        "Radio button with value, \"#{target.id}\" default selected")
+    end
+  end
 end

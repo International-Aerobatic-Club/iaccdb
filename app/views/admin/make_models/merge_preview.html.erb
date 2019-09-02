@@ -4,7 +4,8 @@
   <ul class="make-model-targets">
     <% @merge_models.each do |make_model| %>
       <li>
-        <%= radio_button_tag :target, make_model.id, make_model == @target %>
+        <%= radio_button_tag :target, make_model.id,
+          make_model.id == @target_id %>
         <%= "#{make_model.make}, #{make_model.model}" %>
         <%= hidden_field_tag "selected[#{make_model.id}]" %>
       </li>
