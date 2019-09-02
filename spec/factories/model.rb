@@ -2,13 +2,13 @@ include ContestFactory
 FactoryBot.define do
 ### Airplane
   factory :airplane do
-    make { Faker::Company.name }
-    model { Faker::Company.unique.name }
+    make_model
+    make { make_model.make }
+    model { make_model.model }
     reg do
       Faker::Number.between(from: 100, to: 999).to_s +
         Faker::Name.initials(number: 2)
     end
-    make_model
   end
 ### MakeModel
   factory :make_model do
