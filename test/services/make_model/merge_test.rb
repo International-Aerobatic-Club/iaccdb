@@ -7,7 +7,9 @@ class MakeModel::MergeTest < ActiveSupport::TestCase
   setup do
     setup_make_models_with_airplanes
     mms = MakeModel.limit(2).all
-    @svc = MakeModelService.new(mms[1], mms[0])
+    @source = mms[0]
+    @target = mms[1]
+    @svc = MakeModelService.new(@target, @source)
   end
 
   test 'make_models have multiple airplanes' do
@@ -17,21 +19,19 @@ class MakeModel::MergeTest < ActiveSupport::TestCase
   end
 
   test 'merge service initialization' do
-    mms = MakeModel.limit(2).all
-    assert_equal(2, mms.count)
-    target = mms[1];
-    source = mms[0];
-    svc = MakeModelService.new(target, source)
-    assert_equal(target.id, svc.target.id)
-    assert_equal(source.id, svc.source.id)
+    assert_equal(@target.id, @svc.target_id)
+    assert_equal(@source.id, @svc.source_id)
   end
 
-  test 'merge service airplanes lists' do
-    target_airplanes = @svc.target.airplanes.to_a
-    source_airplanes = @svc.source.airplanes.to_a
-    assert_equal(target_airplanes.collect(&:id).sort,
-      @svc.target_airplanes.collect(&:id).sort)
-    assert_equal(source_airplanes.collect(&:id).sort,
-      @svc.source_airplanes.collect(&:id).sort)
+  test 'merge' do
+    airplane_ids = @source.airplanes.collect(&:id) +
+      @target.airplanes.collect(&:id)
+    @svc.merge
+    mm_target = MakeModel.find(@svc.target_id)
+    refute_nil(mm_target)
+    assert_equal(airplane_ids.sort,
+      mm_target.airplanes.collect(&:id).sort)
+    mm_source = MakeModel.find_by(id: @svc.source_id)
+    assert_nil(mm_source)
   end
 end

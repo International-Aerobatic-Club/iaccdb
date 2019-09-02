@@ -1,9 +1,9 @@
 class MakeModelService
-  attr_reader :target, :source
+  attr_reader :target_id, :source_id
 
   def initialize(target, source)
-    @target = target
-    @source = source
+    @target_id = target.id
+    @source_id = source.id
   end
 
   def self.associate_airplane_make_models
@@ -16,11 +16,9 @@ class MakeModelService
     end
   end
 
-  def target_airplanes
-    target.airplanes.to_a
-  end
-
-  def source_airplanes
-    source.airplanes.to_a
+  def merge
+    source = MakeModel.find(source_id)
+    source.airplanes.update_all(make_model_id: target_id)
+    source.destroy!
   end
 end
