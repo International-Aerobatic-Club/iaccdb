@@ -1,5 +1,5 @@
 class MakeModelService
-  attr_reader :target_id, :source_id
+  attr_reader :target, :source
 
   class LogChanges
     def initialize
@@ -39,16 +39,14 @@ class MakeModelService
   end
 
   def initialize(target, source)
-    @target_id = target.id
-    @source_id = source.id
+    @target = target
+    @source = source
   end
 
   def merge(logger = nil)
     logger ||= self.class.logger
-    source = MakeModel.find(source_id)
-    target = MakeModel.find(target_id)
     logger.log_merge(target, source)
-    source.airplanes.update_all(make_model_id: target_id)
+    source.airplanes.update_all(make_model_id: target.id)
     source.destroy!
   end
 end

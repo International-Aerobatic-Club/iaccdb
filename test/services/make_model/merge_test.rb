@@ -19,19 +19,19 @@ class MakeModel::MergeTest < ActiveSupport::TestCase
   end
 
   test 'merge service initialization' do
-    assert_equal(@target.id, @svc.target_id)
-    assert_equal(@source.id, @svc.source_id)
+    assert_equal(@target, @svc.target)
+    assert_equal(@source, @svc.source)
   end
 
   test 'merge' do
     airplane_ids = @source.airplanes.collect(&:id) +
       @target.airplanes.collect(&:id)
     @svc.merge
-    mm_target = MakeModel.find(@svc.target_id)
+    mm_target = MakeModel.find(@svc.target.id)
     refute_nil(mm_target)
     assert_equal(airplane_ids.sort,
       mm_target.airplanes.collect(&:id).sort)
-    mm_source = MakeModel.find_by(id: @svc.source_id)
+    mm_source = MakeModel.find_by(id: @svc.source.id)
     assert_nil(mm_source)
   end
 
