@@ -15,9 +15,20 @@ class Admin::MakeModelsController < ApplicationController
 
   def update
     mm = load_mm
-    mm.update_attributes(mm_params)
-    flash[:notice] = "Updated #{mm.make}, #{mm.model}"
-    redirect_to admin_make_models_url
+    begin
+      mm.update_attributes(mm_params)
+      flash[:notice] = "Updated #{mm.make}, #{mm.model}"
+      redirect_to admin_make_models_url
+    rescue ActiveRecord::RecordNotUnique,
+           ActiveRecord::StatementInvalid => e
+      other = MakeModel.find_by(
+        make: mm_params[:make], model: mm_params[:model])
+      mm.reload
+      @merge_models = [mm, other]
+      @target_id = other.id
+      flash[:alert] = "Make and model exists, suggesting a merge"
+      render :merge_preview
+    end
   end
 
   def merge_preview

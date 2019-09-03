@@ -35,6 +35,30 @@ class Admin::MakeModelEditTest < ActionDispatch::IntegrationTest
     assert_select('div#notice', /Updated #{@to_edit.make}, #{@to_edit.model}/)
   end
 
+  test 'update collision redirects to merge' do
+    to_edit = @models[0]
+    to_collide = @models[1]
+    patch admin_make_model_path(to_edit),
+      params: update_params(to_collide),
+      headers: http_auth_login(:curator)
+    assert_response :success
+    assert_select('div#alert', /Make and model exists, suggesting a merge/)
+    assert_select('ul.make-model-targets') do |ul|
+      assert_select('li', /#{to_edit.make}, #{to_edit.model}/)
+      input = ul.xpath(
+        "./li/input[@type='radio' and @value='#{to_edit.id}']")
+      assert_equal(1, input.length,
+        "Radio button for #{to_edit.make}, #{to_edit.model}")
+      assert_select('li', /#{to_collide.make}, #{to_collide.model}/)
+      input = ul.xpath(
+        "./li/input[@type='radio' and @value='#{to_collide.id}' and @checked]"
+      )
+      assert_equal(1, input.length,
+        "Checked radio button for #{to_collide.make}, #{to_collide.model}"
+      )
+    end
+  end
+
   test 'authorized can edit' do
     get edit_admin_make_model_path(@to_edit),
       headers: http_auth_login(:curator)
