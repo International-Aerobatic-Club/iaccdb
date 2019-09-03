@@ -15,12 +15,8 @@ class MakeModelTest < ActiveSupport::TestCase
   end
 
   test "make and model enforced unique" do
-    mm2 = MakeModel.create(@mm_attrs)
-    refute(mm2.valid?)
-
-    assert(mm2.errors.messages.has_key?(:model))
-    mm2.errors.full_messages.each do |m|
-      assert(m.include?("has already been taken"))
+    assert_raise(ActiveRecord::RecordNotUnique) do
+      MakeModel.create(@mm_attrs)
     end
   end
 
