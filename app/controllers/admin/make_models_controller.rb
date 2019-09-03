@@ -34,6 +34,23 @@ class Admin::MakeModelsController < ApplicationController
     end
   end
 
+  def merge
+    target_id = params.fetch('target', 0).to_i
+    selected_ids = params.fetch('selected', {}).keys.collect(&:to_i)
+    selected_ids -= [target_id]
+    if 0 < target_id && 0 < selected_ids.count
+      target = MakeModel.find(target_id)
+      selected_ids.each do |select_id|
+        source = MakeModel.find(select_id)
+        MakeModelService.new(target, source).merge
+      end
+      flash[:notice] = "Merged airplanes into #{target.make}, #{target.model}"
+    else
+      return head :bad_request
+    end
+    redirect_to admin_make_models_path
+  end
+
   #######
   private
   #######
