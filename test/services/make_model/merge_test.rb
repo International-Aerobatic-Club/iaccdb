@@ -34,4 +34,26 @@ class MakeModel::MergeTest < ActiveSupport::TestCase
     mm_source = MakeModel.find_by(id: @svc.source_id)
     assert_nil(mm_source)
   end
+
+  class TestLog
+    attr_reader :target, :source, :call_count
+
+    def initialize
+      @call_count = 0
+    end
+
+    def log_merge(target, source)
+      @target = target
+      @source = source
+      @call_count += 1
+    end
+  end
+
+  test 'merge log' do
+    logger = TestLog.new
+    @svc.merge(logger)
+    assert_equal(1, logger.call_count)
+    assert_equal(@target, logger.target)
+    assert_equal(@source, logger.source)
+  end
 end
