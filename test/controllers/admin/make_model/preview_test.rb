@@ -14,7 +14,8 @@ class Admin::MakeModelPreviewTest < ActionDispatch::IntegrationTest
   end
 
   test 'unauthorized cannot preview merge' do
-    post admin_make_models_merge_preview_path
+    post admin_make_models_merge_preview_path,
+      params: admin_make_models_select_params(@select_models)
     assert_response :unauthorized
   end
 
