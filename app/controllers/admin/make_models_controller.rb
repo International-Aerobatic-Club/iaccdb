@@ -14,7 +14,10 @@ class Admin::MakeModelsController < ApplicationController
   end
 
   def update
-    load_mm.update_attributes(mm_params)
+    mm = load_mm
+    mm.update_attributes(mm_params)
+    flash[:notice] = "Updated #{mm.make}, #{mm.model}"
+    redirect_to admin_make_models_url
   end
 
   def merge_preview

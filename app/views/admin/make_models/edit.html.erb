@@ -1,2 +1,33 @@
-<h1>Admin::MakeModel#edit</h1>
-<p>Find me in app/views/admin/make_model/edit.html.erb</p>
+<h1>Admin MakeModel Edit</h1>
+<%= form_for [:admin, @make_model] do |f| %>
+  <div class="field">
+    <%= f.label(:make) %>
+    <%= f.text_field(:make) %>
+  </div>
+  <div class="field">
+    <%= f.label(:model) %>
+    <%= f.text_field(:model) %>
+  </div>
+  <div class="field">
+    <%= f.label(:horsepower) %>
+    <%= f.number_field(:horsepower, min: 0) %>
+  </div>
+  <div class="field">
+    <%= f.label(:seats) %>
+    <%= f.number_field(:seats, min: 1) %>
+  </div>
+  <div class="field">
+    <%= f.label(:wings) %>
+    <%= f.number_field(:wings, within: (1..2)) %>
+  </div>
+  <div class="field">
+    <%= f.label(:empty_weight_lbs) %>
+    <%= f.number_field(:empty_weight_lbs, min: 0) %>
+  </div>
+  <div class="field">
+    <%= f.label(:max_weight_lbs) %>
+    <%= f.number_field(:max_weight_lbs, min: 0) %>
+  </div>
+  <%= f.submit 'Update' %>
+  <%= link_to 'Cancel', admin_make_models_path %>
+<% end %>
