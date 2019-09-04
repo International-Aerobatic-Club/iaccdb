@@ -4,9 +4,7 @@ json.pilot_flight_data do
   json.pilot do
     json.(@pilot_flight.pilot, :id, :name, :iac_id)
   end
-  json.airplane do
-    json.partial! 'airplanes/airplane', airplane: @pilot_flight.airplane
-  end
+  json.partial! 'airplanes/airplane', airplane: @pilot_flight.airplane
   json.flight do
     json.partial! 'flight', flight: @pilot_flight.flight
   end
