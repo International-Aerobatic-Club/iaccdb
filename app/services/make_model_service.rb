@@ -22,20 +22,8 @@ class MakeModelService
     end
   end
 
-  class << self
-    def logger
-      @logger ||= LogChanges.new
-    end
-
-    def associate_airplane_make_models
-      Airplane.all.each do |a|
-        if (a.make or a.model)
-          a.make_model = MakeModel.find_or_create_by!(
-            make: a.make, model: a.model)
-          a.save!
-        end
-      end
-    end
+  def self.logger
+    @logger ||= LogChanges.new
   end
 
   def initialize(target, source)
