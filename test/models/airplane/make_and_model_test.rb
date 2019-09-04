@@ -7,11 +7,12 @@ class AirplaneMakeAndModelTest < ActiveSupport::TestCase
     @reg = '627DP'
   end
 
-  test "new make and model on find_or_create" do
+  test "new airplane, make and model on find_or_create" do
+    # The delete_all invocations are likely unnecessary, but ensure a valid test
+    Airplane.delete_all
+    MakeModel.delete_all
     airplane = Airplane.find_or_create_by_make_model_reg(
       @make, @model, @reg)
-    assert_equal(@make, airplane.make)
-    assert_equal(@model, airplane.model)
     assert_equal(@reg, airplane.reg)
     mnm = airplane.make_model
     refute_nil(mnm)
@@ -23,20 +24,27 @@ class AirplaneMakeAndModelTest < ActiveSupport::TestCase
     mnm = MakeModel.create(make: @make, model: @model)
     airplane = Airplane.find_or_create_by_make_model_reg(
       @make, @model, @reg)
-    assert_equal(@make, airplane.make)
-    assert_equal(@model, airplane.model)
     assert_equal(@reg, airplane.reg)
     assert_equal(mnm.id, airplane.make_model_id)
   end
 
-  test "make and model change" do
+  test "existing airplane on find_or_create" do
+    existing = create(:airplane)
+    mnm = existing.make_model
     airplane = Airplane.find_or_create_by_make_model_reg(
-      @make, @model, @reg)
-    new_model = 'S-1E'
-    airplane.model = new_model
-    assert(airplane.save)
-    mnm = MakeModel.where(make: @make, model: new_model).first
-    refute_nil(mnm)
-    assert_equal(mnm.id, airplane.make_model_id)
+      mnm.make, mnm.model, existing.reg)
+    assert_equal(existing.id, airplane.id)
+  end
+
+  test 'splits make model' do
+    mm = Airplane.split_make_model('Pitts S-1S')
+    assert_equal('Pitts', mm[0])
+    assert_equal('S-1S', mm[1])
+    mm = Airplane.split_make_model('Decathlon')
+    assert_nil(mm[0])
+    assert_equal('Decathlon', mm[1])
+    mm = Airplane.split_make_model('Extra 330 LX')
+    assert_equal('Extra', mm[0])
+    assert_equal('330 LX', mm[1])
   end
 end

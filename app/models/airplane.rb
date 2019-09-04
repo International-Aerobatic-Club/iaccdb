@@ -1,20 +1,20 @@
 class Airplane < ApplicationRecord
   has_many :pilot_flights, :dependent => :nullify
-  belongs_to :make_model, optional: true
-  before_save :check_make_and_model_relation
+  belongs_to :make_model
 
   # find or create airplane with given make, model, reg number
   def self.find_or_create_by_make_model_reg(make, model, reg)
     make = make ? make.strip : ''
     model = model ? model.strip : ''
     reg = reg ? reg.strip.upcase : ''
-    plane = Airplane.where(:make => make,
-      :model => model, :reg => reg).first
-    if !plane
-      plane = Airplane.create(
-        :make => make,
-        :model => model,
-        :reg => reg)
+    plane = nil
+    begin
+      MakeModel.transaction(requires_new: true) do
+        mm = MakeModel.find_or_create_by(make: make, model: model)
+        plane = Airplane.find_or_create_by(make_model: mm, reg: reg)
+      end
+    rescue ActiveRecord::RecordNotUnique
+      retry
     end
     plane
   end
@@ -36,24 +36,10 @@ class Airplane < ApplicationRecord
   end
 
   def description
-    "#{make} #{model} #{reg}"
+    "#{make_model.make} #{make_model.model} #{reg}"
   end
 
   def to_s
     description
-  end
-
-  #######
-  private
-  #######
-
-  def check_make_and_model_relation
-    if make or model
-      begin
-        self.make_model = MakeModel.find_or_create_by(make: make, model: model)
-      rescue ActiveRecord::RecordNotUnique
-        retry
-      end
-    end
   end
 end
