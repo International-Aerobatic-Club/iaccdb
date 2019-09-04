@@ -10,11 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190828210615) do
+ActiveRecord::Schema.define(version: 20190904165621) do
 
   create_table "airplanes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
-    t.string "make"
-    t.string "model"
     t.string "reg"
     t.datetime "created_at"
     t.datetime "updated_at"
