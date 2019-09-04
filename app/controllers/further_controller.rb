@@ -36,13 +36,16 @@ class FurtherController < ApplicationController
       ).order('anum desc'
       ).all.collect { |contest| contest.anum }
     @year = params[:year] || @years.first
-    airplanes_with_cat = Airplane.joins(
-      :pilot_flights => {:flight => [:category, :contest]}
-      ).select(
-        'count(pilot_flights.id) as flight_count, make, model, ' +
+    airplanes_with_cat = Airplane.joins([
+      {:pilot_flights => {:flight => [:category, :contest]}},
+      :make_model
+      ]).select(
+        'count(pilot_flights.id) as flight_count',
+        'make_models.make',
+        'make_models.model',
         'categories.name as category'
       ).where(['year(contests.start) = ?', @year]
-      ).group('make, model, categories.id')
+      ).group('make_models.make, make_models.model, categories.id')
    @airplanes = airplanes_with_cat.inject({}) do |m,a| 
      m[a.category] ||= []
      m[a.category] << a

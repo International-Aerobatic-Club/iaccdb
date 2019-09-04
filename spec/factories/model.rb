@@ -3,8 +3,6 @@ FactoryBot.define do
 ### Airplane
   factory :airplane do
     make_model
-    make { make_model.make }
-    model { make_model.model }
     reg do
       Faker::Number.between(from: 100, to: 999).to_s +
         Faker::Name.initials(number: 2)
