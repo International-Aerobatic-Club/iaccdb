@@ -73,9 +73,9 @@ def process_pilotFlight(pilot_flight_data)
   end
   pilot_flight.sequence = Sequence.find_or_create(kays)
   pilot_flight.penalty_total = pilot_flight_data.penalty
-  make_model = Airplane.split_make_model(pilot_flight_data.aircraft)
+  make_model = MakeModel.find_or_create_makemodel(pilot_flight_data.aircraft)
   pilot_flight.airplane = Airplane.find_or_create_by_make_model_reg(
-    make_model[0], make_model[1], pilot_flight_data.registration)
+    make_model.make, make_model.model, pilot_flight_data.registration)
   pilot_flight.save!
 end
 

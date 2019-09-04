@@ -1,7 +1,7 @@
 require 'test_helper'
 require 'shared/make_models_data'
 
-class AllByMakeTest < ActiveSupport::TestCase
+class MakeModel::AllByMakeTest < ActiveSupport::TestCase
   include MakeModelsData
 
   setup do

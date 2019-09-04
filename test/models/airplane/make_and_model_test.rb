@@ -35,16 +35,4 @@ class AirplaneMakeAndModelTest < ActiveSupport::TestCase
       mnm.make, mnm.model, existing.reg)
     assert_equal(existing.id, airplane.id)
   end
-
-  test 'splits make model' do
-    mm = Airplane.split_make_model('Pitts S-1S')
-    assert_equal('Pitts', mm[0])
-    assert_equal('S-1S', mm[1])
-    mm = Airplane.split_make_model('Decathlon')
-    assert_nil(mm[0])
-    assert_equal('Decathlon', mm[1])
-    mm = Airplane.split_make_model('Extra 330 LX')
-    assert_equal('Extra', mm[0])
-    assert_equal('330 LX', mm[1])
-  end
 end

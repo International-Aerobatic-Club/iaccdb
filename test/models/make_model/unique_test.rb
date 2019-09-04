@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class MakeModelTest < ActiveSupport::TestCase
+class MakeModel::UniqueTest < ActiveSupport::TestCase
   setup do
     @make_model = create(:make_model)
     @mm_attrs = @make_model.attributes
