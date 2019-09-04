@@ -5,10 +5,6 @@ class Admin::MakeModelsController < ApplicationController
     @make_models = MakeModel.all.order(:make, :model)
   end
 
-  def show
-    load_mm
-  end
-
   def edit
     load_mm
   end

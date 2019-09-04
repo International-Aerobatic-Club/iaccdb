@@ -29,7 +29,7 @@ IAC::Application.routes.draw do
     resources :queues, :only => [:index, :show]
     post "members/merge_preview"
     post "members/merge"
-    resources :make_models, :only => [:index, :show, :edit, :update]
+    resources :make_models, :only => [:index, :edit, :update]
     post "make_models/merge_preview"
     post "make_models/merge"
     get 'manny_list',
