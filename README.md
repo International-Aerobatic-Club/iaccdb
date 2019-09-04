@@ -33,7 +33,8 @@ To make this work locally:
  - In the mysql client (`> mysql -u root`):
      - create the `cdb_dev` and `cdb_test` databases
        ```sql
-       mysql> create database cdb_dev;`
+       mysql> create database cdb_dev \
+           -> character set utf8mb4 collate utf8mb4_unicode_ci;
        ```
      - create the `cdbusr` user with global permissions to the two databases
        ```sql
@@ -45,7 +46,9 @@ To make this work locally:
        in `database.yml`.  The user name, "`cdbuser`" matches
        that in `database.yml`.
  - Install the gems: `bundle install`
- - Run the Rails database setup script: `rails db:setup`
+ - Run the Rails database setup script for development and test:
+      - `rails db:setup`
+      - `RAILS_ENV=test rails db:setup`
 
 Having done that,
  - The command "`rspec spec`" should run the older tests.
