@@ -35,8 +35,8 @@ describe PilotFlightsController, :type => :controller do
     d_pf = data['pilot_flight_data']
     d_a = d_pf['airplane']
     expect(d_a).to_not be nil
-    expect(d_a['make']).to eq @pilot_flight.airplane.make
-    expect(d_a['model']).to eq @pilot_flight.airplane.model
+    expect(d_a['make']).to eq @pilot_flight.airplane.make_model.make
+    expect(d_a['model']).to eq @pilot_flight.airplane.make_model.model
     expect(d_a['reg']).to eq @pilot_flight.airplane.reg
   end
   it 'responds with the flight information' do

@@ -19,8 +19,8 @@ describe 'contest category display' do
       pilot = pf.pilot
       pr = pilot_row(pilot)
       airplane_cell = pr.find(:xpath, "./td[@class='airplane']")
-      expect(airplane_cell).to have_content(pf.airplane.make)
-      expect(airplane_cell).to have_content(pf.airplane.model)
+      expect(airplane_cell).to have_content(pf.airplane.make_model.make)
+      expect(airplane_cell).to have_content(pf.airplane.make_model.model)
       expect(airplane_cell).to have_content(pf.airplane.reg)
     end
   end

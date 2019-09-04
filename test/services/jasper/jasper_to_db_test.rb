@@ -72,8 +72,8 @@ module Jasper
       refute_nil(pilot_flight)
       airplane = pilot_flight.airplane
       refute_nil(airplane)
-      assert_equal('Bucker Youngman', airplane.make)
-      assert_equal('131', airplane.model)
+      assert_equal('Bucker Youngman', airplane.make_model.make)
+      assert_equal('131', airplane.make_model.model)
       assert_equal('CFLXE', airplane.reg)
     end
 

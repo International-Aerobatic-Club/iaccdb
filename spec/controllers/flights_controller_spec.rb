@@ -110,8 +110,8 @@ describe FlightsController, :type => :controller do
     airplane = pf.airplane
     d_a = d_pf['airplane']
     expect(d_a).to_not be nil
-    expect(d_a['make']).to eq airplane.make
-    expect(d_a['model']).to eq airplane.model
+    expect(d_a['make']).to eq airplane.make_model.make
+    expect(d_a['model']).to eq airplane.make_model.model
     expect(d_a['reg']).to eq airplane.reg
     expect(d_a['id']).to eq airplane.id
   end
