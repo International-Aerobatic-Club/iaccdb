@@ -55,6 +55,8 @@ class Admin::MakeModelsController < ApplicationController
         source = MakeModel.find(select_id)
         MakeModelService.new(target, source).merge
       end
+      target.curated = true
+      target.save!
       flash[:notice] = "Merged airplanes into #{target.make}, #{target.model}"
     else
       return head :bad_request

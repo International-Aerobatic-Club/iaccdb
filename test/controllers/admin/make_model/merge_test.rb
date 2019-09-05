@@ -74,6 +74,17 @@ class Admin::MakeModelMergeTest < ActionDispatch::IntegrationTest
     assert_equal(airplane_ids.sort, target.reload.airplanes.pluck(:id).sort)
   end
 
+  test 'merge marks target as curated' do
+    target = @select_models[Random.rand(@select_models.count)]
+    airplane_ids = @select_models.collect(&:airplanes).collect(&:to_a).flatten.
+      collect(&:id)
+    post admin_make_models_merge_path,
+      headers: http_auth_login(:curator),
+      params: admin_make_models_merge_params(@select_models, target)
+    assert_response :redirect
+    assert_equal(true, target.reload.curated)
+  end
+
   test 'merge with only one selected returns bad request' do
     target = @select_models[Random.rand(@select_models.count)]
     post admin_make_models_merge_path,
