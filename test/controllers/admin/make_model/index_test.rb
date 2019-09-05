@@ -36,4 +36,30 @@ class Admin::MakeModelIndexTest < ActionDispatch::IntegrationTest
       end
     end
   end
+
+  test 'index view shows curated make_models' do
+    curated_index = Random.rand(@models.length)
+    uncurated_model = @models[curated_index == 0 ? 1 : curated_index - 1]
+    curated_model = @models[curated_index]
+    curated_model.curated = true
+    curated_model.save!
+    get admin_make_models_path, headers: http_auth_login(:curator)
+    assert_response :success
+    assert_select("form[action=\"#{admin_make_models_merge_preview_path}\"]")
+    assert_select('form table tbody') do |tbody|
+      tbody = tbody.first
+      input = tbody.xpath(
+        "./tr/td/input[@type=\"checkbox\" and @name=\"selected[#{curated_model.id}]\"]"
+      )
+      assert_equal(1, input.length, "Have checkbox for make_model #{curated_model.id}")
+      td = input.first.parent
+      assert_match(/👍/, td.text)
+      input = tbody.xpath(
+        "./tr/td/input[@type=\"checkbox\" and @name=\"selected[#{uncurated_model.id}]\"]"
+      )
+      assert_equal(1, input.length, "Have checkbox for make_model #{uncurated_model.id}")
+      td = input.first.parent
+      refute_match(/👍/, td.text)
+    end
+  end
 end

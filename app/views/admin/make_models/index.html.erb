@@ -1,5 +1,19 @@
 <h1>Makes and Models</h1>
 
+<p>Select two or more makes and models using the check boxes on the left.
+Select merge to combine the checked makes and models into one.
+</p>
+
+<p>Use the search function (generally 'CMD-f' for "find")
+in your browser to find make-model
+combinations of interest. Refresh the page ('CMD-r') to clear all check boxes.
+</p>
+
+<p>A thumbs-up "👍" next to a check box indicates
+that a curator has approved the make and model combination.
+Use edit to set or clear it.
+</p>
+
 <%= form_tag admin_make_models_merge_preview_path do %>
   <table>
   <thead>
@@ -14,7 +28,10 @@
   <tbody>
   <% @make_models.each do |mm| %>
     <tr>
-      <td><%= check_box_tag "selected[#{mm.id}]" %></td>
+      <td>
+        <%= check_box_tag "selected[#{mm.id}]" %>
+        <%= ' 👍' if mm.curated %>
+      </td>
       <td><%= mm.make %></td>
       <td><%= mm.model %></td>
       <td><%= mm.horsepower %></td>
