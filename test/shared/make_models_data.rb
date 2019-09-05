@@ -16,4 +16,12 @@ module MakeModelsData
     end
     MakeModel.all.to_a
   end
+
+  def select_models_for_merge(models)
+    select = [models.first, models.last]
+    4.times do
+      select << models[Random.rand(models.length)]
+    end
+    select.uniq
+  end
 end

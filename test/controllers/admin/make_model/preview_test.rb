@@ -6,11 +6,7 @@ class Admin::MakeModelPreviewTest < ActionDispatch::IntegrationTest
 
   setup do
     @models = setup_make_models_with_airplanes
-    select = [@models.first, @models.last]
-    4.times do
-      select << @models[Random.rand(@models.length)]
-    end
-    @select_models = select.uniq
+    @select_models = select_models_for_merge(@models)
   end
 
   def admin_make_models_select_params(select_models, target = nil)
