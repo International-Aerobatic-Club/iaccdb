@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190904165621) do
+ActiveRecord::Schema.define(version: 20190905130441) do
 
   create_table "airplanes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.string "reg"
@@ -196,6 +196,7 @@ ActiveRecord::Schema.define(version: 20190904165621) do
     t.integer "horsepower", limit: 2
     t.integer "seats", limit: 1
     t.integer "wings", limit: 1
+    t.boolean "curated", default: false, null: false
     t.index ["id"], name: "index_make_models_on_id"
     t.index ["make", "model"], name: "index_make_models_on_make_and_model", unique: true
     t.index ["make"], name: "index_make_models_on_make"
