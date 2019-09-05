@@ -6,7 +6,7 @@ module MakeModelsData
     mmods.collect(&:make).uniq.inject(Hash.new) do |memo, make|
       memo[make] = create_list(:make_model, Random::rand(5) + 1, make: make,
         curated: true)
-      memo[make] = create_list(:make_model, Random::rand(5) + 1, make: make,
+      memo[make] += create_list(:make_model, Random::rand(5) + 1, make: make,
         curated: false)
       memo
     end
