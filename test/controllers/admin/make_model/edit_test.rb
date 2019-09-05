@@ -35,6 +35,28 @@ class Admin::MakeModelEditTest < ActionDispatch::IntegrationTest
     assert_select('div#notice', /Updated #{@to_edit.make}, #{@to_edit.model}/)
   end
 
+  test 'authorized update sets values' do
+    edit_model = build(:make_model, 
+      make: 'Sol',
+      model: 'Yellow Dwarf',
+      wings: 2,
+      seats: 2,
+      horsepower: 400,
+      max_weight_lbs: 2000,
+      empty_weight_lbs: 1000,
+      curated: true
+    )
+    patch admin_make_model_path(@to_edit),
+      params: update_params(edit_model),
+      headers: http_auth_login(:curator)
+    assert_redirected_to admin_make_models_path
+    @to_edit.reload
+    %w[make model wings seats horsepower max_weight_lbs empty_weight_lbs
+       curated].each do |attrib|
+      assert_equal(edit_model.send(attrib), @to_edit.send(attrib))
+    end
+  end
+
   test 'update collision redirects to merge' do
     to_edit = @models[0]
     to_collide = @models[1]

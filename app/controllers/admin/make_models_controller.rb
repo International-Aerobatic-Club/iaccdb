@@ -76,7 +76,7 @@ class Admin::MakeModelsController < ApplicationController
     params.require(:make_model).permit(
       :make, :model,
       :empty_weight_lbs, :max_weight_lbs,
-      :horsepower, :seats, :wings
+      :horsepower, :seats, :wings, :curated
     )
   end
 
