@@ -37,21 +37,8 @@ class Admin::MakeModelIndexTest < ActionDispatch::IntegrationTest
   end
 
   test 'index view shows curated make_models' do
-    curated_models = @models.select { |mm| mm.curated }
-    if (curated_models.length == 0)
-      curated_model = @models[Random.rand(@models.length)]
-      curated_model.curated = true
-      curated_model.save!
-    else
-      curated_model = curated_models[Random.rand(curated_models.length)]
-    end
-    uncurated_models = @models.select { |mm| !mm.curated }
-    if (uncurated_models.length == 0)
-      uncurated_model = create(:make_model, curated: false)
-      @models << uncurated_model
-    else
-      uncurated_model = uncurated_models[Random.rand(uncurated_models.length)]
-    end
+    curated_model = @models.find { |mm| mm.curated }
+    uncurated_model = @models.find { |mm| !mm.curated }
     get admin_make_models_path, headers: http_auth_login(:curator)
     assert_response :success
     assert_select("form[action=\"#{admin_make_models_merge_preview_path}\"]")

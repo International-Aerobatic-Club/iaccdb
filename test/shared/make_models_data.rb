@@ -2,16 +2,19 @@ require "test_helper"
 
 module MakeModelsData
   def setup_make_models_data
-    mmods = build_list :make_model, Random::rand(5) + 3, curated: false
-    mmods += build_list :make_model, Random::rand(5) + 3, curated: true
+    mmods = build_list :make_model, Random::rand(5) + 6
     mmods.collect(&:make).uniq.inject(Hash.new) do |memo, make|
-      memo[make] = create_list(:make_model, Random::rand(5) + 1, make: make)
+      memo[make] = create_list(:make_model, Random::rand(5) + 1, make: make,
+        curated: true)
+      memo[make] = create_list(:make_model, Random::rand(5) + 1, make: make,
+        curated: false)
       memo
     end
   end
 
   def setup_make_models_with_airplanes
-    create_list(:airplane, Random.rand(7) + 8)
+    create_list(:make_model, Random::rand(5) + 3, curated: true)
+    create_list(:make_model, Random::rand(5) + 3, curated: false)
     MakeModel.all.each do |mm|
       create_list(:airplane, Random.rand(7) + 2, make_model: mm)
     end
