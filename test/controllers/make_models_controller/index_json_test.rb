@@ -61,34 +61,36 @@ class MakeModelsController::IndexJsonTest < ActionDispatch::IntegrationTest
 
   test 'json has models for make' do
     airplane_makes = @data["airplane_makes"]
-    airplane_models = airplane_makes.first["airplane_models"]
-    first_make = airplane_makes.first["make"]
-    expected_models = @expected_make_models.select do |mm|
-      mm.make == first_make
+    airplane_makes.each do |airplane_make|
+      airplane_models = airplane_make["airplane_models"]
+      make = airplane_make["make"]
+      expected_models = @expected_make_models.select do |mm|
+        mm.make == make
+      end
+      airplane_model_names = airplane_models.collect do |airplane|
+        airplane["model"]
+      end
+      expected_model_names = expected_models.collect do |airplane|
+        airplane.model
+      end
+      assert_equal(expected_model_names.sort, airplane_model_names.sort)
     end
-    airplane_model_names = airplane_models.collect do |airplane|
-      airplane["model"]
-    end
-    expected_model_names = expected_models.collect do |airplane|
-      airplane["model"]
-    end
-    assert_equal(expected_model_names.sort, airplane_model_names.sort)
   end
 
   test 'json has airplane make model details' do
-    make = @mmods.keys.first
-    expected_airplane = @mmods[make].first
+    make_model = @expected_make_models[
+      Random.rand(@expected_make_models.length)]
     airplane_makes = @data['airplane_makes']
-    make_models = airplane_makes.select do |airplane_make|
-      airplane_make["make"] == make
+    airplane_make = airplane_makes.find do |airplane_make|
+      airplane_make["make"] == make_model.make
     end
-    make_model = make_models.first['airplane_models'].select do |airplane_model|
-      airplane_model["model"] == expected_airplane.model
+    airplane_make_model = airplane_make['airplane_models']
+        .find do |airplane_model|
+      airplane_model["model"] == make_model.model
     end
-    airplane = make_model.first
     %w[make model empty_weight_lbs max_weight_lbs horsepower
         seats wings curated].each do |attrib|
-      assert_equal(expected_airplane.send(attrib), airplane[attrib])
+      assert_equal(make_model.send(attrib), airplane_make_model[attrib])
     end
   end
 
