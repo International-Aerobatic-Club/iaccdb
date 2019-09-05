@@ -8,8 +8,10 @@ class MakeModel < ApplicationRecord
   #   ActiveRecord::StatementInvalid when a make model collision occurs
   # validates_uniqueness_of :model, :scope => :make
 
-  def self.all_by_make
-    MakeModel.order(:make, :model).all.to_a.group_by(&:make)
+  def self.all_by_make(only_curated = false)
+    query = MakeModel.order(:make, :model)
+    query = query.where(curated: true) if only_curated
+    query.all.to_a.group_by(&:make)
   end
 
   # split combined make and model into separate make and model
