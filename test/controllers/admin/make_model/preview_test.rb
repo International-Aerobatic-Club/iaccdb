@@ -6,11 +6,22 @@ class Admin::MakeModelPreviewTest < ActionDispatch::IntegrationTest
 
   setup do
     @models = setup_make_models_with_airplanes
-    select = []
+    select = [@models.first, @models.last]
     4.times do
       select << @models[Random.rand(@models.length)]
     end
     @select_models = select.uniq
+  end
+
+  def admin_make_models_select_params(select_models, target = nil)
+    params = {
+      "selected" => select_models.inject(Hash.new) do |hash, mm|
+        hash[mm.id.to_s] = "1"
+        hash
+      end
+    }
+    params = params.merge({ target.id.to_s => 'merge' }) if target
+    params
   end
 
   test 'unauthorized cannot preview merge' do
@@ -93,6 +104,7 @@ class Admin::MakeModelPreviewTest < ActionDispatch::IntegrationTest
 
   test 'selects first make and model when target not among selected' do
     target = (@models - @select_models).first
+    target = create(:make_model, make: 'Unique') unless target
     post admin_make_models_merge_preview_path,
       headers: http_auth_login(:curator),
       params: admin_make_models_select_params(@select_models, target)
