@@ -43,6 +43,9 @@ class MakeModelsController::IndexJsonTest < ActionDispatch::IntegrationTest
 
   setup do
     @mmods = setup_make_models_data
+    @expected_make_models = @mmods.values.flatten.select do |mm|
+      mm.curated
+    end
     get make_models_url, headers: json_headers
     @data = @response.parsed_body
   end
@@ -52,14 +55,17 @@ class MakeModelsController::IndexJsonTest < ActionDispatch::IntegrationTest
     airplane_makes = @data["airplane_makes"]
     assert_equal(%w[airplane_models make], airplane_makes.first.keys.sort)
     makes = airplane_makes.collect { |airplane| airplane["make"] }
-    assert_equal(@mmods.keys.sort, makes.sort)
+    expected_makes = @expected_make_models.collect(&:make).uniq
+    assert_equal(expected_makes.sort, makes.sort)
   end
 
   test 'json has models for make' do
     airplane_makes = @data["airplane_makes"]
     airplane_models = airplane_makes.first["airplane_models"]
     first_make = airplane_makes.first["make"]
-    expected_models = @mmods[first_make]
+    expected_models = @expected_make_models.select do |mm|
+      mm.make == first_make
+    end
     airplane_model_names = airplane_models.collect do |airplane|
       airplane["model"]
     end
@@ -72,17 +78,27 @@ class MakeModelsController::IndexJsonTest < ActionDispatch::IntegrationTest
   test 'json has airplane make model details' do
     make = @mmods.keys.first
     expected_airplane = @mmods[make].first
-    airplane_makes = @data["airplane_makes"]
+    airplane_makes = @data['airplane_makes']
     make_models = airplane_makes.select do |airplane_make|
       airplane_make["make"] == make
     end
-    make_model = make_models.first["airplane_models"].select do |airplane_model|
+    make_model = make_models.first['airplane_models'].select do |airplane_model|
       airplane_model["model"] == expected_airplane.model
     end
     airplane = make_model.first
     %w[make model empty_weight_lbs max_weight_lbs horsepower
-        seats wings].each do |attrib|
+        seats wings curated].each do |attrib|
       assert_equal(expected_airplane.send(attrib), airplane[attrib])
+    end
+  end
+
+  test 'json only includes curated makes and models' do
+    makes = @data['airplane_makes']
+    makes.each do |make|
+      make_models = make['airplane_models']
+      make_models.each do |model|
+        assert(model['curated'])
+      end
     end
   end
 end

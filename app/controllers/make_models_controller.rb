@@ -1,6 +1,7 @@
 class MakeModelsController < ApplicationController
   def index
-    @make_models = MakeModel.all_by_make
+    only_curated = request.format.symbol == :json
+    @make_models = MakeModel.all_by_make(only_curated)
   end
 
   def show
