@@ -28,6 +28,10 @@
     <%= f.label(:max_weight_lbs) %>
     <%= f.number_field(:max_weight_lbs, min: 0) %>
   </div>
+  <div class="field">
+    <%= f.check_box(:curated) %>
+    <%= f.label(:curated) %>
+  </div>
   <%= f.submit 'Update' %>
   <%= link_to 'Cancel', admin_make_models_path %>
 <% end %>

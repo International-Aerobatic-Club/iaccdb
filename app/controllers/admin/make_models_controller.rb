@@ -7,6 +7,7 @@ class Admin::MakeModelsController < ApplicationController
 
   def edit
     load_mm
+    @make_model.curated = true
   end
 
   def update

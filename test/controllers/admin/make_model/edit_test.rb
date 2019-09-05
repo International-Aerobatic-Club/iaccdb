@@ -103,6 +103,11 @@ class Admin::MakeModelEditTest < ActionDispatch::IntegrationTest
         "@value=\"#{@to_edit.max_weight_lbs}\"]"
       )
       assert_equal(1, input.length, "Have max_weight_lbs")
+      input = form.xpath(
+        './/input[@type="checkbox" and @name="make_model[curated]" and ' +
+        '@checked]'
+      )
+      assert_equal(1, input.length, "Have curated checkbox checked")
       assert_select('input[@type="submit"]')
     end
   end
