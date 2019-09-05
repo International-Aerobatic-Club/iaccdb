@@ -26,7 +26,8 @@ FactoryBot.define do
             empty_weight_lbs,
           horsepower: Faker::Number.between(from: 40, to: 600),
           seats: Faker::Number.between(from: 1, to: 4),
-          wings: Faker::Number.between(from: 1, to:2)
+          wings: Faker::Number.between(from: 1, to:2),
+          curated: Faker::Boolean.boolean
         })
       end
       make_model
