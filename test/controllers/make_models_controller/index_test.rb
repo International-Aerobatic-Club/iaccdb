@@ -27,15 +27,17 @@ class MakeModelsController::IndexTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select('dl.make-models', 1)
     assert_select('dl.make-models dt.make', mmods.keys.length)
-    mmods.each_key do |make|
-      assert_select('dl.make-models dt.make', make) do |dt|
-        assert_equal(1, dt.length)
-        dd = dt.xpath('./following-sibling::dd').first
+    assert_select('dl.make-models') do |dl|
+      dl = dl.first
+      mmods.each_key do |make|
+        dt = dl.xpath("./dt[@class='make' and contains(text(), \"#{make}\")]")
+        assert_equal(1, dt.length, "dt for make, with text, \"#{make}\"")
+        dd = dt.first.xpath('./following-sibling::dd').first
         mmods[make].each do |mr|
-          assert_select(dd, 'ul.models li.model', /#{mr.model}/) do |li|
-            assert_match(/👍/, li.text) if mr.curated
-            refute_match(/👍/, li.text) unless mr.curated
-          end
+          li = dd.xpath("./ul[@class='models']/li[@class='model' and " +
+            "contains(text(), \"#{mr.model}\")]").first
+          assert_match(/👍/, li.text) if mr.curated
+          refute_match(/👍/, li.text) unless mr.curated
         end
       end
     end
