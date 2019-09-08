@@ -110,10 +110,22 @@ class Admin::MakeModelEditTest < ActionDispatch::IntegrationTest
       )
       assert_equal(1, input.length, "Have seats")
       input = form.xpath(
-        './/input[@type="number" and @name="make_model[wings]" and ' +
-        "@value=\"#{@to_edit.wings}\"]"
+        './/input[@type="radio" and @name="make_model[wings]" and @value="1"]'
       )
-      assert_equal(1, input.length, "Have wings")
+      assert_equal(1, input.length, "Have monoplane")
+      input = form.xpath(
+        './/input[@type="radio" and @name="make_model[wings]" and @value="2"]'
+      )
+      assert_equal(1, input.length, "Have biplane")
+      input = form.xpath(
+        './/input[@type="radio" and @name="make_model[wings]" and not(@value)]'
+      )
+      assert_equal(1, input.length, "Have wings undetermined")
+      input = form.xpath(
+        './/input[@type="radio" and @name="make_model[wings]" and ' +
+        "@value=\"#{@to_edit.wings}\" and @checked]"
+      )
+      assert_equal(1, input.length, "Monoplane or biplane checked")
       input = form.xpath(
         './/input[@type="number" and ' +
         '@name="make_model[empty_weight_lbs]" and ' +

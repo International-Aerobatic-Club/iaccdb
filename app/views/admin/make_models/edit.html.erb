@@ -18,7 +18,14 @@
   </div>
   <div class="field">
     <%= f.label(:wings) %>
-    <%= f.number_field(:wings, within: (1..2)) %>
+    <div class="selection">
+      Monoplane
+      <%= f.radio_button(:wings, 1) %>
+      <%= f.radio_button(:wings, 2) %>
+      Biplane
+      (<%= f.radio_button(:wings, 0) %>
+       Undetermined)
+    </div>
   </div>
   <div class="field">
     <%= f.label(:empty_weight_lbs) %>
