@@ -7,6 +7,7 @@ class Admin::MakeModelsController < ApplicationController
 
   def edit
     load_mm
+    @make_model.wings ||= 0 # need non-nil for radio button
     @make_model.curated = true
   end
 

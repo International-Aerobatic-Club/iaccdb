@@ -118,7 +118,7 @@ class Admin::MakeModelEditTest < ActionDispatch::IntegrationTest
       )
       assert_equal(1, input.length, "Have biplane")
       input = form.xpath(
-        './/input[@type="radio" and @name="make_model[wings]" and not(@value)]'
+        './/input[@type="radio" and @name="make_model[wings]" and @value="0"]'
       )
       assert_equal(1, input.length, "Have wings undetermined")
       input = form.xpath(
