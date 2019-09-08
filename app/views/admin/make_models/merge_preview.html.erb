@@ -6,7 +6,7 @@
       <li>
         <%= radio_button_tag :target, make_model.id,
           make_model.id == @target_id %>
-        <%= "#{make_model.make}, #{make_model.model}" %>
+        <%= make_model_description(make_model) %>
         <%= hidden_field_tag "selected[#{make_model.id}]" %>
       </li>
     <% end %>
@@ -23,7 +23,7 @@ the selected make and model. It will delete the other make(s) and model(s).
 
 <ul class="make-model-airplanes-list">
   <% @merge_models.each do |make_model| %>
-    <li><%= "#{make_model.make}, #{make_model.model}" %>
+    <li><%= make_model_description(make_model) %>
       <ul>
         <% make_model.airplanes.each do |airplane| %>
           <li><%= "#{airplane.id}: #{airplane.reg}" %>
