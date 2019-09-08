@@ -25,8 +25,8 @@ the selected make and model. It will delete the other make(s) and model(s).
   <% @merge_models.each do |make_model| %>
     <li><%= make_model_description(make_model) %>
       <ul>
-        <% make_model.airplanes.each do |airplane| %>
-          <li><%= "#{airplane.id}: #{airplane.reg}" %>
+        <% make_model.airplanes.collect(&:reg).uniq.sort.each do |reg| %>
+          <li><%= reg.blank? ? '{unspecified registration}' : reg %></li>
         <% end %>
       </ul>
     </li>

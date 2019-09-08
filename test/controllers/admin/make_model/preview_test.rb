@@ -68,7 +68,7 @@ class Admin::MakeModelPreviewTest < ActionDispatch::IntegrationTest
       assert_select('ul.make-model-airplanes-list li',
           /#{mm.make}, #{mm.model}/) do
         mm.airplanes.each do |airplane|
-          assert_select('ul li', /#{airplane.id}: #{airplane.reg}/)
+          assert_select('ul li', /#{airplane.reg}/)
         end
       end
     end
