@@ -286,24 +286,51 @@ class JasperParse
   end
 
   def k_values_for(jCat, jFlt, jPilot)
-    if (jCat == 1) # primary has no free
-      jFlt = 1
-    end
-    if (jCat == 2)  # sportsman has no unknown
-      jFlt = 2 if 2 < jFlt
-    end
-    case jFlt
-    when 2 # free
-      nodes = @document.find("/ContestResults/Pilots/Category[@CategoryID=#{jCat}]/Pilot[@PilotID=#{jPilot}]/FreestyleKs")
-      if (nodes.length == 0)
-        nodes = @document.find("/ContestResults/KnownKFactors/Category[@CategoryID=#{jCat}]")
+    if(jCat == 1 || jFlt == 1)
+      # Known or Primary
+      nodes = @document.find(
+        "/ContestResults/KnownKFactors/Category[@CategoryID=#{jCat}]")
+    elsif(jCat == 2 || jFlt == 2)
+      # Sportsman or Free
+      # look for freestyle K's associated with the category, pilot, flight
+      nodes = @document.find(
+        "/ContestResults/Pilots/Category[@CategoryID=#{jCat}]/" +
+        "Pilot[@PilotID=#{jPilot}]/FreestyleKs[@FlightID=#{jFlt}]")
+      if (jCat == 2 && nodes.length == 0)
+        # look for sportsman freestyle K's associated with pilot, flight 2
+        nodes = @document.find(
+          "/ContestResults/Pilots/Category[@CategoryID=2]/" +
+          "Pilot[@PilotID=#{jPilot}]/FreestyleKs[@FlightID=2]")
       end
-    when 3 # unknown
-      nodes = @document.find("/ContestResults/UnKnownKFactors/One/Category[@CategoryID=#{jCat}]")
-    when 4 # unknown II
-      nodes = @document.find("/ContestResults/UnKnownKFactors/Two/Category[@CategoryID=#{jCat}]")
-    else # known
-      nodes = @document.find("/ContestResults/KnownKFactors/Category[@CategoryID=#{jCat}]")
+      if (nodes.length == 0)
+        # fall back to freestyle K's associated with pilot, no flight identified
+        nodes = @document.find(
+          "/ContestResults/Pilots/Category[@CategoryID=#{jCat}]/" +
+          "Pilot[@PilotID=#{jPilot}]/FreestyleKs")
+      end
+      if (nodes.length == 0)
+        # fall back to known sequence values
+        nodes = @document.find(
+          "/ContestResults/KnownKFactors/Category[@CategoryID=#{jCat}]")
+      end
+    else
+      # look for unknown K's associated with the category, pilot, flight
+      nodes = @document.find(
+        "/ContestResults/Pilots/Category[@CategoryID=#{jCat}]/" +
+        "Pilot[@PilotID=#{jPilot}]/FreestyleKs[@FlightID=#{jFlt}]")
+      if (nodes.length == 0)
+        # look for unknown K's associated with the category, flight
+        kpath = case jFlt
+          when 3 # unknown 1
+            'UnKnownKFactors/One'
+          when 4 # unknown 2
+            'UnKnownKFactors/Two'
+          else # known or free
+            'KnownKFactors'
+          end
+        nodes = @document.find(
+          "/ContestResults/#{kpath}/Category[@CategoryID=#{jCat}]")
+      end
     end
     nodes && nodes.first ? nodes.first.inner_xml : ''
   end

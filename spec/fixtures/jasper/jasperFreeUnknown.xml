@@ -1,0 +1,375 @@
+<?xml version="1.0"?>
+<ContestResults>
+  <Version>
+     <XMLFormat>1.0</XMLFormat>
+     <JaSPer>3.2.41</JaSPer>
+     <Generated>Wed Sep 18 16:23:37 UYT 2019</Generated>
+  </Version>
+  <ContestInfo>
+    <Id>0</Id>
+    <cdbId>693</cdbId>
+    <Contest>U.S. National Aerobatic Championships - Glider - 2019</Contest>
+    <City>Salinas</City>
+    <State>KS</State>
+    <Date>09/21/19</Date>
+    <Director>John Rumbach</Director>
+    <HostChapter>32</HostChapter>
+    <Region>USNationals</Region>
+    <Type>Powered</Type>
+    <Comment></Comment>
+  </ContestInfo>  <Judges>
+    <Category CategoryID="4">
+      <Flight FlightID="1">
+        <Judge JudgeID="0">
+          <Name>
+            <First>Roberto da</First>
+            <Last>Silveira</Last>
+          </Name>
+          <IACNumber>436593</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Marilyn</First>
+              <Last>Dash</Last>
+            </Name>
+            <IACNumber>429794</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+        <Judge JudgeID="1">
+          <Name>
+            <First>Kim</First>
+            <Last>Dahl</Last>
+          </Name>
+          <IACNumber>439030</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Tighe</First>
+              <Last>Daugherty</Last>
+            </Name>
+            <IACNumber>438918</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+        <Judge JudgeID="2">
+          <Name>
+            <First>Nihad</First>
+            <Last>Daidzic</Last>
+          </Name>
+          <IACNumber>430139</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Aaron</First>
+              <Last>Dabney</Last>
+            </Name>
+            <IACNumber>435863</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+        <Judge JudgeID="3">
+          <Name>
+            <First>Michael</First>
+            <Last>Darrah</Last>
+          </Name>
+          <IACNumber>432517</IACNumber>
+          <Assistant>
+            <Name>
+              <First>David Bachler c/o 94</First>
+              <Last>FTS</Last>
+            </Name>
+            <IACNumber>432585</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+      </Flight>
+      <Flight FlightID="2">
+        <Judge JudgeID="0">
+          <Name>
+            <First>Roberto da</First>
+            <Last>Silveira</Last>
+          </Name>
+          <IACNumber>436593</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Marilyn</First>
+              <Last>Dash</Last>
+            </Name>
+            <IACNumber>429794</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+        <Judge JudgeID="1">
+          <Name>
+            <First>Kim</First>
+            <Last>Dahl</Last>
+          </Name>
+          <IACNumber>439030</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Tighe</First>
+              <Last>Daugherty</Last>
+            </Name>
+            <IACNumber>438918</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+        <Judge JudgeID="2">
+          <Name>
+            <First>Nihad</First>
+            <Last>Daidzic</Last>
+          </Name>
+          <IACNumber>430139</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Aaron</First>
+              <Last>Dabney</Last>
+            </Name>
+            <IACNumber>435863</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+        <Judge JudgeID="3">
+          <Name>
+            <First>Michael</First>
+            <Last>Darrah</Last>
+          </Name>
+          <IACNumber>432517</IACNumber>
+          <Assistant>
+            <Name>
+              <First>David Bachler c/o 94</First>
+              <Last>FTS</Last>
+            </Name>
+            <IACNumber>432585</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+      </Flight>
+      <Flight FlightID="3">
+        <Judge JudgeID="0">
+          <Name>
+            <First>Roberto da</First>
+            <Last>Silveira</Last>
+          </Name>
+          <IACNumber>436593</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Marilyn</First>
+              <Last>Dash</Last>
+            </Name>
+            <IACNumber>429794</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+        <Judge JudgeID="1">
+          <Name>
+            <First>Kim</First>
+            <Last>Dahl</Last>
+          </Name>
+          <IACNumber>439030</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Tighe</First>
+              <Last>Daugherty</Last>
+            </Name>
+            <IACNumber>438918</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+        <Judge JudgeID="2">
+          <Name>
+            <First>Nihad</First>
+            <Last>Daidzic</Last>
+          </Name>
+          <IACNumber>430139</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Aaron</First>
+              <Last>Dabney</Last>
+            </Name>
+            <IACNumber>435863</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+        <Judge JudgeID="3">
+          <Name>
+            <First>Michael</First>
+            <Last>Darrah</Last>
+          </Name>
+          <IACNumber>432517</IACNumber>
+          <Assistant>
+            <Name>
+              <First>David Bachler c/o 94</First>
+              <Last>FTS</Last>
+            </Name>
+            <IACNumber>432585</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+      </Flight>
+      <Flight FlightID="4">
+        <Judge JudgeID="0">
+          <Name>
+            <First>Roberto da</First>
+            <Last>Silveira</Last>
+          </Name>
+          <IACNumber>436593</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Marilyn</First>
+              <Last>Dash</Last>
+            </Name>
+            <IACNumber>429794</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+        <Judge JudgeID="1">
+          <Name>
+            <First>Kim</First>
+            <Last>Dahl</Last>
+          </Name>
+          <IACNumber>439030</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Tighe</First>
+              <Last>Daugherty</Last>
+            </Name>
+            <IACNumber>438918</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+        <Judge JudgeID="2">
+          <Name>
+            <First>Nihad</First>
+            <Last>Daidzic</Last>
+          </Name>
+          <IACNumber>430139</IACNumber>
+          <Assistant>
+            <Name>
+              <First>Aaron</First>
+              <Last>Dabney</Last>
+            </Name>
+            <IACNumber>435863</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+        <Judge JudgeID="3">
+          <Name>
+            <First>Michael</First>
+            <Last>Darrah</Last>
+          </Name>
+          <IACNumber>432517</IACNumber>
+          <Assistant>
+            <Name>
+              <First>David Bachler c/o 94</First>
+              <Last>FTS</Last>
+            </Name>
+            <IACNumber>432585</IACNumber>
+            <Modifier>0</Modifier>
+          </Assistant>
+        </Judge>
+      </Flight>
+    </Category>
+  </Judges>
+  <Pilots>
+    <Category CategoryID="4">
+      <Pilot PilotID="1">
+        <IACNumber>430157</IACNumber>
+        <Name>
+          <First>Douglas</First>
+          <Last>Lovell</Last>
+        </Name>
+        <Flights>Known Freestyle Unknown1 Unknown2 </Flights>
+        <Chapter>52</Chapter>
+        <College></College>
+        <FreestyleKs FlightID="2">23 14 21 12 18 16 23 15 11 25 24 21 27 29 21 0 0 0 0 0 25 </FreestyleKs>
+        <FreestyleKs FlightID="3">15 18 32 23 24 34 18 36 28 26 24 33 15 28 21 0 0 0 0 0 25 </FreestyleKs>
+        <FreestyleKs FlightID="4">14 32 12 28 27 25 26 34 31 29 18 22 25 31 33 0 0 0 0 0 25 </FreestyleKs>
+        <SubCategory>NonCollegiate </SubCategory>
+        <Aircraft>
+          <Make>Pitts Special</Make>
+          <Model>S-1T</Model>
+          <NNumber>N627dp</NNumber>
+        </Aircraft>      </Pilot>
+    </Category>
+  </Pilots>
+  <KnownKFactors>
+    <Year>2019</Year>
+    <Category CategoryID="1">7 13 14 10 4 10 0 0 0 0 0 0 0 0 0 0 0 0 0 0 5 </Category>
+    <Category CategoryID="2">10 17 10 14 4 10 10 17 13 14 0 0 0 0 0 0 0 0 0 0 10 </Category>
+    <Category CategoryID="3">21 18 25 13 14 21 19 19 21 14 0 0 0 0 0 0 0 0 0 0 15 </Category>
+    <Category CategoryID="4">40 16 36 40 42 32 33 19 26 0 0 0 0 0 0 0 0 0 0 0 25 </Category>
+    <Category CategoryID="5">40 63 36 35 28 33 53 45 62 0 0 0 0 0 0 0 0 0 0 0 40 </Category>
+    <Category CategoryID="6">40 40 40 40 40 40 40 40 40 40 0 0 0 0 0 0 0 0 0 0 0 </Category>
+  </KnownKFactors>
+  <UnKnownKFactors>
+    <One>
+      <Category CategoryID="3">0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 15 </Category>
+      <Category CategoryID="4">0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 25 </Category>
+      <Category CategoryID="5">0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 40 </Category>
+    </One>
+    <Two>
+      <Category CategoryID="3">0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 15 </Category>
+      <Category CategoryID="4">0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 25 </Category>
+      <Category CategoryID="5">0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 40 </Category>
+    </Two>
+  </UnKnownKFactors>
+  <Scores>
+    <Category CategoryID="4">
+      <Flight FlightID="1">
+        <Pilot PilotID="1">
+          <Judge JudgeID="1">
+            <Figures>7.0 8.0 7.5 8.5 9.0 9.5 8.5 7.5 8.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 9.0 </Figures>
+          </Judge>
+          <Judge JudgeID="2">
+            <Figures>8.0 7.5 7.0 8.5 10.0 9.0 8.5 7.5 7.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 9.0 </Figures>
+          </Judge>
+          <Judge JudgeID="3">
+            <Figures>9.0 7.0 8.5 7.5 8.0 9.0 8.5 9.0 8.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 8.5 </Figures>
+          </Judge>
+          <Penalty>0.0</Penalty>
+        </Pilot>
+      </Flight>
+      <Flight FlightID="2">
+        <Pilot PilotID="1">
+          <Judge JudgeID="1">
+            <Figures>8.0 7.0 9.0 6.0 9.5 8.5 8.0 7.5 9.0 7.0 8.5 7.5 9.5 6.5 9.0 0.0 0.0 0.0 0.0 0.0 9.0 </Figures>
+          </Judge>
+          <Judge JudgeID="2">
+            <Figures>9.0 8.0 7.0 6.0 8.0 7.0 9.0 6.0 8.0 7.0 9.0 6.0 8.0 7.0 9.0 0.0 0.0 0.0 0.0 0.0 6.0 </Figures>
+          </Judge>
+          <Judge JudgeID="3">
+            <Figures>8.0 7.0 9.0 6.0 8.0 9.0 7.0 9.0 7.0 8.0 6.0 8.0 7.0 9.0 8.0 0.0 0.0 0.0 0.0 0.0 6.0 </Figures>
+          </Judge>
+          <Penalty>0.0</Penalty>
+        </Pilot>
+      </Flight>
+      <Flight FlightID="3">
+        <Pilot PilotID="1">
+          <Judge JudgeID="1">
+            <Figures>7.5 8.5 7.0 8.0 7.5 8.5 9.0 8.0 7.0 7.5 8.5 8.0 7.0 9.0 7.5 0.0 0.0 0.0 0.0 0.0 7.5 </Figures>
+          </Judge>
+          <Judge JudgeID="2">
+            <Figures>8.5 8.0 7.0 7.5 7.5 8.5 8.0 9.0 8.5 7.5 7.0 6.5 6.5 7.5 8.5 0.0 0.0 0.0 0.0 0.0 8.5 </Figures>
+          </Judge>
+          <Judge JudgeID="3">
+            <Figures>9.0 9.5 8.5 7.5 7.0 6.5 6.5 7.5 8.5 8.0 9.0 8.5 8.5 8.0 7.0 0.0 0.0 0.0 0.0 0.0 6.5 </Figures>
+          </Judge>
+          <Penalty>0.0</Penalty>
+        </Pilot>
+      </Flight>
+      <Flight FlightID="4">
+        <Pilot PilotID="1">
+          <Judge JudgeID="1">
+            <Figures>8.0 7.0 8.0 9.0 8.5 9.5 7.0 8.0 9.0 9.5 8.5 8.5 8.0 7.5 8.5 0.0 0.0 0.0 0.0 0.0 9.0 </Figures>
+          </Judge>
+          <Judge JudgeID="2">
+            <Figures>8.0 7.5 8.5 8.5 9.0 8.0 7.5 8.5 9.0 9.0 8.0 8.0 8.5 8.5 8.5 0.0 0.0 0.0 0.0 0.0 7.0 </Figures>
+          </Judge>
+          <Judge JudgeID="3">
+            <Figures>8.0 7.0 8.0 8.5 8.5 8.0 9.0 7.0 8.5 9.5 9.0 8.0 8.0 7.5 6.5 0.0 0.0 0.0 0.0 0.0 7.0 </Figures>
+          </Judge>
+          <Penalty>0.0</Penalty>
+        </Pilot>
+      </Flight>
+    </Category>
+  </Scores>
+</ContestResults>
