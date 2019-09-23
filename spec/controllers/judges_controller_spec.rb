@@ -19,13 +19,17 @@ describe JudgesController, :type => :controller do
     unl_cat = Category.where(category: 'Unlimited', aircat: 'P').first
     spn_cat = Category.where(category: 'Sportsman', aircat: 'P').first
     imd_cat = Category.where(category: 'Intermediate', aircat: 'P').first
-    c1fa = create :flight, category: adv_cat,
+    c1fa = create :flight,
+      category: adv_cat.category, aircat: adv_cat.aircat,
       chief: cj, assist: cja
-    c1fs = create :flight, category: spn_cat, contest: c1fa.contest, 
+    c1fs = create :flight, contest: c1fa.contest,
+      category: spn_cat.category, aircat: spn_cat.aircat,
       chief: cj, assist: cja
-    c2fa = create :flight, category: adv_cat,
+    c2fa = create :flight,
+      category: adv_cat.category, aircat: adv_cat.aircat,
       chief: cj, assist: cja
-    c2fs = create :flight, category: spn_cat, contest: c2fa.contest,
+    c2fs = create :flight, contest: c2fa.contest,
+      category: spn_cat.category, aircat: spn_cat.aircat,
       chief: cj, assist: nil
     [c1fa, c1fs, c2fa, c2fs].each do |flt|
       pf = create :pilot_flight, flight: flt
