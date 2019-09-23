@@ -6,7 +6,7 @@ module Model
         @category = Category.where(category: 'Unlimited', aircat: 'P').first
         @flight = create(:flight,
           :contest => @contest,
-          :category => @category)
+          :category_id => @category.id)
         @judge_team = create(:judge)
         @jc_result = create(:jc_result,
           :contest => @contest,
