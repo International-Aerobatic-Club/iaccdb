@@ -8,6 +8,7 @@ class ComputeFlightsJob < Struct.new(:contest)
   def perform
     @contest = contest
     say "Computing flights for #{@contest.year_name}"
+    CategorySynthesisService.synthesize_categories(@contest)
     computer = ContestComputer.new(@contest)
     computer.compute_flights
   end
