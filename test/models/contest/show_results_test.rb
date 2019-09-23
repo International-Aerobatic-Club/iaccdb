@@ -17,12 +17,13 @@ class Contest::ShowResultsTest < ActiveSupport::TestCase
   end
 
   test 'category results resilient to missing pilot_flight' do
-    flight = create(:flight, contest: @contest)
+    category = create(:category)
+    flight = create(:flight, category_id: category.id, contest: @contest)
     jf_result = create(:jf_result, flight: flight)
     pc_result = create(:pc_result,
       contest: @contest,
       pilot: create(:member),
-      category: flight.category
+      category: category
     )
     results = @contest.category_results
     cat_result = results.first

@@ -13,7 +13,7 @@ module Jasper
 
     test 'captures scores' do
       cat = Category.find_for_cat_aircat('Sportsman', 'P')
-      flight = @contest.flights.where( :name => 'Free', :category_id => cat.id).first
+      flight = cat.flights.find_by(name: 'Free', contest: @contest)
       refute_nil(flight)
       pilot = Member.where(:family_name => 'Ernewein').first
       refute_nil(pilot)
@@ -32,7 +32,7 @@ module Jasper
 
     test 'captures four minute free scores' do
       cat = Category.find_for_cat_aircat('Four Minute', 'F')
-      flight = @contest.flights.where(category_id: cat.id).first
+      flight = cat.flights.find_by(contest: @contest)
       refute_nil(flight)
       pilot = Member.where(iac_id: 13721).first
       refute_nil(pilot)

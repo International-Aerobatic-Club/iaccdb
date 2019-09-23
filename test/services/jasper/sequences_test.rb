@@ -13,7 +13,7 @@ module Jasper
 
     test 'captures known sequences' do
       cat = Category.find_for_cat_aircat('Sportsman', 'P')
-      flight = @contest.flights.where(name: 'Known', category_id: cat.id).first
+      flight = cat.flights.find_by(name: 'Known', contest: @contest)
       refute_nil(flight)
       pilot = Member.where(:family_name => 'Ernewein').first
       refute_nil(pilot)
@@ -28,7 +28,7 @@ module Jasper
 
     test 'captures free sequences' do
       cat = Category.find_for_cat_aircat('Sportsman', 'P')
-      flight = @contest.flights.where(name: 'Free', category_id: cat.id).first
+      flight = cat.flights.find_by(name: 'Free', contest: @contest)
       refute_nil(flight)
       pilot = Member.where(:family_name => 'Wieckowski').first
       refute_nil(pilot)
@@ -43,8 +43,7 @@ module Jasper
 
     test 'captures sportsman second free sequences' do
       cat = Category.find_for_cat_aircat('Sportsman', 'P')
-      flight = @contest.flights.where(
-        name: 'Unknown', category_id: cat.id).first
+      flight = cat.flights.find_by(name: 'Unknown', contest: @contest)
       refute_nil(flight)
       pilot = Member.where(:family_name => 'Wieckowski').first
       refute_nil(pilot)
@@ -59,8 +58,7 @@ module Jasper
 
     test 'captures unknown sequences' do
       cat = Category.find_for_cat_aircat('Unlimited', 'P')
-      flight = @contest.flights.where(
-        name: 'Unknown', category_id: cat.id).first
+      flight = cat.flights.find_by(name: 'Unknown', contest: @contest)
       refute_nil(flight)
       pilot = Member.where(:iac_id => '13721').first
       refute_nil(pilot)
@@ -76,8 +74,7 @@ module Jasper
 
     test 'captures second unknown sequences' do
       cat = Category.find_for_cat_aircat('Intermediate', 'P')
-      flight = @contest.flights.where(
-        name: 'Unknown II', category_id: cat.id).first
+      flight = cat.flights.find_by(name: 'Unknown II', contest: @contest)
       refute_nil(flight)
       pilot = Member.where(:iac_id => '10467').first
       refute_nil(pilot)
@@ -93,7 +90,7 @@ module Jasper
 
     test 'captures four minute free sequences' do
       cat = Category.find_for_cat_aircat('Four Minute', 'F')
-      flight = @contest.flights.where(category_id: cat.id).first
+      flight = cat.flights.find_by(contest: @contest)
       refute_nil(flight)
       pilot = Member.where(iac_id: 13721).first
       refute_nil(pilot)

@@ -8,7 +8,7 @@ class FurtherControllerTest < ActionDispatch::IntegrationTest
         create_list(:jy_result, 12 + Random.rand(12),
           year: year, category: category)
         contest = create(:contest, start: "#{year}-09-04")
-        flight = create(:flight, contest: contest, category: category)
+        flight = create(:flight, contest: contest, category_id: category.id)
         create_list(:pilot_flight, 12 + Random.rand(12), flight: flight)
       end
     end

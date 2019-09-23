@@ -13,9 +13,11 @@ class FurtherController < ApplicationController
     judge_counts = JyResult.select('count(distinct(judge_id)) as count, year').group(:year)
     @cat_year_judge_count['any'] = judge_counts.group_by { |count| count.year }
 
-    pilot_counts = PilotFlight.joins(:flight => [:category, :contest]).select(
-      'count(distinct(`pilot_flights`.`pilot_id`)) as count, categories.id as category_id, 
-       year(`contests`.`start`) as year').group(:category_id, :year)
+    pilot_counts = PilotFlight.joins(:flight => [:categories, :contest]).select(
+      'count(distinct(`pilot_flights`.`pilot_id`)) as count,
+       categories.id as category_id,
+       year(`contests`.`start`) as year'
+    ).group(:category_id, :year)
     @cat_year_pilot_count = pilot_counts.group_by { |pf| pf.category_id }
     @cat_year_pilot_count.each do |key, apcr| 
       @cat_year_pilot_count[key] = apcr.group_by { |pcr| pcr.year }
@@ -37,7 +39,7 @@ class FurtherController < ApplicationController
       ).all.collect { |contest| contest.anum }
     @year = params[:year] || @years.first
     airplanes_with_cat = Airplane.joins([
-      {:pilot_flights => {:flight => [:category, :contest]}},
+      {:pilot_flights => {:flight => [:categories, :contest]}},
       :make_model
       ]).select(
         'count(pilot_flights.id) as flight_count',

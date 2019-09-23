@@ -4,7 +4,8 @@ module HorsConcoursData
   def setup_hors_concours_data
     judges = create_list(:judge, 3)
 
-    @known_flight = create(:flight)
+    category = create(:category)
+    @known_flight = create(:flight, category_id: category.id)
     @contest = @known_flight.contest
     known_sequence = create(:sequence)
     known_flights = create_list(:pilot_flight, 7, flight: @known_flight,
@@ -17,7 +18,7 @@ module HorsConcoursData
     end
 
     unknown_flight = create(:flight, name: 'Unknown',
-      contest: @contest, category: @known_flight.category)
+      contest: @contest, category_id: category.id)
     unknown_sequence = create(:sequence)
     unknown_flights = {}
     known_flights.each_with_index do |kpf, i|

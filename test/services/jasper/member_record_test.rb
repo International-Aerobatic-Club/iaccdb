@@ -33,7 +33,8 @@ module Jasper
       assert_equal(1, patch_pilots.count)
       patch_flights = PilotFlight.where(pilot_id: patch_pilots.first.id)
       patch_flights.each do |pf|
-        if pf.category.category == 'unlimited'
+        cats = pf.categories.collect(&:category)
+        if cats.include?('unlimited')
           assert(pf.hors_concours?)
         end
       end
