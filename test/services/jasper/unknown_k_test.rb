@@ -13,7 +13,7 @@ module Jasper
 
     test 'captures free sequence' do
       cat = Category.find_for_cat_aircat('Advanced', 'P')
-      flight = @contest.flights.where(sequence: 2, category_id: cat.id).first
+      flight = cat.flights.find_by(sequence: 2, contest: @contest)
       refute_nil(flight)
       pilot = Member.where(:family_name => 'Lovell').first
       refute_nil(pilot)
@@ -30,7 +30,7 @@ module Jasper
 
     test 'captures free unknown sequence' do
       cat = Category.find_for_cat_aircat('Advanced', 'P')
-      flight = @contest.flights.where(sequence: 3, category_id: cat.id).first
+      flight = cat.flights.find_by(sequence: 3, contest: @contest)
       refute_nil(flight)
       pilot = Member.where(:family_name => 'Lovell').first
       refute_nil(pilot)
@@ -47,7 +47,7 @@ module Jasper
 
     test 'captures second free unknown sequence' do
       cat = Category.find_for_cat_aircat('Advanced', 'P')
-      flight = @contest.flights.where(sequence: 4, category_id: cat.id).first
+      flight = cat.flights.find_by(sequence: 4, contest: @contest)
       refute_nil(flight)
       pilot = Member.where(:family_name => 'Lovell').first
       refute_nil(pilot)

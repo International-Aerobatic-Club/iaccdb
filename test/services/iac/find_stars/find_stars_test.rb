@@ -7,10 +7,10 @@ module IAC
       @ctst = create(:contest, name: 'Test Find Stars', start: '2018-03-27')
       @cat = create(:category, category: 'Sportsman', name: 'Sportsman Power')
       seq = create(:sequence, figure_count: 4, k_values: [20, 4, 15, 9])
-      flt = create(:flight, category: @cat, contest: @ctst)
+      flt = create(:flight, category_id: @cat.id, contest: @ctst)
       @pilot = create(:member)
       @pf = create(:pilot_flight, sequence: seq, flight: flt, pilot: @pilot)
-      flt2 = create(:flight, category: @cat, contest: @ctst, name: 'Free')
+      flt2 = create(:flight, category_id: @cat.id, contest: @ctst, name: 'Free')
       @pf2 = create(:pilot_flight, sequence: seq, flight: flt2, pilot: @pilot)
     end
 

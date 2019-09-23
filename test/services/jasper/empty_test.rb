@@ -15,21 +15,21 @@ module Jasper
     test 'skips empty four minute program' do
       cat = Category.find_by(category: 'Four Minute')
       refute_nil(cat)
-      flights = @contest.flights.where(category: cat)
+      flights = cat.flights.where(contest: @contest)
       assert_equal(0, flights.count)
     end
 
     test 'skips empty unlimited power program' do
       cat = Category.find_by(category: 'Unlimited', aircat: 'P')
       refute_nil(cat)
-      flights = @contest.flights.where(category: cat)
+      flights = cat.flights.where(contest: @contest)
       assert_equal(0, flights.count)
     end
 
     test 'skips flight with pilots but no scores' do
       cat = Category.find_by(category: 'Advanced', aircat: 'P')
       refute_nil(cat)
-      flights = @contest.flights.where(category: cat)
+      flights = cat.flights.where(contest: @contest)
       assert_equal(2, flights.count)
     end
   end

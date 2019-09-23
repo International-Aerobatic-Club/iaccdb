@@ -53,7 +53,7 @@ def process_for_stars
   end
   Category.all.each do |cat|
     catch (:category) do
-      catFlights = contest.flights.where({ :category_id => cat.id })
+      catFlights = cat.flights.where(contest: contest)
       ctFMin = (cat.category =~ /primary|sportsman/i) ? 1 : 2
       if (ctFMin <= catFlights.length) then
         flight = catFlights.first

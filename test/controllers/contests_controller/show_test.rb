@@ -39,8 +39,8 @@ class ContestsController::ShowTest < ActionController::TestCase
   test 'contains categories flown' do
     get :show, params: { id: @contest.id }, :format => :json
     data = JSON.parse(response.body)
-    e_cats = @contest.flights.collect { |f| f.category }
-    e_cats = e_cats.uniq
+    e_cats = @contest.flights.collect { |f| f.categories }
+    e_cats = e_cats.flatten.uniq
     d_cats = data['category_results']
     assert_equal(e_cats.length, d_cats.length)
     e_cat_names = e_cats.collect { |c| c.name }
