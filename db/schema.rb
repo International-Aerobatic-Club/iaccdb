@@ -31,6 +31,13 @@ ActiveRecord::Schema.define(version: 20190923145028) do
     t.index ["id"], name: "index_categories_on_id"
   end
 
+  create_table "categories_flights", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
+    t.integer "flight_id", null: false
+    t.integer "category_id", null: false
+    t.index ["category_id"], name: "index_categories_flights_on_category_id"
+    t.index ["flight_id"], name: "index_categories_flights_on_flight_id"
+  end
+
   create_table "contests", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.string "name", limit: 48
     t.string "city", limit: 24
@@ -83,13 +90,6 @@ ActiveRecord::Schema.define(version: 20190923145028) do
     t.index ["data_post_id"], name: "index_failures_on_data_post_id"
     t.index ["id"], name: "index_failures_on_id"
     t.index ["manny_id"], name: "index_failures_on_manny_id"
-  end
-
-  create_table "flight_categories", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
-    t.integer "flight_id", null: false
-    t.integer "category_id", null: false
-    t.index ["category_id"], name: "index_flight_categories_on_category_id"
-    t.index ["flight_id"], name: "index_flight_categories_on_flight_id"
   end
 
   create_table "flights", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
@@ -396,8 +396,8 @@ ActiveRecord::Schema.define(version: 20190923145028) do
     t.index ["regular_category_id"], name: "index_synthetic_categories_on_regular_category_id"
   end
 
-  add_foreign_key "flight_categories", "categories"
-  add_foreign_key "flight_categories", "flights"
+  add_foreign_key "categories_flights", "categories"
+  add_foreign_key "categories_flights", "flights"
   add_foreign_key "synthetic_categories", "categories", column: "regular_category_id", on_update: :cascade, on_delete: :cascade
   add_foreign_key "synthetic_categories", "contests"
 end
