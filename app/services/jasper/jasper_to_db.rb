@@ -119,14 +119,18 @@ module Jasper
     def flight_for(d_contest, dCategory, jasper, jCat, jFlt)
       chief = chief_for(jasper, jCat, jFlt)
       assist = chief_assist_for(jasper, jCat, jFlt)
-      category_id = dCategory.id
-      d_contest.flights.where(category_id: category_id, sequence: jFlt).first ||
-        d_contest.flights.create!(
-          :category_id => category_id,
+      dFlight = dCategory.flights.find_by(contest: d_contest, sequence: jFlt)
+      unless dFlight
+        dFlight = d_contest.flights.build(
           :name => jasper.flight_name(jFlt),
           :sequence => jFlt,
           :chief_id => chief.id,
-          :assist_id => assist.id)
+          :assist_id => assist.id
+        )
+        dFlight.categories << dCategory
+        dFlight.save!
+      end
+      dFlight
     end
 
     def member_for(iac_id, given_name, family_name)
