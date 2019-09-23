@@ -4,7 +4,8 @@ shared_context 'computed contest' do
     @contest = create :contest, year: @year
     @ctf = 3
     @category = Category.first
-    @flights = create_list :flight, @ctf, contest: @contest, category: @category
+    @flights = create_list :flight, @ctf, contest: @contest,
+      category: @category.category, aircat: @category.aircat
     @flight = @flights.first
     @pilots = create_list :member, 3
     @airplanes = create_list :airplane, 3

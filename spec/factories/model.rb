@@ -123,6 +123,7 @@ FactoryBot.define do
     transient do 
       category { 'intermediate' }
       aircat { 'P' }
+      category_id { nil }
     end
     association :contest
     association :chief, :factory => :member
@@ -130,7 +131,11 @@ FactoryBot.define do
     name { 'Known' }
     sequence(:sequence)
     after(:create) do |flight, ev|
-      cat = create(:category, category: ev.category, aircat: ev.aircat)
+      if (ev.category_id)
+        cat = Category.find(ev.category_id)
+      else
+        cat = create(:category, category: ev.category, aircat: ev.aircat)
+      end
       flight.categories << cat
     end
   end

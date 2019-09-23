@@ -15,11 +15,11 @@ class Flight < ApplicationRecord
   end
 
   def displayName
-    "#{displayCategory} #{name if category.category != 'four minute'}"
+    "#{displayCategory} #{name if categories.first.category != 'four minute'}"
   end
 
   def displayCategory
-    category.name
+    categories.collect(&:name).join(', ')
   end
 
   def display_chief

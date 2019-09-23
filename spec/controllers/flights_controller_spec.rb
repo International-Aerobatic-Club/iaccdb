@@ -29,7 +29,7 @@ describe FlightsController, :type => :controller do
     d_fl = data['flight']
     d_cat = d_fl['category']
     expect(d_cat).to_not be nil
-    cat = @flight.category
+    cat = @flight.category.first
     expect(d_cat['sequence']).to eq cat.sequence
     expect(d_cat['aircat']).to eq cat.aircat
     expect(d_cat['name']).to eq cat.name

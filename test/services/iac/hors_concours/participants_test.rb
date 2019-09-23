@@ -1,33 +1,13 @@
 require 'test_helper'
+require 'shared/hors_concours_data'
 
-module IAC
-  class HorsConcoursParticipantsTest < ActiveSupport::TestCase
-    def create_pilot_flights(flight, pilots)
-      sequence = create(:sequence)
-      pilots.collect do |pilot|
-        create(:pilot_flight, pilot: pilot, flight: flight, sequence: sequence)
-      end
-    end
+module IAC::HorsConcours
+  class ParticipantsTest < ActiveSupport::TestCase
+    include HorsConcoursData
 
     setup do
-      @lower_cat = Category.find_by(aircat: 'P', category: 'sportsman')
-      @higher_cat = Category.find_by(aircat: 'P', category: 'advanced')
-      @glider_cat = Category.find_by(aircat: 'G', category: 'sportsman')
-      @solo_cat = Category.find_by(aircat: 'P', category: 'unlimited')
-      @contest = create(:contest)
-      @pilots = create_list(:member, 7)
-
-      known_flight = create(:flight, contest: @contest, category: @higher_cat)
-      @known_flights = create_pilot_flights(known_flight, @pilots)
-
-      unknown_flight = create(:flight,
-        name: 'Unknown',
-        contest: @contest,
-        category: @higher_cat)
-      unknown_sequence = create(:sequence)
-      @unknown_flights = create_pilot_flights(unknown_flight, @pilots)
-
-      @hc = HorsConcoursParticipants.new(@contest)
+      setup_hors_concours_flights
+      @hc = IAC::HorsConcoursParticipants.new(@contest)
     end
 
     test 'does not mark non-solo, non-lower-category' do
@@ -40,7 +20,8 @@ module IAC
     end
 
     test 'marks solo participant pilot_flight' do
-      known_flight = create(:flight, contest: @contest, category: @solo_cat)
+      known_flight = create(:flight,
+        contest: @contest, category_id: @solo_cat.id)
       pf = create(:pilot_flight, flight: known_flight)
 
       @hc.mark_solo_participants_as_hc
@@ -51,7 +32,8 @@ module IAC
 
     test 'marks lower category participant pilot_flight' do
       pilot = @pilots.first
-      known_flight = create(:flight, contest: @contest, category: @lower_cat)
+      known_flight = create(:flight,
+        contest: @contest, category_id: @lower_cat.id)
       pf = create(:pilot_flight, pilot: pilot, flight: known_flight)
 
       @hc.mark_lower_category_participants_as_hc
@@ -62,7 +44,8 @@ module IAC
 
     test 'does not mark lower category pilot_flight in different class' do
       pilot = @pilots.first
-      known_flight = create(:flight, contest: @contest, category: @glider_cat)
+      known_flight = create(:flight,
+        contest: @contest, category_id: @glider_cat.id)
       pf = create(:pilot_flight, flight: known_flight)
 
       @hc.mark_lower_category_participants_as_hc
@@ -77,13 +60,15 @@ module IAC
       end
 
       pilot = @pilots.first
-      known_flight = create(:flight, contest: @contest, category: @lower_cat)
+      known_flight = create(:flight,
+        contest: @contest, category_id: @lower_cat.id)
       create_list(:pilot_flight, 3, flight: known_flight)
       pf = create(:pilot_flight, pilot: pilot, flight: known_flight)
       lc_result = create(:pc_result,
         pilot: pilot, contest: @contest, category: @lower_cat)
 
-      known_flight = create(:flight, contest: @contest, category: @solo_cat)
+      known_flight = create(:flight,
+        contest: @contest, category_id: @solo_cat.id)
       pf = create(:pilot_flight, flight: known_flight)
       sc_result = create(:pc_result,
         pilot: pf.pilot, contest: @contest, category: @solo_cat)

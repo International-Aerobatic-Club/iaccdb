@@ -38,5 +38,29 @@ module HorsConcoursData
     computer = ContestComputer.new(@contest)
     computer.compute_results
   end
-end
 
+  def create_pilot_flights(flight, pilots)
+    sequence = create(:sequence)
+    pilots.collect do |pilot|
+      create(:pilot_flight, pilot: pilot, flight: flight, sequence: sequence)
+    end
+  end
+
+  def setup_hors_concours_flights
+    @lower_cat = Category.find_by(aircat: 'P', category: 'sportsman')
+    @higher_cat = Category.find_by(aircat: 'P', category: 'advanced')
+    @glider_cat = Category.find_by(aircat: 'G', category: 'sportsman')
+    @solo_cat = Category.find_by(aircat: 'P', category: 'unlimited')
+    @contest = create(:contest)
+    @pilots = create_list(:member, 7)
+
+    known_flight = create(:flight,
+      contest: @contest, category_id: @higher_cat.id)
+    @known_flights = create_pilot_flights(known_flight, @pilots)
+
+    unknown_flight = create(:flight,
+      name: 'Unknown', contest: @contest, category_id: @higher_cat.id)
+    unknown_sequence = create(:sequence)
+    @unknown_flights = create_pilot_flights(unknown_flight, @pilots)
+  end
+end
