@@ -1,15 +1,20 @@
 require 'test_helper'
 
 class CategorySynthesisServiceTest < ActiveSupport::TestCase
-  setup do
-    @synthetic_cat = create(:synthetic_category)
+  def setup_synthetic_category(contest, reg_cat)
+    synth_cat = create(
+      :synthetic_category,
+      contest: contest,
+      regular_category_name: reg_cat.category,
+      regular_category_aircat: reg_cat.aircat
+    )
     pilots = create_list(:member, 6)
     judges = create_list(:judge, 4)
-    flights = @synthetic_cat.synthetic_category_flights.collect do |name|
+    flights = synth_cat.synthetic_category_flights.collect do |name|
       flight = create(:flight,
         name: name,
-        contest_id: @synthetic_cat.contest_id,
-        category_id: @synthetic_cat.regular_category_id
+        contest_id: synth_cat.contest_id,
+        category_id: synth_cat.regular_category_id
       )
       pilots.each do |pilot|
         pf = create(:pilot_flight, pilot: pilot, flight: flight)
@@ -19,27 +24,45 @@ class CategorySynthesisServiceTest < ActiveSupport::TestCase
       end
       flight
     end
-    css = CategorySynthesisService.new(@synthetic_cat)
-    css.synthesize_category
+    synth_cat
+  end
+
+  def collect_flight_names(contest, cat)
+    flights = Flight.where(contest: contest, category: cat)
+    flights.collect(&:name).sort
+  end
+
+  setup do
+    @contest = create(:contest)
+    reg_cat = create(:category, category: 'Advanced', aircat: 'P')
+    @synthetic_cat = setup_synthetic_category(@contest, reg_cat)
   end
 
   test 'copies flights to synthetic category' do
+    CategorySynthesisService.synthesize_category(@synthetic_cat)
     cat = @synthetic_cat.find_or_create
-    flights = Flight.where(
-      contest: @synthetic_cat.contest,
-      category: cat
-    )
-    flight_names = flights.collect(&:name).sort
+    flight_names = collect_flight_names(@contest, cat)
     assert_equal(flight_names, @synthetic_cat.synthetic_category_flights.sort)
   end
 
   test 'removes non-regular category flights' do
+    CategorySynthesisService.synthesize_category(@synthetic_cat)
     cat = @synthetic_cat.regular_category
-    flights = Flight.where(
-      contest: @synthetic_cat.contest,
-      category: cat
-    )
-    flight_names = flights.collect(&:name).sort
+    flight_names = collect_flight_names(@contest, cat)
     assert_equal(flight_names, @synthetic_cat.regular_category_flights.sort)
+  end
+
+  test 'processes synthetic categories for a contest' do
+    reg_cat = create(:category, category: 'Unlimited', aircat: 'P')
+    synth_cat_unl = setup_synthetic_category(@contest, reg_cat)
+    CategorySynthesisService.synthesize_categories(@contest)
+
+    cat = @synthetic_cat.find_or_create
+    flight_names = collect_flight_names(@contest, cat)
+    assert_equal(flight_names, @synthetic_cat.synthetic_category_flights.sort)
+
+    cat = synth_cat_unl.find_or_create
+    flight_names = collect_flight_names(@contest, cat)
+    assert_equal(flight_names, @synthetic_cat.synthetic_category_flights.sort)
   end
 end
