@@ -10,7 +10,7 @@ class PcResult::ComputationTest < ActiveSupport::TestCase
     judge_lynne = create(:judge_lynne)
     known_flight = create(:nationals_imdt_known,
       :contest => @contest)
-    @imdt_cat = known_flight.category
+    @imdt_cat = known_flight.categories.first
     @adams_flight = create(:adams_known,
       :flight => known_flight, :pilot => @adams)
     create(:adams_known_klein, 
@@ -34,7 +34,7 @@ class PcResult::ComputationTest < ActiveSupport::TestCase
       :pilot_flight => denton_flight,
       :judge => judge_lynne)
     free_flight = create(:nationals_imdt_free,
-      :contest => @contest, :category => @imdt_cat)
+      :contest => @contest, :category_id => @imdt_cat.id)
     @adams_flight = create(:adams_free,
       :flight => free_flight, :pilot => @adams)
     create(:adams_free_klein, 
