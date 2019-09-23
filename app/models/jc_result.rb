@@ -15,7 +15,7 @@ class JcResult < ApplicationRecord
 
   def compute_category_totals
     zero_reset
-    flights = contest.flights.where(category: category)
+    flights = category.flights.where(contest: contest)
     flights.each do |flight|
       flight.jf_results.each do |jf_result|
         accumulate(jf_result) if jf_result.judge.judge == self.judge
