@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190923230605) do
+ActiveRecord::Schema.define(version: 20190923231126) do
 
   create_table "airplanes", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.string "reg"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20190923230605) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean "synthetic", default: false, null: false
+    t.index ["category", "aircat", "name"], name: "index_categories_on_category_and_aircat_and_name", unique: true
     t.index ["id"], name: "index_categories_on_id"
   end
 
