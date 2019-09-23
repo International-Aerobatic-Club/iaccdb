@@ -6,7 +6,7 @@ class CategoryRollups
 
   # return flights for this category of this contest
   def flights
-    @contest.flights.where(:category => @category)
+    @category.flights.where(contest: @contest)
   end
 
   # compute pilot results for this category of this contest

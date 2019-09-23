@@ -33,7 +33,7 @@ class PcResult < ApplicationRecord
   def compute_category_totals
     self.category_value = 0.0
     self.total_possible = 0
-    flights = contest.flights.where(category: category)
+    flights = category.flights.where(contest: contest)
     flights.each do |flight|
       pf_results = PfResult.joins(:pilot_flight).where(
         { pilot_flights: {pilot_id: pilot, flight_id: flight}})

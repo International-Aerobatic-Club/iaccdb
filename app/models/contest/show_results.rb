@@ -54,21 +54,21 @@ module Contest::ShowResults
   def category_results
     categories = []
     if !flights.empty?
-      cats = flights.collect { |f| f.category }
-      cats = cats.uniq.sort { |a,b| a.sequence <=> b.sequence }
+      cats = flights.collect { |f| f.categories }
+      cats = cats.flatten.uniq.sort { |a,b| a.sequence <=> b.sequence }
       cats.each do |cat|
         category_data = {}
         category_data[:cat] = cat
         category_data[:judge_results] = jc_results.where(
           category: cat).includes(:judge)
-        category_data[:flights] = flights.where(
-          category: cat).all.sort { |a,b| a.sequence <=> b.sequence }
+        category_data[:flights] = cat.flights.where(
+          contest: self).all.sort { |a,b| a.sequence <=> b.sequence }
         category_data[:chiefs] = flights_chiefs(category_data[:flights])
         category_data[:pilot_results] = []
         pcrs = pc_results.where(category:cat).includes(:pilot).order(:category_rank)
         if !pcrs.empty?
           pf_results = PfResult.joins({:pilot_flight => :flight}).where(
-             {:flights => {contest_id: id, category_id: cat}})
+             {:flights => { id: flights.collect(&:id) }})
           pfr_by_flight = pf_results.all.group_by do |pf|
             pf.flight
           end
