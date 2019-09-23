@@ -253,14 +253,14 @@ module MemberMerge
           t_flight = create :flight, contest: @t_contest
           t_pf = create :pilot_flight, flight: t_flight, pilot: @target_mr
           create :score, pilot_flight: t_pf
-          t_cat = t_flight.category
+          t_cat = t_flight.categories.first
           create :pc_result, pilot: @target_mr, contest: @t_contest,
             category: t_cat
 
           r_flight = create :flight, contest: @r_contest
           r_pf = create :pilot_flight, flight: r_flight, pilot: @replace_mr
           create :score, pilot_flight: r_pf
-          r_cat = r_flight.category
+          r_cat = r_flight.categories.first
           create :pc_result, pilot: @replace_mr, contest: @r_contest,
             category: r_cat
 

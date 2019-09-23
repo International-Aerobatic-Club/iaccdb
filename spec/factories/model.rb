@@ -103,7 +103,7 @@ FactoryBot.define do
 ### Category
   factory :category do
     transient do 
-      category { 'Intermediate' }
+      category { 'intermediate' }
       aircat { 'P' }
     end
     initialize_with do
@@ -111,9 +111,10 @@ FactoryBot.define do
         :category => category, :aircat => aircat
       ).order(:sequence).first
       unless factory_cat
-        sequence = Category.select('MAX sequence').first.sequence + 1
+        sequence = Category.pluck(:sequence).max + 1
         factory_cat = Category.create(
-          :category => cat, :aircat => aircat, :sequence => sequence)
+          category: category, aircat: aircat, sequence: sequence,
+          name: aircat.capitalize)
       end
       factory_cat
     end
