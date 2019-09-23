@@ -13,7 +13,7 @@ class HorsConcoursTest < ActiveSupport::TestCase
   end
 
   def setup_flights(pilot, cat)
-    flights = create_list(:flight, 3, contest: @contest, category: cat)
+    flights = create_list(:flight, 3, contest: @contest, category_id: cat.id)
     flights.each do |flight|
       create(:pilot_flight, flight: flight, pilot: pilot)
       create_list(:pilot_flight, 3, flight: flight)
@@ -23,7 +23,7 @@ class HorsConcoursTest < ActiveSupport::TestCase
 
   def setup_4m_flight(pilot)
     four_cat = create(:category, category: 'four minute', aircat: 'F')
-    flight = create(:flight, contest: @contest, category: four_cat)
+    flight = create(:flight, contest: @contest, category_id: four_cat.id)
     create(:pilot_flight, flight: flight, pilot: pilot)
     create_list(:pilot_flight, 3, flight: flight)
     flight
@@ -46,13 +46,13 @@ class HorsConcoursTest < ActiveSupport::TestCase
   test 'identifies solo performance in category' do
     pilot = create :member
     spn_flights = create_list(:flight, 3,
-      contest: @contest, category: @spn_cat)
+      contest: @contest, category_id: @spn_cat.id)
     spn_flights.each do |flight|
       create(:pilot_flight, flight: flight, pilot: pilot)
     end
     @contest_computer.compute_results
 
-    flights = @contest.flights.where(category_id: @spn_cat.id)
+    flights = @spn_cat.flights.where(contest: @contest)
     assert_equal(3, flights.count)
     pfs = PilotFlight.where(flight_id: flights.collect(&:id))
     assert_equal(3, pfs.count)

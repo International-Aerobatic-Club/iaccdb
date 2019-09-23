@@ -28,7 +28,7 @@ class CategorySynthesisServiceTest < ActiveSupport::TestCase
   end
 
   def collect_flight_names(contest, cat)
-    flights = Flight.where(contest: contest, category: cat)
+    flights = cat.flights.where(contest: contest)
     flights.collect(&:name).sort
   end
 

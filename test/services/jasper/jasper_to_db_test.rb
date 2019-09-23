@@ -27,7 +27,7 @@ module Jasper
 
     test 'captures flights' do
       cat = Category.find_for_cat_aircat('Unlimited', 'P')
-      flights = @contest.flights.where(:category_id => cat.id, :name => 'Unknown')
+      flights = cat.flights.where(contest: @contest, :name => 'Unknown')
       assert_equal(1, flights.count)
       assert_equal(2383, flights.first.chief.iac_id)
       assert_equal(18515, flights.first.assist.iac_id)
@@ -55,7 +55,7 @@ module Jasper
 
     test 'captures pilot flights' do
       cat = Category.find_for_cat_aircat('Intermediate', 'P')
-      flight = @contest.flights.where(:category_id => cat.id, :name => 'Unknown').first
+      flight = cat.flights.find_by(contest: @contest, :name => 'Unknown')
       pilot = Member.find_by_iac_id(10467)
       pilot_flight = PilotFlight.find_by_flight_id_and_pilot_id(flight.id, pilot.id)
       refute_nil(pilot_flight)
@@ -64,7 +64,7 @@ module Jasper
 
     test 'captures airplanes' do
       cat = Category.find_for_cat_aircat('Sportsman', 'P')
-      flight = @contest.flights.where( :name => 'Known', :category_id => cat.id).first
+      flight = cat.flights.find_by(contest: @contest, :name => 'Known')
       refute_nil(flight)
       pilot = Member.where(:family_name => 'Ernewein').first
       refute_nil(pilot)
@@ -79,7 +79,7 @@ module Jasper
 
     test 'filters pilot chapter number' do
       cat = Category.find_for_cat_aircat('Sportsman', 'P')
-      flight = @contest.flights.where(category_id: cat.id, name: 'Known').first
+      flight = cat.flights.find_by(contest: @contest, :name => 'Known')
       pilot = Member.find_by_iac_id(12058)
       pilot_flight = PilotFlight.find_by_flight_id_and_pilot_id(flight.id, pilot.id)
       assert_equal('3/52', pilot_flight.chapter)

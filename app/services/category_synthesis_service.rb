@@ -3,20 +3,15 @@ class CategorySynthesisService
     sc = synthetic_category # shorthand
     reg_cat = sc.regular_category
     syn_cat = sc.find_or_create
-    reg_flights = Flight.where(contest: sc.contest, category: reg_cat)
+    reg_flights = reg_cat.flights.where(contest: sc.contest)
     sc.synthetic_category_flights.each do |name|
-      reg_flight = Flight.find_by(
-        contest: sc.contest, category: reg_cat, name: name
-      )
-      reg_flight.extend(FlightM::CopyToCategory)
-      reg_flight.copy_to_category(syn_cat)
+      reg_flight = reg_flights.find_by(name: name)
+      reg_flight.categories << syn_cat if reg_flight
     end
     non_reg_names =
       sc.synthetic_category_flights - sc.regular_category_flights
-    Flight.where(
-      contest: sc.contest, category: reg_cat, name: non_reg_names
-    ).each do |flight|
-      flight.destroy!
+    reg_flights.where(name: non_reg_names).each do |flight|
+      flight.categories.delete(reg_cat)
     end
   end
 
