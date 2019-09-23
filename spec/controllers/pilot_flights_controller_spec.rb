@@ -49,7 +49,9 @@ describe PilotFlightsController, :type => :controller do
     expect(d_f['url']).to eq flight_url(flight, :format => :json)
     expect(d_f['id']).to eq flight.id
     expect(d_f['name']).to eq flight.name
-    expect(d_f['category']).to eq flight.category.name
+    d_cats = d_f['categories']
+    expect(d_cats).to_not be nil
+    expect(d_cats.length).to eq flight.categories.count
   end
   it 'responds with judge flight grades for pilot' do
     get :show, params: { id: @pilot_flight.id }, :format => :json
