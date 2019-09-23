@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190923140444) do
+ActiveRecord::Schema.define(version: 20190923145028) do
 
   create_table "airplanes", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.string "reg"
@@ -100,12 +100,12 @@ ActiveRecord::Schema.define(version: 20190923140444) do
     t.integer "assist_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer "category_id"
+    t.integer "obsolete_category_reference"
     t.index ["assist_id"], name: "index_flights_on_assist_id"
-    t.index ["category_id"], name: "index_flights_on_category_id"
     t.index ["chief_id"], name: "index_flights_on_chief_id"
     t.index ["contest_id"], name: "index_flights_on_contest_id"
     t.index ["id"], name: "index_flights_on_id"
+    t.index ["obsolete_category_reference"], name: "index_flights_on_obsolete_category_reference"
   end
 
   create_table "jc_results", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
