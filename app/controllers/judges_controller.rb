@@ -157,10 +157,14 @@ class JudgesController < ApplicationController
 
     # Create a hash of Category.id => Category.name
     # TODO should this be category and aircat instead of name?
+    #   If a flight was only recorded in a synthetic
+    #   category, that will be the category found
     ch = Category.pluck(:id, :name).to_h
 
     # Get all Contest objects for the year in question
-    Contest.where(['year(start) = ?', @year]).includes(:flights).find_each do |contest|
+    Contest.where(['year(start) = ?', @year]).includes(
+      :flights
+    ).find_each do |contest|
 
       # Convenience var
       nats = (contest.region == "National")
@@ -168,7 +172,10 @@ class JudgesController < ApplicationController
       # For each flight (e.g., Known/Free/Unknown)
       contest.flights.find_each do |flight|
         # report only one category so the flight is not double-counted
-        category = ch[flight.categories.first.id]
+        # order by sequence so the one chosen is a "regular" category
+        # however if the flight was only recorded in a synthetic
+        # category, that will be the category found
+        category = ch[flight.categories.order(:sequence).first.id]
 
         # Convenience vars
         pf_count = flight.pilot_flights.all.size # Number of pilot flights
@@ -206,7 +213,5 @@ class JudgesController < ApplicationController
 
     response = { 'Year' => @year, 'Activity' => @experience }
     render json: response
-
   end
-
 end
