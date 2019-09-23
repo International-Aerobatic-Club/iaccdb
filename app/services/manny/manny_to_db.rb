@@ -151,7 +151,7 @@ def process_flight(mContest, mCat, mFlight, seq)
     dFlight = Flight.new(:name => mFlight.name, :sequence => seq)
     dFlight.chief = @parts[mFlight.chief] if mFlight.chief
     dFlight.contest = @dContest
-    dFlight.category = dCategory
+    dFlight.categories << dCategory
     dFlight.save!
     process_flight_judges(dFlight, mFlight)
     process_flight_scores(dFlight, mContest, mCat, mFlight)
