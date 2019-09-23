@@ -80,7 +80,9 @@ module ACRO
       fla = ct.flights
       expect(fla.size).to eq(1)
       fl = fla.first
-      cat = fl.category
+      cats = fl.categories
+      expect(cats.count).to eq(1)
+      cat = cats.first
       expect(cat.category).to eq('advanced')
       expect(cat.aircat).to eq('P')
       expect(fl.name).to eq('Free')

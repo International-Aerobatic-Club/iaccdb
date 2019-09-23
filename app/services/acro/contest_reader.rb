@@ -92,14 +92,14 @@ def create_or_replace_pilot_flight(pilot_flight_data)
   if (category && name && aircat)
     cat = Category.find_for_cat_aircat(category, aircat)
     logger.info "Category is #{cat.inspect}"
-    Flight.where(
-      :contest_id => @contest_record, 
-      :name => name, 
-      :category_id => cat.id).destroy_all
+    cat.flights.where(
+      :contest_id => @contest_record,
+      :name => name
+    ).destroy_all
     flight = @contest_record.flights.build(
      :name => name,
-     :category_id => cat.id,
      :sequence => 0)
+    flight.categories << cat
     flight.save!
     @flights[pilot_flight_data.flightID] = flight
   else
