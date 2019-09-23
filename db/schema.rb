@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190923231126) do
+ActiveRecord::Schema.define(version: 20190923232802) do
 
   create_table "airplanes", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.string "reg"
@@ -389,7 +389,6 @@ ActiveRecord::Schema.define(version: 20190923231126) do
     t.integer "contest_id"
     t.integer "regular_category_id"
     t.text "regular_category_flights"
-    t.string "synthetic_category_name"
     t.string "synthetic_category_description"
     t.text "synthetic_category_flights"
     t.datetime "created_at", null: false
