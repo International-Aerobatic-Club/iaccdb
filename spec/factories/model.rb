@@ -107,22 +107,32 @@ FactoryBot.define do
       aircat { 'P' }
     end
     initialize_with do
-      factory_cat = Category.where(:category => category, :aircat => aircat).first
+      factory_cat = Category.where(
+        :category => category, :aircat => aircat
+      ).order(:sequence).first
       unless factory_cat
         sequence = Category.select('MAX sequence').first.sequence + 1
-        factory_cat = Category.create(:category => cat, :aircat => aircat, :sequence => sequence)
+        factory_cat = Category.create(
+          :category => cat, :aircat => aircat, :sequence => sequence)
       end
       factory_cat
     end
   end
 ### Flight
   factory :flight do
+    transient do 
+      category { 'intermediate' }
+      aircat { 'P' }
+    end
     association :contest
-    association :category
     association :chief, :factory => :member
     association :assist, :factory => :member
     name { 'Known' }
     sequence(:sequence)
+    after(:create) do |flight, ev|
+      cat = create(:category, category: ev.category, aircat: ev.aircat)
+      flight.categories << cat
+    end
   end
   factory :nationals_imdt_known, :class => Flight do
     association :contest, :factory => :nationals
