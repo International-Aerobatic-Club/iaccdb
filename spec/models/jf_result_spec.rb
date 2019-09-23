@@ -2,7 +2,7 @@ describe JfResult, :type => :model do
   def reparse_contest(m2d, manny)
     @contest = m2d.process_contest(manny, true)
     @pri_cat = Category.find_by_category_and_aircat('primary', 'P')
-    @flight2 = @contest.flights.where(:category_id => @pri_cat.id, :name => 'Free').first
+    @flight2 = @pri_cat.flights.find_by(contest: @contest, :name => 'Free')
   end
   context 'computed contest' do
     before(:context) do
@@ -93,11 +93,11 @@ describe JfResult, :type => :model do
       j2db = Jasper::JasperToDB.new
       contest = j2db.process_contest(@jasper)
       pri_cat = Category.find_by_category_and_aircat('primary', 'P')
-      @pri_flight = contest.flights.where(:category_id => pri_cat.id, :name => 'Known').first
+      @pri_flight = pri_cat.flights.find_by(contest: contest, :name => 'Known')
       computer = FlightComputer.new(@pri_flight)
       computer.flight_results(false)
       spn_cat = Category.find_by_category_and_aircat('sportsman', 'P')
-      @spn_flight = contest.flights.where(:category_id => spn_cat.id, :name => 'Known').first
+      @spn_flight = spn_cat.flights.find_by(contest: contest, :name => 'Known')
       computer = FlightComputer.new(@spn_flight)
       computer.flight_results(false)
     end
