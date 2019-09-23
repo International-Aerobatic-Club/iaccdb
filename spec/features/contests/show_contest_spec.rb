@@ -1,10 +1,10 @@
 describe 'show contest' do
   def build_contest_category_flights(contest, category, chief)
-    first = create(:flight, contest: contest, category: category,
+    first = create(:flight, contest: contest, category_id: category.id,
       chief: chief)
-    second = create(:flight, contest: contest, category: category,
+    second = create(:flight, contest: contest, category_id: category.id,
       chief: chief, name: 'Free')
-    third = create(:flight, contest: contest, category: category,
+    third = create(:flight, contest: contest, category_id: category.id,
       chief: chief, name: 'Unknown')
     pfs = create_list(:pilot_flight, 7, flight: first)
     [second, third].each do |flight|
@@ -41,7 +41,8 @@ describe 'show contest' do
       fspn.chief = cj2
       fspn.save!
       visit contest_path(@contest)
-      spnh = find(:xpath, "//div[@id='content']/h3[text()='#{fspn.category.name}']")
+      fspn_cat = fspn.categories.first
+      spnh = find(:xpath, "//div[@id='content']/h3[text()='#{fspn_cat.name}']")
       ptbl = spnh.first(:xpath, "following-sibling::table[@class='pilot_results']")
       expect(ptbl).to_not be nil
       pfcj = ptbl.first(:xpath, "following-sibling::p[@class='category-chief']")
