@@ -1,5 +1,5 @@
 class Category < ApplicationRecord
-  has_many :flights
+  has_and_belongs_to_many :flights
   has_many :region_pilots
   has_many :results
   has_many :jc_results, :dependent => :destroy
