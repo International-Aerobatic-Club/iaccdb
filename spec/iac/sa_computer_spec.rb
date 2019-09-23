@@ -5,15 +5,15 @@ module IAC
         @category = Category.find_by_category_and_aircat('intermediate', 'P')
         @pilot_flight = create(:adams_known)
         judge_team = create(:judge_klein)
-        create(:adams_known_klein, 
+        create(:adams_known_klein,
           :pilot_flight => @pilot_flight,
           :judge => judge_team)
         @judge_jim = create(:judge_jim)
-        create(:adams_known_jim, 
+        create(:adams_known_jim,
           :pilot_flight => @pilot_flight,
           :judge => @judge_jim)
         judge_team = create(:judge_lynne)
-        create(:adams_known_lynne, 
+        create(:adams_known_lynne,
           :pilot_flight => @pilot_flight,
           :judge => judge_team)
         @sa_computer = SaComputer.new(@pilot_flight)

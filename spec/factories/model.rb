@@ -138,18 +138,16 @@ FactoryBot.define do
       end
       flight.categories << cat
     end
-  end
-  factory :nationals_imdt_known, :class => Flight do
-    association :contest, :factory => :nationals
-    association :category
-    name { 'Known' }
-    sequence(:sequence) { |n| n }
-  end
-  factory :nationals_imdt_free, :class => Flight do |r|
-    r.association :contest, :factory => :nationals
-    r.association :category
-    r.name { 'Free' }
-    r.sequence(:sequence) { |n| n }
+    factory :nationals_imdt_known do
+      association :contest, :factory => :nationals
+      name { 'Known' }
+      sequence(:sequence) { |n| n }
+    end
+    factory :nationals_imdt_free, :class => Flight do |r|
+      r.association :contest, :factory => :nationals
+      r.name { 'Free' }
+      r.sequence(:sequence) { |n| n }
+    end
   end
 ### Sequence
   factory :sequence, class: Sequence do
