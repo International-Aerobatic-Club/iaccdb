@@ -29,8 +29,7 @@ module Manny
     end
     it 'captures a sportsman submitted free for a second flight' do
       category = Category.find_for_cat_aircat('Sportsman', 'P')
-      flight = @contest.flights.where( :name => 'Free', 
-        :category_id => category.id).first
+      flight = category.flights.find_by(contest: @contest, name: 'Free')
       expect(flight).not_to be nil
       pilot = Member.where(:family_name => 'Hartvigsen').first
       expect(pilot).not_to be nil
@@ -44,8 +43,7 @@ module Manny
     end
     it 'captures a sportsman submitted free for a third flight' do
       category = Category.find_for_cat_aircat('Sportsman', 'P')
-      flight = @contest.flights.where( :name => 'Unknown', 
-        :category_id => category.id).first
+      flight = category.flights.find_by(contest: @contest, name: 'Unknown')
       expect(flight).not_to be nil
       pilot = Member.where(:family_name => 'Hartvigsen').first
       expect(pilot).not_to be nil
@@ -59,8 +57,7 @@ module Manny
     end
     it 'captures the sportsman known for a second flight' do
       category = Category.find_for_cat_aircat('Sportsman', 'P')
-      flight = @contest.flights.where( :name => 'Unknown', 
-        :category_id => category.id).first
+      flight = category.flights.find_by(contest: @contest, name: 'Unknown')
       expect(flight).not_to be nil
       pilot = Member.where(:family_name => 'Cohen').first
       expect(pilot).not_to be nil
@@ -74,8 +71,7 @@ module Manny
     end
     it 'gets the intermediate unknown' do
       category = Category.find_for_cat_aircat('Intermediate', 'P')
-      flight = @contest.flights.where( :name => 'Unknown', 
-        :category_id => category.id).first
+      flight = category.flights.find_by(contest: @contest, name: 'Unknown')
       expect(flight).not_to be nil
       pilot = Member.where(:family_name => 'Wells').first
       expect(pilot).not_to be nil
@@ -89,8 +85,7 @@ module Manny
     end
     it 'captures scores' do
       category = Category.find_for_cat_aircat('Sportsman', 'P')
-      flight = @contest.flights.where( :name => 'Free', 
-        :category_id => category.id).first
+      flight = category.flights.find_by(contest: @contest, name: 'Free')
       expect(flight).not_to be nil
       pilot = Member.where(:family_name => 'Cohen').first # manny_id 6
       expect(pilot).not_to be nil
@@ -109,8 +104,7 @@ module Manny
     end
     it 'captures penalties' do
       category = Category.find_for_cat_aircat('Sportsman', 'P')
-      flight = @contest.flights.where( :name => 'Free', 
-        :category_id => category.id).first
+      flight = category.flights.find_by(contest: @contest, name: 'Free')
       expect(flight).not_to be nil
       pilot = Member.where(:family_name => 'Cohen').first # manny_id 6
       expect(pilot).not_to be nil
