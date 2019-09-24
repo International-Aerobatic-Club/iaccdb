@@ -114,7 +114,8 @@ FactoryBot.define do
       unless factory_cat
         factory_cat = Category.create(
           category: category, aircat: aircat, sequence: seq,
-          name: aircat.capitalize)
+          name: Faker::Book.unique.title
+        )
       end
       factory_cat
     end

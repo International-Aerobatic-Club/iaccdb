@@ -198,7 +198,7 @@ module MemberMerge
           t_cat = t_jc_result.category
           t_jy_result = create :jy_result, year: @t_contest.year,
             judge: @target_mr, category: t_cat
-          t_flight = create :flight, contest: @t_contest, category: t_cat
+          t_flight = create :flight, contest: @t_contest, category_id: t_cat.id
           t_pf = create :pilot_flight, flight: t_flight
           t_jp = create :judge, judge: @target_mr
           create :score, judge: t_jp, pilot_flight: t_pf
@@ -207,7 +207,7 @@ module MemberMerge
           r_cat = r_jc_result.category
           r_jy_result = create :jy_result, year: @r_contest.year,
             judge: @replace_mr, category: r_cat
-          r_flight = create :flight, contest: @r_contest, category: r_cat
+          r_flight = create :flight, contest: @r_contest, category_id: r_cat.id
           r_pf = create :pilot_flight, flight: r_flight
           r_jp = create :judge, judge: @replace_mr
           create :score, judge: r_jp, pilot_flight: r_pf
