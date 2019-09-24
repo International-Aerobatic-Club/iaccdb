@@ -106,6 +106,7 @@ FactoryBot.define do
       category { 'intermediate' }
       aircat { 'P' }
       seq { (Category.pluck(:sequence).max || 0) + 1 }
+      name { nil }
     end
     initialize_with do
       factory_cat = Category.where(
@@ -114,7 +115,7 @@ FactoryBot.define do
       unless factory_cat
         factory_cat = Category.create(
           category: category, aircat: aircat, sequence: seq,
-          name: Faker::Book.unique.title
+          name: (name || Faker::Book.unique.title)
         )
       end
       factory_cat

@@ -8,12 +8,14 @@ module IAC::HorsConcours
     setup do
       setup_hors_concours_flights
       last_seq = Category.pluck(:sequence).max
-      synth_cat = Category.create(category: 'advanced', aircat: 'P',
-        name: 'Advanced Team', sequence: last_seq + 1, synthetic: true)
+      synth_cat = create(:category, category: 'advanced', aircat: 'P',
+        name: 'Advanced Team', seq: last_seq + 1, synthetic: true)
       @unknown_flights.each do |pf|
         flight = pf.flight
-        flight.categories << synth_cat
-        flight.save!
+        unless flight.categories.exists?(synth_cat.id)
+          flight.categories << synth_cat
+          flight.save!
+        end
       end
       @hc = IAC::HorsConcoursParticipants.new(@contest)
     end
