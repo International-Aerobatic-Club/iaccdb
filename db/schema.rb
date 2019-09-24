@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190923232802) do
+ActiveRecord::Schema.define(version: 20190924134741) do
 
   create_table "airplanes", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.string "reg"
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20190923232802) do
     t.integer "sequence", null: false
     t.string "category", limit: 16, null: false
     t.string "aircat", limit: 1, null: false
-    t.string "name", limit: 32, null: false
+    t.string "name", limit: 48, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean "synthetic", default: false, null: false
@@ -389,7 +389,7 @@ ActiveRecord::Schema.define(version: 20190923232802) do
     t.integer "contest_id"
     t.integer "regular_category_id"
     t.text "regular_category_flights"
-    t.string "synthetic_category_description"
+    t.string "synthetic_category_description", limit: 48, null: false
     t.text "synthetic_category_flights"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
