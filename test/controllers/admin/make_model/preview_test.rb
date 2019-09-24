@@ -3,6 +3,7 @@ require 'shared/make_models_data'
 
 class Admin::MakeModelPreviewTest < ActionDispatch::IntegrationTest
   include MakeModelsData
+  include MakeModelsHelper
 
   setup do
     @models = setup_make_models_with_airplanes
@@ -66,7 +67,7 @@ class Admin::MakeModelPreviewTest < ActionDispatch::IntegrationTest
       params: admin_make_models_select_params(@select_models)
     @select_models.each do |mm|
       assert_select('ul.make-model-airplanes-list li',
-          /#{mm.make}, #{mm.model}/) do
+          /#{make_model_description(mm).unicode_normalize}/) do
         mm.airplanes.each do |airplane|
           assert_select('ul li', /#{airplane.reg}/)
         end
