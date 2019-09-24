@@ -5,7 +5,7 @@ class SyntheticCategory < ApplicationRecord
   serialize :synthetic_category_flights
 
   def find_or_create
-    last_seq = Category.pluck(:sequence).max
+    last_seq = Category.maximum(:sequence)
     begin
       cat = Category.find_or_create_by(
         category: regular_category.category,

@@ -15,7 +15,7 @@ class SyntheticCategoryTest < ActiveSupport::TestCase
   end
 
   test 'creates synthetic category' do
-    last_seq = Category.pluck(:sequence).max
+    last_seq = Category.maximum(:sequence)
     cur_ct = Category.count
     cat = synthetic_category.find_or_create
     refute_nil(cat)
