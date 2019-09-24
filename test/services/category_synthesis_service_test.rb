@@ -34,11 +34,34 @@ class CategorySynthesisServiceTest < ActiveSupport::TestCase
 
   setup do
     @contest = create(:contest)
-    reg_cat = create(:category, category: 'Advanced', aircat: 'P')
-    @synthetic_cat = setup_synthetic_category(@contest, reg_cat)
+    @reg_cat = create(:category, category: 'advanced', aircat: 'P')
+    @synthetic_cat = setup_synthetic_category(@contest, @reg_cat)
   end
 
   test 'copies flights to synthetic category' do
+    CategorySynthesisService.synthesize_category(@synthetic_cat)
+    cat = @synthetic_cat.find_or_create
+    flight_names = collect_flight_names(@contest, cat)
+    assert_equal(flight_names, @synthetic_cat.synthetic_category_flights.sort)
+  end
+
+  test 'updates synthetic category on flight with no duplication' do
+    CategorySynthesisService.synthesize_category(@synthetic_cat)
+    flights = @reg_cat.flights.where(contest: @contest)
+    cats = flights.collect { |f| f.categories }
+    cats = cats.flatten.uniq.collect(&:name).sort
+    CategorySynthesisService.synthesize_category(@synthetic_cat)
+    cats_too = flights.collect { |f| f.categories }
+    cats_too = cats_too.flatten.uniq.collect(&:name).sort
+    assert_equal(cats, cats_too)
+  end
+
+  test 'removes synthetic category from flight when no longer applied' do
+    flight_count = @synthetic_cat.synthetic_category_flights.length
+    CategorySynthesisService.synthesize_category(@synthetic_cat)
+    @synthetic_cat.synthetic_category_flights.shift
+    assert_equal(flight_count - 1,
+      @synthetic_cat.synthetic_category_flights.length)
     CategorySynthesisService.synthesize_category(@synthetic_cat)
     cat = @synthetic_cat.find_or_create
     flight_names = collect_flight_names(@contest, cat)
@@ -53,8 +76,8 @@ class CategorySynthesisServiceTest < ActiveSupport::TestCase
   end
 
   test 'processes synthetic categories for a contest' do
-    reg_cat = create(:category, category: 'Unlimited', aircat: 'P')
-    synth_cat_unl = setup_synthetic_category(@contest, reg_cat)
+    unl_cat = create(:category, category: 'Unlimited', aircat: 'P')
+    synth_cat_unl = setup_synthetic_category(@contest, unl_cat)
     CategorySynthesisService.synthesize_categories(@contest)
 
     cat = @synthetic_cat.find_or_create

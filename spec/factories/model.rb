@@ -105,15 +105,15 @@ FactoryBot.define do
     transient do 
       category { 'intermediate' }
       aircat { 'P' }
+      seq { (Category.pluck(:sequence).max || 0) + 1 }
     end
     initialize_with do
       factory_cat = Category.where(
         :category => category, :aircat => aircat
       ).order(:sequence).first
       unless factory_cat
-        sequence = Category.pluck(:sequence).max + 1
         factory_cat = Category.create(
-          category: category, aircat: aircat, sequence: sequence,
+          category: category, aircat: aircat, sequence: seq,
           name: aircat.capitalize)
       end
       factory_cat

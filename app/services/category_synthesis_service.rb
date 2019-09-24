@@ -4,6 +4,9 @@ class CategorySynthesisService
     reg_cat = sc.regular_category
     syn_cat = sc.find_or_create
     reg_flights = reg_cat.flights.where(contest: sc.contest)
+    reg_flights.each do |flight|
+      flight.categories.delete(syn_cat)
+    end
     sc.synthetic_category_flights.each do |name|
       reg_flight = reg_flights.find_by(name: name)
       reg_flight.categories << syn_cat if reg_flight

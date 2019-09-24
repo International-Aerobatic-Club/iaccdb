@@ -13,8 +13,6 @@ FactoryBot.define do
       syncat = SyntheticCategory.new(contest: contest,
         regular_category: regular_category)
       syncat.regular_category_flights = flight_names
-      syncat.synthetic_category_name =
-        [regular_category_name, 'team'].join(' ')
       syncat.synthetic_category_description =
         [regular_category_name, 'team'].join(' ').camelcase
       syncat.synthetic_category_flights = flight_names + extra_flight_names
