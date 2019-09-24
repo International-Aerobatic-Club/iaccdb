@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190924134741) do
+ActiveRecord::Schema.define(version: 20190924175735) do
 
   create_table "airplanes", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.string "reg"
@@ -397,8 +397,8 @@ ActiveRecord::Schema.define(version: 20190924134741) do
     t.index ["regular_category_id"], name: "index_synthetic_categories_on_regular_category_id"
   end
 
-  add_foreign_key "categories_flights", "categories"
-  add_foreign_key "categories_flights", "flights"
+  add_foreign_key "categories_flights", "categories", on_delete: :cascade
+  add_foreign_key "categories_flights", "flights", on_delete: :cascade
   add_foreign_key "synthetic_categories", "categories", column: "regular_category_id", on_update: :cascade, on_delete: :cascade
-  add_foreign_key "synthetic_categories", "contests"
+  add_foreign_key "synthetic_categories", "contests", on_delete: :cascade
 end
