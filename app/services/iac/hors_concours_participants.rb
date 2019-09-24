@@ -10,9 +10,7 @@ module IAC
 
     def mark_solo_participants_as_hc
       flights = @contest.flights
-      categories = flights.collect do |f|
-        f.categories.all
-      end
+      categories = flights.collect { |f| f.categories }
       categories = categories.flatten.uniq
       flights_by_cat = {}
       flights.each do |f|

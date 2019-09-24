@@ -50,9 +50,7 @@ class ContestComputer
 
   # ensure contest pilot rollup computations for this contest are complete
   def compute_contest_pilot_rollups
-    cats = @contest.flights.collect do |f|
-      f.categories
-    end
+    cats = @contest.flights.collect { |f| f.categories }
     cats = cats.flatten.uniq
     cats.each do |cat|
       compute_category_rollups(cat)
