@@ -95,7 +95,7 @@ class ContestsController::ShowTest < ActionController::TestCase
     d_cr = d_crs.first
     d_jrs = d_cr['judge_results']
     assert(d_jrs)
-    assert_equal(3, d_jrs.count)
+    assert_equal(@judges.count, d_jrs.count)
     d_jr = d_jrs.first
     j_result = d_jr['result']
     assert(j_result)
@@ -113,7 +113,7 @@ class ContestsController::ShowTest < ActionController::TestCase
     d_cr = d_crs.first
     d_fdls = d_cr['flights']
     assert(d_fdls)
-    assert_equal(3, d_fdls.count)
+    assert_equal(@flights.count, d_fdls.count)
     d_f = d_fdls.first
     assert(d_f.has_key?('url'))
     assert_match(/^http/, d_f['url'])
