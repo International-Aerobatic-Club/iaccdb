@@ -48,4 +48,11 @@ class ContestsController::IndexTest < ActionController::TestCase
     assert_equal(1, years.uniq.count)
     assert_equal(@year, years.first)
   end
+
+  test 'responds with has_results flag' do
+    get :index, :format => :json
+    data = JSON.parse(response.body)
+    contest = data['contests'].first
+    assert_false(contest.fetch('has_results', true))
+  end
 end
