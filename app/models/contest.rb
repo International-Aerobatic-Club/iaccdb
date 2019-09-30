@@ -54,6 +54,4 @@ class Contest < ApplicationRecord
     jc_results.destroy_all
     failures.destroy_all
   end
-
 end
-

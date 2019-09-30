@@ -114,4 +114,3 @@ module Contest::ShowResults
     categories
   end
 end
-
