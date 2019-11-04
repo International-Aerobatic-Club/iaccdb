@@ -276,6 +276,15 @@ FactoryBot.define do
     r.association :judge, :factory => :judge_klein
     r.values { [75, 80, 80, 85, 85, 85, 85, 85, 80, 80, 85, 80, 85, 85] }
   end
+### PfResult
+  factory :pf_result do
+    association :pilot_flight
+    flight_value { Faker::Number.decimal }
+    adj_flight_value { Faker::Number.decimal }
+    flight_rank { Faker::Number.between(from: 1, to: 30) }
+    adj_flight_rank { Faker::Number.between(from: 1, to: 30) }
+    total_possible { Faker::Number.between(from: 1000, to: 15000) }
+  end
 ### PfjResult
   factory :pfj_result do |r|
     r.association :pilot_flight
