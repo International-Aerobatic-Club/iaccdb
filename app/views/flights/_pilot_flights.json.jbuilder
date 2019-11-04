@@ -4,11 +4,13 @@ json.pilot do
   json.name pf.pilot.name
   json.url pilot_url(pf.pilot, :format => :json)
 end
-json.airplane do
-  json.id pf.airplane.id
-  json.make pf.airplane.make_model.make
-  json.model pf.airplane.make_model.model
-  json.reg pf.airplane.reg
+if pf.airplane
+  json.airplane do
+    json.id pf.airplane.id
+    json.make pf.airplane.make_model.make
+    json.model pf.airplane.make_model.model
+    json.reg pf.airplane.reg
+  end
 end
 json.url pilot_flight_url(pf, :format => :json)
 json.penalty_total pf.penalty_total
