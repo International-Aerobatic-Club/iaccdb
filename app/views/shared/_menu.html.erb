@@ -1,0 +1,33 @@
+    <div class="title-bar"
+      data-responsive-toggle="responsive-menu" data-hide-for="medium">
+      <button class="menu-icon" type="button"
+        data-toggle="responsive-menu"></button>
+      <div class='title-bar-title'><%= link_to "IAC CDB", root_path %></div>
+    </div>
+    <div class="top-bar" id="responsive-menu">
+      <div class="top-bar-left">
+        <ul class="dropdown menu" data-dropdown-menu>
+          <li><%= link_to "IAC CDB", root_path %></li>
+          <li class='has-submenu'>
+            <%= link_to 'Navigate', '#0' %>
+            <ul class='submenu menu vertical' data-submenu>
+              <li><%= link_to 'Contests', contests_path %></li>
+              <li><%= link_to 'Pilots', pilots_path %></li>
+              <li><%= link_to 'Judges', judges_path %></li>
+              <li><%= link_to 'Assistants', assistants_path %></li>
+              <li><%= link_to 'Counts', further_participation_path %></li>
+              <li><%= link_to 'Notes', pages_path(:notes) %></li>
+            </ul>
+          </li>
+          <li class='has-submenu'>
+            <%= link_to 'Leaders', '#0' %>
+            <ul class='submenu menu vertical' data-submenu>
+              <li><%= link_to 'Regional', leaders_recent_regionals_path %></li>
+              <li><%= link_to 'Collegiate', leaders_recent_collegiate_path %></li>
+              <li><%= link_to 'Soucy', leaders_recent_soucy_path %></li>
+              <li><%= link_to 'Judges', leaders_recent_judges_path %></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>

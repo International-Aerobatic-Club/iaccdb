@@ -11,90 +11,16 @@
     <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
     <%= yield :headers %>
     <%= csrf_meta_tags %>
-    <meta name="title" content="IAC Aerobatic Contest Data"/>
-    <meta name="description" 
-      content="Contest data and computed statistics for aerobatic contests
-      of the International Aerobatic Club (IAC)"/>
-    <meta property="og:title" content="IAC Aerobatic Contest Data"/>
-    <meta property="og:type" content="website"/>
-    <meta property="og:url" content="http://iaccdb.iac.org/"/>
-    <meta property="og:image"
-      content="http://iaccdb.iac.org/images/iac_logo_200.png"/>
-    <meta property="og:site_name" content="IAC Contest Data"/>
-    <meta property="og:description"
-      content="Contest data and computed statistics for aerobatic contests
-      of the International Aerobatic Club (IAC)"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="google-site-verification"
-      content="eQl6GaBq3jeBLlrEB-P_EoeE78yAPDRAhtPfB7b1ypw" />
+    <%= render 'shared/sso_metatags' %>
   </head>
   <body>
-    <div class="title-bar"
-      data-responsive-toggle="responsive-menu" data-hide-for="medium">
-      <button class="menu-icon" type="button"
-        data-toggle="responsive-menu"></button>
-      <div class='title-bar-title'><%= link_to "IAC CDB", root_path %></div>
-    </div>
-    <div class="top-bar" id="responsive-menu">
-      <div class="top-bar-left">
-        <ul class="dropdown menu" data-dropdown-menu>
-          <li><%= link_to "IAC CDB", root_path %></li>
-          <li class='has-submenu'>
-            <%= link_to 'Navigate', '#0' %>
-            <ul class='submenu menu vertical' data-submenu>
-              <li><%= link_to 'Contests', contests_path %></li>
-              <li><%= link_to 'Pilots', pilots_path %></li>
-              <li><%= link_to 'Judges', judges_path %></li>
-              <li><%= link_to 'Assistants', assistants_path %></li>
-              <li><%= link_to 'Counts', further_participation_path %></li>
-              <li><%= link_to 'Notes', pages_path(:notes) %></li>
-            </ul>
-          </li>
-          <li class='has-submenu'>
-            <%= link_to 'Leaders', '#0' %>
-            <ul class='submenu menu vertical' data-submenu>
-              <li><%= link_to 'Regional', leaders_recent_regionals_path %></li>
-              <li><%= link_to 'Collegiate', leaders_recent_collegiate_path %></li>
-              <li><%= link_to 'Soucy', leaders_recent_soucy_path %></li>
-              <li><%= link_to 'Judges', leaders_recent_judges_path %></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
+    <%= render 'shared/menu' %>
     <div id="content">
-      <p>Contact <a href="mailto:doug@wbreeze.com">Douglas Lovell</a> with questions and
-         notice of any errors.
-      </p>
+      <%= render 'shared/contact' %>
       <div id='notice'><%= notice %></div>
       <div id='alert'><%= alert %></div>
       <%= yield %>
-      <div id="footer">
-        <p>Contact <a href="mailto:doug@wbreeze.com">Douglas Lovell</a> with questions and
-         notice of any errors.</p>
-        <p>As of the 2014 contest year, these are official results.
-        Results prior to 2014 are computed by this system for study only.
-        <p>See the
-        <%= link_to 'Notes page', pages_path(:notes) %>
-        for explanations of the numbers.</p>
-        <p>These pages appear to you thanks to: </p>
-        <ul>
-          <li>"Manny," the contest results tracking system built by Randy Owens; </li>
-          <li>"JaSPer," the contest scoring and data management system
-          built by 'Bwana' Bob Buckley;</li>
-          <li>Our contest scorekeepers who key-in the data; and</li>
-          <li>Web wizardry by <a href="mailto:doug@wbreeze.com">Douglas Lovell</a></li>
-        </ul>
-        <p>Copyright &#169;2012-<%=Time.now.year%> Douglas Lovell</p>
-        <p>Licensed under the
-          <a href="http://www.apache.org/licenses/LICENSE-2.0">
-          Apache License, Version 2.0</a>
-        </p>
-        <p>Source hosted by
-          <a href="https://github.com">GitHub</a> at
-          <a href="https://github.com/wbreeze/iaccdb">github.com/wbreeze/iaccdb</a>
-        </p>
-      </div>
+      <%= render 'shared/footer' %>
     </div>
   </body>
 </html>
