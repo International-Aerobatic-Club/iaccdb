@@ -6,10 +6,10 @@ https://codeclimate.com/github/wbreeze/iaccdb/coverage)
 https://codeclimate.com/github/wbreeze/iaccdb)
 
 The International Aerobatic Club (IAC)
-is calling for proposals for maintenance of these contest results pages.
+is calling for proposals for maintenance and development of this project.
 Please refer to the
 [call for proposals](CFP.md)
-for details.
+for details. Please also see, [contributions](#contributions) below.
 
 This project contains code for a Ruby-on-Rails web site that displays data
 about aerobatic contests, including contest results, pilot standings,
