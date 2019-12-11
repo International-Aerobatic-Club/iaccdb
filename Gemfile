@@ -4,7 +4,7 @@ gem 'rails', "~> 5.1.0"
 
 gem 'mysql2'
 
-gem 'puma', '~> 3.11'
+gem 'puma', '~> 3.12'
 
 gem 'sass-rails'
 gem 'coffee-rails'
