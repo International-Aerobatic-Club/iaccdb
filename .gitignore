@@ -4,7 +4,7 @@
 .gems*
 .bundle
 db/*.sqlite3*
-log/*.log
+log/
 tmp/**/*
 vendor/cache
 posts/
@@ -15,4 +15,3 @@ public/assets
 config/database.yml
 *.dia~
 coverage/
-
