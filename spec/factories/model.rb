@@ -102,7 +102,7 @@ FactoryBot.define do
   end
 ### Category
   factory :category do
-    transient do 
+    transient do
       category { 'intermediate' }
       aircat { 'P' }
       seq { (Category.pluck(:sequence).max || 0) + 1 }
@@ -114,8 +114,8 @@ FactoryBot.define do
       ).order(:sequence).first
       unless factory_cat
         factory_cat = Category.create(
-          category: category, aircat: aircat, sequence: seq,
-          name: (name || Faker::Book.unique.title)
+          category: category.slice(0,16), aircat: aircat, sequence: seq,
+          name: (name || Faker::Book.unique.title.slice(0,48))
         )
       end
       factory_cat
