@@ -12,8 +12,10 @@ class ContestMergeTest < ActiveSupport::TestCase
   end
 
   setup do
-    @power_contest = create_complete_contest(Category.where(aircat: 'P'))
-    @glider_contest = create_complete_contest(Category.where(aircat: 'G'))
+    @power_contest = create_complete_contest(
+      Category.where(aircat: 'P').first(2))
+    @glider_contest = create_complete_contest(
+      Category.where(aircat: 'G').first(2))
     @ctst_merge = ContestMergeService.new(@power_contest)
   end
 
@@ -33,5 +35,22 @@ class ContestMergeTest < ActiveSupport::TestCase
     assert_equal(jcrs, jcrs & @power_contest.jc_results.pluck(:id))
     assert_equal(pcrs, pcrs & @power_contest.pc_results.pluck(:id))
     assert_equal(flts, flts & @power_contest.flights.pluck(:id))
+  end
+
+  test 'raises exception if overlap flight category' do
+    cat = @power_contest.flights.first.categories.first
+    create(:flight, contest: @glider_contest, name: 'Overlap',
+      category_id: cat.id)
+    @glider_contest.reload
+    assert_raises(ContestMergeService::CategoryOverlapError) do
+      begin
+        @ctst_merge.merge_contest(@glider_contest)
+      rescue ContestMergeService::CategoryOverlapError => e
+        assert_equal([cat], e.overlapping_categories)
+        assert_match(/Category overlap/, e.message)
+        assert_match(/#{cat.name}/, e.message)
+        raise
+      end
+    end
   end
 end
