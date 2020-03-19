@@ -46,6 +46,6 @@ class Flight < ApplicationRecord
   end
 
   def category
-    categories.first
+    categories.where(synthetic: false).first
   end
 end
