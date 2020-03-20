@@ -44,4 +44,8 @@ class Flight < ApplicationRecord
     end
     total_count
   end
+
+  def category
+    categories.where(synthetic: false).first
+  end
 end
