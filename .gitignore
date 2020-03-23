@@ -15,3 +15,6 @@ public/assets
 config/database.yml
 *.dia~
 coverage/
+.idea
+.generators
+.rakeTasks
