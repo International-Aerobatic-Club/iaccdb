@@ -27,6 +27,7 @@ IAC::Application.routes.draw do
     resources :failures, :only => [:index, :show, :destroy]
     resources :data_posts, :only => [:index, :show]
     resources :queues, :only => [:index, :show]
+    resources :free_program_ks
     post "members/merge_preview"
     post "members/merge"
     resources :make_models, :only => [:index, :edit, :update]

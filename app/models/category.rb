@@ -40,4 +40,8 @@ class Category < ApplicationRecord
     name
   end
 
+  def self.options
+    [[ 'Select One', nil ]] + self.all.map{ |c| [ c.name, c.id] }
+  end
+
 end

@@ -1,0 +1,33 @@
+<%= form_with(model: free_program_k, local: true, url: admin_free_program_ks_path + "/#{free_program_k.id}") do |form| %>
+  <% if free_program_k.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(free_program_k.errors.count, "error") %> prohibited this free_program_k from being saved:</h2>
+
+      <ul>
+      <% free_program_k.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :year %>
+    <%= form.text_field :year, id: :free_program_k_year %>
+  </div>
+
+  <div class="field">
+    <%= form.label :category_id %>
+    <%= form.select :category_id, Category.options, id: :free_program_k_category_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :max_k %>
+    <%= form.text_field :max_k, id: :free_program_k_max_k, size: 4 %>
+    Note: Total K includes Presentation
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,2 @@
+module FreeProgramKsHelper
+end

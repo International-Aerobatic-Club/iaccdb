@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Year:</strong>
+  <%= @free_program_k.year %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @free_program_k.category %>
+</p>
+
+<p>
+  <strong>Max k:</strong>
+  <%= @free_program_k.max_k %>
+</p>
+
+<%= link_to 'Edit', edit_admin_free_program_k_path(@free_program_k) %> |
+<%= link_to 'Back', admin_free_program_ks_path %>
