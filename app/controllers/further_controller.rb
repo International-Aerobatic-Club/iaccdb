@@ -35,8 +35,7 @@ class FurtherController < ApplicationController
   def airplane_make_model
     @years = Contest.joins(:flights => {:pilot_flights => :airplane}).select(
       "distinct year(start) as anum"
-      ).order('anum desc'
-      ).all.collect { |contest| contest.anum }
+      ).order(anum: :desc).all.collect { |contest| contest.anum }
     @year = params[:year] || @years.first
     airplanes_with_cat = Airplane.joins([
       {:pilot_flights => {:flight => [:categories, :contest]}},

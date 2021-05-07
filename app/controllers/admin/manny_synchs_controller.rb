@@ -4,7 +4,7 @@ class Admin::MannySynchsController < ApplicationController
   before_action :authenticate
 
   def index
-    @manny_synchs = MannySynch.includes(:contest).order("manny_number DESC")
+    @manny_synchs = MannySynch.includes(:contest).order(manny_number: :desc)
   end
 
   def destroy

@@ -87,7 +87,7 @@ module IAC
     def compute_ranking(year, region)
       regional_pilots = RegionalPilot
         .where(year: year, region: region)
-        .order('qualified desc, percentage desc')
+        .order(qualified: :desc, percentage: :desc)
       cat_pilots = regional_pilots.group_by { |p| p.category_id }
       cat_pilots.each do |_, pilots|
         rank = 1

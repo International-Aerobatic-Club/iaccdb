@@ -67,7 +67,7 @@ class MakeModel < ApplicationRecord
       SQL
     mm = MakeModel.where(
       [query, { ms: match_string }]
-    ).order('length(model), length(make)').limit(1).first
+    ).order('length(`model`), length(`make`)').limit(1).first
 
     # try both anywhere in string
     unless mm
@@ -80,7 +80,7 @@ class MakeModel < ApplicationRecord
         SQL
       mm = MakeModel.where(
         [query, { ms: match_string }]
-      ).order('length(model), length(make)').limit(1).first
+      ).order('length(`model`), length(`make`)').limit(1).first
     end
 
     unless mm

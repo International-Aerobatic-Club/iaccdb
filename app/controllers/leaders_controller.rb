@@ -46,7 +46,7 @@ class LeadersController < ApplicationController
     @years = SoucyResult.select("distinct year").all.collect{|rp| rp.year}.sort{|a,b| b <=> a}
     @year = params[:year] || @years.first
     @soucies = SoucyResult.includes(:pc_results).where("year = ?", @year
-      ).order('qualified desc, rank').limit(10)
+      ).order(qualified: :desc, rank: :asc).limit(10)
     @nationals = Contest.where("year(start) = ? and region = 'National'", @year).first
   end
 
@@ -54,8 +54,8 @@ class LeadersController < ApplicationController
     @years = CollegiateResult.select("distinct year").all.collect{|rp| rp.year}.sort{|a,b| b <=> a}
     @year = params[:year] || @years.first
     @collegiates = CollegiateResult.includes(:pc_results).where("year = ?", @year
-      ).order('qualified desc, rank')
-    i_results = CollegiateIndividualResult.where("year = ?", @year).order('qualified desc, rank')
+      ).order(qualified: :desc, rank: :asc)
+    i_results = CollegiateIndividualResult.where("`year` = ?", @year).order(qualified: :desc, rank: :asc)
     # hash of pilot to pilot's collegiate individual result
     @college_pilots = {}
     @collegiates.each do |cr|

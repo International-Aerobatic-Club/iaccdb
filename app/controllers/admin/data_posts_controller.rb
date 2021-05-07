@@ -2,7 +2,7 @@ class Admin::DataPostsController < ApplicationController
   before_action :authenticate
 
   def index
-    @data_posts = DataPost.order('created_at desc').all
+    @data_posts = DataPost.order(created_at: :desc).all
   end
 
   def show

@@ -6,7 +6,7 @@ class Admin::ContestsController < ApplicationController
   # GET /contests
   # GET /contests.xml
   def index
-    @contests = Contest.includes(:manny_synch).order("start DESC")
+    @contests = Contest.includes(:manny_synch).order(start: :desc")
   end
 
   # GET /contests/1/edit

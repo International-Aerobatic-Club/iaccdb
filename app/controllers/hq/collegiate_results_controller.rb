@@ -92,7 +92,7 @@ class CollegiateResultsController < ApplicationController
   private
   ###
   def year_setup(params)
-    @years = CollegiateResult.select('distinct year').order('year desc')
+    @years = CollegiateResult.select('distinct `year`').order(year: :desc)
     @year = params[:year] || @years.first || Time.now.year
   end
 end

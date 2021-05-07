@@ -2,7 +2,7 @@ class Admin::QueuesController < ApplicationController
   before_action :authenticate
 
   def index
-    @jobs = Delayed::Job.order('created_at DESC')
+    @jobs = Delayed::Job.order(created_at: :desc)
   end
 
   def show

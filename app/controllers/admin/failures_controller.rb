@@ -2,7 +2,7 @@ class Admin::FailuresController < ApplicationController
   before_action :authenticate
 
   def index
-    @failures = Failure.includes(:contest).order("created_at DESC")
+    @failures = Failure.includes(:contest).order(created_at: :desc)
   end
 
   def show
