@@ -227,9 +227,11 @@ module IAC
       # Get the associated Flight record
       flt = @pilot_flight.flight
 
-      # If it's a Free...
-      if flt.name == 'Free'
+      # If it's a Free or a Sportsman "Unknown" (which is the same as a Free)...
+      if flt.name == 'Free' || (flt.name == 'Unknown' && flt.category.category == 'sportsman')
         # Use the max allowed K for the Free program for that category / year
+        # This ensures that all scores are computed against max points value, even if
+        # the competitor did not use all available K in their Free program.
         max_k = FreeProgramK.find_by_year_and_category_id(
           flt.contest.start.year,
           flt.categories.first.id
