@@ -1,0 +1,33 @@
+<%= render 'admin/admin_menu' %>
+
+<br>
+
+<p>
+  <% ( ['All'] + (2006..Time.now.year).to_a.reverse ).each do |y| %>
+    <a href="/admin/pilot_contest_counts/<%= y %>"> <%= y %> </a>
+  <% end %>
+</p>
+
+<br>
+
+<h3>Contests Flown by Pilot: <%= @year %></h3>
+
+<table>
+
+  <tr>
+    <th> Contests</th>
+    <th> Pilot </th>
+  </tr>
+
+  <% @pilot_contests.sort_by{ |k,v| -v }.each do |pid,count| %>
+
+    <% pilot = Member.find_by_id(pid) %>
+
+    <tr>
+      <td class='points_possible'> <%= count %></td>
+      <td> <%= pilot.present? ? "#{pilot.given_name} #{pilot.family_name}" : "UNKNOWN pid=#{pid}" %> </td>
+    </tr>
+
+  <% end %>
+
+</table>

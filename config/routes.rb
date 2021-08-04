@@ -28,6 +28,7 @@ IAC::Application.routes.draw do
     resources :data_posts, :only => [:index, :show]
     resources :queues, :only => [:index, :show]
     resources :free_program_ks
+    get 'pilot_contest_counts/(:year)', controller: :pilot_contest_counts, action: :index
     post "members/merge_preview"
     post "members/merge"
     resources :make_models, :only => [:index, :edit, :update]
