@@ -5,6 +5,7 @@ class Category < ApplicationRecord
   has_many :jc_results, :dependent => :destroy
   has_many :pc_results, :dependent => :destroy
   has_many :jy_results, :dependent => :destroy
+  has_many :free_program_ks
 
   def self.find_for_cat_aircat(cat, aircat)
     cat = cat.downcase.strip
