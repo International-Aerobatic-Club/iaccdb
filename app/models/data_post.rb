@@ -1,5 +1,6 @@
 class DataPost < ApplicationRecord
   belongs_to :contest, optional: true
+  has_many :failures
 
   def self.post_dir
     File.join(::Rails.root.to_s, 'posts')
