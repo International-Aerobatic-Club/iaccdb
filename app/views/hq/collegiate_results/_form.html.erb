@@ -1,4 +1,4 @@
-<%= form_for([:hq, @team], :url => hq_collegiate_index_path) do |f| %>
+<%= form_for([:hq, @team], :url => hq_collegiate_index_path + "/#{@team.id}") do |f| %>
   <% if @team.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@team.errors.count, "error") %> prohibited this team from being saved:</h2>

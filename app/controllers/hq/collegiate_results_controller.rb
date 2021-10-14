@@ -44,7 +44,7 @@ module Hq
     # POST /hq/collegiates
     # POST /hq/collegiates.json
     def create
-      @team = CollegiateResult.new(params[:collegiate_result])
+      @team = CollegiateResult.new(collegiate_result_params)
 
       respond_to do |format|
         if @team.save
@@ -63,8 +63,8 @@ module Hq
       @team = CollegiateResult.find(params[:id])
 
       respond_to do |format|
-        if @team.update_attributes(params[:collegiate_result])
-          format.html { redirect_to @team, notice: 'Collegiate team successfully updated.' }
+        if @team.update_attributes(collegiate_result_params)
+          format.html { redirect_to hq_collegiate_path, notice: 'Collegiate team successfully updated.' }
           format.json { head :no_content }
         else
           format.html { render action: "edit" }
@@ -96,6 +96,13 @@ module Hq
     def year_setup(params)
       @years = CollegiateResult.select('distinct `year`').order(year: :desc)
       @year = params[:year] || @years.first || Time.now.year
+    end
+
+    def collegiate_result_params
+      params.require(:collegiate_result).permit(
+        :name, :year,
+        members_attributes: [ :id, :iac_id, :family_name, :given_name, :_destroy ]
+      )
     end
 
   end
