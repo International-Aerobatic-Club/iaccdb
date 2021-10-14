@@ -1,5 +1,11 @@
 <tr class='collegiate_team'>
-<td class='rank'><%= collegiate_result.rank.ordinalize if collegiate_result.qualified %></td>
+<td class='rank'>
+  <% if collegiate_result.qualified %>
+    <%= collegiate_result.rank.ordinalize%>
+  <% else %>
+    <span title='Team Does Not Qualify'>NQ</span>
+  <% end %>
+</td>
 <td class='team_name'><%= collegiate_result.name %></td>
 <td/>
 <td class='points'><%= decimal_two(collegiate_result.points) %></td>
@@ -7,6 +13,6 @@
 <td class='percentage'><%= decimal_two(collegiate_result.result_percent) %>%</td>
 <td/>
 </tr>
-<%= render :partial => 'collegiate_results/collegiate_individual', 
-   :collection => @college_pilots[collegiate_result], 
+<%= render :partial => 'collegiate_results/collegiate_individual',
+   :collection => @college_pilots[collegiate_result],
    :locals => { combination: collegiate_result.pc_results } %>
