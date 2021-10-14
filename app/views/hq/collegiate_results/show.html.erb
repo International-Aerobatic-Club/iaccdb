@@ -1,4 +1,10 @@
 <p id="notice"><%= notice %></p>
-<p><%= @team.name %></p>
+<h2><%= @team.name %></h2>
+<ul></ul>
+<% @team.members.sort_by{ |m| [m.family_name, m.given_name] }.each do |m| %>
+  <li> <%= m %></li>
+<% end %>
+</ul>
+<br>
 <%= link_to 'Edit', edit_hq_collegiate_path(@team) %> |
 <%= link_to 'Back', hq_collegiate_teams_index_path(@team.year) %>
