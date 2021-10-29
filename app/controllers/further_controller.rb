@@ -5,7 +5,7 @@ class FurtherController < ApplicationController
         'count(distinct(judge_id)) as count, categories.id as category_id, year'
       ).group(:category_id, :year)
     @cat_year_judge_count = judge_counts.group_by { |count| count.category_id }
-    @cat_year_judge_count.each do |key, ac| 
+    @cat_year_judge_count.each do |key, ac|
       @cat_year_judge_count[key] = ac.group_by { |count| count.year }
     end
     yy = judge_counts.collect { |jy_result| jy_result.year }
@@ -19,13 +19,13 @@ class FurtherController < ApplicationController
        year(`contests`.`start`) as year'
     ).group(:category_id, :year)
     @cat_year_pilot_count = pilot_counts.group_by { |pf| pf.category_id }
-    @cat_year_pilot_count.each do |key, apcr| 
+    @cat_year_pilot_count.each do |key, apcr|
       @cat_year_pilot_count[key] = apcr.group_by { |pcr| pcr.year }
     end
     yy = pilot_counts.collect { |pf| pf.year }
     @years.merge(yy)
     pilot_counts = PilotFlight.joins(:flight => :contest).select(
-      'count(distinct(`pilot_flights`.`pilot_id`)) as count, 
+      'count(distinct(`pilot_flights`.`pilot_id`)) as count,
        year(`contests`.`start`) as year').group(:year)
     @cat_year_pilot_count['any'] = pilot_counts.group_by { |count| count.year }
 
@@ -33,9 +33,7 @@ class FurtherController < ApplicationController
   end
 
   def airplane_make_model
-    @years = Contest.joins(:flights => {:pilot_flights => :airplane}).select(
-      "distinct year(start) as anum"
-      ).order(anum: :desc).all.collect { |contest| contest.anum }
+    @years = Contest.pluck(:start).map{ |start| start.year }.uniq.sort.reverse
     @year = params[:year] || @years.first
     airplanes_with_cat = Airplane.joins([
       {:pilot_flights => {:flight => [:categories, :contest]}},
@@ -47,7 +45,7 @@ class FurtherController < ApplicationController
         'categories.name as category'
       ).where(['year(contests.start) = ?', @year]
       ).group('make_models.make, make_models.model, categories.id')
-   @airplanes = airplanes_with_cat.inject({}) do |m,a| 
+   @airplanes = airplanes_with_cat.inject({}) do |m,a|
      m[a.category] ||= []
      m[a.category] << a
      m
