@@ -2,22 +2,22 @@
 # Usage: ruby judges-by-total-flights.rb
 
 
-require 'nokogiri'
-require 'open-uri'
+require 'csv'
 
-BASE_URL = 'https://iaccdb.iac.org'
-LEADERS_PAGE = "#{BASE_URL}/judges"
+# Hash: Key is Judge (member) ID, value is number of flights scored
+jh = Hash.new
 
-leaders = Array.new
-
-# Inhale the web page
-doc = Nokogiri::HTML(URI.open(LEADERS_PAGE))
-
-doc.search('span.para-index a').each do |judge|
-  leaders << [ judge.values.first, judge.text ]
+# Get the rolled-up judge experience records
+JyResult.all.each do |jy|
+  jh[jy.judge_id] ||= 0
+  jh[jy.judge_id] += jy.pilot_count
 end
 
-leaders.each do |url, name|
-  doc = Nokogiri::HTML(URI.open("#{BASE_URL}/#{url}"))
-  puts doc.at('td:contains("All categories")').parent.at('td.count').text + ',' + name
+CSV do |csv|
+
+  jh.each do |jid, nf|
+    member = Member.find(jid)
+    csv << ["#{member.given_name} #{member.family_name}", member.iac_id, nf]
+  end
+
 end
