@@ -2,7 +2,7 @@
 
 <h2>Contents</h2>
 <ul>
-  <li><a href='#articles'>Articles</a>/li>
+  <li><a href='#articles'>Articles</a></li>
   <li><a href='#category'>Category Results</a></li>
   <li><a href='#flight'>Flight Results</a></li>
   <li><a href='#grades'>Grades</a></li>
@@ -58,7 +58,7 @@ outputs from the Exploit Design ACRO scoring program used there.</dd>
 flown in the contest.  The results show each pilot in rank
 order of overall standing and each judge who graded one or
 more flight programs of the category.</p>
-<p>The pilot results columns show scores and rankings 
+<p>The pilot results columns show scores and rankings
 for each flight flown in the category, and the overall
 score and rank.  Each row lists
 flight program and overall results for a single pilot.
@@ -110,7 +110,7 @@ penalties.  These are the ranks used to measure how closely each judge
 ranked each pilot relative to the overall ranking.</li>
 <li>The Pnlt column shows the number of penalty points earned by the pilot
 on the flight.</li>
-<li>The Result column shows the pilot rank and number of points earned 
+<li>The Result column shows the pilot rank and number of points earned
 after subtracting penalties from the average score given by the
 judges.</li>
 <li>See the <a href='#metrics'>judge metrics</a> explanations for
@@ -140,11 +140,11 @@ all judges had awarded a ten grade.  Use this to find figures
 where improvement would give the most point benefit.</li>
 <li>The total number of points awarded by the judge to the pilot.</li>
 <li>The rank number in parentheses is the number of pilots who received a
-higher score from the judge, plus one-- 
+higher score from the judge, plus one--
 '(1)' means first place from that judge.</li>
 <li>The average of points awarded by the judges.
 The rank number in paretheses represents the ranking before penalties.</li>
-<li>The pilot rank and number of points earned 
+<li>The pilot rank and number of points earned
 after subtracting penalties from the average score given by the
 judges.</li>
 <li>Shows the maximum number of points possible for the flight, and the
@@ -173,7 +173,7 @@ formulated as follows, multiplied by 100.
 <%= image_tag 'rhodef.png',
 :alt => "$x_p$ and $y_p$ are judge and result ranks for pilot p adjusted for ties.  When $1 < m$ pilots have the same rank $r$, the values for $x_p$ (or $y_p$) are the average $r + (m - 1)/2$ of the positions they cover.  For example, with three tied for third, $x_p$ is $(3+4+5)/3 = 3 + (3-1)/2 = 4$." %>
 </p><p>
-rho ranges from -100 to 100.  
+rho ranges from -100 to 100.
 100 means the judge ranked the pilots exactly the same as the result
 ranking.
 Zero means the judge's rankings are more or less random relative to the
@@ -198,7 +198,7 @@ are worse.  Find more information about RI in the FAI Sporting Code, Section 6:
 Aerobatics, referenced below.  The RI discussion begins at paragraph 8.8.1.</p>
 <p>Contest values, category rollups, and career rollups
 use the average RI value from all flight programs.  This procedure differs
-from that used for rho and gamma because RI contains a scaling 
+from that used for rho and gamma because RI contains a scaling
 adjustment for the number of pilots in the flight program.  The scaling
 starts to dominate the value when there are more than
 fifty or sixty pilots.<p>
@@ -217,11 +217,11 @@ The formula is:
 <p>
 The formula uses counts of differences in paired rankings.  If the
 overall ranking and the individual judge ranking both place pilot A
-before pilot B, 
+before pilot B,
 that is a "concordant pair."  A "discordant pair" arises when the overall
 ranking places pilot B before while the judge places pilot A before, or
 vice-versa.</p>
-<p>Gamma ranges from -100 to 100.  
+<p>Gamma ranges from -100 to 100.
 100 is a perfect correlation.
 Zero means the judge's rankings are more or less random.
 Negative values mean the judge ranked the pilots more or
@@ -281,4 +281,3 @@ FAI Sporting Code</a>. See Section 6: Aerobatics</li>
 </ul>
 </p>
 </div>
-
