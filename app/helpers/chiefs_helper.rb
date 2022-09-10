@@ -1,0 +1,2 @@
+module ChiefsHelper
+end

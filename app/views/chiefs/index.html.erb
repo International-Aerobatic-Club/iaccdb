@@ -1,0 +1,19 @@
+<h1>IAC Chief Judges</h1>
+
+<% letter = '' %>
+<% @chiefs.each do |chief| %>
+  <% next if chief.family_name.blank? %>
+  <% lead_letter = chief.family_name[0].chr.upcase %>
+  <% if lead_letter != letter %>
+    <% if letter != '' %>
+      </p>
+    <% end %>
+    <p class='letter-index'>
+      <span class='letter-index'><%= lead_letter %></span>
+      <% letter = lead_letter %>
+  <% end %>
+  <span class="para-index">
+    <%= link_to chief.name, chief_cv_path(chief) %>
+  </span>
+<% end %>
+</p>

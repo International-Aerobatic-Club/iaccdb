@@ -61,6 +61,8 @@ IAC::Application.routes.draw do
   ### Leaders namespace
   namespace :leaders do
     root :to => "contests#index"
+    get 'chiefs/:year', :action => :chiefs, :as => :chiefs
+    get 'chiefs', :action => :chiefs, :as => :recent_chiefs
     get 'judges/:year', :action => :judges, :as => :judges
     get 'judges', :action => :judges, :as => :recent_judges
     get 'regionals/:year', :action => :regionals, :as => :regionals
@@ -83,6 +85,8 @@ IAC::Application.routes.draw do
     resources :scores, :only => [:show]
   end
 
+  resources :chiefs, :only => [:index, :show]
+
   resources :judges, :only => [:index, :show]
 
   resources :assistants, :only => [:index, :show]
@@ -92,6 +96,11 @@ IAC::Application.routes.draw do
   resources :jf_results, :only => [:show]
 
   resources :make_models, :only => [:index, :show]
+
+  get 'chief/:id/cv',
+    :controller => :chiefs,
+    :action => :cv,
+    :as => 'chief_cv'
 
   get 'judge/:id/cv',
     :controller => :judges,

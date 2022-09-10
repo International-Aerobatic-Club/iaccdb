@@ -1,0 +1,32 @@
+<h1> <%= "Chief Judge #{@chief.name}" %> </h1>
+<br>
+
+<table>
+
+  <tr class='category'>
+    <th> Contest </th>
+    <th> Total </th>
+    <% Category.where(synthetic: false).order(:sequence).pluck(:name).each do |cname| %>
+      <th> <%= cname %> </th>
+    <% end %>
+  </tr>
+
+  <tr>
+    <td> <strong> Career </strong> </td>
+    <td style='text-align: center;'> <%= @career.values.sum %> </td>
+    <% Category.order(:sequence).pluck(:id).each do |cid| %>
+      <td style='text-align: center;'> <%= @career[cid] %> </td>
+    <% end %>
+  </tr>
+
+  <% @contests.each do |contest| %>
+    <tr>
+      <td> <%= "#{contest.start.year} #{contest.name}" %></td>
+      <td style='text-align: center;'> <%= @flight_counts[contest.id].values.sum %></td>
+      <% Category.order(:sequence).pluck(:id).each do |cat_id| %>
+        <td style='text-align: center;'> <%= @flight_counts[contest.id][cat_id] %> </td>
+      <% end %>
+    </tr>
+  <% end %>
+
+</table>
