@@ -20,7 +20,8 @@ class ChiefsController < ApplicationController
       @flight_counts[contest.id] = Hash.new
 
       contest.flights.each do |flight|
-        cat_id = flight.category.id
+        cat_id = flight.category&.id
+        next if cat_id.nil?
         @flight_counts[contest.id][cat_id] ||= 0
         @flight_counts[contest.id][cat_id] += flight.pilot_flights.count
         @career[cat_id] ||= 0
