@@ -5,9 +5,9 @@ module PilotFlightsHelper
 
   def avg(pts, k)
     if (0 < k)
-      Score.display_score(pts.fdiv(k))
+      Score.display_score(pts.fdiv(k), '%.02f')
     else
-      0.0
+      0.00
     end
   end
 

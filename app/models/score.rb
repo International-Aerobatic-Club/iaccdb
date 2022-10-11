@@ -23,7 +23,7 @@ class Score < ApplicationRecord
   end
 
   # convert the value * 10 into a pretty decimal
-  def self.display_score(score)
+  def self.display_score(score, format = '%0.1f')
     if score <= -30
       'HZ'
     elsif score <= -20
@@ -31,7 +31,7 @@ class Score < ApplicationRecord
     elsif score < 0
       'A'
     else
-      sprintf('%0.1f', score.fdiv(10))
+      sprintf(format, score.fdiv(10))
     end
   end
 end
