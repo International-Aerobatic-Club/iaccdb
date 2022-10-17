@@ -33,11 +33,13 @@ def collect_valid_non_nationals_results
 end
 
 def integrate_national_result(nationals)
-  nationals_result = PcResult.competitive.joins(:category).where(
-    "categories.id in (?) and \
-     pilot_id = ? and \
-     contest_id = ?",
-    SoucyResult.valid_category_ids, pilot.id, nationals.id).first
+  nationals_result = PcResult
+    .competitive
+    .joins(:category)
+    .where(
+      "categories.id IN (?) AND pilot_id = ? AND contest_id IN (?)",
+      SoucyResult.valid_category_ids, pilot.id, nationals.pluck(:id))
+    .first
   if nationals_result
     self.points += nationals_result.category_value
     self.points_possible += nationals_result.total_possible
