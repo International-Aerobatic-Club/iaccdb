@@ -25,7 +25,6 @@ private
 ###
 
 def soucies_for_pilots
-  categories = Category.where("aircat in ('P','G')").pluck(:id)
   pilots = Member.joins(:pc_results => :contest).where(
     "year(contests.start) = ? and \
      contests.region != 'National' and \
