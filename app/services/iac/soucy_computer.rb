@@ -27,13 +27,13 @@ private
 def soucies_for_pilots
 
   pilots = Member
-      .joins(:pc_results => :contest)
+    .joins(:pc_results => :contest)
     .where(
       "YEAR(contests.start) = ? AND contests.region != 'National' AND pc_results.category_id in (?)",
       @year, SoucyResult.valid_category_ids
     )
     .group('members.id')
-    .having('count(distinct(pc_results.id)) > 1')
+    .having('COUNT(DISTINCT(pc_results.id)) > 1')
 
   soucies = pilots.all.collect { |pilot| engage_soucy_for_pilot(pilot) }
   trim_soucies(soucies)
