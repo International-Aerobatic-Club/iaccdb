@@ -25,15 +25,21 @@ private
 ###
 
 def soucies_for_pilots
-  pilots = Member.joins(:pc_results => :contest).where(
-    "year(contests.start) = ? and \
-     contests.region != 'National' and \
-     pc_results.category_id in (?)",
-    @year, SoucyResult.valid_category_ids).group(
-    'members.id').having('1 < count(distinct(pc_results.id))')
+
+  pilots = Member
+      .joins(:pc_results => :contest)
+    .where(
+      "YEAR(contests.start) = ? AND contests.region != 'National' AND pc_results.category_id in (?)",
+      @year, SoucyResult.valid_category_ids
+    )
+    .group('members.id')
+    .having('count(distinct(pc_results.id)) > 1')
+
   soucies = pilots.all.collect { |pilot| engage_soucy_for_pilot(pilot) }
   trim_soucies(soucies)
-  soucies
+
+  return soucies
+
 end
 
 # finds or creates soucy record for pilot
@@ -52,8 +58,8 @@ def trim_soucies(to_be_soucies)
 end
 
 def integrate_nationals
-  nationals = Contest.where("year(start) = ? and region = 'National'", @year).all
-  if (1 < nationals.size)
+  nationals = Contest.where("YEAR(start) = ? AND region = 'National'", @year).all
+  if (nationals.size > 1)
     puts "MORE THAN ONE NATIONALS in #{@year}"
     nationals.each { |n| puts n.inspect }
   end
