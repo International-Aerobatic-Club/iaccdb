@@ -4,7 +4,7 @@
 
 <p>
   <% ( ['All'] + (2006..Time.now.year).to_a.reverse ).each do |y| %>
-    <a href="/admin/pilot_contest_counts/<%= y %>"> <%= y %> </a>
+    <a href="/leaders/pilot_contest_counts/<%= y %>"> <%= y %> </a>
   <% end %>
 </p>
 

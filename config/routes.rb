@@ -28,7 +28,6 @@ IAC::Application.routes.draw do
     resources :data_posts, :only => [:index, :show]
     resources :queues, :only => [:index, :show]
     resources :free_program_ks
-    get 'pilot_contest_counts/(:year)', controller: :pilot_contest_counts, action: :index
     post "members/merge_preview"
     post "members/merge"
     resources :make_models, :only => [:index, :edit, :update]
@@ -71,6 +70,8 @@ IAC::Application.routes.draw do
     get 'soucy', :action => :soucy, :as => :recent_soucy
     get 'collegiate/:year', :action => :collegiate, :as => :collegiate
     get 'collegiate', :action => :collegiate, :as => :recent_collegiate
+    get 'pilot_contest_counts/:year', action: :pilot_contest_counts, as: :pilot_contest_counts
+    get 'pilot_contest_counts', action: :pilot_contest_counts, as: :recent_pilot_contest_counts
   end
 
   ### Default namespace
