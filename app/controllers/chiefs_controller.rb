@@ -19,7 +19,7 @@ class ChiefsController < ApplicationController
 
       @flight_counts[contest.id] = Hash.new
 
-      contest.flights.each do |flight|
+      contest.flights.where(chief_id: @chief.id).each do |flight|
 
         cat_id = flight.category&.id
         next if cat_id.nil?
