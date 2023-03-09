@@ -21,7 +21,7 @@
 
   <% @contests.each do |contest| %>
     <tr>
-      <td> <%= "#{contest.start.year} #{contest.name}" %></td>
+      <td> <%= sanitize("#{contest.start.year} #{link_to contest.name, contest}") %></td>
       <td style='text-align: center;'> <%= @flight_counts[contest.id].values.sum %></td>
       <% Category.order(:sequence).pluck(:id).each do |cat_id| %>
         <td style='text-align: center;'> <%= @flight_counts[contest.id][cat_id] %> </td>
