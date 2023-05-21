@@ -9,6 +9,10 @@ module IAC
     end
 
     def mark_solo_participants_as_hc
+
+      # As of 2022, there is no requirement for multiple competitors in a category
+      return if @contest.start.year >= 2022
+
       flights = @contest.flights
       categories = flights.collect { |f| f.categories }
       categories = categories.flatten.uniq
@@ -87,7 +91,7 @@ module IAC
       cat_flight_ids = cat_flight_ids.flatten.uniq
       pilot_flights = PilotFlight.where(flight_id: cat_flight_ids,
         pilot_id: pilot.id)
-      pilot_flights.each do |pf| 
+      pilot_flights.each do |pf|
         pf.hc_higher_category.save!
       end
     end
