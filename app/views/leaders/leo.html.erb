@@ -1,0 +1,28 @@
+<h1>National Point Series Championship Results, <%= @year %></h1>
+<p>
+<% @years.each do |year| %>
+  <%= link_to year, leaders_leo_path(year) %>
+<% end %>
+</p>
+<p>
+  The purpose of the award is to recognize the IAC competition pilots in each of four categories:
+  Sportsman, Intermediate, Advanced and Unlimited who achieves the highest percentage of points possible
+  during a calendar year from three different regions (in a given category) will be automatically qualified
+  and ranked.
+</p>
+<p>
+  The winner of this award will be determined by the best performance in three different regions to
+  accumulate NPSC points.  Championship points will be earned at each contest based on a
+  <a href="https://en.wikipedia.org/wiki/Percentile_rank" target="_blank">percentile ranking</a>
+  method for each contest flown, rather than by straight score percentages.
+</p>
+<table class='soucy'>
+<thead>
+<tr><th colspan='2'/><th>points</th><th>possible</th><th>percent</th></tr>
+</thead>
+<tbody>
+  <tr>
+    <td>COMING SOON</td>
+  </tr>
+</tbody>
+</table>

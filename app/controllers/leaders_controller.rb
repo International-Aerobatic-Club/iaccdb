@@ -110,4 +110,10 @@ class LeadersController < ApplicationController
 
   end
 
+
+  def leo
+    @years = JyResult.distinct(:year).where('year >= ?', 2021).order(year: :desc).pluck(:year)
+    @year = params[:year] || @years.first
+  end
+
 end

@@ -68,6 +68,8 @@ IAC::Application.routes.draw do
     get 'regionals', :action => :regionals, :as => :recent_regionals
     get 'soucy/:year', :action => :soucy, :as => :soucy
     get 'soucy', :action => :soucy, :as => :recent_soucy
+    get 'leo/:year', action: :leo, as: :leo
+    get 'leo', action: :leo, as: :recent_leo
     get 'collegiate/:year', :action => :collegiate, :as => :collegiate
     get 'collegiate', :action => :collegiate, :as => :recent_collegiate
     get 'pilot_contest_counts/:year', action: :pilot_contest_counts, as: :pilot_contest_counts
