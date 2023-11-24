@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', "~> 6.1.0"
+gem 'rails', "~> 7.0.0"
 
 gem 'mysql2'
 
@@ -35,7 +35,7 @@ end
 
 group :development do
   gem 'listen'
-  gem 'minitest-rails', '~> 6.0'
+  gem 'minitest-rails', '~> 7.0'
 end
 
 group :test do
