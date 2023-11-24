@@ -13,7 +13,7 @@ class ContestsController::ShowTest < ActionController::TestCase
   test 'responds with basic contest information' do
     get :show, params: { id: @contest.id }, :format => :json
     assert_response :success
-    assert_equal("application/json", response.content_type)
+    assert_equal("application/json", response.media_type)
     data = JSON.parse(response.body)
     assert_equal(@contest.region, data['region'])
     assert_equal(@contest.city, data['city'])

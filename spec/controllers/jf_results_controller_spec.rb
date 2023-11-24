@@ -4,7 +4,7 @@ describe JfResultsController, :type => :controller do
   it 'responds with basic judge information' do
     get :show, params: { id: @jf_result.id }, :format => :json
     expect(response.status).to eq(200)
-    expect(response.content_type).to eq "application/json"
+    expect(response.media_type).to eq "application/json"
     data = JSON.parse(response.body)
     d_jf = data['judge_flight_data']
     expect(d_jf).to_not be nil
@@ -13,7 +13,7 @@ describe JfResultsController, :type => :controller do
   it 'responds with judge summary data' do
     get :show, params: { id: @jf_result.id }, :format => :json
     expect(response.status).to eq(200)
-    expect(response.content_type).to eq "application/json"
+    expect(response.media_type).to eq "application/json"
     data = JSON.parse(response.body)
     d_jf = data['judge_flight_data']
     expect(d_jf['gamma']).to eq @jf_result.gamma

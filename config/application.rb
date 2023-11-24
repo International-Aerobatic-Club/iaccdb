@@ -16,3 +16,5 @@ module IAC
     # -- all .rb files in that directory are automatically loaded.
   end
 end
+
+# config.autoloader = :zeitwerk

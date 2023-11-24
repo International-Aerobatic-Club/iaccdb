@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', "~> 5.2.0"
+gem 'rails', "~> 6.1.0"
 
 gem 'mysql2'
 
@@ -10,6 +10,8 @@ gem 'sass-rails'
 gem 'coffee-rails'
 gem 'uglifier'
 gem 'jbuilder'
+
+gem 'webpacker'
 
 gem 'libxml-ruby'
 gem 'jquery-rails'
@@ -33,7 +35,7 @@ end
 
 group :development do
   gem 'listen'
-  gem 'minitest-rails', '~> 3.0'
+  gem 'minitest-rails', '~> 6.0'
 end
 
 group :test do
@@ -52,5 +54,5 @@ end
 group :production do
   gem 'daemons'
   # support for execjs asset precompilation
-  gem 'therubyracer'
+  gem 'mini_racer'
 end

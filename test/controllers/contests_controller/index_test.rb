@@ -13,7 +13,7 @@ class ContestsController::IndexTest < ActionController::TestCase
   test 'responds with list of contests' do
     get :index, params: { year: @year }, :format => :json
     assert_response :success
-    assert_equal('application/json', response.content_type)
+    assert_equal('application/json', response.media_type)
     data = JSON.parse(response.body)
     assert(data['contests'])
     assert_equal(@ctc, data['contests'].count)

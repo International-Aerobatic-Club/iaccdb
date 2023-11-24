@@ -4,7 +4,7 @@ describe PilotFlightsController, :type => :controller do
   it 'responds with basic pilot flight information' do
     get :show, params: { id: @pilot_flight.id }, :format => :json
     expect(response.status).to eq(200)
-    expect(response.content_type).to eq "application/json"
+    expect(response.media_type).to eq "application/json"
     data = JSON.parse(response.body)
     d_pf = data['pilot_flight_data']
     expect(d_pf).to_not be nil

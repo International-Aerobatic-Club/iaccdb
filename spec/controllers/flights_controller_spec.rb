@@ -4,7 +4,7 @@ describe FlightsController, :type => :controller do
   it 'responds with basic flight information' do
     get :show, params: { id: @flight.id }, :format => :json
     expect(response.status).to eq(200)
-    expect(response.content_type).to eq "application/json"
+    expect(response.media_type).to eq "application/json"
     data = JSON.parse(response.body)
     d_fl = data['flight']
     expect(d_fl).to_not be nil
@@ -167,7 +167,7 @@ describe FlightsController, :type => :controller do
       fail "Get flight not expected to raise #{e.message}"
     end
     expect(response.status).to eq(200)
-    expect(response.content_type).to eq "application/json"
+    expect(response.media_type).to eq "application/json"
     data = JSON.parse(response.body)
     d_fl = data['flight']
     d_jfs = d_fl['line_judges']
