@@ -1,11 +1,33 @@
 <%= render 'admin/admin_menu' %>
 <h1>Admin Data Posts</h1>
 <table>
-<thead>
-<tr><th>Contest</th><th>ContestId</th><th>integ</th><th>obso</th><th>err</th><th>error</th>
-<th/></tr>
-</thead>
-<tbody>
-<%= render :partial=>:data_post, :collection => @data_posts %>
-</tbody>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Contest</th>
+      <th>ContestId</th>
+      <th>Created</th>
+      <th>Updated</th>
+      <th>integ</th>
+      <th>obso</th>
+      <th>err</th>
+      <th>Error Msg</th>
+  </tr>
+  </thead>
+  <tbody>
+    <% @data_posts.each do |data_post| %>
+      <tr>
+        <td><%= data_post.id %></td>
+        <td><%= data_post.contest ? data_post.contest.year_name : 'missing' %></td>
+        <td><%= data_post.contest ? data_post.contest.id : '' %></td>
+        <td><%= data_post.created_at %></td>
+        <td><%= data_post.updated_at %></td>
+        <td><%= data_post.is_integrated ? 'Yes' : 'No' %></td>
+        <td><%= data_post.is_obsolete ? 'Yes' : 'No' %></td>
+        <td><%= data_post.has_error ? 'Yes' : 'No' %></td>
+        <td><%= data_post.error_description %></td>
+        <td><%= link_to 'show', admin_data_post_path(data_post) %>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
