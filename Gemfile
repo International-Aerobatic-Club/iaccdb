@@ -1,8 +1,7 @@
 source 'https://rubygems.org'
+ruby '2.7.3'
 
 gem 'rails', "~> 5.2.0"
-
-gem 'mysql2'
 
 gem 'puma', '~> 3.12'
 
@@ -10,6 +9,8 @@ gem 'sass-rails'
 gem 'coffee-rails'
 gem 'uglifier'
 gem 'jbuilder'
+gem 'mysql2', '>= 0.4.4', '< 0.6.0'
+
 
 gem 'libxml-ruby'
 gem 'jquery-rails'
