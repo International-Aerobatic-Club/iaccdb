@@ -1,32 +1,33 @@
 <h3><%= category[:cat].name %></h3>
 
 <table class='pilot_results'><thead><tr>
-  <th colspan='3'>Pilot</th>
-  <th>Airplane</th>
+  <th <% unless live_results %>colspan='3' <% end %> >Pilot</th>
+  <% unless live_results %> %><th>Airplane</th> <% end %>
   <% flight_order = [] %>
   <% category[:flights].each do |flight| %>
-    <th colspan='3'>
+    <th colspan='<%= live_results ? 2 : 3 %>'>
     <%= link_to(flight.name, flight_path(flight)) %>
     </th>
   <% end %>
-  <th colspan='3'>Total</th>
+  <th colspan='<%= live_results ? 2 : 3 %>'>Total</th>
 </tr></thead><tbody>
 <%= render partial: 'contests/pilot_result',
-    collection: category[:pilot_results], 
-    locals: {flights: category[:flights]} %>
+    collection: category[:pilot_results],
+    locals: {flights: category[:flights], live_results: !!defined?(live_results) } %>
 </tbody></table>
 
-<% unless no_category_chiefs %>
+<% unless no_category_chiefs || live_results %>
   <p class="category-chief">Chief Judge(s): <%= category[:chiefs].join(', ') %></p>
 <% end %>
 
-<table class='judge_results'><thead>
-<tr>
-<th colspan='2'>Judge</th>
-<%= render :partial => 'judges/stats_column_headers' %>
-</tr>
-<tbody>
-<%= render :partial => 'judges/jc_result', 
-  :collection => category[:judge_results] %>
-</tbody></table>
-
+<% unless live_results %>
+  <table class='judge_results'><thead>
+    <tr>
+      <th colspan='2'>Judge</th>
+      <%= render :partial => 'judges/stats_column_headers' %>
+    </tr>
+    <tbody>
+      <%= render :partial => 'judges/jc_result', :collection => category[:judge_results] %>
+    </tbody>
+  </table>
+<% end %>

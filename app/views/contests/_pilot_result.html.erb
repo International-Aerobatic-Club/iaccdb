@@ -3,28 +3,27 @@
   <% pc_result = pilot_result[:overall] %>
   <% airplane = pilot_result[:airplane] %>
   <% chapter = pilot_result[:chapter] %>
-  <td class='star'>
-    <%= pc_result.star_qualifying ? '★' : ' ' %>
-  </td>
+  <% unless live_results %>
+    <td class='star'> <%= pc_result.star_qualifying ? '★' : ' ' %> </td>
+  <% end %>
   <td class="pilot">
+    <% if live_results %> <%= pc_result.display_rank %>. <% end %>
     <%= link_to("#{pilot.name}", pilot_score_path(pilot, @contest)) if pilot %>
     <%= " (patch)" if pc_result.hors_concours? %>
   </td>
-  <td class="chapter">
-    <%= "(#{chapter})" if chapter && !chapter.strip.empty?  %>
-  </td>
-  <td class='airplane'>
-    <%= airplane.description if airplane %>
-  </td>
+  <% unless live_results %>
+    <td class="chapter"> <%= "(#{chapter})" if chapter && !chapter.strip.empty?  %> </td>
+    <td class='airplane'> <%= airplane.description if airplane %> </td>
+  <% end %>
   <% flights.each do |flight| %>
     <% pf_result = pilot_result[:flight_results][flight] %>
     <% unless pf_result %>
       <td colspan='3'/>
     <% else %>
       <% pf_result = pf_result.first %>
-      <td class='total_average'>
-        <%= decimal_two(pf_result.adj_flight_value) %>
-      </td>
+      <% unless live_results %>
+        <td class='total_average'> <%= decimal_two(pf_result.adj_flight_value) %> </td>
+      <% end %>
       <td class='percentage'>
         <%= score_pct_two(pf_result.adj_flight_value, pf_result.total_possible) %>%
       </td>
@@ -34,8 +33,10 @@
   <td class='total_average'>
     <%= decimal_two(pc_result.category_value) %>
   </td>
-  <td class='percentage'>
-    <%= score_pct_two(pc_result.category_value, pc_result.total_possible) %>%
-  </td>
-  <td class='rank'>(<%= pc_result.display_rank %>)</td>
+  <% unless live_results %>
+    <td class='percentage'>
+      <%= score_pct_two(pc_result.category_value, pc_result.total_possible) %>%
+    </td>
+    <td class='rank'>(<%= pc_result.display_rank %>)</td>
+  <% end %>
 </tr>

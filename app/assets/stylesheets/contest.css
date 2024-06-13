@@ -13,3 +13,4 @@ p.message {
 span.missing-results {
   font-weight: bold;
 }
+div.live_results { display: none; }

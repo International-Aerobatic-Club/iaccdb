@@ -100,6 +100,8 @@ IAC::Application.routes.draw do
 
   resources :make_models, :only => [:index, :show]
 
+  resources :live_results, only: [:show, :last_update]
+
   get 'chief/:id/cv',
     :controller => :chiefs,
     :action => :cv,
