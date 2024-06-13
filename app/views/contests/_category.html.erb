@@ -1,26 +1,26 @@
 <h3><%= category[:cat].name %></h3>
 
 <table class='pilot_results'><thead><tr>
-  <th <% unless live_results %>colspan='3' <% end %> >Pilot</th>
-  <% unless live_results %> %><th>Airplane</th> <% end %>
+  <th <% unless defined?(live_results) %>colspan='3' <% end %> >Pilot</th>
+  <% unless defined?(live_results) %> <th>Airplane</th> <% end %>
   <% flight_order = [] %>
   <% category[:flights].each do |flight| %>
-    <th colspan='<%= live_results ? 2 : 3 %>'>
+    <th colspan='<%= defined?(live_results) ? 2 : 3 %>'>
     <%= link_to(flight.name, flight_path(flight)) %>
     </th>
   <% end %>
-  <th colspan='<%= live_results ? 2 : 3 %>'>Total</th>
+  <th colspan='<%= defined?(live_results) ? 2 : 3 %>'>Total</th>
 </tr></thead><tbody>
 <%= render partial: 'contests/pilot_result',
     collection: category[:pilot_results],
     locals: {flights: category[:flights], live_results: !!defined?(live_results) } %>
 </tbody></table>
 
-<% unless no_category_chiefs || live_results %>
+<% unless no_category_chiefs || defined?(live_results) %>
   <p class="category-chief">Chief Judge(s): <%= category[:chiefs].join(', ') %></p>
 <% end %>
 
-<% unless live_results %>
+<% unless defined?(live_results) %>
   <table class='judge_results'><thead>
     <tr>
       <th colspan='2'>Judge</th>
