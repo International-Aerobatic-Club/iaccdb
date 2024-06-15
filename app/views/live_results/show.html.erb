@@ -1,4 +1,10 @@
-<div class='live-results'></div>
+<%#
+  These two divs provide places to store timestamps that we use to determine
+  whether there's been a new upload of contest results, and if so, to refresh the page.
+%>
+<div class='hide' id='last-refresh-time'><%= Time.now.utc.to_i %></div>
+<div class='hide' id='latest-results-time'><%= @contest.data_posts.last&.created_at&.to_i || 0 %></div>
+
 <p id="notice"><%= notice %></p>
 
 <h1><%= @contest.name %></h1>
@@ -7,6 +13,10 @@
   <p class='message'>This contest has not posted any results.</p>
 <% end %>
 
-<%= render :partial => 'contests/category', collection: @categories,
-  :locals => { no_category_chiefs: (@contest.chief_names.length < 2), live_results: true }
+<%= render :partial => 'contests/category',
+           collection: @categories,
+           :locals => { no_category_chiefs: (@contest.chief_names.length < 2), live_results: true }
 %>
+
+<br>
+<br>

@@ -27,6 +27,9 @@ gem 'memoist2'
 # prefer server config; but this will work
 gem 'turnout'
 
+# support for execjs asset precompilation
+gem 'mini_racer'
+
 group :development, :test do
   gem 'rspec-rails'
   gem 'factory_bot_rails'
@@ -52,6 +55,4 @@ end
 
 group :production do
   gem 'daemons'
-  # support for execjs asset precompilation
-  gem 'therubyracer'
 end
