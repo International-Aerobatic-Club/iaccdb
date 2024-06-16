@@ -14,7 +14,7 @@ class LiveResultsController < ApplicationController
     respond_to do |format|
       format.js {
         render layout: false,
-               locals: { timestamp: DataPost.where(contest_id: params[:id]).last&.created_at&.to_i || 0 }
+               locals: { last_post: DataPost.where(contest_id: params[:id]).last&.created_at&.to_i || 0 }
       } # format.js
     end
 

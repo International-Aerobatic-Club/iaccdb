@@ -38,7 +38,7 @@ $(document).ready ->
         $('p.alert').html('Internal error while retrieving last upload time')
       success: (data, textStatus, jqXHR) ->
         # Reload the page if new results have come in
-        if (Number($('div#latest-results-time').text()) > Number($('div#last-refresh-time').text()))
+        if (Number($('div#last-results-time').text()) > Number($('div#last-refresh-time').text()))
           alert('Reloading!') # !!!
           location.reload()
 
