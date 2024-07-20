@@ -25,7 +25,7 @@ end
 CSV($stdout) do |csv|
   members
     .find_all{ |k,v| v > 250 }
-    .map{ |mid,v| ["#{Member.find(mid).family_name}, #{Member.find(mid).given_name}", mid, v] }
+    .map{ |mid,v| ["#{Member.find(mid).given_name} #{Member.find(mid).family_name}", mid, v] }
     .sort
-    .each{ |member_name, mid, count| csv << [member_name, mid, count] }
+    .each{ |member_name, mid, count| csv << [member_name, Member.find(mid).iac_id, count] }
 end
