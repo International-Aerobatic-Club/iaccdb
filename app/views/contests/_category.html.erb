@@ -2,7 +2,7 @@
 
 <table class='pilot_results'><thead><tr>
   <th <% unless defined?(live_results) %>colspan='3' <% end %> >Pilot</th>
-  <% unless defined?(live_results) %> %><th>Airplane</th> <% end %>
+  <% unless defined?(live_results) %><th>Airplane</th> <% end %>
   <% flight_order = [] %>
   <% category[:flights].each do |flight| %>
     <th colspan='<%= defined?(live_results) ? 2 : 3 %>'>
