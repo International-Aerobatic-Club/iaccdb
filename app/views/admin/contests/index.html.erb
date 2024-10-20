@@ -22,8 +22,6 @@
 <% @contests.each do |contest| %>
   <tr>
     <td><%= contest.id %></td>
-    <% manny = contest.manny_synch %>
-    <td><%= manny.manny_number if manny%></td>
     <td><%= contest.start %></td>
     <td><%= link_to contest.sobriquet, contest %></td>
     <td><%= contest.place %></td>
@@ -46,7 +44,7 @@
     </td>
     <td>
       <%= link_to :delete, admin_contest_path(contest), 
-        data: { :confirm => 'Will leave the Manny synch record.  Okay?' }, 
+        data: { :confirm => 'This will permanently delete the entire contest. Are you sure?' }, 
         :method => :delete %>
     </td>
   </tr>

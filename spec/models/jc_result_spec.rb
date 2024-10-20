@@ -68,20 +68,5 @@ module Model
         expect(@jc_result.minority_grade_ct).to eq(3)
       end
     end #context factory data
-    context 'parsed data' do
-      it 'computes category level judge results' do
-        manny = Manny::Parse.new
-        IO.foreach('spec/manny/Contest_300.txt') { |line| manny.processLine(line) }
-        m2d = Manny::MannyToDB.new
-        contest = m2d.process_contest(manny, true)
-        expect(contest).not_to be nil
-        expect(contest.flights).not_to be_nil
-        expect(contest.flights.count).to eq 12
-        computer = ContestComputer.new(contest)
-        computer.compute_results
-        expect(contest.pc_results.count).to eq 30
-        expect(contest.jc_results.count).to eq 30
-      end
-    end
   end #JcResult
 end #module

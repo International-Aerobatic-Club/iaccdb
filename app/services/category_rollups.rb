@@ -117,7 +117,6 @@ class CategoryRollups
       Failure.create(
         :step => "category",
         :contest_id => contest.id,
-        :manny_id => contest.manny_synch ? contest.manny_synch.manny_number : nil,
         :description => 
           ":: " + self.to_s +
           "\n:: category_values " + category_values.to_yaml +

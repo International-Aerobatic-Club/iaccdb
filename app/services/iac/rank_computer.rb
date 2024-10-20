@@ -266,7 +266,6 @@ private
       Failure.create(
         :step => 'flight_ranks',
         :contest_id => contest.id,
-        :manny_id => contest.manny_synch ? contest.manny_synch.manny_number : nil,
         :description => 
           ":: Flight #{flight} " +
           "\n:: flight_values " + flight_values.to_yaml +
@@ -334,7 +333,6 @@ private
       Failure.create(
         :step => "figures",
         :contest_id => contest.id,
-        :manny_id => contest.manny_synch ? contest.manny_synch.manny_number : nil,
         :description => 
           ":: flight #{flight} \n:: judge_pilot_figure_computed_values " +
           judge_pilot_figure_computed_values.to_yaml + 

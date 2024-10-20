@@ -4,7 +4,7 @@
   <% airplane = pilot_result[:airplane] %>
   <% chapter = pilot_result[:chapter] %>
   <% unless live_results %>
-    <td class='star'> <%= pc_result.star_qualifying ? '<E2><98><85>' : ' ' %> </td>
+    <td class='star'> <% if pc_result.star_qualifying %> &starf; <% end %> </td>
   <% end %>
   <td class="pilot">
     <% if live_results %> <%= pc_result.display_rank %>. <% end %>

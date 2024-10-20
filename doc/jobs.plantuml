@@ -1,7 +1,6 @@
 @startuml
   control Jobs
   participant JasperToDB
-  participant MannyToDB
   participant ContestComputer as CC
   participant FlightComputer as FC
   participant CategoryRollups as CR
@@ -22,12 +21,6 @@
   group "Process JaSPer Job"
     Jobs -> JasperToDB : process_contest
     JasperToDB -> Contest : create/update
-    Jobs -> Jobs : compute_flights_job
-  end
-
-  group "Retrieve Manny Job"
-    Jobs -> MannyToDB : process_contest
-    MannyToDB -> Contest : create/update
     Jobs -> Jobs : compute_flights_job
   end
 

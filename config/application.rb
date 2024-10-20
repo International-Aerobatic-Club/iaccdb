@@ -17,7 +17,6 @@ class Application < Rails::Application
   config.autoload_paths << Rails.root.join('app/services/iac')
   config.autoload_paths << Rails.root.join('app/services/jasper')
   config.autoload_paths << Rails.root.join('app/services/jobs')
-  config.autoload_paths << Rails.root.join('app/services/manny')
   config.autoload_paths << Rails.root.join('app/services/member_merge')
   config.autoload_paths << Rails.root.join('app/services/ranking')
   config.autoload_paths << Rails.root.join('app/services/tasks')
