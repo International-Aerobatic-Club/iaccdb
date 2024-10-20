@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', "~> 7.0.0"
+gem 'rails', "~> 7.2"
 
 gem 'mysql2'
 
@@ -16,7 +16,9 @@ gem 'webpacker'
 gem 'libxml-ruby'
 gem 'jquery-rails'
 gem 'chronic'
-gem 'foundation-rails'
+
+# Force the use of foundation-rails 6.6 as a workaround for https://github.com/foundation/foundation-rails/issues/789
+gem 'foundation-rails', '~> 6.6.0'
 
 gem 'delayed_job'
 gem 'delayed_job_active_record'
