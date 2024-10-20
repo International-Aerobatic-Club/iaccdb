@@ -12,7 +12,7 @@ FROM
     contests d on d.id = f.contest_id
         JOIN
     members e ON e.id = b.judge_id
-WHERE
-    year(d.start) = 2015
+/* WHERE */
+/*    year(d.start) = 2015 */
 GROUP BY e.id
 ORDER BY `flights` DESC;
