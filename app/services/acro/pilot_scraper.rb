@@ -84,9 +84,9 @@ def score(iFig, iJudge)
   nGrade = childSet.last
   nStr = nGrade.text.strip if nGrade
   if nStr =~ /Z/
-    s = IAC::Constants::HARD_ZERO
+    s = Constants::HARD_ZERO
   elsif nStr =~ /AVG/
-    s = IAC::Constants::AVERAGE
+    s = Constants::AVERAGE
   elsif nStr
     s = nStr.to_f * 10
     s = s.to_i

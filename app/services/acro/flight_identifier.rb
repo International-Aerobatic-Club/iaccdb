@@ -5,7 +5,7 @@ module FlightIdentifier
     if /Four|Minute/i =~ description
       cat = 'Four Minute' 
     else
-      IAC::Constants::CONTEST_CATEGORIES.each do |catName|
+      Constants::CONTEST_CATEGORIES.each do |catName|
         cat = catName if Regexp.new(catName, 'i') =~ description
       end
     end
@@ -103,11 +103,11 @@ module FlightIdentifier
   def detect_flight_aircat(description)
     aircat = nil
     if /Four|Minute/i =~ description
-      aircat = IAC::Constants::FOUR_MINUTE_CATEGORY
+      aircat = Constants::FOUR_MINUTE_CATEGORY
     elsif /Power|Primary|Beginners|Basic/i =~ description
-      aircat = IAC::Constants::POWER_CATEGORY
+      aircat = Constants::POWER_CATEGORY
     elsif /Glider/i =~ description
-      aircat = IAC::Constants::GLIDER_CATEGORY
+      aircat = Constants::GLIDER_CATEGORY
     end
     aircat
   end

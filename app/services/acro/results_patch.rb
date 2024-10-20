@@ -9,7 +9,7 @@ def initialize(control_file)
   @participant_list.read(@contest_info.data_directory)
   @results_list = ResultsList.new(control_file)
   @results_list.read_from_file
-  @rank_computer = IAC::RankComputer.instance
+  @rank_computer = RankComputer.instance
 end
 
 def patch_flight_results

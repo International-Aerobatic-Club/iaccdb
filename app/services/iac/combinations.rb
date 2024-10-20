@@ -1,4 +1,3 @@
-module IAC
 # unlike Array.combination, this enables incremental computation
 # as each combination is built.
 class Combinations
@@ -19,5 +18,4 @@ class Combinations
       end
     end
   end
-end
 end

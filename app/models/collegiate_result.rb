@@ -8,7 +8,7 @@ def pilot_contests
   pilots = self.members.all # array of pilot members
   pilot_contests = {}
   pilots.each do |pilot|
-    pilot_contests[pilot] = IAC::CollegiateComputer.pilot_results(pilot, year)
+    pilot_contests[pilot] = CollegiateComputer.pilot_results(pilot, year)
   end
   pilot_contests
 end

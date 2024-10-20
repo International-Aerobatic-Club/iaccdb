@@ -1,7 +1,7 @@
 class MannySynch < ApplicationRecord
   belongs_to :contest, optional: true
 
-  # pass an IAC::Contest
+  # pass a Contest
   # returns an array containing MannySynch and string action:
   #   skip, update, or create
   def self.contest_action(contest)

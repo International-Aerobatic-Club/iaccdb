@@ -10,7 +10,7 @@ module PfResultM
     end
 
     def self.rank_computer
-      IAC::RankComputer.instance
+      RankComputer.instance
     end
 
     # accepts an array of PfResults

@@ -1,4 +1,4 @@
-IAC::Application.routes.draw do
+Application.routes.draw do
 
   ### HQ Namespace
   namespace :hq do

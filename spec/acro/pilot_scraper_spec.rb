@@ -152,12 +152,12 @@ module ACRO
         expect(@ps.score(10,7)).to eq(75)
       end
       it 'finds hard zeros' do
-        expect(@ps.score(4,1)).to eq(IAC::Constants::HARD_ZERO)
-        expect(@ps.score(4,7)).to eq(IAC::Constants::HARD_ZERO)
+        expect(@ps.score(4,1)).to eq(Constants::HARD_ZERO)
+        expect(@ps.score(4,7)).to eq(Constants::HARD_ZERO)
       end
       it 'finds averages' do
-        expect(@ps.score(8,1)).to eq(IAC::Constants::AVERAGE)
-        expect(@ps.score(11,6)).to eq(IAC::Constants::AVERAGE)
+        expect(@ps.score(8,1)).to eq(Constants::AVERAGE)
+        expect(@ps.score(11,6)).to eq(Constants::AVERAGE)
       end
       it 'finds penalty amount for flight' do
         expect(@ps.penalty).to eq(120)

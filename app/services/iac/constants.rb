@@ -1,4 +1,3 @@
-module IAC
 module Constants
   CONTEST_CATEGORIES = %w{ Primary Sportsman Intermediate Advanced Unlimited }
   CATEGORY_NAMES = CONTEST_CATEGORIES + %w{ Four\ Minute\ Free }
@@ -101,5 +100,4 @@ module Constants
     cat_list
   end
 
-end
 end
