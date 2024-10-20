@@ -98,6 +98,9 @@ Application.routes.draw do
 
   resources :jf_results, :only => [:show]
 
+  resources :live_results, only: [:show]
+  get '/last_upload/:id' => 'live_results#last_upload'
+
   resources :make_models, :only => [:index, :show]
 
   get 'chief/:id/cv',

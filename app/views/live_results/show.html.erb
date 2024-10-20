@@ -1,0 +1,19 @@
+<%# The time at which the page was loaded %>
+<div class='hide' id='last-refresh-time'><%= Time.now.to_i %></div>
+
+<%# The value of `DataPost#created_at` for the contests latest JaSPer upload %>
+<div class='hide' id='last-results-time'><%= 0 %></div>
+
+<h1><%= @contest.name %></h1>
+
+<% if @categories.empty? %>
+  <p class='message'>This contest has not posted any results.</p>
+<% end %>
+
+<%= render :partial => 'contests/category',
+           collection: @categories,
+           :locals => { no_category_chiefs: (@contest.chief_names.length < 2), live_results: true }
+%>
+
+<br>
+<br>
