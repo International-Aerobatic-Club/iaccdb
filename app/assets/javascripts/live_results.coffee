@@ -39,7 +39,7 @@ $(document).ready ->
       success: (data, textStatus, jqXHR) ->
         # Reload the page if new results have come in
         if (Number($('div#last-results-time').text()) > Number($('div#last-refresh-time').text()))
-          alert('Reloading!') # !!!
+          # alert('Reloading!') # !!!
           location.reload()
 
   liveScroll()
