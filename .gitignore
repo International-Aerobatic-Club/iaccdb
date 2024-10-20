@@ -12,7 +12,6 @@ posts/
 dbBackup/
 public/assets
 .DS_Store
-config/database.yml
 *.dia~
 coverage/
 .idea
@@ -25,3 +24,5 @@ coverage/
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+
+/config/master.key
