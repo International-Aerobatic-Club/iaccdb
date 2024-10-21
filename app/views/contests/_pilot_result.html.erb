@@ -21,22 +21,22 @@
       <td colspan='3'/>
     <% else %>
       <% pf_result = pf_result.first %>
-      <td class='total_average'>
-        <%= decimal_two(pf_result.adj_flight_value) %>
-      </td>
       <% unless live_results %>
-        <td class='percentage'>
-          <%= score_pct_two(pc_result.category_value, pc_result.total_possible) %>%
-        </td>
-        <td class='rank'>(<%= pc_result.display_rank %>)</td>
+        <td class='total_average'> <%= decimal_two(pf_result.adj_flight_value) %> </td>
       <% end %>
+      <td class='percentage'>
+        <%= score_pct_two(pf_result.adj_flight_value, pf_result.total_possible) %>%
+      </td>
+      <td class='rank'>(<%= pf_result.display_rank %>)</td>
     <% end %>
   <% end %>
   <td class='total_average'>
     <%= decimal_two(pc_result.category_value) %>
   </td>
-  <td class='percentage'>
-    <%= score_pct_two(pc_result.category_value, pc_result.total_possible) %>%
-  </td>
-  <td class='rank'>(<%= pc_result.display_rank %>)</td>
+  <% unless live_results %>
+    <td class='percentage'>
+      <%= score_pct_two(pc_result.category_value, pc_result.total_possible) %>%
+    </td>
+    <td class='rank'>(<%= pc_result.display_rank %>)</td>
+  <% end %>
 </tr>
