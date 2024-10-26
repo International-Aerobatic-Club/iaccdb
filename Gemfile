@@ -58,6 +58,4 @@ end
 
 group :production do
   gem 'daemons'
-  # support for execjs asset precompilation
-  gem 'mini_racer'
 end
