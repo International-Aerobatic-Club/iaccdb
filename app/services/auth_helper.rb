@@ -16,14 +16,11 @@ module AuthHelper
       attr_accessor :users
 
       def users
-        @users ||=
-          Rails.application.secrets['users'] ||
-          YAML.load_file('config/admin.yml')['users'] ||
-          []
+        @users ||= Rails.application.credentials['users'] || Array.new
       end
 
       def find_by_name(user_name)
-        users.find { |u| u['name'] == user_name }
+        users[user_name]
       end
 
       def first_with_role(role)
