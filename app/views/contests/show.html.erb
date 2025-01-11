@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <h1><%= @contest.name %></h1>
-<% if true || (@contest.start <= Date.tomorrow && @contest.start >= Date.today - 10.days) %>
+<% if @contest.start <= Date.tomorrow && @contest.start >= Date.today - 10.days %>
   <%= button_to 'Live Results', "/live_results/#{@contest.id}", method: :get %>
   <br>
 <% end %>
