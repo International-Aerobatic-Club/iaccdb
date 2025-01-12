@@ -5,6 +5,7 @@ def to_s
 end
 
 def pilot_contests
+  # !!!   members.map{ |member| [member, IAC::CollegiateComputer.pilot_results(member, year)] }.to_h
   pilots = self.members.all # array of pilot members
   pilot_contests = {}
   pilots.each do |pilot|
