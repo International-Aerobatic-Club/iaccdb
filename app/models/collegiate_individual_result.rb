@@ -1,32 +1,25 @@
 class CollegiateIndividualResult < Result
 
-def compute_result
-  best_total = 0.0
-  best_possible = 0
-  best_ratio = 0.0
-  have_non_primary = false
-  results = pc_results.all
-  if results.size < 3
-    csz = results.size
-    self.qualified = false
-  else
-    csz = 3
-    self.qualified = true
+  def compute_result
+
+    # Convenience var
+    pc_count = pc_results.count
+
+    # Must have at least 3 contests to qualify
+    self.qualified = (pc_count >= 3)
+
+    # Reorganize the results into a 2D array, then sort by points-scored divided by possible-points, in descending order
+    sorted_results = pc_results.sort_by{ |pcr| -pcr.pct_possible }.map{ |pcr| [pcr.category_value, pcr.total_possible] }
+
+    # Take the top n results, where n is the actual number of results *or* 3, whichever is less
+    top_results = sorted_results.first([pc_count, 3].min)
+
+    self.points = top_results.map{ |cv, pp| cv/pp }.inject(:+) * 100 / top_results.count
+    self.points_possible = 100
+
+    # Save the updated result
+    save!
+
   end
-  results.to_a.combination(csz) do |triple|
-    total = triple.inject(0.0) { |t,r| t + r.category_value }
-    possible = triple.inject(0) { |t,r| t + r.total_possible }
-    non_primary = triple.inject(false) { |t,r| t || !r.category.is_primary }
-    ratio = 0 < possible ? total / possible : 0.0
-    if ((non_primary && !have_non_primary) || best_ratio < ratio)
-      best_total, best_possible, best_ratio = total, possible, ratio
-      have_non_primary ||= non_primary
-    end
-  end
-  self.qualified &&= have_non_primary
-  self.points = best_total
-  self.points_possible = best_possible
-  save!
-end
 
 end
