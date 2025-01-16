@@ -5,13 +5,7 @@ def to_s
 end
 
 def pilot_contests
-  # !!!   members.map{ |member| [member, IAC::CollegiateComputer.pilot_results(member, year)] }.to_h
-  pilots = self.members.all # array of pilot members
-  pilot_contests = {}
-  pilots.each do |pilot|
-    pilot_contests[pilot] = IAC::CollegiateComputer.pilot_results(pilot, year)
-  end
-  pilot_contests
+  members.map{ |member| [member, IAC::CollegiateComputer.pilot_results(member, year)] }.to_h
 end
 
 def self.find_or_create_team_for_year(team_name, year)
