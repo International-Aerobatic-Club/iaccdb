@@ -51,16 +51,14 @@ class LeadersController < ApplicationController
   end
 
   def collegiate
-    @years = CollegiateResult.select("distinct year").all.collect{|rp| rp.year}.sort{|a,b| b <=> a}
+    @years = CollegiateResult.distinct(:year).order(year: :desc).pluck(:year)
     @year = params[:year] || @years.first
-    @collegiates = CollegiateResult.includes(:pc_results).where("year = ?", @year
-      ).order(qualified: :desc, rank: :asc)
-    i_results = CollegiateIndividualResult.where("`year` = ?", @year).order(qualified: :desc, rank: :asc)
+    @collegiates = CollegiateResult.includes(:pc_results).where(year: @year).order(qualified: :desc, rank: :asc)
+    i_results = CollegiateIndividualResult.where(year: @year).order(qualified: :desc, rank: :asc)
     # hash of pilot to pilot's collegiate individual result
     @college_pilots = {}
     @collegiates.each do |cr|
-      pilots = cr.members
-      @college_pilots[cr] = i_results.select { |r| pilots.include? r.pilot }
+      @college_pilots[cr] = i_results.where(pilot: cr.members).sort_by{ |r| -r.points }
     end
   end
 
