@@ -23,14 +23,22 @@ module IAC
     ###
 
     def collegiates_for_pilots
-      pilots = Member.joins(:result_members => :result, 
-                 :pc_results => :contest).where(
-       "year(contests.start) = ? and results.year = ? " +
-       "and results.type='CollegiateResult'",
-        year, year).group('members.id')
-      collegiates = pilots.all.collect { |pilot| engage_student_for_pilot(pilot) }
+
+      # Build a query to retrieve all collegiate pilots who completed in the specified year
+      pilots = Member.joins(result_members: :result, pc_results: [:contest, :category])
+                     # Filter for contests within the specified year
+                     .where('YEAR(contests.start) = ?', year)
+                     # Filter for collegiate results from the current year
+                     .where(result_members: { results: { type: 'CollegiateResult', year: year  } } )
+                     # All categories except Primary and the 4-Minute Free are eligible
+                     .where.not(pc_results: { categories: { category: [ 'primary', 'four minute' ] } } )
+                     # Eliminate any duplicates
+                     .distinct
+
+      collegiates = pilots.map{ |pilot| engage_student_for_pilot(pilot) }
       trim_collegiates(collegiates)
       collegiates
+
     end
 
     # finds or creates student record for pilot
