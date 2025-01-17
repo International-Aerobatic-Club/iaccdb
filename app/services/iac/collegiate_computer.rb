@@ -45,13 +45,8 @@ module IAC
     # find PcResult records for given pilot and year
     # filter or do not filter according to HC (competitive)
     def self.pilot_results(pilot, year)
-      results = if (non_comp_allowed?(year))
-        PcResult.non_comp_allowed
-      else
-        PcResult.competitive
-      end
-      results.joins(:contest).where(
-        "pilot_id = ? and year(contests.start) = ?", pilot.id, year).all
+      results = non_comp_allowed?(year) ? PcResult.non_comp_allowed : PcResult.competitive
+      results.joins(:contest).where(pilot: pilot).where('YEAR(contests.start) = ?', year)
     end
 
     ###
