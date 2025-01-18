@@ -3,26 +3,26 @@
 development:
   adapter: mysql2
   encoding: utf8
-  database: Rails.application.credentials.dig(:database, :development, :db_name)
+  database: <%= Rails.application.credentials.dig(:database, :development, :db_name) %>
   pool: 5
-  username: Rails.application.credentials.dig(:database, :development, :username)
-  password: Rails.application.credentials.dig(:database, :development, :password)
+  username: <%= Rails.application.credentials.dig(:database, :development, :username) %>
+  password: <%= Rails.application.credentials.dig(:database, :development, :password) %>
   host: localhost
 
 test:
   adapter: mysql2
   encoding: utf8
   reconnect: true
-  database: Rails.application.credentials.dig(:database, :test, :db_name)
+  database: <%= Rails.application.credentials.dig(:database, :test, :db_name) %>
   pool: 5
-  username: Rails.application.credentials.dig(:database, :test, :username)
-  password: Rails.application.credentials.dig(:database, :test, :password)
+  username: <%= Rails.application.credentials.dig(:database, :test, :username) %>
+  password: <%= Rails.application.credentials.dig(:database, :test, :password) %>
 
 production:
   adapter: mysql2
   encoding: utf8
   reconnect: true
-  database: Rails.application.credentials.dig(:database, :production, :db_name)
+  database: <%= Rails.application.credentials.dig(:database, :production, :db_name) %>
   pool: 5
-  username: Rails.application.credentials.dig(:database, :production, :username)
-  password: Rails.application.credentials.dig(:database, :production, :password)
+  username: <%= Rails.application.credentials.dig(:database, :production, :username) %>
+  password: <%= Rails.application.credentials.dig(:database, :production, :password) %>
