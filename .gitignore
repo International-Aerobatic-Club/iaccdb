@@ -12,7 +12,6 @@ posts/
 dbBackup/
 public/assets
 .DS_Store
-config/database.yml
 *.dia~
 coverage/
 .idea
