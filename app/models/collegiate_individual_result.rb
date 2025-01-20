@@ -8,13 +8,13 @@ class CollegiateIndividualResult < Result
     # Must have at least 3 contests to qualify
     self.qualified = (pc_count >= 3)
 
-    # Reorganize the results into a 2D array, then sort by points-scored divided by possible-points, in descending order
-    sorted_results = pc_results.sort_by{ |pcr| -pcr.pct_possible }.map{ |pcr| [pcr.category_value, pcr.total_possible] }
+    # Sort the results in descending order of %pp, then take the top 3 (or fewer, if less than 3 are present)
+    top_results = pc_results.map(&:pct_possible).sort.reverse.first([pc_count, 3].min)
 
-    # Take the top n results, where n is the actual number of results *or* 3, whichever is less
-    top_results = sorted_results.first([pc_count, 3].min)
+    # Average the top results
+    self.points = top_results.sum / top_results.size
 
-    self.points = top_results.map{ |cv, pp| cv/pp }.inject(:+) * 100 / top_results.count
+    # Since the results are presented as a percentage, the maximum number of possible points is always 100
     self.points_possible = 100
 
     # Save the updated result
