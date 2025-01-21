@@ -12,7 +12,7 @@ module HorsConcours
   # catch-all to make h/c when any of the other bits do not apply
   HC_NO_REASON = 1
 
-  # pilot flew non-competitively, e.g. alone in category
+  # pilot flew non-competitively, i.e. alone in category
   HC_NO_COMPETITION = 1 << 1
 
   # pilot flew a higher category (IAC rule)
