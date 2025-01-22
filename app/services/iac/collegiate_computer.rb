@@ -6,8 +6,8 @@ module IAC
     end
 
     def recompute
-      recompute_team
       recompute_individual
+      recompute_team
     end
 
     # Compute the year's team result

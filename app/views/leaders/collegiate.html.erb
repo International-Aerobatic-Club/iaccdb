@@ -1,28 +1,38 @@
 <h1>Collegiate Results, <%= @year %></h1>
-<p>
-<% @years.each do |year| %>
-  <%= link_to year, leaders_collegiate_path(year) %>
-<% end %>
-</p>
-<p>Collegiate team scores are best combination of one non-Primary pilot result
-and any category results from two other pilots.
-Teams qualify by having a non-Primary competitor at three contests and
-three or more pilots at three contests.
-Qualifying teams have their place indicated to the left of their name.
-</p><p>
-Individuals qualify by having at least three contests, at least one not
-in Primary. We use the best combination of three scores, including at least one
-non-Primary.
-Qualifying individuals have their place indicated to the right of their name.
-</p><p>
-Results are provisional until all contests for the year are
-flown and the winner announced.
-</p>
+<p> <%= @years.map{ |year| link_to year, leaders_collegiate_path(year) }.join(' ').html_safe %> </p>
+<p><strong>Notes:</strong></p>
+<ul>
+  <li>All results are provisional the contest year ends and the winners are announced.</li>
+  <li>Team rank is only displayed if the team has qualified for the Team Award.</li>
+  <li>Individual rank is only displayed if the pilot has qualified for the Individual Award.</li>
+  <li>
+    Team "percent" is the average of the best three contests in Sportsman or Intermediate by a single pilot.
+    <br>
+    and the best three contests flown by the top two remaining pilots in Primary, Sportsman, and/or Intermediate.
+  </li>
+  <li>
+    Individual "percent" is the average of the pilot's best three contests regardless of category.
+  </li>
+  <li>
+    The complete rules are listed in
+    <%= link_to 'IAC Policy and Procedure', 'https://www.iac.org/policy-and-procedure-manual',
+                target: '_blank', title: 'Click to Open' %>
+    #225, Section 7.
+  </li>
+</ul>
+
+<br>
+
 <table class='collegiate'>
-<thead>
-<tr><th colspan='3'/><th>points</th><th>possible</th><th>percent</th></tr>
-</thead>
-<tbody>
-<%= render @collegiates, :locals => { college_pilots: @college_pilots } %>
-</tbody>
+  <thead>
+    <tr>
+      <th colspan='3'></th>
+      <th>points</th>
+      <th>possible</th>
+      <th>percent</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render @collegiates, :locals => { college_pilots: @college_pilots } %>
+  </tbody>
 </table>

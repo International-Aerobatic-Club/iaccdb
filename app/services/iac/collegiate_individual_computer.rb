@@ -30,8 +30,6 @@ module IAC
                      .where('YEAR(contests.start) = ?', year)
                      # Filter for collegiate results from the current year
                      .where(result_members: { results: { type: 'CollegiateResult', year: year  } } )
-                     # All categories except Primary and the 4-Minute Free are eligible
-                     .where.not(pc_results: { categories: { category: [ 'primary', 'four minute' ] } } )
                      # Eliminate any duplicates
                      .distinct
 
