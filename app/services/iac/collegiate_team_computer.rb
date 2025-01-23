@@ -27,13 +27,6 @@ module IAC
         dup
       end
 
-      def update(pc_result)
-        self.total += pc_result.category_value
-        self.total_possible += pc_result.total_possible
-        self.combination << pc_result
-        self.has_non_primary = self.has_non_primary || !pc_result.category.is_primary
-      end
-
       def value
         self.total_possible != 0 ? self.total / self.total_possible : 0
       end
@@ -85,7 +78,8 @@ module IAC
       # Of the upper-category qualifiers, find the one with the highest average for their 3 best
       # results in one of those categories (P&P 225.7.1(h)(1))
       best_upper_pilot = qualifying_uppers.map do |qs|
-        { pilot: qs, avg_pp: best_contests(qs, upper_cats).first(3).map(&:pct_possible).sum / 3 }
+        bcs = best_contests(qs, upper_cats).first(3)
+        { pilot: qs, avg_pp: bcs.map(&:pct_possible).sum / 3, pilot_contests: bcs}
       end.sort_by{ |h| -h[:avg_pp] }.first
 
       # We remove the best upper-category pilot from the list of all qualifying pilots so that
@@ -95,7 +89,8 @@ module IAC
       # Of the remaining qualifying pilots, get the average of their three best contests,
       # then take two pilots with the best averages
       best_others = qualifying_pilots.map do |qp|
-        { pilot: qp, avg_pp: best_contests(qp, all_cats).first(3).map(&:pct_possible).sum / 3 }
+        bcs = best_contests(qp, all_cats).first(3)
+        { pilot: qp, avg_pp: bcs.map(&:pct_possible).sum / 3, pilot_contests: bcs }
       end.sort_by{ |h| -h[:avg_pp] }.first(2)
 
       # Now combine the best upper-category pilot with the other two best pilots,
@@ -108,6 +103,9 @@ module IAC
 
       # Because we calculate scores as percentages, the maximum possible is always 100
       result.total_possible = 100
+
+      # Save the PcResult objects
+      result.combination = top3_pilots.map{ |h| h[:pilot_contests] }.flatten
 
       return result
 
