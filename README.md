@@ -1,24 +1,9 @@
-[![Travis Test Status](https://travis-ci.org/wbreeze/iaccdb.svg)](
-https://travis-ci.org/wbreeze/iaccdb)
-[![Test Coverage](https://codeclimate.com/github/wbreeze/iaccdb/badges/coverage.svg)](
-https://codeclimate.com/github/wbreeze/iaccdb/coverage)
-[![Code Climate](https://codeclimate.com/github/wbreeze/iaccdb/badges/gpa.svg)](
-https://codeclimate.com/github/wbreeze/iaccdb)
-
-The International Aerobatic Club (IAC)
-is calling for proposals for maintenance and development of this project.
-Please refer to the
-[call for proposals](CFP.md)
-for details. Please also see, [contributions](#contributions) below.
-
 This project contains code for a Ruby-on-Rails web site that displays data
 about aerobatic contests, including contest results, pilot standings,
 and judge metrics.
 
 Find this deployed on the [web site](https://iaccdb.iac.org/)
 of the International Aerobatic Club (IAC).
-
-For more information contact [Douglas Lovell](https://github.com/wbreeze)
 
 ## Development
 
