@@ -15,7 +15,7 @@ gem 'mysql2', '>= 0.4.4', '< 0.6.0'
 gem 'libxml-ruby'
 gem 'jquery-rails'
 gem 'chronic'
-gem 'foundation-rails'
+gem 'foundation-rails', '< 6.9.0'
 
 gem 'delayed_job'
 gem 'delayed_job_active_record'
