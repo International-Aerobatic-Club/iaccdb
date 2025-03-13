@@ -33,6 +33,7 @@ gem 'mini_racer'
 group :development, :test do
   gem 'rspec-rails'
   gem 'factory_bot_rails'
+  gem 'rubocop', require: false
 end
 
 group :development do
