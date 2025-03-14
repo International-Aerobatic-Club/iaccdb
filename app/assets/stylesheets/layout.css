@@ -48,3 +48,5 @@ div#footer ul {
   margin-top: 0px;
   list-style-type: none;
 }
+
+div.top-bar a:hover { background-color: #d0d0d0; }
