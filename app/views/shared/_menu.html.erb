@@ -2,12 +2,18 @@
       data-responsive-toggle="responsive-menu" data-hide-for="medium">
       <button class="menu-icon" type="button"
         data-toggle="responsive-menu"></button>
-      <div class='title-bar-title'><%= link_to "IAC CDB", root_path %></div>
+      <div class='title-bar-title'><%= link_to "IAC Contest Database", root_path %></div>
     </div>
-    <div class="top-bar" id="responsive-menu">
+    <div class="top-bar" id="responsive-menu" display='inline-block'>
+      <%=
+        link_to image_tag('IAC_Shield_Logo_2C_RGB_51px.png'),
+                'https://www.iac.org',
+                title: 'IAC Homepage',
+                style: 'padding-right: 10px'
+      %>
       <div class="top-bar-left">
         <ul class="dropdown menu" data-dropdown-menu>
-          <li><%= link_to "IAC CDB", root_path %></li>
+          <li><%= link_to "IAC Contest Database", root_path %></li>
           <li class='has-submenu'>
             <%= link_to 'Navigate', '#0' %>
             <ul class='submenu menu vertical' data-submenu>
