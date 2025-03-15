@@ -8,9 +8,10 @@ class PilotsController < ApplicationController
     id = params[:id]
     @pilot = Member.find(id)
     @contests =
-      Contest.joins(flights: :pilot_flights)
-             .where(flights: { pilot_flights: { pilot_id: id }})
+      Contest.joins(pc_results: :category)
+             .where(pc_results: { pilot_id: id })
              .order(start: :desc)
+             .select('contests.*, categories.name as category')
              .distinct
   end
 end
