@@ -32,6 +32,7 @@ class ComputeContestPilotRollupsJob < Struct.new(:contest)
     Delayed::Job.enqueue ComputeRegionalJob.new(contest)
     Delayed::Job.enqueue ComputeSoucyJob.new(contest)
     Delayed::Job.enqueue ComputeCollegiateJob.new(contest)
+    Delayed::Job.enqueue ComputeLeoJob.new(contest)
   end
 
 end

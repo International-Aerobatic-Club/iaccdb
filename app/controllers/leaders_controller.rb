@@ -50,6 +50,14 @@ class LeadersController < ApplicationController
     @nationals = Contest.where("year(start) = ? and region = 'National'", @year).first
   end
 
+  def leo
+    # !!! @years = LeoResult.select(:year).order(year: :desc).distinct.map(&:year)
+    # !!! @leo_pilots = LeoResult.includes(:pc_results).where(year: @year).order(qualified: :desc, rank: :asc).limit(20)
+    @years = [2021,2022,2023,2024].reverse # !!!
+    @year = params[:year] || @years.first
+    IAC::LeoComputer.new(@year).recompute
+  end
+
   def collegiate
     @years = CollegiateResult.distinct(:year).order(year: :desc).pluck(:year)
     @year = params[:year] || @years.first
@@ -108,10 +116,5 @@ class LeadersController < ApplicationController
 
   end
 
-
-  def leo
-    @years = JyResult.distinct(:year).where('year >= ?', 2021).order(year: :desc).pluck(:year)
-    @year = params[:year] || @years.first
-  end
 
 end

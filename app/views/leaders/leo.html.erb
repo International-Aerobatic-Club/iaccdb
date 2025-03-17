@@ -1,28 +1,38 @@
 <h1>National Point Series Championship Results, <%= @year %></h1>
+
 <p>
 <% @years.each do |year| %>
   <%= link_to year, leaders_leo_path(year) %>
 <% end %>
 </p>
 <p>
-  The purpose of the award is to recognize the IAC competition pilots in each of the five Power categories:
-  Primary, Sportsman, Intermediate, Advanced and Unlimited who achieves the highest percentage of points possible
-  during a calendar year from three different regions (in a given category) will be automatically qualified
-  and ranked.
-</p>
-<p>
-  The winner of this award will be determined by the best performance in three different regions to
-  accumulate NPSC points.  Championship points will be earned at each contest based on a
+  The purpose of the award is to recognize the most skilled pilots who competed in at least three
+  different regions in a single year. Championship points are earned at each contest based on a
   <a href="https://en.wikipedia.org/wiki/Percentile_rank" target="_blank">percentile ranking</a>
-  method for each contest flown, rather than by straight score percentages.
+  for each contest flown, rather than by straight score percentages. This minimizes the differences
+  in regional judging, contest size, use of boundary judges, etc.
 </p>
+
 <table class='soucy'>
-<thead>
-<tr><th colspan='2'/><th>points</th><th>possible</th><th>percent</th></tr>
-</thead>
-<tbody>
-  <tr>
-    <td>COMING SOON</td>
-  </tr>
-</tbody>
+
+  <thead>
+    <tr>
+      <th> Rank </th>
+      <th>Pilot</th>
+      <th>Percentile Rank</th>
+      <th>Contests</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>COMING SOON</td>
+    </tr>
+  </tbody>
+
 </table>
+
+
+<h2> Ineligible Flights</h2>
+<p> EXPLAIN WHY: flew higher in prior two years, or HC</p>
+<table> List o' flights </table>
