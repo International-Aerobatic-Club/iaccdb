@@ -9,9 +9,6 @@ module IAC
     # Minimum number of regions to qualify
     REGIONS_REQD = 3
 
-    # The top 'n' percentile rankings are averaged
-    BEST_N_RANKS = 3
-
 
     def initialize(year)
       @year = year.to_i
@@ -126,15 +123,33 @@ module IAC
 
       ###### STEP 5 ######
       # Compute the average percentile per pilot
-      pilots_best.each_value do |pilots|
-        pilots.each_pair do |pilot, regions|
-          pilot[:percentile_avg] = (regions.values.map{ |h| h[:percentile_rank] }.sum / BEST_N_RANKS).round(2)
+      pilots_best.each_pair do |category, pilots|
+        pilots.each_pair do |pilot_id, regions|
+          pct_values = regions.values.map{ |h| h[:percentile_rank] }
+          pilots_best[category][pilot_id][:percentile_avg] = (pct_values.sum / pct_values.size).round(2)
         end
       end
 
 
 
       ###### STEP 6 ######
+      # Rank the pilots in each category
+
+      leo_ranks = Hash.new
+      leo_ranks[:qualified] = Hash.new
+      leo_ranks[:unqualified] = Hash.new
+
+      pilots_best.each_pair do |category, pilots|
+        pilots.sort_by{ |pilot_id, regions| -regions[:percentile_avg] }.each do |pilot_id, regions|
+          qual = (regions.size == REGIONS_REQD + 1 ? :qualified : :unqualified)
+          leo_ranks[qual][category] ||= Array.new
+          leo_ranks[qual][category] << [pilot_id, regions[:percentile_avg]]
+        end
+      end
+
+
+
+      ###### STEP 7 ######
       # Write the individual pilot-contest-category results to the database
 
       # All or nothing
@@ -158,7 +173,9 @@ module IAC
             points_possible: 100,
             ).save
 
-        end  # results.each
+        end  # pc_results.each
+
+
 
       end  # transaction
 
