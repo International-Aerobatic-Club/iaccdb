@@ -13,22 +13,58 @@
   in regional judging, contest size, use of boundary judges, etc.
 </p>
 
+<p class="c">
+  <% cats = LeoRank.categories.map{ |cat| "<b><a href='##{cat.category}'>#{cat.category.titleize}</a></b>" } %>
+  <%= cats.join(" &bull; ").html_safe %>
+</p>
+
+<p>&nbsp;</p>
+
+<% p_rank = 'The average of the best percentile ranks from three separate contest regions.' %>
+
 <table class='soucy'>
 
-  <thead>
-    <tr>
-      <th> Rank </th>
-      <th>Pilot</th>
-      <th>Percentile Rank</th>
-      <th>Contests</th>
-    </tr>
-  </thead>
+  <% LeoRank.categories.each do |category| %>
 
-  <tbody>
+    <thead>
     <tr>
-      <td>COMING SOON</td>
-    </tr>
-  </tbody>
+        <th colspan=99 class="c">
+          <a id="<%= category.category %>"> </a>
+          <h3> <%= category.name %> </h3>
+        </th>
+      </tr>
+      <tr>
+        <th class="b"> Rank </th>
+        <th class="b">Pilot</th>
+        <th class="b r">Avg. Rank<%= image_tag('info_icon.png', size: 18, title: p_rank) %></th>
+        <th class="b">Contests</th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+      <% @leo_ranks.where(category: category, qualified: true).order(:rank).each do |lr| %>
+
+        <tr>
+          <td> <%= lr.rank %> </td>
+          <td> <%= link_to lr.pilot.name, "/pilots/#{lr.pilot.id}" %> </td>
+          <td class="r"> <%= lr.points %> </td>
+          <td> TBD </td>
+        </tr>
+
+      <% end %>
+
+      <% if @leo_ranks.where(category_id: category.id, qualified: true).empty? %>
+      <tr> <td colspan="99" class="c"> <em> No pilots met the qualifications for this category </em> </td> </tr>
+      <% end %>
+
+     <% unless category == LeoRank.categories.last %>
+      <tr class="no-shading"> <td colspan="99"> &nbsp; </td> </tr>
+     <% end %>
+
+    </tbody>
+
+  <% end %>
 
 </table>
 

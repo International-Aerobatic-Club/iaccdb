@@ -6,6 +6,12 @@ module IAC
 
   class LeoComputer
 
+    US_STATE_ABBREVS =
+      %w(
+        AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS MO
+        MT NE NV NH NJ NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI WY
+      )
+
     # Minimum number of regions to qualify
     REGIONS_REQD = 3
 
@@ -19,8 +25,9 @@ module IAC
       # Arrays of all results
       pc_results = Array.new
 
-      # Get all categories that qualify for the Leo
-      categories = Category.where(aircat: 'P', synthetic: false)
+      # Get all categories that qualify for the Leo Award
+      # We save the query results in an Array to avoid numerous ActiveRecord queries in the logic that follows
+      categories = LeoRank.categories
 
 
       ### STEP 1 ###
@@ -29,13 +36,13 @@ module IAC
       # Get the highest Category#sequence value for each pilot who completed during the prior two years (P&P 227.2.3.5)
       pilot_minimum_category = PcResult
         .joins(:contest, :category)
-        .where('YEAR(contests.start) IN (?,?)', @year - 2, @year - 1)
+        .where('YEAR(contests.start) >= ?', Date.today.year - 2)
         .where(category: categories)
         .group(:pilot_id)
         .maximum('categories.sequence')
 
       # Get all domestic (US & Canada) contests
-      contests = Contest.where('YEAR(start) = ?', @year).where.not(region: 'International')
+      contests = Contest.where('YEAR(start) = ?', @year).where(contests: { state: US_STATE_ABBREVS })
 
       # Cache pilot names
       pilot_names = Member.where(id: pilot_minimum_category.keys).map{ |m| [m.id, m.name] }.to_h
@@ -51,9 +58,8 @@ module IAC
         # Convert the ActiveRecord::Base object to a Hash, allowing us to add pseudo-attributes as processing proceeds
         record = pcr.as_json.with_indifferent_access
 
-        # Exception: Treat the 'National' region as SouthCentral. This may need to be changed, with a date cutoff,
         # if Nationals ever moves to a different region.
-        record[:region] = (pcr.contest.region == 'National' ? 'SouthCentral' : pcr.contest.region)
+        record[:region] = fix_nats(pcr.contest.region)
         record[:category] = pcr.category.category
 
         # If the pilot is competing in less than their minimum category, mark them ineligible
@@ -64,14 +70,16 @@ module IAC
         elsif pcr.hors_concours.positive?
           record[:ineligible_reason] = 'Competed as HC'
           record[:qualified] = false
-        # Pilots who are alone in their category get a fixed rank of 50.
-        elsif (pcr_count = PcResult.where(contest: pcr.contest, category: pcr.category, hors_concours: 0).count) == 1
-          record[:percentile_rank] = 50.0
+        else
           record[:qualified] = true
+        end
+
+        # Pilots who are alone in their category get a fixed rank of 50.
+        if (pcr_count = PcResult.where(contest: pcr.contest, category: pcr.category, hors_concours: 0).count) == 1
+          record[:percentile_rank] = 50.0
         else
           # Calculate the percentile rank
           record[:percentile_rank] = (1 - (pcr.category_rank * (1/(pcr_count.to_f + 1)))) * 100
-          record[:qualified] = true
         end
 
         # Save the PcResult
@@ -140,11 +148,15 @@ module IAC
       leo_ranks[:unqualified] = Hash.new
 
       pilots_best.each_pair do |category, pilots|
+
+        leo_ranks[:qualified][category] = Array.new
+        leo_ranks[:unqualified][category] = Array.new
+
         pilots.sort_by{ |pilot_id, regions| -regions[:percentile_avg] }.each do |pilot_id, regions|
           qual = (regions.size == REGIONS_REQD + 1 ? :qualified : :unqualified)
-          leo_ranks[qual][category] ||= Array.new
           leo_ranks[qual][category] << [pilot_id, regions[:percentile_avg]]
         end
+
       end
 
 
@@ -152,34 +164,69 @@ module IAC
       ###### STEP 7 ######
       # Write the individual pilot-contest-category results to the database
 
+      # TODO: Add error reporting if `#transaction` returns `false`; see GitHub issue #268
       # All or nothing
-      # TODO: Add error reporting if `#transaction` returns `false`
       ActiveRecord::Base.transaction do
 
-        # Erase existing records for the year in question
+        # Erase any Leo records for the year in question
         LeoPilotContest.where(year: @year).delete_all
+        LeoRank.where(year: @year).delete_all
 
         pc_results.each do |result|
 
-          LeoPilotContest.new(
+          LeoPilotContest.create(
             year: @year,
             category_id: result[:category_id],
             pilot_id: result[:pilot_id],
-            region: 'National',
             name: pilot_names[result[:pilot_id]],
+            region: fix_nats(Contest.find(result['contest_id']).region),
             qualified: result[:qualified],
-            rank: 0, # Placeholder; ranking is done below and stored as LeoRank objects
             points: result[:percentile_rank],
             points_possible: 100,
-            ).save
+          )
 
         end  # pc_results.each
 
 
+        # Create the LeoRank records
+        # Iterate over the qualified & unqualified lists separately
+        leo_ranks.keys.each do |qual|
+
+          # Iterate over the categories
+          leo_ranks[qual].each_pair do |category, ranks|
+
+            # All qualified pilots are ranked above unqualified pilots
+            # We fiddle the starting index to force all qualified pilots to be ranked first, then the unqualified ones
+            ranks.map.with_index(qual == :qualified ? 1 : leo_ranks[:qualified][category].size + 1) do |(pilot_id, rank), i|
+
+              LeoRank.create(
+                year: @year,
+                category_id: categories.find{ |c| c.category == category }.id,
+                pilot_id: pilot_id,
+                name: pilot_names[pilot_id],
+                region: 'National',
+                qualified: qual == :qualified,
+                rank: i,
+                points: rank,
+                points_possible: 100,
+              )
+
+            end  # ranks.with_index
+
+          end  # categories.each_pair
+
+        end  # leo_ranks.keys
 
       end  # transaction
 
     end  # def recompute
+
+
+    private
+
+    def fix_nats(region)
+      region == 'Nationals' ? 'SouthCentral' : region
+    end
 
   end  # Class
 

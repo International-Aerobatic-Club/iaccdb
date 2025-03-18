@@ -51,11 +51,13 @@ class LeadersController < ApplicationController
   end
 
   def leo
-    # !!! @years = LeoResult.select(:year).order(year: :desc).distinct.map(&:year)
-    # !!! @leo_pilots = LeoResult.includes(:pc_results).where(year: @year).order(qualified: :desc, rank: :asc).limit(20)
-    @years = [2021,2022,2023,2024].reverse # !!!
+    @years = Time.now.year.downto(2021).to_a
     @year = params[:year] || @years.first
+    # !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!!
     IAC::LeoComputer.new(@year).recompute
+    # !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!!
+    @leo_ranks = LeoRank.where(year: @year)
+    @leo_pilot_contests = LeoPilotContest.where(year: @year)
   end
 
   def collegiate

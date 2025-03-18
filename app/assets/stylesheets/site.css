@@ -73,3 +73,13 @@ div.field, div.actions {
   font-size: 12px;
   list-style: square;
 }
+
+
+.c { text-align: center; }
+.r { text-align: right; }
+.l { text-align: left; }
+.b { vertical-align: bottom; }
+
+tr.no-shading td {
+  background-color: white;
+}
