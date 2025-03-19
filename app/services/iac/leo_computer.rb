@@ -87,7 +87,7 @@ module IAC
 
         pc_results.find_all do |r|
 
-          # Match the contest and category, and don't compare the current record (pcr) to itself (r)
+          # Match the contest and category
           next unless r[:contest_id] == pcr[:contest_id] && r[:category_id] == pcr[:category_id]
 
           total_pilots += 1
@@ -160,6 +160,11 @@ module IAC
         pilots.each_pair do |pilot_id, regions|
           pct_values = regions.values.map{ |h| h[:percentile_rank] }
           pilots_best[category][pilot_id][:percentile_avg] = (pct_values.sum / pct_values.size).round(2)
+          # !!! HACK !!!
+          # Set `LeoPilotContest#rank` to 1 to indicate a flight that went into the Avg. Percentile
+          # The `is_a?(String)` test is needed because a different hack saves the average percentile
+          # score in the same array as the LPCs
+          pilots_best[category][pilot_id].each_pair{ |key, r| r[:rank] = 1 if key.is_a?(String) }
         end
       end
 
@@ -197,16 +202,24 @@ module IAC
         LeoPilotContest.where(year: @year).delete_all
         LeoRank.where(year: @year).delete_all
 
-        pc_results.each do |result|
+        pc_results.each do |pcr|
 
+          # Convenience var
+          contest = Contest.find(pcr['contest_id'])
+
+          # Persist the results
           LeoPilotContest.create(
             year: @year,
-            category_id: result[:category_id],
-            pilot_id: result[:pilot_id],
-            name: pilot_names[result[:pilot_id]],
-            region: fix_nats(Contest.find(result['contest_id']).region),
-            qualified: result[:qualified],
-            points: result[:percentile_rank],
+            category_id: pcr[:category_id],
+            pilot_id: pcr[:pilot_id],
+            # !!! HACKS !!!
+            # The view needs several Contest attributes, so I save the `contest#id` value in the `name` attr
+            name: contest.id,
+            rank: pcr[:rank],
+            # !!! END OF HACKS !!!
+            region: fix_nats(contest.region),
+            qualified: pcr[:qualified],
+            points: pcr[:percentile_rank],
             points_possible: 100,
           )
 

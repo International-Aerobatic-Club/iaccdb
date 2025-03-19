@@ -1,3 +1,5 @@
+<% def sbr(obj); sanitize(obj.join('<br>')); end %>
+
 <h1>National Point Series Championship Results, <%= @year %></h1>
 
 <p>
@@ -13,49 +15,65 @@
   in regional judging, contest size, use of boundary judges, etc.
   For complete details, see IAC Policy and Procedure #227. </p>
 
+<br>
 <p class="c">
   <% cats = LeoRank.categories(@year).map{ |cat| "<b><a href='##{cat.category}'>#{cat.category.titleize}</a></b>" } %>
   <%= cats.join(" &bull; ").html_safe %>
 </p>
 
-<p>&nbsp;</p>
+<h2> Winners: </h2>
 
-<% p_rank = 'The average of the best percentile ranks from three separate contest regions.' %>
+<% p_rank = 'The average of the best Percentile Ranks.' %>
 
-<table class='soucy'>
+<table class='leo'>
 
   <% LeoRank.categories(@year).each do |category| %>
 
     <thead>
-    <tr>
-        <th colspan=99 class="c">
+      <tr>
+        <th colspan=99>
           <a id="<%= category.category %>"> </a>
           <h3> <%= category.name %> </h3>
         </th>
       </tr>
-      <tr>
-        <th class="b"> Rank </th>
-        <th class="b">Pilot</th>
-        <th class="b r">Avg. Rank<%= image_tag('info_icon.png', size: 18, title: p_rank) %></th>
-        <th class="b">Contests</th>
-      </tr>
+
+      <% if @leo_ranks.where(category_id: category.id, qualified: true).empty? %>
+        <tr>
+          <td colspan="99"> <em> No pilots met the eligibility requirements for this category </em> </td>
+        </tr>
+      <% else %>
+
+        <tr>
+          <th class="b"> Rank </th>
+          <th class="b"> Pilot </th>
+          <th class="b r"> Avg. PR<%= image_tag('info_icon.png', size: 18, title: p_rank) %></th>
+          <th></th>
+          <th class="b" > Region </th>
+          <th class="b" > PR </th>
+          <th class="b" > Contest </th>
+        </tr>
+
+      <% end %>
     </thead>
 
     <tbody>
 
       <% @leo_ranks.where(category: category, qualified: true).order(:rank).each do |lr| %>
 
+        <% lpcs = @leo_pilot_contests.where(pilot_id: lr.pilot_id) %>
+
         <tr>
           <td> <%= lr.rank %> </td>
           <td> <%= link_to lr.pilot.name, "/pilots/#{lr.pilot.id}" %> </td>
           <td class="r"> <%= lr.points %> </td>
-          <td> TBD </td>
+          <td class="leocheck"> <%= lpcs.map{ |lpc| lpc.rank.present? ? '&check;' : '' }.join('<br>').html_safe %> </td>
+          <td> <%= sbr lpcs.map{ |lpc| lpc.region } %> </td>
+          <td> <%= sbr lpcs.map(&:points).map{ |p| sprintf '%.2f', p } %></td>
+          <td>
+            <%= sbr lpcs.map{ |lpc| link_to @contests[lpc['name']].name, "/contests/#{@contests[lpc['name']].id}" } %>
+          </td>
         </tr>
 
-      <% end %>
-
-      <% if @leo_ranks.where(category_id: category.id, qualified: true).empty? %>
-      <tr> <td colspan="99" class="c"> <em> No pilots met the qualifications for this category </em> </td> </tr>
       <% end %>
 
      <% unless category == LeoRank.categories(@year).last %>
@@ -69,6 +87,10 @@
 </table>
 
 
-<h2> Ineligible Flights</h2>
-<p> EXPLAIN WHY: flew higher in prior two years, or HC</p>
-<table> List o' flights </table>
+<br>
+<h2> Ineligible Flights:</h2>
+<p> The following flights did not quality for the National Point Series because the competitor did not compete in
+at least three regions, or they competed in a higher category within the past two years, or they flew as
+<em>hors concours</em> (HC).</p>
+<br>
+<p> asdf</p>

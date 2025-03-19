@@ -74,12 +74,17 @@ div.field, div.actions {
   list-style: square;
 }
 
-
 .c { text-align: center; }
 .r { text-align: right; }
 .l { text-align: left; }
+.t { vertical-align: top; }
+.m { vertical-align: middle; }
 .b { vertical-align: bottom; }
 
 tr.no-shading td {
   background-color: white;
 }
+
+table.leo td { vertical-align: top; }
+td.leocheck { padding-right: 0; }
+td.leocheck + td { padding-left: 3px; }

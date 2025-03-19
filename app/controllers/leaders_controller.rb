@@ -50,15 +50,28 @@ class LeadersController < ApplicationController
     @nationals = Contest.where("year(start) = ? and region = 'National'", @year).first
   end
 
+
   def leo
+
     @years = Time.now.year.downto(2021).to_a
     @year = params[:year] || @years.first
-    # !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!!
-    IAC::LeoComputer.new(@year).recompute
-    # !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!!
+
+    # !!! !!! !!! !!! !!! !!! !!! !!! !!!
+    # Un-comment the following line to force a recomputation with every GET request (useful for debugging via IDE)
+    # IAC::LeoComputer.new(@year).recompute
+    # !!! !!! !!! !!! !!! !!! !!! !!! !!!
+
     @leo_ranks = LeoRank.where(year: @year)
-    @leo_pilot_contests = LeoPilotContest.where(year: @year)
+    @leo_pilot_contests = LeoPilotContest.where(year: @year).order(:region, points: :desc)
+
+    # !!! HACK !!!
+    # LeoComputer saves the `contest#id` value in the `name` attr
+    @contests = Contest.where(id: LeoPilotContest.where(year: @year).distinct.pluck(:name)).map do |contest|
+      [ contest.id.to_s, contest ]
+    end.to_h
+
   end
+
 
   def collegiate
     @years = CollegiateResult.distinct(:year).order(year: :desc).pluck(:year)
