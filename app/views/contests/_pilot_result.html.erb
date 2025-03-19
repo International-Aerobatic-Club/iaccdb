@@ -4,7 +4,9 @@
   <% airplane = pilot_result[:airplane] %>
   <% chapter = pilot_result[:chapter] %>
   <% unless live_results %>
-    <td class='star'> <%= pc_result.star_qualifying ? '★' : ' ' %> </td>
+    <td class='star'>
+      <%= '<span title="Qualifies for Stars Award">&starf;</span>'.html_safe if pc_result.star_qualifying %>
+    </td>
   <% end %>
   <td class="pilot">
     <% if live_results %> <%= pc_result.display_rank %>. <% end %>
