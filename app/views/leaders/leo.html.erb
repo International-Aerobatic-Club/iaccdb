@@ -6,15 +6,15 @@
 <% end %>
 </p>
 <p>
-  The purpose of the award is to recognize the most skilled pilots who competed in at least three
+  This award recognizes the most skilled pilots who competed in at least three
   different regions in a single year. Championship points are earned at each contest based on a
   <a href="https://en.wikipedia.org/wiki/Percentile_rank" target="_blank">percentile ranking</a>
   for each contest flown, rather than by straight score percentages. This minimizes the differences
   in regional judging, contest size, use of boundary judges, etc.
-</p>
+  For complete details, see IAC Policy and Procedure #227. </p>
 
 <p class="c">
-  <% cats = LeoRank.categories.map{ |cat| "<b><a href='##{cat.category}'>#{cat.category.titleize}</a></b>" } %>
+  <% cats = LeoRank.categories(@year).map{ |cat| "<b><a href='##{cat.category}'>#{cat.category.titleize}</a></b>" } %>
   <%= cats.join(" &bull; ").html_safe %>
 </p>
 
@@ -24,7 +24,7 @@
 
 <table class='soucy'>
 
-  <% LeoRank.categories.each do |category| %>
+  <% LeoRank.categories(@year).each do |category| %>
 
     <thead>
     <tr>
@@ -58,7 +58,7 @@
       <tr> <td colspan="99" class="c"> <em> No pilots met the qualifications for this category </em> </td> </tr>
       <% end %>
 
-     <% unless category == LeoRank.categories.last %>
+     <% unless category == LeoRank.categories(@year).last %>
       <tr class="no-shading"> <td colspan="99"> &nbsp; </td> </tr>
      <% end %>
 

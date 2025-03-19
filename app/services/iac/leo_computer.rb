@@ -12,7 +12,7 @@ module IAC
         MT NE NV NH NJ NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI WY
       )
 
-    # Minimum number of regions to qualify
+    # Minimum number of unique regions required to be qualified
     REGIONS_REQD = 3
 
 
@@ -25,9 +25,9 @@ module IAC
       # Arrays of all results
       pc_results = Array.new
 
-      # Get all categories that qualify for the Leo Award
+      # Get all categories that contend for the Leo Award
       # We save the query results in an Array to avoid numerous ActiveRecord queries in the logic that follows
-      categories = LeoRank.categories
+      categories = LeoRank.categories(@year)
 
 
       ### STEP 1 ###
@@ -36,13 +36,14 @@ module IAC
       # Get the highest Category#sequence value for each pilot who completed during the prior two years (P&P 227.2.3.5)
       pilot_minimum_category = PcResult
         .joins(:contest, :category)
-        .where('YEAR(contests.start) >= ?', Date.today.year - 2)
+        .where('YEAR(contests.start) >= ?', @year - 2)
+        .where('YEAR(contests.start) < ?', @year + 1)
         .where(category: categories)
         .group(:pilot_id)
         .maximum('categories.sequence')
 
       # Get all domestic (US & Canada) contests
-      contests = Contest.where('YEAR(start) = ?', @year).where(contests: { state: US_STATE_ABBREVS })
+      contests = Contest.where('YEAR(start) = ?', @year).where(state: US_STATE_ABBREVS)
 
       # Cache pilot names
       pilot_names = Member.where(id: pilot_minimum_category.keys).map{ |m| [m.id, m.name] }.to_h
@@ -50,37 +51,21 @@ module IAC
 
 
       ###### STEP 2 ######
-      # Enforce misc. eligibility rules and calculate the percentile rank for each eligible flight
+      # Create an Array of PcResult records for the contests and categories for the year in question
 
-      # Iterate over all PcResult records for the contests and categories covered by the Leo rules
+      # Iterate over all PcResult records
       PcResult.includes(:category, :contest).where(contest: contests, category: categories).each do |pcr|
 
         # Convert the ActiveRecord::Base object to a Hash, allowing us to add pseudo-attributes as processing proceeds
         record = pcr.as_json.with_indifferent_access
 
-        # if Nationals ever moves to a different region.
+        # Change region 'Nationals' to the actual physical region where the Nationals contest is hold
         record[:region] = fix_nats(pcr.contest.region)
         record[:category] = pcr.category.category
 
-        # If the pilot is competing in less than their minimum category, mark them ineligible
-        if pcr.category.sequence < (pilot_minimum_category[pcr.pilot_id] || 0)
-          record[:ineligible_reason] = 'Competed in a higher category within the prior two years'
-          record[:qualified] = false
-        # Mark HC competitors as ineligible
-        elsif pcr.hors_concours.positive?
-          record[:ineligible_reason] = 'Competed as HC'
-          record[:qualified] = false
-        else
-          record[:qualified] = true
-        end
-
-        # Pilots who are alone in their category get a fixed rank of 50.
-        if (pcr_count = PcResult.where(contest: pcr.contest, category: pcr.category, hors_concours: 0).count) == 1
-          record[:percentile_rank] = 50.0
-        else
-          # Calculate the percentile rank
-          record[:percentile_rank] = (1 - (pcr.category_rank * (1/(pcr_count.to_f + 1)))) * 100
-        end
+        # The pilot is qualified if they are not HC and competing in their minimum category or higher
+        record[:qualified] =
+          pcr.hors_concours.zero? && pcr.category.sequence >= (pilot_minimum_category[pcr.pilot_id] || 0)
 
         # Save the PcResult
         pc_results << record
@@ -90,6 +75,46 @@ module IAC
 
 
       ###### STEP 3 ######
+      # Calculate the percentile rank for each qualified flight
+
+      # Now we iterate over the results again because we need to know how many unqualified pilots there are,
+      # and how many of them finished higher a given qualified pilot.
+      pc_results.each do |pcr|
+
+        # Count all pilots, all unqualified pilots, and all unqualified pilots with a better ranking
+        # who participated in the same contest and category
+        total_pilots = total_unqualified = unqualifieds_ahead = 0
+
+        pc_results.find_all do |r|
+
+          # Match the contest and category, and don't compare the current record (pcr) to itself (r)
+          next unless r[:contest_id] == pcr[:contest_id] && r[:category_id] == pcr[:category_id]
+
+          total_pilots += 1
+
+          unless r[:qualified]
+            total_unqualified += 1
+            unqualifieds_ahead += 1 if r[:category_rank] < pcr[:category_rank]
+          end
+
+        end  # pc_results.each
+
+
+        # Subtract total unqualified pilots from total pilots
+        adjusted_total = total_pilots - total_unqualified
+
+        # Subtract any unqualified pilots who finished with a better rank than the competitor
+        adjusted_rank = pcr[:category_rank] - unqualifieds_ahead
+
+        # Calculate the percentile rank using the adjusted rank & total count
+        pcr[:percentile_rank] = (1 - (adjusted_rank / (adjusted_total.to_f + 1))) * 100
+
+      end
+
+
+
+
+      ###### STEP 4 ######
       # Rank the pilots and determine who has qualified for the award by meeting the three-region minimum,
       # and store up to three best region scores for each pilot.
 
@@ -197,7 +222,8 @@ module IAC
 
             # All qualified pilots are ranked above unqualified pilots
             # We fiddle the starting index to force all qualified pilots to be ranked first, then the unqualified ones
-            ranks.map.with_index(qual == :qualified ? 1 : leo_ranks[:qualified][category].size + 1) do |(pilot_id, rank), i|
+            index_start = (qual == :qualified ? 1 : leo_ranks[:qualified][category].size + 1)
+            ranks.map.with_index(index_start) do |(pilot_id, rank), i|
 
               LeoRank.create(
                 year: @year,
@@ -225,7 +251,7 @@ module IAC
     private
 
     def fix_nats(region)
-      region == 'Nationals' ? 'SouthCentral' : region
+      region == 'National' ? 'SouthCentral' : region
     end
 
   end  # Class
