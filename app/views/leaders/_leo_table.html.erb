@@ -1,0 +1,63 @@
+<% def sbr(obj); sanitize(obj.join('<br>')); end %>
+<% p_rank = 'The average of the highest Percentile Ranks.' %>
+
+<table class='leo'>
+
+  <% LeoRank.categories(@year).each do |category| %>
+
+    <thead>
+      <tr>
+        <th colspan=99>
+          <a id="<%= category.category %>"> </a>
+          <h3> <%= category.name %> </h3>
+        </th>
+      </tr>
+
+      <% if @leo_ranks.where(category_id: category.id, qualified: qual).empty? %>
+        <tr>
+          <td colspan="99"> <em> No pilots met the eligibility requirements for this category </em> </td>
+        </tr>
+      <% else %>
+
+        <tr>
+          <th class="b"> Rank </th>
+          <th class="b"> Pilot </th>
+          <th class="b r"> Avg. PR<%= image_tag('info_icon.png', size: 18, title: p_rank) %></th>
+          <th></th>
+          <th class="b" > Region </th>
+          <th class="b" > PR </th>
+          <th class="b" > Contest </th>
+        </tr>
+
+      <% end %>
+    </thead>
+
+    <tbody>
+
+      <% @leo_ranks.where(category: category, qualified: qual).order(:rank).each do |lr| %>
+
+        <% lpcs = @leo_pilot_contests.where(pilot_id: lr.pilot_id) %>
+
+        <tr>
+          <td> <%= lr.rank %> </td>
+          <td> <%= link_to lr.pilot.name, "/pilots/#{lr.pilot.id}" %> </td>
+          <td class="r"> <%= lr.points %> </td>
+          <td class="leocheck"> <%= lpcs.map{ |lpc| lpc.rank.present? ? '&check;' : '' }.join('<br>').html_safe %> </td>
+          <td> <%= sbr lpcs.map{ |lpc| lpc.region } %> </td>
+          <td> <%= sbr lpcs.map(&:points).map{ |p| sprintf '%.2f', p } %></td>
+          <td>
+            <%= sbr lpcs.map{ |lpc| link_to @contests[lpc['name']].name, "/contests/#{@contests[lpc['name']].id}" } %>
+          </td>
+        </tr>
+
+      <% end %>
+
+     <% unless category == LeoRank.categories(@year).last %>
+      <tr class="no-shading"> <td colspan="99"> &nbsp; </td> </tr>
+     <% end %>
+
+    </tbody>
+
+  <% end %>
+
+</table>
