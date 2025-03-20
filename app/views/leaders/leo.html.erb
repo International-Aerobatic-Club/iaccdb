@@ -25,15 +25,15 @@
   <%= cats.join(" &bull; ").html_safe %>
 </p>
 
-<h2> Winners: </h2>
+<h2>
+  <%= Date.today.year == @year.to_i ? 'Leaders' : 'Winners' %> for <%= @year %>:
+</h2>
 
 <%= render partial: 'leo_table', locals: { qual: true } %>
 
 <br>
 <br>
 <h2> Ineligible Flights:</h2>
-<p> The following flights did not quality for the National Point Series because the competitor did not compete in
-at least three regions, or they competed in a higher category within the past two years, or they flew as
-<em>hors concours</em> (HC).</p>
+<p> These competitors have flown in fewer than three regions.</p>
 <br>
 <%= render partial: 'leo_table', locals: { qual: false } %>
