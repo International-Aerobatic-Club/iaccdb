@@ -3,9 +3,9 @@
 <h1>National Point Series Championship Results, <%= @year %></h1>
 
 <p>
-<% @years.each do |year| %>
-  <%= link_to year, leaders_leo_path(year) %>
-<% end %>
+  <% @years.each do |year| %>
+    <%= link_to year, leaders_leo_path(year) %>
+  <% end %>
 </p>
 <p>
   This award recognizes the most skilled pilots who competed in at least three
@@ -13,7 +13,11 @@
   <a href="https://en.wikipedia.org/wiki/Percentile_rank" target="_blank">percentile ranking</a>
   for each contest flown, rather than by straight score percentages. This minimizes the differences
   in regional judging, contest size, use of boundary judges, etc.
-  For complete details, see IAC Policy and Procedure #227. </p>
+</p>
+<p>
+  <%= link_to 'Click here', 'https://www.iac.org/national-point-series-championship-iac-npsc' %>
+  for complete details.
+</p>
 
 <br>
 <p class="c">
