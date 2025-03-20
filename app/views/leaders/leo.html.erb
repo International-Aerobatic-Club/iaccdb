@@ -13,8 +13,6 @@
   <a href="https://en.wikipedia.org/wiki/Percentile_rank" target="_blank">percentile ranking</a>
   for each contest flown, rather than by straight score percentages. This minimizes the differences
   in regional judging, contest size, use of boundary judges, etc.
-</p>
-<p>
   <%= link_to 'Click here', 'https://www.iac.org/national-point-series-championship-iac-npsc' %>
   for complete details.
 </p>
@@ -33,7 +31,11 @@
 
 <br>
 <br>
-<h2> Ineligible Flights:</h2>
-<p> These competitors have flown in fewer than three regions.</p>
+<h2> Non-Qualified Results:</h2>
+<p>
+  These competitors have not
+  <%= Date.today.year == @year.to_i ? '(yet) ' : '' %>
+  flown in three regions.
+</p>
 <br>
 <%= render partial: 'leo_table', locals: { qual: false } %>
