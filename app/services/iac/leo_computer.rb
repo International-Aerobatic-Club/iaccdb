@@ -235,8 +235,7 @@ module IAC
 
             # All qualified pilots are ranked above unqualified pilots
             # We fiddle the starting index to force all qualified pilots to be ranked first, then the unqualified ones
-            index_start = (qual == :qualified ? 1 : leo_ranks[:qualified][category].size + 1)
-            ranks.map.with_index(index_start) do |(pilot_id, rank), i|
+            ranks.map.with_index(1) do |(pilot_id, rank), i|
 
               LeoRank.create(
                 year: @year,

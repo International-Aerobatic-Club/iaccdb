@@ -18,14 +18,14 @@
 </p>
 
 <br>
+<h2>
+  <%= Date.today.year == @year.to_i ? 'Leaders' : 'Winners' %> for <%= @year %>:
+</h2>
+
 <p class="c">
   <% cats = LeoRank.categories(@year).map{ |cat| "<b><a href='##{cat.category}'>#{cat.category.titleize}</a></b>" } %>
   <%= cats.join(" &bull; ").html_safe %>
 </p>
-
-<h2>
-  <%= Date.today.year == @year.to_i ? 'Leaders' : 'Winners' %> for <%= @year %>:
-</h2>
 
 <%= render partial: 'leo_table', locals: { qual: true } %>
 
@@ -37,5 +37,12 @@
   <%= Date.today.year == @year.to_i ? '(yet) ' : '' %>
   flown in three regions.
 </p>
+<p class="c">
+  <% cats = LeoRank.categories(@year).map do |cat| %>
+    <% "<b><a href='##{cat.category}-non-qual'>#{cat.category.titleize}</a></b>" %>
+  <% end %>
+  <%= cats.join(" &bull; ").html_safe %>
+</p>
+
 <br>
 <%= render partial: 'leo_table', locals: { qual: false } %>
