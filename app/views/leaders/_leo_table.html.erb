@@ -1,5 +1,6 @@
 <% def sbr(obj); sanitize(obj.join('<br>')); end %>
 <% p_rank = 'The average of the highest Percentile Ranks.' %>
+<% check_txt = 'The Percentile Rank from this contest contributed to the Avg. PR.' %>
 
 <table class='leo'>
 
@@ -42,7 +43,11 @@
           <td> <%= lr.rank %> </td>
           <td> <%= link_to lr.pilot.name, "/pilots/#{lr.pilot.id}" %> </td>
           <td class="r"> <%= lr.points %> </td>
-          <td class="leocheck"> <%= lpcs.map{ |lpc| lpc.rank.present? ? '&check;' : '' }.join('<br>').html_safe %> </td>
+          <td class="leocheck">
+            <%= lpcs.map do |lpc| %>
+              <% lpc.rank.present? ? "<span title='#{check_txt}'>&check;</span>" : '' %>
+            <% end.join('<br>').html_safe %>
+          </td>
           <td> <%= sbr lpcs.map{ |lpc| lpc.region } %> </td>
           <td> <%= sbr lpcs.map(&:points).map{ |p| sprintf '%.2f', p } %></td>
           <td>
