@@ -51,7 +51,7 @@
           <td> <%= sbr lpcs.map{ |lpc| lpc.region } %> </td>
           <td> <%= sbr lpcs.map(&:points).map{ |p| sprintf '%.2f', p } %></td>
           <td>
-            <%= sbr lpcs.map{ |lpc| link_to @contests[lpc['name']].name, "/contests/#{@contests[lpc['name']].id}" } %>
+            <%= sbr lpcs.map{ |lpc| link_to @contests[lpc['name']].name, @contests[lpc['name']] } %>
           </td>
         </tr>
 
