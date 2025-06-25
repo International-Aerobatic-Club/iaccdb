@@ -51,7 +51,15 @@
           <td> <%= sbr lpcs.map{ |lpc| lpc.region } %> </td>
           <td> <%= sbr lpcs.map(&:points).map{ |p| sprintf '%.2f', p } %></td>
           <td>
-            <%= sbr lpcs.map{ |lpc| link_to @contests[lpc['name']].name, @contests[lpc['name']] } %>
+            <% clist = lpcs.map do |lpc| %>
+              <% c = @contests[lpc['name']] %>
+              <% cname = c.name %>
+              <% if lr.category_id != lpc.category_id %>
+                <% cname += " <em>(#{Category.find(lpc.category_id).name})</em>" %>
+              <% end %>
+              <% link_to cname.html_safe, c %>
+            <% end %>
+            <%= sbr clist %>
           </td>
         </tr>
 
