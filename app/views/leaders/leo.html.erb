@@ -36,9 +36,9 @@
 <div class='non-qual'>
   <h2> Non-Qualifying Results:</h2>
   <p>
-    These competitors have not
-    <%= Date.today.year == @year.to_i ? '(yet) ' : '' %>
-    flown in three regions.
+    These pilots
+    <%= Date.today.year == @year.to_i ? 'have not yet competed' : 'did not compete' %>
+    in three different regions.
   </p>
   <p class="c">
     <% cats = LeoRank.categories(@year).map do |cat| %>
