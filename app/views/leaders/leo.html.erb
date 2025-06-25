@@ -30,19 +30,23 @@
 <%= render partial: 'leo_table', locals: { qual: true } %>
 
 <br>
+<hr>
 <br>
-<h2> Non-Qualified Results:</h2>
-<p>
-  These competitors have not
-  <%= Date.today.year == @year.to_i ? '(yet) ' : '' %>
-  flown in three regions.
-</p>
-<p class="c">
-  <% cats = LeoRank.categories(@year).map do |cat| %>
-    <% "<b><a href='##{cat.category}-non-qual'>#{cat.category.titleize}</a></b>" %>
-  <% end %>
-  <%= cats.join(" &bull; ").html_safe %>
-</p>
 
-<br>
-<%= render partial: 'leo_table', locals: { qual: false } %>
+<div class='non-qual'>
+  <h2> Non-Qualified Results:</h2>
+  <p>
+    These competitors have not
+    <%= Date.today.year == @year.to_i ? '(yet) ' : '' %>
+    flown in three regions.
+  </p>
+  <p class="c">
+    <% cats = LeoRank.categories(@year).map do |cat| %>
+      <% "<b><a href='##{cat.category}-non-qual'>#{cat.category.titleize}</a></b>" %>
+    <% end %>
+    <%= cats.join(" &bull; ").html_safe %>
+  </p>
+
+  <br>
+  <%= render partial: 'leo_table', locals: { qual: false } %>
+</div>

@@ -88,3 +88,6 @@ tr.no-shading td {
 table.leo td { vertical-align: top; }
 td.leocheck { padding-right: 0; }
 td.leocheck + td { padding-left: 3px; }
+
+div.non-qual, div.non-qual tbody tr:nth-child(odd) { background-color: LightGoldenRodYellow; }
+div.non-qual thead, div.non-qual tbody tr:nth-child(even) { background-color: #dadab2; }
