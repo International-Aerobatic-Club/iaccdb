@@ -54,11 +54,13 @@ end
 # Filter and output the results
 CSV($stdout) do |csv|
 
+  csv << %w[ Name IAC# Flights]
+
   judges
     # Filter out judges who haven't judged within RECENT_WINDOW or have less than MIN_FLIGHTS flights judged/chiefed
     .find_all{ |k,v| recent[k] && v >= MIN_FLIGHTS }
     # Produce an array of CSV columns
-    .map{ |jid,v| ["#{Member.find(jid).given_name} #{Member.find(jid).family_name}", jid, v] }
+    .map{ |jid,v| ["#{Member.find(jid).given_name} #{Member.find(jid).family_name}", Member.find(jid).iac_id, v] }
     .sort
     .each{ |cols| csv << cols }
 
