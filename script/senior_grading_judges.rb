@@ -25,7 +25,7 @@ JfResult.includes(:judge).find_in_batches do |batch|
 
     # Initialize the Hash entry if necessary, then increment
     judges[jid] ||= 0
-    judges[jid] += 1
+    judges[jid] += jf_result.pilot_count
 
     # Note whether the flight was within the RECENT_WINDOW
     recent[jid] = true if recent_flight_ids.include? jf_result.flight_id
