@@ -39,13 +39,13 @@ class Admin::ContestsController < ApplicationController
     # Delayed::Job.enqueue Jobs::ComputeFlightsJob.new(@contest)
     Jobs::ComputeFlightsJob.new(@contest).perform
     flash[:notice] = "#{@contest.year_name} queued for computation"
-    redirect_to :action => 'index' 
+    redirect_to :action => 'index'
   end
 
   # GET /manny_list
   def manny_list
     @records = []
-    pull_contest_list(lambda do |rcd| 
+    pull_contest_list(lambda do |rcd|
       if !(rcd =~ /ContestList\>/)
         record = rcd.split("\t")
         synch = MannySynch.find_by_manny_number(record[0].to_i)
@@ -57,8 +57,9 @@ class Admin::ContestsController < ApplicationController
   end
 
   def contest_params
-    params.require(:contest).permit(:name, :city, :state, :start, :chapter,
-      :director, :region)
+    params.require(:contest).permit(
+      :name, :city, :state, :start, :chapter, :director, :region, :busy_start, :busy_end,
+    )
   end
 
   def load_contest

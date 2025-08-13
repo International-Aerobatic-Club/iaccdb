@@ -15,31 +15,49 @@
     <%= f.label :name %><br />
     <%= f.text_field :name %>
   </div>
+
   <div class="field">
     <%= f.label :city %><br />
     <%= f.text_field :city %>
   </div>
+
   <div class="field">
     <%= f.label :state %><br />
     <%= f.text_field :state %>
   </div>
+
   <div class="field">
     <%= f.label :start %><br />
-    <%= f.date_select :start %>
+    <%= f.date_field :start %>
   </div>
+
   <div class="field">
     <%= f.label :chapter %><br />
     <%= f.text_field :chapter %>
   </div>
+
   <div class="field">
     <%= f.label :director %><br />
     <%= f.text_field :director %>
   </div>
+
   <div class="field">
     <%= f.label :region %><br />
     <%= f.text_field :region %>
   </div>
+
+  <div class="field">
+    <%= f.label :busy_start %><br />
+    <%= f.date_field :busy_start %>
+  </div>
+
+  <div class="field">
+    <%= f.label :busy_end %><br />
+    <%= f.date_field :busy_end %>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>
+
 <% end %>
