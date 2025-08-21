@@ -11,7 +11,7 @@
   <% @members.each do |member| %>
     <p>
       <%= radio_button_tag :target, member.id, member == @target %>
-      <%= "#{member.name}, #{member.iac_id}" %>
+      <%= label_tag "target_#{member.id}", "#{member.name}, #{member.iac_id}" %>
       <%= hidden_field_tag "selected[#{member.id}]" %>
     </p>
   <% end %>
