@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
-ruby '2.7.8'
+ruby '3.1.7'
 
-gem 'rails', "~> 5.2.0"
+gem 'rails', "~> 6.1.0"
 
 gem 'puma', '~> 3.12'
 
@@ -38,7 +38,7 @@ end
 
 group :development do
   gem 'listen'
-  gem 'minitest-rails', '~> 3.0'
+  gem 'minitest-rails'
 end
 
 group :test do
