@@ -24,8 +24,8 @@ class ContestsController < ApplicationController
 
     @contest = Contest.find(params[:id])
 
-    if @contest.busy_start.present? && @contest.busy_end.present? &&
-       Date.today.between?(@contest.busy_start, @contest.busy_end)
+    # If busy_start/busy_end dates are populated and encompass the current day, redirect to the live results page
+    if @contest.busy_start && @contest.busy_end && Date.today.between?(@contest.busy_start, @contest.busy_end)
       redirect_to live_result_path(@contest)
       return
     end
