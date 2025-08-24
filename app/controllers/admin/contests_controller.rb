@@ -1,12 +1,10 @@
 class Admin::ContestsController < ApplicationController
   before_action :authenticate
 
-  include Manny::Connect
-
   # GET /contests
   # GET /contests.xml
   def index
-    @contests = Contest.includes(:manny_synch).order(start: :desc)
+    @contests = Contest.order(start: :desc)
   end
 
   # GET /contests/1/edit
@@ -39,26 +37,13 @@ class Admin::ContestsController < ApplicationController
     # Delayed::Job.enqueue Jobs::ComputeFlightsJob.new(@contest)
     Jobs::ComputeFlightsJob.new(@contest).perform
     flash[:notice] = "#{@contest.year_name} queued for computation"
-    redirect_to :action => 'index' 
-  end
-
-  # GET /manny_list
-  def manny_list
-    @records = []
-    pull_contest_list(lambda do |rcd| 
-      if !(rcd =~ /ContestList\>/)
-        record = rcd.split("\t")
-        synch = MannySynch.find_by_manny_number(record[0].to_i)
-        record << (synch && synch.contest_id ? synch.contest_id : "no contest")
-        @records << record
-      end
-    end)
-    @records.sort! {|a,b| b[0].to_i <=> a[0].to_i }
+    redirect_to :action => 'index'
   end
 
   def contest_params
-    params.require(:contest).permit(:name, :city, :state, :start, :chapter,
-      :director, :region)
+    params.require(:contest).permit(
+      :name, :city, :state, :start, :chapter, :director, :region, :busy_start, :busy_end,
+    )
   end
 
   def load_contest

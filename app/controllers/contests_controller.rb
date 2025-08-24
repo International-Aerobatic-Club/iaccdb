@@ -21,10 +21,18 @@ class ContestsController < ApplicationController
 
   # GET /contests/1
   def show
+
     @contest = Contest.find(params[:id])
+
+    if @contest.busy_start && @contest.busy_end && Date.today.between?(@contest.busy_start, @contest.busy_end)
+      redirect_to live_result_path(@contest)
+      return
+    end
+
     @contest.extend(Contest::ShowResults)
     @categories = @contest.category_results
     render :show
+
   end
 
   # POST /contests
