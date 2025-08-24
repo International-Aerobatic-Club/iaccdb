@@ -84,7 +84,7 @@ module IAC
 
       # We remove the best upper-category pilot from the list of all qualifying pilots so that
       # they are not counted a second time when we evaluate the remaining results
-      qualifying_pilots.delete(best_upper_pilot[:pilot])
+      qualifying_pilots.delete(best_upper_pilot[:pilot]) if best_upper_pilot.present?
 
       # Of the remaining qualifying pilots, get the average of their three best contests,
       # then take two pilots with the best averages
