@@ -5,7 +5,7 @@ class CollegiateResult < Result
   end
 
   def pilot_contests
-    members.map{ |member| [member, IAC::CollegiateComputer.pilot_results(member, year)] }.to_h
+    members.map{ |member| [member, Iac::CollegiateComputer.pilot_results(member, year)] }.to_h
   end
 
   def self.find_or_create_team_for_year(team_name, year)

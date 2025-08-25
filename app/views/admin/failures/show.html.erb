@@ -4,8 +4,7 @@
 <li>Step: <%= @failure.step %></li>
 <li>Contest id: <%= @failure.contest_id || 'missing' %></li>
 <li>Contest name: <%= @failure.contest.year_name if @failure.contest %></li>
-<li>Manny number: <%= @failure.manny_id %></li>
-<li>Data post id: <%= @failure.manny_id %></li>
+<li>Data post id: <%= @failure.data_post_id %></li>
 <li>Updated: <%= @failure.updated_at %></li>
 </ul>
 <pre><%= @failure.description %></pre>

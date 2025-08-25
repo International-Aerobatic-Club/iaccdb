@@ -1,4 +1,4 @@
-RSpec.describe IAC::JudgeRollups do
+RSpec.describe Iac::JudgeRollups do
   context 'two judges' do
     before :context do
       @year = 2012
@@ -26,7 +26,7 @@ RSpec.describe IAC::JudgeRollups do
       create(:jc_result, contest: @c1, category: @imd, judge: @j2, pilot_count: 4)
       create(:jc_result, contest: @c1, category: @adv, judge: @j2, pilot_count: 8)
       create(:jc_result, contest: @c2, category: @adv, judge: @j2, pilot_count: 3)
-      IAC::JudgeRollups.compute_jy_results(@year)
+      Iac::JudgeRollups.compute_jy_results(@year)
     end
     it 'computes the set of JyResult' do
       expect(JyResult.count).to eq(6)
@@ -111,7 +111,7 @@ RSpec.describe IAC::JudgeRollups do
         # C2 2 6   3
         create(:jc_result, contest: @c1, category: @spn, judge: @j2, pilot_count: 4)
         create(:jc_result, contest: @c2, category: @spn, judge: @j2, pilot_count: 6)
-        IAC::JudgeRollups.compute_jy_results(@year)
+        Iac::JudgeRollups.compute_jy_results(@year)
       end
       it 'recomputes the set of JyResult' do
         expect(JyResult.count).to eq(6)
@@ -169,7 +169,7 @@ RSpec.describe IAC::JudgeRollups do
         create(:jc_result, contest: @c1, category: @pri, judge: @j1, pilot_count: 3)
         create(:jc_result, contest: @c1, category: @spn, judge: @j1, pilot_count: 21)
         create(:jc_result, contest: @c4, category: @spn, judge: @j1, pilot_count: 24)
-        IAC::JudgeRollups.compute_jy_results(@year)
+        Iac::JudgeRollups.compute_jy_results(@year)
       end
       it 'produces correct totals first two contests' do
         expect(JyResult.where(year: @year, judge: @j1).count).to eq(2)
@@ -188,7 +188,7 @@ RSpec.describe IAC::JudgeRollups do
           #  T  3  78      15
           create(:jc_result, contest: @c3, category: @spn, judge: @j1, pilot_count: 33)
           create(:jc_result, contest: @c3, category: @adv, judge: @j1, pilot_count: 15)
-          IAC::JudgeRollups.compute_jy_results(@year)
+          Iac::JudgeRollups.compute_jy_results(@year)
         end
         it 'computes correct totals' do
           expect(JyResult.where(year: @year, judge: @j1).count).to eq(3)
@@ -213,7 +213,7 @@ RSpec.describe IAC::JudgeRollups do
             create(:jc_result, contest: @c2, category: @imd, judge: @j1, pilot_count: 21)
             create(:jc_result, contest: @c2, category: @adv, judge: @j1, pilot_count: 6)
             create(:jc_result, contest: @c2, category: @fou, judge: @j1, pilot_count: 2)
-            IAC::JudgeRollups.compute_jy_results(@year)
+            Iac::JudgeRollups.compute_jy_results(@year)
             expect(JyResult.where(year: @year, judge: @j1).count).to eq(5)
             expect(JyResult.where(
               year: @year, judge: @j1, category: @pri).first.pilot_count).to eq(5)

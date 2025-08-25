@@ -17,7 +17,7 @@ class ComputeSoucyJob < Struct.new(:contest)
 
   def make_computation(year)
     say "Computing L. Paul Soucy standings for #{@description}"
-    soucy = IAC::SoucyComputer.new(year)
+    soucy = Iac::SoucyComputer.new(year)
     soucy.recompute
   end
 

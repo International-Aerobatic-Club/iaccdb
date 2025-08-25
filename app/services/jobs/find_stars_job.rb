@@ -10,7 +10,7 @@ class FindStarsJob < Struct.new(:contest)
   def perform
     @contest = contest
     say "Finding stars qualifying pilots for #{@contest.year_name}"
-    IAC::FindStars.findStars(contest) 
+    Iac::FindStars.findStars(contest) 
   end
 
   def error(job, exception)

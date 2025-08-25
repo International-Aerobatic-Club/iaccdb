@@ -92,7 +92,7 @@ module Hq
 
     def recompute
 
-      IAC::CollegiateComputer.new(params[:year]&.to_i).recompute
+      Iac::CollegiateComputer.new(params[:year]&.to_i).recompute
 
       respond_to do |format|
         format.html { redirect_to leaders_collegiate_path, notice: 'Collegiate results successfully recalculated.' }

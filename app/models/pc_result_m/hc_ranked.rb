@@ -10,7 +10,7 @@ module PcResultM
     end
 
     def self.rank_computer
-      IAC::RankComputer.instance
+      Iac::RankComputer
     end
 
     # accepts an array of PcResults
@@ -26,4 +26,3 @@ module PcResultM
     end
   end
 end
-

@@ -10,7 +10,6 @@
 <thead>
   <tr>
     <th>c_id</th>
-    <th>m_no</th>
     <th>start</th>
     <th>name</th>
     <th>place</th>
@@ -22,8 +21,6 @@
 <% @contests.each do |contest| %>
   <tr>
     <td><%= contest.id %></td>
-    <% manny = contest.manny_synch %>
-    <td><%= manny.manny_number if manny%></td>
     <td><%= contest.start %></td>
     <td><%= link_to contest.sobriquet, contest %></td>
     <td><%= contest.place %></td>
@@ -45,9 +42,7 @@
         data: { :confirm => 'Queues a job to recompute all contest results.  Okay?' } %>
     </td>
     <td>
-      <%= link_to :delete, admin_contest_path(contest), 
-        data: { :confirm => 'Will leave the Manny synch record.  Okay?' }, 
-        :method => :delete %>
+      <%= link_to :delete, admin_contest_path(contest), method: :delete %>
     </td>
   </tr>
 <% end %>

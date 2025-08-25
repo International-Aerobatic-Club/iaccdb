@@ -1,6 +1,7 @@
 require 'delegate'
 
 module PfResultM
+
   class HcRanked < SimpleDelegator
 
     attr_accessor :display_rank
@@ -10,7 +11,7 @@ module PfResultM
     end
 
     def self.rank_computer
-      IAC::RankComputer.instance
+      Iac::RankComputer
     end
 
     # accepts an array of PfResults
@@ -26,4 +27,3 @@ module PfResultM
     end
   end
 end
-

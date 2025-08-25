@@ -1,5 +1,5 @@
-module IAC
-module Constants
+module Iac::Constants
+
   CONTEST_CATEGORIES = %w{ Primary Sportsman Intermediate Advanced Unlimited }
   CATEGORY_NAMES = CONTEST_CATEGORIES + %w{ Four\ Minute\ Free }
   FLIGHT_NAMES = %w{
@@ -18,7 +18,7 @@ module Constants
   HARD_ZERO = -30
 
   def airplane_category_name(aircat)
-    case aircat 
+    case aircat
       when POWER_CATEGORY then 'Power'
       when GLIDER_CATEGORY then 'Glider'
       else ''
@@ -29,11 +29,11 @@ module Constants
     "#{cat}#{' Glider' if aircat == GLIDER_CATEGORY}"
   end
 
-  # given an Array of Hash element, where each element contains 
+  # given an Array of Hash element, where each element contains
   # a :category and :aircat field, return a new Hash of arrays
   # that sorts the elements of the original array into sub-arrays
   # hashed on category
-  # input array [ 
+  # input array [
   #   {:category => 'Advanced', :aircat => 'P', :pilot => 'D'},
   #   {:category => 'Intermediate', :aircat => 'P', :pilot => 'A'},
   #   {:category => 'Intermediate', :aircat => 'G', :pilot => 'C'},
@@ -84,7 +84,7 @@ module Constants
   #   'Unlimited' => [
   #     {:category => 'Unlimited', :aircat => 'P', :pilot => 'F'}
   #   ]}
-  # output array [ 
+  # output array [
   #   'Intermediate',
   #   'Intermediate Glider',
   #   'Advanced',
@@ -101,5 +101,4 @@ module Constants
     cat_list
   end
 
-end
 end

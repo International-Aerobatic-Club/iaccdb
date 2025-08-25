@@ -17,7 +17,7 @@ class ComputeRegionalJob < Struct.new(:contest)
 
   def make_computation
     say "Computing regional series standings for #{@description}"
-    series = IAC::RegionalSeries.new
+    series = Iac::RegionalSeries.new
     series.compute_regional_for_contest(contest) 
   end
 

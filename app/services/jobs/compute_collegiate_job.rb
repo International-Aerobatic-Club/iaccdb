@@ -21,7 +21,7 @@ class ComputeCollegiateJob < Struct.new(:contest)
   end
 
   def computer
-    IAC::CollegiateComputer.new(@year)
+    Iac::CollegiateComputer.new(@year)
   end
 
   def error(job, exception)

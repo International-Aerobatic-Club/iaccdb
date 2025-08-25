@@ -10,7 +10,7 @@ class ComputeYearRollupsJob < Struct.new(:year)
   def perform
     @year = year
     say "Computing year rollups for #{@year}"
-    IAC::JudgeRollups.compute_jy_results(@year)
+    Iac::JudgeRollups.compute_jy_results(@year)
   end
 
   def error(job, exception)

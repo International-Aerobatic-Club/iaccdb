@@ -6,7 +6,7 @@ year = Date.today.year if year < 1990
 stars = []
 Contest.where('year(start) = ?', year).each do |contest|
   puts "Checking #{contest.to_s}..."
-  stars += IAC::FindStars.findStars(contest)
+  stars += Iac::FindStars.findStars(contest)
 end
 puts "Sorting results..."
 stars = stars.group_by { |s| "#{s[:date]}_#{s[:contest]}" }

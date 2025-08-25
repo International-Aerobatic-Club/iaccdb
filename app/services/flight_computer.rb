@@ -11,7 +11,7 @@ class FlightComputer
   end
 
   def rank_computer
-    IAC::RankComputer.instance
+    Iac::RankComputer.instance
   end
 
   def compute_pf_results(has_soft_zero)

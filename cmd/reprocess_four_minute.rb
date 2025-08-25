@@ -102,8 +102,8 @@ def process_all_contests
     end
     puts "Process the judge rollups"
   end
-  IAC::JudgeRollups.compute_jy_results(2014)
-  IAC::JudgeRollups.compute_jy_results(2015)
+  Iac::JudgeRollups.compute_jy_results(2014)
+  Iac::JudgeRollups.compute_jy_results(2015)
   unless pcs.empty?
     puts "There were problems with these:"
     pcs.each { |contest| puts contest }
@@ -116,7 +116,7 @@ else
   cid = ARGV[0].to_i
   c = cid == 0 ? nil : Contest.find(cid)
   if c && process_contest(c)
-    IAC::JudgeRollups.compute_jy_results(c.year)
+    Iac::JudgeRollups.compute_jy_results(c.year)
   else
     puts "Unable to process #{ARGV[0]}"
   end

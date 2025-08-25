@@ -58,7 +58,7 @@ class LeadersController < ApplicationController
 
     # !!! !!! !!! !!! !!! !!! !!! !!! !!!
     # Un-comment the following line to force a recomputation with every GET request (useful for debugging via IDE)
-    # IAC::LeoComputer.new(@year).recompute
+    # Iac::LeoComputer.new(@year).recompute
     # !!! !!! !!! !!! !!! !!! !!! !!! !!!
 
     @leo_ranks = LeoRank.where(year: @year)

@@ -1,6 +1,5 @@
 class Failure < ApplicationRecord
   belongs_to :contest, optional: true
-  #manny_id is not an id from MannySynch.  It is the manny system id.
   belongs_to :data_post, optional: true
 
   before_validation :normalize_fields

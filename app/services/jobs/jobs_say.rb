@@ -17,15 +17,8 @@ module JobsSay
     Failure.create(attributes_hash)
   end
 
-  def record_manny_failure(step, manny_id, exception)
-    record_failure(step, { :manny_id => manny_id }, exception)
-  end
-
   def record_contest_failure(step, contest, exception)
-    record_failure(step, {
-        :contest_id => contest.id,
-        :manny_id => contest.manny_synch ? contest.manny_synch.manny_number : nil
-      }, exception)
+    record_failure(step, { contest_id: contest.id, }, exception)
   end
 
   def record_post_failure(step, data_post_id, contest_id, exception)

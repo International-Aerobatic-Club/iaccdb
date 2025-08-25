@@ -1,13 +1,13 @@
 require 'test_helper'
 require 'shared/hors_concours_data'
 
-module IAC::HorsConcours
+module Iac::HorsConcours
   class ParticipantsTest < ActiveSupport::TestCase
     include HorsConcoursData
 
     setup do
       setup_hors_concours_flights
-      @hc = IAC::HorsConcoursParticipants.new(@contest)
+      @hc = Iac::HorsConcoursParticipants.new(@contest)
     end
 
     test 'does not mark non-solo, non-lower-category' do

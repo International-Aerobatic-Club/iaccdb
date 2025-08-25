@@ -1,7 +1,7 @@
 require 'test_helper'
 require 'shared/hors_concours_data'
 
-module IAC::HorsConcours
+module Iac::HorsConcours
   class SyntheticCategoryTest < ActiveSupport::TestCase
     include HorsConcoursData
 
@@ -17,7 +17,7 @@ module IAC::HorsConcours
           flight.save!
         end
       end
-      @hc = IAC::HorsConcoursParticipants.new(@contest)
+      @hc = Iac::HorsConcoursParticipants.new(@contest)
     end
 
     test 'does not treat synthetic as higher category' do

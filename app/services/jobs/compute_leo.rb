@@ -1,8 +1,8 @@
 # This captures a job for delayed job
 # The job computes National Point Series Championship ("Leo") results for a given year
-module Jobs
-class ComputeLeoJob < Struct.new(:contest)
-  include JobsSay
+class Jobs::ComputeLeo < Struct.new(:contest)
+
+  # !!! include JobsSay
 
   def perform
     @contest = contest
@@ -17,7 +17,7 @@ class ComputeLeoJob < Struct.new(:contest)
 
   def make_computation(year)
     say "Computing Leo standings for #{@description}"
-    leo = IAC::LeoComputer.new(year)
+    leo = Iac::LeoComputer.new(year)
     leo.recompute
   end
 
@@ -30,5 +30,4 @@ class ComputeLeoJob < Struct.new(:contest)
     say "Success Leo computation #{@description}"
   end
 
-end
 end

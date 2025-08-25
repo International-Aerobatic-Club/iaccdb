@@ -1,4 +1,4 @@
-IAC::Application.routes.draw do
+Rails.application.routes.draw do
 
   ### HQ Namespace
   namespace :hq do
@@ -23,7 +23,6 @@ IAC::Application.routes.draw do
         get 'recompute'
       end
     end
-    resources :manny_synchs, :only => [:index, :destroy]
     resources :members, :only => [:index, :edit, :update, :show]
     resources :failures, :only => [:index, :show, :destroy]
     resources :data_posts, :only => [:index, :show]
@@ -34,17 +33,6 @@ IAC::Application.routes.draw do
     resources :make_models, :only => [:index, :edit, :update]
     post "make_models/merge_preview"
     post "make_models/merge"
-    get 'manny_list',
-      :controller => :contests,
-      :action => "manny_list"
-    get 'manny_synchs/:manny_number/retrieve',
-      :controller => :manny_synchs,
-      :action => "retrieve",
-      :as => 'manny_retrieve'
-    get 'manny_synchs/:manny_number/show',
-      :controller => :manny_synchs,
-      :action => "show",
-      :as => 'manny_show'
     post 'jasper',
       :controller => 'jasper',
       :action => 'results'
