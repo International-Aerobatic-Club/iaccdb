@@ -6,6 +6,7 @@ class LiveResultsController < ApplicationController
     @contest = Contest.find(params[:id])
     @contest.extend(Contest::ShowResults)
     @categories = @contest.category_results
+    @last_upload = DataPost.where(contest_id: params[:id]).last&.created_at
     render layout: 'compact'
   end
 
