@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby '3.1.7'
 
-gem 'rails', "~> 6.1.0"
+gem 'rails', '~> 7.1'
 
 gem 'puma', '~> 3.12'
 
