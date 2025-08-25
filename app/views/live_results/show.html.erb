@@ -6,7 +6,9 @@
 
 <h1><%= @contest.name %></h1>
 
-<% if @categories.empty? %>
+<% if @last_upload.present? %>
+  <p class='message'>Uploaded from JaSPer at: <%= @last_upload.strftime('%m/%d/%Y %H:%M %Z') %></p>
+<% else %>
   <p class='message'>This contest has not posted any results.</p>
 <% end %>
 
