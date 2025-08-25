@@ -45,7 +45,7 @@ module Jasper::JasperToDb
     begin
       d_contest = Contest.find(id)
       d_contest.reset_to_base_attributes
-      d_contest.update_attributes(contest_params)
+      d_contest.update(contest_params)
     rescue ActiveRecord::RecordNotFound
       d_contest = Contest.create!(contest_params)
     end

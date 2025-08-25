@@ -59,7 +59,7 @@ class MembersController < ApplicationController
     @member = Member.find(params[:id])
 
     respond_to do |format|
-      if @member.update_attributes(params[:member])
+      if @member.update(params[:member])
         format.html { redirect_to(@member, :notice => 'Member was successfully updated.') }
         format.xml  { head :ok }
       else

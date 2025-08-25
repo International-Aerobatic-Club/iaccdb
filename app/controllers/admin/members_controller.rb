@@ -20,7 +20,7 @@ class Admin::MembersController < ApplicationController
 
   def update
     @member = Member.find(params[:id])
-    if @member.update_attributes(member_params)
+    if @member.update(member_params)
       redirect_to admin_members_path(:anchor => @member.id),
         :notice => "Member updated"
     else

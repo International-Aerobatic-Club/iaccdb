@@ -14,7 +14,7 @@ class Admin::MakeModelsController < ApplicationController
   def update
     mm = load_mm
     begin
-      mm.update_attributes(mm_params)
+      update.update(mm_params)
       flash[:notice] = "Updated #{mm.make}, #{mm.model}"
       redirect_to admin_make_models_url
     rescue ActiveRecord::RecordNotUnique,

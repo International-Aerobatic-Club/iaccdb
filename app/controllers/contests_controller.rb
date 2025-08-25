@@ -49,7 +49,7 @@ class ContestsController < ApplicationController
   # PUT /contests/1
   def update
     contest = fetch_contest
-    contest.update_attributes(contest_params)
+    contest.update(contest_params)
     render json: contest
   end
 

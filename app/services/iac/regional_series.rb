@@ -54,7 +54,7 @@ module Iac::RegionalSeries
         best_combo = c
       end
     end
-    regional_pilot.update_attributes(
+    regional_pilot.update(
       percentage: best_pct,
       qualified: (pc_use == pc_req)
     )

@@ -16,7 +16,7 @@ class Admin::ContestsController < ApplicationController
   def update
     load_contest
 
-    if @contest.update_attributes(contest_params)
+    if @contest.update(contest_params)
       redirect_to :action => "index"
     else
       render :action => "edit"

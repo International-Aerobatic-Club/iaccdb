@@ -63,7 +63,7 @@ module Hq
       @team = CollegiateResult.find(params[:id])
 
       respond_to do |format|
-        if @team.update_attributes(collegiate_result_params)
+        if @team.update(collegiate_result_params)
           format.html { redirect_to hq_collegiate_path, notice: 'Collegiate team successfully updated.' }
           format.json { head :no_content }
         else
