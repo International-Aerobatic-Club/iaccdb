@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_08_12_234423) do
+ActiveRecord::Schema.define(version: 2025_08_25_014310) do
 
   create_table "airplanes", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "reg"
@@ -85,7 +85,6 @@ ActiveRecord::Schema.define(version: 2025_08_12_234423) do
   create_table "failures", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "step", limit: 16
     t.bigint "contest_id"
-    t.bigint "manny_id"
     t.text "description", size: :medium
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -93,7 +92,6 @@ ActiveRecord::Schema.define(version: 2025_08_12_234423) do
     t.index ["contest_id"], name: "index_failures_on_contest_id"
     t.index ["data_post_id"], name: "index_failures_on_data_post_id"
     t.index ["id"], name: "index_failures_on_id"
-    t.index ["manny_id"], name: "index_failures_on_manny_id"
   end
 
   create_table "flights", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
@@ -222,15 +220,6 @@ ActiveRecord::Schema.define(version: 2025_08_12_234423) do
     t.index ["make", "model"], name: "index_make_models_on_make_and_model", unique: true
     t.index ["make"], name: "index_make_models_on_make"
     t.index ["model"], name: "index_make_models_on_model"
-  end
-
-  create_table "manny_synches", id: :integer, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
-    t.bigint "contest_id"
-    t.integer "manny_number"
-    t.datetime "synch_date"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.index ["contest_id"], name: "index_manny_synches_on_contest_id"
   end
 
   create_table "members", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
