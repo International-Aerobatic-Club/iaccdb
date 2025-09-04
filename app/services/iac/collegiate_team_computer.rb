@@ -97,7 +97,7 @@ class Iac::CollegiateTeamComputer
     top3_pilots = ([ best_upper_pilot ] + best_others).compact.sort_by{ |h| -h[:avg_pp] }
 
     # Now average them
-    result.total = top3_pilots.map{ |h| h[:avg_pp] }.sum / top3_pilots.size
+    result.total = top3_pilots.empty? ? 0 : top3_pilots.map{ |h| h[:avg_pp] }.sum / top3_pilots.size
 
     # Because we calculate scores as percentages, the maximum possible is always 100
     result.total_possible = 100
