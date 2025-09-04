@@ -1,4 +1,4 @@
-module Iac::CollegiateTeamComputer
+class Iac::CollegiateTeamComputer
 
   class Result
     attr_accessor :total

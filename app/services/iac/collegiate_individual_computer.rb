@@ -3,7 +3,7 @@
 # First, gather collegiate pilots who have participated in three or more contests
 # Second, compute best combination of three results for each pilot
 # Third, rank competitors based on their results and eligibility.
-module Iac::CollegiateIndividualComputer
+class Iac::CollegiateIndividualComputer
 
   attr_reader :year
 
@@ -15,7 +15,7 @@ module Iac::CollegiateIndividualComputer
   def recompute
     @collegiates = collegiates_for_pilots
     @collegiates.each { |student| student.compute_result }
-    RankComputer.compute_result_rankings(@collegiates)
+    Iac::RankComputer.compute_result_rankings(@collegiates)
   end
 
   ###
@@ -45,7 +45,7 @@ module Iac::CollegiateIndividualComputer
   def engage_student_for_pilot(pilot)
     student = CollegiateIndividualResult.where(:pilot_id => pilot.id,
       :year => year).first_or_create
-    to_be_results = CollegiateComputer.pilot_results(pilot, year)
+    to_be_results = Iac::CollegiateComputer.pilot_results(pilot, year)
     student.update_results(to_be_results)
   end
 

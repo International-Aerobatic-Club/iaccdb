@@ -1,5 +1,7 @@
 # Computes team and individual results and leaves them in the database
-module Iac::CollegiateComputer
+class Iac::CollegiateComputer
+
+  include Iac
 
   def initialize (year)
     @year = year.to_i
