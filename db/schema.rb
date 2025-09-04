@@ -10,12 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_08_25_014310) do
-
+ActiveRecord::Schema[8.0].define(version: 2025_08_25_014310) do
   create_table "airplanes", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "reg"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.bigint "make_model_id"
     t.index ["id"], name: "index_airplanes_on_id"
   end
@@ -25,8 +24,8 @@ ActiveRecord::Schema.define(version: 2025_08_25_014310) do
     t.string "category", limit: 16, null: false
     t.string "aircat", limit: 1, null: false
     t.string "name", limit: 48, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.boolean "synthetic", default: false, null: false
     t.index ["category", "aircat", "name"], name: "index_categories_on_category_and_aircat_and_name", unique: true
     t.index ["id"], name: "index_categories_on_id"
@@ -48,8 +47,8 @@ ActiveRecord::Schema.define(version: 2025_08_25_014310) do
     t.integer "chapter"
     t.string "director", limit: 48
     t.string "region", limit: 16
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.date "busy_start"
     t.date "busy_end"
     t.index ["id"], name: "index_contests_on_id"
@@ -61,8 +60,8 @@ ActiveRecord::Schema.define(version: 2025_08_25_014310) do
     t.boolean "has_error", default: false
     t.string "error_description"
     t.boolean "is_obsolete", default: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.index ["contest_id"], name: "index_data_posts_on_contest_id"
     t.index ["id"], name: "index_data_posts_on_id"
   end
@@ -72,13 +71,13 @@ ActiveRecord::Schema.define(version: 2025_08_25_014310) do
     t.integer "attempts", default: 0
     t.text "handler", size: :medium
     t.text "last_error", size: :medium
-    t.datetime "run_at"
-    t.datetime "locked_at"
-    t.datetime "failed_at"
+    t.datetime "run_at", precision: nil
+    t.datetime "locked_at", precision: nil
+    t.datetime "failed_at", precision: nil
     t.string "locked_by"
     t.string "queue"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
   end
 
@@ -86,8 +85,8 @@ ActiveRecord::Schema.define(version: 2025_08_25_014310) do
     t.string "step", limit: 16
     t.bigint "contest_id"
     t.text "description", size: :medium
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.bigint "data_post_id"
     t.index ["contest_id"], name: "index_failures_on_contest_id"
     t.index ["data_post_id"], name: "index_failures_on_data_post_id"
@@ -100,8 +99,8 @@ ActiveRecord::Schema.define(version: 2025_08_25_014310) do
     t.integer "sequence", null: false
     t.bigint "chief_id"
     t.bigint "assist_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.integer "obsolete_category_reference"
     t.index ["assist_id"], name: "index_flights_on_assist_id"
     t.index ["chief_id"], name: "index_flights_on_chief_id"
@@ -114,8 +113,8 @@ ActiveRecord::Schema.define(version: 2025_08_25_014310) do
     t.integer "year"
     t.bigint "category_id"
     t.integer "max_k"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["category_id"], name: "index_free_program_ks_on_category_id"
   end
 
@@ -127,8 +126,8 @@ ActiveRecord::Schema.define(version: 2025_08_25_014310) do
     t.integer "dis"
     t.integer "minority_zero_ct"
     t.integer "minority_grade_ct"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.integer "pair_count"
     t.integer "ftsdx2"
     t.integer "ftsdxdy"
@@ -152,8 +151,8 @@ ActiveRecord::Schema.define(version: 2025_08_25_014310) do
     t.decimal "sigma_ri_delta", precision: 10, scale: 5
     t.integer "con"
     t.integer "dis"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.integer "minority_zero_ct", default: 0
     t.integer "minority_grade_ct", default: 0
     t.integer "ftsdx2"
@@ -174,8 +173,8 @@ ActiveRecord::Schema.define(version: 2025_08_25_014310) do
   create_table "judges", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "judge_id"
     t.bigint "assist_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.index ["assist_id"], name: "index_judges_on_assist_id"
     t.index ["id"], name: "index_judges_on_id"
     t.index ["judge_id"], name: "index_judges_on_judge_id"
@@ -194,8 +193,8 @@ ActiveRecord::Schema.define(version: 2025_08_25_014310) do
     t.integer "pair_count"
     t.integer "flight_count"
     t.decimal "sigma_ri_delta", precision: 12, scale: 5
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.integer "sigma_d2"
     t.integer "minority_grade_ct"
     t.integer "minority_zero_ct"
@@ -226,8 +225,8 @@ ActiveRecord::Schema.define(version: 2025_08_25_014310) do
     t.integer "iac_id"
     t.string "given_name", limit: 40
     t.string "family_name", limit: 40
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.index ["iac_id"], name: "index_members_on_iac_id"
     t.index ["id"], name: "index_members_on_id"
   end
@@ -236,8 +235,8 @@ ActiveRecord::Schema.define(version: 2025_08_25_014310) do
     t.integer "pilot_id", null: false
     t.decimal "category_value", precision: 8, scale: 2
     t.integer "category_rank"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.boolean "need_compute", default: true
     t.boolean "star_qualifying", default: false
     t.integer "total_possible"
@@ -255,8 +254,8 @@ ActiveRecord::Schema.define(version: 2025_08_25_014310) do
     t.decimal "flight_value", precision: 7, scale: 2
     t.decimal "adj_flight_value", precision: 7, scale: 2
     t.integer "flight_rank"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.string "figure_results"
     t.integer "adj_flight_rank"
     t.boolean "need_compute", default: true
@@ -273,8 +272,8 @@ ActiveRecord::Schema.define(version: 2025_08_25_014310) do
     t.string "computed_ranks"
     t.integer "flight_value"
     t.integer "flight_rank"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.string "graded_values"
     t.string "graded_ranks"
     t.boolean "need_compute", default: true
@@ -289,8 +288,8 @@ ActiveRecord::Schema.define(version: 2025_08_25_014310) do
     t.bigint "sequence_id"
     t.bigint "airplane_id"
     t.string "chapter", limit: 8
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.integer "penalty_total", default: 0
     t.integer "hors_concours", limit: 2, default: 0, null: false
     t.index ["airplane_id"], name: "index_pilot_flights_on_airplane_id"
@@ -303,8 +302,8 @@ ActiveRecord::Schema.define(version: 2025_08_25_014310) do
   create_table "region_contests", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "pc_result_id"
     t.bigint "regional_pilot_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.index ["id"], name: "index_region_contests_on_id"
     t.index ["pc_result_id"], name: "index_region_contests_on_pc_result_id"
     t.index ["regional_pilot_id"], name: "index_region_contests_on_regional_pilot_id"
@@ -317,8 +316,8 @@ ActiveRecord::Schema.define(version: 2025_08_25_014310) do
     t.decimal "percentage", precision: 5, scale: 2
     t.boolean "qualified", default: false
     t.integer "rank"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.bigint "category_id"
     t.index ["category_id"], name: "index_regional_pilots_on_category_id"
     t.index ["id"], name: "index_regional_pilots_on_id"
@@ -328,8 +327,8 @@ ActiveRecord::Schema.define(version: 2025_08_25_014310) do
   create_table "result_accums", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "result_id"
     t.bigint "pc_result_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["pc_result_id"], name: "index_result_accums_on_pc_result_id"
     t.index ["result_id", "pc_result_id"], name: "index_result_accums_on_result_id_and_pc_result_id", unique: true
     t.index ["result_id"], name: "index_result_accums_on_result_id"
@@ -338,8 +337,8 @@ ActiveRecord::Schema.define(version: 2025_08_25_014310) do
   create_table "result_members", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "member_id"
     t.bigint "result_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["member_id", "result_id"], name: "index_result_members_on_member_id_and_result_id", unique: true
     t.index ["member_id"], name: "index_result_members_on_member_id"
     t.index ["result_id"], name: "index_result_members_on_result_id"
@@ -356,8 +355,8 @@ ActiveRecord::Schema.define(version: 2025_08_25_014310) do
     t.integer "rank"
     t.decimal "points", precision: 9, scale: 2
     t.integer "points_possible"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["category_id"], name: "index_results_on_category_id"
     t.index ["id"], name: "index_results_on_id"
     t.index ["pilot_id"], name: "index_results_on_pilot_id"
@@ -367,8 +366,8 @@ ActiveRecord::Schema.define(version: 2025_08_25_014310) do
     t.bigint "pilot_flight_id"
     t.bigint "judge_id"
     t.string "values"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.index ["id"], name: "index_scores_on_id"
     t.index ["judge_id"], name: "index_scores_on_judge_id"
     t.index ["pilot_flight_id"], name: "index_scores_on_pilot_flight_id"
@@ -379,8 +378,8 @@ ActiveRecord::Schema.define(version: 2025_08_25_014310) do
     t.integer "total_k"
     t.integer "mod_3_total"
     t.string "k_values"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.index ["figure_count", "total_k", "mod_3_total"], name: "by_attrs"
     t.index ["id"], name: "index_sequences_on_id"
   end
@@ -391,10 +390,9 @@ ActiveRecord::Schema.define(version: 2025_08_25_014310) do
     t.text "regular_category_flights"
     t.string "synthetic_category_description", limit: 48, null: false
     t.text "synthetic_category_flights"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["contest_id"], name: "index_synthetic_categories_on_contest_id"
     t.index ["regular_category_id"], name: "index_synthetic_categories_on_regular_category_id"
   end
-
 end
