@@ -1,6 +1,6 @@
 # process db flights to identify hors_concours
 
-module Iac::HorsConcoursParticipants
+class Iac::HorsConcoursParticipants
 
   attr_accessor :contest
 

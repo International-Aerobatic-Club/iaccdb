@@ -1,9 +1,11 @@
 class ContestComputer
 
+  include Iac
+
   def initialize(contest)
     @contest = contest
     @flight_computer = FlightComputer.new(nil)
-    @hc_computer = Iac::HorsConcoursParticipants.new(@contest)
+    @hc_computer = HorsConcoursParticipants.new(@contest)
   end
 
   # compute all of the flights and the contest rollups
