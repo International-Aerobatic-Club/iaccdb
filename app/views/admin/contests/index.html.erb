@@ -38,7 +38,7 @@
     <% end %>
     <td><%= link_to :edit, edit_admin_contest_path(contest) %></td>
     <td>
-      <%= link_to :recompute, recompute_admin_contest_path(contest),
+      <%= link_to :recompute, recompute_admin_contest_path(contest), method: :post,
         data: { :confirm => 'Queues a job to recompute all contest results.  Okay?' } %>
     </td>
     <td>

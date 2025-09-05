@@ -7,7 +7,7 @@ Rails.application.routes.draw do
       get 'collegiate_teams/:year', action: :index, as: :collegiate_teams_index
       get 'collegiate_teams/', action: :index, as: :current_collegiate_teams
       get 'collegiate_teams/:year/new', action: :new, as: :new_collegiate_team
-      get 'collegiate_results/recompute/:year', action: :recompute
+      post 'collegiate_results/recompute/:year', action: :recompute
     end
   end
 
@@ -20,7 +20,7 @@ Rails.application.routes.draw do
     end
     resources :contests do
       member do
-        get 'recompute'
+        post 'recompute'
       end
     end
     resources :members, only: [:index, :edit, :update, :show]
