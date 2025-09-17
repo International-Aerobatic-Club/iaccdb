@@ -10,7 +10,13 @@
   <td></td>
   <td></td>
   <td></td>
-  <td class='percentage'><%= decimal_two(collegiate_result.result_percent) %>%</td>
+  <td class='percentage'>
+    <% if collegiate_result.qualified %>
+      <%= decimal_two(collegiate_result.result_percent) %>%
+    <% else %>
+      N/A
+    <% end %>
+  </td>
   <td></td>
 </tr>
 <%= render :partial => 'collegiate_results/collegiate_individual',
