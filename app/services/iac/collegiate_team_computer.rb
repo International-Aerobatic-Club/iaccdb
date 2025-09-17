@@ -2,29 +2,24 @@ module IAC
 
   class CollegiateTeamComputer
 
+
+    ## Constants
+    # Number of pilots who count towards a school's rankings
+    N_TOP = 3
+    # Minimum number of contests a pilot must have participated in to qualify
+    MIN_CONTESTS = 3
+
     class Result
       attr_accessor :total
       attr_accessor :total_possible
       attr_accessor :combination
       attr_accessor :qualified
-      attr_accessor :has_non_primary
 
       def initialize
         @total = 0.0
         @total_possible = 0
         @combination = []
         @qualified = false
-        @has_non_primary = false
-      end
-
-      def self.dup(result)
-        dup = Result.new
-        dup.total = result.total
-        dup.total_possible = result.total_possible
-        dup.combination = Array.new(result.combination)
-        dup.qualified = result.qualified
-        dup.has_non_primary = result.has_non_primary
-        dup
       end
 
       def value
@@ -48,10 +43,8 @@ module IAC
     # pilot_contests is hash pilot => pc_results
     def initialize(pilot_contests)
       @pilot_contests = pilot_contests
-      @pilots = @pilot_contests.keys
-      # disregard pilots with no contest participation
-      @pilots.delete_if { |pilot| @pilot_contests[pilot].size == 0 }
-      initialize_counts
+      # Find all pilots who flew at least one contest
+      @pilots = @pilot_contests.keys.find_all{ |pilot| @pilot_contests[pilot].present? }
     end
 
     # Calculate the results for one collegiate team
@@ -61,108 +54,99 @@ module IAC
 
       result = Result.new
 
-      # Gather the Category#id values that count towards the Team Award
-      # Note that there are two Category objects per competition level: one for Power and one for Gliders
-      all_cats = Category.where(category: %w[ primary sportsman intermediate ])
-      upper_cats = Category.where(category: %w[ sportsman intermediate ])
+      # Gather the Categories that count towards the Team Award
+      # Note: there are two Category objects per competition level: one for Power and one for Gliders
+      collegiate_cats = Category.where(category: %w[ primary sportsman intermediate ])
+      sportsman_cats = Category.where(category: 'sportsman')
 
-      # Find all pilots who flew "enough" contests in any allowed category
-      qualifying_pilots = @pilots.find_all{ |p| flew_enough?(p, all_cats) }
+      best_sportsman_pilot =
+        @pilots.find_all{ |p| flew_enough?(p, sportsman_cats) }.sort_by{ |p| -ppa(p, sportsman_cats) }.first
 
-      # Find all pilots who flew "enough" contests in Spt/Int
-      qualifying_uppers = @pilots.find_all{ |pilot| flew_enough?(pilot, upper_cats) }
+      best_sportsman_info =
+        if best_sportsman_pilot.present?
+          {
+            pilot: best_sportsman_pilot,
+            avg_pp: ppa(best_sportsman_pilot, sportsman_cats),
+            pilot_contests: best_contests(best_sportsman_pilot, sportsman_cats)
+          }
+        else
+          nil
+        end
 
-      # A team is qualified if there are at least three qualifying pilots and one upper-category qualifier
-      result.qualified = (qualifying_pilots.size >= 3 && qualifying_uppers.size > 0)
+      # Find all remaining pilots who flew "enough" contests in any allowed category
+      qualifying_pilots = @pilots.find_all{ |p| p != best_sportsman_pilot && flew_enough?(p, collegiate_cats) }
 
-      # Of the upper-category qualifiers, find the one with the highest average for their 3 best
-      # results in one of those categories (P&P 225.7.1(h)(1))
-      best_upper_pilot = qualifying_uppers.map do |qs|
-        bcs = best_contests(qs, upper_cats).first(3)
-        { pilot: qs, avg_pp: bcs.map(&:pct_possible).sum / 3, pilot_contests: bcs}
-      end.sort_by{ |h| -h[:avg_pp] }.first
+      # Find the best qualified Sportsman pilot, if any
+      # A team is qualified if there are at least N_TOP qualifying pilots, including a qualified Sportsman pilot
+      result.qualified = (qualifying_pilots.size >= N_TOP - 1 && best_sportsman_pilot.present?)
 
-      # We remove the best upper-category pilot from the list of all qualifying pilots so that
-      # they are not counted a second time when we evaluate the remaining results
-      qualifying_pilots.delete(best_upper_pilot[:pilot]) if best_upper_pilot.present?
-
-      # Of the remaining qualifying pilots, get the average of their three best contests,
-      # then take two pilots with the best averages
+      # For each qualifying pilot, get the average of their MIN_CONTESTS best results
       best_others = qualifying_pilots.map do |qp|
-        bcs = best_contests(qp, all_cats).first(3)
-        { pilot: qp, avg_pp: bcs.map(&:pct_possible).sum / 3, pilot_contests: bcs }
-      end.sort_by{ |h| -h[:avg_pp] }.first(2)
+        { pilot: qp, avg_pp: ppa(qp, collegiate_cats), pilot_contests: best_contests(qp, collegiate_cats) }
+      end.sort_by{ |h| -h[:avg_pp] }
 
-      # Now combine the best upper-category pilot with the other two best pilots,
+      # Now combine the best Sportsman pilot with the other best pilots,
       # squeeze out any nil results (which will occur if there is no "best Sportsman"
-      # or less than two other qualifiers), and sort by their %pp
-      top3_pilots = ([ best_upper_pilot ] + best_others).compact.sort_by{ |h| -h[:avg_pp] }
+      # or not enough other qualifiers), and sort by their %pp
+      top_n_pilots = ([ best_sportsman_info ] + best_others).compact.sort_by{ |h| -h[:avg_pp] }.first(N_TOP)
 
       # Now average them
-      result.total = top3_pilots.empty? ? 0 : top3_pilots.map{ |h| h[:avg_pp] }.sum / top3_pilots.size
+      result.total = top_n_pilots.present? ? top_n_pilots.map{ |h| h[:avg_pp] }.sum / top_n_pilots.size : 0.0
 
       # Because we calculate scores as percentages, the maximum possible is always 100
       result.total_possible = 100
 
       # Save the PcResult objects
-      result.combination = top3_pilots.map{ |h| h[:pilot_contests] }.flatten
+      result.combination = top_n_pilots.map{ |h| h[:pilot_contests] }.flatten
 
       return result
 
     end
 
 
-    ###
     private
-    ###
 
     def flew_enough?(pilot, categories)
-      @pilot_contests[pilot].where(category: categories).count >= 3
+      @pilot_contests[pilot].where(category: categories).count >= MIN_CONTESTS
     end
+
 
     def best_contests(pilot, categories)
-      @pilot_contests[pilot].where(category: categories).sort_by{ |pcr| -pcr.pct_possible }
+      @pilot_contests[pilot]&.where(category: categories).sort_by{ |pcr| -pcr.pct_possible }
     end
 
-    def initialize_counts
-      contests_properties = gather_contest_properties(@pilot_contests)
-      @non_primary_participant_occurrence_count = 0
-      @three_or_more_pilot_occurrence_count = 0
-      contests_properties.each do |contest|
-        @non_primary_participant_occurrence_count += 1 if contest[:has_non_primary]
-        @three_or_more_pilot_occurrence_count += 1 if 3 <= contest[:pilot_count]
-      end
 
-      # Count of pilots participating is three or more and
-      # Three contests with three pilots and
-      # Three contests with at least one non-Primary pilot
-      @is_qualified =
-        3 <= @non_primary_participant_occurrence_count &&
-        3 <= @three_or_more_pilot_occurrence_count
+    def ppa(pilot, categories)
+
+      # Get the pilot's best contests in the eligible categories
+      bcs = best_contests(pilot, categories).first(MIN_CONTESTS)
+
+      return 0.0 if bcs.size.zero?
+
+      # Divide the total possible by the minimum number of contests or total contests flown, whichever is less
+      return bcs.first(MIN_CONTESTS).map(&:pct_possible).sum / [MIN_CONTESTS, bcs.size].min
+
     end
+
 
     # pilot_contests is hash of pilot (member)  => [ array of pc_result ]
     # return an array of hashes, one for each unique contest found in pilot_contests
     # each hash contains keys:
-    #   :has_non_primary boolean true if one pilot flew the contest not in Primary
     #   :pilot_count integer count of pilots who flew in the contest
     def gather_contest_properties(pilot_contests)
 
       contest_props = {}
 
-      pilot_contests.each_pair do | pilot, pc_results |
+      pilot_contests.values do |pc_results|
 
         pc_results.each do | pc_result |
           contest = pc_result.contest
           props = contest_props[contest]
-          if !props
-            props = { :has_non_primary => false, :pilot_count => 0 }
+          if props.empty?
+            props = { pilot_count: 0 }
             contest_props[contest] = props
           end
           props[:pilot_count] += 1
-          if !pc_result.category.is_primary
-            props[:has_non_primary] = true
-          end
         end
 
       end
