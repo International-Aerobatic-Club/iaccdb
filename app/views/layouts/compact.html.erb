@@ -3,14 +3,12 @@
   <head xmlns:og="http://ogp.me/ns#">
     <meta charset="utf-8" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-    <title><%=
-      content_for?(:title) ? yield(:title) : "IAC Aerobatic Contest Data"
-    %></title>
-    <%= stylesheet_link_tag    "application" %>
+    <%= favicon_link_tag image_path('iac-favicon.ico') %>
+    <title> <%= content_for?(:title) ? yield(:title) : "IAC Aerobatic Contest Data" %> </title>
+    <%= stylesheet_link_tag "application" %>
     <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
     <%= yield :headers %>
-    <%= csrf_meta_tags %>
+    <%= csrf_meta_tags unless @cacheable %>
     <%= render 'shared/sso_metatags' %>
   </head>
   <body>

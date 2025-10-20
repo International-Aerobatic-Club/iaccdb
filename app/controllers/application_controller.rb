@@ -10,6 +10,26 @@ class ApplicationController < ActionController::Base
     end
   end
 
+
+   # This method, inherited by all controller subclasses, configures the HTTP 1.1 Cache-Control header
+   # which instructs the web server to cache the entire page.
+   #
+   # Sample header: Cache-Control: max-age=60, public
+   #
+   # Usage: before_action: :make_cacheable, only: [:method1, :method2]
+   #        (Note: The "only:" clause is optional)
+
+  def make_cacheable
+
+    # !!! return unless Rails.env.production?
+
+    expires_in 1.minute, public: true
+    @cacheable = true
+    request.session_options[:skip] = true
+
+  end
+
+
 private
 
   def record_not_found
