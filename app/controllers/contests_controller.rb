@@ -1,9 +1,7 @@
 class ContestsController < ApplicationController
-  before_action :require_contest_admin
-  skip_before_action :require_contest_admin,
-    only: [:index, :show]
-  skip_before_action :verify_authenticity_token,
-    only: [:create, :update, :destroy]
+  before_action :require_contest_admin, except: [:index, :show]
+  skip_before_action :verify_authenticity_token, only: [:create, :update, :destroy]
+  before_action :make_cacheable, only: :show
 
   # GET /contests
   def index

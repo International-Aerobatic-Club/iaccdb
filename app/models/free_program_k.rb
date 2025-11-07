@@ -2,7 +2,8 @@ class FreeProgramK < ApplicationRecord
 
   belongs_to :category
 
-  validates :year, numericality: { only_integer: true, greater_than: 2004 }
+  # Allow values between 2005 and "next year"
+  validates :year, numericality: { only_integer: true, greater_than: 2004, less_than: Date.today.year + 2 }
   validates :category_id, uniqueness: { scope: :year, message: "already has a max K factor for that year" }
   validates_presence_of :category_id
   validates :max_k, numericality: { only_integer: true, greater_than: 0 }
