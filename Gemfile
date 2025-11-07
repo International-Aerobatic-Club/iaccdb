@@ -16,6 +16,7 @@ gem 'libxml-ruby'
 gem 'jquery-rails'
 gem 'chronic'
 gem 'foundation-rails', '< 6.9.0'
+gem 'ostruct'
 
 gem 'delayed_job'
 gem 'delayed_job_active_record'
