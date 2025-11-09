@@ -1,11 +1,21 @@
 <%= render 'admin/admin_menu' %>
-<h1>Admin Failures</h1>
+
+<h1>Failures</h1>
+
 <table>
-<thead>
-<tr><th>Timestamp</th><th>Step</th><th>Contest</th><th>c_id</th><th>m_no</th>
-<th colspan='2'>Actions</th></tr>
-</thead>
-<tbody>
-<%= render :partial=>:failure, :collection => @failures %>
-</tbody>
+
+  <thead>
+    <tr>
+      <th>Timestamp</th>
+      <th>Step</th>
+      <th>Contest</th>
+      <th>c_id</th>
+      <th colspan='2'>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <%= render :partial=>:failure, :collection => @failures %>
+  </tbody>
+
 </table>
