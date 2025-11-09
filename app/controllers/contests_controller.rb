@@ -39,8 +39,7 @@ class ContestsController < ApplicationController
     if (contest.valid?)
       render json: contest
     else
-      render json: { errors: contest.errors.full_messages },
-        :status => :bad_request
+      render json: { errors: contest.errors.full_messages }, status: :bad_request
     end
   end
 
