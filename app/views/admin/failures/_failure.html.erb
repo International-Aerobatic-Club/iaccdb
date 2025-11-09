@@ -3,7 +3,6 @@
 <td><%= failure.step %></td>
 <td><%= failure.contest.year_name if failure.contest %></td>
 <td><%= failure.contest_id %></td>
-<td><%= failure.manny_id %></td>
 <td><%= link_to 'show', admin_failure_path(failure) %>
 <td><%= link_to :delete, admin_failure_path(failure), :method => :delete %>
 </tr>
