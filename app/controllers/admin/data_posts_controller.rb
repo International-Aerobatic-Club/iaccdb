@@ -12,13 +12,13 @@ class Admin::DataPostsController < ApplicationController
   def download
     @data_post = DataPost.find(params[:id])
     send_data @data_post.data, 
-      :content_type => 'text/xml', 
-      :filename => "JaSPer_post_IACCDB_#{@data_post.id}.xml"
+      content_type: 'text/xml', 
+      filename: "JaSPer_post_IACCDB_#{@data_post.id}.xml"
   end
 
   def resubmit
     Delayed::Job.enqueue Jobs::ProcessJasperJob.new(params[:id])
     flash[:notice] = "Post queued for processing"
-    redirect_to :action => 'show' 
+    redirect_to action: 'show' 
   end
 end

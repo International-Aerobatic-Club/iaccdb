@@ -1,13 +1,13 @@
 class PcResult < ApplicationRecord
   include HorsConcours
 
-  belongs_to :pilot, :class_name => 'Member'
+  belongs_to :pilot, class_name: 'Member'
   belongs_to :contest
   belongs_to :category
   has_many :region_contests
-  has_many :regional_pilots, :through => :region_contests
+  has_many :regional_pilots, through: :region_contests
   has_many :result_accums
-  has_many :results, :through => :result_accums
+  has_many :results, through: :result_accums
 
   def to_s
     a = "pc_result #{id} for pilot #{pilot} value #{category_value}"

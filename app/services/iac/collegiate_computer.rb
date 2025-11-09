@@ -19,7 +19,7 @@ class Iac::CollegiateComputer
   #   Determine qualification
   #   Determine best score combination
   def recompute_team
-    teams = CollegiateResult.where(:year => @year).all
+    teams = CollegiateResult.where(year: @year).all
     teams.each do |team|
       ctc = CollegiateTeamComputer.new(team.pilot_contests)
       result = ctc.compute_result
@@ -36,7 +36,7 @@ class Iac::CollegiateComputer
   def recompute_individual
     cic = CollegiateIndividualComputer.new(@year)
     cic.recompute
-    results = CollegiateIndividualResult.where(:year => @year).all
+    results = CollegiateIndividualResult.where(year: @year).all
     RankComputer.compute_result_rankings(results)
   end
 

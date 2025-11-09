@@ -29,8 +29,8 @@ class Iac::RankComputer
           jf_result = jf_results_by_judge[judge]
           if !jf_result
             jf_result =
-              flight.jf_results.where(:judge_id => judge.id).first ||
-              flight.jf_results.create(:judge => judge)
+              flight.jf_results.where(judge_id: judge.id).first ||
+              flight.jf_results.create(judge: judge)
             jf_result.zero_reset
             j_rank_for_jf[jf_result] = []
             jf_results_by_judge[judge] = jf_result
@@ -265,10 +265,9 @@ private
       logger.error "Error computing rankings for flight #{flight} is #{exception.message}"
       contest = flight.contest
       Failure.create(
-        :step => 'flight_ranks',
-        :contest_id => contest.id,
-        :description =>
-          ":: Flight #{flight} " +
+        step: 'flight_ranks',
+        contest_id: contest.id,
+        description:           ":: Flight #{flight} " +
           "\n:: flight_values " + flight_values.to_yaml +
           "\n:: judge_pilot_flight_values " +
           judge_pilot_flight_values.to_yaml +
@@ -332,10 +331,9 @@ private
       logger.error exception.message
       contest = flight.contest
       Failure.create(
-        :step => "figures",
-        :contest_id => contest.id,
-        :description =>
-          ":: flight #{flight} \n:: judge_pilot_figure_computed_values " +
+        step: "figures",
+        contest_id: contest.id,
+        description:           ":: flight #{flight} \n:: judge_pilot_figure_computed_values " +
           judge_pilot_figure_computed_values.to_yaml +
           "\n:: judge_pilot_figure_graded_values " +
           judge_pilot_figure_graded_values.to_yaml +

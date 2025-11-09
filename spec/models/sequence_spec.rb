@@ -1,5 +1,5 @@
 module Model
-  describe Sequence, :type => :model do
+  describe Sequence, type: :model do
     before(:all) do
       @k_values = [19, 14, 21, 33, 21, 23, 22, 20, 8]
       @attrs = Sequence.create_attrs(@k_values)

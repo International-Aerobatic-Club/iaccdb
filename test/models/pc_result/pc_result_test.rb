@@ -19,11 +19,11 @@ class PcResult::PcResultTest < ActiveSupport::TestCase
     flight = create(:flight, category_id: category.id)
     pf = create(:pilot_flight, flight: flight)
     create(:score,
-      :pilot_flight => pf,
-      :values => [60, 0, 0, 0, 0])
+      pilot_flight: pf,
+      values: [60, 0, 0, 0, 0])
     create(:score,
-      :pilot_flight => pf,
-      :values => [-1, 0, 0, 0, 0])
+      pilot_flight: pf,
+      values: [-1, 0, 0, 0, 0])
     flight = pf.flight
     computer = FlightComputer.new(flight)
     computer.flight_results(false)

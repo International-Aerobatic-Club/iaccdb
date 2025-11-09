@@ -23,8 +23,8 @@ module JobsSay
 
   def record_post_failure(step, data_post_id, contest_id, exception)
     record_failure(step, {
-        :data_post_id => data_post_id,
-        :contest_id => contest_id
+        data_post_id: data_post_id,
+        contest_id: contest_id
       }, exception)
   end
 end

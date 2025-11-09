@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   include AuthHelper
-  protect_from_forgery :with => :exception
-  rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
+  protect_from_forgery with: :exception
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   # authenticate interactively with browser credentials query
   def authenticate(role = nil)
@@ -34,9 +34,9 @@ private
 
   def record_not_found
     respond_to do |format|
-      format.html { render plain: "Not Found", :status => :not_found }
+      format.html { render plain: "Not Found", status: :not_found }
       format.json { render json: { errors: 'not found' },
-        :status => :not_found }
+        status: :not_found }
     end
   end
 end

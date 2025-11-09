@@ -12,7 +12,7 @@ module Iac::JudgeRollups
     # tracking_list = list all jy_result where year
     # the "to_a" is important because we remove from it all
     # of the records we reuse. We don't want to remove the actual records
-    tracking_list = JyResult.where(:year => year).all.to_a
+    tracking_list = JyResult.where(year: year).all.to_a
     Contest.where(["year(start) = ?", year]).each do |contest|
       logger.info "add #{contest.year_name} to judge rollups"
       contest.jc_results.each do |jc_result|
@@ -44,9 +44,9 @@ module Iac::JudgeRollups
     jy_result = JyResult.where(judge: judge, category: category, year: year).first
     if !jy_result
       jy_result = JyResult.new({
-        :judge => judge,
-        :category => category,
-        :year => year});
+        judge: judge,
+        category: category,
+        year: year});
       jy_result.zero_reset
     end
     jy_result

@@ -17,9 +17,9 @@ class Admin::ContestsController < ApplicationController
     load_contest
 
     if @contest.update(contest_params)
-      redirect_to :action => "index"
+      redirect_to action: "index"
     else
-      render :action => "edit"
+      render action: "edit"
     end
   end
 
@@ -37,7 +37,7 @@ class Admin::ContestsController < ApplicationController
     # Delayed::Job.enqueue Jobs::ComputeFlightsJob.new(@contest)
     Jobs::ComputeFlightsJob.new(@contest).perform
     flash[:notice] = "#{@contest.year_name} queued for computation"
-    redirect_to :action => 'index'
+    redirect_to action: 'index'
   end
 
   def contest_params

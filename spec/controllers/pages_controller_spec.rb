@@ -1,4 +1,4 @@
-describe PagesController, :type => :controller do
+describe PagesController, type: :controller do
   it 'retrieves valid page' do
     get :page_view, params: { title: 'notes' }
     expect(response.status).to eq 200

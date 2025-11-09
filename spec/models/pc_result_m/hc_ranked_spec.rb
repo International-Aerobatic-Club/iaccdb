@@ -1,4 +1,4 @@
-describe 'hc_ranked', :type => :model do
+describe 'hc_ranked', type: :model do
   COUNT = 8
   before :context do
     @contest = create(:contest)

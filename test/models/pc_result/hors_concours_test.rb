@@ -9,7 +9,7 @@ class PcResult::HorsConcoursTest < ActiveSupport::TestCase
   end
 
   test 'carries hors_concours on pilot_flight into pf_results' do
-    pf_results = PfResult.joins(:flight => :contest).where(
+    pf_results = PfResult.joins(flight: :contest).where(
       ['flights.contest_id = ? and pilot_flights.pilot_id = ?', 
         @contest.id, @hc_pilot.id])
     assert_equal(2, pf_results.count)

@@ -5,5 +5,5 @@ json.minority_zeros jfr.minority_zero_ct
 json.minority_grades jfr.minority_grade_ct
 json.average_flight_size jfr.avgFlightSize
 json.average_k jfr.avgK
-json.url jf_result_url(jfr, :format => :json)
+json.url jf_result_url(jfr, format: :json)
 

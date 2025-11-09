@@ -12,7 +12,7 @@ class Sequence < ApplicationRecord
       seq = cur if cur.k_values == k_values
     end
     if !seq
-      attrs.merge!(:k_values => k_values)
+      attrs.merge!(k_values: k_values)
       seq = Sequence.new(attrs)
       seq.save!
     end

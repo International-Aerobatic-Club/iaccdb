@@ -9,8 +9,8 @@ class AssistantsController < ApplicationController
   def show
     id = params[:id]
     @assistant = Member.find(id)
-    assists = Judge.where(:assist_id => id)
-    scores = Score.includes(:flight).where(:judge_id => assists)
+    assists = Judge.where(assist_id: id)
+    scores = Score.includes(:flight).where(judge_id: assists)
     flights = scores.map { |s| s.flight }
     # this following block because there's a problem with 
     # removing dependent records TODO
@@ -37,7 +37,7 @@ class AssistantsController < ApplicationController
           flight_counts_by_category << "#{flight_year_results[cat]} #{cat.name}"
         end
       end
-      @flight_assists << { :label => year, :values => flight_counts_by_category }
+      @flight_assists << { label: year, values: flight_counts_by_category }
       @totals[year] = total_count
     end
     @flight_assists.sort! { |a,b| b[:label] <=> a[:label] }

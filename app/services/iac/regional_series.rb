@@ -66,7 +66,7 @@ module Iac::RegionalSeries
   #  participated in a contest.
   # Competitors will have a result in each category they have competed
   def compute_results(year, region)
-    RegionalPilot.where(:year => year, :region => region).destroy_all
+    RegionalPilot.where(year: year, region: region).destroy_all
     contests = Contest.where(['year(start) = ? and region = ?', year, region])
     contests.each do |contest|
       accumulate_contest year, region, contest
@@ -78,7 +78,7 @@ module Iac::RegionalSeries
     nationals.each do |contest|
       accumulate_contest year, region, contest
     end
-    RegionalPilot.where(:year => year, :region => region).each do |rp|
+    RegionalPilot.where(year: year, region: region).each do |rp|
       compute_pilot_results(rp)
     end
   end

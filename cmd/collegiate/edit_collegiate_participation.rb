@@ -42,7 +42,7 @@ class EditCollegiateParticipation
   end
 
   def verify_for_that_warm_fuzzy_feeling
-    teams = CollegiateResult.where(:year => year)
+    teams = CollegiateResult.where(year: year)
     puts "#{year} Collegiate Teams Composition:"
     teams.each do |team|
       puts team

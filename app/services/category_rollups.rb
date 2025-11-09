@@ -14,7 +14,7 @@ class CategoryRollups
   def compute_pilot_category_results
     cat_flights = flights
     cur_pc_results = Set.new
-    pc_results = @contest.pc_results.where(:category => @category)
+    pc_results = @contest.pc_results.where(category: @category)
     cat_flights.each do |flight|
       cur_pc_results |= pc_results_for_flight(flight)
     end
@@ -35,7 +35,7 @@ class CategoryRollups
   def compute_judge_category_results
     cat_flights = flights
     cur_jc_results = Set.new
-    jc_results = @contest.jc_results.where(:category => @category)
+    jc_results = @contest.jc_results.where(category: @category)
     cat_flights.each do |flight|
       cur_jc_results |= jc_results_for_flight(flight)
     end
@@ -51,7 +51,7 @@ class CategoryRollups
   end
 
   def compute_pilot_rankings
-    pc_results = @contest.pc_results.where(:category => @category)
+    pc_results = @contest.pc_results.where(category: @category)
     compute_category_ranks(pc_results)
   end
 
@@ -115,10 +115,9 @@ class CategoryRollups
     rescue Exception => exception
       logger.error exception.message
       Failure.create(
-        :step => "category",
-        :contest_id => contest.id,
-        :description => 
-          ":: " + self.to_s +
+        step: "category",
+        contest_id: contest.id,
+        description:           ":: " + self.to_s +
           "\n:: category_values " + category_values.to_yaml +
           "\n:: #{exception.message} ::\n" + exception.backtrace.join("\n"))
     end

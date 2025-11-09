@@ -1,4 +1,4 @@
-describe Category, :type => :model do
+describe Category, type: :model do
 
   context 'find_for_cat_aircat' do
     it 'identifies power versus glider' do

@@ -5,7 +5,7 @@ module Hq
     # GET /hq/collegiates.json/:year
     def index
       year_setup(params)
-      @teams = CollegiateResult.where(:year => @year)
+      @teams = CollegiateResult.where(year: @year)
 
       respond_to do |format|
         format.html # index.html.erb
@@ -28,7 +28,7 @@ module Hq
     # GET /hq/collegiates/:year/new.json
     def new
       year_setup(params)
-      @team = CollegiateResult.new(:year => @year)
+      @team = CollegiateResult.new(year: @year)
 
       respond_to do |format|
         format.html # new.html.erb

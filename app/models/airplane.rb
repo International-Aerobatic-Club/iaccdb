@@ -1,5 +1,5 @@
 class Airplane < ApplicationRecord
-  has_many :pilot_flights, :dependent => :nullify
+  has_many :pilot_flights, dependent: :nullify
   belongs_to :make_model
 
   # find or create airplane with given make, model, reg number

@@ -1,8 +1,8 @@
-describe JfResultsController, :type => :controller do
+describe JfResultsController, type: :controller do
   require 'shared/computed_contest_context'
   include_context 'computed contest'
   it 'responds with basic judge information' do
-    get :show, params: { id: @jf_result.id }, :format => :json
+    get :show, params: { id: @jf_result.id }, format: :json
     expect(response.status).to eq(200)
     expect(response.content_type).to eq "application/json"
     data = JSON.parse(response.body)
@@ -11,7 +11,7 @@ describe JfResultsController, :type => :controller do
     expect(d_jf['id']).to eq @jf_result.id
   end
   it 'responds with judge summary data' do
-    get :show, params: { id: @jf_result.id }, :format => :json
+    get :show, params: { id: @jf_result.id }, format: :json
     expect(response.status).to eq(200)
     expect(response.content_type).to eq "application/json"
     data = JSON.parse(response.body)

@@ -9,7 +9,7 @@ json.pilot_flight_data do
     json.partial! 'flight', flight: @pilot_flight.flight
   end
   json.grades do
-    json.partial! 'score', collection: @pilot_flight.scores, :as => :score
+    json.partial! 'score', collection: @pilot_flight.scores, as: :score
   end
   json.sequence do
     json.partial! 'jf_results/sequence', sequence: @pilot_flight.sequence

@@ -47,7 +47,7 @@ module Iac::FindStars
 
   def process_for_stars
     stars = []
-    PcResult.where(:contest_id => contest).each do |pc_result|
+    PcResult.where(contest_id: contest).each do |pc_result|
       pc_result.star_qualifying = false
       pc_result.save!
     end
@@ -70,16 +70,16 @@ module Iac::FindStars
                 throw :pilot if !pilotFlight
                 test_pilot_flight(stars, pilotFlight, maxBlw5)
               end # each flight
-              stars << { :given_name => pilot.given_name,
-                         :family_name => pilot.family_name,
-                         :iacID => pilot.iac_id,
-                         :category => cat.name,
-                         :scoresURL => make_scores_url(pilot, contest),
-                         :contest => contest.name,
-                         :date => contest.start
+              stars << { given_name: pilot.given_name,
+                         family_name: pilot.family_name,
+                         iacID: pilot.iac_id,
+                         category: cat.name,
+                         scoresURL: make_scores_url(pilot, contest),
+                         contest: contest.name,
+                         date: contest.start
                        }
-              PcResult.where({ :contest_id => contest,
-                  :category_id => cat.id, :pilot_id => pilot }).each do |pc_result|
+              PcResult.where({ contest_id: contest,
+                  category_id: cat.id, pilot_id: pilot }).each do |pc_result|
                 pc_result.star_qualifying = true
                 pc_result.save!
               end

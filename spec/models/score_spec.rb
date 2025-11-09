@@ -1,4 +1,4 @@
-describe Score, :type => :model do
+describe Score, type: :model do
   it 'saves missing_judge when saved with judge nil' do
     score = build :score
     score.judge = nil

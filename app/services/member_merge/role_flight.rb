@@ -58,11 +58,11 @@ class RoleFlight
 
   ROLES = [:competitor, :chief_judge, :assist_chief_judge, :line_judge, :assist_line_judge]
   ROLE_NAMES = {
-    :competitor => 'Competitor',
-    :chief_judge => 'Chief Judge',
-    :assist_chief_judge => 'Chief Judge Assistant',
-    :line_judge => 'Line Judge',
-    :assist_line_judge => 'Line Judge Assistant'
+    competitor: 'Competitor',
+    chief_judge: 'Chief Judge',
+    assist_chief_judge: 'Chief Judge Assistant',
+    line_judge: 'Line Judge',
+    assist_line_judge: 'Line Judge Assistant'
   }
 
 end

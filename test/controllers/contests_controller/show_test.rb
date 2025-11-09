@@ -11,7 +11,7 @@ class ContestsController::ShowTest < ActionController::TestCase
   end
 
   test 'responds with basic contest information' do
-    get :show, params: { id: @contest.id }, :format => :json
+    get :show, params: { id: @contest.id }, format: :json
     assert_response :success
     assert_equal("application/json", response.content_type)
     data = JSON.parse(response.body)
@@ -26,7 +26,7 @@ class ContestsController::ShowTest < ActionController::TestCase
   end
 
   test 'contains categories flown' do
-    get :show, params: { id: @contest.id }, :format => :json
+    get :show, params: { id: @contest.id }, format: :json
     data = JSON.parse(response.body)
     e_cats = @contest.flights.collect { |f| f.categories }
     e_cats = e_cats.flatten.uniq
@@ -38,7 +38,7 @@ class ContestsController::ShowTest < ActionController::TestCase
   end
 
   test 'contains competitors in category' do
-    get :show, params: { id: @contest.id }, :format => :json
+    get :show, params: { id: @contest.id }, format: :json
     data = JSON.parse(response.body)
     d_cats = data['category_results']
     d_cr = d_cats.first
@@ -57,7 +57,7 @@ class ContestsController::ShowTest < ActionController::TestCase
   end
 
   test 'contains competitor airplanes in category' do
-    get :show, params: { id: @contest.id }, :format => :json
+    get :show, params: { id: @contest.id }, format: :json
     data = JSON.parse(response.body)
     d_crs = data['category_results']
     d_cr = d_crs.first
@@ -73,7 +73,7 @@ class ContestsController::ShowTest < ActionController::TestCase
   end
 
   test 'contains competitor performance summaries in category' do
-    get :show, params: { id: @contest.id }, :format => :json
+    get :show, params: { id: @contest.id }, format: :json
     data = JSON.parse(response.body)
     d_crs = data['category_results']
     d_cr = d_crs.first
@@ -89,7 +89,7 @@ class ContestsController::ShowTest < ActionController::TestCase
   end
 
   test 'contains judge performance summaries in category' do
-    get :show, params: { id: @contest.id }, :format => :json
+    get :show, params: { id: @contest.id }, format: :json
     data = JSON.parse(response.body)
     d_crs = data['category_results']
     d_cr = d_crs.first
@@ -107,7 +107,7 @@ class ContestsController::ShowTest < ActionController::TestCase
   end
 
   test 'contains flight detail links in category' do
-    get :show, params: { id: @contest.id }, :format => :json
+    get :show, params: { id: @contest.id }, format: :json
     data = JSON.parse(response.body)
     d_crs = data['category_results']
     d_cr = d_crs.first

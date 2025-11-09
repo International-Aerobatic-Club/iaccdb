@@ -9,7 +9,7 @@ class CreateResults < ActiveRecord::Migration
       t.string :name
       t.boolean :qualified
       t.integer :rank
-      t.decimal :points, :precision => 9, :scale => 2
+      t.decimal :points, precision: 9, scale: 2
       t.integer :points_possible
 
       t.timestamps

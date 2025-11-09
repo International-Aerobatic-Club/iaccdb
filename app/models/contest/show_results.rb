@@ -67,8 +67,8 @@ module Contest::ShowResults
         category_data[:pilot_results] = []
         pcrs = pc_results.where(category:cat).includes(:pilot).order(:category_rank)
         if !pcrs.empty?
-          pf_results = PfResult.joins({:pilot_flight => :flight}).where(
-             {:flights => { id: flights.collect(&:id) }})
+          pf_results = PfResult.joins({pilot_flight: :flight}).where(
+             {flights: { id: flights.collect(&:id) }})
           pfr_by_flight = pf_results.all.group_by do |pf|
             pf.flight
           end

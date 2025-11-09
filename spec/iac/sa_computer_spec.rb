@@ -1,21 +1,21 @@
 module IAC
-  describe SaComputer, :type => :model do
+  describe SaComputer, type: :model do
     context 'real_scores' do
       before(:each) do
         @category = Category.find_by_category_and_aircat('intermediate', 'P')
         @pilot_flight = create(:adams_known)
         judge_team = create(:judge_klein)
         create(:adams_known_klein,
-          :pilot_flight => @pilot_flight,
-          :judge => judge_team)
+          pilot_flight: @pilot_flight,
+          judge: judge_team)
         @judge_jim = create(:judge_jim)
         create(:adams_known_jim,
-          :pilot_flight => @pilot_flight,
-          :judge => @judge_jim)
+          pilot_flight: @pilot_flight,
+          judge: @judge_jim)
         judge_team = create(:judge_lynne)
         create(:adams_known_lynne,
-          :pilot_flight => @pilot_flight,
-          :judge => judge_team)
+          pilot_flight: @pilot_flight,
+          judge: judge_team)
         @sa_computer = SaComputer.new(@pilot_flight)
         @pf = @sa_computer.computePilotFlight(false)
       end
@@ -35,20 +35,20 @@ module IAC
         expect(@pf.flight_value).to eq(1789)
       end
       it 'updates figure and flight values when scores change' do
-        scores = @pilot_flight.scores.where(:judge_id => @judge_jim).first
+        scores = @pilot_flight.scores.where(judge_id: @judge_jim).first
         va = scores.values
         va[3] = 80
         va[12] = 100
         expect(scores.save).to eq(true)
-        contest = Contest.where(:start => '2011-09-25').first
+        contest = Contest.where(start: '2011-09-25').first
         expect(contest).not_to be nil
         flight = contest.flights.first
         expect(flight).not_to be nil
         pilot = Member.find_by_iac_id(1999)
         expect(pilot).not_to be nil
         @pilot_flight = PilotFlight.where(
-          :pilot_id => pilot.id, 
-          :flight_id => flight.id).first
+          pilot_id: pilot.id, 
+          flight_id: flight.id).first
         expect(@pilot_flight).not_to be nil
         @sa_computer = SaComputer.new(@pilot_flight)
         pf = @sa_computer.computePilotFlight(false)
@@ -64,15 +64,15 @@ module IAC
       it 'updates figure and flight values when sequence changes' do
         @pilot_flight.sequence.k_values[13] = 12
         expect(@pilot_flight.sequence.save).to eq(true)
-        contest = Contest.where(:start => '2011-09-25').first
+        contest = Contest.where(start: '2011-09-25').first
         expect(contest).not_to be nil
         flight = contest.flights.first
         expect(flight).not_to be nil
         pilot = Member.find_by_iac_id(1999)
         expect(pilot).not_to be nil
         @pilot_flight = PilotFlight.where(
-          :pilot_id => pilot.id, 
-          :flight_id => flight.id).first
+          pilot_id: pilot.id, 
+          flight_id: flight.id).first
         expect(@pilot_flight).not_to be nil
         pf = @sa_computer.computePilotFlight(false)
         expect(pf.flight_value.round(2)).to eq(1827)
@@ -81,15 +81,15 @@ module IAC
         @pilot_flight.sequence.k_values.pop
         expect(@pilot_flight.sequence.save).to eq(true)
         expect(@pilot_flight.sequence.k_values.length).to eq(13)
-        contest = Contest.where(:start => '2011-09-25').first
+        contest = Contest.where(start: '2011-09-25').first
         expect(contest).not_to be nil
         flight = contest.flights.first
         expect(flight).not_to be nil
         pilot = Member.find_by_iac_id(1999)
         expect(pilot).not_to be nil
         @pilot_flight = PilotFlight.where(
-          :pilot_id => pilot.id, 
-          :flight_id => flight.id).first
+          pilot_id: pilot.id, 
+          flight_id: flight.id).first
         expect(@pilot_flight).not_to be nil
         logger = Rails.logger
         expect(logger).to receive(:error).exactly(3).times
@@ -99,43 +99,43 @@ module IAC
     context 'missing sequence' do
       before(:context) do
         @contest = create(:contest)
-        @flight = create(:flight, :contest => @contest)
+        @flight = create(:flight, contest: @contest)
         pilot_flights = []
         2.times do
           pilot_flights << create(
             :pilot_flight,
-            :flight => @flight,
-            :sequence => nil,
-            :penalty_total => 0)
+            flight: @flight,
+            sequence: nil,
+            penalty_total: 0)
         end
         @judges = []
         3.times { @judges << create(:judge) }
         # pilot_flights[0]
         create(:score,
-          :pilot_flight => pilot_flights[0],
-          :judge => @judges[0],
-          :values => [90, 80, 85, 75, 80])
+          pilot_flight: pilot_flights[0],
+          judge: @judges[0],
+          values: [90, 80, 85, 75, 80])
         create(:score,
-          :pilot_flight => pilot_flights[0],
-          :judge => @judges[1],
-          :values => [95, 80, 85, 90, 75])
+          pilot_flight: pilot_flights[0],
+          judge: @judges[1],
+          values: [95, 80, 85, 90, 75])
         create(:score,
-          :pilot_flight => pilot_flights[0],
-          :judge => @judges[2],
-          :values => [80, 75, 80, 75, 55])
+          pilot_flight: pilot_flights[0],
+          judge: @judges[2],
+          values: [80, 75, 80, 75, 55])
         # pilot_flights[1]
         create(:score,
-          :pilot_flight => pilot_flights[1],
-          :judge => @judges[0],
-          :values => [70, 80, 85, 80, 70])
+          pilot_flight: pilot_flights[1],
+          judge: @judges[0],
+          values: [70, 80, 85, 80, 70])
         create(:score,
-          :pilot_flight => pilot_flights[1],
-          :judge => @judges[1],
-          :values => [80, 85, 90, 80, 70])
+          pilot_flight: pilot_flights[1],
+          judge: @judges[1],
+          values: [80, 85, 90, 80, 70])
         create(:score,
-          :pilot_flight => pilot_flights[1],
-          :judge => @judges[2],
-          :values => [65, 80, 60, 75, 50])
+          pilot_flight: pilot_flights[1],
+          judge: @judges[2],
+          values: [65, 80, 60, 75, 50])
       end
       it 'behaves when there is no sequence for result computations' do
         @flight.pilot_flights.each do |pilot_flight|
@@ -152,11 +152,11 @@ module IAC
     it 'behaves on empty sequence' do
       pf = create(:pilot_flight)
       create(:score,
-        :pilot_flight => pf,
-        :values => [60, 0, 0, 0, 0])
+        pilot_flight: pf,
+        values: [60, 0, 0, 0, 0])
       create(:score,
-        :pilot_flight => pf,
-        :values => [-10, 0, 0, 0, 0])
+        pilot_flight: pf,
+        values: [-10, 0, 0, 0, 0])
       sa_computer = SaComputer.new(pf)
       expect(sa_computer).to_not be nil
       res = sa_computer.computePilotFlight(false)
@@ -166,31 +166,31 @@ module IAC
     context 'mixed grades, averages, and zeros' do
       before(:context) do
         seq = create(:sequence,
-          :k_values => [2,2,2,2,2,2])
+          k_values: [2,2,2,2,2,2])
         @pf = create(:pilot_flight,
-          :sequence => seq)
+          sequence: seq)
         @judges = []
         5.times { @judges << create(:judge) }
         create(:score,
-          :pilot_flight => @pf,
-          :judge => @judges[0],
-          :values => [60, 0, 60, 0, 80, 0])
+          pilot_flight: @pf,
+          judge: @judges[0],
+          values: [60, 0, 60, 0, 80, 0])
         create(:score,
-          :pilot_flight => @pf,
-          :judge => @judges[1],
-          :values => [-10, 0, 90, -10, -10, -10])
+          pilot_flight: @pf,
+          judge: @judges[1],
+          values: [-10, 0, 90, -10, -10, -10])
         create(:score,
-          :pilot_flight => @pf,
-          :judge => @judges[2],
-          :values => [80, 60, 0, 70, -10, -10])
+          pilot_flight: @pf,
+          judge: @judges[2],
+          values: [80, 60, 0, 70, -10, -10])
         create(:score,
-          :pilot_flight => @pf,
-          :judge => @judges[3],
-          :values => [80, 70, 0, 80, 0, 0])
+          pilot_flight: @pf,
+          judge: @judges[3],
+          values: [80, 70, 0, 80, 0, 0])
         create(:score,
-          :pilot_flight => @pf,
-          :judge => @judges[4],
-          :values => [60, 80, 0, 60, 0, 0])
+          pilot_flight: @pf,
+          judge: @judges[4],
+          values: [60, 80, 0, 60, 0, 0])
         #     f0, f1, f2, f3, f4, f5
         # j0:  60,  0,  60,   0,  80,   0
         # j1: -10,  0,  90, -10, -10, -10
@@ -246,31 +246,31 @@ module IAC
     context 'mixed grades, conference averages, averages, soft zeros, and hard zeros' do
       before(:context) do
         seq = create(:sequence,
-          :k_values => [2,2,2,2,2,2,2,2,2])
+          k_values: [2,2,2,2,2,2,2,2,2])
         @pf = create(:pilot_flight,
-          :sequence => seq)
+          sequence: seq)
         @judges = []
         5.times { @judges << create(:judge) }
         create(:score,
-          :pilot_flight => @pf,
-          :judge => @judges[0],
-          :values => [-10, -10, -10,  60,  70,  80, -30, -30, -30])
+          pilot_flight: @pf,
+          judge: @judges[0],
+          values: [-10, -10, -10,  60,  70,  80, -30, -30, -30])
         create(:score,
-          :pilot_flight => @pf,
-          :judge => @judges[1],
-          :values => [ 40,  30, -10,  80, -30, -10, -30,   0, -30])
+          pilot_flight: @pf,
+          judge: @judges[1],
+          values: [ 40,  30, -10,  80, -30, -10, -30,   0, -30])
         create(:score,
-          :pilot_flight => @pf,
-          :judge => @judges[2],
-          :values => [-30, -30, -30, -30, -30, -30,   0, -30,   0])
+          pilot_flight: @pf,
+          judge: @judges[2],
+          values: [-30, -30, -30, -30, -30, -30,   0, -30,   0])
         create(:score,
-          :pilot_flight => @pf,
-          :judge => @judges[3],
-          :values => [-30, -20,  50, -30, -30, -30, -30,  70,   0])
+          pilot_flight: @pf,
+          judge: @judges[3],
+          values: [-30, -20,  50, -30, -30, -30, -30,  70,   0])
         create(:score,
-          :pilot_flight => @pf,
-          :judge => @judges[4],
-          :values => [-20, -20, -20, -20, -20, -20, -20,  80,  90])
+          pilot_flight: @pf,
+          judge: @judges[4],
+          values: [-20, -20, -20, -20, -20, -20, -20,  80,  90])
         sa_computer = SaComputer.new(@pf)
         @res = sa_computer.computePilotFlight(true) # has soft zero
         #

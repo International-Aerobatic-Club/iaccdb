@@ -133,9 +133,9 @@ module Iac::SaComputer
 
   def storeGradedValues
     @judges.each_with_index do |judge, j|
-      pfj_result = pilot_flight.pfj_results.where(:judge_id => judge).first
+      pfj_result = pilot_flight.pfj_results.where(judge_id: judge).first
       if !pfj_result
-        pfj_result = pilot_flight.pfj_results.build(:judge => judge)
+        pfj_result = pilot_flight.pfj_results.build(judge: judge)
       end
       pfj_result.graded_values = make_judge_values(j)
       pfj_result.save!
@@ -196,9 +196,9 @@ module Iac::SaComputer
   def storeResults
     flight_total = 0.0
     @judges.each_with_index do |judge, j|
-      pfj_result = pilot_flight.pfj_results.where(:judge_id => judge).first
+      pfj_result = pilot_flight.pfj_results.where(judge_id: judge).first
       if !pfj_result
-        pfj_result = pilot_flight.pfj_results.build(:judge => judge)
+        pfj_result = pilot_flight.pfj_results.build(judge: judge)
       end
       pfj_result.computed_values = make_judge_values(j)
       pfj_result.flight_value = @j_totals[j]

@@ -11,13 +11,13 @@ class CreateJyResults < ActiveRecord::Migration
       t.integer :con
       t.integer :dis
       t.integer :pair_count
-      t.decimal :avgFlightSize, :precision => 5, :scale => 2
+      t.decimal :avgFlightSize, precision: 5, scale: 2
       t.integer :flight_count
       t.integer :grade_count
-      t.decimal :avgK, :precision => 5, :scale => 2
+      t.decimal :avgK, precision: 5, scale: 2
       t.integer :minority_zero_count
       t.integer :minority_grade_count
-      t.decimal :sigma_ri_delta, :precision => 12, :scale => 5
+      t.decimal :sigma_ri_delta, precision: 12, scale: 5
 
       t.timestamps
     end

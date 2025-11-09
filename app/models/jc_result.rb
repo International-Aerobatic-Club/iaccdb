@@ -1,5 +1,5 @@
 class JcResult < ApplicationRecord
-  belongs_to :judge, :class_name => 'Member'
+  belongs_to :judge, class_name: 'Member'
   belongs_to :contest
   belongs_to :category
 

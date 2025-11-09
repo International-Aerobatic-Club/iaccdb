@@ -67,7 +67,7 @@ class Admin::JasperController < ApplicationController
       Delayed::Job.enqueue Jobs::ProcessJasperJob.new(post_record.id)
       render :results
     else
-      render :exception, :status => status
+      render :exception, status: status
     end
 
   end

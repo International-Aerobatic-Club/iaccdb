@@ -122,10 +122,10 @@ module Jasper::JasperToDb
     dFlight = dCategory.flights.find_by(contest: d_contest, sequence: jFlt)
     unless dFlight
       dFlight = d_contest.flights.build(
-        :name => jasper.flight_name(jFlt),
-        :sequence => jFlt,
-        :chief_id => chief.id,
-        :assist_id => assist.id
+        name: jasper.flight_name(jFlt),
+        sequence: jFlt,
+        chief_id: chief.id,
+        assist_id: assist.id
       )
       dFlight.categories << dCategory
       dFlight.save!
@@ -218,12 +218,12 @@ module Jasper::JasperToDb
     pf = PilotFlight.where(flight_id: dFlight.id, pilot_id: dPilot.id).first
     if pf.blank?
       pf = PilotFlight.create!(
-        :flight_id => dFlight.id,
-        :pilot_id => dPilot.id,
-        :sequence_id => dSequence.id,
-        :airplane_id => dAirplane.id,
-        :chapter => jasper.pilot_chapter(jCat, jPilot),
-        :penalty_total => jasper.penalty(jCat, jFlt, jPilot),
+        flight_id: dFlight.id,
+        pilot_id: dPilot.id,
+        sequence_id: dSequence.id,
+        airplane_id: dAirplane.id,
+        chapter: jasper.pilot_chapter(jCat, jPilot),
+        penalty_total: jasper.penalty(jCat, jFlt, jPilot),
       ) do |pf|
         if jasper.pilot_is_hc(jCat, jPilot)
           pf.hc_higher_category.save!
@@ -242,8 +242,8 @@ module Jasper::JasperToDb
       grades = grades.map { |g| (g.to_f * 10.0).round }
       grades = remove_extraneous_grades(grades, jCat, dSequence.figure_count)
       dPilotFlight.scores.create!(
-        :judge_id => dJudgeTeam.id,
-        :values => grades)
+        judge_id: dJudgeTeam.id,
+        values: grades)
     end
     !grades_string.empty?
   end

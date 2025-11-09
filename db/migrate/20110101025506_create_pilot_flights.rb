@@ -5,7 +5,7 @@ class CreatePilotFlights < ActiveRecord::Migration
       t.integer :flight_id
       t.integer :sequence_id
       t.integer :aircraft_id
-      t.string :chapter, :limit=>8
+      t.string :chapter, limit: 8
 
       t.timestamps
     end

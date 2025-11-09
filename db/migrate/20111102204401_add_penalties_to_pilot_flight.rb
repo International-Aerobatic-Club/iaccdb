@@ -1,6 +1,6 @@
 class AddPenaltiesToPilotFlight < ActiveRecord::Migration
   def self.up
-    add_column :pilot_flights, :penalty_total, :integer, :default => 0 
+    add_column :pilot_flights, :penalty_total, :integer, default: 0 
   end
 
   def self.down

@@ -1,8 +1,8 @@
-describe JfResult, :type => :model do
+describe JfResult, type: :model do
   def reparse_contest(m2d, manny)
     @contest = m2d.process_contest(manny, true)
     @pri_cat = Category.find_by_category_and_aircat('primary', 'P')
-    @flight2 = @pri_cat.flights.find_by(contest: @contest, :name => 'Free')
+    @flight2 = @pri_cat.flights.find_by(contest: @contest, name: 'Free')
   end
   context 'computed contest' do
     before(:context) do
@@ -14,13 +14,13 @@ describe JfResult, :type => :model do
       computer.compute_results
       expect(Failure.all).to be_empty
       lr = Member.where(
-        :family_name => 'Ramirez',
-        :given_name => 'Laurie').first
+        family_name: 'Ramirez',
+        given_name: 'Laurie').first
       mf = Member.where(
-        :family_name => 'Flournoy',
-        :given_name => 'Martin').first
-      j1 = Judge.where(:judge_id => lr.id).first
-      j2 = Judge.where(:judge_id => mf.id).first
+        family_name: 'Flournoy',
+        given_name: 'Martin').first
+      j1 = Judge.where(judge_id: lr.id).first
+      j2 = Judge.where(judge_id: mf.id).first
       @jf_result1 = JfResult.where(judge: j1, flight: @flight2).first
       @jf_result2 = JfResult.where(judge: j2, flight: @flight2).first
     end
@@ -93,11 +93,11 @@ describe JfResult, :type => :model do
       j2db = Jasper::JasperToDB.new
       contest = j2db.process_contest(@jasper)
       pri_cat = Category.find_by_category_and_aircat('primary', 'P')
-      @pri_flight = pri_cat.flights.find_by(contest: contest, :name => 'Known')
+      @pri_flight = pri_cat.flights.find_by(contest: contest, name: 'Known')
       computer = FlightComputer.new(@pri_flight)
       computer.flight_results(false)
       spn_cat = Category.find_by_category_and_aircat('sportsman', 'P')
-      @spn_flight = spn_cat.flights.find_by(contest: contest, :name => 'Known')
+      @spn_flight = spn_cat.flights.find_by(contest: contest, name: 'Known')
       computer = FlightComputer.new(@spn_flight)
       computer.flight_results(false)
     end

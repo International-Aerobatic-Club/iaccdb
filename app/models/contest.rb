@@ -1,16 +1,16 @@
 class Contest < ApplicationRecord
-  has_many :flights, :dependent => :destroy
-  has_many :jc_results, :dependent => :destroy
-  has_many :pc_results, :dependent => :destroy
+  has_many :flights, dependent: :destroy
+  has_many :jc_results, dependent: :destroy
+  has_many :pc_results, dependent: :destroy
 
-  has_many :data_posts, :dependent => :nullify
-  has_many :failures, :dependent => :destroy
+  has_many :data_posts, dependent: :nullify
+  has_many :failures, dependent: :destroy
 
-  validates :name, :length => { :in => 4..48 }
-  validates :city, :length => { :maximum => 24 }
-  validates :state, :length => { :maximum => 2 }
-  validates :director, :length => { :maximum => 48 }
-  validates :region, :length => { :maximum => 16 }
+  validates :name, length: { in: 4..48 }
+  validates :city, length: { maximum: 24 }
+  validates :state, length: { maximum: 2 }
+  validates :director, length: { maximum: 48 }
+  validates :region, length: { maximum: 16 }
   validates_presence_of :start
   validate :busy_time_semantics
 

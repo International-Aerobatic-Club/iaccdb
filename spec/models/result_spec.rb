@@ -1,4 +1,4 @@
-RSpec.describe Result, :type => :model do
+RSpec.describe Result, type: :model do
   describe 'associations' do
     it 'relates to members and pc_results' do
       r = create(:result_with_members)

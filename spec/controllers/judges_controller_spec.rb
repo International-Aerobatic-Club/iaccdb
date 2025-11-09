@@ -1,4 +1,4 @@
-describe JudgesController, :type => :controller do
+describe JudgesController, type: :controller do
   before :context do
     # two contests
     #   with two flights, one advanced/unlimited, 

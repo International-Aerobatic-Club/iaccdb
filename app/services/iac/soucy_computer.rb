@@ -26,7 +26,7 @@ module Iac::SoucyComputer
   def soucies_for_pilots
 
     pilots = Member
-      .joins(:pc_results => :contest)
+      .joins(pc_results: :contest)
       .where(
         "YEAR(contests.start) = ? AND contests.region != 'National' AND pc_results.category_id in (?)",
         @year, SoucyResult.valid_category_ids
@@ -45,13 +45,13 @@ module Iac::SoucyComputer
   # links pc_results for @year
   # returns the soucy record
   def engage_soucy_for_pilot(pilot)
-    soucy = SoucyResult.where(:pilot_id => pilot.id, :year => @year).first_or_create
+    soucy = SoucyResult.where(pilot_id: pilot.id, year: @year).first_or_create
     soucy.collect_valid_non_nationals_results
   end
 
   # remove any soucies for year not in the list
   def trim_soucies(to_be_soucies)
-    existing_soucies = SoucyResult.where(:year => @year).all
+    existing_soucies = SoucyResult.where(year: @year).all
     to_remove = existing_soucies - to_be_soucies
     to_remove.each { |soucy| soucy.destroy }
   end

@@ -2,8 +2,8 @@
 # use rails runner cmd/process_data_posts.rb
 require 'xml'
 
-posts = DataPost.where(:is_integrated => false, 
-    :is_obsolete => false).order('created_at DESC')
+posts = DataPost.where(is_integrated: false, 
+    is_obsolete: false).order('created_at DESC')
 pcs = []
 posts.each do |post|
   begin

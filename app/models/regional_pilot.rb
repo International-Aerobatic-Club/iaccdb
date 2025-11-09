@@ -1,7 +1,7 @@
 class RegionalPilot < ApplicationRecord
   has_many :region_contest
-  has_many :pc_results, :through => :region_contest
-  belongs_to :pilot, :class_name => 'Member'
+  has_many :pc_results, through: :region_contest
+  belongs_to :pilot, class_name: 'Member'
   belongs_to :category
 
   def self.find_or_create_given_result(year, region, category_id, pilot_id)

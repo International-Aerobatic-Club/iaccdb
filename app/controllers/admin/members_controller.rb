@@ -21,10 +21,10 @@ class Admin::MembersController < ApplicationController
   def update
     @member = Member.find(params[:id])
     if @member.update(member_params)
-      redirect_to admin_members_path(:anchor => @member.id),
-        :notice => "Member updated"
+      redirect_to admin_members_path(anchor: @member.id),
+        notice: "Member updated"
     else
-      render :action => "edit"
+      render action: "edit"
     end
   end
 
@@ -69,7 +69,7 @@ class Admin::MembersController < ApplicationController
       merge = MemberMerge::Merge.new(params[:selected].keys)
       merge.execute_merge(@target)
       flash[:notice] = "Members merged into #{@target.name}"
-      redirect_to admin_members_path(:anchor => @target.id)
+      redirect_to admin_members_path(anchor: @target.id)
     else
       flash[:alert] = "No target member selected"
       redirect_to merge_preview_path
@@ -86,7 +86,7 @@ class Admin::MembersController < ApplicationController
 
   def merge_params
     nested_keys = params.fetch(:selected, {}).keys
-    params.permit(:selected => nested_keys)
+    params.permit(selected: nested_keys)
   end
 
   def check_dups_join(accum, list)

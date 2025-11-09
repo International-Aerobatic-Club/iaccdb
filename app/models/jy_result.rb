@@ -1,5 +1,5 @@
 class JyResult < ApplicationRecord
-  belongs_to :judge, :class_name => 'Member'
+  belongs_to :judge, class_name: 'Member'
   belongs_to :category
 
   include JudgeMetrics

@@ -22,7 +22,7 @@
 #
 class PfResult < ApplicationRecord
   belongs_to :pilot_flight
-  has_one :flight, :through => :pilot_flight
+  has_one :flight, through: :pilot_flight
 
   serialize :figure_results
   serialize :figure_ranks
@@ -38,7 +38,7 @@ class PfResult < ApplicationRecord
   # Return the pfj_result for a judge team that contributed to
   # this flight result
   def for_judge(judge)
-    pilot_flight.pfj_results.where(:judge_id => judge).first
+    pilot_flight.pfj_results.where(judge_id: judge).first
   end
 
   # Return the judge_teams for a flight

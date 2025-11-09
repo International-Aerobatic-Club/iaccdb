@@ -78,7 +78,7 @@ class CollegiateParticipants
     @pilots.each do |iac_id, p|
       puts "\t#{p}"
       teams = Result.joins(:result_members).includes(:result_members).
-        where(:result_members => { :member_id => p.id }, :year => year)
+        where(result_members: { member_id: p.id }, year: year)
       teams.each { |team| puts "\t\t#{team}" }
     end
   end

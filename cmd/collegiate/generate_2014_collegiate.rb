@@ -6,15 +6,15 @@
 class Generate_2014_Collegiate
 
 def self.clear_the_boards
-  CollegiateResult.where(:year => 2014).destroy_all
+  CollegiateResult.where(year: 2014).destroy_all
 end
 
 def self.add_team(team_name)
-  return CollegiateResult.create(:name => team_name, :year => 2014)
+  return CollegiateResult.create(name: team_name, year: 2014)
 end
 
 def self.find_team(team_name)
-  return CollegiateResult.where(:name => team_name, :year => 2014).first
+  return CollegiateResult.where(name: team_name, year: 2014).first
 end
 
 def self.check_add_member(team, member)
@@ -26,7 +26,7 @@ def self.find_member(given, family, iac)
 end
 
 def self.verify_for_that_warm_fuzzy_feeling
-  teams = CollegiateResult.where(:year => 2014)
+  teams = CollegiateResult.where(year: 2014)
   puts '2014 Collegiate Teams Composition:'
   teams.each do |team|
     puts team

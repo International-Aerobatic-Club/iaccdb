@@ -43,15 +43,15 @@ class Iac::CollegiateIndividualComputer
   # links pc_results for year
   # returns the student record
   def engage_student_for_pilot(pilot)
-    student = CollegiateIndividualResult.where(:pilot_id => pilot.id,
-      :year => year).first_or_create
+    student = CollegiateIndividualResult.where(pilot_id: pilot.id,
+      year: year).first_or_create
     to_be_results = Iac::CollegiateComputer.pilot_results(pilot, year)
     student.update_results(to_be_results)
   end
 
   # remove any collegiates for year not in the list
   def trim_collegiates(to_be_collegiates)
-    existing_collegiates = CollegiateIndividualResult.where(:year => year).all
+    existing_collegiates = CollegiateIndividualResult.where(year: year).all
     to_remove = existing_collegiates - to_be_collegiates
     to_remove.each { |student| student.destroy }
   end

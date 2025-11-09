@@ -15,9 +15,9 @@ module Jasper
       cat = Category.find_for_cat_aircat('Sportsman', 'P')
       flight = cat.flights.find_by(name: 'Known', contest: @contest)
       refute_nil(flight)
-      pilot = Member.where(:family_name => 'Ernewein').first
+      pilot = Member.where(family_name: 'Ernewein').first
       refute_nil(pilot)
-      pilot_flight = flight.pilot_flights.where(:pilot_id => pilot).first
+      pilot_flight = flight.pilot_flights.where(pilot_id: pilot).first
       refute_nil(pilot_flight)
       sequence = pilot_flight.sequence
       refute_nil(sequence)
@@ -30,9 +30,9 @@ module Jasper
       cat = Category.find_for_cat_aircat('Sportsman', 'P')
       flight = cat.flights.find_by(name: 'Free', contest: @contest)
       refute_nil(flight)
-      pilot = Member.where(:family_name => 'Wieckowski').first
+      pilot = Member.where(family_name: 'Wieckowski').first
       refute_nil(pilot)
-      pilot_flight = flight.pilot_flights.where(:pilot_id => pilot).first
+      pilot_flight = flight.pilot_flights.where(pilot_id: pilot).first
       refute_nil(pilot_flight)
       sequence = pilot_flight.sequence
       refute_nil(sequence)
@@ -45,9 +45,9 @@ module Jasper
       cat = Category.find_for_cat_aircat('Sportsman', 'P')
       flight = cat.flights.find_by(name: 'Unknown', contest: @contest)
       refute_nil(flight)
-      pilot = Member.where(:family_name => 'Wieckowski').first
+      pilot = Member.where(family_name: 'Wieckowski').first
       refute_nil(pilot)
-      pilot_flight = flight.pilot_flights.where(:pilot_id => pilot).first
+      pilot_flight = flight.pilot_flights.where(pilot_id: pilot).first
       refute_nil(pilot_flight)
       sequence = pilot_flight.sequence
       refute_nil(sequence)
@@ -60,9 +60,9 @@ module Jasper
       cat = Category.find_for_cat_aircat('Unlimited', 'P')
       flight = cat.flights.find_by(name: 'Unknown', contest: @contest)
       refute_nil(flight)
-      pilot = Member.where(:iac_id => '13721').first
+      pilot = Member.where(iac_id: '13721').first
       refute_nil(pilot)
-      pilot_flight = flight.pilot_flights.where(:pilot_id => pilot).first
+      pilot_flight = flight.pilot_flights.where(pilot_id: pilot).first
       refute_nil(pilot_flight)
       sequence = pilot_flight.sequence
       refute_nil(sequence)
@@ -76,9 +76,9 @@ module Jasper
       cat = Category.find_for_cat_aircat('Intermediate', 'P')
       flight = cat.flights.find_by(name: 'Unknown II', contest: @contest)
       refute_nil(flight)
-      pilot = Member.where(:iac_id => '10467').first
+      pilot = Member.where(iac_id: '10467').first
       refute_nil(pilot)
-      pilot_flight = flight.pilot_flights.where(:pilot_id => pilot).first
+      pilot_flight = flight.pilot_flights.where(pilot_id: pilot).first
       refute_nil(pilot_flight)
       sequence = pilot_flight.sequence
       refute_nil(sequence)
@@ -94,7 +94,7 @@ module Jasper
       refute_nil(flight)
       pilot = Member.where(iac_id: 13721).first
       refute_nil(pilot)
-      pilot_flight = flight.pilot_flights.where(:pilot_id => pilot).first
+      pilot_flight = flight.pilot_flights.where(pilot_id: pilot).first
       refute_nil(pilot_flight)
       sequence = pilot_flight.sequence
       refute_nil(sequence)
@@ -103,7 +103,7 @@ module Jasper
       assert_equal([40, 40, 40, 40, 40, 40, 40, 40, 40, 40], sequence.k_values)
       pilot = Member.where(iac_id: 27381).first
       refute_nil(pilot)
-      pilot_flight = flight.pilot_flights.where(:pilot_id => pilot).first
+      pilot_flight = flight.pilot_flights.where(pilot_id: pilot).first
       refute_nil(pilot_flight)
       sequence2 = pilot_flight.sequence
       assert_equal(sequence.id, sequence2.id)

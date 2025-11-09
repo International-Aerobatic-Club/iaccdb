@@ -27,7 +27,7 @@ module Jasper
 
     test 'captures flights' do
       cat = Category.find_for_cat_aircat('Unlimited', 'P')
-      flights = cat.flights.where(contest: @contest, :name => 'Unknown')
+      flights = cat.flights.where(contest: @contest, name: 'Unknown')
       assert_equal(1, flights.count)
       assert_equal(2383, flights.first.chief.iac_id)
       assert_equal(18515, flights.first.assist.iac_id)
@@ -41,21 +41,21 @@ module Jasper
     end
 
     test 'captures judge teams' do
-      judge = Member.where(:iac_id => 431885).first
+      judge = Member.where(iac_id: 431885).first
       refute_nil(judge)
       assert_equal('Sanford', judge.given_name)
       assert_equal('Langworthy', judge.family_name)
-      assistant = Member.where(:iac_id => 433272).first
+      assistant = Member.where(iac_id: 433272).first
       refute_nil(assistant)
       assert_equal('Hella', assistant.given_name)
       assert_equal('Comat', assistant.family_name)
-      judge_team = Judge.where(:judge_id => judge.id, :assist_id => assistant.id).first
+      judge_team = Judge.where(judge_id: judge.id, assist_id: assistant.id).first
       refute_nil(judge_team)
     end
 
     test 'captures pilot flights' do
       cat = Category.find_for_cat_aircat('Intermediate', 'P')
-      flight = cat.flights.find_by(contest: @contest, :name => 'Unknown')
+      flight = cat.flights.find_by(contest: @contest, name: 'Unknown')
       pilot = Member.find_by_iac_id(10467)
       pilot_flight = PilotFlight.find_by_flight_id_and_pilot_id(flight.id, pilot.id)
       refute_nil(pilot_flight)
@@ -64,11 +64,11 @@ module Jasper
 
     test 'captures airplanes' do
       cat = Category.find_for_cat_aircat('Sportsman', 'P')
-      flight = cat.flights.find_by(contest: @contest, :name => 'Known')
+      flight = cat.flights.find_by(contest: @contest, name: 'Known')
       refute_nil(flight)
-      pilot = Member.where(:family_name => 'Ernewein').first
+      pilot = Member.where(family_name: 'Ernewein').first
       refute_nil(pilot)
-      pilot_flight = flight.pilot_flights.where(:pilot_id => pilot).first
+      pilot_flight = flight.pilot_flights.where(pilot_id: pilot).first
       refute_nil(pilot_flight)
       airplane = pilot_flight.airplane
       refute_nil(airplane)
@@ -79,7 +79,7 @@ module Jasper
 
     test 'filters pilot chapter number' do
       cat = Category.find_for_cat_aircat('Sportsman', 'P')
-      flight = cat.flights.find_by(contest: @contest, :name => 'Known')
+      flight = cat.flights.find_by(contest: @contest, name: 'Known')
       pilot = Member.find_by_iac_id(12058)
       pilot_flight = PilotFlight.find_by_flight_id_and_pilot_id(flight.id, pilot.id)
       assert_equal('3/52', pilot_flight.chapter)

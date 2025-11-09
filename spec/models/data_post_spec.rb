@@ -1,5 +1,5 @@
 module Model
-  describe DataPost, :type => :model do
+  describe DataPost, type: :model do
     context 'factory data' do
       before(:all) do
         @data_post = create(:data_post)

@@ -1,16 +1,16 @@
 class Member < ApplicationRecord
-  has_many :chief, :foreign_key => 'chief_id', :class_name => 'Flight'
-  has_many :assistChief, :foreign_key => 'assist_id', :class_name => 'Flight'
-  has_many :pilot_flights, :foreign_key => 'pilot_id'
-  has_many :flights, :through => :pilot_flights
-  has_many :judge, :foreign_key => 'judge_id', :class_name => 'Judge'
-  has_many :assist, :foreign_key => 'assist_id', :class_name => 'Judge'
-  has_many :jc_results, :foreign_key => 'judge_id', :dependent => :destroy
-  has_many :jy_results, :foreign_key => 'judge_id', :dependent => :destroy
-  has_many :pc_results, :foreign_key => 'pilot_id', :dependent => :destroy
+  has_many :chief, foreign_key: 'chief_id', class_name: 'Flight'
+  has_many :assistChief, foreign_key: 'assist_id', class_name: 'Flight'
+  has_many :pilot_flights, foreign_key: 'pilot_id'
+  has_many :flights, through: :pilot_flights
+  has_many :judge, foreign_key: 'judge_id', class_name: 'Judge'
+  has_many :assist, foreign_key: 'assist_id', class_name: 'Judge'
+  has_many :jc_results, foreign_key: 'judge_id', dependent: :destroy
+  has_many :jy_results, foreign_key: 'judge_id', dependent: :destroy
+  has_many :pc_results, foreign_key: 'pilot_id', dependent: :destroy
   has_many :result_members
-  has_many :teams, :through => :result_members, :source => :result
-  has_many :results, :foreign_key => 'pilot_id'
+  has_many :teams, through: :result_members, source: :result
+  has_many :results, foreign_key: 'pilot_id'
 
   # supply a standard place-holder instance when needed
   def self.missing_member
@@ -36,9 +36,9 @@ class Member < ApplicationRecord
   # otherwise this creates a new member record
   def self.find_or_create_by_name(iac_id, given_name, family_name)
     iac_id ||= 0
-    dm = Member.where(:family_name => family_name, :given_name =>given_name)
+    dm = Member.where(family_name: family_name, given_name: given_name)
     if (iac_id != 0)
-      dm = dm.where(:iac_id => iac_id)
+      dm = dm.where(iac_id: iac_id)
     end
     dm = dm.order(:id)
     if dm.count == 1
@@ -46,9 +46,9 @@ class Member < ApplicationRecord
       Member.logger.info "Found by name member #{dm.to_s}"
     else
       dm = Member.create(
-        :iac_id => iac_id,
-        :given_name => given_name,
-        :family_name => family_name)
+        iac_id: iac_id,
+        given_name: given_name,
+        family_name: family_name)
       Member.logger.info "New member #{dm.to_s}"
     end
     dm

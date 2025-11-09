@@ -1,4 +1,4 @@
-describe Member, :type => :model do
+describe Member, type: :model do
   it 'correctly identifies member with given iac id and family name' do
     iac_id = 212020
     family_name = 'Sinatra'

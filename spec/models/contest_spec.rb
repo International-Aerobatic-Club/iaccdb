@@ -1,4 +1,4 @@
-describe Contest, :type => :model do
+describe Contest, type: :model do
   it 'cleans the contest data on reset_to_base_attributes' do
     flight = create(:flight)
     jf_result = create(:jf_result, flight: flight)

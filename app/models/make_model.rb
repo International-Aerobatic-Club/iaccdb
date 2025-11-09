@@ -1,5 +1,5 @@
 class MakeModel < ApplicationRecord
-  has_many :airplanes, :dependent => :nullify
+  has_many :airplanes, dependent: :nullify
 
   # The database has:
   #   t.index ["make", "model"], name: "...", unique: true

@@ -36,8 +36,8 @@ class AlignJudgeTotals < ActiveRecord::Migration
       t.remove "total_k"
       t.remove "figure_count"
       t.integer "grade_count"
-      t.decimal "avgK", :precision => 5, :scale => 2
-      t.decimal "avgFlightSize", :precision => 5, :scale => 2
+      t.decimal "avgK", precision: 5, scale: 2
+      t.decimal "avgFlightSize", precision: 5, scale: 2
     end
   end
 end

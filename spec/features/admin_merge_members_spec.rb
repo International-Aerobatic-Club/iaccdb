@@ -1,4 +1,4 @@
-RSpec.describe 'admin member merge', :type => :feature do
+RSpec.describe 'admin member merge', type: :feature do
 
   def click_merge
     find(:xpath, "//tbody/tr[1]/td[position()=last()]/input").click

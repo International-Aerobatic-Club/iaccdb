@@ -87,7 +87,7 @@ end
 
 def process_all_contests
   pcs = []
-  contests = Contest.joins(:flights => :category).where(
+  contests = Contest.joins(flights: :category).where(
     "categories.category = 'four minute' and 2014 <= year(contests.start)")
   contests.all.each do |c|
     begin

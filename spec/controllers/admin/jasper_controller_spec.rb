@@ -1,4 +1,4 @@
-describe Admin::JasperController, :type => :controller do
+describe Admin::JasperController, type: :controller do
   before(:all) do
     file = File.new('spec/fixtures/jasper/jasperResultsFormat.xml')
     @valid_xml = file.read
@@ -12,7 +12,7 @@ describe Admin::JasperController, :type => :controller do
   end
 
   it 'writes post data record on post data inline' do
-    post :results, params: { :contest_xml => @valid_xml }
+    post :results, params: { contest_xml: @valid_xml }
     prcd = DataPost.all.first
     expect(prcd).not_to be_nil
     expect(prcd.data).not_to be_nil
@@ -21,7 +21,7 @@ describe Admin::JasperController, :type => :controller do
   end
 
   it 'writes post data record on post data upload' do
-    post :results, params: { :contest_xml => @valid_xml }
+    post :results, params: { contest_xml: @valid_xml }
     prcd = DataPost.all.first
     expect(prcd).not_to be_nil
     expect(prcd.data).not_to be_nil
@@ -41,7 +41,7 @@ describe Admin::JasperController, :type => :controller do
   end
 
   it 'writes post data failure record on failure' do
-    post :results, params: { :contest_xml => @invalid_xml }
+    post :results, params: { contest_xml: @invalid_xml }
     expect(response).not_to be_success
     prcd = DataPost.all.first
     expect(prcd).not_to be_nil
@@ -53,20 +53,20 @@ describe Admin::JasperController, :type => :controller do
   context ('render views') do
     render_views
     it 'returns new contest id when no cdbId' do
-      post :results, params: { :contest_xml => @valid_xml }
+      post :results, params: { contest_xml: @valid_xml }
       expect(response).to be_success
       expect(response.body).to match(/\<cdbId\>[1-9]+\<\/cdbId\>/)
     end
 
     it 'returns existing contest id when cdbId provided' do
-      post :results, params: { :contest_xml => @update_xml }
+      post :results, params: { contest_xml: @update_xml }
       expect(response).to be_success
       expect(response.body).to match(/\<cdbId\>337\<\/cdbId\>/)
     end
   end
 
   it 'writes post data with contest id when no cdbId' do
-    post :results, params: { :contest_xml => @valid_xml }
+    post :results, params: { contest_xml: @valid_xml }
     prcd = DataPost.all.first
     expect(prcd).not_to be_nil
     expect(prcd.has_error).to eq false
@@ -76,7 +76,7 @@ describe Admin::JasperController, :type => :controller do
   end
 
   it 'writes post data with contest id when cdbId provided' do
-    post :results, params: { :contest_xml => @update_xml }
+    post :results, params: { contest_xml: @update_xml }
     prcd = DataPost.all.first
     expect(prcd).not_to be_nil
     expect(prcd.has_error).to eq false

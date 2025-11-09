@@ -1,6 +1,6 @@
 class Chief < ApplicationRecord
 
-  belongs_to :chief, :class_name => 'Member'
+  belongs_to :chief, class_name: 'Member'
   has_many :flights
 
   def to_s

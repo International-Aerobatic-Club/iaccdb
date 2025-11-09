@@ -7,6 +7,6 @@ json.judge_flight_data do
   json.average_flight_size @jf_result.avgFlightSize
   json.average_k @jf_result.avgK
   json.grades do
-    json.partial! 'score', collection: @judge_grades.grades, :as => :score
+    json.partial! 'score', collection: @judge_grades.grades, as: :score
   end
 end

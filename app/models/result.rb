@@ -1,12 +1,12 @@
 class Result < ApplicationRecord
   has_many :result_members
-  has_many :members, :through => :result_members
+  has_many :members, through: :result_members
   has_many :result_accums
-  has_many :pc_results, :through => :result_accums
-  belongs_to :pilot, :class_name => 'Member', optional: true
+  has_many :pc_results, through: :result_accums
+  belongs_to :pilot, class_name: 'Member', optional: true
   belongs_to :category, optional: true
 
-  accepts_nested_attributes_for :members, :allow_destroy => true
+  accepts_nested_attributes_for :members, allow_destroy: true
 
   def result_percent
     points_possible && points ? points * 100.0 / points_possible : 0.0
@@ -32,7 +32,7 @@ class Result < ApplicationRecord
   end
 
   def add_member_if_not_present(member)
-    unless result_members.where(:member => member.id).first
+    unless result_members.where(member: member.id).first
       members << member
     end
   end

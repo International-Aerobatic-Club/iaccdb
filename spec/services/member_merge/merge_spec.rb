@@ -1,5 +1,5 @@
 module MemberMerge
-describe Merge, :type => :services do
+describe Merge, type: :services do
   before :example do
     # mr = member record
     @mra = create_list(:member, 4)
