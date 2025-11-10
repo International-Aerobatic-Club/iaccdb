@@ -31,8 +31,7 @@ class ApplicationController < ActionController::Base
 
 
   def notify_admin_of_failure(record = nil)
-    # !!! UploadFailureMailer.with(record: record).notify.deliver_later
-    UploadFailureMailer.with(record: record).notify.deliver_now
+    UploadFailureMailer.with(record: record).notify.deliver_later
   end
 
 
