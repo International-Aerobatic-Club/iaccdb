@@ -59,6 +59,7 @@ class Admin::JasperController < ApplicationController
 
     ensure
       post_record.save!
+      notify_admin_of_failure(post_record) if post_record.has_error
     end
 
     self.formats = [:xml]

@@ -1,4 +1,5 @@
 class CategoryRollups
+
   def initialize(contest, category)
     @contest = contest
     @category = category
@@ -59,9 +60,9 @@ class CategoryRollups
     "CategoryRollups for #{@contest}, #{@category}"
   end
 
-  ###
+
   private
-  ###
+
 
   def logger
     Rails.logger
@@ -106,20 +107,26 @@ class CategoryRollups
     pc_results.each do |pc_result|
       category_values << pc_result.category_value
     end
+
     begin
       category_ranks = Ranking::Computer.ranks_for(category_values)
       pc_results.each_with_index do |pc_result, i|
         pc_result.category_rank = category_ranks[i]
         pc_result.save!
       end
-    rescue Exception => exception
+
+    rescue StandardError => exception
       logger.error exception.message
-      Failure.create(
-        step: "category",
+      failure = Failure.create(
+        step: 'category',
         contest_id: contest.id,
-        description:           ":: " + self.to_s +
+        description: ":: " + self.to_s +
           "\n:: category_values " + category_values.to_yaml +
           "\n:: #{exception.message} ::\n" + exception.backtrace.join("\n"))
+      notify_admin_of_failure(failure)
+
     end
+
   end
+
 end

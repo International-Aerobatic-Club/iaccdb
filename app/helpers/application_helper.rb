@@ -34,4 +34,10 @@ module ApplicationHelper
     end
     link_to(name, '#', class: 'add_fields', data: {id: id, fields: fields.gsub("\n", '')})
   end
+
+    # Retrieve an address from the file config/email_addresses.yml
+  def email_for(*args)
+    YAML.load_file(File.join(Rails.root, 'config', 'email_addresses.yml')).with_indifferent_access.dig(*args)
+  end
+
 end

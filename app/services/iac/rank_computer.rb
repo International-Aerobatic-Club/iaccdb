@@ -264,7 +264,7 @@ private
     rescue Exception => exception
       logger.error "Error computing rankings for flight #{flight} is #{exception.message}"
       contest = flight.contest
-      Failure.create(
+      failure = Failure.create(
         step: 'flight_ranks',
         contest_id: contest.id,
         description:           ":: Flight #{flight} " +
@@ -273,6 +273,8 @@ private
           judge_pilot_flight_values.to_yaml +
           "\n:: #{exception.message} ::\n" + exception.backtrace.join("\n"))
     end
+    notify_admin_of_failure(failure)
+
     pf_results
   end
 
@@ -306,8 +308,10 @@ private
       end
       pilot_figure_results << pf_result.figure_results
     end
+
     judge_pilot_figure_computed_ranks = {}
     judge_pilot_figure_graded_ranks = {}
+
     begin
       judge_pilot_figure_computed_values.each_key do |judge|
         judge_pilot_figure_computed_ranks[judge] =
@@ -327,7 +331,8 @@ private
         pf_result.figure_ranks = pilot_figure_ranks[i]
         pf_result.save!
       end
-    rescue Exception => exception
+
+    rescue StandardError => exception
       logger.error exception.message
       contest = flight.contest
       Failure.create(
@@ -339,6 +344,8 @@ private
           judge_pilot_figure_graded_values.to_yaml +
           "\n:: #{exception.message} ::\n" +
           exception.backtrace.join("\n"))
+      notify_admin_of_failure(failure)
+
     end
   end
 

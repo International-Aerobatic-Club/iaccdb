@@ -8,13 +8,14 @@ module JobsSay
       puts text
     end
   end
-  
+
   def record_failure(step, attributes_hash, exception)
     attributes_hash ||= {}
     attributes_hash[:step] = step
-    attributes_hash[:description] = 
+    attributes_hash[:description] =
         ':: ' + exception.message + " ::\n" + exception.backtrace.join("\n")
-    Failure.create(attributes_hash)
+    failure = Failure.create(attributes_hash)
+    notify_admin_of_failure(failure)
   end
 
   def record_contest_failure(step, contest, exception)

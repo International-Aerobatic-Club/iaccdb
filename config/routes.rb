@@ -25,7 +25,11 @@ Rails.application.routes.draw do
     end
     resources :members, only: [:index, :edit, :update, :show]
     resources :failures, only: [:index, :show, :destroy]
+
     resources :data_posts, only: [:index, :show]
+    get 'data_post/:id/download', controller: :data_posts, action: 'download', as: 'data_post_download'
+    get 'data_post/:id/resubmit', controller: :data_posts, action: 'resubmit', as: 'data_post_resubmit'
+
     resources :queues, only: [:index, :show]
     resources :free_program_ks
     post 'members/merge_preview'
@@ -33,17 +37,7 @@ Rails.application.routes.draw do
     resources :make_models, only: [:index, :edit, :update]
     post 'make_models/merge_preview'
     post 'make_models/merge'
-    post 'jasper',
-      controller: 'jasper',
-      action: 'results'
-    get 'data_post/:id/download',
-      controller: :data_posts,
-      action: 'download',
-      as: 'data_post_download'
-    get 'data_post/:id/resubmit',
-      controller: :data_posts,
-      action: 'resubmit',
-      as: 'data_post_resubmit'
+    post 'jasper', controller: 'jasper', action: 'results'
   end
 
   ### Leaders namespace
@@ -92,32 +86,17 @@ Rails.application.routes.draw do
   resources :live_results, only: [:show]
   get '/last_upload/:id' => 'live_results#last_upload'
 
-  get 'chief/:id/cv',
-    controller: :chiefs,
-    action: :cv,
-    as: 'chief_cv'
+  get 'chief/:id/cv', controller: :chiefs, action: :cv, as: 'chief_cv'
 
-  get 'judge/:id/cv',
-    controller: :judges,
-    action: :cv,
-    as: 'judge_cv'
+  get 'judge/:id/cv', controller: :judges, action: :cv, as: 'judge_cv'
 
   resources :flights, only: [:show]
 
-  get 'judge/:judge_id/flight/:flight_id',
-    controller: :judges,
-    action: :histograms,
-    as: 'judge_histograms'
+  get 'judge/:judge_id/flight/:flight_id', controller: :judges, action: :histograms, as: 'judge_histograms'
 
-  get 'judge/activity',
-    controller: :judges,
-    action: :activity,
-    as: 'recent_judge_activity'
+  get 'judge/activity', controller: :judges, action: :activity, as: 'recent_judge_activity'
 
-  get 'judge/activity/:year',
-    controller: :judges,
-    action: :activity,
-    as: 'judge_activity'
+  get 'judge/activity/:year', controller: :judges, action: :activity, as: 'judge_activity'
 
   namespace :further do
     get 'participation', action: :participation
