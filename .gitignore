@@ -6,6 +6,7 @@
 db/*.sqlite3*
 log/
 tmp/**/*
+!tmp/restart.txt
 vendor/cache
 posts/
 .sass-cache/
