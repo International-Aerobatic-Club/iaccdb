@@ -7,12 +7,13 @@ class Contest < ApplicationRecord
   has_many :failures, dependent: :destroy
 
   validates :name, length: { minimum: 4 }
-  validates :city
-  validates :state
-  validates :director
-  validates :region
+  validates_presence_of :city
+  validates_presence_of :state
+  validates_presence_of :director
+  validates_presence_of :region
   validates_presence_of :start
   validate :busy_time_semantics
+  validate :unique_name_per_year
 
   def to_s
     "#{name} on #{start.strftime('%b %d, %Y')}"
@@ -71,6 +72,10 @@ class Contest < ApplicationRecord
       errors.add(:busy_end, "must be after busy_start") if busy_start >= busy_end
     end
 
+  end
+
+  def unique_name_per_year
+    errors.add(:name, "must be unique for a given year") if Contest.where(name: name, start: start).present?
   end
 
 end
