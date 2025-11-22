@@ -1,42 +1,48 @@
-    <div class="title-bar"
-      data-responsive-toggle="responsive-menu" data-hide-for="medium">
-      <button class="menu-icon" type="button"
-        data-toggle="responsive-menu"></button>
-      <div class='title-bar-title'><%= link_to "IAC Contest Database", root_path %></div>
-    </div>
-    <div class="top-bar" id="responsive-menu" display='inline-block'>
-      <%=
-        link_to image_tag('IAC_Shield_Logo_2C_RGB_51px.png'),
-                'https://www.iac.org',
-                title: 'IAC Homepage',
-                style: 'padding-right: 10px'
-      %>
-      <div class="top-bar-left">
-        <ul class="dropdown menu" data-dropdown-menu>
-          <li><%= link_to "IAC Contest Database", root_path %></li>
-          <li class='has-submenu'>
-            <%= link_to 'Navigate', '#0' %>
-            <ul class='submenu menu vertical' data-submenu>
-              <li><%= link_to 'Contests', contests_path %></li>
-              <li><%= link_to 'Pilots', pilots_path %></li>
-              <li><%= link_to 'Chiefs', chiefs_path %></li>
-              <li><%= link_to 'Judges', judges_path %></li>
-              <li><%= link_to 'Assistants', assistants_path %></li>
-              <li><%= link_to 'Counts', further_participation_path %></li>
-              <li><%= link_to 'Notes', pages_path(:notes) %></li>
-            </ul>
-          </li>
-          <li class='has-submenu'>
-            <%= link_to 'Leaders', '#0' %>
-            <ul class='submenu menu vertical' data-submenu>
-              <li><%= link_to 'Regional Series', leaders_recent_regionals_path %></li>
-              <li><%= link_to 'Collegiate Series', leaders_recent_collegiate_path %></li>
-              <li><%= link_to 'Soucy Award', leaders_recent_soucy_path %></li>
-              <li><%= link_to "National Point Series", leaders_recent_leo_path %></li>
-              <li><%= link_to 'Judges', leaders_recent_judges_path %></li>
-              <li><%= link_to 'Pilots', leaders_recent_pilot_contest_counts_path %></li>
-            </ul>
-          </li>
+<div class="title-bar" data-responsive-toggle="responsive-menu" data-hide-for="medium">
+  <button class="menu-icon" type="button" data-toggle="responsive-menu"></button>
+  <div class='title-bar-title'><%= link_to "IAC Contest Database", root_path %></div>
+</div>
+
+<div class="top-bar" id="responsive-menu" display='inline-block'>
+  <%= link_to image_tag('IAC_Shield_Logo_2C_RGB_51px.png'),
+        'https://www.iac.org',
+        data: { confirm: 'Switch to the IAC homepage?' },
+        title: 'Switch to IAC Homepage',
+        style: 'padding-right: 8px'
+  %>
+
+  <div class="top-bar-left">
+
+    <ul class="dropdown menu" data-dropdown-menu>
+
+      <li><%= link_to "IAC Contest Database", root_path %></li>
+      <li class='has-submenu'>
+        <%= link_to 'Navigate', '#0' %>
+        <ul class='submenu menu vertical' data-submenu>
+          <li><%= link_to 'Contests', contests_path %></li>
+          <li><%= link_to 'Pilots', pilots_path %></li>
+          <li><%= link_to 'Chiefs', chiefs_path %></li>
+          <li><%= link_to 'Judges', judges_path %></li>
+          <li><%= link_to 'Assistants', assistants_path %></li>
+          <li><%= link_to 'Counts', further_participation_path %></li>
+          <li><%= link_to 'Notes', pages_path(:notes) %></li>
         </ul>
-      </div>
-    </div>
+      </li>
+
+      <li class='has-submenu'>
+        <%= link_to 'Leaders', '#0' %>
+        <ul class='submenu menu vertical' data-submenu>
+          <li><%= link_to 'Regional Series', leaders_recent_regionals_path %></li>
+          <li><%= link_to 'Collegiate Series', leaders_recent_collegiate_path %></li>
+          <li><%= link_to 'Soucy Award', leaders_recent_soucy_path %></li>
+          <li><%= link_to "National Point Series", leaders_recent_leo_path %></li>
+          <li><%= link_to 'Judges', leaders_recent_judges_path %></li>
+          <li><%= link_to 'Pilots', leaders_recent_pilot_contest_counts_path %></li>
+        </ul>
+      </li>
+
+    </ul>
+
+  </div>
+
+</div>
