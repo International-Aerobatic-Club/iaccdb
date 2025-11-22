@@ -75,7 +75,9 @@ class Contest < ApplicationRecord
   end
 
   def unique_name_per_year
-    errors.add(:name, "must be unique for a given year") if Contest.where(name: name, start: start).present?
+    if Contest.where(name: name).where('YEAR(start) = ?', start&.year).present?
+      errors.add(:name, "must be unique for a given year")
+    end
   end
 
 end
