@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_11_22_203047) do
+ActiveRecord::Schema[8.1].define(version: 2025_11_23_174014) do
   create_table "airplanes", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.datetime "created_at", precision: nil
     t.bigint "make_model_id"
@@ -40,8 +40,6 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_22_203047) do
   end
 
   create_table "contests", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
-    t.date "busy_end"
-    t.date "busy_start"
     t.integer "chapter"
     t.string "city"
     t.datetime "created_at", precision: nil

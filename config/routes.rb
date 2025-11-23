@@ -83,9 +83,6 @@ Rails.application.routes.draw do
 
   resources :make_models, only: [:index, :show]
 
-  resources :live_results, only: [:show]
-  get '/last_upload/:id' => 'live_results#last_upload'
-
   get 'chief/:id/cv', controller: :chiefs, action: :cv, as: 'chief_cv'
 
   get 'judge/:id/cv', controller: :judges, action: :cv, as: 'judge_cv'

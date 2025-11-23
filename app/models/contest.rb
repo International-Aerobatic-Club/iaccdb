@@ -12,7 +12,6 @@ class Contest < ApplicationRecord
   validates_presence_of :director
   validates_presence_of :region
   validates_presence_of :start
-  validate :busy_time_semantics
   validate :unique_name_per_year
 
   def to_s
@@ -56,23 +55,6 @@ class Contest < ApplicationRecord
   end
 
   private
-
-  def busy_time_semantics
-
-    # If both times are blank, there's no need to validate further
-    return if busy_start.blank? && busy_end.blank?
-
-    # Complain if one time is blank and the other is present
-    if busy_start.present? && busy_end.blank?
-      errors.add(:busy_end, "must be present if busy_start is present")
-    elsif busy_start.blank? && busy_end.present?
-      errors.add(:busy_start, "must be present if busy_end is present")
-    else
-      # Complain if the times are out of order
-      errors.add(:busy_end, "must be after busy_start") if busy_start >= busy_end
-    end
-
-  end
 
   def unique_name_per_year
     if Contest.where(name: name).where('YEAR(start) = ?', start&.year).present?

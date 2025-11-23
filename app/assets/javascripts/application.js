@@ -5,6 +5,5 @@
 //= require foundation
 //= require_self
 //= require nested_forms
-//= require live_results
 
 $(function(){ $(document).foundation(); });

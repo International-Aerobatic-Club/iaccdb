@@ -42,7 +42,7 @@ class Admin::ContestsController < ApplicationController
 
   def contest_params
     params.require(:contest).permit(
-      :name, :city, :state, :start, :chapter, :director, :region, :busy_start, :busy_end,
+      :name, :city, :state, :start, :chapter, :director, :region,
     )
   end
 
