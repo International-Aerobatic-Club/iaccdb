@@ -9,7 +9,7 @@
     <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
     <%= yield :headers %>
     <%= csrf_meta_tags unless @cacheable %>
-    <%= render 'shared/sso_metatags' %>
+    <%= render 'partials/sso_metatags' %>
   </head>
   <body>
     <div id="content">
