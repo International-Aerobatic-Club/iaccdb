@@ -28,9 +28,7 @@ class Flight < ApplicationRecord
   end
 
   def count_judges
-    Judge.find_by_sql("select distinct s.judge_id 
-      from scores s, pilot_flights p 
-      where p.flight_id = #{id} and s.pilot_flight_id = p.id").count
+    Score.joins(:pilot_flight).where(pilot_flights: { flight_id: id }).select(:judge_id).distinct.count
   end
 
   def count_pilots

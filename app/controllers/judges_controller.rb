@@ -1,9 +1,6 @@
 class JudgesController < ApplicationController
   def index
-    @judges = Member.find_by_sql("select
-      m.given_name, m.family_name, m.id
-      from members m where m.id in (select distinct judge_id from judges)
-      order by  m.family_name, m.given_name")
+    @judges = Member.joins(:judge).distinct(:judge_id).order(:family_name, :given_name, :id)
   end
 
   def show
