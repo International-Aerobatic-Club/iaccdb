@@ -1,0 +1,54 @@
+# IMPORTANT:
+# - Copy this file to /lib/systemd/system
+# - sudo systemctl daemon-reload
+
+[Unit]
+Description=Puma HTTP Server
+After=network.target
+
+# Uncomment for socket activation (see below)
+# Requires=puma.socket
+
+[Service]
+# Puma supports systemd's `Type=notify` and watchdog service
+# monitoring, as of Puma 5.1 or later.
+# On earlier versions of Puma or JRuby, change this to `Type=simple` and remove
+# the `WatchdogSec` line.
+Type=notify
+
+# If your Puma process locks up, systemd's watchdog will restart it within seconds.
+WatchdogSec=10
+
+# Preferably configure a non-privileged user
+# User=
+
+# The path to your application code root directory.
+# Also replace the "<YOUR_APP_PATH>" placeholders below with this path.
+# Example /home/username/myapp
+WorkingDirectory=/home/webmaster/iaccdb8.1
+
+# Helpful for debugging socket activation, etc.
+# Environment=PUMA_DEBUG=1
+
+# SystemD will not run puma even if it is in your path. You must specify
+# an absolute URL to puma. For example /usr/local/bin/puma
+# Alternatively, create a binstub with `bundle binstubs puma --path ./sbin` in the WorkingDirectory
+# ExecStart=<FULLPATH>/sbin/puma -C <YOUR_APP_PATH>/puma.rb
+
+# Variant: Rails start.
+Environment="PATH=/home/webmaster/.rbenv/shims:/home/webmaster/.rbenv/bin:/usr/local/bin:/usr/bin:/bin:/home/webmaster/.nvm/versions/node/v25.1.0/bin/:$PATH"
+#Environment="NVM_DIR="$HOME/.nvm";nvm use default"
+
+ExecStart=/home/webmaster/.rbenv/shims/puma -e production --pidfile /home/webmaster/iaccdb8.1/tmp/pids/server.pid -C /home/webmaster/iaccdb8.1/config/puma.rb /home/webmaster/iaccdb8.1/config.ru
+
+# Variant: Use `bundle exec puma` instead of binstub
+# Variant: Specify directives inline.
+# ExecStart=<FULLPATH>/puma -b tcp://0.0.0.0:9292 -b ssl://0.0.0.0:9293?key=key.pem&cert=cert.pem
+# ExecStart=/home/webmaster/.rbenv/shims/puma -b tcp://0.0.0.0:9292 -b ssl://0.0.0.0:9293?key=key.pem&cert=cert.pem
+# ExecStart=/home/webmaster/.rbenv/shims/puma -b tcp://0.0.0.0:9292 -b
+
+
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

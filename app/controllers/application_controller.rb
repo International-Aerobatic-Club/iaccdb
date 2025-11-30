@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+
   include AuthHelper
   protect_from_forgery with: :exception
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
@@ -16,12 +17,12 @@ class ApplicationController < ActionController::Base
    #
    # Sample header: Cache-Control: max-age=60, public
    #
-   # Usage: before_action: :make_cacheable, only: [:method1, :method2]
+   # Usage: before_action :make_cacheable, only: [:method1, :method2]
    #        (Note: The "only:" clause is optional)
 
   def make_cacheable
 
-    # !!! return unless Rails.env.production?
+    return unless Rails.env.production?
 
     expires_in 1.minute, public: true
     @cacheable = true

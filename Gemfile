@@ -3,7 +3,7 @@ ruby '~> 3.4'
 
 gem 'rails', '~> 8.0'
 
-gem 'puma', '~> 3.12'
+gem 'puma'
 
 gem 'sass-rails'
 gem 'coffee-rails'

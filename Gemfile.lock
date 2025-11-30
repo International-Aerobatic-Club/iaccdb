@@ -217,7 +217,8 @@ GEM
       date
       stringio
     public_suffix (6.0.2)
-    puma (3.12.6)
+    puma (7.1.0)
+      nio4r (~> 2.0)
     racc (1.8.1)
     rack (2.2.21)
     rack-accept (0.4.5)
@@ -402,7 +403,7 @@ DEPENDENCIES
   minitest-rails
   mysql2 (>= 0.4.4, < 0.6.0)
   ostruct
-  puma (~> 3.12)
+  puma
   rails (~> 8.0)
   rspec-rails
   rubocop
