@@ -5,9 +5,7 @@ module Contest::ShowResults
   def flights_chiefs(cfs)
     chiefs = []
     unless cfs.empty?
-      cjs = cfs.collect do |flight|
-        flight.chief
-      end
+      cjs = cfs.collect(&:chief)
       cjs = cjs.compact.uniq.sort do |a,b|
         a.family_name <=> b.family_name
       end
@@ -53,8 +51,8 @@ module Contest::ShowResults
   #             key is Flight, value is array of PfResult (with one element)
   def category_results
     categories = []
-    if !flights.empty?
-      cats = flights.collect { |f| f.categories }
+    unless flights.empty?
+      cats = flights.map(&:categories)
       cats = cats.flatten.uniq.sort { |a,b| a.sequence <=> b.sequence }
       cats.each do |cat|
         category_data = {}
@@ -65,19 +63,14 @@ module Contest::ShowResults
           contest: self).all.sort { |a,b| a.sequence <=> b.sequence }
         category_data[:chiefs] = flights_chiefs(category_data[:flights])
         category_data[:pilot_results] = []
-        pcrs = pc_results.where(category:cat).includes(:pilot).order(:category_rank)
-        if !pcrs.empty?
-          pf_results = PfResult.joins({pilot_flight: :flight}).where(
-             {flights: { id: flights.collect(&:id) }})
-          pfr_by_flight = pf_results.all.group_by do |pf|
-            pf.flight
-          end
+        pcrs = pc_results.where(category: cat).includes(:pilot).order(:category_rank)
+        unless pcrs.empty?
+          pf_results = PfResult.joins(pilot_flight: :flight).where(flights: { id: flights.collect(&:id) })
+          pfr_by_flight = pf_results.all.group_by(&:flight)
           pfr_by_flight.each_key do |flight|
-            pfr_by_flight[flight] = PfResultM::HcRanked.computed_display_ranks(
-              pfr_by_flight[flight])
+            pfr_by_flight[flight] = PfResultM::HcRanked.computed_display_ranks(pfr_by_flight[flight])
           end
-          pcrs =
-            PcResultM::HcRanked.computed_display_ranks(pcrs.all)
+          pcrs = PcResultM::HcRanked.computed_display_ranks(pcrs.all)
           pcrs.each do |p|
             pilot_result = {}
             pilot_result[:member] = p.pilot
