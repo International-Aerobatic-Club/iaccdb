@@ -80,7 +80,7 @@ module Contest::ShowResults
             pf_results = []
             pfr_by_flight.each_key do |flight|
               fr[flight] = pfr_by_flight[flight].select do |f|
-                f.pilot_flight.pilot == p.pilot
+                f.pilot_flight.pilot_id == p.pilot_id
               end
               if (fr[flight].empty?)
                 fr[flight] = nil
