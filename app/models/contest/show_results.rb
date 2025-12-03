@@ -80,7 +80,7 @@ module Contest::ShowResults
             pilot_result[:flight_results] = fr
             pfr = pf_results.first
             pf = pfr.pilot_flight if pfr
-            if (pf)
+            if pf
               pilot_result[:airplane] = pf.airplane
               pilot_result[:chapter] = pf.chapter
             else
