@@ -1,17 +1,9 @@
 # Mix this into a Contest record to collect results on it
 module Contest::ShowResults
   # given array of flight records,
-  # return possibly empty array of unique chief judge names
+  # return a possibly empty array of unique chief judge names
   def flights_chiefs(cfs)
-    chiefs = []
-    unless cfs.empty?
-      cjs = cfs.collect(&:chief)
-      cjs = cjs.compact.uniq.sort do |a,b|
-        a.family_name <=> b.family_name
-      end
-      chiefs = cjs.collect(&:name)
-    end
-    chiefs
+    cfs.map(&:chief).compact.uniq.sort_by(&:family_name).map(&:name)
   end
 
   def chief_names
@@ -19,18 +11,17 @@ module Contest::ShowResults
   end
 
   def is_future
-    Time.now() < (start + 2.days)
+    Time.now < start + 2.days
   end
 
   def place_and_time
-    base = is_future ? "Scheduled" : "Held"
-    "#{base} in #{place}, #{start}"
+    "#{is_future ? 'Scheduled' : 'Held'} in #{place}, #{start}"
   end
 
   def organizers
     orgs = []
     orgs << "Director: #{director}" if director
-    orgs << "Chapter #{chapter}" if chapter != nil && 0 < chapter
+    orgs << "Chapter #{chapter}" if chapter&.positive?
     orgs.join(', ')
   end
 
@@ -57,15 +48,13 @@ module Contest::ShowResults
       cats.each do |cat|
         category_data = {}
         category_data[:cat] = cat
-        category_data[:judge_results] = jc_results.where(
-          category: cat).includes(:judge)
-        category_data[:flights] = cat.flights.where(
-          contest: self).all.sort { |a,b| a.sequence <=> b.sequence }
+        category_data[:judge_results] = jc_results.where(category: cat).includes(:judge)
+        category_data[:flights] = cat.flights.where(contest: self).all.sort_by(&:sequence)
         category_data[:chiefs] = flights_chiefs(category_data[:flights])
         category_data[:pilot_results] = []
         pcrs = pc_results.where(category: cat).includes(:pilot).order(:category_rank)
         unless pcrs.empty?
-          pf_results = PfResult.joins(pilot_flight: :flight).where(flights: { id: flights.collect(&:id) })
+          pf_results = PfResult.joins(pilot_flight: :flight).where(flights: { id: flights.map(&:id) })
           pfr_by_flight = pf_results.all.group_by(&:flight)
           pfr_by_flight.each_key do |flight|
             pfr_by_flight[flight] = PfResultM::HcRanked.computed_display_ranks(pfr_by_flight[flight])
@@ -78,16 +67,16 @@ module Contest::ShowResults
             pilot_result[:flight_results] = {}
             fr = {}
             pf_results = []
+
             pfr_by_flight.each_key do |flight|
-              fr[flight] = pfr_by_flight[flight].select do |f|
-                f.pilot_flight.pilot_id == p.pilot_id
-              end
-              if (fr[flight].empty?)
+              fr[flight] = pfr_by_flight[flight].find_all{ |f| f.pilot_flight.pilot_id == p.pilot_id }
+              if fr[flight].empty?
                 fr[flight] = nil
               else
                 pf_results << fr[flight].first
               end
             end
+
             pilot_result[:flight_results] = fr
             pfr = pf_results.first
             pf = pfr.pilot_flight if pfr
