@@ -1,5 +1,6 @@
 <% def sbr(obj); sanitize(obj.join('<br>')); end %>
 <% p_rank = 'The average of the highest Percentile Ranks.' %>
+<% c_rank = 'The Percentile Rank from this contest.' %>
 <% check_txt = 'The Percentile Rank from this contest contributed to the Avg. PR.' %>
 
 <table class='leo'>
@@ -23,10 +24,10 @@
         <tr>
           <th class="b"> Rank </th>
           <th class="b"> Pilot </th>
-          <th class="b r"> Avg. PR<%= image_tag('info_icon.png', size: 18, title: p_rank) %></th>
+          <th class="b r"> Avg. PR<%= image_tag('info_icon.png', size: 18, title: p_rank) %> </th>
           <th></th>
           <th class="b" > Region </th>
-          <th class="b" > PR </th>
+          <th class="b"> PR<%= image_tag('info_icon.png', size: 18, title: c_rank) %> </th>
           <th class="b" > Contest </th>
         </tr>
 
@@ -49,7 +50,7 @@
             <% end.join('<br>').html_safe %>
           </td>
           <td> <%= sbr lpcs.map{ |lpc| lpc.region } %> </td>
-          <td> <%= sbr lpcs.map(&:points).map{ |p| sprintf '%.2f', p } %></td>
+          <td class="r"> <%= sbr lpcs.map(&:points).map{ |p| sprintf '%.2f', p } %></td>
           <td>
             <% clist = lpcs.map do |lpc| %>
               <% c = @contests[lpc.name] %>
