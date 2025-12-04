@@ -52,7 +52,7 @@
           <td> <%= sbr lpcs.map(&:points).map{ |p| sprintf '%.2f', p } %></td>
           <td>
             <% clist = lpcs.map do |lpc| %>
-              <% c = @contests[lpc['name']] %>
+              <% c = @contests[lpc.name] %>
               <% cname = c.name %>
               <% if lr.category_id != lpc.category_id %>
                 <% cname += " <em>(#{Category.find(lpc.category_id).name})</em>" %>
