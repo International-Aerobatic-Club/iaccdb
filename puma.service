@@ -1,6 +1,7 @@
-# IMPORTANT:
+# INSTALLATION AND SETUP:
 # - Copy this file to /lib/systemd/system
 # - sudo systemctl daemon-reload
+# - sudo systemctl enable puma
 
 [Unit]
 Description=Puma HTTP Server
