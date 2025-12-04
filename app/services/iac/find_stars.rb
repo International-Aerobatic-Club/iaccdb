@@ -109,7 +109,7 @@ module Iac::FindStars
       count_below_five = 0
       figure.length.times do |j|
         grade = figure[j]
-        if (0 <= grade && grade < 50) || grade == Constants::HARD_ZERO
+        if (0 <= grade && grade < 50) || grade == HARD_ZERO
           count_below_five += 1
           throw :pilot if max_below_five < count_below_five
         end

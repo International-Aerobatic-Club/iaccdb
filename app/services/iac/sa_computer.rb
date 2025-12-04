@@ -5,7 +5,9 @@
 # this class contains methods to compute results and rankings
 # it follows the IAC straight average method
 # revised 2014 to support soft and hard zero distinction
-module Iac::SaComputer
+class Iac::SaComputer
+
+  include Iac::Constants
 
   attr_reader :pilot_flight, :seq, :kays
 
@@ -77,11 +79,11 @@ module Iac::SaComputer
             @fjsx[f] << v
           else
             # map soft zero to hard zero if has_soft_zero is false
-            v = Constants::HARD_ZERO if !has_soft_zero && v == 0
+            v = HARD_ZERO if !has_soft_zero && v == 0
             @fjsx[f] << v
           end
-          @zero_ct[f] += 1 if v == Constants::HARD_ZERO
-          @score_ct[f] += 1 if v != Constants::AVERAGE
+          @zero_ct[f] += 1 if v == HARD_ZERO
+          @score_ct[f] += 1 if v != AVERAGE
           @grade_ct[f] += 1 if 0 <= v
         else
           Rails.logger.error <<~EOM
@@ -123,7 +125,7 @@ module Iac::SaComputer
         avg = average_score(f)
         @fjsx[f].length.times do |j|
           grade = @fjsx[f][j]
-          if grade == Constants::CONFERENCE_AVERAGE || grade == Constants::AVERAGE
+          if grade == CONFERENCE_AVERAGE || grade == AVERAGE
             @fjsx[f][j] = avg
           end
         end
@@ -164,8 +166,8 @@ module Iac::SaComputer
         else
           # minority zero
           @fjsx[f].length.times do |j|
-            if @fjsx[f][j] == Constants::HARD_ZERO
-              @fjsx[f][j] = Constants::AVERAGE
+            if @fjsx[f][j] == HARD_ZERO
+              @fjsx[f][j] = AVERAGE
             end
           end
         end

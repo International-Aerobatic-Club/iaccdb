@@ -10,7 +10,8 @@
 class Iac::RankComputer
 
   include Singleton
-  # !!! include Log::ConfigLogger
+  include Log::ConfigLogger
+  include Iac::Constants
 
   def computeJudgeMetrics(flight)
     jf_results_by_judge = {}
@@ -45,7 +46,7 @@ class Iac::RankComputer
             pf_result.flight_value if 0 < pf_result.flight_value
           pfj_result.computed_values.each_with_index do |computed, i|
             graded = pfj_result.graded_values[i]
-            if graded == Constants::HARD_ZERO && 0 < computed
+            if graded == HARD_ZERO && 0 < computed
               jf_result.minority_zero_ct += 1
             end
             jf_result.minority_grade_ct += 1 if computed < graded
@@ -115,7 +116,7 @@ class Iac::RankComputer
     end
     if seq
       flight.pilot_flights.each do |pilot_flight|
-        sac = SaComputer.new(pilot_flight)
+        sac = Iac::SaComputer.new(pilot_flight)
         sac.computePilotFlight(has_soft_zero)
       end
       pf_results = computeFlightOverallRankings(flight)
@@ -261,7 +262,7 @@ private
           pfj_result.save!
         end
       end
-    rescue Exception => exception
+    rescue StandardError => exception
       logger.error "Error computing rankings for flight #{flight} is #{exception.message}"
       contest = flight.contest
       failure = Failure.create(
@@ -272,8 +273,8 @@ private
           "\n:: judge_pilot_flight_values " +
           judge_pilot_flight_values.to_yaml +
           "\n:: #{exception.message} ::\n" + exception.backtrace.join("\n"))
+      notify_admin_of_failure(failure)
     end
-    notify_admin_of_failure(failure)
 
     pf_results
   end
