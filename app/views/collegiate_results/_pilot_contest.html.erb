@@ -7,6 +7,8 @@
 <td class='points_possible'><%= points(pilot_contest.total_possible) %></td>
 <td class='percentage'><%= decimal_two(pilot_contest.pct_possible) %>%</td>
 <td class='team_contribution'>
-  <%= "<span title='Team Contribution'>TC</span>".html_safe if combination.include? pilot_contest %>
+  <% if combination.include? pilot_contest %>
+    <span title='Team Contribution'> TC </span>
+  <% end %>
 </td>
 </tr>
