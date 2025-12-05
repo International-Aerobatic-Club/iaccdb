@@ -1,6 +1,7 @@
-class Iac::CollegiateTeamComputer
+module Iac
 
-  class Result
+  class CollegiateTeamComputer
+
     ## Constants
     # Number of pilots who count towards a school's rankings
     N_TOP = 3
@@ -8,6 +9,7 @@ class Iac::CollegiateTeamComputer
     MIN_CONTESTS = 3
 
     class Result
+
       attr_accessor :total
       attr_accessor :total_possible
       attr_accessor :combination
@@ -30,9 +32,7 @@ class Iac::CollegiateTeamComputer
 
       def to_s
         s = "#{sprintf('%0.2f', value * 100.0)}\n"
-        combination.each do |c|
-          s << "\t#{c.pilot.iac_id} #{c.contest.name}\n"
-        end
+        combination.each{ |c| s << "\t#{c.pilot.iac_id} #{c.contest.name}\n" }
         s
       end
 
