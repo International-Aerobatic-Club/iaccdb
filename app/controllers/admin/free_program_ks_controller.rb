@@ -3,7 +3,7 @@ class Admin::FreeProgramKsController < ApplicationController
 
   # GET /free_program_ks or /free_program_ks.json
   def index
-    @free_program_ks = FreeProgramK.all.sort_by{ |rec| rec.year.to_s + rec.category.name }
+    @free_program_ks = FreeProgramK.all.sort_by{ |rec| [-rec.year, rec.category.name] }
   end
 
   # GET /free_program_ks/1 or /free_program_ks/1.json
