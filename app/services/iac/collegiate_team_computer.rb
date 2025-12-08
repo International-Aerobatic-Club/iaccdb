@@ -110,7 +110,7 @@ module Iac
 
 
     def best_contests(pilot, categories)
-      @pilot_contests[pilot]&.where(category: categories).sort_by{ |pcr| -pcr.pct_possible }
+      @pilot_contests[pilot]&.where(category: categories)&.sort_by{ |pcr| -pcr.pct_possible }.first(MIN_CONTESTS)
     end
 
 
