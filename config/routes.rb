@@ -7,7 +7,6 @@ Rails.application.routes.draw do
       get 'collegiate_teams/:year', action: :index, as: :collegiate_teams_index
       get 'collegiate_teams/', action: :index, as: :current_collegiate_teams
       get 'collegiate_teams/:year/new', action: :new, as: :new_collegiate_team
-      post 'collegiate_results/recompute/:year', action: :recompute
     end
   end
 
@@ -38,6 +37,10 @@ Rails.application.routes.draw do
     post 'make_models/merge_preview'
     post 'make_models/merge'
     post 'jasper', controller: 'jasper', action: 'results'
+
+    get 'recompute', controller: :recompute, action: :index
+    post 'recompute', controller: :recompute, action: :update, as: :recompute_update
+
   end
 
   ### Leaders namespace

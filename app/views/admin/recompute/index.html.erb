@@ -1,0 +1,21 @@
+<H1> Recompute Special Awards and Trophies </H1>
+
+<%= form_tag :admin_recompute_update do |f| %>
+
+  <table>
+
+    <tr>
+      <td> <strong>Year:</strong> </td>
+      <td> <%= select_tag :year, options_for_select(@years, Date.today.year) %> </td>
+    </tr>
+
+    <tr>
+      <td> <strong> Award: </strong> </td>
+      <td> <%= select_tag :award, options_for_select(@award_options) %> </td>
+    </tr>
+
+    <tr> <td> <%= submit_tag "Recompute" %> </td> </tr>
+
+  </table>
+
+<% end %>

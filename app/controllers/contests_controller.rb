@@ -5,7 +5,7 @@ class ContestsController < ApplicationController
 
   # GET /contests
   def index
-    @years = Contest.select("DISTINCT YEAR(start) AS year_num").map(&:year_num).sort.reverse
+    @years = Contest.select('YEAR(start) AS yr').distinct.order(yr: :desc).map(&:yr)
     @year = params[:year] || default_year(@years.first)
     @contests = Contest.where('YEAR(start) = ? AND start <= NOW()', @year).order(start: :desc).includes(:flights)
     @future_contests = Contest.where('YEAR(start) = ? AND start > NOW()', @year).order(:start)
