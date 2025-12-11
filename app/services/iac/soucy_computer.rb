@@ -5,7 +5,7 @@
 # Third, if Nationals has been flown, adds Nationals results for
 #   pilots who have one, and marks them eligible
 # Fourth, ranks competitors based on their results and eligibility.
-module Iac::SoucyComputer
+class Iac::SoucyComputer
 
   def initialize (year)
     @year = year
@@ -16,7 +16,7 @@ module Iac::SoucyComputer
     @soucies = soucies_for_pilots
     @soucies.each { |soucy| soucy.compute_best_pair }
     integrate_nationals
-    RankComputer.compute_result_rankings(@soucies)
+    Iac::RankComputer.compute_result_rankings(@soucies)
   end
 
   ###
