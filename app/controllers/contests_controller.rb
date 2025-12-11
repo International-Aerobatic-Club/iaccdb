@@ -5,16 +5,10 @@ class ContestsController < ApplicationController
 
   # GET /contests
   def index
-    @years = Contest.select("distinct year(start) as anum").all
-      .collect { |contest| contest.anum }
-    @years.sort!{|a,b| b <=> a}
+    @years = Contest.select("DISTINCT YEAR(start) AS year_num").map(&:year_num).sort.reverse
     @year = params[:year] || default_year(@years.first)
-    @contests = Contest.where(
-      'year(start) = ? and start <= now()', @year
-    ).order(start: :desc).includes(:flights)
-    @future_contests = Contest.where(
-      'year(start) = ? and now() < start', @year
-    ).order(:start)
+    @contests = Contest.where('YEAR(start) = ? AND start <= NOW()', @year).order(start: :desc).includes(:flights)
+    @future_contests = Contest.where('YEAR(start) = ? AND start > NOW()', @year).order(:start)
   end
 
   # GET /contests/1
