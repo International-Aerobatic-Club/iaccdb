@@ -6,6 +6,7 @@
   <td></td>
   <td></td>
   <td class='percentage'><%= decimal_two(collegiate_individual.result_percent) %>%</td>
+  <td></td>
 </tr>
 <%= render :partial => 'collegiate_results/pilot_contest',
    :collection => collegiate_individual.pc_results.sort_by{ |pr| -pr.pct_possible },
