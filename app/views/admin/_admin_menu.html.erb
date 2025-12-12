@@ -1,10 +1,5 @@
-<p class="action">
-Admin:
-<%= link_to 'Contests', admin_contests_path %> |
-<%= link_to 'Member Records', admin_members_path %> |
-<%= link_to 'Failures', admin_failures_path %> |
-<%= link_to 'Data Posts', admin_data_posts_path %> |
-<%= link_to 'Job Queue', admin_queues_path %> |
-<%= link_to 'Free Ks', admin_free_program_ks_path %> |
-</p>
+<span class="action">
+  <%= @menu_items.map{ |item| link_to item[:label], item[:path] }.join(' &bull; ').html_safe %>
+</span>
+
 <br>

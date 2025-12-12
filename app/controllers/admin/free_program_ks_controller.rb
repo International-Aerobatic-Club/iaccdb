@@ -1,4 +1,5 @@
-class Admin::FreeProgramKsController < ApplicationController
+class Admin::FreeProgramKsController < Admin::AdminController
+
   before_action :set_free_program_k, only: %i[ show edit update destroy ]
 
   # GET /free_program_ks or /free_program_ks.json

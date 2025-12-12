@@ -1,4 +1,5 @@
-class Admin::QueuesController < ApplicationController
+class Admin::QueuesController < Admin::AdminController
+
   before_action :authenticate
 
   def index

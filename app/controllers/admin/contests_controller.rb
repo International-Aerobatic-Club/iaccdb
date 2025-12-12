@@ -1,4 +1,5 @@
-class Admin::ContestsController < ApplicationController
+class Admin::ContestsController < Admin::AdminController
+
   before_action :authenticate
 
   # GET /contests

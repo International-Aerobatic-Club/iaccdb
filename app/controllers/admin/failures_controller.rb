@@ -1,4 +1,5 @@
-class Admin::FailuresController < ApplicationController
+class Admin::FailuresController < Admin::AdminController
+
   before_action :authenticate
 
   def index

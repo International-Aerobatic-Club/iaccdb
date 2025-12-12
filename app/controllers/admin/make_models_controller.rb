@@ -1,4 +1,5 @@
-class Admin::MakeModelsController < ApplicationController
+class Admin::MakeModelsController < Admin::AdminController
+
   before_action :authorize_curator
 
   def index

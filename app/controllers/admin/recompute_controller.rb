@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Admin::RecomputeController < ApplicationController
+class Admin::RecomputeController < Admin::AdminController
 
   before_action :get_list_of_years
   before_action :get_award_options
