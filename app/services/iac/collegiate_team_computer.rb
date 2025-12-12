@@ -86,7 +86,10 @@ module Iac
       # Now combine the best non-Primary pilot with the other best pilots,
       # squeeze out any nil results (which will occur if there is no "best non-Primary"
       # or not enough other qualifiers), and sort by their %pp
-      top_n_pilots = ([ best_non_primary_info ] + best_others).compact.sort_by{ |h| -h[:avg_pp] }.first(N_TOP)
+      top_n_pilots = [best_non_primary_info] + best_others.sort_by{ |h| -h[:avg_pp] }.first(N_TOP - 1)
+
+      # Eliminate any nil entries, which can occur if no pilots qualify
+      top_n_pilots.compact!
 
       # Now average them
       result.total = top_n_pilots.present? ? top_n_pilots.map{ |h| h[:avg_pp] }.sum / top_n_pilots.size : 0.0
