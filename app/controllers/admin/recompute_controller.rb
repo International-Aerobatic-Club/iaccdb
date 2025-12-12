@@ -74,7 +74,7 @@ class Admin::RecomputeController < Admin::AdminController
   def get_award_options
     @award_options = [
       ['-- Select One --', nil],
-      ['-- All --', :all],
+      ['All Awards', :all],
       ['Collegiate', :collegiate],
       ['National Point Series (Leo)', :leo],
       ['Regional Point Series', :regional],
