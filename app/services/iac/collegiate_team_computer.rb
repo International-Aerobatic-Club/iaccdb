@@ -55,38 +55,38 @@ module Iac
       # Gather the Categories that count towards the Team Award
       # Note: there are two Category objects per competition level: one for Power and one for Gliders
       collegiate_cats = Category.where(category: %w[ primary sportsman intermediate ])
-      sportsman_cats = Category.where(category: 'sportsman')
+      non_primary_cats = Category.where(category: %w[ sportsman intermediate ])
 
-      best_sportsman_pilot =
-        @pilots.find_all{ |p| flew_enough?(p, sportsman_cats) }.sort_by{ |p| -ppa(p, sportsman_cats) }.first
+      best_non_primary_pilot =
+        @pilots.find_all{ |p| flew_enough?(p, non_primary_cats) }.sort_by{ |p| -ppa(p, non_primary_cats) }.first
 
-      best_sportsman_info =
-        if best_sportsman_pilot.present?
+      best_non_primary_info =
+        if best_non_primary_pilot.present?
           {
-            pilot: best_sportsman_pilot,
-            avg_pp: ppa(best_sportsman_pilot, sportsman_cats),
-            pilot_contests: best_contests(best_sportsman_pilot, sportsman_cats)
+            pilot: best_non_primary_pilot,
+            avg_pp: ppa(best_non_primary_pilot, non_primary_cats),
+            pilot_contests: best_contests(best_non_primary_pilot, non_primary_cats)
           }
         else
           nil
         end
 
       # Find all remaining pilots who flew "enough" contests in any allowed category
-      qualifying_pilots = @pilots.find_all{ |p| p != best_sportsman_pilot && flew_enough?(p, collegiate_cats) }
+      qualifying_pilots = @pilots.find_all{ |p| p != best_non_primary_pilot && flew_enough?(p, collegiate_cats) }
 
-      # Find the best qualified Sportsman pilot, if any
-      # A team is qualified if there are at least N_TOP qualifying pilots, including a qualified Sportsman pilot
-      result.qualified = (qualifying_pilots.size >= N_TOP - 1 && best_sportsman_pilot.present?)
+      # Find the best qualified non-Primary pilot, if any
+      # A team is qualified if there are at least N_TOP qualifying pilots, including a qualified non-Primary pilot
+      result.qualified = (best_non_primary_pilot.present? && qualifying_pilots.size >= N_TOP - 1)
 
       # For each qualifying pilot, get the average of their MIN_CONTESTS best results
       best_others = qualifying_pilots.map do |qp|
         { pilot: qp, avg_pp: ppa(qp, collegiate_cats), pilot_contests: best_contests(qp, collegiate_cats) }
       end.sort_by{ |h| -h[:avg_pp] }
 
-      # Now combine the best Sportsman pilot with the other best pilots,
-      # squeeze out any nil results (which will occur if there is no "best Sportsman"
+      # Now combine the best non-Primary pilot with the other best pilots,
+      # squeeze out any nil results (which will occur if there is no "best non-Primary"
       # or not enough other qualifiers), and sort by their %pp
-      top_n_pilots = ([ best_sportsman_info ] + best_others).compact.sort_by{ |h| -h[:avg_pp] }.first(N_TOP)
+      top_n_pilots = ([ best_non_primary_info ] + best_others).compact.sort_by{ |h| -h[:avg_pp] }.first(N_TOP)
 
       # Now average them
       result.total = top_n_pilots.present? ? top_n_pilots.map{ |h| h[:avg_pp] }.sum / top_n_pilots.size : 0.0
