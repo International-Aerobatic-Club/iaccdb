@@ -39,9 +39,8 @@ div.field, div.actions {
   margin-bottom: 10px;
 }
 
-#notice {
-  color: green;
-}
+#notice { color: green; padding-top: 10px; font-weight: bold; }
+#alert { color: #f24713; padding-top: 10px; font-weight: bold; }
 
 .field_with_errors {
   padding: 2px;
