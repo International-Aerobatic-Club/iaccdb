@@ -6,7 +6,7 @@ require 'xml'
 
 files = ARGV
 pcs = []
-j2d = Jasper::JasperToDB.new
+j2d = Jasper::JasperToDb.new
 files.each do |f|
   begin
     jasper = Jasper::JasperParse.new

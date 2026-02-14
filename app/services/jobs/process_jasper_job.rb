@@ -17,7 +17,7 @@ class ProcessJasperJob < Struct.new(:data_post_id)
     jasper.do_parse(parser)
     say "Parsed contest, #{jasper.contest_name} #{jasper.contest_date}"
     @record_year = jasper.contest_date.year
-    j2d = Jasper::JasperToDB.new
+    j2d = Jasper::JasperToDb.new
     @contest = j2d.process_contest(jasper, @contest_id)
     post_record.is_integrated = true
     post_record.save!

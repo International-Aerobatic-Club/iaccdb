@@ -36,7 +36,7 @@ class Admin::JasperController < ApplicationController
       @contest_id = jasper.contest_id
 
       if (@contest_id == nil || @contest_id <= 0)
-        j2d = Jasper::JasperToDB.new
+        j2d = Jasper::JasperToDb.new
         contest = Contest.create! j2d.extract_contest_params_hash(jasper)
         @contest_id = contest.id
       end

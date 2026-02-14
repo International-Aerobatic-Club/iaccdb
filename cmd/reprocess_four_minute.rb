@@ -26,7 +26,7 @@ class ReprocessFourMinute
   end
 
   def process_scores(jasper)
-    j2db = Jasper::JasperToDB.new
+    j2db = Jasper::JasperToDb.new
     j2db.d_contest = @contest
     computer = ContestComputer.new(@contest)
     four_minute = Category.where(category: 'four minute').first
