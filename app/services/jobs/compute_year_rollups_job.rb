@@ -4,6 +4,8 @@
 # The job computes metric rollups for all contests in a year
 module Jobs
 
+  include JasperFailureHelper
+
   class ComputeYearRollupsJob < Struct.new(:year)
 
     include JobsSay

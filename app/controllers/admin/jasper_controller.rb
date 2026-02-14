@@ -1,7 +1,8 @@
-
 require 'libxml'
 
 class Admin::JasperController < ApplicationController
+
+  include JasperFailureHelper
 
   skip_before_action :verify_authenticity_token
 

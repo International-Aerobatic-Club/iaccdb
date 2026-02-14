@@ -12,6 +12,7 @@ class Iac::RankComputer
   include Singleton
   include Log::ConfigLogger
   include Iac::Constants
+  include JasperFailureHelper
 
   def computeJudgeMetrics(flight)
     jf_results_by_judge = {}

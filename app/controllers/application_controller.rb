@@ -31,11 +31,6 @@ class ApplicationController < ActionController::Base
   end
 
 
-  def notify_admin_of_failure(record = nil)
-    UploadFailureMailer.with(record: record).notify.deliver_later
-  end
-
-
 private
 
   def record_not_found

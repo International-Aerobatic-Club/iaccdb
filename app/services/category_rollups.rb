@@ -1,5 +1,7 @@
 class CategoryRollups
 
+  include JasperFailureHelper
+
   def initialize(contest, category)
     @contest = contest
     @category = category
