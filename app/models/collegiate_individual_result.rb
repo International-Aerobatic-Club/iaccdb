@@ -13,7 +13,7 @@ class CollegiateIndividualResult < Result
     top_results = pc_results.map(&:pct_possible).sort.reverse.first([pc_count, 3].min)
 
     # Average the top results
-    self.points = top_results.sum / top_results.size
+    self.points = top_results.size.zero? ? 0 : top_results.sum / top_results.size
 
     # Since the results are presented as a percentage, the maximum number of possible points is always 100
     self.points_possible = 100
