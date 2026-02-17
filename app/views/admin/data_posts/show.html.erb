@@ -1,7 +1,5 @@
+<%= render 'admin/admin_menu' %>
 <h1>Admin Data Post</h1>
-<% if flash[:notice] %>
-  <p id="notice" ><%= flash[:notice] %></p>
-<% end %>
 <p><%= link_to 'back to list', admin_data_posts_path %> |
 <%= link_to 'download data', admin_data_post_download_path(@data_post) %> |
 <%= link_to 'resubmit', admin_data_post_resubmit_path(@data_post) %></p>
