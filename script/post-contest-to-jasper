@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [ $# != 1 ]
+then
+  echo "Usage: `basename $0` <filename.xml>"
+  exit 1
+fi
+
+echo curl -X POST -u iacmgr:dulyenullounquebdubpi -F "contest_xml=@$1" https://iaccdb.iac.org/admin/jasper
