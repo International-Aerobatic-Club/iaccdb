@@ -1,9 +1,18 @@
 #!/bin/bash
 
+SECRETS_FILE=~/.iaccdb-admin-secrets 
+
+
 if [ $# != 1 ]
 then
-  echo "Usage: `basename $0` <filename.xml>"
+  echo "Usage: `basename $0` <filename.xml>" 1>&2
   exit 1
 fi
 
-echo curl -X POST -u iacmgr:dulyenullounquebdubpi -F "contest_xml=@$1" https://iaccdb.iac.org/admin/jasper
+if [ ! -r $SECRETS_FILE ]
+then
+  echo "Error: $SECRETS_FILE is missing or unreadable" 1>&2
+  exit 2
+fi
+
+curl -X POST -u `cat $SECRETS_FILE` -F "contest_xml=@$1" https://iaccdb.iac.org/admin/jasper
