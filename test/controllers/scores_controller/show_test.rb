@@ -25,4 +25,19 @@ class ScoresController::ShowTest < ActionController::TestCase
       assert_select('div.flightScores h3 a', flight.displayName)
     end
   end
+
+  test 'shows figure points for each flight' do
+    pilot = @pilots.first
+    get :show, params: { pilot_id: pilot.id, id: @contest.id }
+
+    assert_select('table.scores th', 'Points')
+    assert_select('table.scores tbody tr:first-child td.points', '220.0')
+  end
+
+  test 'shows points lost title on column header' do
+    pilot = @pilots.first
+    get :show, params: { pilot_id: pilot.id, id: @contest.id }
+
+    assert_select('table.scores th[title=?]', 'Points Left on the Table', 'PtsLoT')
+  end
 end

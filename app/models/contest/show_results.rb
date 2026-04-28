@@ -20,6 +20,13 @@ module Contest::ShowResults
     flights_chiefs(flights.all)
   end
 
+  def collegiate_teams_by_member_id
+    @collegiate_teams_by_member_id ||= CollegiateResult.joins(:result_members).
+      where(year: year).
+      pluck('result_members.member_id', 'results.name').
+      to_h
+  end
+
   def is_future
     Time.now() < (start + 2.days)
   end
@@ -81,6 +88,7 @@ module Contest::ShowResults
           pcrs.each do |p|
             pilot_result = {}
             pilot_result[:member] = p.pilot
+            pilot_result[:collegiate_team] = collegiate_teams_by_member_id[p.pilot_id]
             pilot_result[:overall] = p
             pilot_result[:flight_results] = {}
             fr = {}

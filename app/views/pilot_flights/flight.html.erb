@@ -23,7 +23,8 @@
         <% if sequence %>
           <th colspan='2'>Avg</th>
           <th>K</th>
-          <th>PtsLoT</th>
+          <th>Points</th>
+          <th title='Points Left on the Table'>PtsLoT</th>
         <% end # if sequence %>
       </tr>
     </thead>
@@ -47,6 +48,9 @@
               <%= figure_rank(pf_result.figure_ranks, f-1) if pf_result %>
             </td>
             <td class='k_value'><%= sequence.k_values[f-1] %></td>
+            <td class='points'>
+              <%= Score.display_score(pf_result.figure_results[f-1]) if pf_result %>
+            </td>
             <td class='points'>
               <%= ptsLoT(pf_result.figure_results[f-1], sequence.k_values[f-1]) if pf_result %>
             </td>
@@ -74,6 +78,9 @@
           <%= figure_rank(pf_result.figure_ranks, ctFigs - 1) if pf_result %>
         </td>
         <td class='k_value'><%= sequence.k_values[ctFigs-1] %></td>
+        <td class='points'>
+          <%= Score.display_score(pf_result.figure_results[ctFigs-1]) if pf_result %>
+        </td>
         <td class='points'>
           <%= ptsLoT(pf_result.figure_results[ctFigs-1], sequence.k_values[ctFigs-1]) if pf_result %>
         </td>
