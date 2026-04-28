@@ -3,20 +3,21 @@
 development:
   adapter: mysql2
   encoding: utf8
-  database: <%= Rails.application.credentials.dig(:database, :development, :db_name) %>
+  database: <%= ENV.fetch('DATABASE_NAME') { Rails.application.credentials.dig(:database, :development, :db_name) } %>
   pool: 5
-  username: <%= Rails.application.credentials.dig(:database, :development, :username) %>
-  password: <%= Rails.application.credentials.dig(:database, :development, :password) %>
-  host: localhost
+  username: <%= ENV.fetch('DATABASE_USERNAME') { Rails.application.credentials.dig(:database, :development, :username) } %>
+  password: <%= ENV.fetch('DATABASE_PASSWORD') { Rails.application.credentials.dig(:database, :development, :password) } %>
+  host: <%= ENV.fetch('DATABASE_HOST') { 'localhost' } %>
 
 test:
   adapter: mysql2
   encoding: utf8
   reconnect: true
-  database: <%= Rails.application.credentials.dig(:database, :test, :db_name) %>
+  database: <%= ENV.fetch('DATABASE_NAME_TEST') { Rails.application.credentials.dig(:database, :test, :db_name) } %>
   pool: 5
-  username: <%= Rails.application.credentials.dig(:database, :test, :username) %>
-  password: <%= Rails.application.credentials.dig(:database, :test, :password) %>
+  username: <%= ENV.fetch('DATABASE_USERNAME') { Rails.application.credentials.dig(:database, :test, :username) } %>
+  password: <%= ENV.fetch('DATABASE_PASSWORD') { Rails.application.credentials.dig(:database, :test, :password) } %>
+  host: <%= ENV.fetch('DATABASE_HOST') { 'localhost' } %>
 
 production:
   adapter: mysql2
