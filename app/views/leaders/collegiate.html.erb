@@ -23,6 +23,9 @@
 
 <br>
 
+<% qualified_collegiates = @collegiates.select(&:qualified) %>
+<% non_qualified_collegiates = @collegiates.reject(&:qualified) %>
+
 <table class='collegiate'>
   <thead>
     <tr>
@@ -33,6 +36,32 @@
     </tr>
   </thead>
   <tbody>
-    <%= render @collegiates, :locals => { college_pilots: @college_pilots } %>
+    <%= render qualified_collegiates,
+      :locals => { college_pilots: @college_pilots } %>
   </tbody>
 </table>
+
+<% unless non_qualified_collegiates.empty? %>
+  <br>
+  <hr>
+  <br>
+
+  <div class='non-qual'>
+    <h2> Non-Qualifying Results:</h2>
+
+    <table class='collegiate'>
+      <thead>
+        <tr>
+          <th colspan='3'></th>
+          <th>points</th>
+          <th>possible</th>
+          <th>percent</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render non_qualified_collegiates,
+          :locals => { college_pilots: @college_pilots } %>
+      </tbody>
+    </table>
+  </div>
+<% end %>
