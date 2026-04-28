@@ -13,3 +13,6 @@ p.message {
 span.missing-results {
   font-weight: bold;
 }
+span.collegiate-participant {
+  margin-left: 0.25em;
+}

@@ -11,6 +11,11 @@
   <td class="pilot">
     <%= pc_result.display_rank %>.
     <%= link_to("#{pilot.name}", pilot_score_path(pilot, @contest)) if pilot %>
+    <% if pilot_result[:collegiate_team] %>
+      <span class="collegiate-participant"
+        title="Collegiate Series participant: <%= pilot_result[:collegiate_team] %>"
+        aria-label="Collegiate Series participant">&#127891;</span>
+    <% end %>
     <%= " (patch)" if pc_result.hors_concours? %>
   </td>
   <% unless live_results %>
