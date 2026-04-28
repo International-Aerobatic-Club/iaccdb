@@ -28,4 +28,14 @@ class ContestsShowTest < ActionDispatch::IntegrationTest
       assert_match("Held in #{contest.city}", content.text)
     end
   end
+
+  test "contest displays last updated timestamp" do
+    contest = create(:contest)
+    contest.update_column(:updated_at, Time.utc(2024, 1, 2, 3, 4, 0))
+
+    get contest_path(contest.id)
+
+    assert_select('p.contest_updated',
+      "Last Updated: #{contest.reload.updated_at.strftime('%m/%d/%Y %H:%M %Z')}")
+  end
 end

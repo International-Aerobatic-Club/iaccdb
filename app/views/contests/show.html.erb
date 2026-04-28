@@ -12,6 +12,9 @@
 <% unless @contest.chief_names.empty? %>
   <p class="contest_chief">Chief Judge(s): <%= @contest.chief_names.join(', ') %></p>
 <% end %>
+<% if @contest.updated_at %>
+  <p class="contest_updated">Last Updated: <%= @contest.updated_at.strftime('%m/%d/%Y %H:%M %Z') %></p>
+<% end %>
 
 <% if @categories.empty? %>
   <p class='message'>This contest has not posted any results.</p>
