@@ -5,6 +5,10 @@ and judge metrics.
 Find this deployed on the [web site](https://iaccdb.iac.org/)
 of the International Aerobatic Club (IAC).
 
+## Documentation
+
+There is a project documentation site available in `docs/`. To browse it locally: `pip install -r docs/requirements.txt && mkdocs serve`
+
 ## Development
 
 To make this work locally:
