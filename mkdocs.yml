@@ -1,0 +1,75 @@
+site_name: IACCDB Documentation
+site_description: IAC Contest Database — technical and user documentation
+docs_dir: docs
+site_dir: site
+
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - search.highlight
+    - content.code.copy
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.arithmatex:
+      generic: true
+  - attr_list
+  - md_in_html
+  - tables
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+nav:
+  - Home: index.md
+  - Domain Concepts:
+    - Overview: concepts/index.md
+    - Categories: concepts/categories.md
+    - Competition Types: concepts/competition-types.md
+    - Scoring Overview: concepts/scoring-overview.md
+    - Hors Concours: concepts/hors-concours.md
+  - Data Formats:
+    - Overview: data-formats/index.md
+    - JasPEr XML: data-formats/jasper.md
+    - Manny: data-formats/manny.md
+  - Data Model:
+    - Overview: data-model/index.md
+    - Core Entities: data-model/core-entities.md
+    - Computed Results: data-model/computed-results.md
+    - Special Results: data-model/special-results.md
+    - Judge Teams: data-model/judge-team.md
+  - Scoring Engine:
+    - Pipeline Overview: scoring/index.md
+    - Flight Computation: scoring/flight-computation.md
+    - Contest Rollups: scoring/contest-rollups.md
+    - Judge Metrics: scoring/judge-metrics.md
+    - Judge Statistics: scoring/judge-statistics.md
+    - Special Series: scoring/special-series.md
+  - API Reference:
+    - Overview: api/index.md
+    - Public Endpoints: api/public-endpoints.md
+    - Leaders Endpoints: api/leaders-endpoints.md
+    - Admin Endpoints: api/admin-endpoints.md
+    - Live Results: api/live-results.md
+  - User Guides:
+    - For Organizers: guides/organizers.md
+    - For Judges: guides/judges.md
+    - For Pilots: guides/pilots.md
+    - For Admins: guides/admins.md
+  - Development:
+    - Overview: development/index.md
+    - Local Setup: development/setup.md
+    - Architecture: development/architecture.md
+    - Contributing: development/contributing.md
