@@ -167,7 +167,7 @@ GEM
       childprocess (~> 5.0)
       logger (~> 1.6)
     libv8-node (24.12.0.1-x86_64-linux)
-    libxml-ruby (6.0.0)
+    libxml-ruby (5.0.6)
     lint_roller (1.1.0)
     listen (3.10.0)
       logger
@@ -399,7 +399,7 @@ DEPENDENCIES
   jbuilder
   jquery-rails
   launchy
-  libxml-ruby
+  libxml-ruby (~> 5.0)
   listen
   memoist2
   mini_racer
