@@ -19,8 +19,46 @@ class LeadersController < ApplicationController
     @results = crop_results.sort_by { |cat, jy_results| cat.sequence }
   end
 
-  def pilots
+  def chiefs
+
+    @max_displayed = 50
+
+    @all_years = Contest.select('YEAR(start)').distinct.pluck('YEAR(start)').sort.reverse
+
+    # If year was supplied, wrap the value in an Array for use in the SQL "BETWEEN" clause
+    @years = if params[:year].present?
+               [params[:year]]
+             else
+               # Get all contest years
+               @all_years
+             end
+
+    # Get the flights for the specified years.
+    # NOTE: A "flight" is a category + program, e.g., Sportsman Known
+    flights = Flight.where(contest: Contest.where("YEAR(start) BETWEEN #{@years.last} AND #{@years.first}"))
+
+    # Get the list of uniq Member#id values, filtering out blanks
+    chief_ids = flights.pluck(:chief_id).reject(&:blank?).uniq
+
+    pilot_flights = PilotFlight.where(flight: flights)
+
+    # Create a Hash where chief_id is the key and the value is a hash with elements :name (and later, :count)
+    @results =
+      Member.where(id: chief_ids)
+            .map{ |member| [ member.id, { name: "#{member.given_name} #{member.family_name}" } ] }
+            .to_h
+
+    # Now we count the flights supervised by each chief
+    chief_ids.each do |cid|
+      # For all flights supervised by this chief, add the number of pilot-flights to the chiefs_info Hash
+      @results[cid][:count] = PilotFlight.where(flight: flights.where(chief_id: cid)).count
+    end
+
+    @results = @results.sort_by{ |id, chief| -chief[:count] }.first(@max_displayed)
+
   end
+
+  def pilots; end
 
   def regionals
     @years = RegionalPilot.select("distinct year").all.collect{|rp| rp.year}.sort{|a,b| b <=> a}

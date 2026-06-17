@@ -1,0 +1,41 @@
+<h1>
+  Chief Judge Experience for
+  <%= @years.last %>
+  <%= @years.length > 1 ? "thru #{@years.first}" : '' %>
+</h1>
+
+<p>
+  Total number of pilot flights supervised
+  <% if @results.length >= @max_displayed %>
+   by the top <%= @max_displayed %> judges
+  <% end %>
+</p>
+
+<p>
+  <% @all_years.each do |year| %>
+    <%= link_to year, leaders_chiefs_path(year) %>
+  <% end %>
+</p>
+
+<table class="judge_leaders">
+
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Flights</th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+  <% @results.each do |judge_id, info| %>
+    <% next if info[:name].blank? %>
+    <tr>
+      <td><%= info[:name] %></td>
+      <td><%= info[:count] %></td>
+    </tr>
+  <% end %>
+
+  </tbody>
+
+</table>
