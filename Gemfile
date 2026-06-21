@@ -11,7 +11,7 @@ gem 'uglifier'
 gem 'jbuilder'
 gem 'mysql2', '>= 0.4.4', '< 0.6.0'
 gem 'benchmark'
-
+gem 'csv'
 
 gem 'libxml-ruby', '~> 5.0'
 gem 'jquery-rails'
