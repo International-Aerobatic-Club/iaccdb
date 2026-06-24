@@ -1,33 +1,37 @@
 # This captures a job for delayed job
 # The job computes National Point Series Championship ("Leo") results for a given year
-class Jobs::ComputeLeo < Struct.new(:contest)
+module Jobs
 
-  # !!! include JobsSay
+  class ComputeLeo < Struct.new(:contest)
 
-  def perform
-    @contest = contest
-    year = contest.year
-    @description = "#{year}"
-    if (year == Time.now.year)
-      make_computation(year)
-    else
-      say "Skipping Leo for #{@description} not current year"
+    include JobsSay
+
+    def perform
+      @contest = contest
+      year = contest.year
+      @description = "#{year}"
+      if (year == Time.now.year)
+        make_computation(year)
+      else
+        say "Skipping Leo for #{@description} not current year"
+      end
     end
-  end
 
-  def make_computation(year)
-    say "Computing Leo standings for #{@description}"
-    leo = Iac::LeoComputer.new(year)
-    leo.recompute
-  end
+    def make_computation(year)
+      say "Computing Leo standings for #{@description}"
+      leo = Iac::LeoComputer.new(year)
+      leo.recompute
+    end
 
-  def error(job, exception)
-    say "Error in Leo computation #{@description}"
-    record_contest_failure(@description, @contest, exception)
-  end
+    def error(job, exception)
+      say "Error in Leo computation #{@description}"
+      record_contest_failure(@description, @contest, exception)
+    end
 
-  def success(job)
-    say "Success Leo computation #{@description}"
+    def success(job)
+      say "Success Leo computation #{@description}"
+    end
+
   end
 
 end
