@@ -2,7 +2,7 @@
 # The job computes National Point Series Championship ("Leo") results for a given year
 module Jobs
 
-  class ComputeLeo < Struct.new(:contest)
+  class ComputeLeoJob < Struct.new(:contest)
 
     include JobsSay
 
