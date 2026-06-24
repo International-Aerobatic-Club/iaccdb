@@ -6,6 +6,8 @@
 # This script reads the list of current judges from STDIN, in the format produced by www.iac.org/current-judges-csv
 # Usage: cd ~www-data/iaccdb; bin/rails r script/nationals-eligible-judges.rb < current-judges.csv
 
+MIN_FLIGHTS_REQD = 250
+
 require 'csv'
 
 CSV.parse(STDIN.read, headers: true) do |row|
@@ -23,10 +25,10 @@ CSV.parse(STDIN.read, headers: true) do |row|
   member = Member.find_by_iac_id(iacnum)
 
   if member.nil?
-    STDERR.puts "** No record for IAC# #{iacnum}; skipping"
+    warn "** No record for IAC# #{iacnum}; skipping"
     next
   end
 
-  puts iacnum if Score.where(judge_id: Judge.where(judge_id: member.id).pluck(:id)).count >= 250
+  puts iacnum if Score.where(judge_id: Judge.where(judge_id: member.id).pluck(:id)).count >= MIN_FLIGHTS_REQD
 
 end
