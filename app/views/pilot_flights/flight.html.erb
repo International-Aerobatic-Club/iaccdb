@@ -110,7 +110,7 @@
 
       <tr>
         <td class='summary_label' colspan="<%= ctJudge * 2 + 1 %>">Max Possible</td>
-        <td class='total_average'><%= decimal_two(pf_result.total_possible) %></td>
+        <td class='total_average'><%= decimal_two(pf_result.total_possible) if pf_result %></td>
       </tr>
 
       <tr>
