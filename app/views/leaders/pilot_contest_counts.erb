@@ -23,7 +23,9 @@
 
     <tr>
       <td class='points_possible'> <%= count %></td>
-      <td> <%= pilot.present? ? "#{pilot.given_name} #{pilot.family_name}" : "UNKNOWN pid=#{pid}" %> </td>
+      <td>
+        <%= pilot.present? ? link_to(pilot.name, pilot_path(pilot)) : "UNKNOWN pid=#{pid}" %>
+      </td>
     </tr>
 
   <% end %>
