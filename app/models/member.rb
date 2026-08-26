@@ -22,7 +22,8 @@ class Member < ApplicationRecord
   end
 
   def name
-    "#{given_name} #{family_name}"
+    # The string '\u00a0' is a Unicode non-breaking space
+    "#{given_name}\u00a0#{family_name}"
   end
 
   def to_s
@@ -32,7 +33,7 @@ class Member < ApplicationRecord
   # Do not call this if you have an IAC number.
   # Use find_or_create_by_iac_number
   # This will find or create member with bad or mismatched IAC ID
-  # Returns record where member family and given names match exactly and uniquely, 
+  # Returns record where member family and given names match exactly and uniquely,
   # otherwise this creates a new member record
   def self.find_or_create_by_name(iac_id, given_name, family_name)
     iac_id ||= 0
