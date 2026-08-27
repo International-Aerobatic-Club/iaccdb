@@ -1,6 +1,12 @@
 span.para-index {
-  padding-right: 3pt;
+  margin-right: 3pt;
+  padding: 3px 5px;
+  background-color: #e8e8e8;
+  border-radius: 5px;
 }
+
+p.letter-index { line-height: 24px; }
+
 
 span.letter-index {
   font-weight: bold;
