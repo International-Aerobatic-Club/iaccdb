@@ -2,16 +2,22 @@
 
 <h1><%= @contest.name %></h1>
 <p class="contest_place"><%= @contest.place_and_time %></p>
+
 <% unless @contest.organizers.empty? %>
   <p class="contest_director"><%= @contest.organizers %></p>
 <% end %>
+
 <% unless @contest.chief_names.empty? %>
   <p class="contest_chief">Chief Judge(s): <%= @contest.chief_names.join(', ') %></p>
 <% end %>
 
 <% if @categories.empty? %>
   <p class='message'>This contest has not posted any results.</p>
+<% else %>
+  <p class='contest_updated'>Last updated: <%= @updated %></p>
 <% end %>
+
+<br>
 
 <%= render :partial => 'contests/category', collection: @categories,
   :locals => { no_category_chiefs: (@contest.chief_names.length < 2) }

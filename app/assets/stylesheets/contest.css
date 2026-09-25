@@ -1,7 +1,8 @@
 p.contest_director,
 p.contest_chief,
 p.category-chief,
-p.contest_place {
+p.contest_place,
+p.contest_updated {
   margin-bottom: 0pt;
 }
 p.message {

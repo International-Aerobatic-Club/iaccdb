@@ -16,6 +16,7 @@ class ContestsController < ApplicationController
     @contest = Contest.find(params[:id])
     @contest.extend(Contest::ShowResults)
     @categories = @contest.category_results
+    @updated = DataPost.where(contest: @contest, is_integrated: true).last&.updated_at || 'N/A'
     render :show
   end
 
