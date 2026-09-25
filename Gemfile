@@ -36,6 +36,8 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_bot_rails'
   gem 'rubocop', require: false
+  gem 'rails-erd'
+  gem 'ruby-graphviz'
 end
 
 group :development do
