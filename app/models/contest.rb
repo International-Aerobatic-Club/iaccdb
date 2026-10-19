@@ -51,7 +51,6 @@ class Contest < ApplicationRecord
     flights.destroy_all
     pc_results.destroy_all
     jc_results.destroy_all
-    failures.destroy_all
   end
 
   private
