@@ -36,8 +36,7 @@ module Iac
       # Get the highest Category#sequence value for each pilot who completed during the prior two years (P&P 227.2.3.5)
       pilot_minimum_category = PcResult
         .joins(:contest, :category)
-        .where('YEAR(contests.start) >= ?', @year - 2)
-        .where('YEAR(contests.start) < ?', @year + 1)
+        .where('YEAR(contests.start) BETWEEN ? AND ?', @year - 2, @year)
         .where(category: categories)
         .group(:pilot_id)
         .maximum('categories.sequence')
