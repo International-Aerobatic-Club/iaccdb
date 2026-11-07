@@ -5,6 +5,6 @@ class ScoresController < ApplicationController
     @pilot = Member.find(params[:pilot_id])
     @pilot_flights = PilotFlight.includes(flight: :categories).where(
        {pilot_flights: {pilot_id: @pilot}, flights: {contest_id: @contest}}
-      ).order(Category.arel_table[:sequence], Flight.arel_table[:sequence])
+      ).order('categories.sequence, flights.sequence')
   end
 end
