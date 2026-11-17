@@ -123,7 +123,7 @@ module Iac
     # we don't have ActiveRouting path helpers, so we punt on this
     # and build it with extrinsic knowledge of the resource path
     def make_scores_url(pilot, contest)
-      "http://www.iaccdb.org/pilots/#{pilot.id}/scores/#{contest.id}"
+      "/pilots/#{pilot.id}/scores/#{contest.id}"
     end
 
   end
